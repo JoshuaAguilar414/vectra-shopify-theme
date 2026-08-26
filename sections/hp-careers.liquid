@@ -6,28 +6,30 @@
 ></div>
 <div class="section section--page-width hp" id="careers">
   <div class="hp-wrap hp-careers" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
-    <homepage-reveal data-from="up">
-      <div class="hp-careers__panel">
-        <div class="hp-careers__media" aria-hidden="true">
-          {% render 'hp-media', image: section.settings.image, asset: 'hp-why.png', alt: '', placeholder: 'lifestyle-2' %}
+    <homepage-particles class="hp-particles hp-particles--light" data-mode="light">
+      <homepage-reveal data-from="up">
+        <div class="hp-careers__panel">
+          <div class="hp-careers__media" aria-hidden="true">
+            {% render 'hp-media', image: section.settings.image, asset: 'hp-careers.png', alt: '', placeholder: 'lifestyle-2' %}
+          </div>
+          <div class="hp-careers__copy">
+            {%- if section.settings.eyebrow != blank -%}
+              <p class="hp-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+            {%- endif -%}
+            <h2 class="hp-title">{{ section.settings.heading | escape }}</h2>
+            {%- if section.settings.text != blank -%}
+              <p class="hp-copy">{{ section.settings.text | escape }}</p>
+            {%- endif -%}
+            {%- if section.settings.button_label != blank -%}
+              <a class="hp-btn" href="{{ section.settings.button_link | default: '#' }}">
+                {{ section.settings.button_label | escape }}
+                <img src="{{ 'hp-btn-arrow.svg' | asset_url }}" alt="" width="16" height="10" aria-hidden="true">
+              </a>
+            {%- endif -%}
+          </div>
         </div>
-        <div class="hp-careers__copy">
-          {%- if section.settings.eyebrow != blank -%}
-            <p class="hp-eyebrow">{{ section.settings.eyebrow | escape }}</p>
-          {%- endif -%}
-          <h2 class="hp-title">{{ section.settings.heading | escape }}</h2>
-          {%- if section.settings.text != blank -%}
-            <p class="hp-copy">{{ section.settings.text | escape }}</p>
-          {%- endif -%}
-          {%- if section.settings.button_label != blank -%}
-            <a class="hp-btn" href="{{ section.settings.button_link | default: '#' }}">
-              {{ section.settings.button_label | escape }}
-              <img src="{{ 'hp-btn-arrow.svg' | asset_url }}" alt="" width="16" height="10" aria-hidden="true">
-            </a>
-          {%- endif -%}
-        </div>
-      </div>
-    </homepage-reveal>
+      </homepage-reveal>
+    </homepage-particles>
   </div>
 </div>
 

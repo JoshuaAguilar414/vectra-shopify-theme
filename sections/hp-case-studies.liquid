@@ -15,23 +15,29 @@
 
     <homepage-filters>
       <div class="hp-filters">
-        <input
-          class="hp-field"
-          type="search"
-          data-hp-search
-          placeholder="{{ section.settings.search_placeholder | escape }}"
-          aria-label="{{ section.settings.search_placeholder | escape }}"
-        >
+        <label class="hp-filters__search">
+          <img src="{{ 'hp-search.svg' | asset_url }}" alt="" width="16" height="16" aria-hidden="true">
+          <input
+            class="hp-field"
+            type="search"
+            data-hp-search
+            placeholder="{{ section.settings.search_placeholder | escape }}"
+            aria-label="{{ section.settings.search_placeholder | escape }}"
+          >
+        </label>
         {%- for block in section.blocks -%}
           {%- if block.type == 'filter' -%}
-            <select class="hp-field" data-hp-filter="{{ block.settings.key | handle }}" {{ block.shopify_attributes }}>
-              <option value="">{{ block.settings.label | escape }}</option>
-              {%- assign options = block.settings.options | split: ',' -%}
-              {%- for option in options -%}
-                {%- assign option_value = option | strip -%}
-                <option value="{{ option_value | handle }}">{{ option_value | escape }}</option>
-              {%- endfor -%}
-            </select>
+            <div class="hp-filters__select">
+              <select class="hp-field" data-hp-filter="{{ block.settings.key | handle }}" {{ block.shopify_attributes }}>
+                <option value="">{{ block.settings.label | escape }}</option>
+                {%- assign options = block.settings.options | split: ',' -%}
+                {%- for option in options -%}
+                  {%- assign option_value = option | strip -%}
+                  <option value="{{ option_value | handle }}">{{ option_value | escape }}</option>
+                {%- endfor -%}
+              </select>
+              <img class="hp-filters__caret" src="{{ 'hp-filter-caret.svg' | asset_url }}" alt="" width="12" height="8" aria-hidden="true">
+            </div>
           {%- endif -%}
         {%- endfor -%}
       </div>

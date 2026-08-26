@@ -7,7 +7,7 @@
   endif
 -%}
 
-<section class="hp-hero" id="hp-top" data-hp-hero>
+<div class="hp-hero" id="hp-top" data-hp-hero>
   <homepage-slider class="hp-hero__slider" data-autoplay="6000">
     <div class="hp-hero__viewport">
       <div class="hp-hero__track" data-hp-slider-track>
@@ -107,12 +107,13 @@
   {%- endif -%}
 
   <div class="hp-hero__curve" aria-hidden="true"></div>
-</section>
+</div>
 
 {% schema %}
 {
   "name": "Homepage hero",
   "tag": "section",
+  "class": "hp-hero-section",
   "disabled_on": { "groups": ["header", "footer"] },
   "blocks": [
     {

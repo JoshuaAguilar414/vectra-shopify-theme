@@ -54,10 +54,9 @@
     <div class="hp-footer__bar">
       <span>© {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright | escape }}</span>
       <div class="hp-social">
-        <a href="{{ section.settings.facebook_url | default: '#' }}" aria-label="Facebook">{% render 'hp-icon', name: 'users' %}</a>
-        <a href="{{ section.settings.instagram_url | default: '#' }}" aria-label="Instagram">{% render 'hp-icon', name: 'globe' %}</a>
-        <a href="{{ section.settings.linkedin_url | default: '#' }}" aria-label="LinkedIn">{% render 'hp-icon', name: 'handshake' %}</a>
-        <a href="{{ section.settings.youtube_url | default: '#' }}" aria-label="YouTube">{% render 'hp-icon', name: 'energy' %}</a>
+        <a href="{{ section.settings.instagram_url | default: '#' }}" aria-label="Instagram">
+          <img src="{{ 'hp-social.svg' | asset_url }}" alt="" width="120" height="24" loading="lazy">
+        </a>
       </div>
     </div>
   </div>

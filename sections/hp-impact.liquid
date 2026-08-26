@@ -79,25 +79,6 @@
           </p>
           <img src="{{ 'hp-positive-icon.png' | asset_url }}" alt="" width="37" height="37" aria-hidden="true">
         </div>
-        <div class="hp-logos__track" aria-label="Partner logos">
-          {%- for i in (1..9) -%}
-            <img
-              src="{{ 'hp-logo-' | append: i | append: '.png' | asset_url }}"
-              alt=""
-              loading="lazy"
-              height="64"
-            >
-          {%- endfor -%}
-          {%- for i in (1..9) -%}
-            <img
-              src="{{ 'hp-logo-' | append: i | append: '.png' | asset_url }}"
-              alt=""
-              loading="lazy"
-              height="64"
-              aria-hidden="true"
-            >
-          {%- endfor -%}
-        </div>
       </div>
     </homepage-reveal>
   </div>

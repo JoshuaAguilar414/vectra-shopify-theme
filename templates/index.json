@@ -14,7 +14,7 @@
         "slide_2": {
           "type": "slide",
           "settings": {
-            "asset": "hp-solution-1.png",
+            "asset": "hp-hero-2.png",
             "heading": "Who We Are",
             "text": "Driven by innovation and built on trust, we help businesses transform ideas into measurable impact."
           }
@@ -22,9 +22,9 @@
         "slide_3": {
           "type": "slide",
           "settings": {
-            "asset": "hp-why.png",
-            "heading": "Who We Are",
-            "text": "Discover our mission, meet the team behind our solutions, and see how our values shape every partnership."
+            "asset": "hp-hero-3.png",
+            "heading": "What We Do",
+            "text": "Explore our core products and services designed to solve your toughest challenges and scale with your growth. From tailored strategies to cutting-edge technology, find the exact solutions built to drive your success."
           }
         }
       },
@@ -34,6 +34,15 @@
         "text": "Driven by innovation and built on trust, we help businesses transform ideas into measurable impact.",
         "float_label": "Learn How We Can Help",
         "float_link": "#solutions"
+      }
+    },
+    "hp_trusted": {
+      "type": "hp-trusted",
+      "settings": {
+        "heading": "Trusted by leading organizations worldwide",
+        "badge_alt": "Trusted by 500+ Companies",
+        "background_color": "#ffffff",
+        "padding_y": 28
       }
     },
     "hp_info": {
@@ -178,7 +187,7 @@
             "asset": "hp-course-1.png",
             "badge": "Certificate Course",
             "title": "Acronyms Used in ESG Area",
-            "excerpt": "This course decodes the ESG (Environmental, Social, Governance) framework, transforming alphabet-soup acronyms into actionable business tools.",
+            "excerpt": "This course decodes the ESG (Environmental, Social, Governance) framework, transforming alphabet-soup acronyms into actionable business tools. It is designed for self-paced learners to understand how companies manage risk, ensure compliance, and prove sustainability claims.",
             "price": "$20.00",
             "button_label": "Access this course",
             "regulation": "CSRD",
@@ -192,7 +201,7 @@
             "asset": "hp-course-2.png",
             "badge": "Certificate Course",
             "title": "Preventative and Corrective Measures",
-            "excerpt": "A dual approach using preventative measures as a proactive shield and corrective measures as a surgical fix for supply chain due diligence.",
+            "excerpt": "This course provides a comprehensive framework for managing supply chain due diligence in 2026. It focuses on the dual approach of using preventative measures as a proactive shield and corrective measures as a surgical fix.",
             "price": "$20.00",
             "button_label": "Access this course",
             "regulation": "CSDDD",
@@ -206,7 +215,7 @@
             "asset": "hp-course-3.png",
             "badge": "Certificate Course",
             "title": "Optimizing Purchasing Practices",
-            "excerpt": "Essential strategies for enhancing procurement processes and building stronger, collaborative relationships with suppliers.",
+            "excerpt": "This course provides a comprehensive overview of essential strategies for enhancing procurement processes and building stronger, collaborative relationships with suppliers.",
             "price": "$20.00",
             "button_label": "Access this course",
             "regulation": "GRI",
@@ -220,7 +229,7 @@
             "asset": "hp-course-4.png",
             "badge": "Certificate Course",
             "title": "Disability Accommodation Training",
-            "excerpt": "Fundamental principles, legal frameworks, and practical strategies for tailoring accommodations to meet individual needs.",
+            "excerpt": "The course explores the fundamental principles, legal frameworks, and practical strategies for tailoring accommodations to meet individual needs effectively.",
             "price": "$20.00",
             "button_label": "Access this course",
             "regulation": "CSRD",
@@ -362,9 +371,10 @@
   },
   "order": [
     "hp_hero",
+    "hp_trusted",
+    "hp_impact",
     "hp_info",
     "hp_solutions",
-    "hp_impact",
     "hp_market",
     "hp_partners",
     "hp_faq",

@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="1150" overflow="visible" preserveAspectRatio="none" style="display: block;" viewBox="0 0 1150 1150" width="1150">
-<g filter="url(#filter0_f_0_511)" id="Ellipse 166">
-<circle cx="575" cy="575" fill="var(--fill-0, #54BD01)" fill-opacity="0.3" r="375"/>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="24" overflow="visible" preserveAspectRatio="none" style="display: block;" viewBox="0 0 24 24" width="24">
+<g id="Frame 1">
+<g id="Group 131526">
+<path d="M2.02145 4.31152C1.69852 4.64996 1.5 5.10826 1.5 5.61195V17.7601C1.5 18.7996 2.34552 19.6451 3.38503 19.6451H20.615C21.6545 19.6451 22.5 18.7996 22.5 17.7601V5.61195C22.5 5.10826 22.3015 4.64996 21.9785 4.31152L12.6048 14.0611C12.5999 14.0664 12.5946 14.0713 12.5897 14.0762C12.429 14.2256 12.2199 14.3077 12.0006 14.3077C11.7812 14.3077 11.5721 14.2256 11.4114 14.0762C11.4061 14.0713 11.4012 14.0664 11.3963 14.0611L2.02145 4.31152Z" fill="var(--fill-0, white)" id="Vector"/>
+<path d="M11.9311 13.5257C11.97 13.5578 12.0298 13.5578 12.0687 13.5257L21.3475 3.87479C21.1222 3.7795 20.8745 3.72656 20.6147 3.72656H3.38512C3.12534 3.72656 2.87765 3.7795 2.65228 3.87479L11.9311 13.5257Z" fill="var(--fill-0, white)" id="Vector_2"/>
 </g>
-<defs>
-<filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="1150" id="filter0_f_0_511" width="1150" x="0" y="0">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feBlend in="SourceGraphic" in2="BackgroundImageFix" mode="normal" result="shape"/>
-<feGaussianBlur result="effect1_foregroundBlur_0_511" stdDeviation="100"/>
-</filter>
-</defs>
+</g>
 </svg>

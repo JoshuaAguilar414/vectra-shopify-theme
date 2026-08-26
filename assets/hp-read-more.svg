@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="1" overflow="visible" preserveAspectRatio="none" style="display: block;" viewBox="0 0 454 1" width="454">
-<line id="Line 32" stroke="var(--stroke-0, black)" stroke-opacity="0.3" x2="454" y1="0.5" y2="0.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="10.3923" overflow="visible" preserveAspectRatio="none" style="display: block;" viewBox="0 0 16 10.3923" width="16">
+<path d="M16 5.19615L7 0V10.3923L16 5.19615ZM0 5.19615V6.09615H7.9V5.19615V4.29615H0V5.19615Z" fill="var(--stroke-0, white)" id="Arrow 3"/>
 </svg>

@@ -1,2 +1,6 @@
 {{ 'overflow-list.css' | asset_url | preload_tag: as: 'style' }}
 {{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
+
+{%- if template.name == 'index' -%}
+  {{ 'homepage.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
