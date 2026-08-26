@@ -16,7 +16,7 @@
         {%- endif -%}
       </div>
 
-      <div class="hp-form">
+      <div class="hp-form hp-form--glass">
         <h2>{{ section.settings.form_heading | escape }}</h2>
         {%- form 'contact', id: form_id -%}
           <input type="hidden" name="contact[id]" value="{{ form_id }}">

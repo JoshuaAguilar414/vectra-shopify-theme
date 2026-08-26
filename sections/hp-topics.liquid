@@ -9,7 +9,7 @@
   class="section-background hp-bg color-custom-{{ section.id }}"
   style="--hp-section-bg: {{ section.settings.background_color }};"
 ></div>
-<div class="section section--page-width hp">
+<div class="section section--page-width hp" id="topics">
   <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
     {%- if section.settings.heading != blank -%}
       <h2 class="hp-title" style="margin-bottom: 20px;">{{ section.settings.heading | escape }}</h2>
@@ -65,7 +65,7 @@
               {{ block.shopify_attributes }}
             >
               <div class="hp-media hp-topic__media">
-                {% render 'hp-media', image: block.settings.image, alt: block.settings.title, placeholder: 'collection-4' %}
+                {% render 'hp-media', image: block.settings.image, asset: block.settings.asset, alt: block.settings.title, placeholder: 'collection-4' %}
               </div>
               <div>
                 {%- if block.settings.category != blank -%}
@@ -104,6 +104,9 @@
           "label": "Tab id",
           "options": [
             { "value": "all", "label": "All" },
+            { "value": "casestudy", "label": "Case study" },
+            { "value": "expertise", "label": "By Expertise" },
+            { "value": "article", "label": "Article" },
             { "value": "sustainability", "label": "Sustainability" },
             { "value": "esg", "label": "ESG" },
             { "value": "latest", "label": "Latest" },
@@ -119,6 +122,7 @@
       "name": "Article",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "asset", "label": "Fallback theme asset", "default": "hp-article-1.png" },
         { "type": "text", "id": "category", "label": "Category", "default": "Insights" },
         { "type": "text", "id": "title", "label": "Title", "default": "Building a credible climate transition plan" },
         { "type": "textarea", "id": "excerpt", "label": "Excerpt", "default": "How leading companies connect targets, capital, and operating decisions." },
@@ -130,6 +134,9 @@
           "label": "Show in tab",
           "options": [
             { "value": "all", "label": "All" },
+            { "value": "casestudy", "label": "Case study" },
+            { "value": "expertise", "label": "By Expertise" },
+            { "value": "article", "label": "Article" },
             { "value": "sustainability", "label": "Sustainability" },
             { "value": "esg", "label": "ESG" },
             { "value": "latest", "label": "Latest" },

@@ -1,5 +1,5 @@
 {% comment %}
-  Trusted-by badge + logo marquee — matches Figma strip under the hero.
+  Trusted-by badge + CTA + logo marquee (screenshot layout, Figma marquee motion).
 {% endcomment %}
 
 <div
@@ -8,25 +8,32 @@
 ></div>
 <div class="section section--full-width hp" id="trusted">
   <div class="hp-trusted" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
-    <div class="hp-trusted__badge-wrap">
-      {%- if section.settings.badge_image != blank -%}
-        {{
-          section.settings.badge_image
-          | image_url: width: 400
-          | image_tag: loading: 'lazy', class: 'hp-trusted__badge', alt: section.settings.badge_alt
-        }}
-      {%- else -%}
-        <img
-          class="hp-trusted__badge"
-          src="{{ 'hp-trusted-badge.png' | asset_url }}"
-          alt="{{ section.settings.badge_alt | escape }}"
-          width="198"
-          height="191"
-          loading="lazy"
-        >
-      {%- endif -%}
-      {%- if section.settings.heading != blank -%}
-        <p class="hp-trusted__heading">{{ section.settings.heading | escape }}</p>
+    <div class="hp-trusted__bar">
+      <div class="hp-trusted__badge-wrap">
+        {%- if section.settings.badge_image != blank -%}
+          {{
+            section.settings.badge_image
+            | image_url: width: 400
+            | image_tag: loading: 'lazy', class: 'hp-trusted__badge', alt: section.settings.badge_alt
+          }}
+        {%- else -%}
+          <img
+            class="hp-trusted__badge"
+            src="{{ 'hp-trusted-badge.png' | asset_url }}"
+            alt="{{ section.settings.badge_alt | escape }}"
+            width="198"
+            height="191"
+            loading="lazy"
+          >
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <p class="hp-trusted__heading">{{ section.settings.heading | escape }}</p>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.button_label != blank -%}
+        <a class="hp-btn" href="{{ section.settings.button_link | default: '#solutions' }}">
+          {{ section.settings.button_label | escape }}
+        </a>
       {%- endif -%}
     </div>
 
@@ -53,7 +60,7 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Trusted by leading organizations worldwide"
+      "default": "Trusted by the world’s leading corporations & investors"
     },
     { "type": "image_picker", "id": "badge_image", "label": "Badge image" },
     {
@@ -62,6 +69,8 @@
       "label": "Badge alt text",
       "default": "Trusted by 500+ Companies"
     },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Explore solutions" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
     { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" },
     {
       "type": "range",

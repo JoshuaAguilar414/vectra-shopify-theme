@@ -9,7 +9,6 @@
     <div class="hp-wrap hp-partners" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
       <homepage-reveal>
         <div class="hp-partners__intro">
-          <img class="hp-partners__stars" src="{{ 'hp-stars.svg' | asset_url }}" alt="" width="120" height="24" loading="lazy">
           {%- if section.settings.heading != blank -%}
             <h2 class="hp-title">{{ section.settings.heading | escape | newline_to_br }}</h2>
           {%- endif -%}
@@ -19,58 +18,52 @@
         </div>
       </homepage-reveal>
 
-      <homepage-slider data-autoplay="4500">
-        <div class="hp-slider">
-          <div class="hp-slider__viewport">
-            <div class="hp-slider__track" data-hp-slider-track>
-              {%- for block in section.blocks -%}
-                {%- liquid
-                  assign logo_asset = block.settings.asset
-                  if logo_asset == blank
-                    case forloop.index
-                      when 1
-                        assign logo_asset = 'hp-partner-otto.png'
-                      when 2
-                        assign logo_asset = 'hp-partner-crh.png'
-                      else
-                        assign logo_asset = 'hp-partner-kodak.png'
-                    endcase
-                  endif
-                -%}
-                <div class="hp-slider__slide{% if forloop.first %} is-active{% endif %}" data-hp-slide {{ block.shopify_attributes }}>
-                  <a class="hp-partner hp-partner--slide" href="{{ block.settings.link | default: '#' }}">
-                    {%- if block.settings.logo != blank -%}
-                      {{
-                        block.settings.logo
-                        | image_url: width: 800
-                        | image_tag: alt: block.settings.name, loading: 'lazy'
-                      }}
-                    {%- else -%}
-                      <img src="{{ logo_asset | asset_url }}" alt="{{ block.settings.name | escape }}" loading="lazy" width="726" height="408">
-                    {%- endif -%}
-                    <div class="hp-partner__meta">
-                      <strong>{{ block.settings.name | escape }}</strong>
-                      {%- if block.settings.industry != blank -%}
-                        <span>{{ block.settings.industry | escape }}</span>
-                      {%- endif -%}
-                    </div>
-                  </a>
-                </div>
-              {%- endfor -%}
-            </div>
+      <div class="hp-partners__grid">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign logo_asset = block.settings.asset
+            if logo_asset == blank
+              case forloop.index
+                when 1
+                  assign logo_asset = 'hp-partner-otto.png'
+                when 2
+                  assign logo_asset = 'hp-partner-crh.png'
+                else
+                  assign logo_asset = 'hp-partner-kodak.png'
+              endcase
+            endif
+          -%}
+          <homepage-reveal data-from="up" data-delay="{{ forloop.index }}">
+            <a class="hp-partner" href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>
+              {%- if block.settings.logo != blank -%}
+                {{
+                  block.settings.logo
+                  | image_url: width: 400
+                  | image_tag: alt: block.settings.name, loading: 'lazy'
+                }}
+              {%- else -%}
+                <img src="{{ logo_asset | asset_url }}" alt="{{ block.settings.name | escape }}" loading="lazy" width="200" height="80">
+              {%- endif -%}
+              {%- if block.settings.name != blank -%}
+                <strong>{{ block.settings.name | escape }}</strong>
+              {%- endif -%}
+              {%- if block.settings.industry != blank -%}
+                <span>{{ block.settings.industry | escape }}</span>
+              {%- endif -%}
+            </a>
+          </homepage-reveal>
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.button_label != blank -%}
+        <homepage-reveal data-delay="2">
+          <div class="hp-partners__cta">
+            <a class="hp-btn" href="{{ section.settings.button_link | default: '#' }}">
+              {{ section.settings.button_label | escape }}
+            </a>
           </div>
-          {%- if section.blocks.size > 1 -%}
-            <div class="hp-slider__nav">
-              <button class="hp-slider__btn hp-slider__btn--prev" type="button" data-hp-prev aria-label="Previous partner">
-                <img src="{{ 'hp-btn-arrow.svg' | asset_url }}" alt="" width="16" height="10">
-              </button>
-              <button class="hp-slider__btn" type="button" data-hp-next aria-label="Next partner">
-                <img src="{{ 'hp-btn-arrow.svg' | asset_url }}" alt="" width="16" height="10">
-              </button>
-            </div>
-          {%- endif -%}
-        </div>
-      </homepage-slider>
+        </homepage-reveal>
+      {%- endif -%}
     </div>
   </homepage-particles>
 </div>
@@ -99,9 +92,11 @@
       "type": "textarea",
       "id": "heading",
       "label": "Heading",
-      "default": "Tested in real crises.\nProven by industry leaders."
+      "default": "Everything you need to ensure your supply chain transparency."
     },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Based on 500 reviews" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Expand solutions" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
     { "type": "color", "id": "background_color", "label": "Background", "default": "#00263d" },
     { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 72 }
   ],

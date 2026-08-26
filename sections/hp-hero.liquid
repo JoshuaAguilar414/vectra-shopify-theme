@@ -63,6 +63,18 @@
     <button class="hp-hero__arrow hp-hero__arrow--next" type="button" data-hp-next aria-label="Next slide">
       <img src="{{ 'hp-nav-arrow.svg' | asset_url }}" alt="" width="19" height="15">
     </button>
+    {%- if slides.size > 1 -%}
+      <div class="hp-hero__dots" role="tablist" aria-label="Hero slides">
+        {%- for block in slides -%}
+          <button
+            class="hp-hero__dot{% if forloop.first %} is-active{% endif %}"
+            type="button"
+            data-hp-dot
+            aria-label="Go to slide {{ forloop.index }}"
+          ></button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </homepage-slider>
 
   <div class="hp-hero__topbar">
@@ -72,15 +84,12 @@
       </a>
 
       <nav class="hp-hero__nav" aria-label="Primary">
-        <a href="{{ section.settings.link_dna | default: '#why' }}">Our DNA</a>
-        <a href="{{ section.settings.link_help | default: '#solutions' }}">How We Help</a>
-        <a href="{{ section.settings.link_market | default: '#marketplace' }}">Marketplace</a>
+        <a href="{{ section.settings.link_help | default: '#solutions' }}">Solutions</a>
+        <a href="{{ section.settings.link_market | default: '#marketplace' }}">Services</a>
+        <a href="{{ section.settings.link_dna | default: '#why' }}">Who We Are</a>
         <a href="{{ section.settings.link_resources | default: '#articles' }}">Resources</a>
-        <a class="hp-hero__cta" href="{{ section.settings.link_contact | default: '#contact' }}">
-          Contact Us
-          <img src="{{ 'hp-arrow.svg' | asset_url }}" alt="" width="16" height="9">
-        </a>
       </nav>
+      <a class="hp-hero__cta" href="{{ section.settings.link_contact | default: '#contact' }}">Contact Us</a>
     </div>
 
     <div class="hp-hero__actions">

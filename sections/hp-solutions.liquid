@@ -4,71 +4,76 @@
   class="section-background hp-bg color-custom-{{ section.id }}"
   style="--hp-section-bg: {{ section.settings.background_color }};"
 ></div>
-<div class="section section--page-width hp" id="solutions">
-  <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
-    <homepage-reveal>
-      <div class="hp-solhead">
-        <p class="hp-eyebrow">{{ section.settings.eyebrow | escape }}</p>
-        <h2 class="hp-title">{{ section.settings.heading | escape }}</h2>
-      </div>
-    </homepage-reveal>
+<div class="section section--page-width hp hp--navy" id="solutions">
+  <homepage-particles class="hp-particles hp-particles--dark" data-mode="dark">
+    <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
+      <div class="hp-solshow">
+        <homepage-reveal data-from="left">
+          <div class="hp-solshow__copy">
+            {%- if section.settings.eyebrow != blank -%}
+              <p class="hp-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+            {%- endif -%}
+            <h2 class="hp-title">{{ section.settings.heading | escape }}</h2>
+            {%- if section.settings.text != blank -%}
+              <p class="hp-copy">{{ section.settings.text | escape }}</p>
+            {%- endif -%}
+            {%- if section.settings.intro_button_label != blank -%}
+              <a class="hp-btn" href="{{ section.settings.intro_button_link | default: '#contact' }}">
+                {{ section.settings.intro_button_label | escape }}
+              </a>
+            {%- endif -%}
+          </div>
+        </homepage-reveal>
 
-    <homepage-carousel>
-      <div class="hp-solgrid hp-solgrid--carousel" data-hp-track>
-        {%- for block in section.blocks -%}
-          {%- liquid
-            assign media_asset = block.settings.asset
-            if media_asset == blank
-              assign media_asset = 'hp-solution-' | append: forloop.index | append: '.png'
-            endif
-          -%}
-          <homepage-reveal data-delay="{{ forloop.index }}" style="min-width: {% if forloop.first %}100%{% else %}min(320px, 80vw){% endif %};">
-            <article
-              class="hp-solcard{% if forloop.first %} hp-solcard--featured{% endif %}"
-              {{ block.shopify_attributes }}
-            >
-              <div class="hp-media hp-solcard__media">
-                {% render 'hp-media', image: block.settings.image, asset: media_asset, alt: block.settings.title, placeholder: 'collection-1' %}
-                <span class="hp-solcard__shade"></span>
-              </div>
-              <div class="hp-solcard__body">
-                <h3>{{ block.settings.title | escape }}</h3>
-                {%- if block.settings.text != blank -%}
-                  <p>{{ block.settings.text | escape }}</p>
-                {%- endif -%}
-                {%- if block.settings.button_label != blank -%}
-                  <a class="hp-btn" href="{{ block.settings.link | default: '#' }}">
-                    {{ block.settings.button_label | escape }}
-                    <img src="{{ 'hp-btn-arrow.svg' | asset_url }}" alt="" width="16" height="10" aria-hidden="true">
-                  </a>
-                {%- endif -%}
-              </div>
-            </article>
-          </homepage-reveal>
-        {%- endfor -%}
+        <homepage-carousel>
+          <div class="hp-solgrid hp-solgrid--carousel" data-hp-track>
+            {%- for block in section.blocks -%}
+              {%- liquid
+                assign media_asset = block.settings.asset
+                if media_asset == blank
+                  assign media_asset = 'hp-solution-' | append: forloop.index | append: '.png'
+                endif
+              -%}
+              <homepage-reveal data-delay="{{ forloop.index }}">
+                <article class="hp-solcard" {{ block.shopify_attributes }}>
+                  <div class="hp-media hp-solcard__media">
+                    {% render 'hp-media', image: block.settings.image, asset: media_asset, alt: block.settings.title, placeholder: 'collection-1' %}
+                    <span class="hp-solcard__shade"></span>
+                  </div>
+                  <div class="hp-solcard__body">
+                    <h3>{{ block.settings.title | escape }}</h3>
+                    {%- if block.settings.text != blank -%}
+                      <p>{{ block.settings.text | escape }}</p>
+                    {%- endif -%}
+                  </div>
+                </article>
+              </homepage-reveal>
+            {%- endfor -%}
+          </div>
+          {%- if section.blocks.size > 1 -%}
+            <div class="hp-slider__nav">
+              <button class="hp-slider__btn hp-slider__btn--prev" type="button" data-hp-prev aria-label="Previous solution">
+                <img src="{{ 'hp-btn-arrow.svg' | asset_url }}" alt="" width="16" height="10">
+              </button>
+              <button class="hp-slider__btn" type="button" data-hp-next aria-label="Next solution">
+                <img src="{{ 'hp-btn-arrow.svg' | asset_url }}" alt="" width="16" height="10">
+              </button>
+            </div>
+          {%- endif -%}
+        </homepage-carousel>
       </div>
-      {%- if section.blocks.size > 1 -%}
-        <div class="hp-slider__nav">
-          <button class="hp-slider__btn hp-slider__btn--prev" type="button" data-hp-prev aria-label="Previous solution">
-            <img src="{{ 'hp-btn-arrow.svg' | asset_url }}" alt="" width="16" height="10">
-          </button>
-          <button class="hp-slider__btn" type="button" data-hp-next aria-label="Next solution">
-            <img src="{{ 'hp-btn-arrow.svg' | asset_url }}" alt="" width="16" height="10">
-          </button>
-        </div>
+
+      {%- if section.settings.button_label != blank -%}
+        <homepage-reveal data-delay="2">
+          <div class="hp-solgrid__cta">
+            <a class="hp-btn" href="{{ section.settings.button_link | default: '#' }}">
+              {{ section.settings.button_label | escape }}
+            </a>
+          </div>
+        </homepage-reveal>
       {%- endif -%}
-    </homepage-carousel>
-
-    {%- if section.settings.button_label != blank -%}
-      <homepage-reveal data-delay="2">
-        <div class="hp-solgrid__cta">
-          <a class="hp-btn" href="{{ section.settings.button_link | default: '#' }}">
-            {{ section.settings.button_label | escape }}
-          </a>
-        </div>
-      </homepage-reveal>
-    {%- endif -%}
-  </div>
+    </div>
+  </homepage-particles>
 </div>
 
 {% schema %}
@@ -96,7 +101,7 @@
           "label": "Text",
           "default": "Build operational control, continuity, and a stronger response to disruption."
         },
-        { "type": "text", "id": "button_label", "label": "Button label", "default": "Start a briefing" },
+        { "type": "text", "id": "button_label", "label": "Button label" },
         { "type": "url", "id": "link", "label": "Link" }
       ]
     }
@@ -107,11 +112,19 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Find the right solution for you and your team, fast."
+      "default": "A multi-benefit solution for you and your team, fast."
     },
-    { "type": "text", "id": "button_label", "label": "Footer button", "default": "Explore All Solutions →" },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Practical solutions built for implementation — from operational resilience to ESG capability."
+    },
+    { "type": "text", "id": "intro_button_label", "label": "Intro button", "default": "Contact us" },
+    { "type": "url", "id": "intro_button_link", "label": "Intro button link" },
+    { "type": "text", "id": "button_label", "label": "Footer button", "default": "See all benefits" },
     { "type": "url", "id": "button_link", "label": "Footer button link" },
-    { "type": "color", "id": "background_color", "label": "Background", "default": "#f4f6f8" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#00263d" },
     { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 72 }
   ],
   "presets": [
@@ -122,9 +135,7 @@
           "type": "card",
           "settings": {
             "asset": "hp-solution-1.png",
-            "title": "Operational Resilience",
-            "text": "Build operational control, continuity, and a stronger response to disruption.",
-            "button_label": "Start a briefing"
+            "title": "Operational Resilience"
           }
         }
       ]

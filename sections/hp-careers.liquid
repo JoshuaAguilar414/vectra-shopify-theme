@@ -5,28 +5,22 @@
   style="--hp-section-bg: {{ section.settings.background_color }};"
 ></div>
 <div class="section section--page-width hp" id="careers">
-  <div class="hp-wrap hp-careers" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
+  <div class="hp-wrap hp-careers hp-careers--plain" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
     <homepage-particles class="hp-particles hp-particles--light" data-mode="light">
       <homepage-reveal data-from="up">
-        <div class="hp-careers__panel">
-          <div class="hp-careers__media" aria-hidden="true">
-            {% render 'hp-media', image: section.settings.image, asset: 'hp-careers.png', alt: '', placeholder: 'lifestyle-2' %}
-          </div>
-          <div class="hp-careers__copy">
-            {%- if section.settings.eyebrow != blank -%}
-              <p class="hp-eyebrow">{{ section.settings.eyebrow | escape }}</p>
-            {%- endif -%}
-            <h2 class="hp-title">{{ section.settings.heading | escape }}</h2>
-            {%- if section.settings.text != blank -%}
-              <p class="hp-copy">{{ section.settings.text | escape }}</p>
-            {%- endif -%}
-            {%- if section.settings.button_label != blank -%}
-              <a class="hp-btn" href="{{ section.settings.button_link | default: '#' }}">
-                {{ section.settings.button_label | escape }}
-                <img src="{{ 'hp-btn-arrow.svg' | asset_url }}" alt="" width="16" height="10" aria-hidden="true">
-              </a>
-            {%- endif -%}
-          </div>
+        <div class="hp-careers__copy">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="hp-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          {%- endif -%}
+          <h2 class="hp-title">{{ section.settings.heading | escape }}</h2>
+          {%- if section.settings.text != blank -%}
+            <p class="hp-copy">{{ section.settings.text | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.button_label != blank -%}
+            <a class="hp-btn" href="{{ section.settings.button_link | default: '#' }}">
+              {{ section.settings.button_label | escape }}
+            </a>
+          {%- endif -%}
         </div>
       </homepage-reveal>
     </homepage-particles>
@@ -48,7 +42,7 @@
       "default": "At VECTRA International, we believe our greatest asset is our people. We are always looking for passionate, driven individuals eager to make an impact and grow their careers with us."
     },
     { "type": "image_picker", "id": "image", "label": "Background image" },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Explore our open roles" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "See open positions" },
     { "type": "url", "id": "button_link", "label": "Button link" },
     { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" },
     { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 140, "step": 4, "unit": "px", "default": 88 }

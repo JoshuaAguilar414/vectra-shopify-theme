@@ -15,8 +15,8 @@
           "type": "slide",
           "settings": {
             "asset": "hp-hero-2.png",
-            "heading": "Who We Are",
-            "text": "Driven by innovation and built on trust, we help businesses transform ideas into measurable impact."
+            "heading": "Upcoming Webinar",
+            "text": "Stay ahead of industry trends with our latest webinars, live events, and expert-led podcast episodes. Stream on demand to gain actionable insights, practical strategies, and fresh perspectives."
           }
         },
         "slide_3": {
@@ -32,15 +32,16 @@
       "settings": {
         "heading": "Who We Are",
         "text": "Driven by innovation and built on trust, we help businesses transform ideas into measurable impact.",
-        "float_label": "Learn How We Can Help",
+        "float_label": "",
         "float_link": "#solutions"
       }
     },
     "hp_trusted": {
       "type": "hp-trusted",
       "settings": {
-        "heading": "Trusted by leading organizations worldwide",
+        "heading": "Trusted by the world’s leading corporations & investors",
         "badge_alt": "Trusted by 500+ Companies",
+        "button_label": "Explore solutions",
         "background_color": "#ffffff",
         "padding_y": 28
       }
@@ -113,9 +114,11 @@
       "block_order": ["sol_1", "sol_2", "sol_3", "sol_4"],
       "settings": {
         "eyebrow": "VECTRA Solutions",
-        "heading": "Find the right solution for you and your team, fast.",
-        "button_label": "Explore All Solutions →",
-        "background_color": "#f4f6f8",
+        "heading": "A multi-benefit solution for you and your team, fast.",
+        "text": "Practical solutions built for implementation — from operational resilience to ESG capability.",
+        "intro_button_label": "Contact us",
+        "button_label": "See all benefits",
+        "background_color": "#00263d",
         "padding_y": 72
       }
     },
@@ -126,42 +129,45 @@
           "type": "pillar",
           "settings": {
             "icon_asset": "hp-pillar-1.svg",
-            "heading": "Progress you can measure",
-            "text": "Practical implementation makes improvement visible and durable."
+            "stat": "50+",
+            "heading": "Projects worldwide",
+            "text": ""
           }
         },
         "p2": {
           "type": "pillar",
           "settings": {
             "icon_asset": "hp-pillar-2.svg",
-            "heading": "Integrated expertise around the work",
-            "text": "Curated specialists, tools, and learning shaped to your context."
+            "stat": "25+",
+            "heading": "Countries",
+            "text": ""
           }
         },
         "p3": {
           "type": "pillar",
           "settings": {
             "icon_asset": "hp-pillar-3.svg",
-            "heading": "AI-enabled. Human-led",
-            "text": "Technology makes expert judgment more timely and useful."
+            "stat": "15+",
+            "heading": "Years of experience",
+            "text": ""
           }
         },
         "p4": {
           "type": "pillar",
           "settings": {
             "icon_asset": "hp-pillar-4.svg",
-            "heading": "Your success is our success",
-            "text": "We work toward business outcomes, not a list of deliverables."
+            "stat": "500+",
+            "heading": "Clients served",
+            "text": ""
           }
         }
       },
       "block_order": ["p1", "p2", "p3", "p4"],
       "settings": {
-        "eyebrow": "Why VECTRA",
-        "heading": "Partnership with accountability. Built for implementation.",
+        "heading": "Enabling global business impact.",
+        "feature_heading": "Sustainability with accountability. Built for impact that lasts.",
         "text": "We combine human expertise, an ecosystem of specialists, AI-enabled intelligence, and structured execution—then stay accountable for the outcomes that matter.",
-        "button_label": "Explore our approach",
-        "cases_label": "Explore case studies →",
+        "button_label": "Learn more",
         "background_color": "#ffffff",
         "padding_y": 72
       }
@@ -247,6 +253,64 @@
         "padding_y": 72
       }
     },
+    "hp_topics": {
+      "type": "hp-topics",
+      "blocks": {
+        "t1": { "type": "tab", "settings": { "label": "Case study", "tab_id": "all" } },
+        "t2": { "type": "tab", "settings": { "label": "By Expertise", "tab_id": "expertise" } },
+        "t3": { "type": "tab", "settings": { "label": "Article", "tab_id": "article" } },
+        "a1": {
+          "type": "article",
+          "settings": {
+            "asset": "hp-article-1.png",
+            "category": "Climate",
+            "title": "Building a credible climate transition plan",
+            "excerpt": "How leading companies connect targets, capital, and operating decisions.",
+            "date": "Aug 12, 2026",
+            "tab": "casestudy"
+          }
+        },
+        "a2": {
+          "type": "article",
+          "settings": {
+            "asset": "hp-article-2.png",
+            "category": "Governance",
+            "title": "What boards need from ESG reporting now",
+            "excerpt": "The questions directors should ask before the next reporting cycle.",
+            "date": "Jul 28, 2026",
+            "tab": "expertise"
+          }
+        },
+        "a3": {
+          "type": "article",
+          "settings": {
+            "asset": "hp-article-3.png",
+            "category": "Social",
+            "title": "Designing impact programs that scale",
+            "excerpt": "Practical ways to move from pilots to operating models.",
+            "date": "Jul 04, 2026",
+            "tab": "article"
+          }
+        },
+        "a4": {
+          "type": "article",
+          "settings": {
+            "asset": "hp-course-1.png",
+            "category": "Strategy",
+            "title": "From materiality to operating model",
+            "excerpt": "Turn assessment findings into accountable workstreams.",
+            "date": "Jun 19, 2026",
+            "tab": "casestudy"
+          }
+        }
+      },
+      "block_order": ["t1", "t2", "t3", "a1", "a2", "a3", "a4"],
+      "settings": {
+        "heading": "Featured Topics",
+        "background_color": "#ffffff",
+        "padding_y": 72
+      }
+    },
     "hp_partners": {
       "type": "hp-partners",
       "blocks": {
@@ -256,8 +320,9 @@
       },
       "block_order": ["p1", "p2", "p3"],
       "settings": {
-        "heading": "Tested in real crises.\nProven by industry leaders.",
-        "text": "Based on 500 reviews",
+        "heading": "Everything you need to ensure your supply chain transparency.",
+        "text": "",
+        "button_label": "Expand solutions",
         "background_color": "#00263d",
         "padding_y": 72
       }
@@ -352,7 +417,7 @@
         "eyebrow": "Careers",
         "heading": "Join Our Team",
         "text": "At VECTRA International, we believe our greatest asset is our people. We are always looking for passionate, driven individuals eager to make an impact and grow their careers with us.",
-        "button_label": "Explore our open roles",
+        "button_label": "See open positions",
         "background_color": "#ffffff",
         "padding_y": 88
       }
@@ -363,7 +428,7 @@
         "heading": "Everything your VECTRA relationship, in one place.",
         "text": "Access Marketplace purchases, active services, VSuites, current retainers, billing, documentation, and support from a single, secure account.",
         "form_heading": "Get In Touch",
-        "button_label": "Sign in",
+        "button_label": "Send Message",
         "background_gradient": "linear-gradient(180deg, #00263d 0%, #1a6b3c 52%, #54bd01 100%)",
         "padding_y": 80
       }
@@ -376,10 +441,11 @@
     "hp_info",
     "hp_solutions",
     "hp_market",
+    "hp_topics",
     "hp_partners",
-    "hp_faq",
     "hp_articles",
-    "hp_careers",
-    "hp_form"
+    "hp_faq",
+    "hp_form",
+    "hp_careers"
   ]
 }

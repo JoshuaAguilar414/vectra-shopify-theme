@@ -115,14 +115,47 @@ class HomepageSlider extends HTMLElement {
     this.slides = Array.from(this.querySelectorAll('[data-hp-slide]'));
     this.index = 0;
     this.autoplayMs = Number(this.dataset.autoplay || 0);
+    this.paused = false;
 
     this.querySelector('[data-hp-prev]')?.addEventListener('click', () => this.go(-1));
     this.querySelector('[data-hp-next]')?.addEventListener('click', () => this.go(1));
+    this.addEventListener('mouseenter', () => this.pause());
+    this.addEventListener('mouseleave', () => this.resume());
+    this.addEventListener('focusin', () => this.pause());
+    this.addEventListener('focusout', () => this.resume());
+
+    this.querySelectorAll('[data-hp-dot]').forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        this.index = i;
+        this.update();
+      });
+    });
 
     this.update();
-    if (this.autoplayMs > 0 && this.slides.length > 1) {
-      this.timer = setInterval(() => this.go(1), this.autoplayMs);
+    this.start();
+  }
+
+  start() {
+    this.stop();
+    if (this.paused || this.autoplayMs <= 0 || this.slides.length < 2) return;
+    this.timer = setInterval(() => this.go(1), this.autoplayMs);
+  }
+
+  stop() {
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.timer = 0;
     }
+  }
+
+  pause() {
+    this.paused = true;
+    this.stop();
+  }
+
+  resume() {
+    this.paused = false;
+    this.start();
   }
 
   go(step) {
@@ -136,13 +169,16 @@ class HomepageSlider extends HTMLElement {
       slide.classList.toggle('is-active', i === this.index);
       slide.setAttribute('aria-hidden', i === this.index ? 'false' : 'true');
     });
+    this.querySelectorAll('[data-hp-dot]').forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === this.index);
+    });
     if (this.track) {
       this.track.style.transform = `translateX(-${this.index * 100}%)`;
     }
   }
 
   disconnectedCallback() {
-    if (this.timer) clearInterval(this.timer);
+    this.stop();
   }
 }
 

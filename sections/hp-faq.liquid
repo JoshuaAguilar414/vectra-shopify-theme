@@ -63,7 +63,7 @@
         {%- endif -%}
         <div class="hp-acc">
           {%- for block in section.blocks -%}
-            <details {% if forloop.last %}open{% endif %} {{ block.shopify_attributes }}>
+            <details {% if forloop.first %}open{% endif %} {{ block.shopify_attributes }}>
               <summary>{{ block.settings.question | escape }}</summary>
               <div class="hp-acc__body">{{ block.settings.answer }}</div>
             </details>
