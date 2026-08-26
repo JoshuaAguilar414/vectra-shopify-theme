@@ -172,6 +172,10 @@ class HomepageSlider extends HTMLElement {
     this.querySelectorAll('[data-hp-dot]').forEach((dot, i) => {
       dot.classList.toggle('is-active', i === this.index);
     });
+    const progress = this.querySelector('[data-hp-progress]');
+    if (progress && this.slides.length) {
+      progress.style.width = `${((this.index + 1) / this.slides.length) * 100}%`;
+    }
     if (this.track) {
       this.track.style.transform = `translateX(-${this.index * 100}%)`;
     }
@@ -258,9 +262,28 @@ class HomepageParticles extends HTMLElement {
   }
 }
 
+class HomepageSolutions extends HTMLElement {
+  connectedCallback() {
+    this.panels = Array.from(this.querySelectorAll('[data-hp-sol-panel]'));
+    this.thumbs = Array.from(this.querySelectorAll('[data-hp-sol-thumb]'));
+    this.index = 0;
+    this.thumbs.forEach((thumb, i) => {
+      thumb.addEventListener('click', () => this.activate(i));
+    });
+    this.activate(0);
+  }
+
+  activate(index) {
+    this.index = index;
+    this.panels.forEach((panel, i) => panel.classList.toggle('is-active', i === index));
+    this.thumbs.forEach((thumb, i) => thumb.classList.toggle('is-active', i === index));
+  }
+}
+
 if (!customElements.get('homepage-carousel')) customElements.define('homepage-carousel', HomepageCarousel);
 if (!customElements.get('homepage-filters')) customElements.define('homepage-filters', HomepageFilters);
 if (!customElements.get('homepage-tabs')) customElements.define('homepage-tabs', HomepageTabs);
 if (!customElements.get('homepage-reveal')) customElements.define('homepage-reveal', HomepageReveal);
 if (!customElements.get('homepage-slider')) customElements.define('homepage-slider', HomepageSlider);
 if (!customElements.get('homepage-particles')) customElements.define('homepage-particles', HomepageParticles);
+if (!customElements.get('homepage-solutions')) customElements.define('homepage-solutions', HomepageSolutions);

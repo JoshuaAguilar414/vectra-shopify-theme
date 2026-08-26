@@ -7,17 +7,9 @@
 <div class="section section--page-width hp" id="trust">
   <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
     <div class="hp-trust">
+      <div class="hp-trust__dome" aria-hidden="true"></div>
       <homepage-reveal data-from="scale">
         <div class="hp-trust__visual">
-          <img
-            class="hp-trust__rings"
-            src="{{ 'hp-trust-rings.svg' | asset_url }}"
-            alt=""
-            aria-hidden="true"
-            width="320"
-            height="320"
-            loading="lazy"
-          >
           <div class="hp-trust__center">
             <h2 class="hp-trust__heading">
               {{ section.settings.heading_line_1 | escape }}
@@ -32,37 +24,8 @@
 
       <div class="hp-trust__stats">
         {%- for block in section.blocks limit: 3 -%}
-          {%- liquid
-            assign icon_asset = block.settings.icon_asset
-            assign from = 'up'
-            if icon_asset == blank
-              case forloop.index
-                when 1
-                  assign icon_asset = 'hp-stat-experts.svg'
-                  assign from = 'right'
-                when 2
-                  assign icon_asset = 'hp-stat-years.svg'
-                  assign from = 'left'
-                else
-                  assign icon_asset = 'hp-stat-clients.svg'
-                  assign from = 'up'
-              endcase
-            else
-              case forloop.index
-                when 1
-                  assign from = 'right'
-                when 2
-                  assign from = 'left'
-                else
-                  assign from = 'up'
-              endcase
-            endif
-          -%}
-          <homepage-reveal data-from="{{ from }}" data-delay="{{ forloop.index }}">
+          <homepage-reveal data-from="up" data-delay="{{ forloop.index }}">
             <article class="hp-trust__stat hp-trust__stat--{{ forloop.index }}" {{ block.shopify_attributes }}>
-              <div class="hp-trust__icon">
-                {% render 'hp-asset-icon', name: icon_asset, alt: block.settings.label %}
-              </div>
               <p class="hp-trust__value" data-hp-count="{{ block.settings.stat | escape }}">{{ block.settings.stat | escape }}</p>
               <h3>{{ block.settings.label | escape }}</h3>
             </article>
@@ -111,9 +74,9 @@
     {
       "name": "Homepage ESG partner",
       "blocks": [
-        { "type": "stat", "settings": { "icon_asset": "hp-stat-experts.svg", "stat": "100+", "label": "Experts Worldwide" } },
-        { "type": "stat", "settings": { "icon_asset": "hp-stat-years.svg", "stat": "30+", "label": "Years Of Experience" } },
-        { "type": "stat", "settings": { "icon_asset": "hp-stat-clients.svg", "stat": "500+", "label": "Satisfied Clients" } }
+        { "type": "stat", "settings": { "stat": "30+", "label": "Years Of Experience" } },
+        { "type": "stat", "settings": { "stat": "100+", "label": "Experts Worldwide" } },
+        { "type": "stat", "settings": { "stat": "500+", "label": "Satisfied Clients" } }
       ]
     }
   ]

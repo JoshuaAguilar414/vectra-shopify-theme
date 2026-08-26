@@ -9,14 +9,14 @@
     {%- if section.settings.heading != blank -%}
       <homepage-reveal>
         {%- if section.settings.heading contains 'Positive' or section.settings.heading contains 'positive' -%}
-          <h2 class="hp-title hp-impact__head">
+          <h2 class="hp-title hp-impact__head" aria-label="Enabling Positive Business Impact">
             Enabling P<span class="hp-impact__o" aria-hidden="true">
               <svg viewBox="0 0 32 32" fill="none">
                 <path d="M16 5.2a10.8 10.8 0 0 1 9.4 5.6l1.9-3.2.9 8.2-7.6-2.4 2.2-1.8A8.4 8.4 0 0 0 16 7.6V5.2Z" fill="currentColor"/>
                 <path d="M25.2 20.4A10.8 10.8 0 0 1 16 26.8v2.4a13.2 13.2 0 0 0 11.2-6.4l2 1.4-2.4-7.6-3.4 5.8 1.8 2Z" fill="currentColor"/>
                 <path d="M8.2 22.6A10.8 10.8 0 0 1 7.4 11l-3.4.6L9.6 5.8l2.2 7.6-2.6-1.2A8.4 8.4 0 0 0 8.6 21l1.8 1.8-2.2-.2Z" fill="currentColor"/>
               </svg>
-            </span>sitive Business Impact
+            </span>sit<span class="hp-impact__i">ı</span>ve Business Impact
           </h2>
         {%- else -%}
           <h2 class="hp-title hp-impact__head">{{ section.settings.heading | escape }}</h2>
@@ -68,9 +68,6 @@
               <div class="hp-impact__icon">
                 {% render 'hp-asset-icon', name: icon_asset, alt: block.settings.heading %}
               </div>
-              {%- if block.settings.stat != blank -%}
-                <p class="hp-impact__value" data-hp-count="{{ block.settings.stat | escape }}">{{ block.settings.stat | escape }}</p>
-              {%- endif -%}
               <h3>{{ block.settings.heading | escape }}</h3>
               {%- if block.settings.text != blank -%}
                 <p>{{ block.settings.text | escape }}</p>
@@ -92,7 +89,7 @@
   "blocks": [
     {
       "type": "pillar",
-      "name": "Stat",
+      "name": "Feature",
       "settings": [
         {
           "type": "text",
@@ -100,9 +97,9 @@
           "label": "Icon asset filename",
           "default": "hp-pillar-1.svg"
         },
-        { "type": "text", "id": "stat", "label": "Stat", "default": "50+" },
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Projects worldwide" },
-        { "type": "textarea", "id": "text", "label": "Text" }
+        { "type": "text", "id": "stat", "label": "Stat (unused)" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Your success is our success" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "We work toward business outcomes, not a list of deliverables." }
       ]
     }
   ],
@@ -112,13 +109,13 @@
       "type": "text",
       "id": "heading",
       "label": "Section heading",
-      "default": "Enabling global business impact."
+      "default": "Enabling Positive Business Impact"
     },
     {
       "type": "text",
       "id": "feature_heading",
       "label": "Feature heading",
-      "default": "Sustainability with accountability. Built for impact that lasts."
+      "default": "Partnership with accountability. Built for implementation."
     },
     {
       "type": "textarea",
@@ -127,7 +124,7 @@
       "default": "We combine human expertise, an ecosystem of specialists, AI-enabled intelligence, and structured execution—then stay accountable for the outcomes that matter."
     },
     { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "button_label", "label": "Button", "default": "Learn more" },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Explore Our Approach →" },
     { "type": "url", "id": "button_link", "label": "Button link" },
     { "type": "text", "id": "cases_label", "label": "Secondary button" },
     { "type": "url", "id": "cases_link", "label": "Secondary button link" },
@@ -138,10 +135,38 @@
     {
       "name": "Homepage impact",
       "blocks": [
-        { "type": "pillar", "settings": { "icon_asset": "hp-pillar-1.svg", "stat": "50+", "heading": "Projects worldwide" } },
-        { "type": "pillar", "settings": { "icon_asset": "hp-pillar-2.svg", "stat": "25+", "heading": "Countries" } },
-        { "type": "pillar", "settings": { "icon_asset": "hp-pillar-3.svg", "stat": "15+", "heading": "Years of experience" } },
-        { "type": "pillar", "settings": { "icon_asset": "hp-pillar-4.svg", "stat": "500+", "heading": "Clients served" } }
+        {
+          "type": "pillar",
+          "settings": {
+            "icon_asset": "hp-pillar-1.svg",
+            "heading": "Your success is our success",
+            "text": "We work toward business outcomes, not a list of deliverables."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon_asset": "hp-pillar-2.svg",
+            "heading": "Human-led. AI-enabled",
+            "text": "Technology makes expert judgment more timely and useful."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon_asset": "hp-pillar-3.svg",
+            "heading": "Integrated expertise around the work",
+            "text": "Curated specialists, tools, and learning shaped to your context."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon_asset": "hp-pillar-4.svg",
+            "heading": "Progress you can measure",
+            "text": "Practical implementation makes improvement visible and durable."
+          }
+        }
       ]
     }
   ]

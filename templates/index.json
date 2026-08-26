@@ -51,15 +51,15 @@
       "blocks": {
         "stat_1": {
           "type": "stat",
-          "settings": { "icon_asset": "hp-stat-experts.svg", "stat": "100+", "label": "Experts Worldwide" }
+          "settings": { "stat": "30+", "label": "Years Of Experience" }
         },
         "stat_2": {
           "type": "stat",
-          "settings": { "icon_asset": "hp-stat-years.svg", "stat": "30+", "label": "Years Of Experience" }
+          "settings": { "stat": "100+", "label": "Experts Worldwide" }
         },
         "stat_3": {
           "type": "stat",
-          "settings": { "icon_asset": "hp-stat-clients.svg", "stat": "500+", "label": "Satisfied Clients" }
+          "settings": { "stat": "500+", "label": "Satisfied Clients" }
         }
       },
       "block_order": ["stat_1", "stat_2", "stat_3"],
@@ -78,7 +78,7 @@
           "type": "card",
           "settings": {
             "asset": "hp-solution-1.png",
-            "title": "Operational Resilience",
+            "title": "Operational Resilience.",
             "text": "Build operational control, continuity, and a stronger response to disruption.",
             "button_label": "Start a briefing"
           }
@@ -113,12 +113,12 @@
       },
       "block_order": ["sol_1", "sol_2", "sol_3", "sol_4"],
       "settings": {
-        "eyebrow": "Specialized Features",
-        "heading": "A multi-benefit solution for you and your team, fast.",
-        "text": "Practical solutions built for implementation — from operational resilience to ESG capability.",
-        "intro_button_label": "Get started today",
-        "button_label": "View all features",
-        "background_color": "#0a1f30",
+        "eyebrow": "VECTRA Solutions",
+        "heading": "Find the right solution for you and your team, fast.",
+        "text": "",
+        "intro_button_label": "",
+        "button_label": "Explore All Solutions →",
+        "background_color": "#05192d",
         "padding_y": 72
       }
     },
@@ -129,36 +129,32 @@
           "type": "pillar",
           "settings": {
             "icon_asset": "hp-pillar-1.svg",
-            "stat": "20+",
-            "heading": "Partners",
-            "text": ""
+            "heading": "Your Success Is Our Success",
+            "text": "We work toward business outcomes, not a list of deliverables."
           }
         },
         "p2": {
           "type": "pillar",
           "settings": {
             "icon_asset": "hp-pillar-2.svg",
-            "stat": "10+",
-            "heading": "Years",
-            "text": ""
+            "heading": "Human-led. AI-enabled",
+            "text": "Technology makes expert judgment more timely and useful."
           }
         },
         "p3": {
           "type": "pillar",
           "settings": {
             "icon_asset": "hp-pillar-3.svg",
-            "stat": "35+",
-            "heading": "Projects",
-            "text": ""
+            "heading": "Integrated expertise around the work",
+            "text": "Curated specialists, tools, and learning shaped to your context."
           }
         },
         "p4": {
           "type": "pillar",
           "settings": {
             "icon_asset": "hp-pillar-4.svg",
-            "stat": "11+",
-            "heading": "Countries",
-            "text": ""
+            "heading": "Progress you can measure",
+            "text": "Practical implementation makes improvement visible and durable."
           }
         }
       },
@@ -167,7 +163,7 @@
         "eyebrow": "Why VECTRA",
         "heading": "Enabling Positive Business Impact",
         "feature_heading": "Partnership with accountability. Built for implementation.",
-        "text": "We Combine Human Expertise, An Ecosystem Of Specialists, AI-Enabled Intelligence, And Structured Execution—Then Stay Accountable For The Outcomes That Matter.",
+        "text": "We combine human expertise, an ecosystem of specialists, AI-enabled intelligence, and structured execution—then stay accountable for the outcomes that matter.",
         "button_label": "Explore Our Approach →",
         "background_color": "#ffffff",
         "padding_y": 72
