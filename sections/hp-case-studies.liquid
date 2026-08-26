@@ -1,20 +1,17 @@
 {% render 'homepage-styles' %}
 
-{%- liquid
-  assign blog = section.settings.blog
-  assign limit = section.settings.post_limit | default: 8
--%}
-
 <div
   class="section-background hp-bg color-custom-{{ section.id }}"
   style="--hp-section-bg: {{ section.settings.background_color }};"
 ></div>
-<div class="section section--page-width hp">
+<div class="section section--page-width hp" id="marketplace">
   <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
-    <h2 class="hp-title">{{ section.settings.heading | escape }}</h2>
-    {%- if section.settings.text != blank -%}
-      <p class="hp-copy">{{ section.settings.text | escape }}</p>
-    {%- endif -%}
+    <div class="hp-market__head">
+      <h2 class="hp-title">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.text != blank -%}
+        <p class="hp-eyebrow">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+    </div>
 
     <homepage-filters>
       <div class="hp-filters">
@@ -39,42 +36,47 @@
         {%- endfor -%}
       </div>
 
-      <div class="hp-cases">
-        {%- if blog != blank and blog.articles_count > 0 -%}
-          {%- for article in blog.articles limit: limit -%}
-            <a
-              class="hp-card"
-              href="{{ article.url }}"
+      <div class="hp-courses">
+        {%- assign course_index = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'course' -%}
+            {%- assign course_index = course_index | plus: 1 -%}
+            {%- liquid
+              assign media_asset = block.settings.asset
+              if media_asset == blank
+                assign media_asset = 'hp-course-' | append: course_index | append: '.png'
+              endif
+            -%}
+            <article
+              class="hp-course"
               data-hp-card
-              data-search="{{ article.title | escape }} {{ article.tags | join: ' ' }}"
-              data-energy="{% if article.tags contains 'Energy' %}energy{% endif %}"
-              data-industry="{{ article.tags.first | handle }}"
-              data-area="{{ article.tags.last | handle }}"
+              data-search="{{ block.settings.title | escape }} {{ block.settings.excerpt | escape }}"
+              data-regulation="{{ block.settings.regulation | handle }}"
+              data-stage="{{ block.settings.stage | handle }}"
+              data-role="{{ block.settings.role | handle }}"
+              {{ block.shopify_attributes }}
             >
-              <div class="hp-media hp-card__media">
-                {% render 'hp-media', image: article.image, alt: article.title, placeholder: 'collection-2' %}
+              <div class="hp-media hp-course__media">
+                {% render 'hp-media', image: block.settings.image, asset: media_asset, alt: block.settings.title, placeholder: 'collection-2' %}
               </div>
-              <h3>{{ article.title | escape }}</h3>
-              {%- if article.excerpt != blank -%}
-                <p>{{ article.excerpt | strip_html | truncate: 90 | escape }}</p>
+              {%- if block.settings.badge != blank -%}
+                <p class="hp-course__badge">{{ block.settings.badge | escape }}</p>
               {%- endif -%}
-              <span class="hp-card__more">Read More</span>
-            </a>
-          {%- endfor -%}
-        {%- else -%}
-          {%- assign placeholders = 'Sustainability|Decarbonizing industrial operations,Climate|Nature-positive supply chains,Governance|Board-ready ESG reporting,Impact|Community investment programs,Energy|Renewable offtake strategy,Industry|Responsible mining transition,Finance|ESG-linked capital programs,Social|Workforce wellbeing at scale' | split: ',' -%}
-          {%- for item in placeholders -%}
-            {%- assign parts = item | split: '|' -%}
-            <article class="hp-card" data-hp-card data-search="{{ parts.last }}">
-              <div class="hp-media hp-card__media">
-                {% render 'hp-media', placeholder: 'collection-1' %}
+              <h3>{{ block.settings.title | escape }}</h3>
+              {%- if block.settings.excerpt != blank -%}
+                <p>{{ block.settings.excerpt | escape }}</p>
+              {%- endif -%}
+              <div class="hp-course__meta">
+                {%- if block.settings.price != blank -%}
+                  <strong>{{ block.settings.price | escape }}</strong>
+                {%- endif -%}
+                <a class="hp-course__cta" href="{{ block.settings.link | default: '#' }}">
+                  {{ block.settings.button_label | default: 'Access this course' | escape }}
+                </a>
               </div>
-              <h3>{{ parts.last | escape }}</h3>
-              <p>{{ parts.first | escape }} services for teams building responsible growth.</p>
-              <span class="hp-card__more">Read More</span>
             </article>
-          {%- endfor -%}
-        {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
       </div>
     </homepage-filters>
   </div>
@@ -82,7 +84,7 @@
 
 {% schema %}
 {
-  "name": "Homepage case studies",
+  "name": "Homepage marketplace",
   "tag": "section",
   "disabled_on": { "groups": ["header", "footer"] },
   "blocks": [
@@ -90,28 +92,85 @@
       "type": "filter",
       "name": "Filter",
       "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Industry" },
-        { "type": "text", "id": "key", "label": "Data key", "default": "industry", "info": "Matches article tags when using a blog." },
-        { "type": "textarea", "id": "options", "label": "Options (comma separated)", "default": "Energy, Manufacturing, Finance" }
+        { "type": "text", "id": "label", "label": "Label", "default": "Regulation" },
+        { "type": "text", "id": "key", "label": "Data key", "default": "regulation" },
+        { "type": "textarea", "id": "options", "label": "Options (comma separated)", "default": "CSRD, CSDDD, GRI" }
+      ]
+    },
+    {
+      "type": "course",
+      "name": "Course",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "asset", "label": "Fallback theme asset", "default": "hp-course-1.png" },
+        { "type": "text", "id": "badge", "label": "Badge", "default": "Certificate Course" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Acronyms Used in ESG Area" },
+        {
+          "type": "textarea",
+          "id": "excerpt",
+          "label": "Excerpt",
+          "default": "This course decodes the ESG framework into actionable business tools."
+        },
+        { "type": "text", "id": "price", "label": "Price", "default": "$20.00" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Access this course" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "text", "id": "regulation", "label": "Regulation tag", "default": "CSRD" },
+        { "type": "text", "id": "stage", "label": "Stage tag", "default": "Foundation" },
+        { "type": "text", "id": "role", "label": "Role tag", "default": "Practitioner" }
       ]
     }
   ],
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Real Cases" },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Don't know where to start? Filter by industry, topic, or region." },
-    { "type": "text", "id": "search_placeholder", "label": "Search placeholder", "default": "Search case studies" },
-    { "type": "blog", "id": "blog", "label": "Blog" },
-    { "type": "range", "id": "post_limit", "label": "Number of posts", "min": 4, "max": 12, "step": 1, "default": 8 },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Don’t Know Where To Start?" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Search courses, assessments and bundles." },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search placeholder",
+      "default": "Search courses, assessments and bundles"
+    },
     { "type": "color", "id": "background_color", "label": "Background", "default": "#f4f6f8" },
     { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 72 }
   ],
   "presets": [
     {
-      "name": "Homepage case studies",
+      "name": "Homepage marketplace",
       "blocks": [
-        { "type": "filter", "settings": { "label": "Energy", "key": "energy", "options": "Renewables, Oil & Gas, Utilities" } },
-        { "type": "filter", "settings": { "label": "Industry", "key": "industry", "options": "Energy, Manufacturing, Finance" } },
-        { "type": "filter", "settings": { "label": "Area", "key": "area", "options": "Europe, Americas, APAC" } }
+        { "type": "filter", "settings": { "label": "Regulation", "key": "regulation", "options": "CSRD, CSDDD, GRI" } },
+        { "type": "filter", "settings": { "label": "Stage", "key": "stage", "options": "Foundation, Advanced" } },
+        { "type": "filter", "settings": { "label": "Role", "key": "role", "options": "Practitioner, Leader" } },
+        {
+          "type": "course",
+          "settings": {
+            "title": "Acronyms Used in ESG Area",
+            "excerpt": "This course decodes the ESG framework, transforming alphabet-soup acronyms into actionable business tools.",
+            "price": "$20.00"
+          }
+        },
+        {
+          "type": "course",
+          "settings": {
+            "title": "Preventative and Corrective Measures",
+            "excerpt": "A dual approach using preventative measures as a proactive shield and corrective measures as a surgical fix.",
+            "price": "$20.00"
+          }
+        },
+        {
+          "type": "course",
+          "settings": {
+            "title": "Optimizing Purchasing Practices",
+            "excerpt": "Essential strategies for enhancing procurement and building stronger supplier relationships.",
+            "price": "$20.00"
+          }
+        },
+        {
+          "type": "course",
+          "settings": {
+            "title": "Disability Accommodation Training",
+            "excerpt": "Legal frameworks and practical strategies for tailoring accommodations to individual needs.",
+            "price": "$20.00"
+          }
+        }
       ]
     }
   ]

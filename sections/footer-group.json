@@ -5,39 +5,39 @@
     "hp_footer": {
       "type": "hp-footer",
       "blocks": {
-        "menu_services": {
+        "menu_explore": {
           "type": "menu",
           "settings": {
-            "heading": "Services",
-            "fallback_links": "ESG Strategy, Climate, Reporting, Social Impact"
+            "heading": "Explore",
+            "fallback_links": "Solutions, Marketplace, Resources, Case studies, VSuites"
           }
         },
-        "menu_resources": {
+        "menu_start": {
           "type": "menu",
           "settings": {
-            "heading": "Resources",
-            "fallback_links": "Insights, Case Studies, Events, News"
+            "heading": "Start here",
+            "fallback_links": "Talk to an expert, Request a demo, Readiness assessment, Build a capability path, Client Portal"
           }
         },
-        "menu_about": {
+        "menu_company": {
           "type": "menu",
           "settings": {
-            "heading": "About",
-            "fallback_links": "Who We Are, Careers, Contact"
+            "heading": "Company",
+            "fallback_links": "About VECTRA, Associates and Experts, Careers, Our values and pledges, Contact us"
           }
         },
-        "menu_legal": {
+        "menu_follow": {
           "type": "menu",
           "settings": {
-            "heading": "Legal",
-            "fallback_links": "Privacy, Terms, Cookies"
+            "heading": "Follow Us",
+            "fallback_links": "Subscribe to our newsletter"
           }
         }
       },
-      "block_order": ["menu_services", "menu_resources", "menu_about", "menu_legal"],
+      "block_order": ["menu_explore", "menu_start", "menu_company", "menu_follow"],
       "settings": {
-        "address": "Vectra\nSustainable value, globally.",
-        "copyright": "All rights reserved.",
+        "address": "Your partner for business resilience and operational capability building through an ecosystem of integrated solutions.\n\n+32 26206118\ninfo@vectra-intl.com\nChaussée de Wavre 1517B\n1160 Brussels, Belgium",
+        "copyright": "VECTRA International | All Rights Reserved.",
         "background_color": "#00263d",
         "padding_y": 64
       }

@@ -20,7 +20,7 @@
               | image_tag: alt: shop.name, loading: 'lazy', height: 36
             }}
           {%- else -%}
-            <strong>{{ shop.name }}</strong>
+            <img src="{{ 'hp-logo.png' | asset_url }}" alt="{{ shop.name | escape }}" width="161" height="42" loading="lazy">
           {%- endif -%}
         </a>
         {%- if section.settings.address != blank -%}

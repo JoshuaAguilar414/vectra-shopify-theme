@@ -4,16 +4,70 @@
   class="section-background hp-bg color-custom-{{ section.id }}"
   style="--hp-section-bg: {{ section.settings.background_color }};"
 ></div>
-<div class="section section--page-width hp">
+<div class="section section--page-width hp" id="trust">
   <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
-    <div class="hp-info">
-      <div class="hp-venn">
-        {%- for block in section.blocks limit: 3 -%}
-          <div class="hp-venn__circle hp-venn__circle--{{ forloop.index }}" {{ block.shopify_attributes }}>
-            <strong>{{ block.settings.stat | escape }}</strong>
+    <div class="hp-trust">
+      <homepage-reveal data-from="scale">
+        <div class="hp-trust__visual">
+          <img
+            class="hp-trust__rings"
+            src="{{ 'hp-trust-rings.svg' | asset_url }}"
+            alt=""
+            aria-hidden="true"
+            width="320"
+            height="320"
+            loading="lazy"
+          >
+          <div class="hp-trust__center">
+            <h2 class="hp-trust__heading">
+              {{ section.settings.heading_line_1 | escape }}
+              <span>{{ section.settings.heading_line_2 | escape }}</span>
+            </h2>
+            {%- if section.settings.text != blank -%}
+              <p class="hp-copy">{{ section.settings.text | escape }}</p>
+            {%- endif -%}
           </div>
+        </div>
+      </homepage-reveal>
+
+      <div class="hp-trust__stats">
+        {%- for block in section.blocks limit: 3 -%}
+          {%- liquid
+            assign icon_asset = block.settings.icon_asset
+            assign from = 'up'
+            if icon_asset == blank
+              case forloop.index
+                when 1
+                  assign icon_asset = 'hp-stat-experts.svg'
+                  assign from = 'right'
+                when 2
+                  assign icon_asset = 'hp-stat-years.svg'
+                  assign from = 'left'
+                else
+                  assign icon_asset = 'hp-stat-clients.svg'
+                  assign from = 'up'
+              endcase
+            else
+              case forloop.index
+                when 1
+                  assign from = 'right'
+                when 2
+                  assign from = 'left'
+                else
+                  assign from = 'up'
+              endcase
+            endif
+          -%}
+          <homepage-reveal data-from="{{ from }}" data-delay="{{ forloop.index }}">
+            <article class="hp-trust__stat hp-trust__stat--{{ forloop.index }}" {{ block.shopify_attributes }}>
+              <div class="hp-trust__icon">
+                {% render 'hp-asset-icon', name: icon_asset, alt: block.settings.label %}
+              </div>
+              <p class="hp-trust__value" data-hp-count="{{ block.settings.stat | escape }}">{{ block.settings.stat | escape }}</p>
+              <h3>{{ block.settings.label | escape }}</h3>
+            </article>
+          </homepage-reveal>
         {%- endfor -%}
-        <p class="hp-venn__core">{{ section.settings.core_text | escape }}</p>
       </div>
     </div>
   </div>
@@ -21,7 +75,7 @@
 
 {% schema %}
 {
-  "name": "Homepage infographic",
+  "name": "Homepage ESG partner",
   "tag": "section",
   "disabled_on": { "groups": ["header", "footer"] },
   "max_blocks": 3,
@@ -30,22 +84,36 @@
       "type": "stat",
       "name": "Stat",
       "settings": [
-        { "type": "text", "id": "stat", "label": "Stat", "default": "30+" }
+        {
+          "type": "text",
+          "id": "icon_asset",
+          "label": "Icon asset filename",
+          "info": "Theme asset, e.g. hp-stat-experts.svg"
+        },
+        { "type": "text", "id": "stat", "label": "Stat", "default": "100+" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Experts Worldwide" }
       ]
     }
   ],
   "settings": [
-    { "type": "text", "id": "core_text", "label": "Center text", "default": "Your Trusted ESG Partner" },
+    { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Your Trusted" },
+    { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "ESG Partner" },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Our solutions are tailored to empower your organization to achieve ESG goals and build more resilient, responsible supply chains"
+    },
     { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" },
-    { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 64 }
+    { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 72 }
   ],
   "presets": [
     {
-      "name": "Homepage infographic",
+      "name": "Homepage ESG partner",
       "blocks": [
-        { "type": "stat", "settings": { "stat": "30+" } },
-        { "type": "stat", "settings": { "stat": "100+" } },
-        { "type": "stat", "settings": { "stat": "500+" } }
+        { "type": "stat", "settings": { "icon_asset": "hp-stat-experts.svg", "stat": "100+", "label": "Experts Worldwide" } },
+        { "type": "stat", "settings": { "icon_asset": "hp-stat-years.svg", "stat": "30+", "label": "Years Of Experience" } },
+        { "type": "stat", "settings": { "icon_asset": "hp-stat-clients.svg", "stat": "500+", "label": "Satisfied Clients" } }
       ]
     }
   ]

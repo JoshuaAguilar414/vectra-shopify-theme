@@ -1,0 +1,18 @@
+{%- doc -%}
+  Render a Figma-exported icon asset from the theme.
+
+  @param {string} name - Asset filename without path (e.g. hp-stat-experts.svg)
+  @param {string} [alt] - Accessible label; decorative if blank
+{%- enddoc -%}
+
+{%- if name != blank -%}
+  <img
+    class="hp-asset-icon"
+    src="{{ name | asset_url }}"
+    alt="{% if alt != blank %}{{ alt | escape }}{% endif %}"
+    {% if alt == blank %}aria-hidden="true"{% endif %}
+    loading="lazy"
+    width="48"
+    height="48"
+  >
+{%- endif -%}

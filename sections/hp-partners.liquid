@@ -4,44 +4,72 @@
   class="section-background hp-bg color-custom-{{ section.id }}"
   style="--hp-section-bg: {{ section.settings.background_color }};"
 ></div>
-<div class="section section--page-width hp hp--navy">
+<div class="section section--page-width hp hp--navy" id="partners">
   <div class="hp-wrap hp-partners" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
-    <div class="hp-partners__intro">
-      {%- if section.settings.heading != blank -%}
-        <h2 class="hp-title">{{ section.settings.heading | escape }}</h2>
-      {%- endif -%}
-      {%- if section.settings.text != blank -%}
-        <p class="hp-copy">{{ section.settings.text | escape }}</p>
-      {%- endif -%}
-      {%- if section.settings.button_label != blank -%}
-        <a class="hp-btn" href="{{ section.settings.button_link | default: '#' }}">
-          {{ section.settings.button_label | escape }}
-        </a>
-      {%- endif -%}
-    </div>
+    <homepage-reveal>
+      <div class="hp-partners__intro">
+        <img class="hp-partners__stars" src="{{ 'hp-stars.svg' | asset_url }}" alt="" width="120" height="24" loading="lazy">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="hp-title">{{ section.settings.heading | escape | newline_to_br }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p class="hp-copy">{{ section.settings.text | escape }}</p>
+        {%- endif -%}
+      </div>
+    </homepage-reveal>
 
-    <div class="hp-partners__grid">
-      {%- for block in section.blocks -%}
-        <a
-          class="hp-partner"
-          href="{{ block.settings.link | default: '#' }}"
-          {{ block.shopify_attributes }}
-        >
-          {%- if block.settings.logo != blank -%}
-            {{
-              block.settings.logo
-              | image_url: width: 400
-              | image_tag: alt: block.settings.name, loading: 'lazy'
-            }}
-          {%- else -%}
-            <strong style="font-size: 1.75rem; letter-spacing: 0.04em;">{{ block.settings.name | escape }}</strong>
-          {%- endif -%}
-          {%- if block.settings.industry != blank -%}
-            <span>{{ block.settings.industry | escape }}</span>
-          {%- endif -%}
-        </a>
-      {%- endfor -%}
-    </div>
+    <homepage-slider data-autoplay="4500">
+      <div class="hp-slider">
+        <div class="hp-slider__viewport">
+          <div class="hp-slider__track" data-hp-slider-track>
+            {%- for block in section.blocks -%}
+              {%- liquid
+                assign logo_asset = block.settings.asset
+                if logo_asset == blank
+                  case forloop.index
+                    when 1
+                      assign logo_asset = 'hp-partner-otto.png'
+                    when 2
+                      assign logo_asset = 'hp-partner-crh.png'
+                    else
+                      assign logo_asset = 'hp-partner-kodak.png'
+                  endcase
+                endif
+              -%}
+              <div class="hp-slider__slide{% if forloop.first %} is-active{% endif %}" data-hp-slide {{ block.shopify_attributes }}>
+                <a class="hp-partner hp-partner--slide" href="{{ block.settings.link | default: '#' }}">
+                  {%- if block.settings.logo != blank -%}
+                    {{
+                      block.settings.logo
+                      | image_url: width: 800
+                      | image_tag: alt: block.settings.name, loading: 'lazy'
+                    }}
+                  {%- else -%}
+                    <img src="{{ logo_asset | asset_url }}" alt="{{ block.settings.name | escape }}" loading="lazy" width="726" height="408">
+                  {%- endif -%}
+                  <div class="hp-partner__meta">
+                    <strong>{{ block.settings.name | escape }}</strong>
+                    {%- if block.settings.industry != blank -%}
+                      <span>{{ block.settings.industry | escape }}</span>
+                    {%- endif -%}
+                  </div>
+                </a>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+        {%- if section.blocks.size > 1 -%}
+          <div class="hp-slider__nav">
+            <button class="hp-slider__btn hp-slider__btn--prev" type="button" data-hp-prev aria-label="Previous partner">
+              <img src="{{ 'hp-btn-arrow.svg' | asset_url }}" alt="" width="16" height="10">
+            </button>
+            <button class="hp-slider__btn" type="button" data-hp-next aria-label="Next partner">
+              <img src="{{ 'hp-btn-arrow.svg' | asset_url }}" alt="" width="16" height="10">
+            </button>
+          </div>
+        {%- endif -%}
+      </div>
+    </homepage-slider>
   </div>
 </div>
 
@@ -57,17 +85,21 @@
       "name": "Partner",
       "settings": [
         { "type": "image_picker", "id": "logo", "label": "Logo" },
+        { "type": "text", "id": "asset", "label": "Fallback theme asset", "default": "hp-partner-otto.png" },
         { "type": "text", "id": "name", "label": "Name", "default": "Partner" },
-        { "type": "text", "id": "industry", "label": "Industry label", "default": "Manufacturing" },
+        { "type": "text", "id": "industry", "label": "Location / label", "default": "Hamburg, Germany" },
         { "type": "url", "id": "link", "label": "Link" }
       ]
     }
   ],
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Everything you need for your sustainability success" },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Join the organizations building responsible growth with Vectra." },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Request a demo" },
-    { "type": "url", "id": "button_link", "label": "Button link" },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Tested in real crises.\nProven by industry leaders."
+    },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Based on 500 reviews" },
     { "type": "color", "id": "background_color", "label": "Background", "default": "#00263d" },
     { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 72 }
   ],
@@ -75,9 +107,9 @@
     {
       "name": "Homepage partners",
       "blocks": [
-        { "type": "partner", "settings": { "name": "OTTO", "industry": "Retail" } },
-        { "type": "partner", "settings": { "name": "IKEA", "industry": "Retail" } },
-        { "type": "partner", "settings": { "name": "Kodak", "industry": "Manufacturing" } }
+        { "type": "partner", "settings": { "asset": "hp-partner-otto.png", "name": "OTTO Group", "industry": "Hamburg, Germany" } },
+        { "type": "partner", "settings": { "asset": "hp-partner-crh.png", "name": "CRH", "industry": "Hamburg, Germany" } },
+        { "type": "partner", "settings": { "asset": "hp-partner-kodak.png", "name": "Kodak", "industry": "Hamburg, Germany" } }
       ]
     }
   ]

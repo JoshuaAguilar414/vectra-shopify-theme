@@ -4,124 +4,190 @@
   class="section-background hp-bg color-custom-{{ section.id }}"
   style="--hp-section-bg: {{ section.settings.background_color }};"
 ></div>
-<div class="section section--page-width hp">
+<div class="section section--page-width hp" id="why">
   <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
-    {%- if section.settings.heading != blank -%}
-      <div class="hp-impact__intro">
-        <h2 class="hp-title">{{ section.settings.heading | escape }}</h2>
-      </div>
-    {%- endif -%}
+    <homepage-reveal data-from="left">
+      <div class="hp-why">
+        <div class="hp-why__intro">
+          <div class="hp-why__label">
+            <img src="{{ 'hp-label-left.svg' | asset_url }}" alt="" width="20" height="8" aria-hidden="true">
+            <p class="hp-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+            <img src="{{ 'hp-label-right.svg' | asset_url }}" alt="" width="20" height="8" aria-hidden="true">
+          </div>
+          <h2 class="hp-title">{{ section.settings.heading | escape }}</h2>
+          {%- if section.settings.text != blank -%}
+            <p class="hp-copy">{{ section.settings.text | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.button_label != blank -%}
+            <a class="hp-btn" href="{{ section.settings.button_link | default: '#' }}">
+              {{ section.settings.button_label | escape }}
+              <img src="{{ 'hp-btn-arrow.svg' | asset_url }}" alt="" width="16" height="10" aria-hidden="true">
+            </a>
+          {%- endif -%}
+        </div>
 
-    <div class="hp-impact__split">
-      <div class="hp-media hp-impact__media">
-        {% render 'hp-media', image: section.settings.image, alt: section.settings.image_alt, placeholder: 'lifestyle-2' %}
+        <homepage-reveal data-from="right" data-delay="2">
+          <div class="hp-why__media">
+            {% render 'hp-media', image: section.settings.image, asset: 'hp-why.png', alt: section.settings.heading, placeholder: 'lifestyle-2' %}
+          </div>
+        </homepage-reveal>
       </div>
-      <div>
-        {%- if section.settings.subheading != blank -%}
-          <p class="hp-eyebrow">{{ section.settings.subheading | escape }}</p>
-        {%- endif -%}
-        {%- if section.settings.block_heading != blank -%}
-          <h3 class="hp-title">{{ section.settings.block_heading | escape }}</h3>
-        {%- endif -%}
-        {%- if section.settings.text != blank -%}
-          <div class="hp-copy rte">{{ section.settings.text }}</div>
-        {%- endif -%}
-        {%- if section.settings.button_label != blank -%}
-          <a class="hp-btn" href="{{ section.settings.button_link | default: '#' }}" style="margin-top: 22px;">
-            {{ section.settings.button_label | escape }}
-          </a>
-        {%- endif -%}
-      </div>
-    </div>
+    </homepage-reveal>
 
     {%- if section.blocks.size > 0 -%}
-      <div class="hp-impact__stats">
+      <div class="hp-why__pillars">
         {%- for block in section.blocks -%}
-          <article class="hp-stat" {{ block.shopify_attributes }}>
-            <div class="hp-stat__icon">
-              {%- if block.settings.icon_image != blank -%}
-                {{
-                  block.settings.icon_image
-                  | image_url: width: 80
-                  | image_tag: alt: block.settings.heading, loading: 'lazy', width: 36, height: 36
-                }}
-              {%- else -%}
-                {% render 'hp-icon', name: block.settings.icon %}
+          {%- liquid
+            assign icon_asset = block.settings.icon_asset
+            if icon_asset == blank
+              assign icon_asset = 'hp-pillar-' | append: forloop.index | append: '.svg'
+            endif
+          -%}
+          <homepage-reveal data-from="up" data-delay="{{ forloop.index }}">
+            <article class="hp-pillar" {{ block.shopify_attributes }}>
+              <div class="hp-pillar__icon">
+                {% render 'hp-asset-icon', name: icon_asset, alt: block.settings.heading %}
+              </div>
+              <h3>{{ block.settings.heading | escape }}</h3>
+              {%- if block.settings.text != blank -%}
+                <p>{{ block.settings.text | escape }}</p>
               {%- endif -%}
-            </div>
-            {%- if block.settings.stat != blank -%}
-              <p class="hp-stat__value">{{ block.settings.stat | escape }}</p>
-            {%- endif -%}
-            <h3>{{ block.settings.heading | escape }}</h3>
-            {%- if block.settings.text != blank -%}
-              <p>{{ block.settings.text | escape }}</p>
-            {%- endif -%}
-          </article>
+            </article>
+          </homepage-reveal>
         {%- endfor -%}
       </div>
     {%- endif -%}
+
+    {%- if section.settings.cases_label != blank -%}
+      <homepage-reveal data-delay="2">
+        <div class="hp-why__cta">
+          <a class="hp-btn" href="{{ section.settings.cases_link | default: '#' }}">
+            {{ section.settings.cases_label | escape }}
+          </a>
+        </div>
+      </homepage-reveal>
+    {%- endif -%}
+
+    <homepage-reveal data-from="scale">
+      <div class="hp-logos">
+        <div class="hp-logos__title">
+          <img src="{{ 'hp-positive-o.png' | asset_url }}" alt="" width="40" height="49" aria-hidden="true">
+          <p>
+            Enabling
+            <span>Positive</span>
+            Business Impact
+          </p>
+          <img src="{{ 'hp-positive-icon.png' | asset_url }}" alt="" width="37" height="37" aria-hidden="true">
+        </div>
+        <div class="hp-logos__track" aria-label="Partner logos">
+          {%- for i in (1..9) -%}
+            <img
+              src="{{ 'hp-logo-' | append: i | append: '.png' | asset_url }}"
+              alt=""
+              loading="lazy"
+              height="64"
+            >
+          {%- endfor -%}
+          {%- for i in (1..9) -%}
+            <img
+              src="{{ 'hp-logo-' | append: i | append: '.png' | asset_url }}"
+              alt=""
+              loading="lazy"
+              height="64"
+              aria-hidden="true"
+            >
+          {%- endfor -%}
+        </div>
+      </div>
+    </homepage-reveal>
   </div>
 </div>
 
 {% schema %}
 {
-  "name": "Homepage impact",
+  "name": "Homepage Why VECTRA",
   "tag": "section",
   "disabled_on": { "groups": ["header", "footer"] },
   "max_blocks": 4,
   "blocks": [
     {
-      "type": "stat",
-      "name": "Stat",
+      "type": "pillar",
+      "name": "Pillar",
       "settings": [
         {
-          "type": "select",
-          "id": "icon",
-          "label": "Icon",
-          "options": [
-            { "value": "leaf", "label": "Leaf" },
-            { "value": "globe", "label": "Globe" },
-            { "value": "chart", "label": "Chart" },
-            { "value": "users", "label": "People" },
-            { "value": "shield", "label": "Shield" },
-            { "value": "building", "label": "Building" },
-            { "value": "energy", "label": "Energy" },
-            { "value": "report", "label": "Report" }
-          ],
-          "default": "chart"
+          "type": "text",
+          "id": "icon_asset",
+          "label": "Icon asset filename",
+          "default": "hp-pillar-1.svg"
         },
-        { "type": "image_picker", "id": "icon_image", "label": "Custom icon" },
-        { "type": "text", "id": "stat", "label": "Stat", "default": "30+" },
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Countries reached" },
-        { "type": "textarea", "id": "text", "label": "Text" }
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Progress you can measure" },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Practical implementation makes improvement visible and durable."
+        }
       ]
     }
   ],
   "settings": [
-    { "type": "text", "id": "heading", "label": "Section heading", "default": "Unlocking sustainable value & impact" },
-    { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "image_alt", "label": "Image alt text" },
-    { "type": "text", "id": "subheading", "label": "Eyebrow", "default": "Sustainability & responsibility" },
-    { "type": "text", "id": "block_heading", "label": "Block heading", "default": "Partnering with sustainability leaders" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why VECTRA" },
     {
-      "type": "richtext",
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Partnership with accountability. Built for implementation."
+    },
+    {
+      "type": "textarea",
       "id": "text",
       "label": "Text",
-      "default": "<p>We help organizations turn ESG ambition into operating reality — from strategy and disclosure to climate, social impact, and governance programs that last.</p>"
+      "default": "We combine human expertise, an ecosystem of specialists, AI-enabled intelligence, and structured execution—then stay accountable for the outcomes that matter."
     },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Learn More" },
-    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "button_label", "label": "Primary button", "default": "Explore our approach" },
+    { "type": "url", "id": "button_link", "label": "Primary button link" },
+    { "type": "text", "id": "cases_label", "label": "Secondary button", "default": "Explore case studies →" },
+    { "type": "url", "id": "cases_link", "label": "Secondary button link" },
     { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" },
     { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 72 }
   ],
   "presets": [
     {
-      "name": "Homepage impact",
+      "name": "Homepage Why VECTRA",
       "blocks": [
-        { "type": "stat", "settings": { "icon": "chart", "heading": "Comprehensive ESG Strategy" } },
-        { "type": "stat", "settings": { "icon": "shield", "heading": "Regulatory Compliance" } },
-        { "type": "stat", "settings": { "icon": "globe", "heading": "Climate & Nature" } },
-        { "type": "stat", "settings": { "icon": "users", "heading": "Social Impact" } }
+        {
+          "type": "pillar",
+          "settings": {
+            "icon_asset": "hp-pillar-1.svg",
+            "heading": "Progress you can measure",
+            "text": "Practical implementation makes improvement visible and durable."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon_asset": "hp-pillar-2.svg",
+            "heading": "Integrated expertise around the work",
+            "text": "Curated specialists, tools, and learning shaped to your context."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon_asset": "hp-pillar-3.svg",
+            "heading": "AI-enabled. Human-led",
+            "text": "Technology makes expert judgment more timely and useful."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon_asset": "hp-pillar-4.svg",
+            "heading": "Your success is our success",
+            "text": "We work toward business outcomes, not a list of deliverables."
+          }
+        }
       ]
     }
   ]

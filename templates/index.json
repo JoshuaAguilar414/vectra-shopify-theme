@@ -1,339 +1,255 @@
 {
   "sections": {
-    "hero_jVaWmY": {
-      "type": "hero",
+    "hp_hero": {
+      "type": "hp-hero",
       "blocks": {
-        "text_YLPk4p": {
-          "type": "text",
-          "name": "t:names.heading",
+        "slide_1": {
+          "type": "slide",
           "settings": {
-            "text": "<h1>Who We Are</h1>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h1",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "{{ settings.color_palette.background }}",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "text_hero_copy": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<p>Vectra partners with organizations to turn ESG ambition into operating reality — from strategy and disclosure to climate, social impact, and governance programs that last.</p>",
-            "width": "fit-content",
-            "max_width": "narrow",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "{{ settings.color_palette.background }}",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 8,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
-          "settings": {
-            "label": "Learn How We Can Help",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-custom",
-            "custom_button_background": "{{ settings.color_palette.foreground }}",
-            "custom_button_text": "{{ settings.color_palette.background }}",
-            "custom_button_border": "{{ settings.color_palette.foreground }}",
-            "link_text_color": "",
-            "width": "custom",
-            "custom_width": 29,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": ["text_YLPk4p", "text_hero_copy"],
-      "name": "t:names.hero",
-      "settings": {
-        "media_type_1": "video",
-        "video_1": "shopify://files/videos/Website - Hero Banner.mp4",
-        "media_type_2": "image",
-        "stack_media_on_mobile": false,
-        "custom_mobile_media": false,
-        "media_type_1_mobile": "image",
-        "media_type_2_mobile": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "flex-end",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 16,
-        "section_width": "page-width",
-        "section_height": "large",
-        "section_height_custom": 50,
-        "background_color": "rgba(0,0,0,0)",
-        "toggle_overlay": true,
-        "overlay_color": "#12121299",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 80,
-        "padding-block-end": 120
-      }
-    },
-    "hp_cta": {
-      "type": "hp-cta-bar",
-      "settings": {
-        "badge_text": "VECTRA",
-        "heading": "Proudly trusted by global businesses",
-        "button_label": "Explore Services",
-        "background_color": "#ffffff",
-        "padding_y": 56
-      }
-    },
-    "hp_icons": {
-      "type": "hp-icon-nav",
-      "blocks": {
-        "icon_home": { "type": "item", "settings": { "icon": "building", "label": "Home" } },
-        "icon_services": { "type": "item", "settings": { "icon": "chart", "label": "Services" } },
-        "icon_why": { "type": "item", "settings": { "icon": "shield", "label": "Why Us" } },
-        "icon_testimonials": { "type": "item", "settings": { "icon": "users", "label": "Testimonials" } },
-        "icon_faq": { "type": "item", "settings": { "icon": "report", "label": "FAQ" } },
-        "icon_contact": { "type": "item", "settings": { "icon": "handshake", "label": "Contact" } }
-      },
-      "block_order": ["icon_home", "icon_services", "icon_why", "icon_testimonials", "icon_faq", "icon_contact"],
-      "settings": {
-        "heading": "Service areas",
-        "background_color": "#f4f6f8",
-        "padding_y": 20
-      }
-    },
-    "hp_impact": {
-      "type": "hp-impact",
-      "blocks": {
-        "stat_1": {
-          "type": "stat",
-          "settings": {
-            "icon": "globe",
-            "stat": "30+",
-            "heading": "Countries reached"
+            "asset": "hp-hero.png",
+            "heading": "Who We Are",
+            "text": "Driven by innovation and built on trust, we help businesses transform ideas into measurable impact. Discover our mission, meet the team behind our solutions, and see how our values shape every partnership."
           }
         },
-        "stat_2": {
-          "type": "stat",
+        "slide_2": {
+          "type": "slide",
           "settings": {
-            "icon": "chart",
-            "stat": "20+",
-            "heading": "Projects completed"
+            "asset": "hp-solution-1.png",
+            "heading": "Who We Are",
+            "text": "Driven by innovation and built on trust, we help businesses transform ideas into measurable impact."
           }
         },
-        "stat_3": {
-          "type": "stat",
+        "slide_3": {
+          "type": "slide",
           "settings": {
-            "icon": "users",
-            "stat": "50+",
-            "heading": "Professionals"
-          }
-        },
-        "stat_4": {
-          "type": "stat",
-          "settings": {
-            "icon": "energy",
-            "stat": "10+",
-            "heading": "Ongoing projects"
+            "asset": "hp-why.png",
+            "heading": "Who We Are",
+            "text": "Discover our mission, meet the team behind our solutions, and see how our values shape every partnership."
           }
         }
       },
-      "block_order": ["stat_1", "stat_2", "stat_3", "stat_4"],
+      "block_order": ["slide_1", "slide_2", "slide_3"],
       "settings": {
-        "heading": "Enabling global infrastructure impact.",
-        "subheading": "",
-        "block_heading": "Partnership with sustainability, our ESG implementation",
-        "text": "",
-        "button_label": "Learn More",
-        "background_color": "#ffffff",
-        "padding_y": 72
+        "heading": "Who We Are",
+        "text": "Driven by innovation and built on trust, we help businesses transform ideas into measurable impact.",
+        "float_label": "Learn How We Can Help",
+        "float_link": "#solutions"
       }
     },
     "hp_info": {
       "type": "hp-infographic",
       "blocks": {
-        "s1": { "type": "stat", "settings": { "stat": "30+" } },
-        "s2": { "type": "stat", "settings": { "stat": "100+" } },
-        "s3": { "type": "stat", "settings": { "stat": "500+" } }
+        "stat_1": {
+          "type": "stat",
+          "settings": { "icon_asset": "hp-stat-experts.svg", "stat": "100+", "label": "Experts Worldwide" }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": { "icon_asset": "hp-stat-years.svg", "stat": "30+", "label": "Years Of Experience" }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": { "icon_asset": "hp-stat-clients.svg", "stat": "500+", "label": "Satisfied Clients" }
+        }
       },
-      "block_order": ["s1", "s2", "s3"],
+      "block_order": ["stat_1", "stat_2", "stat_3"],
       "settings": {
-        "core_text": "Your Trusted ESG Partner",
+        "heading_line_1": "Your Trusted",
+        "heading_line_2": "ESG Partner",
+        "text": "Our solutions are tailored to empower your organization to achieve ESG goals and build more resilient, responsible supply chains",
         "background_color": "#ffffff",
-        "padding_y": 64
+        "padding_y": 72
       }
     },
     "hp_solutions": {
       "type": "hp-solutions",
       "blocks": {
-        "sol_1": { "type": "card", "settings": { "eyebrow": "Advisory", "title": "ESG Strategy" } },
-        "sol_2": { "type": "card", "settings": { "eyebrow": "Climate", "title": "Climate Transition" } },
-        "sol_3": { "type": "card", "settings": { "eyebrow": "Disclosure", "title": "Sustainability Reporting" } },
-        "sol_4": { "type": "card", "settings": { "eyebrow": "People", "title": "Social Impact" } }
+        "sol_1": {
+          "type": "card",
+          "settings": {
+            "asset": "hp-solution-1.png",
+            "title": "Operational Resilience",
+            "text": "Build operational control, continuity, and a stronger response to disruption.",
+            "button_label": "Start a briefing"
+          }
+        },
+        "sol_2": {
+          "type": "card",
+          "settings": {
+            "asset": "hp-solution-2.png",
+            "title": "Supply Chain Due Diligence",
+            "text": "Strengthen visibility and response across complex supplier networks.",
+            "button_label": "Start a briefing"
+          }
+        },
+        "sol_3": {
+          "type": "card",
+          "settings": {
+            "asset": "hp-solution-3.png",
+            "title": "ESG Capability Building",
+            "text": "Equip teams with practical tools, learning, and implementation support.",
+            "button_label": "Start a briefing"
+          }
+        },
+        "sol_4": {
+          "type": "card",
+          "settings": {
+            "asset": "hp-solution-4.png",
+            "title": "Responsible Purchasing",
+            "text": "Improve purchasing practices and build stronger supplier collaboration.",
+            "button_label": "Start a briefing"
+          }
+        }
       },
       "block_order": ["sol_1", "sol_2", "sol_3", "sol_4"],
       "settings": {
-        "eyebrow": "Solutions",
-        "heading": "A multi-insight solution for you and your team.",
-        "button_label": "Learn More",
-        "background_color": "#00263d",
-        "padding_y": 72
-      }
-    },
-    "hp_cases": {
-      "type": "hp-case-studies",
-      "blocks": {
-        "f1": { "type": "filter", "settings": { "label": "Location", "key": "location", "options": "Europe, Americas, APAC" } },
-        "f2": { "type": "filter", "settings": { "label": "Industry", "key": "industry", "options": "Energy, Manufacturing, Finance" } },
-        "f3": { "type": "filter", "settings": { "label": "Price", "key": "price", "options": "Advisory, Program, Retainer" } }
-      },
-      "block_order": ["f1", "f2", "f3"],
-      "settings": {
-        "heading": "Our different services Portfolio",
-        "text": "",
-        "search_placeholder": "Search services",
-        "post_limit": 8,
+        "eyebrow": "VECTRA Solutions",
+        "heading": "Find the right solution for you and your team, fast.",
+        "button_label": "Explore All Solutions →",
         "background_color": "#f4f6f8",
         "padding_y": 72
       }
     },
-    "hp_topics": {
-      "type": "hp-topics",
+    "hp_impact": {
+      "type": "hp-impact",
       "blocks": {
-        "tab_all": { "type": "tab", "settings": { "label": "All topics", "tab_id": "all" } },
-        "tab_sus": { "type": "tab", "settings": { "label": "Sustainability", "tab_id": "sustainability" } },
-        "tab_esg": { "type": "tab", "settings": { "label": "ESG", "tab_id": "esg" } },
-        "a1": {
-          "type": "article",
+        "p1": {
+          "type": "pillar",
           "settings": {
-            "category": "Climate",
-            "title": "Building a credible climate transition plan",
-            "excerpt": "How leading companies connect targets, capital, and operating decisions.",
-            "date": "Aug 12, 2026",
-            "tab": "all"
+            "icon_asset": "hp-pillar-1.svg",
+            "heading": "Progress you can measure",
+            "text": "Practical implementation makes improvement visible and durable."
           }
         },
-        "a2": {
-          "type": "article",
+        "p2": {
+          "type": "pillar",
           "settings": {
-            "category": "Governance",
-            "title": "What boards need from ESG reporting now",
-            "excerpt": "A practical view of assurance, controls, and decision-useful metrics.",
-            "date": "Jul 28, 2026",
-            "tab": "esg"
+            "icon_asset": "hp-pillar-2.svg",
+            "heading": "Integrated expertise around the work",
+            "text": "Curated specialists, tools, and learning shaped to your context."
           }
         },
-        "a3": {
-          "type": "article",
+        "p3": {
+          "type": "pillar",
           "settings": {
-            "category": "Social",
-            "title": "Designing impact programs that scale",
-            "excerpt": "From community investment to workforce strategy with measurable outcomes.",
-            "date": "Jul 04, 2026",
-            "tab": "sustainability"
+            "icon_asset": "hp-pillar-3.svg",
+            "heading": "AI-enabled. Human-led",
+            "text": "Technology makes expert judgment more timely and useful."
           }
         },
-        "a4": {
-          "type": "article",
+        "p4": {
+          "type": "pillar",
           "settings": {
-            "category": "Strategy",
-            "title": "From materiality to operating model",
-            "excerpt": "Turning assessment findings into roles, processes, and investment choices.",
-            "date": "Jun 19, 2026",
-            "tab": "all"
-          }
-        },
-        "a5": {
-          "type": "article",
-          "settings": {
-            "category": "Insights",
-            "title": "The disclosure calendar for the year ahead",
-            "excerpt": "Key reporting milestones and how teams are preparing.",
-            "date": "May 30, 2026",
-            "tab": "esg"
-          }
-        },
-        "a6": {
-          "type": "article",
-          "settings": {
-            "category": "Climate",
-            "title": "Nature-positive supply chains in practice",
-            "excerpt": "Where procurement, data, and supplier engagement actually move the needle.",
-            "date": "Apr 11, 2026",
-            "tab": "sustainability"
+            "icon_asset": "hp-pillar-4.svg",
+            "heading": "Your success is our success",
+            "text": "We work toward business outcomes, not a list of deliverables."
           }
         }
       },
-      "block_order": ["tab_all", "tab_sus", "tab_esg", "a1", "a2", "a3", "a4", "a5", "a6"],
+      "block_order": ["p1", "p2", "p3", "p4"],
       "settings": {
-        "heading": "Recent Topics",
-        "post_limit": 4,
+        "eyebrow": "Why VECTRA",
+        "heading": "Partnership with accountability. Built for implementation.",
+        "text": "We combine human expertise, an ecosystem of specialists, AI-enabled intelligence, and structured execution—then stay accountable for the outcomes that matter.",
+        "button_label": "Explore our approach",
+        "cases_label": "Explore case studies →",
         "background_color": "#ffffff",
+        "padding_y": 72
+      }
+    },
+    "hp_market": {
+      "type": "hp-case-studies",
+      "blocks": {
+        "f1": {
+          "type": "filter",
+          "settings": { "label": "Regulation", "key": "regulation", "options": "CSRD, CSDDD, GRI" }
+        },
+        "f2": {
+          "type": "filter",
+          "settings": { "label": "Stage", "key": "stage", "options": "Foundation, Advanced" }
+        },
+        "f3": {
+          "type": "filter",
+          "settings": { "label": "Role", "key": "role", "options": "Practitioner, Leader" }
+        },
+        "c1": {
+          "type": "course",
+          "settings": {
+            "asset": "hp-course-1.png",
+            "badge": "Certificate Course",
+            "title": "Acronyms Used in ESG Area",
+            "excerpt": "This course decodes the ESG (Environmental, Social, Governance) framework, transforming alphabet-soup acronyms into actionable business tools.",
+            "price": "$20.00",
+            "button_label": "Access this course",
+            "regulation": "CSRD",
+            "stage": "Foundation",
+            "role": "Practitioner"
+          }
+        },
+        "c2": {
+          "type": "course",
+          "settings": {
+            "asset": "hp-course-2.png",
+            "badge": "Certificate Course",
+            "title": "Preventative and Corrective Measures",
+            "excerpt": "A dual approach using preventative measures as a proactive shield and corrective measures as a surgical fix for supply chain due diligence.",
+            "price": "$20.00",
+            "button_label": "Access this course",
+            "regulation": "CSDDD",
+            "stage": "Advanced",
+            "role": "Leader"
+          }
+        },
+        "c3": {
+          "type": "course",
+          "settings": {
+            "asset": "hp-course-3.png",
+            "badge": "Certificate Course",
+            "title": "Optimizing Purchasing Practices",
+            "excerpt": "Essential strategies for enhancing procurement processes and building stronger, collaborative relationships with suppliers.",
+            "price": "$20.00",
+            "button_label": "Access this course",
+            "regulation": "GRI",
+            "stage": "Foundation",
+            "role": "Practitioner"
+          }
+        },
+        "c4": {
+          "type": "course",
+          "settings": {
+            "asset": "hp-course-4.png",
+            "badge": "Certificate Course",
+            "title": "Disability Accommodation Training",
+            "excerpt": "Fundamental principles, legal frameworks, and practical strategies for tailoring accommodations to meet individual needs.",
+            "price": "$20.00",
+            "button_label": "Access this course",
+            "regulation": "CSRD",
+            "stage": "Foundation",
+            "role": "Leader"
+          }
+        }
+      },
+      "block_order": ["f1", "f2", "f3", "c1", "c2", "c3", "c4"],
+      "settings": {
+        "heading": "Don’t Know Where To Start?",
+        "text": "Relevant Topics",
+        "search_placeholder": "Search courses, assessments and bundles",
+        "background_color": "#f4f6f8",
         "padding_y": 72
       }
     },
     "hp_partners": {
       "type": "hp-partners",
       "blocks": {
-        "p1": { "type": "partner", "settings": { "name": "OTTO", "industry": "Retail" } },
-        "p2": { "type": "partner", "settings": { "name": "IKEA", "industry": "Retail" } },
-        "p3": { "type": "partner", "settings": { "name": "Kodak", "industry": "Manufacturing" } }
+        "p1": { "type": "partner", "settings": { "asset": "hp-partner-otto.png", "name": "OTTO Group", "industry": "Hamburg, Germany" } },
+        "p2": { "type": "partner", "settings": { "asset": "hp-partner-crh.png", "name": "CRH", "industry": "Hamburg, Germany" } },
+        "p3": { "type": "partner", "settings": { "asset": "hp-partner-kodak.png", "name": "Kodak", "industry": "Hamburg, Germany" } }
       },
       "block_order": ["p1", "p2", "p3"],
       "settings": {
-        "heading": "Everything you need for your sustainability success",
-        "text": "Join the organizations building responsible growth with Vectra.",
-        "button_label": "Request a demo",
+        "heading": "Tested in real crises.\nProven by industry leaders.",
+        "text": "Based on 500 reviews",
         "background_color": "#00263d",
-        "padding_y": 72
-      }
-    },
-    "hp_articles": {
-      "type": "hp-articles",
-      "blocks": {
-        "art1": { "type": "article", "settings": { "title": "Building a credible climate transition plan", "date": "Aug 12, 2026" } },
-        "art2": { "type": "article", "settings": { "title": "What boards need from ESG reporting now", "date": "Jul 28, 2026" } },
-        "art3": { "type": "article", "settings": { "title": "Designing impact programs that scale", "date": "Jul 04, 2026" } }
-      },
-      "block_order": ["art1", "art2", "art3"],
-      "settings": {
-        "heading": "Our Latest Articles",
-        "button_label": "See All Articles",
-        "background_color": "#ffffff",
         "padding_y": 72
       }
     },
@@ -343,79 +259,117 @@
         "q1": {
           "type": "item",
           "settings": {
-            "question": "How do we get started with Vectra?",
-            "answer": "<p>Share your current ESG priorities and we’ll match you with a specialist who can scope a practical next step.</p>"
+            "question": "What are the different types of trading?",
+            "answer": "<p>Whether you’re exploring advisory, marketplace learning, or retained support, VECTRA can help you choose the right path.</p>"
           }
         },
         "q2": {
           "type": "item",
           "settings": {
-            "question": "Do you work with global reporting standards?",
-            "answer": "<p>Yes. We support ISSB, CSRD, GRI, TCFD-aligned climate work, and sector-specific disclosure needs.</p>"
+            "question": "What is the difference between trading and investing?",
+            "answer": "<p>Share your current priorities and we’ll match you with a specialist who can scope a practical next step.</p>"
           }
         },
         "q3": {
           "type": "item",
           "settings": {
-            "question": "Can you support both strategy and implementation?",
-            "answer": "<p>Our teams stay with you from ambition setting through operating model, data, and program delivery.</p>"
+            "question": "How do I protect my trading account?",
+            "answer": "<p>Our teams stay with you from assessment through implementation, with clear ownership and measurable outcomes.</p>"
           }
         },
         "q4": {
           "type": "item",
           "settings": {
-            "question": "How are engagements typically structured?",
-            "answer": "<p>Most work begins with a focused diagnostic, then a scoped program with clear milestones, owners, and outcomes.</p>"
+            "question": "How do I deposit money into my trading account?",
+            "answer": "<p>Contact our Brussels team and we’ll guide you through onboarding, access, and next steps.</p>"
           }
         }
       },
       "block_order": ["q1", "q2", "q3", "q4"],
       "settings": {
+        "faq_eyebrow": "Our FAQ",
         "heading": "Frequently Asked Questions",
-        "contact_heading": "Quick Support",
-        "contact_text": "Talk to a real human.",
-        "phone": "+1 (800) 555-0148",
-        "email": "hello@vectra.example",
-        "address": "120 Sustainability Ave\nNew York, NY",
+        "faq_intro": "Answers to common questions about working with VECTRA.",
+        "contact_heading": "You Have Different",
+        "contact_text": "Questions?",
+        "support_text": "Whether you’re here to build capability, find balance, or boost your ESG readiness — our team is ready to help.",
+        "phone": "+32 495 239088",
+        "email": "info@vectra-intl.com",
+        "address": "Chaussée de Wavre 1517B\n1160 Brussels, Belgium",
+        "button_label": "Contact Us",
         "background_color": "#ffffff",
         "padding_y": 72
       }
     },
-    "hp_form": {
-      "type": "hp-contact-form",
+    "hp_articles": {
+      "type": "hp-articles",
+      "blocks": {
+        "art1": {
+          "type": "article",
+          "settings": {
+            "asset": "hp-article-1.png",
+            "title": "Master the Markets: Trading Tips for Beginners",
+            "date": "January 25, 2025"
+          }
+        },
+        "art2": {
+          "type": "article",
+          "settings": {
+            "asset": "hp-article-2.png",
+            "title": "Master the Markets: Trading Tips for Beginners",
+            "date": "January 25, 2025"
+          }
+        },
+        "art3": {
+          "type": "article",
+          "settings": {
+            "asset": "hp-article-3.png",
+            "title": "Master the Markets: Trading Tips for Beginners",
+            "date": "January 25, 2025"
+          }
+        }
+      },
+      "block_order": ["art1", "art2", "art3"],
       "settings": {
-        "heading": "Everything your Vectra relationship. In one place.",
-        "text": "Tell us about your ESG priorities and a specialist will follow up.",
-        "form_heading": "Get in Touch",
-        "button_label": "Send Message",
-        "background_gradient": "linear-gradient(180deg, #00263d 0%, #1a6b3c 52%, #54bd01 100%)",
-        "padding_y": 80
+        "heading": "Our latest Articles",
+        "button_label": "See All Articles →",
+        "background_color": "#ffffff",
+        "padding_y": 72
       }
     },
     "hp_careers": {
       "type": "hp-careers",
       "settings": {
+        "eyebrow": "Careers",
         "heading": "Join Our Team",
-        "text": "Help organizations turn sustainability ambition into lasting impact.",
-        "button_label": "View Job Openings",
+        "text": "At VECTRA International, we believe our greatest asset is our people. We are always looking for passionate, driven individuals eager to make an impact and grow their careers with us.",
+        "button_label": "Explore our open roles",
         "background_color": "#ffffff",
         "padding_y": 88
+      }
+    },
+    "hp_form": {
+      "type": "hp-contact-form",
+      "settings": {
+        "heading": "Everything your VECTRA relationship, in one place.",
+        "text": "Access Marketplace purchases, active services, VSuites, current retainers, billing, documentation, and support from a single, secure account.",
+        "form_heading": "Get In Touch",
+        "button_label": "Sign in",
+        "background_gradient": "linear-gradient(180deg, #00263d 0%, #1a6b3c 52%, #54bd01 100%)",
+        "padding_y": 80
       }
     }
   },
   "order": [
-    "hero_jVaWmY",
-    "hp_cta",
-    "hp_icons",
-    "hp_impact",
+    "hp_hero",
     "hp_info",
     "hp_solutions",
-    "hp_cases",
-    "hp_topics",
+    "hp_impact",
+    "hp_market",
     "hp_partners",
-    "hp_articles",
     "hp_faq",
-    "hp_form",
-    "hp_careers"
+    "hp_articles",
+    "hp_careers",
+    "hp_form"
   ]
 }

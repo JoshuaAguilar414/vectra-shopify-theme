@@ -1,15 +1,16 @@
 {%- doc -%}
-  Image with SVG placeholder fallback.
+  Image with Shopify file, theme asset, or SVG placeholder fallback.
 
   @param {object} [image] - Shopify image
+  @param {string} [asset] - Theme asset filename (e.g. hp-hero.png)
   @param {string} [alt] - Alt text
-  @param {number} [width] - Image width
+  @param {number} [width] - Image width hint
   @param {string} [placeholder] - Shopify placeholder key
 {%- enddoc -%}
 
 {%- assign hp_width = width | default: 1600 -%}
 {%- assign hp_placeholder = placeholder | default: 'lifestyle-1' -%}
-{%- assign hp_alt = alt | default: image.alt -%}
+{%- assign hp_alt = alt | default: image.alt | default: '' -%}
 
 {%- if image != blank -%}
   {{
@@ -20,6 +21,14 @@
       widths: '400, 800, 1200, 1600, 2000',
       alt: hp_alt
   }}
+{%- elsif asset != blank -%}
+  <img
+    src="{{ asset | asset_url }}"
+    alt="{{ hp_alt | escape }}"
+    loading="lazy"
+    width="{{ hp_width }}"
+    height="auto"
+  >
 {%- else -%}
   {{ hp_placeholder | placeholder_svg_tag: 'hp-placeholder' }}
 {%- endif -%}

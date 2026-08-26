@@ -6,7 +6,7 @@
   class="section-background hp-bg color-custom-{{ section.id }}"
   style="--hp-section-bg: {{ section.settings.background_gradient }};"
 ></div>
-<div class="section section--page-width hp">
+<div class="section section--page-width hp" id="contact">
   <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
     <div class="hp-lead">
       <div class="hp-lead__copy">
@@ -36,26 +36,37 @@
           {%- endif -%}
 
           <div class="hp-form__row">
-            <label class="visually-hidden" for="{{ form_id }}-first">First name</label>
-            <input class="hp-field" id="{{ form_id }}-first" type="text" name="contact[first_name]" placeholder="First name" value="{% if customer %}{{ customer.first_name }}{% endif %}">
-            <label class="visually-hidden" for="{{ form_id }}-last">Last name</label>
-            <input class="hp-field" id="{{ form_id }}-last" type="text" name="contact[last_name]" placeholder="Last name" value="{% if customer %}{{ customer.last_name }}{% endif %}">
+            <label class="visually-hidden" for="{{ form_id }}-first">First Name*</label>
+            <input class="hp-field" id="{{ form_id }}-first" type="text" name="contact[first_name]" placeholder="First Name*" required value="{% if customer %}{{ customer.first_name }}{% endif %}">
+            <label class="visually-hidden" for="{{ form_id }}-last">Last Name*</label>
+            <input class="hp-field" id="{{ form_id }}-last" type="text" name="contact[last_name]" placeholder="Last Name*" required value="{% if customer %}{{ customer.last_name }}{% endif %}">
           </div>
-          <label class="visually-hidden" for="{{ form_id }}-email">Email</label>
-          <input
-            class="hp-field"
-            id="{{ form_id }}-email"
-            type="email"
-            name="contact[email]"
-            placeholder="Email"
-            required
-            value="{% if customer %}{{ customer.email }}{% endif %}"
-          >
-          <label class="visually-hidden" for="{{ form_id }}-phone">Phone</label>
-          <input class="hp-field" id="{{ form_id }}-phone" type="tel" name="contact[phone]" placeholder="Phone" value="{% if customer %}{{ customer.phone }}{% endif %}">
-          <label class="visually-hidden" for="{{ form_id }}-message">Message</label>
-          <textarea class="hp-field" id="{{ form_id }}-message" name="contact[body]" placeholder="Message"></textarea>
-          <button class="hp-btn" type="submit">{{ section.settings.button_label | escape }}</button>
+          <div class="hp-form__row">
+            <label class="visually-hidden" for="{{ form_id }}-email">Email*</label>
+            <input
+              class="hp-field"
+              id="{{ form_id }}-email"
+              type="email"
+              name="contact[email]"
+              placeholder="Email*"
+              required
+              value="{% if customer %}{{ customer.email }}{% endif %}"
+            >
+            <label class="visually-hidden" for="{{ form_id }}-phone">Phone Number*</label>
+            <input class="hp-field" id="{{ form_id }}-phone" type="tel" name="contact[phone]" placeholder="Phone Number*" required value="{% if customer %}{{ customer.phone }}{% endif %}">
+          </div>
+          <div class="hp-form__row">
+            <label class="visually-hidden" for="{{ form_id }}-job">Job Title*</label>
+            <input class="hp-field" id="{{ form_id }}-job" type="text" name="contact[job_title]" placeholder="Job Title*" required>
+            <label class="visually-hidden" for="{{ form_id }}-company">Company*</label>
+            <input class="hp-field" id="{{ form_id }}-company" type="text" name="contact[company]" placeholder="Company*" required>
+          </div>
+          <label class="visually-hidden" for="{{ form_id }}-message">Message Here...</label>
+          <textarea class="hp-field" id="{{ form_id }}-message" name="contact[body]" placeholder="Message Here..."></textarea>
+          <button class="hp-btn" type="submit">
+            {{ section.settings.button_label | escape }}
+            <img src="{{ 'hp-form-arrow.svg' | asset_url }}" alt="" width="16" height="10" aria-hidden="true">
+          </button>
         {%- endform -%}
       </div>
     </div>

@@ -9,34 +9,52 @@
   class="section-background hp-bg color-custom-{{ section.id }}"
   style="--hp-section-bg: {{ section.settings.background_color }};"
 ></div>
-<div class="section section--page-width hp">
+<div class="section section--page-width hp" id="articles">
   <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
-    <h2 class="hp-title" style="margin-bottom: 28px;">{{ section.settings.heading | escape }}</h2>
+    <homepage-reveal>
+      <div class="hp-articles__head">
+        <p class="hp-eyebrow">Our Blog</p>
+        <h2 class="hp-title">{{ section.settings.heading | escape }}</h2>
+      </div>
+    </homepage-reveal>
 
     <div class="hp-articles">
       {%- if blog != blank and blog.articles_count > 0 -%}
         {%- for article in blog.articles limit: limit -%}
-          <a class="hp-article" href="{{ article.url }}">
-            <div class="hp-media hp-article__media">
-              {% render 'hp-media', image: article.image, alt: article.title, placeholder: 'collection-5' %}
-            </div>
-            <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%b %d, %Y' }}</time>
-            <h3>{{ article.title | escape }}</h3>
-            <span class="hp-card__more">Read More</span>
-          </a>
+          <homepage-reveal data-from="up" data-delay="{{ forloop.index }}">
+            <a class="hp-article" href="{{ article.url }}">
+              <div class="hp-media hp-article__media">
+                {% render 'hp-media', image: article.image, alt: article.title, placeholder: 'collection-5' %}
+              </div>
+              <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%b %d, %Y' }}</time>
+              <h3>{{ article.title | escape }}</h3>
+              <span class="hp-card__more">Read More</span>
+            </a>
+          </homepage-reveal>
         {%- endfor -%}
       {%- else -%}
         {%- for block in section.blocks -%}
-          <a class="hp-article" href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>
-            <div class="hp-media hp-article__media">
-              {% render 'hp-media', image: block.settings.image, alt: block.settings.title, placeholder: 'collection-5' %}
-            </div>
-            {%- if block.settings.date != blank -%}
-              <time>{{ block.settings.date | escape }}</time>
-            {%- endif -%}
-            <h3>{{ block.settings.title | escape }}</h3>
-            <span class="hp-card__more">Read More</span>
-          </a>
+          {%- liquid
+            assign media_asset = block.settings.asset
+            if media_asset == blank
+              assign media_asset = 'hp-article-' | append: forloop.index | append: '.png'
+            endif
+          -%}
+          <homepage-reveal data-from="up" data-delay="{{ forloop.index }}">
+            <a class="hp-article" href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>
+              <div class="hp-media hp-article__media">
+                {% render 'hp-media', image: block.settings.image, asset: media_asset, alt: block.settings.title, placeholder: 'collection-5' %}
+              </div>
+              {%- if block.settings.date != blank -%}
+                <time>{{ block.settings.date | escape }}</time>
+              {%- endif -%}
+              <h3>{{ block.settings.title | escape }}</h3>
+              <span class="hp-card__more">
+                Read More
+                <img src="{{ 'hp-read-more.svg' | asset_url }}" alt="" width="16" height="10" aria-hidden="true">
+              </span>
+            </a>
+          </homepage-reveal>
         {%- endfor -%}
       {%- endif -%}
     </div>
@@ -63,6 +81,7 @@
       "name": "Article",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "asset", "label": "Fallback theme asset", "default": "hp-article-1.png" },
         { "type": "text", "id": "date", "label": "Date", "default": "Aug 12, 2026" },
         { "type": "text", "id": "title", "label": "Title", "default": "Building a credible climate transition plan" },
         { "type": "url", "id": "link", "label": "Link" }
