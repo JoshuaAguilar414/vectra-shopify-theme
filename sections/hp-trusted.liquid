@@ -26,15 +26,17 @@
             loading="lazy"
           >
         {%- endif -%}
+      </div>
+      <div class="hp-trusted__copy">
         {%- if section.settings.heading != blank -%}
           <p class="hp-trusted__heading">{{ section.settings.heading | escape }}</p>
         {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a class="hp-btn" href="{{ section.settings.button_link | default: '#marketplace' }}">
+            {{ section.settings.button_label | escape }}
+          </a>
+        {%- endif -%}
       </div>
-      {%- if section.settings.button_label != blank -%}
-        <a class="hp-btn" href="{{ section.settings.button_link | default: '#solutions' }}">
-          {{ section.settings.button_label | escape }}
-        </a>
-      {%- endif -%}
     </div>
 
     <div class="hp-trusted__marquee" aria-label="Trusted by">
@@ -60,7 +62,7 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Trusted by the world’s leading corporations & investors"
+      "default": "Trusted Partnership. Practical Implementation."
     },
     { "type": "image_picker", "id": "badge_image", "label": "Badge image" },
     {
@@ -69,7 +71,7 @@
       "label": "Badge alt text",
       "default": "Trusted by 500+ Companies"
     },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Explore solutions" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Explore Case Studies →" },
     { "type": "url", "id": "button_link", "label": "Button link" },
     { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" },
     {

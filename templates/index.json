@@ -39,9 +39,9 @@
     "hp_trusted": {
       "type": "hp-trusted",
       "settings": {
-        "heading": "Your Trusted ESG Partner",
+        "heading": "Trusted Partnership. Practical Implementation.",
         "badge_alt": "Trusted by 500+ Companies",
-        "button_label": "Explore Solutions",
+        "button_label": "Explore Case Studies →",
         "background_color": "#ffffff",
         "padding_y": 28
       }
@@ -164,11 +164,11 @@
       },
       "block_order": ["p1", "p2", "p3", "p4"],
       "settings": {
-        "eyebrow": "ESG Partnership",
-        "heading": "Enabling a sustainable impact",
-        "feature_heading": "Partnership with sustainability, built for implementation",
-        "text": "We combine human expertise, an ecosystem of specialists, AI-enabled intelligence, and structured execution—then stay accountable for the outcomes that matter.",
-        "button_label": "Learn more",
+        "eyebrow": "Why VECTRA",
+        "heading": "Enabling Positive Business Impact",
+        "feature_heading": "Partnership with accountability. Built for implementation.",
+        "text": "We Combine Human Expertise, An Ecosystem Of Specialists, AI-Enabled Intelligence, And Structured Execution—Then Stay Accountable For The Outcomes That Matter.",
+        "button_label": "Explore Our Approach →",
         "background_color": "#ffffff",
         "padding_y": 72
       }
