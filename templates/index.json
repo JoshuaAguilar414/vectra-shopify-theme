@@ -68,7 +68,7 @@
         "heading_line_2": "ESG Partner",
         "text": "Our solutions are tailored to empower your organization to achieve ESG goals and build more resilient, responsible supply chains",
         "background_color": "#ffffff",
-        "padding_y": 72
+        "padding_y": 100
       }
     },
     "hp_solutions": {
@@ -118,8 +118,8 @@
         "text": "",
         "intro_button_label": "",
         "button_label": "Explore All Solutions →",
-        "background_color": "#05192d",
-        "padding_y": 72
+        "background_color": "#092543",
+        "padding_y": 100
       }
     },
     "hp_impact": {
@@ -166,7 +166,7 @@
         "text": "We combine human expertise, an ecosystem of specialists, AI-enabled intelligence, and structured execution—then stay accountable for the outcomes that matter.",
         "button_label": "Explore Our Approach →",
         "background_color": "#ffffff",
-        "padding_y": 72
+        "padding_y": 100
       }
     },
     "hp_market": {
@@ -246,8 +246,8 @@
         "heading": "Don’t Know Where To Start?",
         "text": "Relevant Topics",
         "search_placeholder": "Search",
-        "background_color": "#f4f6f8",
-        "padding_y": 72
+        "background_color": "#f1f1f1",
+        "padding_y": 100
       }
     },
     "hp_topics": {
@@ -305,7 +305,7 @@
       "settings": {
         "heading": "Featured Topics",
         "background_color": "#ffffff",
-        "padding_y": 72
+        "padding_y": 100
       }
     },
     "hp_partners": {
@@ -320,8 +320,8 @@
         "heading": "Our region-wide network of implementation partners.",
         "text": "",
         "button_label": "Expand solutions",
-        "background_color": "#0a1f30",
-        "padding_y": 72
+        "background_color": "#092543",
+        "padding_y": 100
       }
     },
     "hp_faq": {
@@ -369,7 +369,7 @@
         "address": "Chaussée de Wavre 1517B\n1160 Brussels, Belgium",
         "button_label": "Contact Us",
         "background_color": "#ffffff",
-        "padding_y": 72
+        "padding_y": 100
       }
     },
     "hp_articles": {
@@ -405,7 +405,7 @@
         "heading": "Our Latest Articles",
         "button_label": "See all articles",
         "background_color": "#ffffff",
-        "padding_y": 72
+        "padding_y": 100
       }
     },
     "hp_careers": {
