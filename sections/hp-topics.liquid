@@ -1,0 +1,166 @@
+{% render 'homepage-styles' %}
+
+{%- liquid
+  assign blog = section.settings.blog
+  assign limit = section.settings.post_limit | default: 4
+-%}
+
+<div
+  class="section-background hp-bg color-custom-{{ section.id }}"
+  style="--hp-section-bg: {{ section.settings.background_color }};"
+></div>
+<div class="section section--page-width hp">
+  <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="hp-title" style="margin-bottom: 20px;">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    <homepage-tabs>
+      <div class="hp-tabs" role="tablist">
+        {%- assign first_tab = true -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'tab' -%}
+            <button
+              class="hp-tab{% if first_tab %} is-active{% endif %}"
+              type="button"
+              data-hp-tab="{{ block.settings.tab_id | default: 'latest' }}"
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.label | escape }}
+            </button>
+            {%- assign first_tab = false -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if blog != blank and blog.articles_count > 0 -%}
+        {%- for article in blog.articles limit: limit -%}
+          <a
+            class="hp-topic"
+            href="{{ article.url }}"
+            data-hp-tab-item="all"
+          >
+            <div class="hp-media hp-topic__media">
+              {% render 'hp-media', image: article.image, alt: article.title, placeholder: 'collection-3' %}
+            </div>
+            <div>
+              {%- if article.tags.size > 0 -%}
+                <span class="hp-card__tag">{{ article.tags.first | escape }}</span>
+              {%- endif -%}
+              <h3>{{ article.title | escape }}</h3>
+              <p>{{ article.excerpt_or_content | strip_html | truncate: 140 | escape }}</p>
+            </div>
+            <time class="hp-topic__date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+              {{ article.published_at | date: '%b %d, %Y' }}
+            </time>
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'article' -%}
+            <a
+              class="hp-topic"
+              href="{{ block.settings.link | default: '#' }}"
+              data-hp-tab-item="{{ block.settings.tab | default: 'all' }}"
+              {{ block.shopify_attributes }}
+            >
+              <div class="hp-media hp-topic__media">
+                {% render 'hp-media', image: block.settings.image, alt: block.settings.title, placeholder: 'collection-4' %}
+              </div>
+              <div>
+                {%- if block.settings.category != blank -%}
+                  <span class="hp-card__tag">{{ block.settings.category | escape }}</span>
+                {%- endif -%}
+                <h3>{{ block.settings.title | escape }}</h3>
+                {%- if block.settings.excerpt != blank -%}
+                  <p>{{ block.settings.excerpt | escape }}</p>
+                {%- endif -%}
+              </div>
+              {%- if block.settings.date != blank -%}
+                <span class="hp-topic__date">{{ block.settings.date | escape }}</span>
+              {%- endif -%}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </homepage-tabs>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage topics",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Our Latest" },
+        {
+          "type": "select",
+          "id": "tab_id",
+          "label": "Tab id",
+          "options": [
+            { "value": "all", "label": "All" },
+            { "value": "sustainability", "label": "Sustainability" },
+            { "value": "esg", "label": "ESG" },
+            { "value": "latest", "label": "Latest" },
+            { "value": "popular", "label": "Popular" },
+            { "value": "archive", "label": "Archive" }
+          ],
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "type": "article",
+      "name": "Article",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "category", "label": "Category", "default": "Insights" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Building a credible climate transition plan" },
+        { "type": "textarea", "id": "excerpt", "label": "Excerpt", "default": "How leading companies connect targets, capital, and operating decisions." },
+        { "type": "text", "id": "date", "label": "Date", "default": "Aug 12, 2026" },
+        { "type": "url", "id": "link", "label": "Link" },
+        {
+          "type": "select",
+          "id": "tab",
+          "label": "Show in tab",
+          "options": [
+            { "value": "all", "label": "All" },
+            { "value": "sustainability", "label": "Sustainability" },
+            { "value": "esg", "label": "ESG" },
+            { "value": "latest", "label": "Latest" },
+            { "value": "popular", "label": "Popular" },
+            { "value": "archive", "label": "Archive" }
+          ],
+          "default": "all"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Relevant Topics" },
+    { "type": "blog", "id": "blog", "label": "Blog", "info": "If a blog is selected, its articles replace the manual list in the Latest tab." },
+    { "type": "range", "id": "post_limit", "label": "Blog posts to show", "min": 2, "max": 8, "step": 1, "default": 4 },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" },
+    { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 72 }
+  ],
+  "presets": [
+    {
+      "name": "Homepage topics",
+      "blocks": [
+        { "type": "tab", "settings": { "label": "Our Latest", "tab_id": "latest" } },
+        { "type": "tab", "settings": { "label": "Most Popular", "tab_id": "popular" } },
+        { "type": "tab", "settings": { "label": "Archive", "tab_id": "archive" } },
+        { "type": "article", "settings": { "category": "Climate", "title": "Building a credible climate transition plan", "date": "Aug 12, 2026", "tab": "latest" } },
+        { "type": "article", "settings": { "category": "Governance", "title": "What boards need from ESG reporting now", "date": "Jul 28, 2026", "tab": "latest" } },
+        { "type": "article", "settings": { "category": "Social", "title": "Designing impact programs that scale", "date": "Jul 04, 2026", "tab": "popular" } },
+        { "type": "article", "settings": { "category": "Strategy", "title": "From materiality to operating model", "date": "Jun 19, 2026", "tab": "archive" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

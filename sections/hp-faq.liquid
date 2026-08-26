@@ -1,0 +1,91 @@
+{% render 'homepage-styles' %}
+
+<div
+  class="section-background hp-bg color-custom-{{ section.id }}"
+  style="--hp-section-bg: {{ section.settings.background_color }};"
+></div>
+<div class="section section--page-width hp">
+  <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
+    <div class="hp-faq">
+      <aside class="hp-contact-card">
+        <p class="hp-eyebrow" style="color: #fff;">{{ section.settings.contact_heading | escape }}</p>
+        {%- if section.settings.contact_text != blank -%}
+          <h2>{{ section.settings.contact_text | escape }}</h2>
+        {%- endif -%}
+        <dl>
+          {%- if section.settings.email != blank -%}
+            <div>
+              <dt>Email</dt>
+              <dd><a href="mailto:{{ section.settings.email }}">{{ section.settings.email | escape }}</a></dd>
+            </div>
+          {%- endif -%}
+          {%- if section.settings.phone != blank -%}
+            <div>
+              <dt>Phone</dt>
+              <dd><a href="tel:{{ section.settings.phone | replace: ' ', '' }}">{{ section.settings.phone | escape }}</a></dd>
+            </div>
+          {%- endif -%}
+          {%- if section.settings.address != blank -%}
+            <div>
+              <dt>Address</dt>
+              <dd>{{ section.settings.address | escape | newline_to_br }}</dd>
+            </div>
+          {%- endif -%}
+        </dl>
+      </aside>
+
+      <div>
+        {%- if section.settings.heading != blank -%}
+          <h2 class="hp-title" style="margin-bottom: 18px;">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        <div class="hp-acc">
+          {%- for block in section.blocks -%}
+            <details {% if forloop.first %}open{% endif %} {{ block.shopify_attributes }}>
+              <summary>{{ block.settings.question | escape }}</summary>
+              <div class="hp-acc__body">{{ block.settings.answer }}</div>
+            </details>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage FAQ",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "How do we get started with Vectra?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Share your current ESG priorities and we’ll match you with a specialist who can scope a practical next step.</p>" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "heading", "label": "FAQ heading", "default": "Frequently Asked Questions" },
+    { "type": "text", "id": "contact_heading", "label": "Contact eyebrow", "default": "Quick Support" },
+    { "type": "textarea", "id": "contact_text", "label": "Contact heading", "default": "Talk to a real human." },
+    { "type": "text", "id": "phone", "label": "Phone", "default": "+1 (800) 555-0148" },
+    { "type": "text", "id": "email", "label": "Email", "default": "hello@vectra.example" },
+    { "type": "textarea", "id": "address", "label": "Address", "default": "120 Sustainability Ave\nNew York, NY" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" },
+    { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 72 }
+  ],
+  "presets": [
+    {
+      "name": "Homepage FAQ",
+      "blocks": [
+        { "type": "item", "settings": { "question": "How do we get started with Vectra?" } },
+        { "type": "item", "settings": { "question": "Do you work with global reporting standards?" } },
+        { "type": "item", "settings": { "question": "Can you support both strategy and implementation?" } },
+        { "type": "item", "settings": { "question": "How are engagements typically structured?" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

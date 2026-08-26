@@ -1,0 +1,104 @@
+{% render 'homepage-styles' %}
+
+{%- liquid
+  assign logo = settings.logo_inverse | default: settings.logo
+-%}
+
+<div
+  class="section-background hp-bg color-custom-{{ section.id }}"
+  style="--hp-section-bg: {{ section.settings.background_color }};"
+></div>
+<div class="section section--page-width hp hp--navy">
+  <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
+    <div class="hp-footer">
+      <div>
+        <a class="hp-footer__logo" href="{{ routes.root_url }}">
+          {%- if logo != blank -%}
+            {{
+              logo
+              | image_url: width: 320
+              | image_tag: alt: shop.name, loading: 'lazy', height: 36
+            }}
+          {%- else -%}
+            <strong>{{ shop.name }}</strong>
+          {%- endif -%}
+        </a>
+        {%- if section.settings.address != blank -%}
+          <p>{{ section.settings.address | escape | newline_to_br }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="hp-footer__menus">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'menu' -%}
+            <nav {{ block.shopify_attributes }} aria-label="{{ block.settings.heading | escape }}">
+              <h3>{{ block.settings.heading | escape }}</h3>
+              <ul>
+                {%- if block.settings.menu != blank -%}
+                  {%- for link in block.settings.menu.links -%}
+                    <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+                  {%- endfor -%}
+                {%- else -%}
+                  {%- assign fallback_links = block.settings.fallback_links | split: ',' -%}
+                  {%- for item in fallback_links -%}
+                    <li><a href="{{ routes.root_url }}">{{ item | strip | escape }}</a></li>
+                  {%- endfor -%}
+                {%- endif -%}
+              </ul>
+            </nav>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="hp-footer__bar">
+      <span>© {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright | escape }}</span>
+      <div class="hp-social">
+        <a href="{{ section.settings.facebook_url | default: '#' }}" aria-label="Facebook">{% render 'hp-icon', name: 'users' %}</a>
+        <a href="{{ section.settings.instagram_url | default: '#' }}" aria-label="Instagram">{% render 'hp-icon', name: 'globe' %}</a>
+        <a href="{{ section.settings.linkedin_url | default: '#' }}" aria-label="LinkedIn">{% render 'hp-icon', name: 'handshake' %}</a>
+        <a href="{{ section.settings.youtube_url | default: '#' }}" aria-label="YouTube">{% render 'hp-icon', name: 'energy' %}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage footer",
+  "tag": "section",
+  "enabled_on": { "groups": ["footer"] },
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Services" },
+        { "type": "link_list", "id": "menu", "label": "Menu" },
+        { "type": "text", "id": "fallback_links", "label": "Fallback links", "default": "ESG Strategy, Climate, Reporting" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "textarea", "id": "address", "label": "Address", "default": "Vectra\nSustainable value, globally." },
+    { "type": "url", "id": "facebook_url", "label": "Facebook" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram" },
+    { "type": "url", "id": "linkedin_url", "label": "LinkedIn" },
+    { "type": "url", "id": "youtube_url", "label": "YouTube" },
+    { "type": "text", "id": "copyright", "label": "Copyright note", "default": "All rights reserved." },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#00263d" },
+    { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "presets": [
+    {
+      "name": "Homepage footer",
+      "blocks": [
+        { "type": "menu", "settings": { "heading": "Services", "fallback_links": "ESG Strategy, Climate, Reporting" } },
+        { "type": "menu", "settings": { "heading": "Resources", "fallback_links": "Insights, Case Studies, Events" } },
+        { "type": "menu", "settings": { "heading": "About", "fallback_links": "Who We Are, Careers, Contact" } },
+        { "type": "menu", "settings": { "heading": "Legal", "fallback_links": "Privacy, Terms, Cookies" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

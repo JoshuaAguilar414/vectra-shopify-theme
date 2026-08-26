@@ -1,0 +1,25 @@
+{%- doc -%}
+  Image with SVG placeholder fallback.
+
+  @param {object} [image] - Shopify image
+  @param {string} [alt] - Alt text
+  @param {number} [width] - Image width
+  @param {string} [placeholder] - Shopify placeholder key
+{%- enddoc -%}
+
+{%- assign hp_width = width | default: 1600 -%}
+{%- assign hp_placeholder = placeholder | default: 'lifestyle-1' -%}
+{%- assign hp_alt = alt | default: image.alt -%}
+
+{%- if image != blank -%}
+  {{
+    image
+    | image_url: width: hp_width
+    | image_tag:
+      loading: 'lazy',
+      widths: '400, 800, 1200, 1600, 2000',
+      alt: hp_alt
+  }}
+{%- else -%}
+  {{ hp_placeholder | placeholder_svg_tag: 'hp-placeholder' }}
+{%- endif -%}

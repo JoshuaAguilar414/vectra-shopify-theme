@@ -113,6 +113,13 @@
     </div>
   {% endif %}
 
+  {%- if template.name == 'index' -%}
+    {%- unless customer -%}
+      <a class="hp-header-signin header-actions__action" href="{{ routes.account_login_url }}">Sign In</a>
+    {%- endunless -%}
+    <a class="hp-header-cta header-actions__action" href="{{ routes.account_register_url }}">Get Started</a>
+  {%- endif -%}
+
   {% if settings.cart_type == 'drawer' and template.name != 'cart' %}
     <button
       class="header-actions__action button-unstyled{% if display_style == 'text' %} header-actions__text-style{% endif %}"

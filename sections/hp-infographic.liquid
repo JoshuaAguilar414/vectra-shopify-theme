@@ -1,0 +1,53 @@
+{% render 'homepage-styles' %}
+
+<div
+  class="section-background hp-bg color-custom-{{ section.id }}"
+  style="--hp-section-bg: {{ section.settings.background_color }};"
+></div>
+<div class="section section--page-width hp">
+  <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
+    <div class="hp-info">
+      <div class="hp-venn">
+        {%- for block in section.blocks limit: 3 -%}
+          <div class="hp-venn__circle hp-venn__circle--{{ forloop.index }}" {{ block.shopify_attributes }}>
+            <strong>{{ block.settings.stat | escape }}</strong>
+          </div>
+        {%- endfor -%}
+        <p class="hp-venn__core">{{ section.settings.core_text | escape }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage infographic",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "stat", "label": "Stat", "default": "30+" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "core_text", "label": "Center text", "default": "Your Trusted ESG Partner" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" },
+    { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "presets": [
+    {
+      "name": "Homepage infographic",
+      "blocks": [
+        { "type": "stat", "settings": { "stat": "30+" } },
+        { "type": "stat", "settings": { "stat": "100+" } },
+        { "type": "stat", "settings": { "stat": "500+" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

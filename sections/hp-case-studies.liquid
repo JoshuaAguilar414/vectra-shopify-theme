@@ -1,0 +1,119 @@
+{% render 'homepage-styles' %}
+
+{%- liquid
+  assign blog = section.settings.blog
+  assign limit = section.settings.post_limit | default: 8
+-%}
+
+<div
+  class="section-background hp-bg color-custom-{{ section.id }}"
+  style="--hp-section-bg: {{ section.settings.background_color }};"
+></div>
+<div class="section section--page-width hp">
+  <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
+    <h2 class="hp-title">{{ section.settings.heading | escape }}</h2>
+    {%- if section.settings.text != blank -%}
+      <p class="hp-copy">{{ section.settings.text | escape }}</p>
+    {%- endif -%}
+
+    <homepage-filters>
+      <div class="hp-filters">
+        <input
+          class="hp-field"
+          type="search"
+          data-hp-search
+          placeholder="{{ section.settings.search_placeholder | escape }}"
+          aria-label="{{ section.settings.search_placeholder | escape }}"
+        >
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'filter' -%}
+            <select class="hp-field" data-hp-filter="{{ block.settings.key | handle }}" {{ block.shopify_attributes }}>
+              <option value="">{{ block.settings.label | escape }}</option>
+              {%- assign options = block.settings.options | split: ',' -%}
+              {%- for option in options -%}
+                {%- assign option_value = option | strip -%}
+                <option value="{{ option_value | handle }}">{{ option_value | escape }}</option>
+              {%- endfor -%}
+            </select>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="hp-cases">
+        {%- if blog != blank and blog.articles_count > 0 -%}
+          {%- for article in blog.articles limit: limit -%}
+            <a
+              class="hp-card"
+              href="{{ article.url }}"
+              data-hp-card
+              data-search="{{ article.title | escape }} {{ article.tags | join: ' ' }}"
+              data-energy="{% if article.tags contains 'Energy' %}energy{% endif %}"
+              data-industry="{{ article.tags.first | handle }}"
+              data-area="{{ article.tags.last | handle }}"
+            >
+              <div class="hp-media hp-card__media">
+                {% render 'hp-media', image: article.image, alt: article.title, placeholder: 'collection-2' %}
+              </div>
+              <h3>{{ article.title | escape }}</h3>
+              {%- if article.excerpt != blank -%}
+                <p>{{ article.excerpt | strip_html | truncate: 90 | escape }}</p>
+              {%- endif -%}
+              <span class="hp-card__more">Read More</span>
+            </a>
+          {%- endfor -%}
+        {%- else -%}
+          {%- assign placeholders = 'Sustainability|Decarbonizing industrial operations,Climate|Nature-positive supply chains,Governance|Board-ready ESG reporting,Impact|Community investment programs,Energy|Renewable offtake strategy,Industry|Responsible mining transition,Finance|ESG-linked capital programs,Social|Workforce wellbeing at scale' | split: ',' -%}
+          {%- for item in placeholders -%}
+            {%- assign parts = item | split: '|' -%}
+            <article class="hp-card" data-hp-card data-search="{{ parts.last }}">
+              <div class="hp-media hp-card__media">
+                {% render 'hp-media', placeholder: 'collection-1' %}
+              </div>
+              <h3>{{ parts.last | escape }}</h3>
+              <p>{{ parts.first | escape }} services for teams building responsible growth.</p>
+              <span class="hp-card__more">Read More</span>
+            </article>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </homepage-filters>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage case studies",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "blocks": [
+    {
+      "type": "filter",
+      "name": "Filter",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Industry" },
+        { "type": "text", "id": "key", "label": "Data key", "default": "industry", "info": "Matches article tags when using a blog." },
+        { "type": "textarea", "id": "options", "label": "Options (comma separated)", "default": "Energy, Manufacturing, Finance" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Real Cases" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Don't know where to start? Filter by industry, topic, or region." },
+    { "type": "text", "id": "search_placeholder", "label": "Search placeholder", "default": "Search case studies" },
+    { "type": "blog", "id": "blog", "label": "Blog" },
+    { "type": "range", "id": "post_limit", "label": "Number of posts", "min": 4, "max": 12, "step": 1, "default": 8 },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#f4f6f8" },
+    { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 72 }
+  ],
+  "presets": [
+    {
+      "name": "Homepage case studies",
+      "blocks": [
+        { "type": "filter", "settings": { "label": "Energy", "key": "energy", "options": "Renewables, Oil & Gas, Utilities" } },
+        { "type": "filter", "settings": { "label": "Industry", "key": "industry", "options": "Energy, Manufacturing, Finance" } },
+        { "type": "filter", "settings": { "label": "Area", "key": "area", "options": "Europe, Americas, APAC" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

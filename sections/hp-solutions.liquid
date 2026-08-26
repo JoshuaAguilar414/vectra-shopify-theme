@@ -1,0 +1,87 @@
+{% render 'homepage-styles' %}
+
+<div
+  class="section-background hp-bg color-custom-{{ section.id }}"
+  style="--hp-section-bg: {{ section.settings.background_color }};"
+></div>
+<div class="section section--page-width hp hp--navy">
+  <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
+    <div class="hp-solutions">
+      <div class="hp-solutions__copy">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="hp-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        <h2 class="hp-title">{{ section.settings.heading | escape }}</h2>
+        {%- if section.settings.text != blank -%}
+          <p class="hp-copy">{{ section.settings.text | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a class="hp-btn" href="{{ section.settings.button_link | default: '#' }}">
+            {{ section.settings.button_label | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      <homepage-carousel>
+        <div class="hp-track" data-hp-track>
+          {%- for block in section.blocks -%}
+            <a
+              class="hp-sol"
+              href="{{ block.settings.link | default: '#' }}"
+              {{ block.shopify_attributes }}
+            >
+              {% render 'hp-media', image: block.settings.image, alt: block.settings.title, placeholder: 'collection-1' %}
+              <span class="hp-sol__shade"></span>
+              <span class="hp-sol__body">
+                {%- if block.settings.eyebrow != blank -%}
+                  <span class="hp-eyebrow">{{ block.settings.eyebrow | escape }}</span>
+                {%- endif -%}
+                <h3>{{ block.settings.title | escape }}</h3>
+              </span>
+            </a>
+          {%- endfor -%}
+        </div>
+      </homepage-carousel>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage solutions",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Solution",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Service" },
+        { "type": "text", "id": "title", "label": "Title", "default": "ESG Strategy" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Solutions" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A multi-insight solution for you and your team." },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Learn More" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#00263d" },
+    { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 72 }
+  ],
+  "presets": [
+    {
+      "name": "Homepage solutions",
+      "blocks": [
+        { "type": "card", "settings": { "title": "ESG Strategy", "eyebrow": "Advisory" } },
+        { "type": "card", "settings": { "title": "Climate Transition", "eyebrow": "Climate" } },
+        { "type": "card", "settings": { "title": "Sustainability Reporting", "eyebrow": "Disclosure" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

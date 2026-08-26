@@ -1,1 +1,421 @@
-{"sections":{"hero_jVaWmY":{"type":"hero","blocks":{"text_YLPk4p":{"type":"text","name":"t:names.heading","settings":{"text":"<p>Creating End-to-End Responsible Business Solutions<\/p>","width":"fit-content","max_width":"normal","alignment":"left","type_preset":"h2","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"pretty","text_color":"{{ settings.color_palette.background }}","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"button_H9gpTf":{"type":"button","name":"t:names.button","settings":{"label":"Learn How We Can Help","link":"shopify:\/\/collections\/all","open_in_new_tab":false,"style_class":"button-custom","custom_button_background":"{{ settings.color_palette.foreground }}","custom_button_text":"{{ settings.color_palette.background }}","custom_button_border":"{{ settings.color_palette.foreground }}","link_text_color":"","width":"custom","custom_width":29,"width_mobile":"fit-content","custom_width_mobile":100},"blocks":{}}},"block_order":["text_YLPk4p","button_H9gpTf"],"name":"t:names.hero","settings":{"media_type_1":"video","video_1":"shopify:\/\/files\/videos\/Website - Hero Banner.mp4","media_type_2":"image","stack_media_on_mobile":false,"custom_mobile_media":false,"media_type_1_mobile":"image","media_type_2_mobile":"image","link":"","open_in_new_tab":false,"content_direction":"row","vertical_on_mobile":true,"horizontal_alignment":"space-between","vertical_alignment":"flex-end","align_baseline":true,"horizontal_alignment_flex_direction_column":"center","vertical_alignment_flex_direction_column":"flex-end","gap":24,"section_width":"page-width","section_height":"medium","section_height_custom":50,"background_color":"rgba(0,0,0,0)","toggle_overlay":true,"overlay_color":"#12121266","overlay_style":"solid","gradient_direction":"to bottom","blurred_reflection":false,"reflection_opacity":75,"padding-block-start":100,"padding-block-end":72}},"product_list_fa6P9H":{"type":"product-list","blocks":{"static-header":{"type":"_product-list-content","name":"t:names.header","static":true,"settings":{"content_direction":"row","vertical_on_mobile":false,"horizontal_alignment":"space-between","vertical_alignment":"flex-end","align_baseline":true,"horizontal_alignment_flex_direction_column":"flex-start","vertical_alignment_flex_direction_column":"center","gap":12,"width":"fill","custom_width":100,"width_mobile":"fill","custom_width_mobile":100,"height":"fit","custom_height":100,"background_media":"none","background_color":"","video_position":"cover","background_image_position":"cover","border":"none","border_width":1,"border_opacity":100,"border_color":"","border_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{"product_list_text_YFtzcL":{"type":"_product-list-text","name":"t:names.collection_title","settings":{"text":"<h3>{{ closest.collection.title }}<\/h3>","width":"fit-content","max_width":"normal","alignment":"left","type_preset":"h4","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"pretty","text_color":"","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"product_list_button_MWeP9V":{"type":"_product-list-button","name":"t:names.product_list_button","settings":{"label":"View all","open_in_new_tab":false,"style_class":"link","custom_button_background":"{{ settings.color_palette.foreground }}","custom_button_text":"{{ settings.color_palette.background }}","custom_button_border":"{{ settings.color_palette.background }}","link_text_color":"","width":"fit-content","custom_width":100,"width_mobile":"fit-content","custom_width_mobile":100},"blocks":{}}},"block_order":["product_list_text_YFtzcL","product_list_button_MWeP9V"]},"static-product-card":{"type":"_product-card","name":"t:names.product_card","static":true,"settings":{"product_card_gap":4,"background_color":"","border":"none","border_width":1,"border_opacity":100,"border_color":"","border_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{"product_card_gallery_677WP3":{"type":"_product-card-gallery","name":"t:names.product_card_media","settings":{"image_ratio":"adapt","border":"none","border_width":1,"border_opacity":100,"border_color":"","border_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"product_title_YXxMTj":{"type":"product-title","name":"t:names.product_title","settings":{"width":"100%","max_width":"normal","alignment":"left","type_preset":"rte","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"pretty","text_color":"","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":4,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"price_JQzVV4":{"type":"price","name":"t:names.product_price","settings":{"show_sale_price_first":true,"show_installments":false,"show_tax_info":false,"type_preset":"h6","width":"100%","alignment":"left","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","text_color":"","padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}}},"block_order":["product_card_gallery_677WP3","product_title_YXxMTj","price_JQzVV4"]}},"name":"t:names.product_list","settings":{"collection":"all","layout_type":"grid","carousel_on_mobile":false,"max_products":8,"columns":4,"mobile_columns":"2","mobile_card_size":"60cqw","columns_gap":8,"rows_gap":24,"icons_style":"arrow","icons_shape":"none","section_width":"page-width","horizontal_alignment":"flex-start","gap":28,"background_color":"{{ settings.color_palette.background }}","padding-block-start":48,"padding-block-end":48}}},"order":["hero_jVaWmY","product_list_fa6P9H"]}
+{
+  "sections": {
+    "hero_jVaWmY": {
+      "type": "hero",
+      "blocks": {
+        "text_YLPk4p": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h1>Who We Are</h1>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h1",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.background }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "text_hero_copy": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>Vectra partners with organizations to turn ESG ambition into operating reality — from strategy and disclosure to climate, social impact, and governance programs that last.</p>",
+            "width": "fit-content",
+            "max_width": "narrow",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.background }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 8,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "button_H9gpTf": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "Learn How We Can Help",
+            "link": "shopify://collections/all",
+            "open_in_new_tab": false,
+            "style_class": "button-custom",
+            "custom_button_background": "{{ settings.color_palette.foreground }}",
+            "custom_button_text": "{{ settings.color_palette.background }}",
+            "custom_button_border": "{{ settings.color_palette.foreground }}",
+            "link_text_color": "",
+            "width": "custom",
+            "custom_width": 29,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": ["text_YLPk4p", "text_hero_copy"],
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "video",
+        "video_1": "shopify://files/videos/Website - Hero Banner.mp4",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "flex-end",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "flex-end",
+        "gap": 16,
+        "section_width": "page-width",
+        "section_height": "large",
+        "section_height_custom": 50,
+        "background_color": "rgba(0,0,0,0)",
+        "toggle_overlay": true,
+        "overlay_color": "#12121299",
+        "overlay_style": "solid",
+        "gradient_direction": "to bottom",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 80,
+        "padding-block-end": 120
+      }
+    },
+    "hp_cta": {
+      "type": "hp-cta-bar",
+      "settings": {
+        "badge_text": "VECTRA",
+        "heading": "Proudly trusted by global businesses",
+        "button_label": "Explore Services",
+        "background_color": "#ffffff",
+        "padding_y": 56
+      }
+    },
+    "hp_icons": {
+      "type": "hp-icon-nav",
+      "blocks": {
+        "icon_home": { "type": "item", "settings": { "icon": "building", "label": "Home" } },
+        "icon_services": { "type": "item", "settings": { "icon": "chart", "label": "Services" } },
+        "icon_why": { "type": "item", "settings": { "icon": "shield", "label": "Why Us" } },
+        "icon_testimonials": { "type": "item", "settings": { "icon": "users", "label": "Testimonials" } },
+        "icon_faq": { "type": "item", "settings": { "icon": "report", "label": "FAQ" } },
+        "icon_contact": { "type": "item", "settings": { "icon": "handshake", "label": "Contact" } }
+      },
+      "block_order": ["icon_home", "icon_services", "icon_why", "icon_testimonials", "icon_faq", "icon_contact"],
+      "settings": {
+        "heading": "Service areas",
+        "background_color": "#f4f6f8",
+        "padding_y": 20
+      }
+    },
+    "hp_impact": {
+      "type": "hp-impact",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "icon": "globe",
+            "stat": "30+",
+            "heading": "Countries reached"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "icon": "chart",
+            "stat": "20+",
+            "heading": "Projects completed"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "icon": "users",
+            "stat": "50+",
+            "heading": "Professionals"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "icon": "energy",
+            "stat": "10+",
+            "heading": "Ongoing projects"
+          }
+        }
+      },
+      "block_order": ["stat_1", "stat_2", "stat_3", "stat_4"],
+      "settings": {
+        "heading": "Enabling global infrastructure impact.",
+        "subheading": "",
+        "block_heading": "Partnership with sustainability, our ESG implementation",
+        "text": "",
+        "button_label": "Learn More",
+        "background_color": "#ffffff",
+        "padding_y": 72
+      }
+    },
+    "hp_info": {
+      "type": "hp-infographic",
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "stat": "30+" } },
+        "s2": { "type": "stat", "settings": { "stat": "100+" } },
+        "s3": { "type": "stat", "settings": { "stat": "500+" } }
+      },
+      "block_order": ["s1", "s2", "s3"],
+      "settings": {
+        "core_text": "Your Trusted ESG Partner",
+        "background_color": "#ffffff",
+        "padding_y": 64
+      }
+    },
+    "hp_solutions": {
+      "type": "hp-solutions",
+      "blocks": {
+        "sol_1": { "type": "card", "settings": { "eyebrow": "Advisory", "title": "ESG Strategy" } },
+        "sol_2": { "type": "card", "settings": { "eyebrow": "Climate", "title": "Climate Transition" } },
+        "sol_3": { "type": "card", "settings": { "eyebrow": "Disclosure", "title": "Sustainability Reporting" } },
+        "sol_4": { "type": "card", "settings": { "eyebrow": "People", "title": "Social Impact" } }
+      },
+      "block_order": ["sol_1", "sol_2", "sol_3", "sol_4"],
+      "settings": {
+        "eyebrow": "Solutions",
+        "heading": "A multi-insight solution for you and your team.",
+        "button_label": "Learn More",
+        "background_color": "#00263d",
+        "padding_y": 72
+      }
+    },
+    "hp_cases": {
+      "type": "hp-case-studies",
+      "blocks": {
+        "f1": { "type": "filter", "settings": { "label": "Location", "key": "location", "options": "Europe, Americas, APAC" } },
+        "f2": { "type": "filter", "settings": { "label": "Industry", "key": "industry", "options": "Energy, Manufacturing, Finance" } },
+        "f3": { "type": "filter", "settings": { "label": "Price", "key": "price", "options": "Advisory, Program, Retainer" } }
+      },
+      "block_order": ["f1", "f2", "f3"],
+      "settings": {
+        "heading": "Our different services Portfolio",
+        "text": "",
+        "search_placeholder": "Search services",
+        "post_limit": 8,
+        "background_color": "#f4f6f8",
+        "padding_y": 72
+      }
+    },
+    "hp_topics": {
+      "type": "hp-topics",
+      "blocks": {
+        "tab_all": { "type": "tab", "settings": { "label": "All topics", "tab_id": "all" } },
+        "tab_sus": { "type": "tab", "settings": { "label": "Sustainability", "tab_id": "sustainability" } },
+        "tab_esg": { "type": "tab", "settings": { "label": "ESG", "tab_id": "esg" } },
+        "a1": {
+          "type": "article",
+          "settings": {
+            "category": "Climate",
+            "title": "Building a credible climate transition plan",
+            "excerpt": "How leading companies connect targets, capital, and operating decisions.",
+            "date": "Aug 12, 2026",
+            "tab": "all"
+          }
+        },
+        "a2": {
+          "type": "article",
+          "settings": {
+            "category": "Governance",
+            "title": "What boards need from ESG reporting now",
+            "excerpt": "A practical view of assurance, controls, and decision-useful metrics.",
+            "date": "Jul 28, 2026",
+            "tab": "esg"
+          }
+        },
+        "a3": {
+          "type": "article",
+          "settings": {
+            "category": "Social",
+            "title": "Designing impact programs that scale",
+            "excerpt": "From community investment to workforce strategy with measurable outcomes.",
+            "date": "Jul 04, 2026",
+            "tab": "sustainability"
+          }
+        },
+        "a4": {
+          "type": "article",
+          "settings": {
+            "category": "Strategy",
+            "title": "From materiality to operating model",
+            "excerpt": "Turning assessment findings into roles, processes, and investment choices.",
+            "date": "Jun 19, 2026",
+            "tab": "all"
+          }
+        },
+        "a5": {
+          "type": "article",
+          "settings": {
+            "category": "Insights",
+            "title": "The disclosure calendar for the year ahead",
+            "excerpt": "Key reporting milestones and how teams are preparing.",
+            "date": "May 30, 2026",
+            "tab": "esg"
+          }
+        },
+        "a6": {
+          "type": "article",
+          "settings": {
+            "category": "Climate",
+            "title": "Nature-positive supply chains in practice",
+            "excerpt": "Where procurement, data, and supplier engagement actually move the needle.",
+            "date": "Apr 11, 2026",
+            "tab": "sustainability"
+          }
+        }
+      },
+      "block_order": ["tab_all", "tab_sus", "tab_esg", "a1", "a2", "a3", "a4", "a5", "a6"],
+      "settings": {
+        "heading": "Recent Topics",
+        "post_limit": 4,
+        "background_color": "#ffffff",
+        "padding_y": 72
+      }
+    },
+    "hp_partners": {
+      "type": "hp-partners",
+      "blocks": {
+        "p1": { "type": "partner", "settings": { "name": "OTTO", "industry": "Retail" } },
+        "p2": { "type": "partner", "settings": { "name": "IKEA", "industry": "Retail" } },
+        "p3": { "type": "partner", "settings": { "name": "Kodak", "industry": "Manufacturing" } }
+      },
+      "block_order": ["p1", "p2", "p3"],
+      "settings": {
+        "heading": "Everything you need for your sustainability success",
+        "text": "Join the organizations building responsible growth with Vectra.",
+        "button_label": "Request a demo",
+        "background_color": "#00263d",
+        "padding_y": 72
+      }
+    },
+    "hp_articles": {
+      "type": "hp-articles",
+      "blocks": {
+        "art1": { "type": "article", "settings": { "title": "Building a credible climate transition plan", "date": "Aug 12, 2026" } },
+        "art2": { "type": "article", "settings": { "title": "What boards need from ESG reporting now", "date": "Jul 28, 2026" } },
+        "art3": { "type": "article", "settings": { "title": "Designing impact programs that scale", "date": "Jul 04, 2026" } }
+      },
+      "block_order": ["art1", "art2", "art3"],
+      "settings": {
+        "heading": "Our Latest Articles",
+        "button_label": "See All Articles",
+        "background_color": "#ffffff",
+        "padding_y": 72
+      }
+    },
+    "hp_faq": {
+      "type": "hp-faq",
+      "blocks": {
+        "q1": {
+          "type": "item",
+          "settings": {
+            "question": "How do we get started with Vectra?",
+            "answer": "<p>Share your current ESG priorities and we’ll match you with a specialist who can scope a practical next step.</p>"
+          }
+        },
+        "q2": {
+          "type": "item",
+          "settings": {
+            "question": "Do you work with global reporting standards?",
+            "answer": "<p>Yes. We support ISSB, CSRD, GRI, TCFD-aligned climate work, and sector-specific disclosure needs.</p>"
+          }
+        },
+        "q3": {
+          "type": "item",
+          "settings": {
+            "question": "Can you support both strategy and implementation?",
+            "answer": "<p>Our teams stay with you from ambition setting through operating model, data, and program delivery.</p>"
+          }
+        },
+        "q4": {
+          "type": "item",
+          "settings": {
+            "question": "How are engagements typically structured?",
+            "answer": "<p>Most work begins with a focused diagnostic, then a scoped program with clear milestones, owners, and outcomes.</p>"
+          }
+        }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"],
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "contact_heading": "Quick Support",
+        "contact_text": "Talk to a real human.",
+        "phone": "+1 (800) 555-0148",
+        "email": "hello@vectra.example",
+        "address": "120 Sustainability Ave\nNew York, NY",
+        "background_color": "#ffffff",
+        "padding_y": 72
+      }
+    },
+    "hp_form": {
+      "type": "hp-contact-form",
+      "settings": {
+        "heading": "Everything your Vectra relationship. In one place.",
+        "text": "Tell us about your ESG priorities and a specialist will follow up.",
+        "form_heading": "Get in Touch",
+        "button_label": "Send Message",
+        "background_gradient": "linear-gradient(180deg, #00263d 0%, #1a6b3c 52%, #54bd01 100%)",
+        "padding_y": 80
+      }
+    },
+    "hp_careers": {
+      "type": "hp-careers",
+      "settings": {
+        "heading": "Join Our Team",
+        "text": "Help organizations turn sustainability ambition into lasting impact.",
+        "button_label": "View Job Openings",
+        "background_color": "#ffffff",
+        "padding_y": 88
+      }
+    }
+  },
+  "order": [
+    "hero_jVaWmY",
+    "hp_cta",
+    "hp_icons",
+    "hp_impact",
+    "hp_info",
+    "hp_solutions",
+    "hp_cases",
+    "hp_topics",
+    "hp_partners",
+    "hp_articles",
+    "hp_faq",
+    "hp_form",
+    "hp_careers"
+  ]
+}

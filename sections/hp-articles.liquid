@@ -1,0 +1,92 @@
+{% render 'homepage-styles' %}
+
+{%- liquid
+  assign blog = section.settings.blog
+  assign limit = section.settings.post_limit | default: 3
+-%}
+
+<div
+  class="section-background hp-bg color-custom-{{ section.id }}"
+  style="--hp-section-bg: {{ section.settings.background_color }};"
+></div>
+<div class="section section--page-width hp">
+  <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
+    <h2 class="hp-title" style="margin-bottom: 28px;">{{ section.settings.heading | escape }}</h2>
+
+    <div class="hp-articles">
+      {%- if blog != blank and blog.articles_count > 0 -%}
+        {%- for article in blog.articles limit: limit -%}
+          <a class="hp-article" href="{{ article.url }}">
+            <div class="hp-media hp-article__media">
+              {% render 'hp-media', image: article.image, alt: article.title, placeholder: 'collection-5' %}
+            </div>
+            <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%b %d, %Y' }}</time>
+            <h3>{{ article.title | escape }}</h3>
+            <span class="hp-card__more">Read More</span>
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for block in section.blocks -%}
+          <a class="hp-article" href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>
+            <div class="hp-media hp-article__media">
+              {% render 'hp-media', image: block.settings.image, alt: block.settings.title, placeholder: 'collection-5' %}
+            </div>
+            {%- if block.settings.date != blank -%}
+              <time>{{ block.settings.date | escape }}</time>
+            {%- endif -%}
+            <h3>{{ block.settings.title | escape }}</h3>
+            <span class="hp-card__more">Read More</span>
+          </a>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.button_label != blank -%}
+      <div class="hp-articles__cta">
+        <a class="hp-btn" href="{{ section.settings.button_link | default: '#' }}">
+          {{ section.settings.button_label | escape }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage articles",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "article",
+      "name": "Article",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "date", "label": "Date", "default": "Aug 12, 2026" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Building a credible climate transition plan" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our Latest Articles" },
+    { "type": "blog", "id": "blog", "label": "Blog" },
+    { "type": "range", "id": "post_limit", "label": "Posts", "min": 3, "max": 6, "step": 1, "default": 3 },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "See All Articles" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" },
+    { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 72 }
+  ],
+  "presets": [
+    {
+      "name": "Homepage articles",
+      "blocks": [
+        { "type": "article", "settings": { "title": "Building a credible climate transition plan", "date": "Aug 12, 2026" } },
+        { "type": "article", "settings": { "title": "What boards need from ESG reporting now", "date": "Jul 28, 2026" } },
+        { "type": "article", "settings": { "title": "Designing impact programs that scale", "date": "Jul 04, 2026" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

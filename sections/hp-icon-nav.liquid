@@ -1,0 +1,86 @@
+{% render 'homepage-styles' %}
+
+<div
+  class="section-background hp-bg color-custom-{{ section.id }}"
+  style="--hp-section-bg: {{ section.settings.background_color }};"
+></div>
+<div class="section section--page-width hp">
+  <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
+    <nav class="hp-icons" aria-label="{{ section.settings.heading | escape }}">
+      {%- for block in section.blocks -%}
+        <a
+          class="hp-icon"
+          href="{{ block.settings.link | default: '#' }}"
+          {{ block.shopify_attributes }}
+        >
+          <span class="hp-icon__mark">
+            {%- if block.settings.icon_image != blank -%}
+              {{
+                block.settings.icon_image
+                | image_url: width: 80
+                | image_tag: alt: block.settings.label, loading: 'lazy', width: 32, height: 32
+              }}
+            {%- else -%}
+              {% render 'hp-icon', name: block.settings.icon %}
+            {%- endif -%}
+          </span>
+          <span>{{ block.settings.label | escape }}</span>
+        </a>
+      {%- endfor -%}
+    </nav>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage icon nav",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "globe", "label": "Globe" },
+            { "value": "chart", "label": "Chart" },
+            { "value": "users", "label": "People" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "building", "label": "Building" },
+            { "value": "energy", "label": "Energy" },
+            { "value": "report", "label": "Report" },
+            { "value": "handshake", "label": "Handshake" }
+          ],
+          "default": "leaf"
+        },
+        { "type": "image_picker", "id": "icon_image", "label": "Custom icon" },
+        { "type": "text", "id": "label", "label": "Label", "default": "ESG" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Accessibility label", "default": "Service areas" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#f4f6f8" },
+    { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 8, "max": 80, "step": 4, "unit": "px", "default": 20 }
+  ],
+  "presets": [
+    {
+      "name": "Homepage icon nav",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "leaf", "label": "ESG" } },
+        { "type": "item", "settings": { "icon": "globe", "label": "Impact" } },
+        { "type": "item", "settings": { "icon": "chart", "label": "Strategy" } },
+        { "type": "item", "settings": { "icon": "shield", "label": "Governance" } },
+        { "type": "item", "settings": { "icon": "report", "label": "Reporting" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,85 @@
+{% render 'homepage-styles' %}
+
+{%- assign form_id = 'HomepageContact-' | append: section.id -%}
+
+<div
+  class="section-background hp-bg color-custom-{{ section.id }}"
+  style="--hp-section-bg: {{ section.settings.background_gradient }};"
+></div>
+<div class="section section--page-width hp">
+  <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
+    <div class="hp-lead">
+      <div class="hp-lead__copy">
+        <h2 class="hp-title">{{ section.settings.heading | escape }}</h2>
+        {%- if section.settings.text != blank -%}
+          <p class="hp-copy">{{ section.settings.text | escape }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="hp-form">
+        <h2>{{ section.settings.form_heading | escape }}</h2>
+        {%- form 'contact', id: form_id -%}
+          <input type="hidden" name="contact[id]" value="{{ form_id }}">
+
+          {%- liquid
+            assign form_matches = false
+            if form.id == form_id or form.id == blank
+              assign form_matches = true
+            endif
+          -%}
+
+          {%- if form.errors and form_matches -%}
+            <p class="hp-form__note hp-form__note--err">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+          {%- endif -%}
+          {%- if form.posted_successfully? and form_matches -%}
+            <p class="hp-form__note hp-form__note--ok">Thanks — we’ll be in touch shortly.</p>
+          {%- endif -%}
+
+          <div class="hp-form__row">
+            <label class="visually-hidden" for="{{ form_id }}-first">First name</label>
+            <input class="hp-field" id="{{ form_id }}-first" type="text" name="contact[first_name]" placeholder="First name" value="{% if customer %}{{ customer.first_name }}{% endif %}">
+            <label class="visually-hidden" for="{{ form_id }}-last">Last name</label>
+            <input class="hp-field" id="{{ form_id }}-last" type="text" name="contact[last_name]" placeholder="Last name" value="{% if customer %}{{ customer.last_name }}{% endif %}">
+          </div>
+          <label class="visually-hidden" for="{{ form_id }}-email">Email</label>
+          <input
+            class="hp-field"
+            id="{{ form_id }}-email"
+            type="email"
+            name="contact[email]"
+            placeholder="Email"
+            required
+            value="{% if customer %}{{ customer.email }}{% endif %}"
+          >
+          <label class="visually-hidden" for="{{ form_id }}-phone">Phone</label>
+          <input class="hp-field" id="{{ form_id }}-phone" type="tel" name="contact[phone]" placeholder="Phone" value="{% if customer %}{{ customer.phone }}{% endif %}">
+          <label class="visually-hidden" for="{{ form_id }}-message">Message</label>
+          <textarea class="hp-field" id="{{ form_id }}-message" name="contact[body]" placeholder="Message"></textarea>
+          <button class="hp-btn" type="submit">{{ section.settings.button_label | escape }}</button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage contact form",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Everything your Vectra relationship. In one place." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Tell us about your ESG priorities and a specialist will follow up." },
+    { "type": "text", "id": "form_heading", "label": "Form heading", "default": "Get in Touch" },
+    { "type": "text", "id": "button_label", "label": "Submit label", "default": "Send Message" },
+    {
+      "type": "text",
+      "id": "background_gradient",
+      "label": "Background",
+      "default": "linear-gradient(180deg, #00263d 0%, #1a6b3c 52%, #54bd01 100%)"
+    },
+    { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "presets": [{ "name": "Homepage contact form" }]
+}
+{% endschema %}

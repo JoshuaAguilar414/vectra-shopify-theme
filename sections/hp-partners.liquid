@@ -1,0 +1,85 @@
+{% render 'homepage-styles' %}
+
+<div
+  class="section-background hp-bg color-custom-{{ section.id }}"
+  style="--hp-section-bg: {{ section.settings.background_color }};"
+></div>
+<div class="section section--page-width hp hp--navy">
+  <div class="hp-wrap hp-partners" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
+    <div class="hp-partners__intro">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="hp-title">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="hp-copy">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a class="hp-btn" href="{{ section.settings.button_link | default: '#' }}">
+          {{ section.settings.button_label | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="hp-partners__grid">
+      {%- for block in section.blocks -%}
+        <a
+          class="hp-partner"
+          href="{{ block.settings.link | default: '#' }}"
+          {{ block.shopify_attributes }}
+        >
+          {%- if block.settings.logo != blank -%}
+            {{
+              block.settings.logo
+              | image_url: width: 400
+              | image_tag: alt: block.settings.name, loading: 'lazy'
+            }}
+          {%- else -%}
+            <strong style="font-size: 1.75rem; letter-spacing: 0.04em;">{{ block.settings.name | escape }}</strong>
+          {%- endif -%}
+          {%- if block.settings.industry != blank -%}
+            <span>{{ block.settings.industry | escape }}</span>
+          {%- endif -%}
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage partners",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 9,
+  "blocks": [
+    {
+      "type": "partner",
+      "name": "Partner",
+      "settings": [
+        { "type": "image_picker", "id": "logo", "label": "Logo" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Partner" },
+        { "type": "text", "id": "industry", "label": "Industry label", "default": "Manufacturing" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Everything you need for your sustainability success" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Join the organizations building responsible growth with Vectra." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Request a demo" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#00263d" },
+    { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 72 }
+  ],
+  "presets": [
+    {
+      "name": "Homepage partners",
+      "blocks": [
+        { "type": "partner", "settings": { "name": "OTTO", "industry": "Retail" } },
+        { "type": "partner", "settings": { "name": "IKEA", "industry": "Retail" } },
+        { "type": "partner", "settings": { "name": "Kodak", "industry": "Manufacturing" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
