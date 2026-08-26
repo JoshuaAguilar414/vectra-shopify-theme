@@ -39,9 +39,9 @@
     "hp_trusted": {
       "type": "hp-trusted",
       "settings": {
-        "heading": "Trusted by the world’s leading corporations & investors",
+        "heading": "Your Trusted ESG Partner",
         "badge_alt": "Trusted by 500+ Companies",
-        "button_label": "Explore solutions",
+        "button_label": "Explore Solutions",
         "background_color": "#ffffff",
         "padding_y": 28
       }
@@ -113,12 +113,12 @@
       },
       "block_order": ["sol_1", "sol_2", "sol_3", "sol_4"],
       "settings": {
-        "eyebrow": "VECTRA Solutions",
+        "eyebrow": "Specialized Features",
         "heading": "A multi-benefit solution for you and your team, fast.",
         "text": "Practical solutions built for implementation — from operational resilience to ESG capability.",
-        "intro_button_label": "Contact us",
-        "button_label": "See all benefits",
-        "background_color": "#00263d",
+        "intro_button_label": "Get started today",
+        "button_label": "View all features",
+        "background_color": "#0a1f30",
         "padding_y": 72
       }
     },
@@ -129,8 +129,8 @@
           "type": "pillar",
           "settings": {
             "icon_asset": "hp-pillar-1.svg",
-            "stat": "50+",
-            "heading": "Projects worldwide",
+            "stat": "20+",
+            "heading": "Partners",
             "text": ""
           }
         },
@@ -138,8 +138,8 @@
           "type": "pillar",
           "settings": {
             "icon_asset": "hp-pillar-2.svg",
-            "stat": "25+",
-            "heading": "Countries",
+            "stat": "10+",
+            "heading": "Years",
             "text": ""
           }
         },
@@ -147,8 +147,8 @@
           "type": "pillar",
           "settings": {
             "icon_asset": "hp-pillar-3.svg",
-            "stat": "15+",
-            "heading": "Years of experience",
+            "stat": "35+",
+            "heading": "Projects",
             "text": ""
           }
         },
@@ -156,16 +156,17 @@
           "type": "pillar",
           "settings": {
             "icon_asset": "hp-pillar-4.svg",
-            "stat": "500+",
-            "heading": "Clients served",
+            "stat": "11+",
+            "heading": "Countries",
             "text": ""
           }
         }
       },
       "block_order": ["p1", "p2", "p3", "p4"],
       "settings": {
-        "heading": "Enabling global business impact.",
-        "feature_heading": "Sustainability with accountability. Built for impact that lasts.",
+        "eyebrow": "ESG Partnership",
+        "heading": "Enabling a sustainable impact",
+        "feature_heading": "Partnership with sustainability, built for implementation",
         "text": "We combine human expertise, an ecosystem of specialists, AI-enabled intelligence, and structured execution—then stay accountable for the outcomes that matter.",
         "button_label": "Learn more",
         "background_color": "#ffffff",
@@ -177,15 +178,15 @@
       "blocks": {
         "f1": {
           "type": "filter",
-          "settings": { "label": "Regulation", "key": "regulation", "options": "CSRD, CSDDD, GRI" }
+          "settings": { "label": "Category", "key": "regulation", "options": "CSRD, CSDDD, GRI" }
         },
         "f2": {
           "type": "filter",
-          "settings": { "label": "Stage", "key": "stage", "options": "Foundation, Advanced" }
+          "settings": { "label": "Industry", "key": "stage", "options": "Foundation, Advanced" }
         },
         "f3": {
           "type": "filter",
-          "settings": { "label": "Role", "key": "role", "options": "Practitioner, Leader" }
+          "settings": { "label": "Region", "key": "role", "options": "Practitioner, Leader" }
         },
         "c1": {
           "type": "course",
@@ -248,7 +249,7 @@
       "settings": {
         "heading": "Don’t Know Where To Start?",
         "text": "Relevant Topics",
-        "search_placeholder": "Search courses, assessments and bundles",
+        "search_placeholder": "Search",
         "background_color": "#f4f6f8",
         "padding_y": 72
       }
@@ -256,9 +257,9 @@
     "hp_topics": {
       "type": "hp-topics",
       "blocks": {
-        "t1": { "type": "tab", "settings": { "label": "Case study", "tab_id": "all" } },
+        "t1": { "type": "tab", "settings": { "label": "News feeds", "tab_id": "all" } },
         "t2": { "type": "tab", "settings": { "label": "By Expertise", "tab_id": "expertise" } },
-        "t3": { "type": "tab", "settings": { "label": "Article", "tab_id": "article" } },
+        "t3": { "type": "tab", "settings": { "label": "News", "tab_id": "article" } },
         "a1": {
           "type": "article",
           "settings": {
@@ -320,10 +321,10 @@
       },
       "block_order": ["p1", "p2", "p3"],
       "settings": {
-        "heading": "Everything you need to ensure your supply chain transparency.",
+        "heading": "Our region-wide network of implementation partners.",
         "text": "",
         "button_label": "Expand solutions",
-        "background_color": "#00263d",
+        "background_color": "#0a1f30",
         "padding_y": 72
       }
     },
@@ -405,8 +406,8 @@
       },
       "block_order": ["art1", "art2", "art3"],
       "settings": {
-        "heading": "Our latest Articles",
-        "button_label": "See All Articles →",
+        "heading": "Our Latest Articles",
+        "button_label": "See all articles",
         "background_color": "#ffffff",
         "padding_y": 72
       }
@@ -417,7 +418,7 @@
         "eyebrow": "Careers",
         "heading": "Join Our Team",
         "text": "At VECTRA International, we believe our greatest asset is our people. We are always looking for passionate, driven individuals eager to make an impact and grow their careers with us.",
-        "button_label": "See open positions",
+        "button_label": "Check out current vacancies",
         "background_color": "#ffffff",
         "padding_y": 88
       }
@@ -428,8 +429,8 @@
         "heading": "Everything your VECTRA relationship, in one place.",
         "text": "Access Marketplace purchases, active services, VSuites, current retainers, billing, documentation, and support from a single, secure account.",
         "form_heading": "Get In Touch",
-        "button_label": "Send Message",
-        "background_gradient": "linear-gradient(180deg, #00263d 0%, #1a6b3c 52%, #54bd01 100%)",
+        "button_label": "Submit",
+        "background_gradient": "linear-gradient(180deg, #72bf44 0%, #1f5c28 48%, #0a1f30 100%)",
         "padding_y": 80
       }
     }

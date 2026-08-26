@@ -36,10 +36,10 @@
           {%- endif -%}
 
           <div class="hp-form__row">
-            <label class="visually-hidden" for="{{ form_id }}-first">First Name*</label>
-            <input class="hp-field" id="{{ form_id }}-first" type="text" name="contact[first_name]" placeholder="First Name*" required value="{% if customer %}{{ customer.first_name }}{% endif %}">
-            <label class="visually-hidden" for="{{ form_id }}-last">Last Name*</label>
-            <input class="hp-field" id="{{ form_id }}-last" type="text" name="contact[last_name]" placeholder="Last Name*" required value="{% if customer %}{{ customer.last_name }}{% endif %}">
+            <label class="visually-hidden" for="{{ form_id }}-first">Name*</label>
+            <input class="hp-field" id="{{ form_id }}-first" type="text" name="contact[first_name]" placeholder="Name*" required value="{% if customer %}{{ customer.first_name }}{% endif %}">
+            <label class="visually-hidden" for="{{ form_id }}-last">Surname*</label>
+            <input class="hp-field" id="{{ form_id }}-last" type="text" name="contact[last_name]" placeholder="Surname*" required value="{% if customer %}{{ customer.last_name }}{% endif %}">
           </div>
           <div class="hp-form__row">
             <label class="visually-hidden" for="{{ form_id }}-email">Email*</label>
@@ -52,17 +52,11 @@
               required
               value="{% if customer %}{{ customer.email }}{% endif %}"
             >
-            <label class="visually-hidden" for="{{ form_id }}-phone">Phone Number*</label>
-            <input class="hp-field" id="{{ form_id }}-phone" type="tel" name="contact[phone]" placeholder="Phone Number*" required value="{% if customer %}{{ customer.phone }}{% endif %}">
+            <label class="visually-hidden" for="{{ form_id }}-phone">Phone*</label>
+            <input class="hp-field" id="{{ form_id }}-phone" type="tel" name="contact[phone]" placeholder="Phone*" required value="{% if customer %}{{ customer.phone }}{% endif %}">
           </div>
-          <div class="hp-form__row">
-            <label class="visually-hidden" for="{{ form_id }}-job">Job Title*</label>
-            <input class="hp-field" id="{{ form_id }}-job" type="text" name="contact[job_title]" placeholder="Job Title*" required>
-            <label class="visually-hidden" for="{{ form_id }}-company">Company*</label>
-            <input class="hp-field" id="{{ form_id }}-company" type="text" name="contact[company]" placeholder="Company*" required>
-          </div>
-          <label class="visually-hidden" for="{{ form_id }}-message">Message Here...</label>
-          <textarea class="hp-field" id="{{ form_id }}-message" name="contact[body]" placeholder="Message Here..."></textarea>
+          <label class="visually-hidden" for="{{ form_id }}-message">Message</label>
+          <textarea class="hp-field" id="{{ form_id }}-message" name="contact[body]" placeholder="Message"></textarea>
           <button class="hp-btn" type="submit">
             {{ section.settings.button_label | escape }}
             <img src="{{ 'hp-form-arrow.svg' | asset_url }}" alt="" width="16" height="10" aria-hidden="true">
@@ -87,7 +81,7 @@
       "type": "text",
       "id": "background_gradient",
       "label": "Background",
-      "default": "linear-gradient(180deg, #00263d 0%, #1a6b3c 52%, #54bd01 100%)"
+      "default": "linear-gradient(180deg, #72bf44 0%, #1f5c28 48%, #0a1f30 100%)"
     },
     { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 80 }
   ],

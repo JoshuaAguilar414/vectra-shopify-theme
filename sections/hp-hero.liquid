@@ -41,6 +41,7 @@
                 {%- if block.settings.text != blank -%}
                   <p>{{ block.settings.text | escape }}</p>
                 {%- endif -%}
+                <a class="hp-btn" href="{{ section.settings.float_link | default: '#why' }}">Learn more</a>
               </div>
             </div>
           {%- endfor -%}
@@ -51,6 +52,7 @@
             <div class="hp-hero__content">
               <h1>{{ section.settings.heading | escape }}</h1>
               <p>{{ section.settings.text | escape }}</p>
+              <a class="hp-btn" href="{{ section.settings.float_link | default: '#why' }}">Learn more</a>
             </div>
           </div>
         {%- endif -%}
@@ -77,34 +79,30 @@
     {%- endif -%}
   </homepage-slider>
 
-  <div class="hp-hero__topbar">
-    <div class="hp-hero__glass">
+  <div class="hp-hero__chrome">
+    <div class="hp-hero__util">
+      <a href="{{ routes.account_register_url }}">Join us</a>
+      <a href="{{ routes.account_login_url }}">Log in</a>
+      <span>ENG</span>
+    </div>
+    <div class="hp-hero__topbar">
       <a class="hp-hero__logo" href="{{ routes.root_url }}">
         <img src="{{ 'hp-logo.png' | asset_url }}" alt="{{ shop.name | escape }}" width="161" height="42">
       </a>
 
       <nav class="hp-hero__nav" aria-label="Primary">
-        <a href="{{ section.settings.link_help | default: '#solutions' }}">Solutions</a>
-        <a href="{{ section.settings.link_market | default: '#marketplace' }}">Services</a>
         <a href="{{ section.settings.link_dna | default: '#why' }}">Who We Are</a>
-        <a href="{{ section.settings.link_resources | default: '#articles' }}">Resources</a>
+        <a href="{{ section.settings.link_help | default: '#solutions' }}">Expertise</a>
+        <a href="{{ section.settings.link_market | default: '#marketplace' }}">Solutions</a>
+        <a href="{{ section.settings.link_resources | default: '#articles' }}">Insights</a>
+        <a href="{{ section.settings.link_news | default: '#topics' }}">News</a>
+        <a href="{{ section.settings.link_careers | default: '#careers' }}">Careers</a>
       </nav>
-      <a class="hp-hero__cta" href="{{ section.settings.link_contact | default: '#contact' }}">Contact Us</a>
-    </div>
 
-    <div class="hp-hero__actions">
-      <button class="hp-hero__chip" type="button" aria-label="Language">
-        <span>ENG</span>
-        <img src="{{ 'hp-lang.png' | asset_url }}" alt="" width="22" height="22">
-      </button>
-      <a class="hp-hero__chip" href="{{ routes.account_login_url }}">
-        <span>Log In</span>
-        <img src="{{ 'hp-login.png' | asset_url }}" alt="" width="18" height="20">
-      </a>
-      <a class="hp-hero__chip" href="{{ routes.account_register_url }}">
-        <span>Join us</span>
-        <img src="{{ 'hp-join.png' | asset_url }}" alt="" width="18" height="18">
-      </a>
+      <div class="hp-hero__actions">
+        <a class="hp-hero__portal" href="{{ routes.account_login_url }}">Client Portal</a>
+        <a class="hp-hero__cta" href="{{ section.settings.link_contact | default: '#contact' }}">Contact</a>
+      </div>
     </div>
   </div>
 
@@ -154,7 +152,9 @@
     { "type": "url", "id": "link_dna", "label": "Our DNA link" },
     { "type": "url", "id": "link_help", "label": "How We Help link" },
     { "type": "url", "id": "link_market", "label": "Marketplace link" },
-    { "type": "url", "id": "link_resources", "label": "Resources link" },
+    { "type": "url", "id": "link_resources", "label": "Insights link" },
+    { "type": "url", "id": "link_news", "label": "News link" },
+    { "type": "url", "id": "link_careers", "label": "Careers link" },
     { "type": "url", "id": "link_contact", "label": "Contact link" }
   ],
   "presets": [

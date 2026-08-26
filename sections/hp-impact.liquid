@@ -20,6 +20,9 @@
       </homepage-reveal>
       <homepage-reveal data-from="right" data-delay="2">
         <div class="hp-impact__copy">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="hp-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          {%- endif -%}
           {%- if section.settings.feature_heading != blank -%}
             <h3 class="hp-title">{{ section.settings.feature_heading | escape }}</h3>
           {%- endif -%}
