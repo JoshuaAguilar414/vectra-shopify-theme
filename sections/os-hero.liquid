@@ -1,0 +1,88 @@
+{% render 'homepage-styles' %}
+
+<div class="os-hero hp" id="os-top">
+  <div class="os-hero__media">
+    {%- if section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 2400
+        | image_tag: class: 'os-hero__img', alt: section.settings.heading, fetchpriority: 'high'
+      }}
+    {%- else -%}
+      <video
+        class="os-hero__video"
+        autoplay
+        muted
+        loop
+        playsinline
+        poster="{{ 'hp-hero.png' | asset_url }}"
+      >
+        <source src="{{ 'os-hero.mp4' | asset_url }}" type="video/mp4">
+      </video>
+    {%- endif -%}
+  </div>
+  <div class="os-hero__shade"></div>
+  <img class="os-hero__glow" src="{{ 'os-hero-mark.svg' | asset_url }}" alt="" width="1024" height="1024">
+
+  {% render 'os-nav',
+    link_dna: section.settings.link_dna,
+    link_help: section.settings.link_help,
+    link_market: section.settings.link_market,
+    link_resources: section.settings.link_resources,
+    link_contact: section.settings.link_contact
+  %}
+
+  <div class="os-hero__copy">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="os-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    <h1>{{ section.settings.heading | escape }}</h1>
+    {%- if section.settings.text != blank -%}
+      <div class="os-hero__text">{{ section.settings.text }}</div>
+    {%- endif -%}
+    {%- if section.settings.acronym != blank -%}
+      <p class="os-hero__acro">
+        {%- assign parts = section.settings.acronym | split: ',' -%}
+        {%- for part in parts -%}
+          {%- assign word = part | strip -%}
+          {%- assign first = word | slice: 0 -%}
+          {%- assign rest = word | remove_first: first -%}
+          {%- if forloop.last -%}and {% endif -%}
+          <span><b>{{ first }}</b>{{ rest }}</span>{%- unless forloop.last -%}, {% endunless -%}
+        {%- endfor -%}
+      </p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Our Story hero",
+  "tag": "section",
+  "class": "os-hero-section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "ABOUT US" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our VECTRA Story" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>We co-founded VECTRA International in 2005 to improve the lives of workers in supply chains, for products and services, to enhance the lives of the people in the local communities. Supply chains are where you can reach the most vulnerable people and have the greatest impact to protect people.</p><p>We believe business can be a force for good. Our goal is to improve businesses’ performance while helping their workers. That’s why we created a logo with five stakeholders (workers, workplaces, brand, community, and consumers) and embedded our values in the VECTRA name:</p>"
+    },
+    {
+      "type": "text",
+      "id": "acronym",
+      "label": "Acronym words",
+      "default": "Values, Ethics, Community, Transparency, Rights, Action"
+    },
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "url", "id": "link_dna", "label": "Our DNA link" },
+    { "type": "url", "id": "link_help", "label": "How We Help link" },
+    { "type": "url", "id": "link_market", "label": "Marketplace link" },
+    { "type": "url", "id": "link_resources", "label": "Resources link" },
+    { "type": "url", "id": "link_contact", "label": "Contact link" }
+  ],
+  "presets": [{ "name": "Our Story hero" }]
+}
+{% endschema %}

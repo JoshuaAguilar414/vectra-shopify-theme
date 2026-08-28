@@ -7,6 +7,7 @@
           "type": "slide",
           "settings": {
             "asset": "hp-hero.png",
+            "layout": "photo",
             "heading": "Who We Are",
             "text": "Driven by innovation and built on trust, we help businesses transform ideas into measurable impact. Discover our mission, meet the team behind our solutions, and see how our values shape every partnership."
           }
@@ -14,7 +15,8 @@
         "slide_2": {
           "type": "slide",
           "settings": {
-            "asset": "hp-hero-2.png",
+            "asset": "hp-hero-3.png",
+            "layout": "webinar",
             "heading": "Upcoming Webinar",
             "text": "Stay ahead of industry trends with our latest webinars, live events, and expert-led podcast episodes. Stream on demand to gain actionable insights, practical strategies, and fresh perspectives."
           }
@@ -22,7 +24,8 @@
         "slide_3": {
           "type": "slide",
           "settings": {
-            "asset": "hp-hero-3.png",
+            "asset": "hp-hero-2.png",
+            "layout": "photo",
             "heading": "What We Do",
             "text": "Explore our core products and services designed to solve your toughest challenges and scale with your growth. From tailored strategies to cutting-edge technology, find the exact solutions built to drive your success."
           }

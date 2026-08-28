@@ -1,0 +1,50 @@
+{% render 'homepage-styles' %}
+
+<div class="section-background hp-bg" style="--hp-section-bg: {{ section.settings.background_color }};"></div>
+<div class="section section--full-width hp os-join" id="join">
+  <homepage-particles class="hp-particles" data-mode="dark">
+    <div class="hp-wrap os-join__wrap">
+      <homepage-reveal data-from="left">
+        <div class="os-join__copy">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="os-join__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          {%- endif -%}
+          <h2>{{ section.settings.heading | escape | newline_to_br }}</h2>
+          {%- if section.settings.text != blank -%}
+            <p class="os-join__text">{{ section.settings.text | escape }}</p>
+          {%- endif -%}
+        </div>
+      </homepage-reveal>
+      {%- if section.settings.button_label != blank -%}
+        <homepage-reveal data-from="right" data-delay="2">
+          <a class="os-join__btn" href="{{ section.settings.button_link | default: '#' }}">
+            {{ section.settings.button_label | escape }}
+            <img src="{{ 'hp-btn-arrow.svg' | asset_url }}" alt="" width="16" height="10">
+          </a>
+        </homepage-reveal>
+      {%- endif -%}
+    </div>
+  </homepage-particles>
+</div>
+
+{% schema %}
+{
+  "name": "Our Story join",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "BE PART OF A GLOBAL TEAM" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Ready to join\nour journey?" },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "We’re always looking for talented individuals who share our passion for innovation and excellence."
+    },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Join Our Team" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#092543" }
+  ],
+  "presets": [{ "name": "Our Story join" }]
+}
+{% endschema %}

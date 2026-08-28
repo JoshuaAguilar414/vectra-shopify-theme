@@ -1,0 +1,74 @@
+{%- doc -%}
+  Glass navigation chrome used by the Our Story hero.
+  @param {string} [link_dna]
+  @param {string} [link_help]
+  @param {string} [link_market]
+  @param {string} [link_resources]
+  @param {string} [link_contact]
+{%- enddoc -%}
+
+{%- liquid
+  assign dna_link = link_dna | default: routes.root_url | append: '#why'
+  if link_dna != blank
+    assign dna_link = link_dna
+  endif
+  assign help_link = link_help | default: routes.root_url | append: '#solutions'
+  if link_help != blank
+    assign help_link = link_help
+  endif
+  assign market_link = link_market | default: routes.root_url | append: '#marketplace'
+  if link_market != blank
+    assign market_link = link_market
+  endif
+  assign resources_link = link_resources | default: routes.root_url | append: '#articles'
+  if link_resources != blank
+    assign resources_link = link_resources
+  endif
+  assign contact_link = link_contact | default: routes.root_url | append: '#contact'
+  if link_contact != blank
+    assign contact_link = link_contact
+  endif
+-%}
+
+<div class="hp-hero__chrome">
+  <div class="hp-hero__util">
+    <a class="hp-hero__chip" href="{{ routes.account_register_url }}">
+      <img src="{{ 'hp-join.png' | asset_url }}" alt="" width="18" height="18">
+      <span>Join us</span>
+    </a>
+    <button class="hp-hero__chip" type="button" aria-label="Language">
+      <img src="{{ 'hp-lang.png' | asset_url }}" alt="" width="18" height="18">
+      <span>ENG</span>
+    </button>
+    <a class="hp-hero__chip" href="{{ routes.account_login_url }}">
+      <img src="{{ 'hp-login.png' | asset_url }}" alt="" width="18" height="18">
+      <span>Log In</span>
+    </a>
+  </div>
+
+  <div class="hp-hero__glass">
+    <a class="hp-hero__logo" href="{{ routes.root_url }}">
+      <img src="{{ 'hp-logo.png' | asset_url }}" alt="{{ shop.name | escape }}" width="161" height="42">
+    </a>
+
+    <nav class="hp-hero__nav" aria-label="Primary">
+      <a href="{{ dna_link }}">Our DNA</a>
+      <a href="{{ help_link }}">How We Help</a>
+      <a href="{{ market_link }}">Marketplace</a>
+      <a href="{{ resources_link }}">Resources</a>
+    </nav>
+
+    <div class="hp-hero__actions">
+      <a class="hp-hero__search" href="{{ market_link }}" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.25" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M16.2 16.2L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </a>
+      <a class="hp-hero__cta" href="{{ contact_link }}">
+        Contact Us
+        <img src="{{ 'hp-arrow-green.svg' | asset_url }}" alt="" width="16" height="10">
+      </a>
+    </div>
+  </div>
+</div>

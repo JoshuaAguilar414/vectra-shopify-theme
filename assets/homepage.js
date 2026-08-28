@@ -262,6 +262,101 @@ class HomepageParticles extends HTMLElement {
   }
 }
 
+class HomepageSquares extends HTMLElement {
+  connectedCallback() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    this.canvas = document.createElement('canvas');
+    this.canvas.setAttribute('aria-hidden', 'true');
+    this.canvas.className = 'hp-particles__canvas';
+    this.prepend(this.canvas);
+    this.ctx = this.canvas.getContext('2d');
+    this.shapes = [];
+    this.raf = 0;
+
+    this.resize = this.resize.bind(this);
+    this.tick = this.tick.bind(this);
+    window.addEventListener('resize', this.resize);
+    this.resize();
+    this.raf = requestAnimationFrame(this.tick);
+  }
+
+  resize() {
+    const rect = this.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    this.width = Math.max(1, Math.floor(rect.width));
+    this.height = Math.max(1, Math.floor(rect.height));
+    this.canvas.width = this.width * dpr;
+    this.canvas.height = this.height * dpr;
+    this.canvas.style.width = `${this.width}px`;
+    this.canvas.style.height = `${this.height}px`;
+    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const count = Math.max(18, Math.floor((this.width * this.height) / 42000));
+    this.shapes = Array.from({ length: count }, () => this.makeShape());
+  }
+
+  makeShape() {
+    const grid = Math.random() > 0.55;
+    const size = grid ? 36 + Math.random() * 70 : 22 + Math.random() * 90;
+    return {
+      x: Math.random() * this.width,
+      y: Math.random() * this.height,
+      size,
+      grid,
+      rot: Math.random() * Math.PI,
+      vr: (Math.random() - 0.5) * 0.0024,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
+      green: Math.random() > 0.45,
+      a: 0.12 + Math.random() * 0.22,
+    };
+  }
+
+  drawSquare(ctx, x, y, size, grid) {
+    ctx.strokeRect(x - size / 2, y - size / 2, size, size);
+    if (!grid) return;
+    ctx.beginPath();
+    ctx.moveTo(x, y - size / 2);
+    ctx.lineTo(x, y + size / 2);
+    ctx.moveTo(x - size / 2, y);
+    ctx.lineTo(x + size / 2, y);
+    ctx.stroke();
+  }
+
+  tick() {
+    const { ctx, width, height, shapes } = this;
+    ctx.clearRect(0, 0, width, height);
+    ctx.lineWidth = 1.2;
+
+    for (const s of shapes) {
+      s.x += s.vx;
+      s.y += s.vy;
+      s.rot += s.vr;
+      if (s.x < -80) s.x = width + 80;
+      if (s.x > width + 80) s.x = -80;
+      if (s.y < -80) s.y = height + 80;
+      if (s.y > height + 80) s.y = -80;
+
+      ctx.save();
+      ctx.translate(s.x, s.y);
+      ctx.rotate(s.rot);
+      ctx.strokeStyle = s.green
+        ? `rgba(84, 189, 1, ${s.a})`
+        : `rgba(90, 130, 160, ${s.a})`;
+      this.drawSquare(ctx, 0, 0, s.size, s.grid);
+      ctx.restore();
+    }
+
+    this.raf = requestAnimationFrame(this.tick);
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener('resize', this.resize);
+    if (this.raf) cancelAnimationFrame(this.raf);
+  }
+}
+
 class HomepageSolutions extends HTMLElement {
   connectedCallback() {
     this.panels = Array.from(this.querySelectorAll('[data-hp-sol-panel]'));
@@ -286,4 +381,5 @@ if (!customElements.get('homepage-tabs')) customElements.define('homepage-tabs',
 if (!customElements.get('homepage-reveal')) customElements.define('homepage-reveal', HomepageReveal);
 if (!customElements.get('homepage-slider')) customElements.define('homepage-slider', HomepageSlider);
 if (!customElements.get('homepage-particles')) customElements.define('homepage-particles', HomepageParticles);
+if (!customElements.get('homepage-squares')) customElements.define('homepage-squares', HomepageSquares);
 if (!customElements.get('homepage-solutions')) customElements.define('homepage-solutions', HomepageSolutions);

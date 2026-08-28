@@ -1,0 +1,106 @@
+{% render 'homepage-styles' %}
+
+<div class="section-background hp-bg" style="--hp-section-bg: {{ section.settings.background_color }};"></div>
+<div class="section section--full-width hp os-who" id="who">
+  <homepage-squares class="os-squares"></homepage-squares>
+  <div class="hp-wrap os-who__wrap">
+    <div class="os-who__intro">
+      <homepage-reveal data-from="left">
+        <div class="os-who__copy">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="os-who__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          {%- endif -%}
+          <h2 class="os-who__title">
+            {{ section.settings.heading | escape | newline_to_br }}
+          </h2>
+        </div>
+      </homepage-reveal>
+      <homepage-reveal data-from="right" data-delay="2">
+        <div class="os-who__media">
+          {%- if section.settings.image != blank -%}
+            {{
+              section.settings.image
+              | image_url: width: 1600
+              | image_tag: class: 'os-who__img', alt: section.settings.heading, loading: 'lazy'
+            }}
+          {%- else -%}
+            <img
+              class="os-who__img"
+              src="{{ 'os-who.jpg' | asset_url }}"
+              alt="{{ section.settings.heading | escape }}"
+              width="1117"
+              height="628"
+              loading="lazy"
+            >
+          {%- endif -%}
+          {%- if section.settings.caption != blank -%}
+            <p class="os-who__caption">{{ section.settings.caption | escape }}</p>
+          {%- endif -%}
+        </div>
+      </homepage-reveal>
+    </div>
+
+    <div class="os-who__cards">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign icon = block.settings.icon_asset | default: 'os-mission-icon.png'
+          if forloop.index == 2 and block.settings.icon_asset == blank
+            assign icon = 'os-vision-icon.png'
+          endif
+        -%}
+        <homepage-reveal data-from="up" data-delay="{{ forloop.index }}">
+          <article class="os-who__card" {{ block.shopify_attributes }}>
+            <img class="os-who__icon" src="{{ icon | asset_url }}" alt="" width="79" height="79">
+            <h3>{{ block.settings.heading | escape }}</h3>
+            <img class="os-who__rule" src="{{ 'os-rule.svg' | asset_url }}" alt="" width="624" height="2">
+            {%- if block.settings.text != blank -%}
+              <p>{{ block.settings.text | escape }}</p>
+            {%- endif -%}
+          </article>
+        </homepage-reveal>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Our Story who we are",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Our Mission" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "text", "id": "icon_asset", "label": "Icon asset" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Who We Are" },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Enabling Positive\nBusiness Impact"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Media caption",
+      "default": "THIS IS NOT ANOTHER NEW LOGO VIDEO"
+    },
+    { "type": "image_picker", "id": "image", "label": "Video poster / image" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" }
+  ],
+  "presets": [
+    {
+      "name": "Our Story who we are",
+      "blocks": [{ "type": "card" }, { "type": "card" }]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,83 @@
+{% render 'homepage-styles' %}
+
+<div class="section-background hp-bg" style="--hp-section-bg: {{ section.settings.background_color }};"></div>
+<div class="section section--full-width hp os-experts" id="experts">
+  <div class="hp-wrap os-experts__wrap">
+    <homepage-reveal>
+      <h2>{{ section.settings.heading | escape }}</h2>
+    </homepage-reveal>
+
+    <div class="os-experts__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign asset = block.settings.asset
+          if asset == blank
+            assign names = 'os-expert-beat.png,os-expert-bercin.png,os-expert-daniel.png,os-expert-iddah.png' | split: ','
+            assign idx = forloop.index0 | modulo: names.size
+            assign asset = names[idx]
+          endif
+        -%}
+        <homepage-reveal data-from="up" data-delay="{{ forloop.index }}">
+          <article class="os-experts__card" {{ block.shopify_attributes }}>
+            <div class="os-experts__media">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 600
+                  | image_tag: alt: block.settings.name, loading: 'lazy'
+                }}
+              {%- else -%}
+                <img src="{{ asset | asset_url }}" alt="{{ block.settings.name | escape }}" width="237" height="297" loading="lazy">
+              {%- endif -%}
+            </div>
+            <h3>{{ block.settings.name | escape }}</h3>
+            {%- if block.settings.bio != blank -%}
+              <p>{{ block.settings.bio | escape }}</p>
+            {%- endif -%}
+          </article>
+        </homepage-reveal>
+      {%- endfor -%}
+    </div>
+
+    <div class="os-experts__foot">
+      <div class="os-experts__avatars" aria-hidden="true">
+        <img src="{{ 'os-avatar-1.png' | asset_url }}" alt="" width="61" height="76">
+        <img src="{{ 'os-avatar-2.png' | asset_url }}" alt="" width="61" height="76">
+        <img src="{{ 'os-avatar-3.png' | asset_url }}" alt="" width="61" height="76">
+        <img src="{{ 'os-avatar-more.svg' | asset_url }}" alt="" width="73" height="73">
+      </div>
+      {%- if section.settings.button_label != blank -%}
+        <a class="os-lead__btn" href="{{ section.settings.button_link | default: '#' }}">
+          {{ section.settings.button_label | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Our Story experts",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "blocks": [
+    {
+      "type": "expert",
+      "name": "Expert",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "asset", "label": "Fallback asset" },
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "textarea", "id": "bio", "label": "Bio" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our Team of Experts" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Meet All Experts  →" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" }
+  ],
+  "presets": [{ "name": "Our Story experts" }]
+}
+{% endschema %}

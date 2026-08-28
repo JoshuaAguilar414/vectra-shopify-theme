@@ -15,26 +15,36 @@
           {%- for block in slides -%}
             {%- liquid
               assign slide_asset = block.settings.asset | default: 'hp-hero.png'
+              assign slide_layout = block.settings.layout | default: 'photo'
+              if slide_layout == 'photo' and block.settings.heading contains 'Webinar'
+                assign slide_layout = 'webinar'
+              endif
             -%}
-            <div class="hp-hero__slide{% if forloop.first %} is-active{% endif %}" data-hp-slide {{ block.shopify_attributes }}>
-              {%- if block.settings.image != blank -%}
-                {{
-                  block.settings.image
-                  | image_url: width: 2400
-                  | image_tag: loading: 'lazy', class: 'hp-hero__img', alt: block.settings.heading
-                }}
-              {%- else -%}
-                <img
-                  class="hp-hero__img"
-                  src="{{ slide_asset | asset_url }}"
-                  alt="{{ block.settings.heading | escape }}"
-                  {% if forloop.first %}
-                    fetchpriority="high"
-                  {% else %}
-                    loading="lazy"
-                  {% endif %}
-                >
-              {%- endif -%}
+            <div
+              class="hp-hero__slide hp-hero__slide--{{ slide_layout }}{% if forloop.first %} is-active{% endif %}"
+              data-hp-slide
+              {{ block.shopify_attributes }}
+            >
+              <div class="hp-hero__media">
+                {%- if block.settings.image != blank -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 2400
+                    | image_tag: loading: 'lazy', class: 'hp-hero__img', alt: block.settings.heading
+                  }}
+                {%- else -%}
+                  <img
+                    class="hp-hero__img"
+                    src="{{ slide_asset | asset_url }}"
+                    alt="{{ block.settings.heading | escape }}"
+                    {% if forloop.first %}
+                      fetchpriority="high"
+                    {% else %}
+                      loading="lazy"
+                    {% endif %}
+                  >
+                {%- endif -%}
+              </div>
               <div class="hp-hero__shade"></div>
               <div class="hp-hero__content">
                 <h1>{{ block.settings.heading | escape }}</h1>
@@ -45,8 +55,10 @@
             </div>
           {%- endfor -%}
         {%- else -%}
-          <div class="hp-hero__slide is-active" data-hp-slide>
-            <img class="hp-hero__img" src="{{ 'hp-hero.png' | asset_url }}" alt="{{ section.settings.heading | escape }}" fetchpriority="high">
+          <div class="hp-hero__slide hp-hero__slide--photo is-active" data-hp-slide>
+            <div class="hp-hero__media">
+              <img class="hp-hero__img" src="{{ 'hp-hero.png' | asset_url }}" alt="{{ section.settings.heading | escape }}" fetchpriority="high">
+            </div>
             <div class="hp-hero__shade"></div>
             <div class="hp-hero__content">
               <h1>{{ section.settings.heading | escape }}</h1>
@@ -61,7 +73,7 @@
       <img src="{{ 'hp-nav-arrow.svg' | asset_url }}" alt="" width="19" height="15">
     </button>
     <button class="hp-hero__arrow hp-hero__arrow--next" type="button" data-hp-next aria-label="Next slide">
-      <img src="{{ 'hp-nav-arrow.svg' | asset_url }}" alt="" width="19" height="15">
+      <img src="{{ 'hp-arrow-green.svg' | asset_url }}" alt="" width="19" height="15">
     </button>
     {%- if slides.size > 1 -%}
       <div class="hp-hero__dots" role="tablist" aria-label="Hero slides">
@@ -144,6 +156,16 @@
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image" },
         { "type": "text", "id": "asset", "label": "Fallback asset", "default": "hp-hero.png" },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Slide layout",
+          "options": [
+            { "value": "photo", "label": "Photo" },
+            { "value": "webinar", "label": "Webinar card" }
+          ],
+          "default": "photo"
+        },
         { "type": "text", "id": "heading", "label": "Heading", "default": "Who We Are" },
         {
           "type": "textarea",
@@ -180,6 +202,7 @@
           "type": "slide",
           "settings": {
             "asset": "hp-hero.png",
+            "layout": "photo",
             "heading": "Who We Are",
             "text": "Driven by innovation and built on trust, we help businesses transform ideas into measurable impact. Discover our mission, meet the team behind our solutions, and see how our values shape every partnership."
           }
@@ -187,17 +210,19 @@
         {
           "type": "slide",
           "settings": {
-            "asset": "hp-solution-1.png",
-            "heading": "Who We Are",
-            "text": "Driven by innovation and built on trust, we help businesses transform ideas into measurable impact."
+            "asset": "hp-hero-3.png",
+            "layout": "webinar",
+            "heading": "Upcoming Webinar",
+            "text": "Stay ahead of industry trends with our latest webinars, live events, and expert-led podcast episodes. Stream on demand to gain actionable insights, practical strategies, and fresh perspectives."
           }
         },
         {
           "type": "slide",
           "settings": {
-            "asset": "hp-why.png",
-            "heading": "Who We Are",
-            "text": "Discover our mission, meet the team behind our solutions, and see how our values shape every partnership."
+            "asset": "hp-hero-2.png",
+            "layout": "photo",
+            "heading": "What We Do",
+            "text": "Explore our core products and services designed to solve your toughest challenges and scale with your growth. From tailored strategies to cutting-edge technology, find the exact solutions built to drive your success."
           }
         }
       ]

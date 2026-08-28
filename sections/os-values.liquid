@@ -1,0 +1,61 @@
+{% render 'homepage-styles' %}
+
+<div class="section-background hp-bg" style="--hp-section-bg: {{ section.settings.background_color }};"></div>
+<div class="section section--full-width hp os-values" id="values">
+  <homepage-squares class="os-squares"></homepage-squares>
+  <div class="hp-wrap os-values__wrap">
+    <homepage-reveal>
+      <div class="os-values__head">
+        <h2>{{ section.settings.heading | escape }}</h2>
+        {%- if section.settings.text != blank -%}
+          <p>{{ section.settings.text | escape }}</p>
+        {%- endif -%}
+      </div>
+    </homepage-reveal>
+
+    <div class="os-values__grid">
+      {%- for block in section.blocks -%}
+        <homepage-reveal data-from="up" data-delay="{{ forloop.index }}">
+          <article class="os-values__item" {{ block.shopify_attributes }}>
+            <span class="os-values__letter">{{ block.settings.letter | escape }}</span>
+            <h3>{{ block.settings.heading | escape }}</h3>
+            {%- if block.settings.text != blank -%}
+              <p>{{ block.settings.text | escape }}</p>
+            {%- endif -%}
+          </article>
+        </homepage-reveal>
+      {%- endfor -%}
+    </div>
+    <img class="os-values__line" src="{{ 'os-values-line.svg' | asset_url }}" alt="" width="1261" height="7">
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Our Story values",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value",
+      "settings": [
+        { "type": "text", "id": "letter", "label": "Letter", "default": "V" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "VALUES" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "VECTRA Values" },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Our values make clear how we work with clients, communities, experts, and one another."
+    },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" }
+  ],
+  "presets": [{ "name": "Our Story values" }]
+}
+{% endschema %}

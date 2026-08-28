@@ -1,0 +1,238 @@
+{
+  "sections": {
+    "os_hero": {
+      "type": "os-hero",
+      "settings": {
+        "eyebrow": "ABOUT US",
+        "heading": "Our VECTRA Story",
+        "text": "<p>We co-founded VECTRA International in 2005 to improve the lives of workers in supply chains, for products and services, to enhance the lives of the people in the local communities. Supply chains are where you can reach the most vulnerable people and have the greatest impact to protect people.</p><p>We believe business can be a force for good. Our goal is to improve businesses’ performance while helping their workers. That’s why we created a logo with five stakeholders (workers, workplaces, brand, community, and consumers) and embedded our values in the VECTRA name:</p>",
+        "acronym": "Values, Ethics, Community, Transparency, Rights, Action"
+      }
+    },
+    "os_ceo": {
+      "type": "os-ceo",
+      "settings": {
+        "eyebrow": "Meet the Founder",
+        "heading": "A Message from Our CEO",
+        "name": "Patrick Neyts",
+        "quote": "<p>Most organizations don’t struggle because of a lack of data, they struggle when performance, priorities, and execution are not fully aligned.</p><p>At VECTRA International, we provide end-to-end business solutions with relentless customer focus, helping organizations, from global enterprises to micro businesses, improve performance, strengthen decision-making, and deliver consistent results.</p><p>We believe business is a force for good when better performance leads to better outcomes for your organization, your customers, people, and society.</p>",
+        "background_color": "#ffffff"
+      }
+    },
+    "os_who": {
+      "type": "os-who",
+      "blocks": {
+        "mission": {
+          "type": "card",
+          "settings": {
+            "heading": "Our Mission",
+            "text": "We enable positive business impact by partnering with organizations to transform end-to-end operational complexity into resilient, well-governed performance through expert teams and human-led, state-of-the-art technology—creating measurable value for people, operations, and sustainable growth.",
+            "icon_asset": "os-mission-icon.png"
+          }
+        },
+        "vision": {
+          "type": "card",
+          "settings": {
+            "heading": "Our Vision",
+            "text": "We enable positive business impact by partnering with organizations to transform end-to-end operational complexity into resilient, well-governed performance through expert teams and human-led, state-of-the-art technology—creating measurable value for people, operations, and sustainable growth.",
+            "icon_asset": "os-vision-icon.png"
+          }
+        }
+      },
+      "block_order": ["mission", "vision"],
+      "settings": {
+        "eyebrow": "Who We Are",
+        "heading": "Enabling Positive\nBusiness Impact",
+        "caption": "THIS IS NOT ANOTHER NEW LOGO VIDEO",
+        "background_color": "#ffffff"
+      }
+    },
+    "os_values": {
+      "type": "os-values",
+      "blocks": {
+        "v": {
+          "type": "value",
+          "settings": {
+            "letter": "V",
+            "heading": "VALUES",
+            "text": "We are guided by respect, innovation, integrity, and accountability."
+          }
+        },
+        "e": {
+          "type": "value",
+          "settings": {
+            "letter": "E",
+            "heading": "ETHICS",
+            "text": "We prioritize ethically sourcing goods, empowering others, and creating positive impact."
+          }
+        },
+        "c": {
+          "type": "value",
+          "settings": {
+            "letter": "C",
+            "heading": "COMMUNITY",
+            "text": "We actively build strong, supportive communities, fostering connections that uplift."
+          }
+        },
+        "t": {
+          "type": "value",
+          "settings": {
+            "letter": "T",
+            "heading": "TRANSPARENCY",
+            "text": "We are honest, clear, and open, so you can trust us and know where you stand."
+          }
+        },
+        "r": {
+          "type": "value",
+          "settings": {
+            "letter": "R",
+            "heading": "RIGHTS",
+            "text": "We defend human rights and champion fair treatment for all."
+          }
+        },
+        "a": {
+          "type": "value",
+          "settings": {
+            "letter": "A",
+            "heading": "ACTION",
+            "text": "We turn words into real actions that drive meaningful change."
+          }
+        }
+      },
+      "block_order": ["v", "e", "c", "t", "r", "a"],
+      "settings": {
+        "heading": "VECTRA Values",
+        "text": "Our values make clear how we work with clients, communities, experts, and one another.",
+        "background_color": "#ffffff"
+      }
+    },
+    "os_lead": {
+      "type": "os-leadership",
+      "blocks": {
+        "patrick": {
+          "type": "person",
+          "settings": {
+            "asset": "os-lead-patrick.png",
+            "name": "Patrick Neyts",
+            "role": "CEO",
+            "bio": "With over 30 years of experience in ESG programs, Corporate Codes, and Responsible Business practices across 11 industry sectors and 40 countries."
+          }
+        },
+        "shelly": {
+          "type": "person",
+          "settings": {
+            "asset": "os-lead-shelly.png",
+            "name": "Shelly Sanders",
+            "role": "SVP, Global Sales, Marketing & Communications",
+            "bio": "With over 30 years of leadership experience in consultative and solution-based sales & operations. She has worked across healthcare, finance, and IT, driving global growth, strategic partnerships, and ESG-aligned outcomes."
+          }
+        },
+        "lorenz": {
+          "type": "person",
+          "settings": {
+            "asset": "os-lead-lorenz.png",
+            "name": "Lorenz Berzau",
+            "role": "VP Operations",
+            "bio": "With a focus on sustainability strategy, human rights, and social compliance, backed by 20 years of consultancy experience and a background in law."
+          }
+        },
+        "alana": {
+          "type": "person",
+          "settings": {
+            "asset": "os-lead-alana.png",
+            "name": "Alana van Wouw",
+            "role": "AI Architect",
+            "bio": "With over 20 years of experience in project management, ESG, financial modeling, and AI, leading high-impact initiatives across emerging markets with strong sustainability and data-driven expertise."
+          }
+        },
+        "elizabeth": {
+          "type": "person",
+          "settings": {
+            "asset": "os-lead-elizabeth.png",
+            "name": "Elizabeth Korban",
+            "role": "Director of Organizational Enablement",
+            "bio": "Elizabeth has 15+ years of experience as a leader responsible for embedding ESG principles into organisational culture, governance and operations."
+          }
+        }
+      },
+      "block_order": ["patrick", "shelly", "lorenz", "alana", "elizabeth"],
+      "settings": {
+        "heading": "Our Leadership Team",
+        "button_label": "Meet Our People  →",
+        "button_link": "#experts",
+        "background_color": "#ffffff"
+      }
+    },
+    "os_experts": {
+      "type": "os-experts",
+      "blocks": {
+        "beat": {
+          "type": "expert",
+          "settings": {
+            "asset": "os-expert-beat.png",
+            "name": "Beat Grüninger",
+            "bio": "Senior Technical Advisor and lecturer in sustainability management and standards"
+          }
+        },
+        "bercin": {
+          "type": "expert",
+          "settings": {
+            "asset": "os-expert-bercin.png",
+            "name": "Berçin Doğan Öztürk",
+            "bio": "13+ years of experience in sustainability, social compliance, and responsible business"
+          }
+        },
+        "daniel": {
+          "type": "expert",
+          "settings": {
+            "asset": "os-expert-daniel.png",
+            "name": "Daniel Ndiwa",
+            "bio": "Sustainability Standards Consultant with 5 years of experience in auditing of Voluntary Sustainability Standards in Coffee, Tea, Avocado and Horticultural in Eastern Africa."
+          }
+        },
+        "iddah": {
+          "type": "expert",
+          "settings": {
+            "asset": "os-expert-iddah.png",
+            "name": "Iddah Ooko",
+            "bio": "An environmental and social impact consultant with over 15 years’ experience leading Environmental Impact Assessments, audits, ESG and multidisciplinary development projects."
+          }
+        }
+      },
+      "block_order": ["beat", "bercin", "daniel", "iddah"],
+      "settings": {
+        "heading": "Our Team of Experts",
+        "button_label": "Meet All Experts  →",
+        "background_color": "#ffffff"
+      }
+    },
+    "os_people": {
+      "type": "os-people",
+      "settings": {
+        "heading": "People that make VECTRA",
+        "text": "Our presence goes beyond locations. It reflects how we help bring structure, clarity, and control into complex global challenges.",
+        "background_color": "#ffffff"
+      }
+    },
+    "os_join": {
+      "type": "os-join",
+      "settings": {
+        "eyebrow": "BE PART OF A GLOBAL TEAM",
+        "heading": "Ready to join\nour journey?",
+        "text": "We’re always looking for talented individuals who share our passion for innovation and excellence.",
+        "button_label": "Join Our Team",
+        "background_color": "#092543"
+      }
+    }
+  },
+  "order": [
+    "os_hero",
+    "os_ceo",
+    "os_who",
+    "os_values",
+    "os_lead",
+    "os_experts",
+    "os_people",
+    "os_join"
+  ]
+}

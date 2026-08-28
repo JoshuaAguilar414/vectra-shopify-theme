@@ -1,0 +1,91 @@
+{% render 'homepage-styles' %}
+
+<div class="section-background hp-bg" style="--hp-section-bg: {{ section.settings.background_color }};"></div>
+<div class="section section--full-width hp os-lead" id="leadership">
+  <homepage-reveal>
+    <div class="os-lead__head">
+      <h2>{{ section.settings.heading | escape }}</h2>
+    </div>
+  </homepage-reveal>
+
+  <homepage-carousel class="os-lead__carousel">
+    <div class="os-lead__track" data-hp-track>
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign asset = block.settings.asset
+          if asset == blank
+            assign names = 'os-lead-patrick.png,os-lead-shelly.png,os-lead-lorenz.png,os-lead-alana.png,os-lead-elizabeth.png' | split: ','
+            assign idx = forloop.index0 | modulo: names.size
+            assign asset = names[idx]
+          endif
+        -%}
+        <article class="os-lead__card{% if forloop.index == 2 %} is-featured{% endif %}" {{ block.shopify_attributes }}>
+          <div class="os-lead__media">
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 900
+                | image_tag: alt: block.settings.name, loading: 'lazy'
+              }}
+            {%- else -%}
+              <img src="{{ asset | asset_url }}" alt="{{ block.settings.name | escape }}" width="522" height="653" loading="lazy">
+            {%- endif -%}
+            <div class="os-lead__overlay">
+              <h3>{{ block.settings.name | escape }}</h3>
+              {%- if block.settings.role != blank -%}
+                <p class="os-lead__role">{{ block.settings.role | escape }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    <div class="os-lead__nav">
+      <button class="os-lead__arrow" type="button" data-hp-prev aria-label="Previous">
+        <img src="{{ 'hp-chevron-circle.svg' | asset_url }}" alt="" width="46" height="46">
+        <img class="os-lead__chevron os-lead__chevron--prev" src="{{ 'hp-nav-arrow.svg' | asset_url }}" alt="" width="19" height="15">
+      </button>
+      <button class="os-lead__arrow" type="button" data-hp-next aria-label="Next">
+        <img src="{{ 'hp-chevron-circle.svg' | asset_url }}" alt="" width="46" height="46">
+        <img class="os-lead__chevron" src="{{ 'hp-nav-arrow.svg' | asset_url }}" alt="" width="19" height="15">
+      </button>
+    </div>
+  </homepage-carousel>
+
+  {%- if section.settings.button_label != blank -%}
+    <div class="os-lead__cta">
+      <a class="os-lead__btn" href="{{ section.settings.button_link | default: '#experts' }}">
+        {{ section.settings.button_label | escape }}
+      </a>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Our Story leadership",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "blocks": [
+    {
+      "type": "person",
+      "name": "Leader",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "asset", "label": "Fallback asset" },
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "role", "label": "Role" },
+        { "type": "textarea", "id": "bio", "label": "Bio" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our Leadership Team" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Meet Our People  →" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" }
+  ],
+  "presets": [{ "name": "Our Story leadership" }]
+}
+{% endschema %}
