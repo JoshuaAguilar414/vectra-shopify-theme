@@ -1,5 +1,3 @@
-{% render 'homepage-styles' %}
-
 <div
   class="section-background hp-bg color-custom-{{ section.id }}"
   style="--hp-section-bg: {{ section.settings.background_color }};"
@@ -8,6 +6,7 @@
   <homepage-particles class="hp-particles hp-particles--dark" data-mode="dark">
     <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
       <div class="hp-solhead">
+        <img class="hp-solhead__deco" src="{{ 'hp-solutions-deco.svg' | asset_url }}" alt="" width="48" height="48" aria-hidden="true">
         {%- if section.settings.eyebrow != blank -%}
           {%- assign eyebrow_rest = section.settings.eyebrow | remove_first: 'VECTRA' | strip -%}
           <p class="hp-eyebrow">

@@ -1,5 +1,3 @@
-{% render 'homepage-styles' %}
-
 {%- liquid
   assign logo = settings.logo_inverse | default: settings.logo
 -%}
@@ -11,6 +9,7 @@
 <div class="section section--full-width hp hp--navy">
   <div class="hp-wrap" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
     <div class="hp-footer">
+      <img class="hp-footer__deco" src="{{ 'hp-footer-deco.svg' | asset_url }}" alt="" width="48" height="48" aria-hidden="true">
       <div>
         <a class="hp-footer__logo" href="{{ routes.root_url }}">
           {%- if logo != blank -%}

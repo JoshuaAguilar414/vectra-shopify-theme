@@ -1,5 +1,3 @@
-{% render 'homepage-styles' %}
-
 <div
   class="section-background hp-bg color-custom-{{ section.id }}"
   style="--hp-section-bg: {{ section.settings.background_color }};"
@@ -16,7 +14,8 @@
     <homepage-filters>
       <div class="hp-filters">
         <label class="hp-filters__search">
-          <img src="{{ 'hp-search.svg' | asset_url }}" alt="" width="16" height="16" aria-hidden="true">
+          <img class="hp-filters__search-icon" src="{{ 'hp-search-icon.svg' | asset_url }}" alt="" width="18" height="18" aria-hidden="true">
+          <img class="hp-filters__search-line" src="{{ 'hp-search-line.svg' | asset_url }}" alt="" width="1" height="24" aria-hidden="true">
           <input
             class="hp-field"
             type="search"

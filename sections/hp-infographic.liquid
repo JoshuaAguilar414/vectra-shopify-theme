@@ -1,5 +1,3 @@
-{% render 'homepage-styles' %}
-
 <div
   class="section-background hp-bg color-custom-{{ section.id }}"
   style="--hp-section-bg: {{ section.settings.background_color }};"
@@ -10,6 +8,7 @@
       <div class="hp-trust__dome" aria-hidden="true"></div>
       <homepage-reveal data-from="scale">
         <div class="hp-trust__visual">
+          <img class="hp-trust__rings" src="{{ 'hp-trust-rings.svg' | asset_url }}" alt="" width="560" height="560" loading="lazy">
           <div class="hp-trust__center">
             <h2 class="hp-trust__heading">
               {{ section.settings.heading_line_1 | escape }}
@@ -51,7 +50,7 @@
           "type": "text",
           "id": "icon_asset",
           "label": "Icon asset filename",
-          "info": "Theme asset, e.g. hp-stat-experts.svg"
+          "info": "Optional icon asset filename"
         },
         { "type": "text", "id": "stat", "label": "Stat", "default": "100+" },
         { "type": "text", "id": "label", "label": "Label", "default": "Experts Worldwide" }

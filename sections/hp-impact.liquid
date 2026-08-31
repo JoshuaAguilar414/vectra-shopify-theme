@@ -1,5 +1,3 @@
-{% render 'homepage-styles' %}
-
 <div
   class="section-background hp-bg color-custom-{{ section.id }}"
   style="--hp-section-bg: {{ section.settings.background_color }};"
@@ -25,12 +23,7 @@
     {%- endif -%}
 
     <div class="hp-impact__feature">
-      <homepage-reveal data-from="left">
-        <div class="hp-impact__media">
-          {% render 'hp-media', image: section.settings.image, asset: 'hp-why.png', alt: section.settings.feature_heading, placeholder: 'lifestyle-2' %}
-        </div>
-      </homepage-reveal>
-      <homepage-reveal data-from="right" data-delay="2">
+      <homepage-reveal class="hp-impact__copy-wrap" data-from="left">
         <div class="hp-impact__copy">
           {%- if section.settings.eyebrow != blank -%}
             <p class="hp-eyebrow hp-impact__eyebrow">
@@ -50,6 +43,11 @@
               {{ section.settings.button_label | escape }}
             </a>
           {%- endif -%}
+        </div>
+      </homepage-reveal>
+      <homepage-reveal class="hp-impact__media-wrap" data-from="right" data-delay="2">
+        <div class="hp-impact__media">
+          {% render 'hp-media', image: section.settings.image, asset: 'hp-why.png', alt: section.settings.feature_heading, placeholder: 'lifestyle-2' %}
         </div>
       </homepage-reveal>
     </div>

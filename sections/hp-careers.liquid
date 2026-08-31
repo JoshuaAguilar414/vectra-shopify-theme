@@ -1,14 +1,24 @@
-{% render 'homepage-styles' %}
-
 <div
   class="section-background hp-bg color-custom-{{ section.id }}"
   style="--hp-section-bg: {{ section.settings.background_color }};"
 ></div>
 <div class="section section--full-width hp" id="careers">
-  <div class="hp-wrap hp-careers hp-careers--plain" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
+  <div class="hp-wrap hp-careers" style="--hp-pad-y: {{ section.settings.padding_y }}px;">
     <homepage-particles class="hp-particles hp-particles--light" data-mode="light">
-      <homepage-reveal data-from="up">
-        <div class="hp-careers__copy">
+      <div class="hp-careers__panel">
+        <div class="hp-careers__media" aria-hidden="true">
+          {%- if section.settings.image != blank -%}
+            {{
+              section.settings.image
+              | image_url: width: 1600
+              | image_tag: loading: 'lazy', alt: ''
+            }}
+          {%- else -%}
+            <img src="{{ 'hp-careers.png' | asset_url }}" alt="" loading="lazy">
+          {%- endif -%}
+        </div>
+        <homepage-reveal data-from="up">
+          <div class="hp-careers__copy">
           {%- if section.settings.eyebrow != blank -%}
             <p class="hp-eyebrow">{{ section.settings.eyebrow | escape }}</p>
           {%- endif -%}
@@ -21,8 +31,9 @@
               {{ section.settings.button_label | escape }}
             </a>
           {%- endif -%}
-        </div>
-      </homepage-reveal>
+          </div>
+        </homepage-reveal>
+      </div>
     </homepage-particles>
   </div>
 </div>
