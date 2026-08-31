@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="8.37118" overflow="visible" preserveAspectRatio="none" style="display: block;" viewBox="0 0 11.9144 8.37118" width="11.9144">
-<path d="M5.16786 0.386059C5.56822 -0.128687 6.34621 -0.128686 6.74657 0.38606L11.7019 6.75724C12.2128 7.4141 11.7447 8.37118 10.9126 8.37118H1.00185C0.169704 8.37118 -0.29839 7.4141 0.212499 6.75724L5.16786 0.386059Z" fill="var(--fill-0, #092543)" id="Polygon 4"/>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="24" overflow="visible" preserveAspectRatio="none" style="display: block;" viewBox="0 0 24 24" width="24">
+<g id="Frame 1">
+<g id="Group 131507">
+<path clip-rule="evenodd" d="M13.5301 16.4185C11.4533 15.2218 8.78342 11.6203 8.27951 9.33897C9.21535 7.89097 10.0022 8.60171 10.5003 7.11112C10.5224 7.04157 11.8739 -0.33186 6.67859 1.21264C-4.58676 4.63201 13.9729 29.6483 20.9905 20.5008C24.1806 16.2529 16.5042 15.1096 16.4322 15.1096C14.8095 15.0831 15.2582 16.0286 13.5301 16.4185Z" fill="var(--fill-0, white)" fill-rule="evenodd" id="Vector"/>
+</g>
+</g>
 </svg>

@@ -1,15 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="12" overflow="visible" preserveAspectRatio="none" style="display: block;" viewBox="0 0 106.384 12" width="106.384">
-<g id="Group 134836">
-<circle cx="6" cy="6" fill="var(--fill-0, white)" id="Ellipse 41" r="6"/>
-<rect fill="url(#paint0_linear_0_500)" height="12" id="Rectangle 94" rx="6" width="40.145" x="22.0798"/>
-<circle cx="78.2719" cy="6" fill="var(--fill-0, white)" id="Ellipse 43" r="6"/>
-<circle cx="100.384" cy="6" fill="var(--fill-0, white)" id="Ellipse 44" r="6"/>
-</g>
-<defs>
-<linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear_0_500" x1="23.051" x2="60.9368" y1="1.29412" y2="9.6826">
-<stop stop-color="#79EB93"/>
-<stop offset="1" stop-color="#D6FFAD"/>
-</linearGradient>
-</defs>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="21.2391" overflow="visible" preserveAspectRatio="none" style="display: block;" viewBox="0 0 20.7432 21.2391" width="20.7432">
+<ellipse cx="10.3716" cy="10.6195" id="Ellipse 169" rx="8.87161" ry="9.11954" stroke="var(--stroke-0, #D1D1D1)" stroke-width="3"/>
 </svg>

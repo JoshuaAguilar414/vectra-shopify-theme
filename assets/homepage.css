@@ -116,82 +116,138 @@
 
   .hp-trusted {
     background: #fff;
-    padding: 8px 0 0;
+    padding: 0;
+    overflow: hidden;
   }
 
   .hp-trusted__bar {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(32px, 6.7vw, 129px);
+    gap: calc(111px * var(--hp-scale));
     flex-wrap: wrap;
-    width: min(840px, calc(100% - 40px));
+    width: 100%;
+    max-width: 1920px;
     margin: 0 auto;
-    padding: 48px 0 40px;
-    text-align: left;
+    padding: calc(48px * var(--hp-scale)) clamp(24px, 3.85vw, 74px) calc(40px * var(--hp-scale));
+    box-sizing: border-box;
   }
 
   .hp-trusted__badge-wrap {
     display: flex;
+    flex: 0 0 auto;
     align-items: center;
     justify-content: center;
-    padding: 0;
   }
 
   .hp-trusted__badge {
     display: block;
-    width: clamp(140px, 10.3vw, 198px);
+    width: calc(198px * var(--hp-scale));
     height: auto;
   }
 
   .hp-trusted__copy {
-    display: grid;
-    gap: 16px;
-    justify-items: start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: calc(23px * var(--hp-scale));
+    flex: 0 1 auto;
+    max-width: calc(727px * var(--hp-scale));
   }
 
   .hp-trusted__heading {
     margin: 0;
-    max-width: 42rem;
     color: var(--hp-navy);
     font-family: var(--font-heading--family);
-    font-size: clamp(1.35rem, 1.8vw, 2.125rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.2;
+    font-size: calc(32px * var(--hp-scale));
+    font-weight: 400;
+    letter-spacing: -0.05em;
+    line-height: calc(45px * var(--hp-scale));
   }
 
-  .hp-trusted .hp-btn {
-    min-width: calc(280px * var(--hp-scale));
+  .hp-trusted__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: calc(368px * var(--hp-scale));
     min-height: calc(76px * var(--hp-scale));
-    padding: calc(18px * var(--hp-scale)) calc(32px * var(--hp-scale));
+    padding: 0 calc(28px * var(--hp-scale));
+    border: 0;
     border-radius: 15px;
-    font-size: calc(26px * var(--hp-scale));
+    background: var(--hp-green);
+    color: #fff !important;
+    font-family: inherit;
+    font-size: calc(25px * var(--hp-scale));
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .hp-trusted__btn:hover {
+    background: var(--hp-green-dark);
+    color: #fff !important;
+    transform: translateY(-1px);
   }
 
   .hp-trusted__marquee {
     overflow: hidden;
     background: #e8e8e8;
-    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    height: calc(100px * var(--hp-scale));
   }
 
   .hp-trusted__track {
     display: flex;
     align-items: center;
-    gap: 114px;
+    gap: calc(104px * var(--hp-scale));
     width: max-content;
-    padding: 10px 0;
-    height: 100px;
-    animation: hp-marquee 36s linear infinite;
+    height: 100%;
+    padding: calc(10px * var(--hp-scale)) 0;
+    animation: hp-trusted-marquee 42s linear infinite;
+    will-change: transform;
   }
 
-  .hp-trusted__track img {
-    flex: 0 0 auto;
-    max-height: 80px;
+  .hp-trusted__logo {
+    flex: 0 0 calc(142px * var(--hp-scale));
+    display: grid;
+    place-items: center;
+    height: calc(80px * var(--hp-scale));
+  }
+
+  .hp-trusted__logo img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
     width: auto;
+    height: auto;
     object-fit: contain;
     filter: grayscale(1);
-    opacity: 0.9;
+    opacity: 0.85;
+  }
+
+  @keyframes hp-trusted-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media screen and (max-width: 989px) {
+    .hp-trusted__bar {
+      flex-direction: column;
+      gap: calc(32px * var(--hp-scale));
+      text-align: center;
+    }
+
+    .hp-trusted__copy {
+      align-items: center;
+      max-width: none;
+    }
+
+    .hp-trusted__heading {
+      text-align: center;
+    }
   }
 
   /* Particle canvas backgrounds */
@@ -692,6 +748,10 @@
     }
 
     .hp-logos__track {
+      animation: none;
+    }
+
+    .hp-trusted__track {
       animation: none;
     }
   }
@@ -2474,6 +2534,7 @@
 
     .hp-btn,
     .hp-trusted .hp-btn,
+    .hp-trusted__btn,
     .hp-solpanel .hp-btn,
     .hp-impact__copy .hp-btn {
       min-width: 0;
@@ -2566,6 +2627,7 @@
     }
 
     .hp-trusted .hp-btn,
+    .hp-trusted__btn,
     .hp-solpanel .hp-btn {
       width: 100%;
     }
