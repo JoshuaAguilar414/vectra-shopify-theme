@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "vectra_our_story": {
+      "type": "vectra-our-story",
+      "settings": {}
+    }
+  },
+  "order": ["vectra_our_story"]
+}

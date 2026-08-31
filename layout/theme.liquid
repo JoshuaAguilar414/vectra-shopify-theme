@@ -43,8 +43,11 @@
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-palette' -%}
 
-    {% if template.name == 'index' %}
+    {% if template.name == 'index' or template.suffix == 'our-story' %}
       {{ 'vectra-home.css' | asset_url | stylesheet_tag }}
+      {% if template.suffix == 'our-story' %}
+        {{ 'vectra-our-story.css' | asset_url | stylesheet_tag }}
+      {% endif %}
       <style>
         .vectra-home-page #header-group,
         .vectra-home-page > .page-wrapper > footer {
@@ -64,7 +67,7 @@
     {{ content_for_header }}
   </head>
 
-  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}{% if template.name == 'index' %} vectra-home-page{% endif %}">
+  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}{% if template.name == 'index' or template.suffix == 'our-story' %} vectra-home-page{% endif %}">
     {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
 
     {% render 'chat-drawer' %}

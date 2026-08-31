@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="145.6" overflow="visible" preserveAspectRatio="none" style="display: block;" viewBox="0 0 145.6 145.6" width="145.6">
+<g id="Frame 1171275896">
+<g filter="url(#filter0_d_0_491)" id="Marcel 5">
+<rect fill="var(--fill-0, #BBE39B)" height="122" rx="61" width="122" x="11.8" y="11.8"/>
+<rect height="115" rx="57.5" stroke="var(--stroke-0, white)" stroke-width="7" width="115" x="15.3" y="15.3"/>
+</g>
+<g id="Mask group">
+<mask height="123" id="mask0_0_491" maskUnits="userSpaceOnUse" style="mask-type:alpha" width="123" x="11" y="11">
+<rect fill="var(--fill-0, white)" height="115" id="Marcel 4" rx="57.5" stroke="var(--stroke-0, white)" stroke-width="7" width="115" x="15.3" y="15.3"/>
+</mask>
+<g mask="url(#mask0_0_491)">
+<circle cx="73.3" cy="115.3" fill="var(--fill-0, white)" id="Ellipse 172" r="43.5"/>
+</g>
+</g>
+<circle cx="73.3" cy="55.3" fill="var(--fill-0, white)" id="Ellipse 171" r="24.5"/>
+</g>
+<defs>
+<filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="145.6" id="filter0_d_0_491" width="145.6" x="0" y="0">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" result="hardAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="5.9"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.11 0"/>
+<feBlend in2="BackgroundImageFix" mode="normal" result="effect1_dropShadow_0_491"/>
+<feBlend in="SourceGraphic" in2="effect1_dropShadow_0_491" mode="normal" result="shape"/>
+</filter>
+</defs>
+</svg>
