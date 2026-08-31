@@ -43,6 +43,20 @@
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-palette' -%}
 
+    {% if template.name == 'index' %}
+      {{ 'vectra-home.css' | asset_url | stylesheet_tag }}
+      <style>
+        .vectra-home-page #header-group,
+        .vectra-home-page > .page-wrapper > footer {
+          display: none !important;
+        }
+        .vectra-home-page {
+          --header-height: 0px;
+          --header-group-height: 0px;
+        }
+      </style>
+    {% endif %}
+
     {% if request.design_mode %}
       {%- render 'theme-editor' -%}
     {% endif %}
@@ -50,7 +64,7 @@
     {{ content_for_header }}
   </head>
 
-  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
+  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}{% if template.name == 'index' %} vectra-home-page{% endif %}">
     {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
 
     {% render 'chat-drawer' %}

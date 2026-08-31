@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="8" overflow="visible" preserveAspectRatio="none" style="display: block;" viewBox="0 0 20 8" width="20">
+<g id="Group 3">
+<g id="Group 4">
+<circle cx="4" cy="4" fill="var(--fill-0, #54BD01)" id="Ellipse 1" r="4"/>
+<g id="Group 3_2">
+<path clip-rule="evenodd" d="M20 4C20 4.55228 19.5523 5 19 5H5C4.44772 5 4 4.55228 4 4C4 3.44772 4.44772 3 5 3H19C19.5523 3 20 3.44772 20 4Z" fill="var(--fill-0, #54BD01)" fill-rule="evenodd" id="Line 2 (Stroke)"/>
+</g>
+</g>
+</g>
+</svg>
