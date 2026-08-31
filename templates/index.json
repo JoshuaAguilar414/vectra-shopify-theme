@@ -35,14 +35,14 @@
       "settings": {
         "heading": "Who We Are",
         "text": "Driven by innovation and built on trust, we help businesses transform ideas into measurable impact.",
-        "float_label": "",
+        "float_label": "Learn How We Can Help",
         "float_link": "#solutions"
       }
     },
     "hp_trusted": {
       "type": "hp-trusted",
       "settings": {
-        "heading": "Trusted Partnership. Practical Implementation.",
+        "heading": "Trusted partnership. Practical implementation.",
         "badge_alt": "Trusted by 500+ Companies",
         "button_label": "Explore case studies→",
         "background_color": "#ffffff",
