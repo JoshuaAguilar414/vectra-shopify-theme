@@ -103,6 +103,13 @@ img {
   object-fit: contain;
 }
 
+.vectra-home-page .vh-locale__panel img,
+.vectra-home .vh-locale__panel img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+}
+
 .vectra-home-page .vh-hero__slide > img,
 .vectra-home .vh-hero__slide > img {
   width: 100%;

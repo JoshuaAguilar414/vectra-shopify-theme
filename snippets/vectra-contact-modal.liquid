@@ -102,7 +102,11 @@
         if (event.key === 'Escape' && isOpen()) closeModal();
       });
 
-      if (modal.querySelector('[data-vh-contact-success]') || location.hash === '#VectraContactModal') {
+      if (
+        modal.querySelector('[data-vh-contact-success]') ||
+        location.hash === '#VectraContactModal' ||
+        location.hash === '#contact'
+      ) {
         openModal();
       }
     };

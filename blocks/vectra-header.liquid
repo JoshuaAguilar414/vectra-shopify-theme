@@ -1,5 +1,8 @@
 {% liquid
-  assign mega_menu = block.settings.menu
+  assign mega_menu = linklists['vectra-website-mega-menu']
+  if mega_menu == blank or mega_menu.links.size == 0
+    assign mega_menu = block.settings.menu
+  endif
   if mega_menu == blank or mega_menu.links.size == 0
     assign mega_menu = section.settings.menu
   endif
@@ -15,7 +18,7 @@
       "type": "link_list",
       "id": "menu",
       "label": "MEGA Navigation",
-      "info": "Select the nested MEGA Nav from Content > Menus (vectra-website-mega-menu).",
+      "info": "Uses VECTRA Website Mega Menu (vectra-website-mega-menu). Nested items under Our DNA, How We Help, and Resources appear as dropdowns.",
       "default": "vectra-website-mega-menu"
     }
   ],

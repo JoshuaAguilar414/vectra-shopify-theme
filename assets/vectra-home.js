@@ -32,6 +32,42 @@
     });
   }
 
+  const megaItems = qsa('[data-vh-mega-item]');
+  megaItems.forEach((item) => {
+    const trigger = item.querySelector(':scope > a');
+    const close = () => {
+      item.classList.remove('is-open');
+      trigger?.setAttribute('aria-expanded', 'false');
+    };
+    const open = () => {
+      megaItems.forEach((other) => {
+        if (other !== item) {
+          other.classList.remove('is-open');
+          other.querySelector(':scope > a')?.setAttribute('aria-expanded', 'false');
+        }
+      });
+      item.classList.add('is-open');
+      trigger?.setAttribute('aria-expanded', 'true');
+    };
+    item.addEventListener('mouseenter', open);
+    item.addEventListener('mouseleave', close);
+    item.addEventListener('focusin', open);
+    trigger?.addEventListener('click', (event) => {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      event.preventDefault();
+      const isOpen = item.classList.contains('is-open');
+      if (isOpen) close();
+      else open();
+    });
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    megaItems.forEach((item) => {
+      item.classList.remove('is-open');
+      item.querySelector(':scope > a')?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
   document.querySelectorAll('[data-vh-account]').forEach((account) => {
     const toggle = account.querySelector('[data-vh-account-toggle]');
     const menu = account.querySelector('[data-vh-account-menu]');
@@ -52,6 +88,31 @@
     });
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') close();
+    });
+  });
+
+  document.querySelectorAll('.vh-locale__native').forEach((locale) => {
+    const button = locale.querySelector('.vh-locale__summary');
+    const panel = locale.querySelector('.vh-locale__panel');
+    if (!button || !panel) return;
+
+    button.addEventListener('click', (event) => {
+      if (customElements.get('dropdown-localization-component')) return;
+      event.preventDefault();
+      const willOpen = panel.hasAttribute('hidden');
+      panel.toggleAttribute('hidden', !willOpen);
+      button.setAttribute('aria-expanded', String(willOpen));
+    });
+
+    panel.addEventListener('click', (event) => {
+      if (customElements.get('localization-form-component')) return;
+      const item = event.target.closest('.localization-form__list-item[data-value]');
+      if (!item) return;
+      const form = item.closest('form');
+      const input = form && form.querySelector('input[name="country_code"]');
+      if (!form || !input) return;
+      input.value = item.getAttribute('data-value');
+      form.submit();
     });
   });
 
