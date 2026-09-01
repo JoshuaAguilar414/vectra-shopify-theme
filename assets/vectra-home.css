@@ -1,4 +1,3 @@
-:root,
 .vectra-home {
   --vh-green: #54bd01;
   --vh-green-dark: #46a300;
@@ -14,9 +13,6 @@
   --vh-radius-lg: 24px;
   --vh-wrap: min(1770px, calc(100% - 140px));
   --vh-font: 'Poppins', sans-serif;
-}
-
-.vectra-home {
   color: var(--vh-text);
   font-family: var(--vh-font);
   background: var(--vh-white);
@@ -38,9 +34,14 @@
 }
 
 .vectra-home img {
+  width: auto;
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+.vectra-home svg {
+  max-width: none;
 }
 
 .vectra-home a {
@@ -1835,6 +1836,7 @@
 .vh-case__stars svg {
   width: 45px;
   height: 43px;
+  max-width: 45px;
   display: block;
   flex: none;
 }

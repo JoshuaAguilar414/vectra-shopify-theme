@@ -1,6 +1,21 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+{{ 'vectra-home.css' | asset_url | stylesheet_tag }}
+{{ 'vectra-our-story.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'vectra-home.js' | asset_url }}" defer></script>
+<script src="{{ 'vectra-our-story.js' | asset_url }}" defer></script>
+
+{% stylesheet %}
+  .vectra-home img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+  }
+  .vectra-home svg {
+    max-width: none;
+  }
+{% endstylesheet %}
 
 <div class="vectra-home vectra-story" data-vectra-home data-vectra-story>
   {% content_for 'blocks' %}

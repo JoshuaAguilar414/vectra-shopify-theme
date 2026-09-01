@@ -44,6 +44,14 @@
     {%- render 'color-palette' -%}
 
     {% if template.name == 'index' or template.suffix == 'our-story' %}
+      {{ 'vectra-home.css' | asset_url | stylesheet_tag }}
+      {% if template.suffix == 'our-story' %}
+        {{ 'vectra-our-story.css' | asset_url | stylesheet_tag }}
+      {% endif %}
+      <script src="{{ 'vectra-home.js' | asset_url }}" defer></script>
+      {% if template.suffix == 'our-story' %}
+        <script src="{{ 'vectra-our-story.js' | asset_url }}" defer></script>
+      {% endif %}
       <style>
         .vectra-home-page #header-group,
         .vectra-home-page > .page-wrapper > footer {
@@ -52,6 +60,30 @@
         .vectra-home-page {
           --header-height: 0px;
           --header-group-height: 0px;
+        }
+        /* Horizon sets img { width: 100% } and svg { max-width: 100% }.
+           Keep Vectra images/icons from exploding if the asset CSS is delayed. */
+        .vectra-home img {
+          width: auto;
+          max-width: 100%;
+          height: auto;
+        }
+        .vectra-home svg {
+          max-width: none;
+        }
+        .vectra-home .vh-hero__slide img,
+        .vectra-home .vh-why__media img,
+        .vectra-home .vh-sol-shot img,
+        .vectra-home .vh-case__photo img,
+        .vectra-home .vh-article img,
+        .vectra-home .vh-topic-card img {
+          width: 100%;
+          height: 100%;
+        }
+        .vectra-home .vh-case__stars svg {
+          width: 45px;
+          height: 43px;
+          max-width: 45px;
         }
       </style>
     {% endif %}
