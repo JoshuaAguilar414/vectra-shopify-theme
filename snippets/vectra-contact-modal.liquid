@@ -29,19 +29,7 @@
           {{ form.errors | default_errors }}
         </p>
       {% endif %}
-      <div class="vh-form__grid">
-        <input type="text" name="contact[first_name]" placeholder="First Name*" value="{{ customer.first_name }}" required>
-        <input type="text" name="contact[last_name]" placeholder="Last Name*" value="{{ customer.last_name }}" required>
-        <input type="email" name="contact[email]" placeholder="Email*" value="{{ customer.email }}" required>
-        <input type="tel" name="contact[phone]" placeholder="Phone Number*" value="{{ customer.phone }}">
-        <input type="text" name="contact[company]" placeholder="Company*">
-        <input type="text" name="contact[job_title]" placeholder="Job Title*">
-      </div>
-      <textarea name="contact[body]" placeholder="Message Here..."></textarea>
-      <button class="vh-btn vh-btn--green" type="submit">
-        Send message
-        <img src="{{ img_arrow }}" alt="">
-      </button>
+      {% render 'vectra-contact-fields', img_arrow: img_arrow %}
     {% endform %}
   </div>
 </dialog>

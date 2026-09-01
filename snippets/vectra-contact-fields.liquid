@@ -1,0 +1,67 @@
+{%- doc -%}
+  Shared Get In Touch fields used by the page form and the header modal.
+{%- enddoc -%}
+
+<div class="vh-form__grid">
+  <input
+    type="text"
+    name="contact[first_name]"
+    placeholder="First Name*"
+    value="{{ customer.first_name }}"
+    required
+    autocomplete="given-name"
+  >
+  <input
+    type="text"
+    name="contact[last_name]"
+    placeholder="Last Name*"
+    value="{{ customer.last_name }}"
+    required
+    autocomplete="family-name"
+  >
+  <input
+    type="email"
+    name="contact[email]"
+    placeholder="Email*"
+    value="{{ customer.email }}"
+    required
+    autocomplete="email"
+  >
+  <input
+    type="tel"
+    name="contact[phone]"
+    placeholder="Phone Number*"
+    value="{{ customer.phone }}"
+    autocomplete="tel"
+  >
+  <input type="text" name="contact[company]" placeholder="Company*" autocomplete="organization">
+  <label class="vh-form__select">
+    <span class="visually-hidden">Job Title</span>
+    <select name="contact[job_title]" aria-label="Job Title" required>
+      <option value="" disabled selected>Job Title*</option>
+      <option value="Executive / C-level">Executive / C-level</option>
+      <option value="Director">Director</option>
+      <option value="Manager">Manager</option>
+      <option value="Specialist">Specialist</option>
+      <option value="Consultant">Consultant</option>
+      <option value="Other">Other</option>
+    </select>
+  </label>
+</div>
+<label class="vh-form__select vh-form__select--wide">
+  <span class="visually-hidden">I'm interested in</span>
+  <select name="contact[interest]" aria-label="I'm interested in">
+    <option value="" disabled selected>I'm interested in...</option>
+    <option value="Solutions">Solutions</option>
+    <option value="Marketplace & courses">Marketplace &amp; courses</option>
+    <option value="VSuites">VSuites</option>
+    <option value="Partnership">Partnership</option>
+    <option value="Careers">Careers</option>
+    <option value="Other">Other</option>
+  </select>
+</label>
+<textarea name="contact[body]" placeholder="Message Here..."></textarea>
+<button class="vh-btn vh-btn--green" type="submit">
+  Send message
+  <img src="{{ img_arrow }}" alt="">
+</button>

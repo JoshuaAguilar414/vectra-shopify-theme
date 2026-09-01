@@ -574,19 +574,7 @@
       </div>
       {% form 'contact', class: 'vh-form' %}
         <h3>Get In Touch</h3>
-        <div class="vh-form__grid">
-          <input type="text" name="contact[first_name]" placeholder="First Name*" required>
-          <input type="text" name="contact[last_name]" placeholder="Last Name*" required>
-          <input type="email" name="contact[email]" placeholder="Email*" required>
-          <input type="tel" name="contact[phone]" placeholder="Phone Number*">
-          <input type="text" name="contact[company]" placeholder="Company*">
-          <input type="text" name="contact[job_title]" placeholder="Job Title*">
-        </div>
-        <textarea name="contact[body]" placeholder="Message Here..."></textarea>
-        <button class="vh-btn vh-btn--green" type="submit">
-          Sign in
-          <img src="{{ img_arrow }}" alt="">
-        </button>
+        {% render 'vectra-contact-fields', img_arrow: img_arrow %}
       {% endform %}
     </div>
   </section>
