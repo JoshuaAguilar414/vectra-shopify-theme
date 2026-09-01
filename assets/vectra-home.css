@@ -34,7 +34,6 @@
 }
 
 .vectra-home img {
-  width: auto;
   max-width: 100%;
   height: auto;
   display: block;
@@ -222,8 +221,10 @@
   cursor: pointer;
 }
 
+.vectra-home .vh-util img,
 .vh-util img {
   width: 34px;
+  max-width: 38px;
   height: 34px;
   object-fit: contain;
   mix-blend-mode: screen;
@@ -280,8 +281,10 @@
   margin-left: 7.66vw;
 }
 
+.vectra-home .vh-logo img,
 .vh-logo img {
   width: 160.88px;
+  max-width: 160.88px;
   height: 43.1px;
   object-fit: contain;
   mix-blend-mode: screen;

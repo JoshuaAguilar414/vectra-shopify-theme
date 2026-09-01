@@ -1,3 +1,6 @@
+@import url('vectra-home.css');
+@import url('vectra-our-story.css');
+
 * {
   box-sizing: border-box;
 }
@@ -80,6 +83,43 @@ svg {
 img {
   width: 100%;
   height: auto;
+}
+
+/* VECTRA homepage (preview.html): keep Horizon from stretching images to the viewport. */
+.vectra-home-page .vh-logo img,
+.vectra-home .vh-logo img {
+  width: 161px;
+  max-width: 161px;
+  height: 43px;
+  object-fit: contain;
+  mix-blend-mode: screen;
+}
+
+.vectra-home-page .vh-util img,
+.vectra-home .vh-util img {
+  width: 34px;
+  max-width: 38px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.vectra-home-page .vh-hero__slide > img,
+.vectra-home .vh-hero__slide > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vectra-home-page .vh-case__stars svg,
+.vectra-home .vh-case__stars svg {
+  width: 45px;
+  height: 43px;
+  max-width: 45px;
+}
+
+.vectra-home-page svg,
+.vectra-home svg {
+  max-width: none;
 }
 
 input,
