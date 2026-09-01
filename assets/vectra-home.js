@@ -33,8 +33,20 @@
   }
 
   const megaItems = qsa('[data-vh-mega-item]');
+  const alignMega = (item) => {
+    const trigger = item.querySelector('.vh-menu__anchor > a') || item.querySelector('a');
+    const mega = item.querySelector('.vh-mega');
+    if (!trigger || !mega) return;
+    mega.style.left = '0px';
+    mega.style.right = 'auto';
+    mega.style.transform = 'none';
+    const triggerBox = trigger.getBoundingClientRect();
+    const megaBox = mega.getBoundingClientRect();
+    const shift = triggerBox.left + triggerBox.width / 2 - (megaBox.left + megaBox.width / 2);
+    mega.style.left = `${shift}px`;
+  };
   megaItems.forEach((item) => {
-    const trigger = item.querySelector('a');
+    const trigger = item.querySelector('.vh-menu__anchor > a') || item.querySelector('a');
     const close = () => {
       item.classList.remove('is-open');
       trigger?.setAttribute('aria-expanded', 'false');
@@ -43,11 +55,13 @@
       megaItems.forEach((other) => {
         if (other !== item) {
           other.classList.remove('is-open');
-          other.querySelector('a')?.setAttribute('aria-expanded', 'false');
+          const otherTrigger = other.querySelector('.vh-menu__anchor > a') || other.querySelector('a');
+          otherTrigger?.setAttribute('aria-expanded', 'false');
         }
       });
       item.classList.add('is-open');
       trigger?.setAttribute('aria-expanded', 'true');
+      requestAnimationFrame(() => alignMega(item));
     };
     item.addEventListener('mouseenter', open);
     item.addEventListener('mouseleave', close);
@@ -64,7 +78,8 @@
     if (event.key !== 'Escape') return;
     megaItems.forEach((item) => {
       item.classList.remove('is-open');
-      item.querySelector('a')?.setAttribute('aria-expanded', 'false');
+      const trigger = item.querySelector('.vh-menu__anchor > a') || item.querySelector('a');
+      trigger?.setAttribute('aria-expanded', 'false');
     });
   });
 

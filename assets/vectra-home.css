@@ -19,8 +19,8 @@
   --vh-radius-lg: 24px;
   --vh-wrap: min(1770px, calc(100% - 140px));
   --vh-font: 'Poppins', sans-serif;
-  --vh-dropdown-bg: rgba(255, 255, 255, 0.18);
-  --vh-dropdown-border: rgba(255, 255, 255, 0.43);
+  --vh-dropdown-bg: rgba(255, 255, 255, 0.35);
+  --vh-dropdown-border: rgba(255, 255, 255, 0.55);
   --vh-panel-fill: linear-gradient(rgba(231, 231, 231, 0.28), rgba(231, 231, 231, 0.28)),
     linear-gradient(180deg, #092543 0%, #54bd01 101.41%);
   color: var(--vh-text);
@@ -199,11 +199,13 @@
   color: var(--vh-white);
   animation: vh-hero-in 0.7s ease both;
   overflow: visible;
+  --vh-dropdown-bg: rgba(255, 255, 255, 0.35);
+  --vh-dropdown-border: rgba(255, 255, 255, 0.55);
 }
 
 .vh-util {
   position: relative;
-  z-index: 6;
+  z-index: 30;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -259,6 +261,7 @@
 
 .vh-nav {
   position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: 0;
@@ -318,28 +321,29 @@
   letter-spacing: -0.05em;
   line-height: 24px;
   overflow: visible;
-  position: relative;
+  position: static;
   z-index: 5;
   align-self: stretch;
   height: 100%;
 }
 
 .vh-menu__item {
-  position: relative;
+  position: static;
   display: flex;
   align-items: center;
   height: 100%;
   align-self: stretch;
   flex: 0 0 auto;
-  width: max-content;
+  width: auto;
 }
 
 .vh-menu__anchor {
   position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   height: 100%;
-  width: max-content;
+  width: auto;
 }
 
 .vh-menu__item > a,
@@ -3580,30 +3584,31 @@ body:has(.vectra-home) #MainContent {
   --color-foreground-rgb: 255 255 255;
   --color-foreground-subdued: rgba(255, 255, 255, 0.7);
   --color-foreground-muted: rgba(255, 255, 255, 0.55);
-  --color-background: rgba(255, 255, 255, 0.18);
-  --color-border: rgba(255, 255, 255, 0.43);
+  --color-background: rgba(255, 255, 255, 0.35);
+  --color-border: rgba(255, 255, 255, 0.55);
   --color-shadow: transparent;
   --color-input-text: #ffffff;
-  --color-input-background: rgba(255, 255, 255, 0.12);
+  --color-input-background: rgba(255, 255, 255, 0.22);
   --color-primary-active: var(--vh-green);
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
   left: auto;
   z-index: 600;
+  isolation: isolate;
   min-width: 280px;
   max-width: min(360px, calc(100vw - 32px));
   max-height: min(27.5rem, calc(100vh - 120px));
   overflow: hidden;
   padding: 12px 10px;
-  background: var(--vh-dropdown-bg);
-  background-color: var(--vh-dropdown-bg) !important;
+  background: rgba(255, 255, 255, 0.35);
+  background-color: rgba(255, 255, 255, 0.35) !important;
   color: #fff;
   border: 1px solid var(--vh-dropdown-border);
   border-radius: 15px;
-  box-shadow: 0 4px 12px 5px rgba(0, 0, 0, 0.09);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
   color-scheme: dark;
 }
 
@@ -3621,21 +3626,44 @@ body:has(.vectra-home) #MainContent {
   border-bottom: 0;
 }
 
+.vh-header dropdown-localization-component .country-filter .field {
+  position: relative;
+}
+
 .vh-header dropdown-localization-component .country-filter__input {
   height: 36px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.43);
+  padding-left: 40px;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 10px;
   color: #fff;
 }
 
 .vh-header dropdown-localization-component .country-filter__input::placeholder {
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .vh-header dropdown-localization-component .country-filter__search-icon,
-.vh-header dropdown-localization-component .country-filter .field__button {
-  color: rgba(255, 255, 255, 0.7);
+.vh-header dropdown-localization-component .country-filter .country-filter__search-icon.field__button {
+  position: absolute;
+  left: 12px;
+  right: auto;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.vh-header dropdown-localization-component .country-filter__search-icon svg,
+.vh-header dropdown-localization-component .country-filter__search-icon .svg-wrapper {
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 
 .vh-header dropdown-localization-component .localization-form__list-item {
@@ -3706,8 +3734,8 @@ body:has(.vectra-home) #MainContent {
   min-height: 36px;
   padding: 8px 28px 8px 12px;
   field-sizing: unset;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.43);
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 10px;
   color: #fff;
   text-align: left;
@@ -3728,9 +3756,11 @@ body:has(.vectra-home) #MainContent {
   color: #fff;
 }
 
+.vh-locale,
 .vh-account,
 .vh-account__session {
   position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
 }
@@ -3771,13 +3801,14 @@ body:has(.vectra-home) #MainContent {
   min-width: 220px;
   max-width: min(320px, 80vw);
   padding: 12px 10px;
-  background: var(--vh-dropdown-bg);
-  background-color: var(--vh-dropdown-bg);
+  background: rgba(255, 255, 255, 0.35);
+  background-color: rgba(255, 255, 255, 0.35);
   border: 1px solid var(--vh-dropdown-border);
   border-radius: 15px;
-  box-shadow: 0 4px 12px 5px rgba(0, 0, 0, 0.09);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  isolation: isolate;
   display: grid;
   gap: 2px;
 }
@@ -3876,15 +3907,14 @@ body:has(.vectra-home) #MainContent {
   min-width: 220px;
   max-width: min(920px, 80vw);
   padding: 12px 10px;
-  background: var(--vh-dropdown-bg);
-  background-color: var(--vh-dropdown-bg);
+  background: rgba(255, 255, 255, 0.35);
+  background-color: rgba(255, 255, 255, 0.35);
   border: 1px solid var(--vh-dropdown-border);
   border-radius: 15px;
-  box-shadow: 0 4px 12px 5px rgba(0, 0, 0, 0.09);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transform: none;
-  translate: -50% 0;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  transform: translateX(-50%);
 }
 
 .vh-mega::before {
