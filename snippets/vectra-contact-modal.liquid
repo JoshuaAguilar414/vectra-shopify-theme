@@ -14,10 +14,10 @@
   aria-labelledby="{{ form_id }}-title"
 >
   <div class="vh-contact-modal__dialog" data-vh-contact-dialog>
-    <button class="vh-contact-modal__close" type="button" data-vh-contact-close aria-label="Close contact form">
-      <span aria-hidden="true">&times;</span>
-    </button>
     {% form 'contact', id: form_id, class: 'vh-form vh-form--modal' %}
+      <button class="vh-contact-modal__close" type="button" data-vh-contact-close aria-label="Close contact form">
+        <span aria-hidden="true">&times;</span>
+      </button>
       <h3 id="{{ form_id }}-title">Get In Touch</h3>
       {% if form.posted_successfully? %}
         <p class="vh-contact-modal__success" data-vh-contact-success>

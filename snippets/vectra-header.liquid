@@ -107,15 +107,12 @@
             aria-haspopup="true"
             aria-label="Account"
           >
-            {{ customer_initial }}
+            <img src="{{ img_user }}" alt="" width="32" height="36">
           </button>
           <div class="vh-account__menu" data-vh-account-menu hidden>
             <div class="vh-account__head">
-              <span class="vh-account__head-avatar" aria-hidden="true">{{ customer_initial }}</span>
-              <div>
-                <p class="vh-account__hi">Hi {{ customer_hello }}</p>
-                <p class="vh-account__email">{{ customer.email }}</p>
-              </div>
+              <p class="vh-account__hi">Hi {{ customer_hello }}</p>
+              <p class="vh-account__email">{{ customer.email }}</p>
             </div>
             <div class="vh-account__grid">
               <a class="vh-account__chip" href="{{ orders_url }}">
