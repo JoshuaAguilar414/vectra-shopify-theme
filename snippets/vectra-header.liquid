@@ -81,7 +81,7 @@
         </button>
         <div
           id="LocalizationPanel-{{ locale_form_id }}"
-          class="vh-locale__panel localization-wrapper right-bound"
+          class="vh-locale__panel vh-dropdown localization-wrapper right-bound"
           hidden
           ref="panel"
         >
@@ -109,7 +109,7 @@
           >
             <img src="{{ img_user }}" alt="" width="32" height="36">
           </button>
-          <div class="vh-account__menu" data-vh-account-menu hidden>
+          <div class="vh-account__menu vh-dropdown" data-vh-account-menu hidden>
             <div class="vh-account__head">
               <p class="vh-account__hi">Hi {{ customer_hello }}</p>
               <p class="vh-account__email">{{ customer.email }}</p>
@@ -154,7 +154,7 @@
         <div class="vh-menu__item has-children" data-vh-mega-item>
           <div class="vh-menu__anchor">
             <a href="{{ story }}" aria-haspopup="true" aria-expanded="false">Our DNA</a>
-            <div class="vh-mega vh-mega--list" role="menu">
+            <div class="vh-mega vh-mega--list vh-dropdown" role="menu">
               <ul class="vh-mega__list">
                 <li><a href="{{ story }}" role="menuitem">Our Story</a></li>
                 <li><a href="{{ home }}" role="menuitem">Our Leadership Team</a></li>
@@ -169,7 +169,7 @@
         <div class="vh-menu__item has-children" data-vh-mega-item>
           <div class="vh-menu__anchor">
             <a href="{{ home }}#solutions" aria-haspopup="true" aria-expanded="false">How We Help</a>
-            <div class="vh-mega vh-mega--list" role="menu">
+            <div class="vh-mega vh-mega--list vh-dropdown" role="menu">
               <ul class="vh-mega__list">
                 <li><a href="{{ home }}#solutions" role="menuitem">Solutions</a></li>
                 <li><a href="{{ home }}#solutions" role="menuitem">Services</a></li>
@@ -186,7 +186,7 @@
         <div class="vh-menu__item has-children" data-vh-mega-item>
           <div class="vh-menu__anchor">
             <a href="{{ home }}#resources" aria-haspopup="true" aria-expanded="false">Resources</a>
-            <div class="vh-mega vh-mega--list" role="menu">
+            <div class="vh-mega vh-mega--list vh-dropdown" role="menu">
               <ul class="vh-mega__list">
                 <li><a href="{{ home }}#cases" role="menuitem">Case Studies</a></li>
                 <li><a href="{{ home }}#resources" role="menuitem">Insights</a></li>

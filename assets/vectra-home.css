@@ -19,7 +19,7 @@
   --vh-radius-lg: 24px;
   --vh-wrap: min(1770px, calc(100% - 140px));
   --vh-font: 'Poppins', sans-serif;
-  --vh-dropdown-bg: rgba(255, 255, 255, 0.35);
+  --vh-dropdown-bg: rgba(255, 255, 255, 0.45);
   --vh-dropdown-border: rgba(255, 255, 255, 0.55);
   --vh-panel-fill: linear-gradient(rgba(231, 231, 231, 0.28), rgba(231, 231, 231, 0.28)),
     linear-gradient(180deg, #092543 0%, #54bd01 101.41%);
@@ -199,7 +199,7 @@
   color: var(--vh-white);
   animation: vh-hero-in 0.7s ease both;
   overflow: visible;
-  --vh-dropdown-bg: rgba(255, 255, 255, 0.35);
+  --vh-dropdown-bg: rgba(255, 255, 255, 0.45);
   --vh-dropdown-border: rgba(255, 255, 255, 0.55);
 }
 
@@ -3601,8 +3601,8 @@ body:has(.vectra-home) #MainContent {
   max-height: min(27.5rem, calc(100vh - 120px));
   overflow: hidden;
   padding: 12px 10px;
-  background: rgba(255, 255, 255, 0.35);
-  background-color: rgba(255, 255, 255, 0.35) !important;
+  background: rgba(255, 255, 255, 0.45) !important;
+  background-color: rgba(255, 255, 255, 0.45) !important;
   color: #fff;
   border: 1px solid var(--vh-dropdown-border);
   border-radius: 15px;
@@ -3801,8 +3801,8 @@ body:has(.vectra-home) #MainContent {
   min-width: 220px;
   max-width: min(320px, 80vw);
   padding: 12px 10px;
-  background: rgba(255, 255, 255, 0.35);
-  background-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.45) !important;
+  background-color: rgba(255, 255, 255, 0.45) !important;
   border: 1px solid var(--vh-dropdown-border);
   border-radius: 15px;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
@@ -3894,11 +3894,13 @@ body:has(.vectra-home) #MainContent {
   color: var(--vh-green);
 }
 
-.vh-mega {
+.vh-mega,
+.vh-menu__item.has-children .vh-mega,
+.vh-menu__item.has-children:last-child .vh-mega {
   position: absolute;
   top: calc(100% + 8px);
-  left: 50%;
-  right: auto;
+  left: 50% !important;
+  right: auto !important;
   z-index: 500;
   display: none;
   gap: 28px;
@@ -3907,14 +3909,15 @@ body:has(.vectra-home) #MainContent {
   min-width: 220px;
   max-width: min(920px, 80vw);
   padding: 12px 10px;
-  background: rgba(255, 255, 255, 0.35);
-  background-color: rgba(255, 255, 255, 0.35);
-  border: 1px solid var(--vh-dropdown-border);
+  background: rgba(255, 255, 255, 0.45) !important;
+  background-color: rgba(255, 255, 255, 0.45) !important;
+  border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 15px;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
   backdrop-filter: blur(20px) saturate(1.2);
   -webkit-backdrop-filter: blur(20px) saturate(1.2);
-  transform: translateX(-50%);
+  transform: translateX(-50%) !important;
+  translate: none !important;
 }
 
 .vh-mega::before {

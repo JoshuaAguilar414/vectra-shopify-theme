@@ -61,7 +61,7 @@
         {{ link.title }}
       </a>
       {% if has_kids %}
-        <div class="vh-mega{% if has_grand %} vh-mega--cols{% else %} vh-mega--list{% endif %}" role="menu">
+        <div class="vh-mega vh-dropdown{% if has_grand %} vh-mega--cols{% else %} vh-mega--list{% endif %}" role="menu">
           {% if has_grand %}
             {% for child in link.links %}
               <div class="vh-mega__col">
