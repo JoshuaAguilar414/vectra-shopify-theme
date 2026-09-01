@@ -1,4 +1,7 @@
 (() => {
+  if (window.__vectraStoryInit) return;
+  window.__vectraStoryInit = true;
+
   const root = document.querySelector('[data-vectra-story]');
   if (!root) return;
 
@@ -22,10 +25,24 @@
       const shift = card.offsetLeft - (track.parentElement.clientWidth - card.offsetWidth) / 2;
       track.style.transform = `translateX(${-Math.max(0, shift)}px)`;
     };
-    qs('[data-vs-prev]')?.addEventListener('click', () => go(index - 1));
-    qs('[data-vs-next]')?.addEventListener('click', () => go(index + 1));
+    qs('[data-vs-prev]')?.addEventListener('click', () => {
+      go(index - 1);
+      startLeaders();
+    });
+    qs('[data-vs-next]')?.addEventListener('click', () => {
+      go(index + 1);
+      startLeaders();
+    });
     window.addEventListener('resize', () => go(index));
     go(0);
+
+    let leaderTimer = 0;
+    const startLeaders = () => {
+      window.clearInterval(leaderTimer);
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || count < 2) return;
+      leaderTimer = window.setInterval(() => go(index + 1), 5000);
+    };
+    startLeaders();
   }
 
   const runReveal = (el) => el.classList.add('is-in');

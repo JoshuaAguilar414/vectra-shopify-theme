@@ -1,0 +1,323 @@
+{%- doc -%}
+  Reusable VECTRA Our Story modules.
+{%- enddoc -%}
+
+{% render 'vectra-assets', include_story: true %}
+{% liquid
+  assign img_logo = 'vectra-f1f1bad320cc916c9d3f257211cb366de698a572.png' | asset_url
+  assign img_globe = 'vectra-e75326688c7e0ce3e0b991e45c67a26e49052254.png' | asset_url
+  assign img_user = 'vectra-f07515ab5f0a8f7807c77ab21d02c5eb476eb902.png' | asset_url
+  assign img_case = 'vectra-bc13c1ac5973c68a13ce0a8ee907baaf2e4e4828.png' | asset_url
+  assign img_arrow_circle = 'vectra-4cfa6bb3f0d11e89962d1245674fd2ddd7350694.svg' | asset_url
+  assign img_arrow_white = 'vectra-d640d7e5d10a7b2543900785147430e0c5cd06a1.svg' | asset_url
+  assign img_arrow_btn = 'vectra-92b1edc95f4a73dc0740d86ef2953eac763cdc86.svg' | asset_url
+  assign img_arrow_send = 'vectra-54db3b2d66b85bf4c6ca264ed1363beb759e512d.svg' | asset_url
+  assign img_social = 'vectra-8edaf1fb1163eb6b857092f513083a6fc9fdc561.svg' | asset_url
+  assign img_glow = 'vectra-81e405ef1e5763ccbc49a2e23ee2f5ec21868308.svg' | asset_url
+  assign img_ceo = 'vectra-1323aaa74cde58ad7343be0a5de5bcef13017f6c.png' | asset_url
+  assign img_ceo_cut = 'vectra-85a6bf1d4fe720d04d30ef1cf07477479286f5a9.png' | asset_url
+  assign img_ceo_line = 'vectra-9608a3bf5c3df62aacde306f0a5bc0f23cd6cda4.svg' | asset_url
+  assign img_mark = 'vectra-6fbd7c62e521082467b9d6192e09d91235f198a5.png' | asset_url
+  assign img_mission = 'vectra-ab5a73b700ceb5a66dc5957be5e3b8aad23b6091.png' | asset_url
+  assign img_vision = 'vectra-1d6215c04cf277ec10b09b10ee5ed62453e8f71e.png' | asset_url
+  assign img_rule = 'vectra-f4557f4e97f060fde63a715e6fa9dfd3653ade0b.svg' | asset_url
+  assign img_values_line = 'vectra-8b21e57438446123bfee8c0c2a534513c4515e0b.svg' | asset_url
+  assign img_lead_1 = 'vectra-4a782677c9907a899d2e84025df9fda627b7fbf8.png' | asset_url
+  assign img_lead_2 = 'vectra-5a45cef3c985f7964fd6f04020f73a021850f52c.png' | asset_url
+  assign img_lead_3 = 'vectra-dc0daa0599cf1e7890ac477b6fd8c91f8bc1743a.png' | asset_url
+  assign img_lead_4 = 'vectra-dd46b740bdec4d3fe0852fbab0c2855306beb4e4.png' | asset_url
+  assign img_lead_5 = 'vectra-8606670d35448bf9a7c0b601a64c49b9be7e86de.png' | asset_url
+  assign img_exp_1 = 'vectra-14b9e6914bc9f1111966be55232cfa8990739462.png' | asset_url
+  assign img_exp_2 = 'vectra-bb37886d23428b36d5a6703f3aa1e71fd1d15929.png' | asset_url
+  assign img_exp_3 = 'vectra-70734a58f670e934fa9e18fa958676614dedc858.png' | asset_url
+  assign img_exp_4 = 'vectra-a7fddb20a7074e9dc372d79b62756ec3622de6d2.png' | asset_url
+  assign img_face_1 = 'vectra-3d90b6de863f4a0f6cfb9e8f77617b9ea7caeff1.png' | asset_url
+  assign img_face_2 = 'vectra-c543bcdfc727d87f2710b5345cea3b7eb76daab1.png' | asset_url
+  assign img_face_3 = 'vectra-26b8a07235b9d48b395528564d6124a59d29f6e3.png' | asset_url
+  assign img_face_4 = 'vectra-8d90f000de5e274a0c256afc80b101856c4f87b8.svg' | asset_url
+  assign vid_hero = 'vectra-story-hero.mp4' | asset_url
+  assign vid_who = 'vectra-story-who.mp4' | asset_url
+  assign vid_map = 'vectra-story-map.mp4' | asset_url
+  assign home = routes.root_url
+  assign story = pages['our-story'].url | default: '/pages/our-story'
+  assign mv_copy = 'We enable positive business impact by partnering with organizations to transform end-to-end operational complexity into resilient, well-governed performance through expert teams and human-led, state-of-the-art technology—creating measurable value for people, operations, and sustainable growth.'
+%}
+{% case module %}
+  {% when 'hero' %}
+<section class="vs-hero" aria-label="Our VECTRA Story" {{ block.shopify_attributes }}>
+    <video class="vs-hero__video" autoplay muted loop playsinline>
+      <source src="{{ vid_hero }}" type="video/mp4">
+      <source src="https://mind-heart-53521212.figma.site/_videos/v1/cf35e8be90772b3ab01cf2fb07d3d88607a4d291" type="video/mp4">
+    </video>
+    <img class="vs-hero__glow" src="{{ img_glow }}" alt="">
+    <div class="vs-hero__shade"></div>
+    <div class="vs-hero__copy">
+      <p class="vs-hero__kicker" data-vh-reveal="up">About us</p>
+      <h1 data-vh-reveal="up">Our VECTRA Story</h1>
+      <div class="vs-hero__body" data-vh-reveal="up">
+        <p>
+          We co-founded VECTRA International in 2005 to improve the lives of workers in supply chains, for products and services, to enhance the lives of the people in the local communities. Supply chains are where you can reach the most vulnerable people and have the greatest impact to protect people.
+        </p>
+        <p>
+          We believe business can be a force for good. Our goal is to improve businesses’ performance while helping their workers. That’s why we created a logo with five stakeholders (workers, workplaces, brand, community, and consumers) and embedded our values in the VECTRA name:
+          Values, Ethics, Community, Transparency, Rights, and Action.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {% when 'ceo' %}
+<div class="vs-sheet" {{ block.shopify_attributes }}>
+    <section class="vs-ceo" id="founder">
+      <img class="vs-ceo__mark" src="{{ img_mark }}" alt="">
+      <div class="vs-ceo__photo">
+        <img class="vs-ceo__arch" src="{{ img_ceo }}" alt="Patrick Neyts, CEO of VECTRA International" width="620" height="574" data-vh-reveal="fade">
+        <div class="vs-ceo__tag" data-vh-reveal="left">
+          <span>Patrick Neyts</span>
+        </div>
+        <img class="vs-ceo__line" src="{{ img_ceo_line }}" alt="" data-vh-reveal="left">
+      </div>
+      <div class="vs-ceo__copy" data-vh-reveal="pop">
+        <p class="vs-ceo__kicker">Meet the Founder</p>
+        <h2>A Message from Our CEO</h2>
+        <div class="vs-ceo__body">
+          <p>Most organizations don’t struggle because of a lack of data, they struggle when performance, priorities, and execution are not fully aligned.</p>
+          <p>At VECTRA International, we provide end-to-end business solutions with relentless customer focus, helping organizations, from global enterprises to micro businesses, improve performance, strengthen decision-making, and deliver consistent results.</p>
+          <p>We believe business is a force for good when better performance leads to better outcomes for your organization, your customers, people, and society.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  {% when 'main' %}
+<div class="vs-main" {{ block.shopify_attributes }}>
+    <div class="vs-grid-bg">
+      <canvas class="vs-grid-bg__canvas" data-vs-cell-grid aria-hidden="true"></canvas>
+
+    <section class="vs-who" id="who-we-are">
+      <div class="vs-who__copy">
+        <p class="vs-who__kicker">Who We Are</p>
+        <h2>Enabling Positive Business Impact</h2>
+      </div>
+      <div class="vs-who__media">
+        <video autoplay muted loop playsinline>
+          <source src="{{ vid_who }}" type="video/mp4">
+          <source src="https://mind-heart-53521212.figma.site/_videos/v1/9d111e59b40b7ea7e50837a852bb6a4b1c53a99c" type="video/mp4">
+        </video>
+      </div>
+    </section>
+
+    <section class="vs-mv">
+      <article class="vs-card">
+        <img class="vs-card__watermark" src="{{ img_mission }}" alt="">
+        <div class="vs-card__head">
+          <img src="{{ img_mission }}" alt="" width="69" height="69">
+          <h3>Our Mission</h3>
+        </div>
+        <img class="vs-card__rule" src="{{ img_rule }}" alt="">
+        <p>{{ mv_copy }}</p>
+      </article>
+      <article class="vs-card">
+        <img class="vs-card__watermark" src="{{ img_vision }}" alt="">
+        <div class="vs-card__head">
+          <img src="{{ img_vision }}" alt="" width="79" height="79">
+          <h3>Our Vision</h3>
+        </div>
+        <img class="vs-card__rule" src="{{ img_rule }}" alt="">
+        <p>{{ mv_copy }}</p>
+      </article>
+    </section>
+
+    <section class="vs-values" id="values">
+      <h2>VECTRA Values</h2>
+      <p>Our values make clear how we work with clients, communities, experts, and one another.</p>
+      <div class="vs-values__row">
+        <img class="vs-values__line" src="{{ img_values_line }}" alt="">
+        <article class="vs-value">
+          <div class="vs-value__letter">v</div>
+          <h3>Values</h3>
+          <p>We are guided by respect, innovation, integrity, and accountability.</p>
+        </article>
+        <article class="vs-value">
+          <div class="vs-value__letter">e</div>
+          <h3>Ethics</h3>
+          <p>We prioritize ethically sourcing goods, empowering others, and creating positive impact.</p>
+        </article>
+        <article class="vs-value">
+          <div class="vs-value__letter">c</div>
+          <h3>Community</h3>
+          <p>We actively build strong, supportive communities, fostering connections that uplift.</p>
+        </article>
+        <article class="vs-value">
+          <div class="vs-value__letter">t</div>
+          <h3>Transparency</h3>
+          <p>We are honest, clear, and open, so you can trust us and know where you stand.</p>
+        </article>
+        <article class="vs-value">
+          <div class="vs-value__letter">r</div>
+          <h3>Rights</h3>
+          <p>We defend human rights and champion fair treatment for all.</p>
+        </article>
+        <article class="vs-value">
+          <div class="vs-value__letter">a</div>
+          <h3>Action</h3>
+          <p>We turn words into real actions that drive meaningful change.</p>
+        </article>
+      </div>
+    </section>
+    </div>
+
+    <section class="vs-leaders" id="leadership" data-vs-reveal-group>
+      <h2>Our Leadership Team</h2>
+      <div class="vs-leaders__viewport">
+        <div class="vs-leaders__track" data-vs-leaders-track>
+          <article class="vs-leader" data-vs-leader data-vh-reveal="right">
+            <div class="vs-leader__frame">
+              <div class="vs-leader__media">
+                <img src="{{ img_lead_1 }}" alt="Patrick Neyts">
+                <div class="vs-leader__shade"></div>
+              </div>
+              <div class="vs-leader__id">
+                <h3>Patrick Neyts</h3>
+                <p class="vs-leader__role vs-leader__role--lg">CEO</p>
+                <p class="vs-leader__bio">With over 30 years of experience in ESG programs, Corporate Codes, and Responsible Business practices across 11 industry sectors and 40 countries.</p>
+              </div>
+            </div>
+          </article>
+          <article class="vs-leader" data-vs-leader data-vh-reveal="right">
+            <div class="vs-leader__frame">
+              <div class="vs-leader__media">
+                <img src="{{ img_lead_2 }}" alt="Shelly Sanders">
+                <div class="vs-leader__shade"></div>
+              </div>
+              <div class="vs-leader__id">
+                <h3>Shelly Sanders</h3>
+                <p class="vs-leader__role">SVP, Global Sales, Marketing &amp; Communications</p>
+                <p class="vs-leader__bio">With over 30 years of leadership experience in consultative and solution-based sales &amp; operations. She has worked across healthcare, finance, and IT, driving global growth, strategic partnerships, and ESG-aligned outcome.</p>
+              </div>
+            </div>
+          </article>
+          <article class="vs-leader" data-vs-leader data-vh-reveal="right">
+            <div class="vs-leader__frame">
+              <div class="vs-leader__media">
+                <img src="{{ img_lead_3 }}" alt="Lorenz Berzau">
+                <div class="vs-leader__shade"></div>
+              </div>
+              <div class="vs-leader__id">
+                <h3>Lorenz Berzau</h3>
+                <p class="vs-leader__role">VP Operations</p>
+                <p class="vs-leader__bio">With a focus on sustainability strategy, human rights, and social compliance, backed by 20 years of consultancy experience and a background in law.</p>
+              </div>
+            </div>
+          </article>
+          <article class="vs-leader" data-vs-leader data-vh-reveal="right">
+            <div class="vs-leader__frame">
+              <div class="vs-leader__media">
+                <img src="{{ img_lead_4 }}" alt="Alana van Wouw">
+                <div class="vs-leader__shade"></div>
+              </div>
+              <div class="vs-leader__id">
+                <h3>Alana van Wouw</h3>
+                <p class="vs-leader__role">AI Architect</p>
+                <p class="vs-leader__bio">With over 20 years of experience in project management, ESG, financial modeling, and AI, leading high-impact initiatives across emerging markets with strong sustainability and data-driven expertise.</p>
+              </div>
+            </div>
+          </article>
+          <article class="vs-leader" data-vs-leader data-vh-reveal="right">
+            <div class="vs-leader__frame">
+              <div class="vs-leader__media">
+                <img src="{{ img_lead_5 }}" alt="Elizabeth Korban">
+                <div class="vs-leader__shade"></div>
+              </div>
+              <div class="vs-leader__id">
+                <h3>Elizabeth Korban</h3>
+                <p class="vs-leader__role">Director of Organizational Enablement</p>
+                <p class="vs-leader__bio">Elizabeth has 15+ years of experience as a leader responsible for embedding ESG principles into organisational culture, governance and operations.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="vs-arrows" data-vh-reveal="right">
+        <button type="button" data-vs-prev aria-label="Previous">
+          <img class="vs-arrows__bg" src="{{ img_arrow_circle }}" alt="">
+          <img class="vs-arrows__icon" src="{{ img_arrow_white }}" alt="">
+        </button>
+        <button type="button" data-vs-next aria-label="Next">
+          <img class="vs-arrows__bg" src="{{ img_arrow_circle }}" alt="">
+          <img class="vs-arrows__icon" src="{{ img_arrow_white }}" alt="">
+        </button>
+      </div>
+      <a class="vs-cta-btn" href="#experts" data-vh-reveal="scale">
+        Meet Our People
+        <img src="{{ img_arrow_btn }}" alt="">
+      </a>
+    </section>
+
+    <section class="vs-experts" id="experts">
+      <h2>Our Team of Experts</h2>
+      <div class="vs-experts__grid">
+        <article class="vs-expert">
+          <img src="{{ img_exp_1 }}" alt="Beat Grüninger">
+          <h3>Beat Grüninger</h3>
+          <p>Senior Technical Advisor and lecturer in sustainability management and standards</p>
+        </article>
+        <article class="vs-expert">
+          <img src="{{ img_exp_2 }}" alt="Berçin Doğan Öztürk">
+          <h3>Berçin Doğan Öztürk</h3>
+          <p>13+ years of experience in sustainability, social compliance, and responsible business</p>
+        </article>
+        <article class="vs-expert">
+          <img src="{{ img_exp_3 }}" alt="Daniel Ndiwa">
+          <h3>Daniel Ndiwa</h3>
+          <p>Sustainability Standards Consultant with 5 years of experience in auditing of Voluntary Sustainability Standards in Coffee, Tea, Avocado and Horticultural in Eastern Africa.</p>
+        </article>
+        <article class="vs-expert">
+          <img src="{{ img_exp_4 }}" alt="Iddah Ooko">
+          <h3>Iddah Ooko</h3>
+          <p>An environmental and social impact consultant with over 15 years’ experience leading Environmental Impact Assessments, audits, ESG and multidisciplinary development projects.</p>
+        </article>
+      </div>
+      <div class="vs-experts__more">
+        <div class="vs-faces" data-vh-reveal="fade">
+          <img src="{{ img_face_1 }}" alt="">
+          <img src="{{ img_face_2 }}" alt="">
+          <img src="{{ img_face_3 }}" alt="">
+          <img src="{{ img_face_4 }}" alt="">
+        </div>
+        <a class="vs-cta-btn" href="mailto:info@vectra-intl.com" data-vh-reveal="scale">
+          Meet All Experts
+          <img src="{{ img_arrow_btn }}" alt="">
+        </a>
+      </div>
+    </section>
+
+    <section class="vs-people" data-vh-reveal="scale">
+      <h2>People that make VECTRA</h2>
+      <p>Our presence goes beyond locations. It reflects how we help bring structure, clarity, and control into complex global challenges.</p>
+      <div class="vs-people__map">
+        <video autoplay muted loop playsinline>
+          <source src="{{ vid_map }}" type="video/mp4">
+          <source src="https://mind-heart-53521212.figma.site/_videos/v1/70bd9d70447180d47d644737320fb4e353597bd3" type="video/mp4">
+        </video>
+      </div>
+    </section>
+  </div>
+
+  {% when 'join' %}
+<section class="vs-join" id="careers" {{ block.shopify_attributes }}>
+    <canvas class="vs-join__grid" data-vs-join-grid aria-hidden="true"></canvas>
+    <div class="vs-join__inner">
+      <div>
+        <p class="vs-join__kicker">Be part of a global team</p>
+        <h2>Ready to join<br>our journey?</h2>
+        <p>We’re always looking for talented individuals who share our passion for innovation and excellence.</p>
+      </div>
+      <a class="vs-cta-btn" href="mailto:info@vectra-intl.com">
+        Join our Team
+        <img src="{{ img_arrow_send }}" alt="">
+      </a>
+    </div>
+  </section>
+
+{% endcase %}

@@ -1,6 +1,8 @@
 (() => {
-  const root = document.querySelector('[data-vectra-home]');
-  if (!root) return;
+  if (window.__vectraHomeInit) return;
+  window.__vectraHomeInit = true;
+
+  const root = document.querySelector('[data-vectra-home]') || document;
 
   const qs = (sel, el = root) => el.querySelector(sel);
   const qsa = (sel, el = root) => [...el.querySelectorAll(sel)];
@@ -13,19 +15,194 @@
       navToggle.setAttribute('aria-expanded', String(open));
       document.body.classList.toggle('vh-nav-open', open);
     });
-    qsa('a', navPanel).forEach((link) => {
+    qsa('a, [data-vh-contact-open]', navPanel).forEach((link) => {
       link.addEventListener('click', () => {
         navPanel.classList.remove('is-open');
         navToggle.setAttribute('aria-expanded', 'false');
         document.body.classList.remove('vh-nav-open');
       });
     });
+    qsa('[data-vh-mobile-sub]', navPanel).forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.vh-nav-panel__item');
+        if (!item) return;
+        const open = item.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', String(open));
+      });
+    });
+  }
+
+  qsa('[data-vh-mega-item]').forEach((item) => {
+    const trigger = item.querySelector('[data-vh-mega-trigger]');
+    if (!trigger) return;
+    trigger.addEventListener('click', (event) => {
+      event.preventDefault();
+      const open = item.classList.contains('is-open');
+      qsa('[data-vh-mega-item]').forEach((other) => {
+        other.classList.remove('is-open');
+        other.querySelector('[data-vh-mega-trigger]')?.setAttribute('aria-expanded', 'false');
+      });
+      if (!open) {
+        item.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+  document.addEventListener('click', (event) => {
+    if (event.target.closest('[data-vh-mega-item]')) return;
+    qsa('[data-vh-mega-item]').forEach((item) => {
+      item.classList.remove('is-open');
+      item.querySelector('[data-vh-mega-trigger]')?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  const accountRoot = qs('[data-vh-account-root]');
+  const signup = qs('[data-vh-signup]');
+  const session = qs('[data-vh-account]');
+  const accountSensor = qs('[data-vh-account-sensor]');
+
+  const cookieSignedIn = () =>
+    document.cookie.split(';').some((part) => {
+      const [name, ...rest] = part.trim().split('=');
+      return name === 'secure_customer_sig' && rest.join('=').length > 8;
+    });
+
+  const analyticsSignedIn = () => Boolean(window.ShopifyAnalytics?.meta?.page?.customerId);
+
+  const sensorSignedIn = () => {
+    const shadow = accountSensor?.shadowRoot;
+    if (!shadow || !shadow.childElementCount) return false;
+    const signedOut = shadow.querySelector(
+      '[part="signed-out-avatar"], slot[name="signed-out-avatar"]'
+    );
+    if (signedOut) {
+      const style = window.getComputedStyle(signedOut);
+      if (style.display !== 'none' && style.visibility !== 'hidden') return false;
+    }
+    return Boolean(shadow.querySelector('[part*="signed-in"]')) || !signedOut;
+  };
+
+  const setAccountSignedIn = (signedIn) => {
+    if (!signup || !session) return;
+    signup.hidden = signedIn;
+    session.hidden = !signedIn;
+    accountRoot?.classList.toggle('is-signed-in', signedIn);
+  };
+
+  const syncAccountSignedIn = () => {
+    if (accountRoot?.hasAttribute('data-logged-in')) {
+      setAccountSignedIn(true);
+      return;
+    }
+    setAccountSignedIn(cookieSignedIn() || analyticsSignedIn() || sensorSignedIn());
+  };
+
+  syncAccountSignedIn();
+  if (accountSensor && customElements.whenDefined) {
+    customElements.whenDefined('shopify-account').then(() => {
+      syncAccountSignedIn();
+      const observer = new MutationObserver(syncAccountSignedIn);
+      observer.observe(accountSensor, { childList: true, subtree: true, attributes: true });
+      if (accountSensor.shadowRoot) {
+        observer.observe(accountSensor.shadowRoot, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+        });
+      }
+      [200, 800, 2000].forEach((delay) => window.setTimeout(syncAccountSignedIn, delay));
+    });
+  }
+
+  qsa('[data-vh-account]').forEach((account) => {
+    const toggle = qs('[data-vh-account-toggle]', account);
+    const menu = qs('[data-vh-account-menu]', account);
+    if (!toggle || !menu) return;
+    const close = () => {
+      menu.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+    };
+    toggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const open = menu.hidden;
+      qsa('[data-vh-account-menu]').forEach((other) => {
+        other.hidden = true;
+      });
+      qsa('[data-vh-account-toggle]').forEach((other) => {
+        other.setAttribute('aria-expanded', 'false');
+      });
+      menu.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('click', (event) => {
+      if (!account.contains(event.target)) close();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') close();
+    });
+  });
+
+  qsa('[data-vh-locale-select]').forEach((select) => {
+    select.addEventListener('change', () => select.form?.submit());
+  });
+
+  const contactModal = document.querySelector('[data-vh-contact-modal]');
+  if (contactModal) {
+    if (contactModal.parentElement !== document.body) {
+      document.body.appendChild(contactModal);
+    }
+    const isOpen = () => contactModal.open === true || contactModal.hasAttribute('open');
+    const openModal = () => {
+      if (isOpen()) return;
+      if (typeof contactModal.showModal === 'function') {
+        contactModal.showModal();
+      } else {
+        contactModal.setAttribute('open', '');
+      }
+      document.body.classList.add('vh-contact-open');
+    };
+    const closeModal = () => {
+      if (typeof contactModal.close === 'function') {
+        if (isOpen()) contactModal.close();
+      } else {
+        contactModal.removeAttribute('open');
+      }
+      document.body.classList.remove('vh-contact-open');
+    };
+    document.addEventListener('click', (event) => {
+      const opener = event.target.closest('[data-vh-contact-open]');
+      if (opener) {
+        event.preventDefault();
+        event.stopPropagation();
+        openModal();
+        return;
+      }
+      if (event.target.closest('[data-vh-contact-close]')) {
+        event.preventDefault();
+        closeModal();
+      }
+    });
+    contactModal.addEventListener('click', (event) => {
+      if (event.target === contactModal) closeModal();
+    });
+    contactModal.addEventListener('close', () => {
+      document.body.classList.remove('vh-contact-open');
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && isOpen()) closeModal();
+    });
+    if (contactModal.querySelector('[data-vh-contact-success]')) {
+      openModal();
+    }
   }
 
   const initCarousel = (carousel) => {
     const slides = qsa('[data-vh-slide]', carousel);
     if (slides.length < 2) return;
     let index = Math.max(0, slides.findIndex((slide) => slide.classList.contains('is-active')));
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let timer = 0;
     const go = (next) => {
       index = (next + slides.length) % slides.length;
       slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
@@ -33,11 +210,30 @@
         dot.classList.toggle('is-active', i === index);
       });
     };
-    qs('[data-vh-prev]', carousel)?.addEventListener('click', () => go(index - 1));
-    qs('[data-vh-next]', carousel)?.addEventListener('click', () => go(index + 1));
-    qsa('[data-vh-dot]', carousel).forEach((dot, i) => {
-      dot.addEventListener('click', () => go(i));
+    const stop = () => {
+      window.clearInterval(timer);
+      timer = 0;
+    };
+    const start = () => {
+      if (reduceMotion) return;
+      stop();
+      timer = window.setInterval(() => go(index + 1), 5000);
+    };
+    qs('[data-vh-prev]', carousel)?.addEventListener('click', () => {
+      go(index - 1);
+      start();
     });
+    qs('[data-vh-next]', carousel)?.addEventListener('click', () => {
+      go(index + 1);
+      start();
+    });
+    qsa('[data-vh-dot]', carousel).forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        go(i);
+        start();
+      });
+    });
+    start();
   };
 
   qsa('[data-vh-carousel]').forEach(initCarousel);
@@ -128,7 +324,19 @@
       const item = event.target.closest('[data-vh-sol-item]');
       if (!item) return;
       activate(item);
+      startSol();
     });
+
+    let solTimer = 0;
+    const startSol = () => {
+      window.clearInterval(solTimer);
+      if (reduceMotion || shotsInit.length < 2) return;
+      solTimer = window.setInterval(() => {
+        const shots = qsa('[data-vh-sol-item]', gallery || solutions);
+        if (shots[1]) activate(shots[1]);
+      }, 5000);
+    };
+    startSol();
   }
 
   qsa('[data-vh-faq-item]').forEach((item) => {

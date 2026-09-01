@@ -45,8 +45,14 @@
 >
   {% assign localization_label = 'content.localization_region_and_language' | t %}
 
+  {%- liquid
+    assign localization_form_dom_id = 'LocalizationForm'
+    if form_id != blank
+      assign localization_form_dom_id = 'LocalizationForm-' | append: form_id
+    endif
+  -%}
   {%- form 'localization',
-    id: 'LocalizationForm',
+    id: localization_form_dom_id,
     class: 'localization-form',
     ref: 'form',
     return_to: back,

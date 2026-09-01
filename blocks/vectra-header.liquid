@@ -1,0 +1,24 @@
+{% liquid
+  assign mega_menu = block.settings.menu
+  if mega_menu == blank or mega_menu.links.size == 0
+    assign mega_menu = section.settings.menu
+  endif
+%}
+{% render 'vectra-header', menu: mega_menu, block: block %}
+
+{% schema %}
+{
+  "name": "VECTRA: Header",
+  "tag": null,
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "MEGA Navigation",
+      "info": "Use the nested MEGA Nav menu from Content > Menus.",
+      "default": "vectra-website-mega-menu"
+    }
+  ],
+  "presets": [{ "name": "VECTRA: Header" }]
+}
+{% endschema %}

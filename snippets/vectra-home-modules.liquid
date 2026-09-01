@@ -1,0 +1,609 @@
+{%- doc -%}
+  Reusable VECTRA homepage modules.
+{%- enddoc -%}
+
+{% render 'vectra-assets' %}
+{% liquid
+  assign img_logo = 'vectra-f1f1bad320cc916c9d3f257211cb366de698a572.png' | asset_url
+  assign img_globe = 'vectra-e75326688c7e0ce3e0b991e45c67a26e49052254.png' | asset_url
+  assign img_user = 'vectra-f07515ab5f0a8f7807c77ab21d02c5eb476eb902.png' | asset_url
+  assign img_case = 'vectra-bc13c1ac5973c68a13ce0a8ee907baaf2e4e4828.png' | asset_url
+  assign img_arrow_circle = 'vectra-4cfa6bb3f0d11e89962d1245674fd2ddd7350694.svg' | asset_url
+  assign img_arrow_white = 'vectra-d640d7e5d10a7b2543900785147430e0c5cd06a1.svg' | asset_url
+  assign img_arrow = 'vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg' | asset_url
+  assign img_arrow_btn = 'vectra-92b1edc95f4a73dc0740d86ef2953eac763cdc86.svg' | asset_url
+  assign img_kicker_l = 'vectra-e205076c7ecd44be81c212b46ad88ffcb4b695e2.svg' | asset_url
+  assign img_kicker_r = 'vectra-59d55f26f31ee92b3fed74cf7b852de115d005dc.svg' | asset_url
+  assign img_hero = 'vectra-e5f2730422a9a0516df81d548f5c3f4383f99969.png' | asset_url
+  assign img_hero_2 = 'vectra-6a69557ce365aa215c5c28bca6a6e51af0a2c987.png' | asset_url
+  assign img_mark = 'vectra-impact-icon.png' | asset_url
+  assign img_check = 'vectra-impact-check.png' | asset_url
+  assign img_seal = 'vectra-trust-badge.png' | asset_url
+  assign img_why = 'vectra-98b18fd88fbc107def3e73f0c7affa6539c876eb.png' | asset_url
+  assign img_icon_1 = 'vectra-be208e26a6843edcaa8fc4443996531be291a3b4.svg' | asset_url
+  assign img_icon_2 = 'vectra-0741b53e27e031962e5853d5e609fc42e3000a0a.svg' | asset_url
+  assign img_icon_3 = 'vectra-7710da89715977538c6f4fe9c6dc34d7e755efbe.svg' | asset_url
+  assign img_icon_4 = 'vectra-2ff6aff392536da49f749783879fa1d814bae954.svg' | asset_url
+  assign img_caret = 'vectra-56f1265cfe47c63f7fdb66a187b51b98638147e0.svg' | asset_url
+  assign img_mail = 'vectra-9a4f80a5b924a881fc96b20219bb1f7c8ca734ab.svg' | asset_url
+  assign img_phone = 'vectra-7c0e54b37d57d95df328b0e4ee1f7b87844a7372.svg' | asset_url
+  assign img_pin = 'vectra-484bca36e3874bd30d1d6dd79807ed0314378e3d.svg' | asset_url
+  assign img_chat = 'vectra-da137306dcbc6716d83295ef75678ab141a500e1.svg' | asset_url
+  assign img_social = 'vectra-8edaf1fb1163eb6b857092f513083a6fc9fdc561.svg' | asset_url
+  assign img_sol_1 = 'vectra-d7047ac7e66609406a0cb2e3fa6ac8ad2faf5cca.png' | asset_url
+  assign img_sol_2 = 'vectra-add817f67c59297c528c5d57486a2794644fb47c.png' | asset_url
+  assign img_sol_3 = 'vectra-d9fea5c48820c581c90942feb5bfc3997b28135f.png' | asset_url
+  assign img_sol_4 = 'vectra-a22c67e8c858a4742869caed8035aebee50f5996.png' | asset_url
+  assign img_course_1 = 'vectra-514da1e5ddd8e93543da62a9818e4183b5547b3a.png' | asset_url
+  assign img_course_2 = 'vectra-01d26f601c057ccb6b54759c020d48ae5de18cf3.png' | asset_url
+  assign img_course_3 = 'vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png' | asset_url
+  assign img_course_4 = 'vectra-ae8b362b8368e8b200e58c921e1c7c274608a975.png' | asset_url
+  assign img_logo_ms = 'vectra-a4cdfe52a81d802c9aaf6b7bf6d694343cbedde4.png' | asset_url
+  assign img_logo_copper = 'vectra-e1d133cc580029cb6b8074e5aae5a7dda46406b4.png' | asset_url
+  assign img_logo_rba = 'vectra-b45406e535c5bbc9c26b808cd8cbca66f572f9e7.png' | asset_url
+  assign img_logo_otto = 'vectra-f9891ea3bc104013ef4392a154f93dad123a8da6.png' | asset_url
+  assign img_logo_applied = 'vectra-08b090be3b1f1972589bc05ef1d4cf3d74f30fca.png' | asset_url
+  assign img_logo_adidas = 'vectra-cb8e65114981244bc1e02bd76e369c2e9275bc0b.png' | asset_url
+  assign img_logo_better = 'vectra-ac45449dcc22ca95791fd9c0955f7d62850045d2.png' | asset_url
+  assign img_logo_jysk = 'vectra-fc0d652f27cfacfaf98915d93a3a90bbb65771bf.png' | asset_url
+  assign img_crh = 'vectra-28a1d7e111c00e8a7fc45b900983e7447e9874e4.png' | asset_url
+  assign img_kodak = 'vectra-c581678ac8eabd45e9273d17ceb6fa657d364dc9.png' | asset_url
+  assign img_careers = 'vectra-8dd632f9a55b50e7d1bc55dc9197d46aa4f6588a.png' | asset_url
+  assign img_blog_1 = img_sol_1
+  assign img_blog_2 = img_sol_4
+  assign img_blog_3 = img_sol_2
+%}
+{% case module %}
+  {% when 'hero' %}
+<section class="vh-hero" data-vh-carousel aria-label="Featured" {{ block.shopify_attributes }}>
+    <div class="vh-hero__track" data-vh-track>
+      <article class="vh-hero__slide is-active" data-vh-slide>
+        <img src="{{ img_hero }}" alt="VECTRA team collaborating" width="1920" height="1080">
+        <div class="vh-hero__copy">
+          <h1 data-vh-hero-el>Who We Are</h1>
+          <p data-vh-hero-el>
+            Driven by innovation and built on trust, we help businesses transform ideas into measurable impact.
+            Discover our mission, meet the team behind our solutions, and see how our values shape every partnership.
+          </p>
+        </div>
+      </article>
+      <article class="vh-hero__slide" data-vh-slide>
+        <img src="{{ img_hero_2 }}" alt="Responsible supply chains in motion" width="1920" height="1080">
+        <div class="vh-hero__copy">
+          <h1>Your Trusted ESG Partner</h1>
+          <p>
+            Our solutions are tailored to empower your organization to achieve ESG goals and build more resilient,
+            responsible supply chains.
+          </p>
+        </div>
+      </article>
+    </div>
+    <button class="vh-hero__arrow vh-hero__arrow--prev" type="button" data-vh-prev aria-label="Previous slide">
+      <img class="vh-hero__arrow-bg" src="{{ img_arrow_circle }}" alt="">
+      <img class="vh-hero__arrow-icon" src="{{ img_arrow_white }}" alt="">
+    </button>
+    <button class="vh-hero__arrow vh-hero__arrow--next" type="button" data-vh-next aria-label="Next slide">
+      <img class="vh-hero__arrow-bg" src="{{ img_arrow_circle }}" alt="">
+      <img class="vh-hero__arrow-icon" src="{{ img_arrow_white }}" alt="">
+    </button>
+  </section>
+
+  {% when 'trust' %}
+<section class="vh-trust" {{ block.shopify_attributes }}>
+    <div class="vh-wrap">
+      <div class="vh-trust__row">
+        <div class="vh-seal" aria-hidden="true">
+          <img src="{{ img_seal }}" alt="" width="198" height="193" data-vh-reveal="scale">
+        </div>
+        <div class="vh-trust__copy">
+          <h2 data-vh-reveal="left">Trusted partnership. Practical implementation.</h2>
+          <a class="vh-btn vh-btn--green vh-btn--rect" href="#cases" data-vh-reveal="scale">
+            Explore the case study→
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% when 'logos' %}
+<div class="vh-logos" aria-label="Trusted by" {{ block.shopify_attributes }}>
+    <div class="vh-logos__track" data-vh-marquee>
+      {% for i in (1..2) %}
+        <img src="{{ img_logo_ms }}" alt="{% if i == 1 %}Marks & Spencer{% endif %}">
+        <img src="{{ img_logo_copper }}" alt="{% if i == 1 %}The Copper Mark{% endif %}">
+        <img src="{{ img_logo_rba }}" alt="{% if i == 1 %}Responsible Business Alliance{% endif %}">
+        <img src="{{ img_logo_otto }}" alt="{% if i == 1 %}OTTO{% endif %}">
+        <img src="{{ img_logo_applied }}" alt="{% if i == 1 %}Applied Materials{% endif %}">
+        <img src="{{ img_logo_adidas }}" alt="{% if i == 1 %}adidas{% endif %}">
+        <img src="{{ img_logo_better }}" alt="{% if i == 1 %}BetterWork{% endif %}">
+        <img src="{{ img_logo_jysk }}" alt="{% if i == 1 %}JYSK{% endif %}">
+      {% endfor %}
+    </div>
+  </div>
+
+  {% when 'impact' %}
+<section class="vh-impact" {{ block.shopify_attributes }}>
+    <div class="vh-wrap">
+      <h2 data-vh-reveal="scale">
+        Enabling P<img class="vh-impact__mark" src="{{ img_mark }}" alt="" width="37" height="37">siti<img class="vh-impact__v" src="{{ img_check }}" alt="" width="40" height="49">e Business Impact
+      </h2>
+    </div>
+  </section>
+
+  {% when 'why' %}
+<section class="vh-why" id="why-vectra" {{ block.shopify_attributes }}>
+    <div class="vh-wrap vh-why__grid">
+      <div class="vh-why__media">
+        <img src="{{ img_why }}" alt="VECTRA International facility" width="980" height="720">
+      </div>
+      <div class="vh-why__copy" data-vh-reveal>
+        <p class="vh-kicker vh-kicker--arrows">
+          <img src="{{ img_kicker_l }}" alt="" class="vh-kicker__arrow vh-kicker__arrow--l">
+          WHY VECTRA
+          <img src="{{ img_kicker_r }}" alt="" class="vh-kicker__arrow">
+        </p>
+        <h2>Partnership with accountability.<br>Built for implementation.</h2>
+        <p>
+          We combine human expertise, an ecosystem of specialists, AI-enabled intelligence, and structured execution—then stay accountable for the outcomes that matter.
+        </p>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="#solutions">
+          Explore our approach
+          <img src="{{ img_arrow }}" alt="">
+        </a>
+      </div>
+    </div>
+    <div class="vh-wrap vh-why__list">
+      <article class="vh-why__item" data-vh-reveal>
+        <img src="{{ img_icon_4 }}" alt="">
+        <h3>Your success is our success</h3>
+        <p>We work toward business outcomes, not a list of deliverables.</p>
+      </article>
+      <article class="vh-why__item" data-vh-reveal>
+        <img src="{{ img_icon_3 }}" alt="">
+        <h3>AI-enabled<br>Human-led</h3>
+        <p>Technology makes expert judgment more timely and useful.</p>
+      </article>
+      <article class="vh-why__item" data-vh-reveal>
+        <img src="{{ img_icon_2 }}" alt="">
+        <h3>Integrated expertise around the work</h3>
+        <p>Curated specialists, tools, and learning shaped to your context.</p>
+      </article>
+      <article class="vh-why__item" data-vh-reveal>
+        <img src="{{ img_icon_1 }}" alt="">
+        <h3>Progress you can measure</h3>
+        <p>Practical implementation makes improvement visible and durable.</p>
+      </article>
+    </div>
+  </section>
+
+  {% when 'esg' %}
+<section class="vh-esg" {{ block.shopify_attributes }}>
+    <div class="vh-esg__stage">
+      <div class="vh-esg__glow" aria-hidden="true"></div>
+      <div class="vh-esg__copy" data-vh-reveal>
+        <h2>Your Trusted<br>ESG Partner</h2>
+        <p class="vh-lead">
+          Our solutions are tailored to empower your organization to achieve ESG goals and build more resilient, responsible supply chains
+        </p>
+      </div>
+      <div class="vh-stat vh-stat--100" data-vh-reveal="right"><b>100+</b><span>Experts Worldwide</span></div>
+      <div class="vh-stat vh-stat--30" data-vh-reveal="left"><b>30+</b><span>Years Of Experience</span></div>
+      <div class="vh-stat vh-stat--500" data-vh-reveal="up"><b>500+</b><span>Satisfied Clients</span></div>
+    </div>
+  </section>
+
+  {% when 'solutions' %}
+<section class="vh-solutions" id="solutions" data-vh-solutions {{ block.shopify_attributes }}>
+    <div class="vh-solutions__canvas">
+      <div class="vh-solutions__head" data-vh-reveal>
+        <p class="vh-kicker">VECTRA Solutions</p>
+        <h2>Find the right solution for you and your team, fast.</h2>
+      </div>
+      <div class="vh-solutions__body">
+        <div class="vh-solutions__copy" data-vh-sol-copy>
+          <h3 data-vh-sol-title>Responsible Business Performance</h3>
+          <p data-vh-sol-text>Turn stakeholder expectations into clearer decisions, stronger governance, and durable operating practice.</p>
+              <button class="vh-btn vh-btn--green vh-btn--rect" type="button" data-vh-contact-open data-vh-sol-cta>Build capability</button>
+        </div>
+        <div class="vh-solutions__gallery">
+          <button
+            class="vh-sol-shot is-active"
+            type="button"
+            data-vh-sol-item
+            data-title="Responsible Business Performance"
+            data-text="Turn stakeholder expectations into clearer decisions, stronger governance, and durable operating practice."
+            data-cta="Build capability"
+          >
+            <img src="{{ img_sol_3 }}" alt="Responsible business performance">
+          </button>
+          <button
+            class="vh-sol-shot"
+            type="button"
+            data-vh-sol-item
+            data-title="Governance &amp; Regulatory Readiness"
+            data-text="Translate shifting requirements into accountable controls, reliable evidence, and implementation plans."
+            data-cta="Strengthen visibility"
+          >
+            <img src="{{ img_hero_2 }}" alt="Governance and regulatory readiness">
+          </button>
+          <button
+            class="vh-sol-shot vh-sol-shot--plus"
+            type="button"
+            data-vh-sol-item
+            data-title="Let's Connect: We're Here To Help"
+            data-text="We build custom solutions designed to meet your specific objectives and drive measurable results."
+            data-cta="Customize Your Solution"
+          >
+            <img src="{{ img_sol_4 }}" alt="Let's connect">
+          </button>
+          <button
+            class="vh-sol-shot"
+            type="button"
+            data-vh-sol-item
+            data-title="Operational Resilience"
+            data-text="Build operational control, continuity, and a stronger response to disruption."
+            data-cta="Start a briefing."
+          >
+            <img src="{{ img_sol_2 }}" alt="Operational resilience">
+          </button>
+          <button
+            class="vh-sol-shot"
+            type="button"
+            data-vh-sol-item
+            data-title="Value Chain Resilience &amp; Improvement"
+            data-text="Connect due diligence, supplier improvement, risk visibility, and practical follow-through."
+            data-cta="Explore delivery"
+          >
+            <img src="{{ img_sol_1 }}" alt="Value chain resilience">
+          </button>
+        </div>
+      </div>
+      <div class="vh-solutions__cta">
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ routes.all_products_collection_url }}">
+          Explore All Solutions →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {% when 'marketplace' %}
+<section class="vh-market" id="marketplace" {{ block.shopify_attributes }}>
+    <div class="vh-market__panel">
+    <div class="vh-wrap">
+      <div class="vh-market__head">
+        <h2 class="vh-h2">Don’t Know Where To Start?</h2>
+      </div>
+      <div>
+      
+      </div>
+      <form class="vh-searchbar" action="{{ routes.search_url }}" method="get" role="search">
+        <label class="vh-searchbar__q">
+          <span class="vh-searchbar__icon" aria-hidden="true">{{ 'icon-search.svg' | inline_asset_content }}</span>
+          <input type="hidden" name="type" value="product">
+          <input type="search" name="q" placeholder="Search courses, assessments and bundles" aria-label="Search courses">
+        </label>
+        <select aria-label="Role"><option>Role</option></select>
+        <select aria-label="Regulation"><option>Regulation</option></select>
+        <select aria-label="Stage"><option>Stage</option></select>
+      </form>
+
+      <div class="vh-courses">
+        <article class="vh-course">
+          <img src="{{ img_course_1 }}" alt="">
+          <div class="vh-course__body">
+            <h3>Acronyms Used in ESG Area</h3>
+            <div class="vh-course__meta">
+              <span class="vh-price">$20.00</span>
+              <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">Access this course</a>
+            </div>
+          </div>
+        </article>
+        <article class="vh-course">
+          <img src="{{ img_course_2 }}" alt="">
+          <div class="vh-course__body">
+            <h3>Preventative and Corrective Measures</h3>
+            <div class="vh-course__meta">
+              <span class="vh-price">$20.00</span>
+              <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">Access this course</a>
+            </div>
+          </div>
+        </article>
+        <article class="vh-course">
+          <img src="{{ img_course_3 }}" alt="">
+          <div class="vh-course__body">
+            <h3>Optimizing Purchasing Practices</h3>
+            <div class="vh-course__meta">
+              <span class="vh-price">$20.00</span>
+              <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">Access this course</a>
+            </div>
+          </div>
+        </article>
+        <article class="vh-course">
+          <img src="{{ img_course_4 }}" alt="">
+          <div class="vh-course__body">
+            <h3>Disability Accommodation Training</h3>
+            <div class="vh-course__meta">
+              <span class="vh-price">$20.00</span>
+              <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">Access this course</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="vh-topics">
+        <h2 class="vh-h2">Relevant Topics</h2>
+        <div class="vh-pills">
+          <span class="vh-pill">Most Popular →</span>
+          <span class="vh-pill">By Regulation →</span>
+          <span class="vh-pill">By Role →</span>
+        </div>
+        <div class="vh-topics__list">
+          <article class="vh-topic-card">
+            <img src="{{ img_course_2 }}" alt="">
+            <div class="vh-topic-card__body">
+              <span class="vh-topic-card__label">Certificate Course</span>
+              <h3>Preventative and Corrective Measures</h3>
+              <p>
+                This course provides a comprehensive framework for managing supply chain due diligence in 2026. It focuses on the dual approach of using preventative measures as a “proactive shield” to avoid crises and corrective measures as a “surgical fix” to address and remediate existing violations.
+              </p>
+              <div class="vh-course__meta">
+                <span class="vh-price">$20.00</span>
+                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">Access this course</a>
+              </div>
+            </div>
+          </article>
+          <article class="vh-topic-card">
+            <img src="{{ img_course_3 }}" alt="">
+            <div class="vh-topic-card__body">
+              <span class="vh-topic-card__label">Certificate Course</span>
+              <h3>Optimizing Purchasing Practices</h3>
+              <p>
+                Learn how purchasing decisions shape supplier performance, cost, and ESG outcomes—and how to build practices that hold up under scrutiny.
+              </p>
+              <div class="vh-course__meta">
+                <span class="vh-price">$20.00</span>
+                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">Access this course</a>
+              </div>
+            </div>
+          </article>
+          <article class="vh-topic-card">
+            <img src="{{ img_course_1 }}" alt="">
+            <div class="vh-topic-card__body">
+              <span class="vh-topic-card__label">Certificate Course</span>
+              <h3>Acronyms Used in ESG Area</h3>
+              <p>
+                Build a shared vocabulary for ESG, due diligence, and supply-chain reporting so teams can act faster and with less confusion.
+              </p>
+              <div class="vh-course__meta">
+                <span class="vh-price">$20.00</span>
+                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">Access this course</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  {% when 'cases' %}
+<section class="vh-cases" id="cases" {{ block.shopify_attributes }}>
+    <canvas class="vh-cases__grid" data-vh-cases-grid aria-hidden="true"></canvas>
+    <div class="vh-wrap">
+      <h2 data-vh-reveal>Tested in real crises.<br>Proven by industry leaders.</h2>
+      <span class="vh-reviews">Based on 500 reviews</span>
+      <div class="vh-case-grid">
+        <article class="vh-case" data-vh-reveal>
+          <div class="vh-case__main">
+            <div class="vh-case__photo"><img src="{{ img_logo_otto }}" alt=""></div>
+            <div class="vh-case__caption">
+              <p class="vh-case__name">OTTO Group</p>
+              <p class="vh-case__loc">Hamburg, Germany</p>
+            </div>
+          </div>
+          <div class="vh-case__quote">
+            <div class="vh-case__stars" aria-label="5 stars">
+              <svg viewBox="0 0 20 19" aria-hidden="true"><path fill="currentColor" d="M10 0l2.47 6.28H19.4l-5.44 3.88 2.08 6.4L10 12.68 3.96 16.56l2.08-6.4L.6 6.28h6.93z"/></svg>
+              <svg viewBox="0 0 20 19" aria-hidden="true"><path fill="currentColor" d="M10 0l2.47 6.28H19.4l-5.44 3.88 2.08 6.4L10 12.68 3.96 16.56l2.08-6.4L.6 6.28h6.93z"/></svg>
+              <svg viewBox="0 0 20 19" aria-hidden="true"><path fill="currentColor" d="M10 0l2.47 6.28H19.4l-5.44 3.88 2.08 6.4L10 12.68 3.96 16.56l2.08-6.4L.6 6.28h6.93z"/></svg>
+              <svg viewBox="0 0 20 19" aria-hidden="true"><path fill="currentColor" d="M10 0l2.47 6.28H19.4l-5.44 3.88 2.08 6.4L10 12.68 3.96 16.56l2.08-6.4L.6 6.28h6.93z"/></svg>
+              <svg viewBox="0 0 20 19" aria-hidden="true"><path fill="currentColor" d="M10 0l2.47 6.28H19.4l-5.44 3.88 2.08 6.4L10 12.68 3.96 16.56l2.08-6.4L.6 6.28h6.93z"/></svg>
+            </div>
+            <blockquote>
+              “Working together transformed our ESG compliance framework. The team simplified complex EU CSRD reporting into a clear roadmap, cutting our data collection timeline by 40% and delivering our annual sustainability report six weeks ahead of schedule.”
+            </blockquote>
+          </div>
+        </article>
+        <article class="vh-case" data-vh-reveal>
+          <div class="vh-case__main">
+            <div class="vh-case__photo"><img src="{{ img_crh }}" alt=""></div>
+            <div class="vh-case__caption">
+              <p class="vh-case__name">CRH</p>
+              <p class="vh-case__loc">Hamburg, Germany</p>
+            </div>
+          </div>
+          <div class="vh-case__quote">
+            <div class="vh-case__stars" aria-label="5 stars">
+              <svg viewBox="0 0 20 19" aria-hidden="true"><path fill="currentColor" d="M10 0l2.47 6.28H19.4l-5.44 3.88 2.08 6.4L10 12.68 3.96 16.56l2.08-6.4L.6 6.28h6.93z"/></svg>
+              <svg viewBox="0 0 20 19" aria-hidden="true"><path fill="currentColor" d="M10 0l2.47 6.28H19.4l-5.44 3.88 2.08 6.4L10 12.68 3.96 16.56l2.08-6.4L.6 6.28h6.93z"/></svg>
+              <svg viewBox="0 0 20 19" aria-hidden="true"><path fill="currentColor" d="M10 0l2.47 6.28H19.4l-5.44 3.88 2.08 6.4L10 12.68 3.96 16.56l2.08-6.4L.6 6.28h6.93z"/></svg>
+              <svg viewBox="0 0 20 19" aria-hidden="true"><path fill="currentColor" d="M10 0l2.47 6.28H19.4l-5.44 3.88 2.08 6.4L10 12.68 3.96 16.56l2.08-6.4L.6 6.28h6.93z"/></svg>
+              <svg viewBox="0 0 20 19" aria-hidden="true"><path fill="currentColor" d="M10 0l2.47 6.28H19.4l-5.44 3.88 2.08 6.4L10 12.68 3.96 16.56l2.08-6.4L.6 6.28h6.93z"/></svg>
+            </div>
+            <blockquote>
+              "An essential partner for our climate tech scale-up. They optimized our carbon accounting infrastructure to handle rapid user growth while maintaining 100% compliance during intensive third-party client audits."
+            </blockquote>
+          </div>
+        </article>
+        <article class="vh-case" data-vh-reveal>
+          <div class="vh-case__main">
+            <div class="vh-case__photo"><img src="{{ img_kodak }}" alt=""></div>
+            <div class="vh-case__caption">
+              <p class="vh-case__name">Kodak</p>
+              <p class="vh-case__loc">Hamburg, Germany</p>
+            </div>
+          </div>
+          <div class="vh-case__quote">
+            <div class="vh-case__stars" aria-label="5 stars">
+              <svg viewBox="0 0 20 19" aria-hidden="true"><path fill="currentColor" d="M10 0l2.47 6.28H19.4l-5.44 3.88 2.08 6.4L10 12.68 3.96 16.56l2.08-6.4L.6 6.28h6.93z"/></svg>
+              <svg viewBox="0 0 20 19" aria-hidden="true"><path fill="currentColor" d="M10 0l2.47 6.28H19.4l-5.44 3.88 2.08 6.4L10 12.68 3.96 16.56l2.08-6.4L.6 6.28h6.93z"/></svg>
+              <svg viewBox="0 0 20 19" aria-hidden="true"><path fill="currentColor" d="M10 0l2.47 6.28H19.4l-5.44 3.88 2.08 6.4L10 12.68 3.96 16.56l2.08-6.4L.6 6.28h6.93z"/></svg>
+              <svg viewBox="0 0 20 19" aria-hidden="true"><path fill="currentColor" d="M10 0l2.47 6.28H19.4l-5.44 3.88 2.08 6.4L10 12.68 3.96 16.56l2.08-6.4L.6 6.28h6.93z"/></svg>
+              <svg viewBox="0 0 20 19" aria-hidden="true"><path fill="currentColor" d="M10 0l2.47 6.28H19.4l-5.44 3.88 2.08 6.4L10 12.68 3.96 16.56l2.08-6.4L.6 6.28h6.93z"/></svg>
+            </div>
+            <blockquote>
+              "Finding partners who truly understand Scope 3 emissions tracing is rare. They brought deep domain expertise and seamless execution, enabling us to verify and onboard over 150 sustainable suppliers in under six months."
+            </blockquote>
+          </div>
+        </article>
+      </div>
+      <div class="vh-case-dots" aria-hidden="true">
+        <span></span>
+        <span class="is-active"></span>
+        <span></span>
+        <span></span>
+      </div>
+      <a class="vh-btn vh-btn--green vh-cases__cta" href="#cases">
+        Explore Case studies
+        <img src="{{ img_arrow }}" alt="">
+      </a>
+    </div>
+  </section>
+
+  {% when 'blog' %}
+<section class="vh-blog" id="resources" {{ block.shopify_attributes }}>
+    <div class="vh-wrap">
+      <p class="vh-kicker" data-vh-reveal="scale">Our Blog</p>
+      <h2 class="vh-h2" data-vh-reveal="scale">Our latest Articles</h2>
+      <div class="vh-blog__grid">
+        <article class="vh-article" data-vh-reveal="up">
+          <img src="{{ img_blog_1 }}" alt="">
+          <time datetime="2025-01-25">January 25, 2025</time>
+          <h3>Master the Markets: Trading Tips for Beginners</h3>
+          <a class="vh-read" href="{{ blogs.news.url | default: '/blogs/news' }}">Read More</a>
+        </article>
+        <article class="vh-article">
+          <img src="{{ img_blog_2 }}" alt="">
+          <time datetime="2025-01-25">January 25, 2025</time>
+          <h3>Master the Markets: Trading Tips for Beginners</h3>
+          <a class="vh-read" href="{{ blogs.news.url | default: '/blogs/news' }}">Read More</a>
+        </article>
+        <article class="vh-article">
+          <img src="{{ img_blog_3 }}" alt="">
+          <time datetime="2025-01-25">January 25, 2025</time>
+          <h3>Master the Markets: Trading Tips for Beginners</h3>
+          <a class="vh-read" href="{{ blogs.news.url | default: '/blogs/news' }}">Read More</a>
+        </article>
+      </div>
+      <div class="vh-blog__more">
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ blogs.news.url | default: '/blogs/news' }}">See All Articles →</a>
+      </div>
+    </div>
+  </section>
+
+  {% when 'faq' %}
+<section class="vh-faq" id="faq" {{ block.shopify_attributes }}>
+    <div class="vh-wrap vh-faq__grid">
+      <aside class="vh-contact-card" data-vh-reveal="left">
+        <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
+        <p class="vh-contact-card__title">You Have Different Questions?</p>
+        <p>
+          Whether you’re here to build muscle, find balance, or boost you’re here to find balan your our state-of the-art equipment, expert muscle It’s the practice.
+        </p>
+        <button class="vh-btn vh-btn--white" type="button" data-vh-contact-open>
+          Contact Us
+          <img src="{{ img_arrow }}" alt="">
+        </button>
+        <div class="vh-contact-list">
+          <div>
+            <small>Give Us A Call</small>
+            <span>
+              <img src="{{ img_phone }}" alt="">
+              <strong>+32 495 239088</strong>
+            </span>
+          </div>
+          <div>
+            <small>Have a question</small>
+            <span>
+              <img src="{{ img_mail }}" alt="">
+              <strong class="vh-contact-list__email">info@vectra-intl.com</strong>
+            </span>
+          </div>
+          <div>
+            <small>Our Address</small>
+            <span>
+              <img src="{{ img_pin }}" alt="">
+              <strong>Chaussée de Wavre 1517B<br>1160 Brussels, Belgium</strong>
+            </span>
+          </div>
+        </div>
+      </aside>
+
+      <div class="vh-faq__right">
+        <div class="vh-faq__glow" aria-hidden="true"></div>
+        <div class="vh-accordion">
+          <p class="vh-kicker">Our FAQ</p>
+          <h2 class="vh-h2">Frequently Asked Questions</h2>
+          <p class="vh-lead">
+            Whether you’re here to build muscle, find balance, or boost you’re here your our state-of the-art equipment, expert muscle.
+          </p>
+          {% assign faqs = "What are the different types of trading?|What is the difference between trading and investing?|How do I deposit money into my trading account?|How do I protect my trading account?|What is the difference between trading and investing?" | split: '|' %}
+          {% for question in faqs %}
+            <div class="vh-acc{% if forloop.index == 3 %} is-open{% endif %}" data-vh-faq-item>
+              <button type="button" data-vh-faq-btn>
+                {{ question }}
+              </button>
+              <div class="vh-acc__body">
+                Whether you’re here to build muscle, find balance, or boost you’re here to find balan your our state-of the-art equipment, expert muscle It’s the practice.
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% when 'portal' %}
+<section class="vh-portal" data-vh-reveal="scale" {{ block.shopify_attributes }}>
+    <div class="vh-wrap vh-portal__grid">
+      <div class="vh-portal__copy">
+        <h2>Everything your <strong>VECTRA</strong> relationship, in one place.</h2>
+        <p>
+          Access Marketplace purchases, active services, VSuites, current retainers, billing, documentation, and support from a single, secure account.
+        </p>
+      </div>
+      {% form 'contact', class: 'vh-form' %}
+        <h3>Get In Touch</h3>
+        <div class="vh-form__grid">
+          <input type="text" name="contact[first_name]" placeholder="First Name*" required>
+          <input type="text" name="contact[last_name]" placeholder="Last Name*" required>
+          <input type="email" name="contact[email]" placeholder="Email*" required>
+          <input type="tel" name="contact[phone]" placeholder="Phone Number*">
+          <input type="text" name="contact[company]" placeholder="Company*">
+          <input type="text" name="contact[job_title]" placeholder="Job Title*">
+        </div>
+        <textarea name="contact[body]" placeholder="Message Here..."></textarea>
+        <button class="vh-btn vh-btn--green" type="submit">
+          Sign in
+          <img src="{{ img_arrow }}" alt="">
+        </button>
+      {% endform %}
+    </div>
+  </section>
+
+  {% when 'careers' %}
+<section class="vh-careers" id="careers" {{ block.shopify_attributes }}>
+    <canvas class="vh-careers__grid" data-vh-careers-grid aria-hidden="true"></canvas>
+    <div class="vh-careers__inner">
+      <p class="vh-kicker">Careers</p>
+      <h2 class="vh-h2">Join Our Team</h2>
+      <p class="vh-lead">
+        At VECTRA International, we believe our greatest asset is our people. We are always looking for passionate, driven individuals eager to make an impact and grow their careers with us.
+      </p>
+      <a class="vh-btn vh-btn--green vh-careers__cta" href="mailto:info@vectra-intl.com">
+        Explore our open roles
+      </a>
+    </div>
+  </section>
+
+{% endcase %}

@@ -2,7 +2,48 @@
   "sections": {
     "vectra_home": {
       "type": "vectra-home",
-      "settings": {}
+      "blocks": {
+        "header": {
+          "type": "vectra-header",
+          "settings": {
+            "menu": "vectra-website-mega-menu"
+          }
+        },
+        "hero": { "type": "vectra-hero", "settings": {} },
+        "trust": { "type": "vectra-trust", "settings": {} },
+        "logos": { "type": "vectra-logos", "settings": {} },
+        "impact": { "type": "vectra-impact", "settings": {} },
+        "why": { "type": "vectra-why", "settings": {} },
+        "esg": { "type": "vectra-esg", "settings": {} },
+        "solutions": { "type": "vectra-solutions", "settings": {} },
+        "marketplace": { "type": "vectra-marketplace", "settings": {} },
+        "cases": { "type": "vectra-cases", "settings": {} },
+        "blog": { "type": "vectra-blog", "settings": {} },
+        "faq": { "type": "vectra-faq", "settings": {} },
+        "portal": { "type": "vectra-portal", "settings": {} },
+        "careers": { "type": "vectra-careers", "settings": {} },
+        "footer": { "type": "vectra-footer", "settings": {} }
+      },
+      "block_order": [
+        "header",
+        "hero",
+        "trust",
+        "logos",
+        "impact",
+        "why",
+        "esg",
+        "solutions",
+        "marketplace",
+        "cases",
+        "blog",
+        "faq",
+        "portal",
+        "careers",
+        "footer"
+      ],
+      "settings": {
+        "menu": "vectra-website-mega-menu"
+      }
     }
   },
   "order": ["vectra_home"]

@@ -1,0 +1,291 @@
+{%- doc -%}
+  Shared VECTRA header with MEGA nav, native Shopify localization, and an account dropdown.
+{%- enddoc -%}
+
+{% render 'vectra-assets' %}
+
+{% liquid
+  assign img_logo = 'vectra-f1f1bad320cc916c9d3f257211cb366de698a572.png' | asset_url
+  assign img_globe = 'vectra-e75326688c7e0ce3e0b991e45c67a26e49052254.png' | asset_url
+  assign img_user = 'vectra-f07515ab5f0a8f7807c77ab21d02c5eb476eb902.png' | asset_url
+  assign img_case = 'vectra-bc13c1ac5973c68a13ce0a8ee907baaf2e4e4828.png' | asset_url
+  assign img_arrow_white = 'vectra-d640d7e5d10a7b2543900785147430e0c5cd06a1.svg' | asset_url
+  assign home = routes.root_url
+  assign story = pages['our-story'].url | default: '/pages/our-story'
+  assign account_menu = 'customer-account-main-menu'
+
+  assign mega = menu
+  if mega == blank or mega.links.size == 0
+    assign mega = linklists['vectra-website-mega-menu']
+  endif
+
+  assign has_nested = false
+  if mega != blank
+    for link in mega.links
+      if link.links != blank
+        assign has_nested = true
+      endif
+    endfor
+  endif
+
+  unless has_nested
+    assign mega_handles = 'vectra-website-mega-menu,mega-nav,mega-menu,mega-navigation,vectra-mega-nav,main-menu' | split: ','
+    for handle in mega_handles
+      if has_nested
+        break
+      endif
+      assign candidate = linklists[handle]
+      if candidate != blank and candidate.links.size > 0
+        for link in candidate.links
+          if link.links != blank
+            assign mega = candidate
+            assign has_nested = true
+            break
+          endif
+        endfor
+      endif
+    endfor
+  endunless
+%}
+
+<header class="vh-header" data-vh-header>
+  <div class="vh-util">
+    <div
+      class="vh-account"
+      data-vh-account-root
+      {% if customer %}
+        data-logged-in="true"
+      {% endif %}
+    >
+      {% liquid
+        assign account_root = routes.account_url | split: '?' | first
+        if account_root contains 'shopify.com'
+          assign profile_url = account_root | append: '/profile'
+          assign orders_url = account_root | append: '/orders'
+        else
+          assign profile_url = routes.account_url
+          assign orders_url = routes.account_url
+        endif
+      %}
+
+      <a
+        class="vh-signup"
+        href="{{ routes.account_register_url | default: '/account/register' }}"
+        data-vh-signup
+        {% if customer %}
+          hidden
+        {% endif %}
+      >
+        <img src="{{ img_case }}" alt="" width="34" height="34">
+        Sign Up
+      </a>
+
+      <div
+        class="vh-account__session"
+        data-vh-account
+        {% unless customer %}
+          hidden
+        {% endunless %}
+      >
+        <button
+          class="vh-account__toggle"
+          type="button"
+          data-vh-account-toggle
+          aria-expanded="false"
+          aria-haspopup="true"
+        >
+          <img src="{{ img_user }}" alt="" width="32" height="36">
+          <span data-vh-account-label>
+            {% if customer %}
+              {{ customer.first_name | default: 'Account' }}
+            {% else %}
+              Account
+            {% endif %}
+          </span>
+        </button>
+        <div class="vh-account__menu" data-vh-account-menu hidden>
+          <a href="{{ profile_url }}">{{ 'content.account_profile' | t }}</a>
+          <a href="{{ orders_url }}">{{ 'content.account_orders' | t }}</a>
+          <a href="{{ routes.account_logout_url }}">Log out</a>
+        </div>
+      </div>
+
+      {% if shop.customer_accounts_enabled %}
+        <shopify-account
+          class="vh-account__sensor"
+          menu="{{ account_menu }}"
+          data-vh-account-sensor
+          aria-hidden="true"
+          tabindex="-1"
+        >
+          <span slot="signed-out-avatar"></span>
+          <div class="account-button__fallback"></div>
+        </shopify-account>
+      {% endif %}
+    </div>
+
+    <div class="vh-locale vh-locale--native">
+      {% form 'localization', id: 'VectraLocalization', class: 'vh-locale__native', return_to: request.path %}
+        <img class="vh-locale__globe" src="{{ img_globe }}" alt="" width="38" height="38">
+        {% if localization.available_countries.size > 1 %}
+          <label class="vh-locale__field-inline">
+            {% if localization.country %}
+              <span
+                class="vh-locale__flag"
+                style="background-image: url({{ localization.country | image_url: width: 32 }});"
+              ></span>
+            {% endif %}
+            <select name="country_code" data-vh-locale-select aria-label="Country and currency">
+              {% for country in localization.available_countries %}
+                <option
+                  value="{{ country.iso_code }}"
+                  {% if country.iso_code == localization.country.iso_code %}
+                    selected
+                  {% endif %}
+                >
+                  {{ country.currency.iso_code }}
+                </option>
+              {% endfor %}
+            </select>
+          </label>
+        {% else %}
+          <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+          {% if localization.country %}
+            <span
+              class="vh-locale__flag"
+              style="background-image: url({{ localization.country | image_url: width: 32 }});"
+            ></span>
+            <span>{{ localization.country.currency.iso_code }}</span>
+          {% endif %}
+        {% endif %}
+        {% if localization.available_countries.size >= 1 and localization.available_languages.size >= 1 %}
+          <span>/</span>
+        {% endif %}
+        {% if localization.available_languages.size > 1 %}
+          <label class="vh-locale__field-inline">
+            <select name="language_code" data-vh-locale-select aria-label="{{ 'content.language' | t }}">
+              {% for language in localization.available_languages %}
+                <option
+                  value="{{ language.iso_code }}"
+                  lang="{{ language.iso_code }}"
+                  {% if language.iso_code == localization.language.iso_code %}
+                    selected
+                  {% endif %}
+                >
+                  {{ language.iso_code | upcase }}
+                </option>
+              {% endfor %}
+            </select>
+          </label>
+        {% else %}
+          <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
+          {% if localization.language %}
+            <span>{{ localization.language.iso_code | upcase }}</span>
+          {% endif %}
+        {% endif %}
+      {% endform %}
+    </div>
+  </div>
+
+  <nav class="vh-nav" aria-label="Primary">
+    <a class="vh-logo" href="{{ home }}">
+      <img src="{{ img_logo }}" alt="{{ shop.name }}" width="220" height="38">
+    </a>
+
+    <div class="vh-menu">
+      {% if mega != blank and mega.links.size > 0 %}
+        {% for link in mega.links %}
+          <div class="vh-menu__item{% if link.links != blank %} has-children{% endif %}" {% if link.links != blank %}data-vh-mega-item{% endif %}>
+            <a
+              href="{{ link.url }}"
+              {% if link.current %}
+                aria-current="page"
+              {% endif %}
+              {% if link.links != blank %}
+                aria-haspopup="true"
+                aria-expanded="false"
+                data-vh-mega-trigger
+              {% endif %}
+            >
+              {{ link.title }}
+            </a>
+            {% if link.links != blank %}
+              <div class="vh-mega" role="list">
+                {% for child in link.links %}
+                  <div class="vh-mega__col" role="listitem">
+                    <a class="vh-mega__parent" href="{{ child.url }}">{{ child.title }}</a>
+                    {% if child.links != blank %}
+                      <ul class="vh-mega__list">
+                        {% for grandchild in child.links %}
+                          <li>
+                            <a href="{{ grandchild.url }}">{{ grandchild.title }}</a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% else %}
+        <a href="{{ story }}">Our DNA</a>
+        <a href="{{ home }}#solutions">How We Help</a>
+        <a href="{{ home }}#marketplace">Marketplace</a>
+        <a href="{{ home }}#resources">Discover VECTRA</a>
+      {% endif %}
+    </div>
+
+    <div class="vh-nav-end">
+      <button
+        class="vh-search"
+        type="button"
+        on:click="#search-modal/showDialog"
+        aria-label="Search"
+      >
+        <span class="vh-search__icon" aria-hidden="true"></span>
+      </button>
+      <button class="vh-contact-link" type="button" data-vh-contact-open>
+        Contact Us
+        <img src="{{ img_arrow_white }}" alt="" width="16" height="9">
+      </button>
+      <button class="vh-nav-toggle" type="button" data-vh-nav-toggle aria-expanded="false" aria-label="Menu">
+        {{ 'icon-menu.svg' | inline_asset_content }}
+      </button>
+    </div>
+
+    <div class="vh-nav-panel" data-vh-nav-panel>
+      {% if mega != blank and mega.links.size > 0 %}
+        {% for link in mega.links %}
+          <div class="vh-nav-panel__item{% if link.links != blank %} has-children{% endif %}">
+            {% if link.links != blank %}
+              <button type="button" data-vh-mobile-sub aria-expanded="false">
+                {{ link.title }}
+              </button>
+              <div class="vh-nav-panel__sub">
+                <a href="{{ link.url }}">View {{ link.title }}</a>
+                {% for child in link.links %}
+                  <a href="{{ child.url }}">{{ child.title }}</a>
+                  {% if child.links != blank %}
+                    {% for grandchild in child.links %}
+                      <a class="vh-nav-panel__grand" href="{{ grandchild.url }}">{{ grandchild.title }}</a>
+                    {% endfor %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+            {% else %}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% else %}
+        <a href="{{ story }}">Our DNA</a>
+        <a href="{{ home }}#solutions">How We Help</a>
+        <a href="{{ home }}#marketplace">Marketplace</a>
+        <a href="{{ home }}#resources">Discover VECTRA</a>
+      {% endif %}
+      <button type="button" data-vh-contact-open>Contact Us</button>
+    </div>
+  </nav>
+</header>

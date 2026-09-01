@@ -44,10 +44,6 @@
     {%- render 'color-palette' -%}
 
     {% if template.name == 'index' or template.suffix == 'our-story' %}
-      {{ 'vectra-home.css' | asset_url | stylesheet_tag }}
-      {% if template.suffix == 'our-story' %}
-        {{ 'vectra-our-story.css' | asset_url | stylesheet_tag }}
-      {% endif %}
       <style>
         .vectra-home-page #header-group,
         .vectra-home-page > .page-wrapper > footer {
