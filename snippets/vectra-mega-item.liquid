@@ -47,45 +47,47 @@
   </div>
 {% else %}
   <div class="vh-menu__item{% if has_kids %} has-children{% endif %}" {% if has_kids %}data-vh-mega-item{% endif %}>
-    <a
-      href="{{ link.url }}"
-      {% if link.current %}
-        aria-current="page"
-      {% endif %}
-      {% if has_kids %}
-        aria-haspopup="true"
-        aria-expanded="false"
-      {% endif %}
-    >
-      {{ link.title }}
-    </a>
-    {% if has_kids %}
-      <div class="vh-mega{% if has_grand %} vh-mega--cols{% else %} vh-mega--list{% endif %}" role="menu">
-        {% if has_grand %}
-          {% for child in link.links %}
-            <div class="vh-mega__col">
-              <a class="vh-mega__parent" href="{{ child.url }}" role="menuitem">{{ child.title }}</a>
-              {% if child.links.size > 0 %}
-                <ul class="vh-mega__list">
-                  {% for grandchild in child.links %}
-                    <li>
-                      <a href="{{ grandchild.url }}" role="menuitem">{{ grandchild.title }}</a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
-            </div>
-          {% endfor %}
-        {% else %}
-          <ul class="vh-mega__list">
-            {% for child in link.links %}
-              <li>
-                <a href="{{ child.url }}" role="menuitem">{{ child.title }}</a>
-              </li>
-            {% endfor %}
-          </ul>
+    <div class="vh-menu__anchor">
+      <a
+        href="{{ link.url }}"
+        {% if link.current %}
+          aria-current="page"
         {% endif %}
-      </div>
-    {% endif %}
+        {% if has_kids %}
+          aria-haspopup="true"
+          aria-expanded="false"
+        {% endif %}
+      >
+        {{ link.title }}
+      </a>
+      {% if has_kids %}
+        <div class="vh-mega{% if has_grand %} vh-mega--cols{% else %} vh-mega--list{% endif %}" role="menu">
+          {% if has_grand %}
+            {% for child in link.links %}
+              <div class="vh-mega__col">
+                <a class="vh-mega__parent" href="{{ child.url }}" role="menuitem">{{ child.title }}</a>
+                {% if child.links.size > 0 %}
+                  <ul class="vh-mega__list">
+                    {% for grandchild in child.links %}
+                      <li>
+                        <a href="{{ grandchild.url }}" role="menuitem">{{ grandchild.title }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+            {% endfor %}
+          {% else %}
+            <ul class="vh-mega__list">
+              {% for child in link.links %}
+                <li>
+                  <a href="{{ child.url }}" role="menuitem">{{ child.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
   </div>
 {% endif %}

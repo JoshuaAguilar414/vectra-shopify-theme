@@ -1,6 +1,23 @@
+{%- doc -%}
+  Shared VECTRA fonts, CSS, and JS. Safe to render from multiple sections.
+{%- enddoc -%}
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-{% if include_story %}
-  <script src="{{ 'vectra-our-story.js' | asset_url }}" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+
+{% if include_css %}
+  {{ 'vectra-home.css' | asset_url | stylesheet_tag }}
+  <link rel="stylesheet" href="{{ 'vectra-home.css' | asset_url }}" media="all">
+  {% if include_story %}
+    {{ 'vectra-our-story.css' | asset_url | stylesheet_tag }}
+    <link rel="stylesheet" href="{{ 'vectra-our-story.css' | asset_url }}" media="all">
+  {% endif %}
+{% endif %}
+
+{% if include_js %}
+  <script src="{{ 'vectra-home.js' | asset_url }}" defer></script>
+  {% if include_story %}
+    <script src="{{ 'vectra-our-story.js' | asset_url }}" defer></script>
+  {% endif %}
 {% endif %}

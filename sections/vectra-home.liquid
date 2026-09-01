@@ -1,12 +1,7 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ 'vectra-home.css' | asset_url }}" media="all">
-<script src="{{ 'vectra-home.js' | asset_url }}" defer></script>
-
-<div class="vectra-home" data-vectra-home>
+{% capture children %}
   {% content_for 'blocks' %}
-</div>
+{% endcapture %}
+{% render 'vectra-page-shell', children: children %}
 
 {% schema %}
 {

@@ -564,13 +564,21 @@
   </section>
 
   {% when 'portal' %}
+{% liquid
+  assign portal_heading = block.settings.heading
+  if portal_heading == blank
+    assign portal_heading = 'Everything your <strong>VECTRA</strong> relationship, in one place.'
+  endif
+  assign portal_text = block.settings.text
+  if portal_text == blank
+    assign portal_text = 'Access Marketplace purchases, active services, VSuites, current retainers, billing, documentation, and support from a single, secure account.'
+  endif
+%}
 <section class="vh-portal" data-vh-reveal="scale" {{ block.shopify_attributes }}>
     <div class="vh-wrap vh-portal__grid">
       <div class="vh-portal__copy">
-        <h2>Everything your <strong>VECTRA</strong> relationship, in one place.</h2>
-        <p>
-          Access Marketplace purchases, active services, VSuites, current retainers, billing, documentation, and support from a single, secure account.
-        </p>
+        <h2>{{ portal_heading }}</h2>
+        <p>{{ portal_text }}</p>
       </div>
       {% form 'contact', class: 'vh-form' %}
         <h3>Get In Touch</h3>

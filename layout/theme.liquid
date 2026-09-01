@@ -43,21 +43,29 @@
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-palette' -%}
 
-    {% if template.name == 'index' or template.suffix == 'our-story' %}
-      <link rel="stylesheet" href="{{ 'vectra-home.css' | asset_url }}" media="all">
-      {% if template.suffix == 'our-story' %}
-        <link rel="stylesheet" href="{{ 'vectra-our-story.css' | asset_url }}" media="all">
-      {% endif %}
-      <script src="{{ 'vectra-home.js' | asset_url }}" defer></script>
-      {% if template.suffix == 'our-story' %}
-        <script src="{{ 'vectra-our-story.js' | asset_url }}" defer></script>
-      {% endif %}
+    {% liquid
+      assign vectra_shell = false
+      if template.name == 'index' or template.suffix == 'our-story' or template.suffix == 'vectra'
+        assign vectra_shell = true
+      endif
+    %}
+    {% if vectra_shell %}
+      {% liquid
+        assign vectra_story_assets = false
+        if template.suffix == 'our-story' or template.suffix == 'vectra'
+          assign vectra_story_assets = true
+        endif
+      %}
+      {% render 'vectra-assets', include_css: true, include_js: true, include_story: vectra_story_assets %}
       <style>
         .vectra-home-page #header-group,
-        .vectra-home-page > .page-wrapper > footer {
+        .vectra-home-page .page-wrapper > footer,
+        body:has(.vh-header) #header-group,
+        body:has(.vh-header) .page-wrapper > footer {
           display: none !important;
         }
-        .vectra-home-page {
+        .vectra-home-page,
+        body:has(.vectra-home) {
           --header-height: 0px;
           --header-group-height: 0px;
         }
@@ -71,7 +79,7 @@
     {{ content_for_header }}
   </head>
 
-  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}{% if template.name == 'index' or template.suffix == 'our-story' %} vectra-home-page{% endif %}">
+  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}{% if template.name == 'index' or template.suffix == 'our-story' or template.suffix == 'vectra' %} vectra-home-page{% endif %}">
     {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
 
     {% render 'chat-drawer' %}

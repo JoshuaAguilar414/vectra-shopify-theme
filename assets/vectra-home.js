@@ -34,7 +34,7 @@
 
   const megaItems = qsa('[data-vh-mega-item]');
   megaItems.forEach((item) => {
-    const trigger = item.querySelector(':scope > a');
+    const trigger = item.querySelector('a');
     const close = () => {
       item.classList.remove('is-open');
       trigger?.setAttribute('aria-expanded', 'false');
@@ -43,7 +43,7 @@
       megaItems.forEach((other) => {
         if (other !== item) {
           other.classList.remove('is-open');
-          other.querySelector(':scope > a')?.setAttribute('aria-expanded', 'false');
+          other.querySelector('a')?.setAttribute('aria-expanded', 'false');
         }
       });
       item.classList.add('is-open');
@@ -64,7 +64,7 @@
     if (event.key !== 'Escape') return;
     megaItems.forEach((item) => {
       item.classList.remove('is-open');
-      item.querySelector(':scope > a')?.setAttribute('aria-expanded', 'false');
+      item.querySelector('a')?.setAttribute('aria-expanded', 'false');
     });
   });
 

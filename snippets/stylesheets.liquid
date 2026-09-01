@@ -1,9 +1,9 @@
 {{ 'overflow-list.css' | asset_url | preload_tag: as: 'style' }}
 {{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
-{% if template.name == 'index' or template.suffix == 'our-story' %}
+{% if template.name == 'index' or template.suffix == 'our-story' or template.suffix == 'vectra' %}
   {{ 'vectra-home.css' | asset_url | stylesheet_tag: preload: true }}
   <link rel="stylesheet" href="{{ 'vectra-home.css' | asset_url }}" media="all">
-  {% if template.suffix == 'our-story' %}
+  {% if template.suffix == 'our-story' or template.suffix == 'vectra' %}
     {{ 'vectra-our-story.css' | asset_url | stylesheet_tag: preload: true }}
     <link rel="stylesheet" href="{{ 'vectra-our-story.css' | asset_url }}" media="all">
   {% endif %}

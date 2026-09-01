@@ -1,0 +1,35 @@
+{% capture children %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-page-shell', children: children, include_story: true %}
+
+{% schema %}
+{
+  "name": "VECTRA page",
+  "class": "vectra-page-section",
+  "enabled_on": {
+    "templates": ["index", "page"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Shared VECTRA canvas. Add header, page hero, homepage modules, Our Story modules, Get in touch, and footer as blocks."
+    }
+  ],
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA page",
+      "blocks": [
+        { "type": "vectra-header" },
+        { "type": "vectra-page-hero" },
+        { "type": "vectra-portal" },
+        { "type": "vectra-footer" }
+      ]
+    }
+  ]
+}
+{% endschema %}

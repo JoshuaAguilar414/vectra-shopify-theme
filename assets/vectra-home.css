@@ -19,6 +19,8 @@
   --vh-radius-lg: 24px;
   --vh-wrap: min(1770px, calc(100% - 140px));
   --vh-font: 'Poppins', sans-serif;
+  --vh-dropdown-bg: rgba(255, 255, 255, 0.18);
+  --vh-dropdown-border: rgba(255, 255, 255, 0.43);
   --vh-panel-fill: linear-gradient(rgba(231, 231, 231, 0.28), rgba(231, 231, 231, 0.28)),
     linear-gradient(180deg, #092543 0%, #54bd01 101.41%);
   color: var(--vh-text);
@@ -328,15 +330,27 @@
   align-items: center;
   height: 100%;
   align-self: stretch;
+  flex: 0 0 auto;
+  width: max-content;
 }
 
-.vh-menu__item > a {
+.vh-menu__anchor {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  width: max-content;
+}
+
+.vh-menu__item > a,
+.vh-menu__anchor > a {
   display: inline-flex;
   align-items: center;
 }
 
 .vh-menu > a:hover,
-.vh-menu__item > a:hover {
+.vh-menu__item > a:hover,
+.vh-menu__anchor > a:hover {
   color: var(--vh-green);
 }
 
@@ -350,11 +364,13 @@
   flex: none;
 }
 
-.vh-menu__item.has-children > a {
+.vh-menu__item.has-children > a,
+.vh-menu__anchor > a {
   gap: 6px;
 }
 
-.vh-menu__item.has-children > a::after {
+.vh-menu__item.has-children > a::after,
+.vh-menu__anchor > a[aria-haspopup]::after {
   content: '';
   width: 8px;
   height: 8px;
@@ -628,6 +644,66 @@
 
 .vh-hero__arrow:hover .vh-hero__arrow-bg {
   opacity: 0.85;
+}
+
+/* Interior page hero — shared by VECTRA subpages */
+.vh-page-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 420px;
+  padding: 160px 0 120px;
+  overflow: hidden;
+  color: var(--vh-white);
+  background: linear-gradient(180deg, #092543 0%, #54bd01 101.41%);
+}
+
+.vh-page-hero::after {
+  content: '';
+  position: absolute;
+  left: -12%;
+  right: -12%;
+  bottom: -70px;
+  height: 140px;
+  background: var(--vh-white);
+  border-radius: 50% 50% 0 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.vh-page-hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.vh-page-hero__kicker {
+  margin: 0 0 16px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.vh-page-hero h1 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.vh-page-hero__text {
+  margin: 22px auto 0;
+  max-width: 640px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.5;
 }
 
 /* Trust — Figma Group 186697, 1036×193 at x=511 */
@@ -2837,21 +2913,26 @@
 
 /* Homepage chrome */
 .vectra-home-page #header-group,
-.vectra-home-page > .page-wrapper > footer {
+.vectra-home-page .page-wrapper > footer,
+body:has(.vh-header) #header-group,
+body:has(.vh-header) .page-wrapper > footer {
   display: none !important;
 }
 
-.vectra-home-page {
+.vectra-home-page,
+body:has(.vectra-home) {
   --header-height: 0px;
   --header-group-height: 0px;
 }
 
-.vectra-home-page .shopify-section:has(.vectra-home) {
+.vectra-home-page .shopify-section:has(.vectra-home),
+body:has(.vectra-home) .shopify-section:has(.vectra-home) {
   margin: 0;
   overflow: visible;
 }
 
-.vectra-home-page #MainContent {
+.vectra-home-page #MainContent,
+body:has(.vectra-home) #MainContent {
   padding: 0;
 }
 
@@ -2947,6 +3028,16 @@
 }
 
 @media (max-width: 989px) {
+  .vh-page-hero {
+    min-height: 0;
+    padding: 120px 0 88px;
+  }
+
+  .vh-page-hero::after {
+    bottom: -48px;
+    height: 96px;
+  }
+
   .vh-menu {
     display: none;
   }
@@ -3483,16 +3574,17 @@
 }
 
 .vh-locale__panel,
-.vh-header dropdown-localization-component .localization-wrapper {
+.vh-header dropdown-localization-component .localization-wrapper,
+.vh-header dropdown-localization-component .localization-wrapper.localization-wrapper {
   --color-foreground: #ffffff;
   --color-foreground-rgb: 255 255 255;
   --color-foreground-subdued: rgba(255, 255, 255, 0.7);
   --color-foreground-muted: rgba(255, 255, 255, 0.55);
-  --color-background: transparent;
+  --color-background: rgba(255, 255, 255, 0.18);
   --color-border: rgba(255, 255, 255, 0.43);
   --color-shadow: transparent;
   --color-input-text: #ffffff;
-  --color-input-background: rgba(255, 255, 255, 0.08);
+  --color-input-background: rgba(255, 255, 255, 0.12);
   --color-primary-active: var(--vh-green);
   position: absolute;
   top: calc(100% + 8px);
@@ -3504,9 +3596,10 @@
   max-height: min(27.5rem, calc(100vh - 120px));
   overflow: hidden;
   padding: 12px 10px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--vh-dropdown-bg);
+  background-color: var(--vh-dropdown-bg) !important;
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.43);
+  border: 1px solid var(--vh-dropdown-border);
   border-radius: 15px;
   box-shadow: 0 4px 12px 5px rgba(0, 0, 0, 0.09);
   backdrop-filter: blur(10px);
@@ -3678,8 +3771,9 @@
   min-width: 220px;
   max-width: min(320px, 80vw);
   padding: 12px 10px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.43);
+  background: var(--vh-dropdown-bg);
+  background-color: var(--vh-dropdown-bg);
+  border: 1px solid var(--vh-dropdown-border);
   border-radius: 15px;
   box-shadow: 0 4px 12px 5px rgba(0, 0, 0, 0.09);
   backdrop-filter: blur(10px);
@@ -3782,13 +3876,15 @@
   min-width: 220px;
   max-width: min(920px, 80vw);
   padding: 12px 10px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.43);
+  background: var(--vh-dropdown-bg);
+  background-color: var(--vh-dropdown-bg);
+  border: 1px solid var(--vh-dropdown-border);
   border-radius: 15px;
   box-shadow: 0 4px 12px 5px rgba(0, 0, 0, 0.09);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transform: translateX(-50%);
+  transform: none;
+  translate: -50% 0;
 }
 
 .vh-mega::before {
@@ -3800,9 +3896,9 @@
   height: 16px;
 }
 
-.vh-menu__item.has-children:hover > .vh-mega,
-.vh-menu__item.has-children:focus-within > .vh-mega,
-.vh-menu__item.has-children.is-open > .vh-mega {
+.vh-menu__item.has-children:hover .vh-mega,
+.vh-menu__item.has-children:focus-within .vh-mega,
+.vh-menu__item.has-children.is-open .vh-mega {
   display: flex;
 }
 

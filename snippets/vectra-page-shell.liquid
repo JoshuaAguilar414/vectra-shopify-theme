@@ -1,0 +1,19 @@
+{%- doc -%}
+  Shared VECTRA page wrapper. Homepage, Our Story, and interior pages
+  all render inside this so theme blocks keep the same styles.
+
+  @param {string} children - Captured section blocks
+  @param {boolean} [include_story] - Also load Our Story CSS/JS
+{%- enddoc -%}
+
+{% render 'vectra-assets', include_css: true, include_js: true, include_story: include_story %}
+
+<div
+  class="vectra-home{% if include_story %} vectra-story{% endif %}"
+  data-vectra-home
+  {% if include_story %}
+    data-vectra-story
+  {% endif %}
+>
+  {{ children }}
+</div>
