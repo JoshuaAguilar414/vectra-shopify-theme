@@ -32,91 +32,9 @@
     });
   }
 
-  qsa('[data-vh-mega-item]').forEach((item) => {
-    const trigger = item.querySelector('[data-vh-mega-trigger]');
-    if (!trigger) return;
-    trigger.addEventListener('click', (event) => {
-      event.preventDefault();
-      const open = item.classList.contains('is-open');
-      qsa('[data-vh-mega-item]').forEach((other) => {
-        other.classList.remove('is-open');
-        other.querySelector('[data-vh-mega-trigger]')?.setAttribute('aria-expanded', 'false');
-      });
-      if (!open) {
-        item.classList.add('is-open');
-        trigger.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
-  document.addEventListener('click', (event) => {
-    if (event.target.closest('[data-vh-mega-item]')) return;
-    qsa('[data-vh-mega-item]').forEach((item) => {
-      item.classList.remove('is-open');
-      item.querySelector('[data-vh-mega-trigger]')?.setAttribute('aria-expanded', 'false');
-    });
-  });
-
-  const accountRoot = qs('[data-vh-account-root]');
-  const signup = qs('[data-vh-signup]');
-  const session = qs('[data-vh-account]');
-  const accountSensor = qs('[data-vh-account-sensor]');
-
-  const cookieSignedIn = () =>
-    document.cookie.split(';').some((part) => {
-      const [name, ...rest] = part.trim().split('=');
-      return name === 'secure_customer_sig' && rest.join('=').length > 8;
-    });
-
-  const analyticsSignedIn = () => Boolean(window.ShopifyAnalytics?.meta?.page?.customerId);
-
-  const sensorSignedIn = () => {
-    const shadow = accountSensor?.shadowRoot;
-    if (!shadow || !shadow.childElementCount) return false;
-    const signedOut = shadow.querySelector(
-      '[part="signed-out-avatar"], slot[name="signed-out-avatar"]'
-    );
-    if (signedOut) {
-      const style = window.getComputedStyle(signedOut);
-      if (style.display !== 'none' && style.visibility !== 'hidden') return false;
-    }
-    return Boolean(shadow.querySelector('[part*="signed-in"]')) || !signedOut;
-  };
-
-  const setAccountSignedIn = (signedIn) => {
-    if (!signup || !session) return;
-    signup.hidden = signedIn;
-    session.hidden = !signedIn;
-    accountRoot?.classList.toggle('is-signed-in', signedIn);
-  };
-
-  const syncAccountSignedIn = () => {
-    if (accountRoot?.hasAttribute('data-logged-in')) {
-      setAccountSignedIn(true);
-      return;
-    }
-    setAccountSignedIn(cookieSignedIn() || analyticsSignedIn() || sensorSignedIn());
-  };
-
-  syncAccountSignedIn();
-  if (accountSensor && customElements.whenDefined) {
-    customElements.whenDefined('shopify-account').then(() => {
-      syncAccountSignedIn();
-      const observer = new MutationObserver(syncAccountSignedIn);
-      observer.observe(accountSensor, { childList: true, subtree: true, attributes: true });
-      if (accountSensor.shadowRoot) {
-        observer.observe(accountSensor.shadowRoot, {
-          childList: true,
-          subtree: true,
-          attributes: true,
-        });
-      }
-      [200, 800, 2000].forEach((delay) => window.setTimeout(syncAccountSignedIn, delay));
-    });
-  }
-
-  qsa('[data-vh-account]').forEach((account) => {
-    const toggle = qs('[data-vh-account-toggle]', account);
-    const menu = qs('[data-vh-account-menu]', account);
+  document.querySelectorAll('[data-vh-account]').forEach((account) => {
+    const toggle = account.querySelector('[data-vh-account-toggle]');
+    const menu = account.querySelector('[data-vh-account-menu]');
     if (!toggle || !menu) return;
     const close = () => {
       menu.hidden = true;
@@ -126,12 +44,6 @@
       event.preventDefault();
       event.stopPropagation();
       const open = menu.hidden;
-      qsa('[data-vh-account-menu]').forEach((other) => {
-        other.hidden = true;
-      });
-      qsa('[data-vh-account-toggle]').forEach((other) => {
-        other.setAttribute('aria-expanded', 'false');
-      });
       menu.hidden = !open;
       toggle.setAttribute('aria-expanded', String(open));
     });
@@ -142,60 +54,6 @@
       if (event.key === 'Escape') close();
     });
   });
-
-  qsa('[data-vh-locale-select]').forEach((select) => {
-    select.addEventListener('change', () => select.form?.submit());
-  });
-
-  const contactModal = document.querySelector('[data-vh-contact-modal]');
-  if (contactModal) {
-    if (contactModal.parentElement !== document.body) {
-      document.body.appendChild(contactModal);
-    }
-    const isOpen = () => contactModal.open === true || contactModal.hasAttribute('open');
-    const openModal = () => {
-      if (isOpen()) return;
-      if (typeof contactModal.showModal === 'function') {
-        contactModal.showModal();
-      } else {
-        contactModal.setAttribute('open', '');
-      }
-      document.body.classList.add('vh-contact-open');
-    };
-    const closeModal = () => {
-      if (typeof contactModal.close === 'function') {
-        if (isOpen()) contactModal.close();
-      } else {
-        contactModal.removeAttribute('open');
-      }
-      document.body.classList.remove('vh-contact-open');
-    };
-    document.addEventListener('click', (event) => {
-      const opener = event.target.closest('[data-vh-contact-open]');
-      if (opener) {
-        event.preventDefault();
-        event.stopPropagation();
-        openModal();
-        return;
-      }
-      if (event.target.closest('[data-vh-contact-close]')) {
-        event.preventDefault();
-        closeModal();
-      }
-    });
-    contactModal.addEventListener('click', (event) => {
-      if (event.target === contactModal) closeModal();
-    });
-    contactModal.addEventListener('close', () => {
-      document.body.classList.remove('vh-contact-open');
-    });
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && isOpen()) closeModal();
-    });
-    if (contactModal.querySelector('[data-vh-contact-success]')) {
-      openModal();
-    }
-  }
 
   const initCarousel = (carousel) => {
     const slides = qsa('[data-vh-slide]', carousel);

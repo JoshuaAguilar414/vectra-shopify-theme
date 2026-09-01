@@ -7,7 +7,12 @@
   assign form_id = 'VectraContact-' | append: section.id
 %}
 
-<dialog class="vh-contact-modal" data-vh-contact-modal aria-labelledby="{{ form_id }}-title">
+<dialog
+  id="VectraContactModal"
+  class="vh-contact-modal"
+  data-vh-contact-modal
+  aria-labelledby="{{ form_id }}-title"
+>
   <div class="vh-contact-modal__dialog" data-vh-contact-dialog>
     <button class="vh-contact-modal__close" type="button" data-vh-contact-close aria-label="Close contact form">
       <span aria-hidden="true">&times;</span>
@@ -40,3 +45,69 @@
     {% endform %}
   </div>
 </dialog>
+
+<script>
+  (function () {
+    if (window.__vectraContactInit) return;
+    window.__vectraContactInit = true;
+
+    var bind = function () {
+      var modal = document.getElementById('VectraContactModal');
+      if (!modal) return;
+      if (modal.parentElement !== document.body) document.body.appendChild(modal);
+
+      var isOpen = function () {
+        return modal.open === true || modal.hasAttribute('open');
+      };
+      var openModal = function () {
+        if (isOpen()) return;
+        if (typeof modal.showModal === 'function') modal.showModal();
+        else modal.setAttribute('open', '');
+        document.body.classList.add('vh-contact-open');
+      };
+      var closeModal = function () {
+        if (typeof modal.close === 'function' && isOpen()) modal.close();
+        else modal.removeAttribute('open');
+        document.body.classList.remove('vh-contact-open');
+        if (location.hash === '#VectraContactModal') {
+          history.replaceState(null, '', location.pathname + location.search);
+        }
+      };
+
+      document.addEventListener(
+        'click',
+        function (event) {
+          var opener = event.target.closest('[data-vh-contact-open], a[href="#VectraContactModal"], a[href="#contact"]');
+          if (opener) {
+            event.preventDefault();
+            event.stopPropagation();
+            openModal();
+            return;
+          }
+          if (event.target.closest('[data-vh-contact-close]')) {
+            event.preventDefault();
+            closeModal();
+          }
+        },
+        true
+      );
+
+      modal.addEventListener('click', function (event) {
+        if (event.target === modal) closeModal();
+      });
+      modal.addEventListener('close', function () {
+        document.body.classList.remove('vh-contact-open');
+      });
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && isOpen()) closeModal();
+      });
+
+      if (modal.querySelector('[data-vh-contact-success]') || location.hash === '#VectraContactModal') {
+        openModal();
+      }
+    };
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
+    else bind();
+  })();
+</script>
