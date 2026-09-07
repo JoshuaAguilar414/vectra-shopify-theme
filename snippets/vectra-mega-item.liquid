@@ -21,6 +21,8 @@
     endfor
   endif
 %}
+{% capture href %}{% render 'vectra-preview-href', url: link.url, title: link.title %}{% endcapture %}
+{% assign href = href | strip %}
 
 {% if mode == 'mobile' %}
   <div class="vh-nav-panel__item{% if has_kids %} has-children{% endif %}">
@@ -30,26 +32,26 @@
       </button>
       <div class="vh-nav-panel__sub">
         {% unless link.url == blank or link.url == '#' %}
-          <a href="{{ link.url }}">{{ link.title }}</a>
+          <a href="{{ href }}">{{ link.title }}</a>
         {% endunless %}
         {% for child in link.links %}
-          <a href="{{ child.url }}">{{ child.title }}</a>
+          <a href="{% render 'vectra-preview-href', url: child.url, title: child.title %}">{{ child.title }}</a>
           {% if child.links.size > 0 %}
             {% for grandchild in child.links %}
-              <a class="vh-nav-panel__grand" href="{{ grandchild.url }}">{{ grandchild.title }}</a>
+              <a class="vh-nav-panel__grand" href="{% render 'vectra-preview-href', url: grandchild.url, title: grandchild.title %}">{{ grandchild.title }}</a>
             {% endfor %}
           {% endif %}
         {% endfor %}
       </div>
     {% else %}
-      <a href="{{ link.url }}">{{ link.title }}</a>
+      <a href="{{ href }}">{{ link.title }}</a>
     {% endif %}
   </div>
 {% else %}
   <div class="vh-menu__item{% if has_kids %} has-children{% endif %}" {% if has_kids %}data-vh-mega-item{% endif %}>
     <div class="vh-menu__anchor">
       <a
-        href="{{ link.url }}"
+        href="{{ href }}"
         {% if link.current %}
           aria-current="page"
         {% endif %}
@@ -65,12 +67,12 @@
           {% if has_grand %}
             {% for child in link.links %}
               <div class="vh-mega__col">
-                <a class="vh-mega__parent" href="{{ child.url }}" role="menuitem">{{ child.title }}</a>
+                <a class="vh-mega__parent" href="{% render 'vectra-preview-href', url: child.url, title: child.title %}" role="menuitem">{{ child.title }}</a>
                 {% if child.links.size > 0 %}
                   <ul class="vh-mega__list">
                     {% for grandchild in child.links %}
                       <li>
-                        <a href="{{ grandchild.url }}" role="menuitem">{{ grandchild.title }}</a>
+                        <a href="{% render 'vectra-preview-href', url: grandchild.url, title: grandchild.title %}" role="menuitem">{{ grandchild.title }}</a>
                       </li>
                     {% endfor %}
                   </ul>
@@ -81,7 +83,7 @@
             <ul class="vh-mega__list">
               {% for child in link.links %}
                 <li>
-                  <a href="{{ child.url }}" role="menuitem">{{ child.title }}</a>
+                  <a href="{% render 'vectra-preview-href', url: child.url, title: child.title %}" role="menuitem">{{ child.title }}</a>
                 </li>
               {% endfor %}
             </ul>

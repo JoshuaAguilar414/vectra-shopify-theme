@@ -1,0 +1,47 @@
+{%- doc -%}
+  Storefront href that keeps unpublished-theme page templates working.
+  On a draft/development theme, adds ?view= so /pages/our-story uses page.our-story.json
+  even when the Shopify admin still has the page on Default.
+
+  @param {string} url - Original href
+  @param {string} [view] - Template suffix: our-story, solutions, resources
+  @param {string} [title] - Link label; used to infer view when the nav item points at Home
+{%- enddoc -%}
+{%- liquid
+  assign href = url | default: ''
+  assign view_name = view
+  assign title_key = title | downcase | strip
+
+  if view_name == blank
+    if title_key == 'our story' or title_key == 'our dna' or title_key == 'about vectra'
+      assign view_name = 'our-story'
+    elsif title_key == 'solutions' or title_key == 'how we help'
+      assign view_name = 'solutions'
+    elsif title_key == 'resources'
+      assign view_name = 'resources'
+    endif
+  endif
+
+  if view_name == 'our-story'
+    assign href = pages['our-story'].url | default: '/pages/our-story'
+  elsif view_name == 'solutions'
+    assign href = pages['solutions'].url | default: '/pages/solutions'
+  elsif view_name == 'resources'
+    assign href = pages['resources'].url | default: '/pages/resources'
+  endif
+
+  if href == blank
+    assign href = url | default: '/'
+  endif
+
+  if theme.role != 'published' and view_name != blank
+    unless href contains 'view='
+      if href contains '?'
+        assign href = href | append: '&view=' | append: view_name
+      else
+        assign href = href | append: '?view=' | append: view_name
+      endif
+    endunless
+  endif
+-%}
+{{- href -}}

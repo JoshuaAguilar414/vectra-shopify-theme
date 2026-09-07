@@ -14,9 +14,9 @@
   assign img_case = 'vectra-bc13c1ac5973c68a13ce0a8ee907baaf2e4e4828.png' | asset_url
   assign img_arrow_white = 'vectra-d640d7e5d10a7b2543900785147430e0c5cd06a1.svg' | asset_url
   assign home = routes.root_url
-  assign story = pages['our-story'].url | default: '/pages/our-story'
-  assign solutions = pages['solutions'].url | default: '/pages/solutions'
-  assign resources = pages['resources'].url | default: '/pages/resources'
+  assign story_base = pages['our-story'].url | default: '/pages/our-story'
+  assign solutions_base = pages['solutions'].url | default: '/pages/solutions'
+  assign resources_base = pages['resources'].url | default: '/pages/resources'
   assign login_url = routes.account_login_url
   assign register_url = routes.account_register_url | default: routes.account_login_url
 
@@ -57,6 +57,12 @@
   assign customer_initial = customer.first_name | default: customer.email | slice: 0 | upcase
   assign customer_hello = customer.first_name | default: 'there'
 %}
+{% capture story %}{% render 'vectra-preview-href', url: story_base, view: 'our-story' %}{% endcapture %}
+{% capture solutions %}{% render 'vectra-preview-href', url: solutions_base, view: 'solutions' %}{% endcapture %}
+{% capture resources %}{% render 'vectra-preview-href', url: resources_base, view: 'resources' %}{% endcapture %}
+{% assign story = story | strip %}
+{% assign solutions = solutions | strip %}
+{% assign resources = resources | strip %}
 
 <header class="vh-header" data-vh-header>
   <div class="vh-util">

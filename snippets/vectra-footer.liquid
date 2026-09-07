@@ -8,10 +8,16 @@
   assign img_logo = 'vectra-f1f1bad320cc916c9d3f257211cb366de698a572.png' | asset_url
   assign img_social = 'vectra-8edaf1fb1163eb6b857092f513083a6fc9fdc561.svg' | asset_url
   assign home = home_url | default: routes.root_url
-  assign story = story_url | default: pages['our-story'].url | default: '/pages/our-story'
-  assign solutions = pages['solutions'].url | default: '/pages/solutions'
-  assign resources = pages['resources'].url | default: '/pages/resources'
+  assign story_base = story_url | default: pages['our-story'].url | default: '/pages/our-story'
+  assign solutions_base = pages['solutions'].url | default: '/pages/solutions'
+  assign resources_base = pages['resources'].url | default: '/pages/resources'
 %}
+{% capture story %}{% render 'vectra-preview-href', url: story_base, view: 'our-story' %}{% endcapture %}
+{% capture solutions %}{% render 'vectra-preview-href', url: solutions_base, view: 'solutions' %}{% endcapture %}
+{% capture resources %}{% render 'vectra-preview-href', url: resources_base, view: 'resources' %}{% endcapture %}
+{% assign story = story | strip %}
+{% assign solutions = solutions | strip %}
+{% assign resources = resources | strip %}
 
 <footer class="vh-footer">
   <div class="vh-wrap">
