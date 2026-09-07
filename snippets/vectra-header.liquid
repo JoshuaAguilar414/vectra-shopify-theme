@@ -15,6 +15,8 @@
   assign img_arrow_white = 'vectra-d640d7e5d10a7b2543900785147430e0c5cd06a1.svg' | asset_url
   assign home = routes.root_url
   assign story = pages['our-story'].url | default: '/pages/our-story'
+  assign solutions = pages['solutions'].url | default: '/pages/solutions'
+  assign resources = pages['resources'].url | default: '/pages/resources'
   assign login_url = routes.account_login_url
   assign register_url = routes.account_register_url | default: routes.account_login_url
 
@@ -168,14 +170,14 @@
         </div>
         <div class="vh-menu__item has-children" data-vh-mega-item>
           <div class="vh-menu__anchor">
-            <a href="{{ home }}#solutions" aria-haspopup="true" aria-expanded="false">How We Help</a>
+            <a href="{{ solutions }}" aria-haspopup="true" aria-expanded="false">How We Help</a>
             <div class="vh-mega vh-mega--list vh-dropdown" role="menu">
               <ul class="vh-mega__list">
-                <li><a href="{{ home }}#solutions" role="menuitem">Solutions</a></li>
-                <li><a href="{{ home }}#solutions" role="menuitem">Services</a></li>
+                <li><a href="{{ solutions }}" role="menuitem">Solutions</a></li>
+                <li><a href="{{ solutions }}#services" role="menuitem">Services</a></li>
                 <li><a href="{{ home }}#solutions" role="menuitem">VSuites</a></li>
                 <li><a href="{{ home }}#why-vectra" role="menuitem">Why Partner With Us</a></li>
-                <li><a href="{{ home }}#solutions" role="menuitem">Customized Solutions</a></li>
+                <li><a href="{{ solutions }}#custom" role="menuitem">Customized Solutions</a></li>
               </ul>
             </div>
           </div>
@@ -185,14 +187,14 @@
         </div>
         <div class="vh-menu__item has-children" data-vh-mega-item>
           <div class="vh-menu__anchor">
-            <a href="{{ home }}#resources" aria-haspopup="true" aria-expanded="false">Resources</a>
+            <a href="{{ resources }}" aria-haspopup="true" aria-expanded="false">Resources</a>
             <div class="vh-mega vh-mega--list vh-dropdown" role="menu">
               <ul class="vh-mega__list">
                 <li><a href="{{ home }}#cases" role="menuitem">Case Studies</a></li>
-                <li><a href="{{ home }}#resources" role="menuitem">Insights</a></li>
-                <li><a href="{{ home }}#resources" role="menuitem">Events &amp; Webinars</a></li>
-                <li><a href="{{ home }}#resources" role="menuitem">Podcasts</a></li>
-                <li><a href="{{ home }}#resources" role="menuitem">Press Release</a></li>
+                <li><a href="{{ resources }}#insights" role="menuitem">Insights</a></li>
+                <li><a href="{{ resources }}#events" role="menuitem">Events &amp; Webinars</a></li>
+                <li><a href="{{ resources }}#podcasts" role="menuitem">Podcasts</a></li>
+                <li><a href="{{ resources }}#podcasts" role="menuitem">Press Release</a></li>
               </ul>
             </div>
           </div>
@@ -238,11 +240,11 @@
         <div class="vh-nav-panel__item has-children">
           <button type="button" data-vh-mobile-sub aria-expanded="false">How We Help</button>
           <div class="vh-nav-panel__sub">
-            <a href="{{ home }}#solutions">Solutions</a>
-            <a href="{{ home }}#solutions">Services</a>
+            <a href="{{ solutions }}">Solutions</a>
+            <a href="{{ solutions }}#services">Services</a>
             <a href="{{ home }}#solutions">VSuites</a>
             <a href="{{ home }}#why-vectra">Why Partner With Us</a>
-            <a href="{{ home }}#solutions">Customized Solutions</a>
+            <a href="{{ solutions }}#custom">Customized Solutions</a>
           </div>
         </div>
         <a href="{{ home }}#marketplace">Marketplace</a>
@@ -250,10 +252,10 @@
           <button type="button" data-vh-mobile-sub aria-expanded="false">Resources</button>
           <div class="vh-nav-panel__sub">
             <a href="{{ home }}#cases">Case Studies</a>
-            <a href="{{ home }}#resources">Insights</a>
-            <a href="{{ home }}#resources">Events &amp; Webinars</a>
-            <a href="{{ home }}#resources">Podcasts</a>
-            <a href="{{ home }}#resources">Press Release</a>
+            <a href="{{ resources }}#insights">Insights</a>
+            <a href="{{ resources }}#events">Events &amp; Webinars</a>
+            <a href="{{ resources }}#podcasts">Podcasts</a>
+            <a href="{{ resources }}#podcasts">Press Release</a>
           </div>
         </div>
       {% endif %}

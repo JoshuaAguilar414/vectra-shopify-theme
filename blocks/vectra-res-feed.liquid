@@ -1,0 +1,45 @@
+{% render 'vectra-assets' %}
+{% liquid
+  assign img_side = 'vectra-8ee652fcc300949bf9c1387dbcc9e04238d48321.svg' | asset_url
+  assign img_search = 'vectra-ddefc620c4f82140acfa9b8253e156e88360289b.svg' | asset_url
+%}
+<section class="vres-feed" {{ block.shopify_attributes }}>
+  <div class="vres-feed__layout">
+    <div class="vres-feed__main">
+      {% render 'vectra-resources-modules', module: 'feed', block: block %}
+    </div>
+    <aside class="vres-side" aria-label="Resource filters">
+      <img class="vres-side__panel" src="{{ img_side }}" alt="" width="420" height="1228">
+      <div class="vres-side__inner">
+        <label class="vres-search">
+          <span class="visually-hidden">Search resources</span>
+          <input type="search" placeholder="Search Keyword" data-vres-search autocomplete="off">
+          <img src="{{ img_search }}" alt="" width="20" height="20">
+        </label>
+        {% content_for 'blocks' %}
+      </div>
+    </aside>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "VECTRA: Res feed",
+  "tag": null,
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" }
+  ],
+  "settings": [],
+  "presets": [
+    {
+      "name": "VECTRA: Res feed",
+      "blocks": [
+        { "type": "vectra-recent-posts" },
+        { "type": "vectra-tags" },
+        { "type": "vectra-instagram" }
+      ]
+    }
+  ]
+}
+{% endschema %}

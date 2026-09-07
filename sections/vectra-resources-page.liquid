@@ -1,0 +1,46 @@
+{% capture children %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-page-shell', children: children, include_resources: true, include_solutions: true %}
+
+{% schema %}
+{
+  "name": "VECTRA Resources",
+  "class": "vectra-res-section",
+  "enabled_on": {
+    "templates": ["page"]
+  },
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "MEGA Navigation",
+      "info": "Uses VECTRA Website Mega Menu (handle: vectra-website-mega-menu). Nested items render as header dropdowns."
+    }
+  ],
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA Resources",
+      "blocks": [
+        { "type": "vectra-header" },
+        { "type": "vectra-res-hero" },
+        {
+          "type": "vectra-res-feed",
+          "blocks": [
+            { "type": "vectra-recent-posts" },
+            { "type": "vectra-tags" },
+            { "type": "vectra-instagram" }
+          ]
+        },
+        { "type": "vectra-res-ebooks" },
+        { "type": "vectra-portal" },
+        { "type": "vectra-footer" }
+      ]
+    }
+  ]
+}
+{% endschema %}

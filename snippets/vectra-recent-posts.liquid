@@ -1,0 +1,50 @@
+{%- doc -%}
+  Reusable Recent posts widget. Uses a blog when set, otherwise placeholder posts.
+{%- enddoc -%}
+
+{% liquid
+  assign heading = block.settings.heading | default: 'Recent post'
+  assign limit = block.settings.limit | default: 3
+  assign img_fallback = 'vectra-8dd632f9a55b50e7d1bc55dc9197d46aa4f6588a.png' | asset_url
+  assign post_blog = blogs[block.settings.blog]
+  if post_blog == blank
+    assign post_blog = blogs['news']
+  endif
+%}
+
+<section class="vh-recent" {{ block.shopify_attributes }}>
+  {% if heading != blank %}
+    <h3>{{ heading }}</h3>
+  {% endif %}
+  <ul class="vh-recent__list">
+    {% if post_blog != blank and post_blog.articles.size > 0 %}
+      {% for article in post_blog.articles limit: limit %}
+        <li>
+          <a href="{{ article.url }}">
+            {% if article.image %}
+              {{ article.image | image_url: width: 210 | image_tag: loading: 'lazy', width: 105, height: 105, alt: article.title }}
+            {% else %}
+              <img src="{{ img_fallback }}" alt="" width="105" height="105">
+            {% endif %}
+            <span>
+              <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%d %B, %Y' }}</time>
+              <strong>{{ article.title }}</strong>
+            </span>
+          </a>
+        </li>
+      {% endfor %}
+    {% else %}
+      {% for i in (1..limit) %}
+        <li>
+          <a href="{{ block.settings.fallback_link | default: '#insights' }}">
+            <img src="{{ img_fallback }}" alt="" width="105" height="105">
+            <span>
+              <time datetime="2024-09-26">26 September, 2024</time>
+              <strong>Quisque a sem risus Suspendisse risus.</strong>
+            </span>
+          </a>
+        </li>
+      {% endfor %}
+    {% endif %}
+  </ul>
+</section>

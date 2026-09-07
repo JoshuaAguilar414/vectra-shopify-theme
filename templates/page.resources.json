@@ -1,0 +1,40 @@
+{
+  "sections": {
+    "vectra_resources": {
+      "type": "vectra-resources-page",
+      "blocks": {
+        "header": {
+          "type": "vectra-header",
+          "settings": {
+            "menu": "vectra-website-mega-menu"
+          }
+        },
+        "hero": { "type": "vectra-res-hero", "settings": {} },
+        "feed": {
+          "type": "vectra-res-feed",
+          "blocks": {
+            "recent": { "type": "vectra-recent-posts", "settings": {} },
+            "tags": { "type": "vectra-tags", "settings": {} },
+            "instagram": { "type": "vectra-instagram", "settings": {} }
+          },
+          "block_order": ["recent", "tags", "instagram"],
+          "settings": {}
+        },
+        "ebooks": { "type": "vectra-res-ebooks", "settings": {} },
+        "portal": {
+          "type": "vectra-portal",
+          "settings": {
+            "heading": "Start with the <strong>challenge</strong> in front of you.",
+            "text": "We will help you determine the right combination of expert support, intelligence, and capability-building."
+          }
+        },
+        "footer": { "type": "vectra-footer", "settings": {} }
+      },
+      "block_order": ["header", "hero", "feed", "ebooks", "portal", "footer"],
+      "settings": {
+        "menu": "vectra-website-mega-menu"
+      }
+    }
+  },
+  "order": ["vectra_resources"]
+}

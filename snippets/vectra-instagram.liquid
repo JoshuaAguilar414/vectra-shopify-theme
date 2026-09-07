@@ -1,0 +1,53 @@
+{%- doc -%}
+  Reusable Instagram grid widget.
+{%- enddoc -%}
+
+{% liquid
+  assign heading = block.settings.heading | default: 'Instagram'
+  assign img_a = 'vectra-01d26f601c057ccb6b54759c020d48ae5de18cf3.png' | asset_url
+  assign img_b = 'vectra-add817f67c59297c528c5d57486a2794644fb47c.png' | asset_url
+  assign profile = block.settings.profile_url
+%}
+
+<section class="vh-ig" {{ block.shopify_attributes }}>
+  {% if heading != blank %}
+    <h3>{{ heading }}</h3>
+  {% endif %}
+  <div class="vh-ig__grid">
+    {% for i in (1..6) %}
+      {% liquid
+        assign image = nil
+        case i
+          when 1
+            assign image = block.settings.image_1
+          when 2
+            assign image = block.settings.image_2
+          when 3
+            assign image = block.settings.image_3
+          when 4
+            assign image = block.settings.image_4
+          when 5
+            assign image = block.settings.image_5
+          when 6
+            assign image = block.settings.image_6
+        endcase
+        if i == 2 or i == 4 or i == 6
+          assign fallback = img_b
+        else
+          assign fallback = img_a
+        endif
+      %}
+      {% if profile != blank %}
+        <a href="{{ profile }}" {% if profile contains 'http' %}target="_blank" rel="noopener"{% endif %}>
+      {% endif %}
+      {% if image != blank %}
+        {{ image | image_url: width: 220 | image_tag: loading: 'lazy', width: 110, height: 104, alt: '' }}
+      {% else %}
+        <img src="{{ fallback }}" alt="" width="110" height="104">
+      {% endif %}
+      {% if profile != blank %}
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>

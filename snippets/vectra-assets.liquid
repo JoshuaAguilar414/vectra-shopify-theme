@@ -9,15 +9,29 @@
 {% if include_css %}
   {{ 'vectra-home.css' | asset_url | stylesheet_tag }}
   <link rel="stylesheet" href="{{ 'vectra-home.css' | asset_url }}" media="all">
+  {{ 'vectra-widgets.css' | asset_url | stylesheet_tag }}
+  <link rel="stylesheet" href="{{ 'vectra-widgets.css' | asset_url }}" media="all">
   {% if include_story %}
     {{ 'vectra-our-story.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'vectra-our-story.css' | asset_url }}" media="all">
+  {% endif %}
+  {% if include_solutions %}
+    {{ 'vectra-solutions.css' | asset_url | stylesheet_tag }}
+    <link rel="stylesheet" href="{{ 'vectra-solutions.css' | asset_url }}" media="all">
+  {% endif %}
+  {% if include_resources %}
+    {{ 'vectra-resources.css' | asset_url | stylesheet_tag }}
+    <link rel="stylesheet" href="{{ 'vectra-resources.css' | asset_url }}" media="all">
   {% endif %}
 {% endif %}
 
 {% if include_js %}
   <script src="{{ 'vectra-home.js' | asset_url }}" defer></script>
+  <script src="{{ 'vectra-widgets.js' | asset_url }}" defer></script>
   {% if include_story %}
     <script src="{{ 'vectra-our-story.js' | asset_url }}" defer></script>
+  {% endif %}
+  {% if include_solutions %}
+    <script src="{{ 'vectra-solutions.js' | asset_url }}" defer></script>
   {% endif %}
 {% endif %}

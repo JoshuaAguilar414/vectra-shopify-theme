@@ -1,0 +1,287 @@
+{%- doc -%}
+  VECTRA Solutions / How We Help page modules.
+{%- enddoc -%}
+
+{% render 'vectra-assets' %}
+{% liquid
+  assign img_mark = 'vectra-6fbd7c62e521082467b9d6192e09d91235f198a5.png' | asset_url
+  assign img_badge = 'vectra-58b46df4a1e51a5a12917bf1285632e15c205635.png' | asset_url
+  assign img_collage_1 = 'vectra-514da1e5ddd8e93543da62a9818e4183b5547b3a.png' | asset_url
+  assign img_collage_2 = 'vectra-ae8b362b8368e8b200e58c921e1c7c274608a975.png' | asset_url
+  assign img_collage_3 = 'vectra-add817f67c59297c528c5d57486a2794644fb47c.png' | asset_url
+  assign img_collage_4 = 'vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png' | asset_url
+  assign img_leaf = 'vectra-7e32b8cb91105f95e3244070f5f535fb9ce04c02.svg' | asset_url
+  assign img_svc = 'vectra-fba768472f693dc9d17736644f117390ddfce96f.png' | asset_url
+  assign img_sol_1 = 'vectra-d7047ac7e66609406a0cb2e3fa6ac8ad2faf5cca.png' | asset_url
+  assign img_sol_2 = 'vectra-add817f67c59297c528c5d57486a2794644fb47c.png' | asset_url
+  assign img_sol_3 = 'vectra-d9fea5c48820c581c90942feb5bfc3997b28135f.png' | asset_url
+  assign img_sol_4 = 'vectra-a22c67e8c858a4742869caed8035aebee50f5996.png' | asset_url
+  assign img_hero_2 = 'vectra-6a69557ce365aa215c5c28bca6a6e51af0a2c987.png' | asset_url
+  assign img_course_1 = 'vectra-514da1e5ddd8e93543da62a9818e4183b5547b3a.png' | asset_url
+  assign img_arrow = 'vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg' | asset_url
+%}
+{% case module %}
+  {% when 'hero' %}
+<section class="vsol-hero" aria-label="How We Help" {{ block.shopify_attributes }}>
+    <img class="vsol-hero__icon" src="{{ img_mark }}" alt="" width="901" height="909">
+    <div class="vsol-hero__inner" data-vh-reveal="up">
+      <p class="vsol-hero__kicker">Business resilience &amp; operational capability building</p>
+      <h1>Integrated solutions for operations that need to hold.</h1>
+      <p>
+        For SMBs, enterprises, and value chain partners navigating supply chain, procurement, and operational complexity, VECTRA combines expert teams, ecosystem solutions, and practical implementation.
+      </p>
+    </div>
+    <button class="vsol-quote" type="button" data-vh-contact-open data-vh-reveal="scale">
+      Request a Quote
+    </button>
+  </section>
+
+  {% when 'intro' %}
+<section class="vsol-intro" {{ block.shopify_attributes }}>
+    <div class="vsol-intro__grid">
+      <div class="vsol-collage">
+        <img class="vsol-collage__a" src="{{ img_collage_1 }}" alt="Teams reviewing operational dashboards" width="246" height="246" data-vh-reveal="fade">
+        <img class="vsol-collage__b" src="{{ img_collage_2 }}" alt="Connected operations across landscapes" width="314" height="314" data-vh-reveal="fade">
+        <img class="vsol-collage__c" src="{{ img_collage_3 }}" alt="ESG reporting in practice" width="314" height="314" data-vh-reveal="fade">
+        <img class="vsol-collage__d" src="{{ img_collage_4 }}" alt="Collaborative planning around sustainability" width="246" height="246" data-vh-reveal="fade">
+        <img class="vsol-collage__badge" src="{{ img_badge }}" alt="Enabling Positive Business Impact" width="143" height="143" data-vh-reveal="fade">
+      </div>
+      <div class="vsol-intro__copy" data-vh-reveal="right">
+        <p class="vsol-kicker">How We Help</p>
+        <h2>Design. Govern. Execute.</h2>
+        <p>
+          We connect the right expertise, specialist partners, AI-enabled intelligence, and capability building around the outcome your organisation needs to achieve.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {% when 'ecosystem' %}
+<section class="vsol-eco" id="solutions" data-vsol-eco {{ block.shopify_attributes }}>
+    <div class="vsol-eco__head" data-vh-reveal>
+      <p class="vsol-kicker vsol-kicker--center">Our ecosystem of solutions</p>
+      <h2>Design. Govern. Execute.</h2>
+      <p>
+        We connect the right expertise, specialist partners, AI-enabled intelligence, and capability building around the outcome your organisation needs to achieve.
+      </p>
+    </div>
+    <div class="vsol-eco__wrap">
+      <a class="vsol-custom-card" href="#custom">
+        <span>Customized Solution Catered To Your Business Needs</span>
+        <span class="vsol-custom-card__plus" aria-hidden="true"></span>
+      </a>
+      <div class="vsol-eco__cols">
+      <div class="vsol-eco__col">
+        <article class="vsol-card" data-vsol-card>
+          <button class="vsol-card__hit" type="button" aria-expanded="false" onclick="window.vsolToggleCard && window.vsolToggleCard(this)">
+            <span class="vsol-card__title">Operational Resilience</span>
+              <span class="vsol-card__num">01</span>
+          </button>
+          <div class="vsol-card__panel">
+            <img src="{{ img_collage_4 }}" alt="Operational resilience in practice">
+            <div>
+              <p>Build operational control, continuity, and a stronger response to disruption.</p>
+              <a class="vsol-card__cta" href="#VectraContactModal" data-vh-contact-open>Start a briefing</a>
+            </div>
+          </div>
+        </article>
+        <article class="vsol-card" data-vsol-card>
+          <button class="vsol-card__hit" type="button" aria-expanded="false" onclick="window.vsolToggleCard && window.vsolToggleCard(this)">
+            <span class="vsol-card__title">Value Chain Resilience &amp; Improvement</span>
+              <span class="vsol-card__num">02</span>
+          </button>
+          <div class="vsol-card__panel">
+            <img src="{{ img_collage_4 }}" alt="Value chain resilience">
+            <div>
+              <p>Connect due diligence, supplier improvement, risk visibility, and practical follow-through.</p>
+              <a class="vsol-card__cta" href="#VectraContactModal" data-vh-contact-open>Explore delivery</a>
+            </div>
+          </div>
+        </article>
+        <article class="vsol-card" data-vsol-card>
+          <button class="vsol-card__hit" type="button" aria-expanded="false" onclick="window.vsolToggleCard && window.vsolToggleCard(this)">
+            <span class="vsol-card__title">Responsible Business Performance</span>
+              <span class="vsol-card__num">03</span>
+          </button>
+          <div class="vsol-card__panel">
+            <img src="{{ img_collage_4 }}" alt="Responsible business performance">
+            <div>
+              <p>Turn stakeholder expectations into clearer decisions, stronger governance, and durable operating practice.</p>
+              <a class="vsol-card__cta" href="#VectraContactModal" data-vh-contact-open>Build capability</a>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="vsol-eco__col">
+        <article class="vsol-card" data-vsol-card>
+          <button class="vsol-card__hit" type="button" aria-expanded="false" onclick="window.vsolToggleCard && window.vsolToggleCard(this)">
+            <span class="vsol-card__title">Governance &amp; Regulatory Readiness</span>
+              <span class="vsol-card__num">04</span>
+          </button>
+          <div class="vsol-card__panel">
+            <img src="{{ img_collage_4 }}" alt="Governance and regulatory readiness">
+            <div>
+              <p>Translate shifting requirements into accountable controls, reliable evidence, and implementation plans.</p>
+              <a class="vsol-card__cta" href="#VectraContactModal" data-vh-contact-open>Start a briefing</a>
+            </div>
+          </div>
+        </article>
+        <article class="vsol-card" data-vsol-card>
+          <button class="vsol-card__hit" type="button" aria-expanded="false" onclick="window.vsolToggleCard && window.vsolToggleCard(this)">
+            <span class="vsol-card__title">Capability Building at Scale</span>
+              <span class="vsol-card__num">05</span>
+          </button>
+          <div class="vsol-card__panel">
+            <img src="{{ img_collage_4 }}" alt="Capability building at scale">
+            <div>
+              <p>Equip teams, leaders, and networks with the confidence and tools to carry the work forward.</p>
+              <a class="vsol-card__cta" href="#VectraContactModal" data-vh-contact-open>Explore delivery</a>
+            </div>
+          </div>
+        </article>
+        <article class="vsol-card" data-vsol-card>
+          <button class="vsol-card__hit" type="button" aria-expanded="false" onclick="window.vsolToggleCard && window.vsolToggleCard(this)">
+            <span class="vsol-card__title">Human-Centered<br>AI-Enabled Intelligence</span>
+              <span class="vsol-card__num">06</span>
+          </button>
+          <div class="vsol-card__panel">
+            <img src="{{ img_collage_4 }}" alt="Human-centered AI-enabled intelligence">
+            <div>
+              <p>Use technology to strengthen expert judgment, surface relevant signals, and accelerate action.</p>
+              <a class="vsol-card__cta" href="#VectraContactModal" data-vh-contact-open>Build capability</a>
+            </div>
+          </div>
+        </article>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  {% when 'outcomes' %}
+<section class="vsol-out" {{ block.shopify_attributes }}>
+    <canvas class="vsol-out__grid" data-vsol-cell-grid aria-hidden="true"></canvas>
+    <div class="vsol-out__inner">
+      <h2 data-vh-reveal>From complexity to clearer, more resilient performance.</h2>
+      <div class="vsol-out__cards">
+        <article class="vsol-glass" data-vh-reveal="down">
+          <img src="{{ img_leaf }}" alt="">
+          <h3>Operational control</h3>
+          <p>Priorities, responsibilities, and next steps are clearer across the work.</p>
+        </article>
+        <article class="vsol-glass" data-vh-reveal="down">
+          <img src="{{ img_leaf }}" alt="">
+          <h3>Stronger resilience</h3>
+          <p>Teams and systems are better prepared to adapt, respond, and sustain performance.</p>
+        </article>
+        <article class="vsol-glass" data-vh-reveal="down">
+          <img src="{{ img_leaf }}" alt="">
+          <h3>Measurable progress</h3>
+          <p>Evidence is structured so leaders can see what is moving and why.</p>
+        </article>
+        <article class="vsol-glass" data-vh-reveal="down">
+          <img src="{{ img_leaf }}" alt="">
+          <h3>Lasting capability</h3>
+          <p>People build the knowledge and confidence to improve performance over time.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {% when 'services' %}
+<section class="vsol-svc" id="services" {{ block.shopify_attributes }}>
+    <div class="vsol-svc__head" data-vh-reveal>
+      <p class="vsol-kicker vsol-kicker--center">Our ecosystem of services</p>
+      <h2>Every engagement starts with the business outcome.</h2>
+      <p>
+        We align the baseline, the decision, the accountable owner, and the measurable result before delivery begins—so progress is visible, useful, and owned.
+      </p>
+    </div>
+    <div class="vsol-svc__grid">
+      <article class="vsol-svc-card" data-vh-reveal>
+        <img src="{{ img_svc }}" alt="">
+        <span class="vsol-svc-card__num">01</span>
+        <div class="vsol-svc-card__body">
+          <h3>Audit Readiness &amp; Practical Remediation</h3>
+          <p>Prepare with confidence, address findings with structure, and convert assurance pressure into operational improvement.</p>
+          <a href="#VectraContactModal" data-vh-contact-open>Explore This Service →</a>
+        </div>
+      </article>
+      <article class="vsol-svc-card" data-vh-reveal>
+        <img src="{{ img_svc }}" alt="">
+        <span class="vsol-svc-card__num">02</span>
+        <div class="vsol-svc-card__body">
+          <h3>Due Diligence &amp; Value Chain Risk Management</h3>
+          <p>Identify priority exposure, strengthen decision-making, and establish practical controls across complex value chains.</p>
+          <a href="#VectraContactModal" data-vh-contact-open>Explore This Service →</a>
+        </div>
+      </article>
+      <article class="vsol-svc-card" data-vh-reveal>
+        <img src="{{ img_svc }}" alt="">
+        <span class="vsol-svc-card__num">03</span>
+        <div class="vsol-svc-card__body">
+          <h3>Operational Performance &amp; Improvement</h3>
+          <p>Support factories, farms, mines, and operating sites to build stronger performance, capability, and responsible practice.</p>
+          <a href="#VectraContactModal" data-vh-contact-open>Explore This Service →</a>
+        </div>
+      </article>
+      <article class="vsol-svc-card" data-vh-reveal>
+        <img src="{{ img_svc }}" alt="">
+        <span class="vsol-svc-card__num">04</span>
+        <div class="vsol-svc-card__body">
+          <h3>Independent Assurance, Governance &amp; Oversight</h3>
+          <p>Bring trusted review, quality assurance, and governance visibility to high-stakes programmes and commitments.</p>
+          <a href="#VectraContactModal" data-vh-contact-open>Explore This Service →</a>
+        </div>
+      </article>
+      <article class="vsol-svc-card" data-vh-reveal>
+        <img src="{{ img_svc }}" alt="">
+        <span class="vsol-svc-card__num">05</span>
+        <div class="vsol-svc-card__body">
+          <h3>Responsible Business Reporting &amp; Disclosure</h3>
+          <p>Build credible reporting processes and stronger evidence that connects disclosure with better operational decisions.</p>
+          <a href="#VectraContactModal" data-vh-contact-open>Explore This Service →</a>
+        </div>
+      </article>
+      <article class="vsol-svc-card" data-vh-reveal>
+        <img src="{{ img_svc }}" alt="">
+        <span class="vsol-svc-card__num">06</span>
+        <div class="vsol-svc-card__body">
+          <h3>Capability Building &amp; Change Enablement</h3>
+          <p>Build practical confidence across leaders, teams, and suppliers through learning, coaching, and tailored pathways.</p>
+          <a href="#VectraContactModal" data-vh-contact-open>Explore This Service →</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  {% when 'process' %}
+<section class="vsol-process" {{ block.shopify_attributes }}>
+    <div class="vsol-process__inner">
+      <canvas class="vsol-process__grid" data-vsol-cell-grid aria-hidden="true"></canvas>
+      <h2 data-vh-reveal>From complexity to clearer, more resilient performance.</h2>
+      <div class="vsol-process__cards">
+        <article class="vsol-step" data-vh-reveal="down">
+          <span>01</span>
+          <h3>Context</h3>
+          <p>See the real operating environment.</p>
+        </article>
+        <article class="vsol-step" data-vh-reveal="down">
+          <span>02</span>
+          <h3>Path</h3>
+          <p>Design the practical route forward.</p>
+        </article>
+        <article class="vsol-step vsol-step--impl" data-vh-reveal="down">
+          <span>03</span>
+          <h3>Implementation</h3>
+          <p>Work alongside accountable owners.</p>
+        </article>
+        <article class="vsol-step" data-vh-reveal="down">
+          <span>04</span>
+          <h3>Impact</h3>
+          <p>Measure what changed for the business.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+{% endcase %}

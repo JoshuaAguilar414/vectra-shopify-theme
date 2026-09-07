@@ -1,0 +1,155 @@
+{%- doc -%}
+  VECTRA Resources page modules.
+{%- enddoc -%}
+
+{% render 'vectra-assets' %}
+{% liquid
+  assign img_mark = 'vectra-6fbd7c62e521082467b9d6192e09d91235f198a5.png' | asset_url
+  assign img_arrow = 'vectra-54db3b2d66b85bf4c6ca264ed1363beb759e512d.svg' | asset_url
+  assign img_dot = 'vectra-8d2852491309a3c401402b92709c6dbc1ad06451.svg' | asset_url
+  assign img_rule = 'vectra-8de942ae22a0127f8e87d300c70bae29095e63f7.svg' | asset_url
+  assign img_feature = 'vectra-add817f67c59297c528c5d57486a2794644fb47c.png' | asset_url
+  assign img_events = 'vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png' | asset_url
+  assign img_ebook_1 = 'vectra-ebook-1.png' | asset_url
+  assign img_ebook_2 = 'vectra-ebook-2.png' | asset_url
+  assign img_ebook_3 = 'vectra-ebook-3.png' | asset_url
+%}
+{% case module %}
+  {% when 'hero' %}
+<section class="vres-hero" aria-label="Resources" {{ block.shopify_attributes }}>
+    <img class="vres-hero__mark" src="{{ img_mark }}" alt="" width="901" height="909">
+    <div class="vres-hero__copy" data-vh-reveal="up">
+      <p class="vres-hero__kicker">Discover more about VECTRA</p>
+      <h1>Practical perspective for more resilient performance.</h1>
+      <p class="vres-hero__lead">
+        Insights, playbooks, events, and news that help teams understand changing operational context and decide what to do next.
+      </p>
+    </div>
+    <nav class="vres-cats" aria-label="Resource types" data-vh-reveal="up">
+      <a class="vres-cat" href="#insights">
+        Insights
+        <img src="{{ img_arrow }}" alt="" width="16" height="10">
+      </a>
+      <a class="vres-cat" href="#ebooks">
+        Ebook and playbooks
+        <img src="{{ img_arrow }}" alt="" width="16" height="10">
+      </a>
+      <a class="vres-cat" href="#events">
+        Events and webinars
+        <img src="{{ img_arrow }}" alt="" width="16" height="10">
+      </a>
+      <a class="vres-cat" href="#podcasts">
+        Podcasts and press
+        <img src="{{ img_arrow }}" alt="" width="16" height="10">
+      </a>
+    </nav>
+  </section>
+
+  {% when 'feed' %}
+        <header class="vres-label" id="insights">
+          <img class="vres-label__dot" src="{{ img_dot }}" alt="" width="6" height="6">
+          <h2>Insights</h2>
+          <img class="vres-label__rule" src="{{ img_rule }}" alt="" width="693" height="2">
+        </header>
+
+        <article class="vres-feature" data-vres-item data-vres-tags="performance management solutions">
+          <h3>Continually monetize open source networks</h3>
+          <img src="{{ img_feature }}" alt="Teams reviewing operational performance" width="932" height="301">
+          <div class="vres-prose">
+            <p>
+              Quisque a sem risus. Suspendisse risus augue, rhoncus in gravida vel, interdum ac enim. Fusce sed sagittis massa. Etiam velit mi, luctus et semper eget, tempus a dolor. Vivamus ipsum metus, ultrices et felis vitae, pretium consequat dolor. Etiam fermentum, massa non dictum lobortis, lacus diam semper dui, eu euismod odio ipsum eget nibh. Aliquam erat volutpat. Aliquam ullamcorper tempor justo non cursus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec ornare turpis viverra sapien ultrices congue. Etiam eu maximus mauris, in dignissim dui. Donec id ultricies justo.
+            </p>
+            <p>
+              Nunc sit amet mi finibus ex sagittis porttitor in porta sem. In pretium eros ac orci vulputate placerat. Donec quis condimentum nisl, tempor tincidunt est. Etiam ante ex, viverra eget risus et, consequat facilisis est. In eget diam eu lorem eleifend efficitur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in aliquam purus. Vestibulum cursus nunc vel tristique placerat. Quisque elementum felis erat, eu iaculis nibh congue non. Etiam nisi ante, suscipit in pulvinar faucibus, feugiat nec mi. Donec dapibus eros dui, interdum rutrum metus accumsan in.
+            </p>
+          </div>
+        </article>
+
+        <header class="vres-label" id="events">
+          <img class="vres-label__dot" src="{{ img_dot }}" alt="" width="6" height="6">
+          <h2>Events &amp; webinars</h2>
+          <img class="vres-label__rule" src="{{ img_rule }}" alt="" width="693" height="2">
+        </header>
+
+        <article class="vres-split" data-vres-item data-vres-tags="experience development">
+          <div class="vres-split__copy">
+            <h3>Tempor tincidunt est. Etiam ante ex</h3>
+            <div class="vres-prose vres-prose--muted">
+              <p>
+                Quisque a sem risus. Suspendisse risus augue, rhoncus in gravida vel, interdum ac enim. Fusce sed sagittis massa. Etiam velit mi, luctus et semper eget, tempus a dolor. Vivamus ipsum metus, ultrices et felis vitae, pretium consequat dolor.
+              </p>
+              <p>
+                Etiam fermentum, massa non dictum lobortis, lacus diam semper dui, eu euismod odio ipsum eget nibh. Aliquam erat volutpat. Aliquam ullamcorper tempor justo non cursus. Pellentesque habitant morbi.
+              </p>
+            </div>
+          </div>
+          <img src="{{ img_events }}" alt="Teams mapping sustainability actions" width="460" height="301">
+        </article>
+
+        <article class="vres-follow" data-vres-item data-vres-tags="support recruitment">
+          <h3>Quisque a sem risus. Suspendisse risus augue, rhoncus in</h3>
+          <div class="vres-prose vres-prose--muted">
+            <p>
+              Quisque a sem risus. Suspendisse risus augue, rhoncus in gravida vel, interdum ac enim. Fusce sed sagittis massa. Etiam velit mi, luctus et semper eget, tempus a dolor. Vivamus ipsum metus, ultrices et felis vitae, pretium consequat dolor. Etiam fermentum, massa non dictum lobortis, lacus diam semper dui, eu euismod odio ipsum eget nibh. Aliquam erat volutpat. Aliquam ullamcorper tempor justo non cursus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec ornare turpis viverra sapien ultrices congue. Etiam eu maximus mauris, in dignissim dui. Donec id ultricies justo.
+            </p>
+            <p>
+              Nunc sit amet mi finibus ex sagittis porttitor in porta sem. In pretium eros ac orci vulputate placerat. Donec quis condimentum nisl, tempor tincidunt est. Etiam ante ex, viverra eget risus et, consequat facilisis est. In eget diam eu lorem eleifend efficitur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in aliquam purus. Vestibulum cursus nunc vel tristique placerat. Quisque elementum felis erat, eu iaculis nibh congue non. Etiam nisi ante, suscipit in pulvinar faucibus, feugiat nec mi. Donec dapibus eros dui, interdum rutrum metus accumsan in.
+            </p>
+          </div>
+        </article>
+
+  {% when 'ebooks' %}
+<section class="vres-ebooks" id="ebooks" {{ block.shopify_attributes }}>
+    <header class="vres-label">
+      <img class="vres-label__dot" src="{{ img_dot }}" alt="" width="6" height="6">
+      <h2>Ebooks &amp; playbooks</h2>
+      <img class="vres-label__rule" src="{{ img_rule }}" alt="" width="693" height="2">
+    </header>
+    {% liquid
+      assign ebook_1 = block.settings.image_1
+      assign ebook_2 = block.settings.image_2
+      assign ebook_3 = block.settings.image_3
+      assign ebook_4 = block.settings.image_4
+      assign ebook_5 = block.settings.image_5
+    %}
+    <div class="vres-ebooks__grid">
+      <a class="vres-ebooks__card" href="{{ block.settings.link_1 | default: '#' }}">
+        {% if ebook_1 != blank %}
+          {{ ebook_1 | image_url: width: 960 | image_tag: loading: 'lazy', alt: 'Risk Management & Supply Chain Due Diligence in a Complex Legal Landscape', width: 480, height: 472 }}
+        {% else %}
+          <img src="{{ img_ebook_1 }}" alt="Risk Management &amp; Supply Chain Due Diligence in a Complex Legal Landscape" width="480" height="472">
+        {% endif %}
+      </a>
+      <a class="vres-ebooks__card" href="{{ block.settings.link_2 | default: '#' }}">
+        {% if ebook_2 != blank %}
+          {{ ebook_2 | image_url: width: 960 | image_tag: loading: 'lazy', alt: "A Guide to EU's Corporate Sustainability Due Diligence Directive", width: 450, height: 472 }}
+        {% else %}
+          <img src="{{ img_ebook_2 }}" alt="A Guide to EU's Corporate Sustainability Due Diligence Directive" width="450" height="472">
+        {% endif %}
+      </a>
+      <a class="vres-ebooks__card" href="{{ block.settings.link_3 | default: '#' }}">
+        {% if ebook_3 != blank %}
+          {{ ebook_3 | image_url: width: 960 | image_tag: loading: 'lazy', alt: 'ESG Due Diligence Insights and Actionable Steps for Businesses', width: 451, height: 472 }}
+        {% else %}
+          <img src="{{ img_ebook_3 }}" alt="ESG Due Diligence Insights and Actionable Steps for Businesses" width="451" height="472">
+        {% endif %}
+      </a>
+      <a class="vres-ebooks__card" href="{{ block.settings.link_4 | default: '#' }}">
+        {% if ebook_4 != blank %}
+          {{ ebook_4 | image_url: width: 960 | image_tag: loading: 'lazy', alt: "A Guide to EU's Corporate Sustainability Due Diligence Directive", width: 450, height: 472 }}
+        {% else %}
+          <img src="{{ img_ebook_2 }}" alt="A Guide to EU's Corporate Sustainability Due Diligence Directive" width="450" height="472">
+        {% endif %}
+      </a>
+      <a class="vres-ebooks__card" href="{{ block.settings.link_5 | default: '#' }}">
+        {% if ebook_5 != blank %}
+          {{ ebook_5 | image_url: width: 960 | image_tag: loading: 'lazy', alt: 'Risk Management & Supply Chain Due Diligence in a Complex Legal Landscape', width: 480, height: 472 }}
+        {% else %}
+          <img src="{{ img_ebook_1 }}" alt="Risk Management &amp; Supply Chain Due Diligence in a Complex Legal Landscape" width="480" height="472">
+        {% endif %}
+      </a>
+    </div>
+    <span id="podcasts"></span>
+  </section>
+
+{% endcase %}

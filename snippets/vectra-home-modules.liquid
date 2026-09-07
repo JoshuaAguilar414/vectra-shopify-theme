@@ -496,7 +496,7 @@
         </article>
       </div>
       <div class="vh-blog__more">
-        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ blogs.news.url | default: '/blogs/news' }}">See All Articles →</a>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ pages.resources.url | default: '/pages/resources' }}">See All Articles →</a>
       </div>
     </div>
   </section>
@@ -565,25 +565,51 @@
 
   {% when 'portal' %}
 {% liquid
+  assign is_solutions_portal = false
+  if template.suffix == 'solutions' or template.suffix == 'resources'
+    assign is_solutions_portal = true
+  endif
   assign portal_heading = block.settings.heading
   if portal_heading == blank
-    assign portal_heading = 'Everything your <strong>VECTRA</strong> relationship, in one place.'
+    if is_solutions_portal
+      assign portal_heading = 'Start with the <strong>challenge</strong> in front of you.'
+    else
+      assign portal_heading = 'Everything your <strong>VECTRA</strong> relationship, in one place.'
+    endif
   endif
   assign portal_text = block.settings.text
   if portal_text == blank
-    assign portal_text = 'Access Marketplace purchases, active services, VSuites, current retainers, billing, documentation, and support from a single, secure account.'
+    if is_solutions_portal
+      assign portal_text = 'We will help you determine the right combination of expert support, intelligence, and capability-building.'
+    else
+      assign portal_text = 'Access Marketplace purchases, active services, VSuites, current retainers, billing, documentation, and support from a single, secure account.'
+    endif
+  endif
+  assign portal_submit = 'Send message'
+  if is_solutions_portal
+    assign portal_submit = 'Submit'
   endif
 %}
-<section class="vh-portal" data-vh-reveal="scale" {{ block.shopify_attributes }}>
+<section class="vh-portal{% if is_solutions_portal %} vh-portal--sol{% endif %}" id="{{ block.settings.anchor_id | default: 'get-in-touch' }}"{% unless is_solutions_portal %} data-vh-reveal="scale"{% endunless %} {{ block.shopify_attributes }}>
+    {% if is_solutions_portal %}
+      <canvas class="vh-portal__cells" data-vsol-cell-grid aria-hidden="true"></canvas>
+    {% endif %}
     <div class="vh-wrap vh-portal__grid">
       <div class="vh-portal__copy">
         <h2>{{ portal_heading }}</h2>
         <p>{{ portal_text }}</p>
       </div>
-      {% form 'contact', class: 'vh-form' %}
-        <h3>Get In Touch</h3>
-        {% render 'vectra-contact-fields', img_arrow: img_arrow %}
-      {% endform %}
+      {% if is_solutions_portal %}
+        {% form 'contact', class: 'vh-form', data-vh-reveal: 'scale' %}
+          <h3>Get In Touch</h3>
+          {% render 'vectra-contact-fields', img_arrow: img_arrow, solutions_form: true, submit_label: portal_submit %}
+        {% endform %}
+      {% else %}
+        {% form 'contact', class: 'vh-form' %}
+          <h3>Get In Touch</h3>
+          {% render 'vectra-contact-fields', img_arrow: img_arrow %}
+        {% endform %}
+      {% endif %}
     </div>
   </section>
 

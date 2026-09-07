@@ -1,0 +1,25 @@
+{%- doc -%}
+  Reusable Tags widget. One tag per line in the block setting.
+{%- enddoc -%}
+
+{% liquid
+  assign heading = block.settings.heading | default: 'Tags'
+  assign tags_raw = block.settings.tags | default: 'Performance, Development, Solutions, Support, Recruitment, Management, Experience'
+  assign tags = tags_raw | replace: ', ', ',' | split: ','
+%}
+
+<section class="vh-tags" {{ block.shopify_attributes }}>
+  {% if heading != blank %}
+    <h3>{{ heading }}</h3>
+  {% endif %}
+  <ul class="vh-tags__list">
+    {% for tag in tags %}
+      {% assign label = tag | strip %}
+      {% if label != blank %}
+        <li>
+          <button type="button" data-vres-tag="{{ label | handleize }}">{{ label }}</button>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</section>

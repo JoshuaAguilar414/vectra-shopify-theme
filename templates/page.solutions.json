@@ -1,0 +1,45 @@
+{
+  "sections": {
+    "vectra_solutions": {
+      "type": "vectra-solutions-page",
+      "blocks": {
+        "header": {
+          "type": "vectra-header",
+          "settings": {
+            "menu": "vectra-website-mega-menu"
+          }
+        },
+        "hero": { "type": "vectra-sol-hero", "settings": {} },
+        "intro": { "type": "vectra-sol-intro", "settings": {} },
+        "ecosystem": { "type": "vectra-sol-ecosystem", "settings": {} },
+        "outcomes": { "type": "vectra-sol-outcomes", "settings": {} },
+        "services": { "type": "vectra-sol-services", "settings": {} },
+        "process": { "type": "vectra-sol-process", "settings": {} },
+        "portal": {
+          "type": "vectra-portal",
+          "settings": {
+            "heading": "Start with the <strong>challenge</strong> in front of you.",
+            "text": "We will help you determine the right combination of expert support, intelligence, and capability-building.",
+            "anchor_id": "custom"
+          }
+        },
+        "footer": { "type": "vectra-footer", "settings": {} }
+      },
+      "block_order": [
+        "header",
+        "hero",
+        "intro",
+        "ecosystem",
+        "outcomes",
+        "services",
+        "process",
+        "portal",
+        "footer"
+      ],
+      "settings": {
+        "menu": "vectra-website-mega-menu"
+      }
+    }
+  },
+  "order": ["vectra_solutions"]
+}

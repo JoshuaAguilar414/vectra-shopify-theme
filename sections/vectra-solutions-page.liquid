@@ -1,0 +1,42 @@
+{% capture children %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-page-shell', children: children, include_solutions: true %}
+
+{% schema %}
+{
+  "name": "VECTRA Solutions",
+  "class": "vectra-sol-section",
+  "enabled_on": {
+    "templates": ["page"]
+  },
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "MEGA Navigation",
+      "info": "Uses VECTRA Website Mega Menu (handle: vectra-website-mega-menu). Nested items render as header dropdowns."
+    }
+  ],
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA Solutions",
+      "blocks": [
+        { "type": "vectra-header" },
+        { "type": "vectra-sol-hero" },
+        { "type": "vectra-sol-intro" },
+        { "type": "vectra-sol-ecosystem" },
+        { "type": "vectra-sol-outcomes" },
+        { "type": "vectra-sol-services" },
+        { "type": "vectra-sol-process" },
+        { "type": "vectra-portal" },
+        { "type": "vectra-footer" }
+      ]
+    }
+  ]
+}
+{% endschema %}

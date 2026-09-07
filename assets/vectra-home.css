@@ -2958,6 +2958,10 @@ body:has(.vectra-home) #MainContent {
   transform: translateY(150px);
 }
 
+[data-vh-reveal='down'] {
+  transform: translateY(-150px);
+}
+
 [data-vh-reveal='scale'] {
   transform: scale(0.5);
   transform-origin: 50% 50%;
