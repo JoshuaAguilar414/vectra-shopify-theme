@@ -1025,41 +1025,42 @@
 }
 
 .vectra-story .vs-join p.vs-join__kicker {
-  margin: 0 0 18px;
+  margin: 0 0 10px;
   color: #54bd01;
-  font-size: 32px;
-  font-weight: 400;
-  letter-spacing: -1.6px;
-  line-height: 42px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
   text-transform: uppercase;
   max-width: none;
 }
 
 .vectra-story .vs-join h2 {
-  margin: 0 0 28px;
+  margin: 0 0 12px;
   color: #fff;
-  font-size: clamp(40px, 3.33vw, 64px);
+  font-size: clamp(20px, 1.7vw, 24px);
   font-weight: 800;
-  letter-spacing: -3.2px;
-  line-height: 1;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
 }
 
 .vectra-story .vs-join p {
-  max-width: 732px;
+  max-width: 40em;
   margin: 0;
   color: #fff;
-  font-size: 32px;
+  font-size: 15px;
   font-weight: 400;
-  letter-spacing: -1.6px;
-  line-height: 1.3;
+  letter-spacing: -0.02em;
+  line-height: 1.45;
 }
 
 .vectra-story .vs-join .vs-cta-btn {
-  width: 464px;
+  width: auto;
   max-width: 100%;
-  height: 86px;
-  font-size: 24px;
-  letter-spacing: -1.2px;
+  height: 48px;
+  padding: 0 28px;
+  font-size: 14px;
+  letter-spacing: -0.03em;
 }
 
 .vectra-story .vs-join .vs-cta-btn:hover,

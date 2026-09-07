@@ -23,6 +23,21 @@ body:has(.vectra-res) {
   scroll-margin-top: 24px;
 }
 
+.vectra-res .vres-feed__layout > *,
+.vectra-res .vres-split > *,
+.vectra-res .vres-ebooks__grid > *,
+.vectra-res .vres-label,
+.vectra-res .vres-feature,
+.vectra-res .vres-follow,
+.vectra-res .vres-side,
+.vectra-res .vres-feed__main {
+  min-width: 0;
+}
+
+.vectra-res img {
+  max-width: 100%;
+}
+
 .vectra-res .vres-hero {
   position: relative;
   isolation: isolate;
@@ -61,7 +76,7 @@ body:has(.vectra-res) {
 .vectra-res .vres-hero__copy {
   position: relative;
   z-index: 1;
-  width: min(calc(1221px * var(--vres-s)), calc(100% - 80px));
+  width: min(calc(1221px * var(--vres-s)), calc(100% - 32px));
   margin: 0 auto;
   padding-top: calc(352px * var(--vres-s));
   text-align: center;
@@ -70,31 +85,31 @@ body:has(.vectra-res) {
 .vectra-res .vres-hero__kicker {
   margin: 0 auto 18px;
   color: var(--vres-navy);
-  font-size: calc(20px * var(--vres-s));
+  font-size: clamp(14px, 1.05vw, 20px);
   font-weight: 700;
   letter-spacing: -0.05em;
-  line-height: calc(30px * var(--vres-s));
+  line-height: 1.3;
   text-transform: uppercase;
 }
 
 .vectra-res .vres-hero h1 {
   margin: 0 auto;
-  max-width: calc(1221px * var(--vres-s));
+  max-width: 16em;
   color: var(--vres-navy);
-  font-size: calc(75px * var(--vres-s));
+  font-size: clamp(32px, 3.9vw, 75px);
   font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: calc(80px * var(--vres-s));
+  line-height: 1.08;
 }
 
 .vectra-res .vres-hero__lead {
-  margin: calc(20px * var(--vres-s)) auto 0;
-  max-width: calc(662px * var(--vres-s));
+  margin: clamp(12px, 1.1vw, 20px) auto 0;
+  max-width: 42em;
   color: var(--vres-green);
-  font-size: calc(20px * var(--vres-s));
+  font-size: clamp(15px, 1.05vw, 20px);
   font-weight: 500;
   letter-spacing: -0.05em;
-  line-height: 1.2;
+  line-height: 1.35;
 }
 
 .vectra-res .vres-cats {
@@ -104,8 +119,8 @@ body:has(.vectra-res) {
   bottom: calc(80px * var(--vres-s));
   display: flex;
   justify-content: center;
-  gap: calc(24px * var(--vres-s));
-  width: min(calc(1420px * var(--vres-s)), calc(100% - 80px));
+  gap: clamp(8px, 1.2vw, 24px);
+  width: min(calc(1420px * var(--vres-s)), calc(100% - 32px));
   transform: translateX(-50%);
 }
 
@@ -116,16 +131,17 @@ body:has(.vectra-res) {
   gap: 10px;
   flex: 1 1 0;
   min-height: 56px;
-  padding: 10px 18px;
+  padding: 10px 14px;
   border-radius: 13px;
   background: var(--vres-green);
   color: #fff;
-  font-size: calc(18px * var(--vres-s));
+  font-size: clamp(13px, 0.95vw, 18px);
   font-weight: 700;
   letter-spacing: -0.05em;
-  line-height: 1;
+  line-height: 1.15;
   text-transform: uppercase;
-  white-space: nowrap;
+  text-align: center;
+  white-space: normal;
   box-shadow: 0 8px 24px rgba(84, 189, 1, 0.28);
   transition: transform 0.25s ease, background 0.2s ease;
 }
@@ -149,9 +165,9 @@ body:has(.vectra-res) {
 
 .vectra-res .vres-feed__layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) calc(420px * var(--vres-s));
-  gap: calc(48px * var(--vres-s));
-  width: min(calc(1420px * var(--vres-s)), calc(100% - 80px));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
+  gap: clamp(24px, 2.5vw, 48px);
+  width: min(calc(1420px * var(--vres-s)), calc(100% - 48px));
   margin: 0 auto;
   align-items: start;
 }
@@ -173,10 +189,10 @@ body:has(.vectra-res) {
 .vectra-res .vres-label h2 {
   margin: 0;
   color: var(--vres-green);
-  font-size: 25px;
+  font-size: clamp(16px, 1.4vw, 25px);
   font-weight: 700;
   letter-spacing: -0.05em;
-  line-height: 50px;
+  line-height: 1.2;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -185,7 +201,8 @@ body:has(.vectra-res) {
   flex: 1 1 auto;
   height: 2px;
   max-width: none;
-  min-width: 40px;
+  min-width: 24px;
+  width: auto;
   object-fit: cover;
   object-position: left center;
 }
@@ -199,15 +216,16 @@ body:has(.vectra-res) {
 }
 
 .vectra-res .vres-feature h3 {
-  max-width: 909px;
-  font-size: calc(57px * var(--vres-s));
-  line-height: 1.05;
+  max-width: 100%;
+  font-size: clamp(26px, 3vw, 57px);
+  line-height: 1.1;
 }
 
 .vectra-res .vres-feature img {
   width: 100%;
-  max-width: 932px;
-  height: calc(301px * var(--vres-s));
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 932 / 301;
   object-fit: cover;
   border-radius: 20px;
   margin-bottom: 36px;
@@ -229,7 +247,7 @@ body:has(.vectra-res) {
 
 .vectra-res .vres-split {
   display: grid;
-  grid-template-columns: minmax(0, 420px) minmax(0, 460px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   justify-content: space-between;
   gap: 24px;
   margin: 0 0 48px;
@@ -239,16 +257,17 @@ body:has(.vectra-res) {
 .vectra-res .vres-split h3 {
   margin: 0 0 18px;
   color: var(--vres-ink);
-  font-size: 24px;
+  font-size: clamp(18px, 1.4vw, 24px);
   font-weight: 600;
   letter-spacing: -0.04em;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 .vectra-res .vres-split img {
   width: 100%;
-  max-width: 460px;
-  height: calc(301px * var(--vres-s));
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 460 / 301;
   object-fit: cover;
   border-radius: 20px;
   justify-self: end;
@@ -259,11 +278,11 @@ body:has(.vectra-res) {
 }
 
 .vectra-res .vres-follow h3 {
-  max-width: 884px;
-  font-size: 30px;
+  max-width: 100%;
+  font-size: clamp(22px, 1.8vw, 30px);
   font-weight: 600;
   color: var(--vres-ink);
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 .vectra-res .vres-feature[hidden],
@@ -275,6 +294,7 @@ body:has(.vectra-res) {
 .vectra-res .vres-side {
   position: relative;
   min-height: calc(1228px * var(--vres-s));
+  width: 100%;
 }
 
 .vectra-res .vres-side__panel {
@@ -282,8 +302,8 @@ body:has(.vectra-res) {
   inset: 0;
   width: 100%;
   height: 100%;
-  max-width: none;
-  object-fit: fill;
+  max-width: 100%;
+  object-fit: cover;
   pointer-events: none;
 }
 
@@ -330,17 +350,17 @@ body:has(.vectra-res) {
 }
 
 .vectra-res .vres-ebooks .vres-label {
-  width: min(calc(1420px * var(--vres-s)), calc(100% - 80px));
+  width: min(calc(1420px * var(--vres-s)), calc(100% - 48px));
   margin-inline: auto;
 }
 
 .vectra-res .vres-ebooks__grid {
-  width: min(calc(1420px * var(--vres-s)), calc(100% - 80px));
+  width: min(calc(1420px * var(--vres-s)), calc(100% - 48px));
   margin: calc(28px * var(--vres-s)) auto 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: calc(36px * var(--vres-s));
-  row-gap: calc(8px * var(--vres-s));
+  column-gap: clamp(12px, 1.8vw, 36px);
+  row-gap: clamp(8px, 1vw, 16px);
   align-items: end;
 }
 
@@ -350,9 +370,11 @@ body:has(.vectra-res) {
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.vectra-res .vres-ebooks__card:hover,
-.vectra-res .vres-ebooks__card:focus-visible {
-  transform: translateY(-14px);
+@media (hover: hover) and (pointer: fine) {
+  .vectra-res .vres-ebooks__card:hover,
+  .vectra-res .vres-ebooks__card:focus-visible {
+    transform: translateY(-14px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -364,30 +386,31 @@ body:has(.vectra-res) {
 .vectra-res .vres-ebooks__card img {
   width: 100%;
   height: auto;
-  max-width: none;
   object-fit: contain;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 989px) {
+  .vectra-res .vh-contact-link {
+    display: none;
+  }
+
+  .vectra-res .vh-nav-end {
+    gap: 0;
+    padding-right: 8px;
+  }
+}
+
+@media (max-width: 1280px) {
   .vectra-res .vres-hero {
     height: auto;
     min-height: 0;
-    padding: 150px 20px 48px;
-    border-radius: 0 0 48px 48px;
+    padding: 150px 24px 48px;
+    border-radius: 0 0 64px 64px;
   }
 
   .vectra-res .vres-hero__copy {
     width: 100%;
     padding-top: 0;
-  }
-
-  .vectra-res .vres-hero h1 {
-    font-size: 42px;
-    line-height: 1.08;
-  }
-
-  .vectra-res .vres-hero__lead {
-    font-size: 16px;
   }
 
   .vectra-res .vres-cats {
@@ -402,51 +425,54 @@ body:has(.vectra-res) {
 
   .vectra-res .vres-cat {
     flex: 1 1 calc(50% - 12px);
-    font-size: 14px;
-    white-space: normal;
-    text-align: center;
+  }
+}
+
+@media (max-width: 1100px) {
+  .vectra-res .vres-hero h1 {
+    font-size: clamp(32px, 6vw, 42px);
   }
 
   .vectra-res .vres-feed__layout,
   .vectra-res .vres-ebooks .vres-label,
   .vectra-res .vres-ebooks__grid {
     width: calc(100% - 40px);
-    grid-template-columns: 1fr;
+  }
+
+  .vectra-res .vres-feed__layout {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .vectra-res .vres-ebooks__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .vectra-res .vres-feature h3 {
-    font-size: 36px;
-  }
-
-  .vectra-res .vres-feature img,
-  .vectra-res .vres-split img {
-    height: 220px;
-  }
-
   .vectra-res .vres-split {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .vectra-res .vres-split img {
+    justify-self: stretch;
   }
 
   .vectra-res .vres-side {
     min-height: 0;
   }
+
+  .vectra-res .vres-prose p {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 720px) {
   .vectra-res .vres-hero {
-    padding: 130px 16px 36px;
-  }
-
-  .vectra-res .vres-hero h1 {
-    font-size: 32px;
+    padding: 120px 16px 32px;
+    border-radius: 0 0 36px 36px;
   }
 
   .vectra-res .vres-cat {
     flex-basis: 100%;
+    min-height: 48px;
   }
 
   .vectra-res .vres-feed__layout,
@@ -456,20 +482,58 @@ body:has(.vectra-res) {
   }
 
   .vectra-res .vres-ebooks__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .vectra-res .vres-label {
+    flex-wrap: wrap;
   }
 
   .vectra-res .vres-label h2 {
-    font-size: 18px;
-    line-height: 1.2;
+    white-space: normal;
   }
 
-  .vectra-res .vres-feature h3,
-  .vectra-res .vres-follow h3 {
-    font-size: 26px;
+  .vectra-res .vres-label__rule {
+    flex-basis: 100%;
+  }
+
+  .vectra-res .vres-feature img,
+  .vectra-res .vres-split img {
+    border-radius: 14px;
   }
 
   .vectra-res .vres-side__inner {
-    padding: 28px 20px;
+    padding: 28px 16px;
+  }
+
+  .vectra-res .vh-logo img {
+    width: min(168px, 48vw);
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .vectra-res .vh-util {
+    gap: 10px;
+    font-size: 12px;
+  }
+
+  .vectra-res .vh-contact-link {
+    padding-inline: 12px;
+    font-size: 13px;
+  }
+
+  .vectra-res .vres-hero {
+    padding: 108px 12px 28px;
+  }
+
+  .vectra-res .vres-feed__layout,
+  .vectra-res .vres-ebooks .vres-label,
+  .vectra-res .vres-ebooks__grid {
+    width: calc(100% - 24px);
+  }
+
+  .vectra-res .vres-search {
+    padding-left: 14px;
   }
 }

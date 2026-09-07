@@ -1,0 +1,369 @@
+/* LRQA-aligned type + shared responsive rules for all VECTRA pages.
+   Reference: https://www.lrqa.com/en-us/who-we-are/
+   H1 ~26px, H2 ~22px, H3 ~18px, lead 16px, body 14px, nav 14px. */
+
+.vectra-home {
+  --vh-fs-display: clamp(22px, 2vw, 28px);
+  --vh-fs-title: clamp(20px, 1.7vw, 24px);
+  --vh-fs-section: clamp(18px, 1.4vw, 22px);
+  --vh-fs-card: clamp(16px, 1.15vw, 18px);
+  --vh-fs-lead: clamp(14px, 1vw, 16px);
+  --vh-fs-body: 14px;
+  --vh-fs-kicker: 12px;
+  --vh-fs-nav: 14px;
+  --vh-fs-btn: 14px;
+  --vh-fs-stat: clamp(28px, 3.2vw, 40px);
+  overflow-x: clip;
+  max-width: 100%;
+  letter-spacing: -0.02em;
+}
+
+.vectra-home img {
+  max-width: 100%;
+}
+
+.vectra-home .vh-logo img,
+.vectra-home .vh-util img,
+.vectra-home .vh-contact-link img,
+.vectra-home .vh-btn img,
+.vectra-home .vres-label__dot,
+.vectra-home .vres-cat img {
+  width: auto;
+  max-width: none;
+}
+
+.vectra-home .vh-util,
+.vectra-home .vh-locale__summary {
+  font-size: var(--vh-fs-nav);
+}
+
+.vectra-home .vh-menu a,
+.vectra-home .vh-menu button,
+.vectra-home .vh-nav-panel a,
+.vectra-home .vh-mega a,
+.vectra-home .vh-contact-link,
+.vectra-home button.vh-contact-link {
+  font-size: var(--vh-fs-nav);
+}
+
+.vectra-home .vh-btn,
+.vectra-home .vh-news button,
+.vectra-home .vh-form .vh-btn,
+.vectra-sol .vh-form .vh-btn {
+  font-size: var(--vh-fs-btn);
+}
+
+.vectra-home h1,
+.vectra-home .vh-hero__copy h1,
+.vectra-home .vh-page-hero h1,
+.vectra-story .vs-hero h1,
+.vectra-story .vs-hero__copy h1,
+.vectra-sol .vsol-hero h1,
+.vectra-res .vres-hero h1 {
+  font-size: var(--vh-fs-display) !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.vectra-home h2,
+.vectra-home .vh-h2,
+.vectra-home .vh-why__copy h2,
+.vectra-home .vh-esg__copy h2,
+.vectra-home .vh-cases h2,
+.vectra-home .vh-solutions__copy h3,
+.vectra-home .vh-impact h2,
+.vectra-home .vh-portal h2,
+.vectra-home .vh-blog .vh-h2,
+.vectra-home .vh-accordion .vh-h2,
+.vectra-home .vh-careers .vh-h2,
+.vectra-home .vh-form h3,
+.vectra-story .vs-ceo__copy h2,
+.vectra-story .vs-who h2,
+.vectra-story .vs-mv h2,
+.vectra-story .vs-join h2,
+.vectra-story .vs-people h2,
+.vectra-story .vs-values h2,
+.vectra-sol .vsol-intro__copy h2,
+.vectra-sol .vsol-eco__head h2,
+.vectra-sol .vsol-out h2,
+.vectra-sol .vsol-svc__head h2,
+.vectra-sol .vsol-process h2,
+.vectra-sol .vh-portal h2,
+.vectra-res .vres-feature h3,
+.vectra-res .vres-follow h3 {
+  font-size: var(--vh-fs-title) !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.vectra-home h3,
+.vectra-home .vh-article h3,
+.vectra-home .vh-case h3,
+.vectra-home .vh-course h3,
+.vectra-home .vh-why__item h3,
+.vectra-home .vh-footer h3,
+.vectra-home .vh-recent h3,
+.vectra-home .vh-tags h3,
+.vectra-home .vh-ig h3,
+.vectra-story .vs-leader h3,
+.vectra-sol .vsol-card__title,
+.vectra-sol .vsol-glass h3,
+.vectra-sol .vsol-svc-card h3,
+.vectra-sol .vsol-step h3,
+.vectra-sol .vsol-custom-card,
+.vectra-res .vres-split h3,
+.vectra-res .vres-label h2 {
+  font-size: var(--vh-fs-section) !important;
+  line-height: 1.3 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.vectra-home .vh-kicker,
+.vectra-home .vs-hero__kicker,
+.vectra-story .vs-hero__kicker,
+.vectra-story .vs-ceo__kicker,
+.vectra-sol .vsol-kicker,
+.vectra-sol .vsol-hero__kicker,
+.vectra-res .vres-hero__kicker {
+  font-size: var(--vh-fs-kicker) !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0.04em;
+}
+
+.vectra-home .vh-hero__copy p,
+.vectra-home .vh-page-hero p,
+.vectra-home .vh-lead,
+.vectra-story .vs-hero__body p,
+.vectra-sol .vsol-hero__inner > p:not(.vsol-hero__kicker),
+.vectra-sol .vsol-intro__copy p:last-child,
+.vectra-sol .vsol-eco__head > p:not(.vsol-kicker),
+.vectra-sol .vsol-svc__head p,
+.vectra-sol .vh-portal p,
+.vectra-res .vres-hero__lead,
+.vectra-home .vh-portal p,
+.vectra-home .vh-solutions__copy p {
+  font-size: var(--vh-fs-lead) !important;
+  line-height: 1.45 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.vectra-home p,
+.vectra-home li,
+.vectra-home .vh-prose,
+.vectra-home .vh-article p,
+.vectra-home .vh-why__item p,
+.vectra-home .vh-case p,
+.vectra-home .vh-course p,
+.vectra-home .vh-footer p,
+.vectra-home .vh-footer a,
+.vectra-home .vh-form input,
+.vectra-home .vh-form textarea,
+.vectra-home .vh-form select,
+.vectra-story p,
+.vectra-sol p,
+.vectra-sol .vsol-card__panel p,
+.vectra-sol .vsol-glass p,
+.vectra-sol .vsol-svc-card p,
+.vectra-sol .vsol-step p,
+.vectra-res .vres-prose p,
+.vectra-res .vres-search input,
+.vectra-home .vh-recent__list time,
+.vectra-home .vh-recent__list strong,
+.vectra-home .vh-tags__list button {
+  font-size: var(--vh-fs-body);
+  line-height: 1.5;
+}
+
+.vectra-home .vh-stat b,
+.vectra-home .vh-stat--100 b,
+.vectra-home .vh-stat--30 b,
+.vectra-home .vh-stat--500 b,
+.vectra-sol .vsol-svc-card__num,
+.vectra-sol .vsol-step span {
+  font-size: var(--vh-fs-stat) !important;
+  line-height: 1 !important;
+}
+
+.vectra-home .vh-quote,
+.vectra-sol .vsol-quote,
+.vectra-res .vres-cat {
+  font-size: var(--vh-fs-btn) !important;
+}
+
+.vectra-home .vh-contact-card__title,
+.vectra-home .vh-solutions__copy h3,
+.vectra-home .vh-accordion .vh-h2,
+.vectra-sol .vh-form h3 {
+  font-size: var(--vh-fs-section) !important;
+  line-height: 1.3 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.vectra-home .vh-course h3,
+.vectra-home .vh-topic-card h3,
+.vectra-home .vh-article h3,
+.vectra-home .vh-price,
+.vectra-sol .vsol-card__title,
+.vectra-sol .vsol-custom-card {
+  font-size: var(--vh-fs-card) !important;
+  line-height: 1.3 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.vectra-home .vh-footer h3,
+.vectra-home .vh-footer__subscribe,
+.vectra-home .vh-contact-list strong,
+.vectra-home .vh-topic-card__label,
+.vectra-sol .vsol-card__num,
+.vectra-home .vh-acc button {
+  font-size: var(--vh-fs-nav) !important;
+  line-height: 1.3 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.vectra-story .vs-join h2 {
+  font-size: var(--vh-fs-title) !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.vectra-story .vs-join p,
+.vectra-story .vs-join p.vs-join__kicker {
+  font-size: var(--vh-fs-lead) !important;
+  line-height: 1.45 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.vectra-story .vs-join .vs-cta-btn {
+  font-size: var(--vh-fs-btn) !important;
+}
+
+.vectra-home .vh-searchbar input,
+.vectra-home .vh-searchbar select,
+.vectra-home .vh-form input,
+.vectra-home .vh-form textarea,
+.vectra-home .vh-form select {
+  font-size: var(--vh-fs-body) !important;
+  letter-spacing: -0.02em !important;
+}
+
+.vectra-home .vh-kicker--arrows {
+  font-size: var(--vh-fs-kicker) !important;
+  letter-spacing: 0.06em !important;
+}
+
+.vectra-home .vh-pill {
+  font-size: var(--vh-fs-btn) !important;
+}
+
+@media (max-width: 1399px) {
+  .vectra-home .vh-portal__grid {
+    grid-template-columns: 1fr;
+    row-gap: 36px;
+    padding-top: 64px;
+    padding-bottom: 72px;
+  }
+
+  .vectra-home .vh-form {
+    justify-self: stretch;
+    max-width: none;
+  }
+
+  .vectra-home .vh-solutions__body {
+    flex-wrap: wrap;
+  }
+
+  .vectra-home .vh-solutions__gallery {
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+  }
+
+  .vectra-home .vh-faq__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 989px) {
+  .vectra-home .vh-contact-link {
+    display: none;
+  }
+
+  .vectra-home .vh-nav-end {
+    gap: 0;
+    padding-right: 8px;
+  }
+
+  .vectra-home .vh-logo img {
+    width: min(168px, 48vw);
+    height: auto;
+  }
+
+  .vectra-home .vh-hero,
+  .vectra-home .vh-hero__track,
+  .vectra-home .vh-hero__slide {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  .vectra-home .vh-hero {
+    aspect-ratio: auto;
+    min-height: 520px;
+    height: auto;
+  }
+
+  .vectra-home .vh-hero__copy {
+    left: 16px;
+    right: 16px;
+    top: auto;
+    bottom: 56px;
+    width: auto;
+    max-width: none;
+  }
+
+  .vectra-home .vh-wrap,
+  .vectra-sol .vsol-intro__grid,
+  .vectra-sol .vsol-eco__head,
+  .vectra-sol .vsol-eco__wrap,
+  .vectra-sol .vsol-out__inner,
+  .vectra-sol .vsol-svc__head,
+  .vectra-sol .vsol-svc__grid,
+  .vectra-sol .vsol-process__inner {
+    width: min(100%, calc(100% - 32px));
+    max-width: 100%;
+  }
+
+  .vectra-sol .vsol-hero {
+    height: auto;
+    min-height: 0;
+    padding: 140px 20px 64px;
+  }
+
+  .vectra-sol .vsol-hero__inner,
+  .vectra-sol .vsol-hero__kicker,
+  .vectra-sol .vsol-hero h1,
+  .vectra-sol .vsol-hero__inner > p:not(.vsol-hero__kicker) {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    max-width: none;
+    height: auto;
+  }
+
+  .vectra-sol .vsol-quote {
+    position: relative;
+    right: auto;
+    top: auto;
+    margin-top: 28px;
+    transform: none;
+  }
+}
+
+@media (max-width: 749px) {
+  .vectra-home .vh-util {
+    gap: 10px;
+    font-size: 12px;
+  }
+}

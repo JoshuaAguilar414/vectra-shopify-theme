@@ -31,12 +31,16 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  height: calc(926px * var(--vsol-s));
-  min-height: 0;
-  padding: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(24px, 4vw, 64px);
+  height: auto;
+  min-height: clamp(460px, 48vw, 620px);
+  padding: 150px 40px 72px;
   color: #fff;
   background: linear-gradient(106.42deg, #54bd01 -32.39%, #092543 72.71%);
-  border-radius: 0 0 calc(101px * var(--vsol-s)) calc(101px * var(--vsol-s));
+  border-radius: 0 0 clamp(40px, 5vw, 101px) clamp(40px, 5vw, 101px);
 }
 
 .vectra-sol .vsol-hero__icon {
@@ -52,98 +56,103 @@
 }
 
 .vectra-sol .vsol-hero__inner {
-  position: absolute;
+  position: relative;
   z-index: 1;
-  left: calc(157px * var(--vsol-s));
-  top: calc(417px * var(--vsol-s));
-  width: min(1221px, calc(100% - 180px));
-  height: calc(305px * var(--vsol-s));
+  left: auto;
+  top: auto;
+  width: min(720px, 100%);
+  height: auto;
 }
 
 .vectra-sol .vsol-hero__kicker {
-  position: absolute;
-  left: 3px;
-  top: 0;
-  margin: 0;
-  width: calc(544px * var(--vsol-s));
-  max-width: calc(100% - 8px);
-  height: calc(30px * var(--vsol-s));
+  position: relative;
+  left: auto;
+  top: auto;
+  margin: 0 0 10px;
+  width: auto;
+  max-width: 100%;
+  height: auto;
   color: #fff;
-  font-size: calc(20px * var(--vsol-s));
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: -0.05em;
-  line-height: calc(30px * var(--vsol-s));
+  letter-spacing: 0.04em;
+  line-height: 1.3;
   text-transform: uppercase;
   display: flex;
   align-items: center;
 }
 
 .vectra-sol .vsol-hero h1 {
-  position: absolute;
-  left: 0;
-  top: 18.37%;
-  margin: 0;
-  width: 100%;
+  position: relative;
+  left: auto;
+  top: auto;
+  margin: 0 0 16px;
+  width: auto;
+  max-width: 18em;
   color: #fff;
-  font-size: calc(75px * var(--vsol-s));
+  font-size: clamp(22px, 2.4vw, 32px);
   font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: calc(80px * var(--vsol-s));
+  line-height: 1.2;
 }
 
 .vectra-sol .vsol-hero__inner > p:not(.vsol-hero__kicker) {
-  position: absolute;
-  left: 3px;
-  top: 81.32%;
+  position: relative;
+  left: auto;
+  top: auto;
   margin: 0;
-  width: min(calc(706px * var(--vsol-s)), 100%);
+  width: auto;
+  max-width: 38em;
   color: rgba(255, 255, 255, 0.9);
-  font-size: calc(20px * var(--vsol-s));
+  font-size: 15px;
   font-weight: 500;
-  letter-spacing: -0.05em;
-  line-height: calc(24px * var(--vsol-s));
+  letter-spacing: -0.02em;
+  line-height: 1.45;
 }
 
 .vectra-sol .vsol-quote {
-  position: absolute;
+  position: relative;
   z-index: 1;
-  right: calc(165px * var(--vsol-s));
-  top: calc(668px * var(--vsol-s));
-  width: calc(359px * var(--vsol-s));
-  max-width: calc(100% - 32px);
-  height: 70px;
+  right: auto;
+  top: auto;
+  width: auto;
+  max-width: 100%;
+  height: 52px;
+  padding: 0 28px;
   border: 0;
   border-radius: 13px;
   background: var(--vsol-green);
   color: #fff;
   font-family: inherit;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.03em;
   cursor: pointer;
   box-shadow: 0 0 24px rgba(84, 189, 1, 0.45);
-  transform: translateY(-50%);
+  transform: none;
+  align-self: center;
+  flex: none;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background 0.25s ease, box-shadow 0.25s ease;
 }
 
 .vectra-sol .vsol-quote:hover,
 .vectra-sol .vsol-quote:focus-visible {
   background: #46a300;
-  transform: translateY(calc(-50% - 10px));
+  transform: translateY(-6px);
 }
 
 .vectra-sol .vsol-quote[data-vh-reveal='scale'] {
-  transform: translateY(-50%) scale(0.5);
+  transform: scale(0.5);
   transform-origin: 50% 50%;
 }
 
 .vectra-sol .vsol-quote[data-vh-reveal='scale'].is-in {
-  transform: translateY(-50%);
+  transform: none;
 }
 
 .vectra-sol .vsol-quote[data-vh-reveal='scale'].is-in:hover,
 .vectra-sol .vsol-quote[data-vh-reveal='scale'].is-in:focus-visible {
-  transform: translateY(calc(-50% - 10px));
+  transform: translateY(-6px);
 }
 
 .vectra-sol [data-vh-reveal='fade'] {
@@ -403,8 +412,8 @@
   justify-content: space-between;
   gap: 16px;
   width: 100%;
-  height: 100px;
-  padding: 0 28px;
+  height: 72px;
+  padding: 0 20px;
   border: 0;
   background: transparent;
   color: #000;
@@ -429,10 +438,10 @@
 .vectra-sol .vsol-card__title {
   flex: 1 1 auto;
   min-width: 0;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1.25;
+  letter-spacing: -0.03em;
+  line-height: 1.3;
 }
 
 .vectra-sol .vsol-card__num {
@@ -548,20 +557,20 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
-  width: 50%;
-  box-sizing: border-box;
-  height: 100px;
-  margin: 0 auto 35px;
-  padding: 0 72px;
+  width: min(720px, calc(100% - 48px));
+  height: auto;
+  min-height: 72px;
+  margin: 0 auto 24px;
+  padding: 16px 56px 16px 28px;
   overflow: hidden;
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
   color: #000;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1.25;
+  letter-spacing: -0.03em;
+  line-height: 1.3;
   text-align: center;
 }
 
@@ -785,18 +794,18 @@
 .vectra-sol .vsol-svc__grid {
   width: min(1600px, calc(100% - 80px));
   margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 32px 40px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px 28px;
 }
 
 .vectra-sol .vsol-svc-card {
   position: relative;
-  width: 457.65px;
-  height: 578.4px;
-  max-width: 100%;
-  flex: none;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 458 / 578;
+  max-width: none;
   border-radius: 10px;
   overflow: hidden;
   color: #fff;
@@ -1067,6 +1076,7 @@
 .vectra-sol #custom,
 .vectra-sol .vh-portal,
 .vectra-sol .vh-portal--sol {
+  position: relative;
   scroll-margin-top: 40px;
   margin-bottom: 0;
   overflow: hidden;
@@ -1074,12 +1084,7 @@
 }
 
 .vectra-sol .vh-portal::before {
-  background-color: var(--vsol-navy);
-  background-image:
-    linear-gradient(rgba(84, 189, 1, 0.18) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(84, 189, 1, 0.18) 1px, transparent 1px);
-  background-size: 48px 48px;
-  bottom: 0;
+  display: none;
 }
 
 .vectra-sol .vh-portal__cells {
@@ -1239,15 +1244,21 @@
 
   .vectra-sol .vsol-hero__kicker,
   .vectra-sol .vsol-hero__inner > p:not(.vsol-hero__kicker) {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.4;
     height: auto;
   }
 
   .vectra-sol .vsol-hero h1 {
-    margin: 12px 0 20px;
-    font-size: clamp(32px, 7vw, 52px);
-    line-height: 1.07;
+    margin: 8px 0 14px;
+    font-size: clamp(22px, 5.5vw, 28px);
+    line-height: 1.2;
+  }
+
+  .vectra-sol .vsol-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 140px 24px 64px;
   }
 
   .vectra-sol .vsol-quote {
@@ -1275,8 +1286,9 @@
     transform: translateY(-10px);
   }
 
-  .vectra-sol .vsol-intro {
-    padding: 48px 24px 40px;
+  .vectra-sol .vsol-svc__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: calc(100% - 48px);
   }
 
   .vectra-sol .vsol-intro__grid {
@@ -1376,10 +1388,19 @@
   .vectra-sol .vsol-intro__grid,
   .vectra-sol .vsol-eco__head,
   .vectra-sol .vsol-eco__wrap,
-  .vectra-sol .vsol-eco__cols,
-  .vectra-sol .vsol-svc__head,
-  .vectra-sol .vsol-svc__grid,
-  .vectra-sol .vsol-out__inner,
+  .vectra-sol .vsol-eco__cols {
+    width: calc(100% - 32px);
+  }
+
+  .vectra-sol .vsol-svc__grid {
+    grid-template-columns: 1fr;
+    width: calc(100% - 32px);
+  }
+
+  .vectra-sol .vsol-svc-card {
+    aspect-ratio: 4 / 5;
+    max-height: 460px;
+  }
   .vectra-sol .vsol-out__grid,
   .vectra-sol .vsol-process__inner {
     width: calc(100% - 32px);

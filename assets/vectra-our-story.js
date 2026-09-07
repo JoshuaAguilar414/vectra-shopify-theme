@@ -188,7 +188,7 @@
   }
 
   const gridCanvas = qs('[data-vs-join-grid]');
-  if (gridCanvas) {
+  if (gridCanvas && gridCanvas.dataset.vhGlowBound !== 'true') {
     const ctx = gridCanvas.getContext('2d', { alpha: false });
     if (ctx) {
       const animationSpeed = 2;

@@ -590,9 +590,9 @@
     assign portal_submit = 'Submit'
   endif
 %}
-<section class="vh-portal{% if is_solutions_portal %} vh-portal--sol{% endif %}" id="{{ block.settings.anchor_id | default: 'get-in-touch' }}"{% unless is_solutions_portal %} data-vh-reveal="scale"{% endunless %} {{ block.shopify_attributes }}>
+<section class="vh-portal{% if is_solutions_portal %} vh-portal--sol{% endif %}" id="{{ block.settings.anchor_id | default: 'get-in-touch' }}" {{ block.shopify_attributes }}>
     {% if is_solutions_portal %}
-      <canvas class="vh-portal__cells" data-vsol-cell-grid aria-hidden="true"></canvas>
+      <canvas class="vh-portal__cells" data-vs-join-grid aria-hidden="true"></canvas>
     {% endif %}
     <div class="vh-wrap vh-portal__grid">
       <div class="vh-portal__copy">

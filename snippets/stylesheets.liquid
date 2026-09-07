@@ -17,4 +17,6 @@
     {{ 'vectra-resources.css' | asset_url | stylesheet_tag: preload: true }}
     <link rel="stylesheet" href="{{ 'vectra-resources.css' | asset_url }}" media="all">
   {% endif %}
+  {{ 'vectra-type.css' | asset_url | stylesheet_tag: preload: true }}
+  <link rel="stylesheet" href="{{ 'vectra-type.css' | asset_url }}" media="all">
 {% endif %}

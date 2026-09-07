@@ -8,7 +8,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/vectra-home.css">
-<link rel="stylesheet" href="assets/vectra-solutions.css?v=form-scale">
+<link rel="stylesheet" href="assets/vectra-solutions.css?v=svc-grid3">
+<link rel="stylesheet" href="assets/vectra-type.css?v=svc-grid3">
 <style>body{margin:0;background:#fff}</style>
 </head>
 <body class="vectra-home-page">
@@ -31,6 +32,16 @@
       </div>
       <div class="vh-nav-end">
         <a class="vh-contact-link" href="#custom">Contact Us <img src="assets/vectra-d640d7e5d10a7b2543900785147430e0c5cd06a1.svg" alt="" width="16" height="9"></a>
+        <button class="vh-nav-toggle" type="button" data-vh-nav-toggle aria-expanded="false" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+      <div class="vh-nav-panel" data-vh-nav-panel>
+        <a href="preview-our-story.html">Our DNA</a>
+        <a href="preview-solutions.html">How We Help</a>
+        <a href="preview.html#marketplace">Marketplace</a>
+        <a href="preview-resources.html">Resources</a>
+        <a href="#custom">Contact Us</a>
       </div>
     </nav>
   </header>
@@ -267,7 +278,7 @@
   </section>
 
   <section class="vh-portal vh-portal--sol" id="custom">
-    <canvas class="vh-portal__cells" data-vsol-cell-grid aria-hidden="true"></canvas>
+    <canvas class="vh-portal__cells" data-vs-join-grid aria-hidden="true"></canvas>
     <div class="vh-wrap vh-portal__grid">
       <div class="vh-portal__copy">
         <h2>Start with the <strong>challenge</strong> in front of you.</h2>
@@ -353,7 +364,7 @@
     </div>
   </footer>
 </div>
-<script src="assets/vectra-home.js" defer></script>
+<script src="assets/vectra-home.js?v=join-grid" defer></script>
 <script src="assets/vectra-solutions.js?v=portal" defer></script>
 </body>
 </html>

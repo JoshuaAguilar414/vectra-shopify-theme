@@ -104,7 +104,7 @@
 
 .vectra-home .vh-ig__grid {
   display: grid;
-  grid-template-columns: repeat(3, 110px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 15px;
   justify-content: start;
 }
@@ -112,12 +112,13 @@
 .vectra-home .vh-ig__grid a,
 .vectra-home .vh-ig__grid img {
   display: block;
+  min-width: 0;
 }
 
 .vectra-home .vh-ig__grid img {
-  width: 110px;
-  height: 104px;
-  max-width: none;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 110 / 104;
   object-fit: cover;
   border-radius: 10px;
 }
