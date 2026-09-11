@@ -1,12 +1,12 @@
 {% capture children %}
   {% content_for 'blocks' %}
 {% endcapture %}
-{% render 'vectra-page-shell', children: children, include_resources: true, include_solutions: true %}
+{% render 'vectra-page-shell', children: children, include_resources: true %}
 
 {% schema %}
 {
-  "name": "VECTRA Resources",
-  "class": "vectra-res-section",
+  "name": "VECTRA Contact",
+  "class": "vectra-con-section",
   "enabled_on": {
     "templates": ["page"]
   },
@@ -24,21 +24,13 @@
   ],
   "presets": [
     {
-      "name": "VECTRA Resources",
+      "name": "VECTRA Contact",
       "blocks": [
         { "type": "vectra-header" },
-        { "type": "vectra-res-hero" },
-        {
-          "type": "vectra-res-feed",
-          "blocks": [
-            { "type": "vectra-recent-posts" },
-            { "type": "vectra-tags" },
-            { "type": "vectra-instagram" }
-          ]
-        },
-        { "type": "vectra-res-ebooks" },
-        { "type": "vectra-res-faq" },
-        { "type": "vectra-portal" },
+        { "type": "vectra-con-hero" },
+        { "type": "vectra-con-challenges" },
+        { "type": "vectra-con-next" },
+        { "type": "vectra-con-direct" },
         { "type": "vectra-footer" }
       ]
     }

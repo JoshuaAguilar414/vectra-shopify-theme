@@ -1,0 +1,147 @@
+{%- doc -%}
+  VECTRA Contact Us page modules. Uses existing homepage/resources classes.
+{%- enddoc -%}
+
+{% render 'vectra-assets' %}
+{% liquid
+  assign img_arrow = 'vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg' | asset_url
+  assign img_mark = 'vectra-6fbd7c62e521082467b9d6192e09d91235f198a5.png' | asset_url
+  assign img_chat = 'vectra-da137306dcbc6716d83295ef75678ab141a500e1.svg' | asset_url
+  assign img_mail = 'vectra-9a4f80a5b924a881fc96b20219bb1f7c8ca734ab.svg' | asset_url
+  assign img_phone = 'vectra-7c0e54b37d57d95df328b0e4ee1f7b87844a7372.svg' | asset_url
+  assign img_pin = 'vectra-484bca36e3874bd30d1d6dd79807ed0314378e3d.svg' | asset_url
+  assign img_icon_1 = 'vectra-2ff6aff392536da49f749783879fa1d814bae954.svg' | asset_url
+  assign img_icon_2 = 'vectra-7710da89715977538c6f4fe9c6dc34d7e755efbe.svg' | asset_url
+  assign img_icon_3 = 'vectra-0741b53e27e031962e5853d5e609fc42e3000a0a.svg' | asset_url
+  assign img_icon_4 = 'vectra-be208e26a6843edcaa8fc4443996531be291a3b4.svg' | asset_url
+%}
+{% case module %}
+  {% when 'hero' %}
+{% render 'vectra-seo', page_key: 'contact' %}
+<section class="vres-hero" aria-label="Contact VECTRA International" {{ block.shopify_attributes }}>
+  <img class="vres-hero__mark" src="{{ img_mark }}" alt="" width="901" height="909">
+  <div class="vres-hero__copy" data-vh-reveal="up">
+    <h1 class="vres-hero__kicker">Contact VECTRA International</h1>
+    <h2>Bring Us the Problem.</h2>
+    <p class="vres-hero__lead">
+      You don’t need a finished scope before you talk to us. Tell us what’s happening, what keeps coming back, or where the work is getting stuck — whether that’s a supplier finding, an ESG reporting gap, an audit follow-up, or an operational resilience problem you haven’t fully named yet. You don’t need to decide which VECTRA service it belongs to first. We’ll review what you share, bring the relevant expertise into the conversation, and work out the most useful next step together. Use the form below, email info@vectra-intl.com, or call +32 495 239088.
+    </p>
+  </div>
+</section>
+
+  {% when 'challenges' %}
+<section class="vh-why" id="challenges" {{ block.shopify_attributes }}>
+  <div class="vh-wrap">
+    <p class="vh-kicker">Not sure where it fits?</p>
+    <h2 class="vh-h2">Start With What’s Happening</h2>
+    <p class="vh-lead">You may already know exactly what support you need. Or you may simply know that something isn’t working as it should — either way, this is the right place to start.</p>
+  </div>
+  <div class="vh-wrap vh-why__list">
+    <article class="vh-why__item" data-vh-reveal>
+      <img src="{{ img_icon_4 }}" alt="">
+      <h3>The same problem keeps coming back</h3>
+      <p>It gets corrected. A few weeks or months later, the same finding, gap, or issue is back — a sign the root cause, not just the symptom, needs attention.</p>
+    </article>
+    <article class="vh-why__item" data-vh-reveal>
+      <img src="{{ img_icon_3 }}" alt="">
+      <h3>You have supplier findings, but no clear priority</h3>
+      <p>You’re sitting on audit results, supplier risk data, or compliance evidence. The harder part is deciding what needs attention first and who owns the next action.</p>
+    </article>
+    <article class="vh-why__item" data-vh-reveal>
+      <img src="{{ img_icon_2 }}" alt="">
+      <h3>The evidence exists, but using it takes too much work</h3>
+      <p>ESG data, audit records, and compliance evidence are scattered across files, systems, emails, and teams — making it difficult to use, verify, or defend when it matters.</p>
+    </article>
+    <article class="vh-why__item" data-vh-reveal>
+      <img src="{{ img_icon_1 }}" alt="">
+      <h3>The change makes sense on paper, but it isn’t sticking</h3>
+      <p>The requirement, process, or system is clear. The people who need to use it day to day are still struggling to make it part of normal work.</p>
+    </article>
+  </div>
+</section>
+
+  {% when 'next' %}
+<section class="vh-faq" id="what-happens-next" {{ block.shopify_attributes }}>
+  <div class="vh-wrap vh-faq__grid">
+    <aside class="vh-contact-card" data-vh-reveal="left">
+      <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
+      <p class="vh-contact-card__title">Prefer to reach us directly?</p>
+      <p>Already know who you need to speak with? Reach out directly. If you’re not sure which VECTRA specialist fits the issue, use the form and we’ll route the conversation.</p>
+      <a class="vh-btn vh-btn--white" href="#get-in-touch">
+        Start the Conversation
+        <img src="{{ img_arrow }}" alt="">
+      </a>
+      <div class="vh-contact-list">
+        <div>
+          <small>Give Us A Call</small>
+          <span>
+            <img src="{{ img_phone }}" alt="">
+            <strong>+32 495 239088</strong>
+          </span>
+        </div>
+        <div>
+          <small>Have a question</small>
+          <span>
+            <img src="{{ img_mail }}" alt="">
+            <strong class="vh-contact-list__email">info@vectra-intl.com</strong>
+          </span>
+        </div>
+        <div>
+          <small>Our Address</small>
+          <span>
+            <img src="{{ img_pin }}" alt="">
+            <strong>Chaussée de Wavre 1517B<br>1160 Brussels, Belgium</strong>
+          </span>
+        </div>
+      </div>
+    </aside>
+    <div class="vh-faq__right">
+      <div class="vh-faq__glow" aria-hidden="true"></div>
+      <div class="vh-accordion">
+        <p class="vh-kicker">Next</p>
+        <h2 class="vh-h2">You Send the Context. We Work Out the Next Move Together.</h2>
+        <p class="vh-lead">Three steps from first message to a useful next move.</p>
+        <div class="vh-acc is-open" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>01 — Tell Us What’s Happening</button>
+          <div class="vh-acc__body">
+            Share what you already know — a recurring issue, an audit finding, a customer or regulatory requirement, supplier data, an internal process, or something that simply isn’t working as expected. You don’t need to turn it into a formal brief first.
+          </div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>02 — We Bring in the Relevant Expertise</button>
+          <div class="vh-acc__body">
+            We review what you’ve shared and bring in the VECTRA International specialists whose experience best fits the issue — in ESG, supply chain resilience, audit, or operational capability building. You won’t have to re-explain the problem through several layers before reaching someone who understands the work.
+          </div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>03 — Agree on the Most Useful Next Step</button>
+          <div class="vh-acc__body">
+            The first useful step might be a focused assessment, specialist support, implementation work, capability building, or simply a clearer direction. We agree on that together, rather than assuming the answer before we understand the situation.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  {% when 'direct' %}
+<section class="vh-portal" id="get-in-touch" {{ block.shopify_attributes }}>
+  <div class="vh-wrap vh-portal__grid">
+    <div class="vh-portal__copy">
+      <h2>Contact VECTRA International</h2>
+      <p>Use the form, email info@vectra-intl.com, or call +32 495 239088. Tell us what’s happening — supplier risk, ESG compliance, audit follow-up, or a broader resilience program — and we’ll route the conversation to the right person.</p>
+    </div>
+    {% form 'contact', class: 'vh-form' %}
+      <h3>Tell Us What You’re Working Through</h3>
+      {% if form.posted_successfully? %}
+        <p class="vh-contact-modal__success">Thanks — we received your message and will be in touch shortly.</p>
+      {% endif %}
+      {% if form.errors %}
+        <p class="vh-contact-modal__error">{{ form.errors | default_errors }}</p>
+      {% endif %}
+      {% render 'vectra-contact-fields', img_arrow: img_arrow, variant: 'contact', submit_label: 'Start the Conversation' %}
+    {% endform %}
+  </div>
+</section>
+
+{% endcase %}

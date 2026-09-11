@@ -55,25 +55,25 @@
 %}
 {% case module %}
   {% when 'hero' %}
+{% render 'vectra-seo', page_key: 'home' %}
 <section class="vh-hero" data-vh-carousel aria-label="Featured" {{ block.shopify_attributes }}>
     <div class="vh-hero__track" data-vh-track>
       <article class="vh-hero__slide is-active" data-vh-slide>
         <img src="{{ img_hero }}" alt="VECTRA team collaborating" width="1920" height="1080">
         <div class="vh-hero__copy">
-          <h1 data-vh-hero-el>Who We Are</h1>
+          <h1 data-vh-hero-el>Business Resilience Partner for Responsible Business &amp; Operational Resilience</h1>
+          <p class="vh-hero__display" data-vh-hero-el>Turn Business Complexity Into Resilient Performance</p>
           <p data-vh-hero-el>
-            Driven by innovation and built on trust, we help businesses transform ideas into measurable impact.
-            Discover our mission, meet the team behind our solutions, and see how our values shape every partnership.
+            Responsible business practices are the standards, controls, and decisions organizations use to manage supplier risk, environmental and social impact, and regulatory obligations across their operations. VECTRA International is a business resilience partner that turns those practices into clear ownership, practical action, and measurable performance, not just policy.
           </p>
         </div>
       </article>
       <article class="vh-hero__slide" data-vh-slide>
         <img src="{{ img_hero_2 }}" alt="Responsible supply chains in motion" width="1920" height="1080">
         <div class="vh-hero__copy">
-          <h1>Your Trusted ESG Partner</h1>
+          <p class="vh-hero__display">Business Resilience &amp; Operational Capability Building</p>
           <p>
-            Our solutions are tailored to empower your organization to achieve ESG goals and build more resilient,
-            responsible supply chains.
+            VECTRA helps organizations turn complex operational, supplier, and responsible business issues into clear ownership, practical action, and stronger control. From strategy through implementation, we stay accountable for moving the work forward.
           </p>
         </div>
       </article>
@@ -96,9 +96,9 @@
           <img src="{{ img_seal }}" alt="" width="198" height="193" data-vh-reveal="scale">
         </div>
         <div class="vh-trust__copy">
-          <h2 data-vh-reveal="left">Trusted partnership. Practical implementation.</h2>
+          <h2 data-vh-reveal="left">20+ Years of Experience. 500+ Organizations Supported.</h2>
           <a class="vh-btn vh-btn--green vh-btn--rect" href="#cases" data-vh-reveal="scale">
-            Explore the case study→
+            Explore Case Studies
           </a>
         </div>
       </div>
@@ -142,12 +142,12 @@
           WHY VECTRA
           <img src="{{ img_kicker_r }}" alt="" class="vh-kicker__arrow">
         </p>
-        <h2>Partnership with accountability.<br>Built for implementation.</h2>
+        <h2>Why Choose VECTRA as Your<br>Business Resilience Partner</h2>
         <p>
-          We combine human expertise, an ecosystem of specialists, AI-enabled intelligence, and structured execution—then stay accountable for the outcomes that matter.
+          A report can tell you what needs to change. A dashboard can show you where the problem is showing up. The harder part is turning that information into clear ownership, practical action, and a change that holds. VECTRA works with your teams, suppliers, and existing systems as decisions move into practice.
         </p>
         <a class="vh-btn vh-btn--green vh-btn--rect" href="#solutions">
-          Explore our approach
+          See Why VECTRA
           <img src="{{ img_arrow }}" alt="">
         </a>
       </div>
@@ -155,23 +155,23 @@
     <div class="vh-wrap vh-why__list">
       <article class="vh-why__item" data-vh-reveal>
         <img src="{{ img_icon_4 }}" alt="">
-        <h3>Your success is our success</h3>
-        <p>We work toward business outcomes, not a list of deliverables.</p>
+        <h3>Partnership With Accountability</h3>
+        <p>We agree what needs to improve first, then keep the work tied to that outcome as it moves into practice.</p>
       </article>
       <article class="vh-why__item" data-vh-reveal>
         <img src="{{ img_icon_3 }}" alt="">
-        <h3>AI-enabled<br>Human-led</h3>
-        <p>Technology makes expert judgment more timely and useful.</p>
+        <h3>Human-Led.<br>AI-Enabled</h3>
+        <p>Technology helps us work through large volumes of supplier information, identify patterns behind repeat findings, and keep evidence current. Experienced people remain accountable for judgment, context, and decisions.</p>
       </article>
       <article class="vh-why__item" data-vh-reveal>
         <img src="{{ img_icon_2 }}" alt="">
-        <h3>Integrated expertise around the work</h3>
-        <p>Curated specialists, tools, and learning shaped to your context.</p>
+        <h3>Expertise Built Around Your Challenge</h3>
+        <p>Your problem should not have to fit our org chart. We bring together the specialists and capabilities the work requires.</p>
       </article>
       <article class="vh-why__item" data-vh-reveal>
         <img src="{{ img_icon_1 }}" alt="">
-        <h3>Progress you can measure</h3>
-        <p>Practical implementation makes improvement visible and durable.</p>
+        <h3>Progress You Can Measure</h3>
+        <p>We agree what improvement should look like at the start, then track what changed and what still needs attention.</p>
       </article>
     </div>
   </section>
@@ -181,13 +181,13 @@
     <div class="vh-esg__stage">
       <div class="vh-esg__glow" aria-hidden="true"></div>
       <div class="vh-esg__copy" data-vh-reveal>
-        <h2>Your Trusted<br>ESG Partner</h2>
+        <h2>Helping Organizations Build<br>Long-Term Business Resilience</h2>
         <p class="vh-lead">
-          Our solutions are tailored to empower your organization to achieve ESG goals and build more resilient, responsible supply chains
+          Since 2005, VECTRA International has worked across responsible business, supply chains, and operational improvement. That experience now supports a broader role in business resilience and operational capability building.
         </p>
       </div>
       <div class="vh-stat vh-stat--100" data-vh-reveal="right"><b>100+</b><span>Experts Worldwide</span></div>
-      <div class="vh-stat vh-stat--30" data-vh-reveal="left"><b>30+</b><span>Years Of Experience</span></div>
+      <div class="vh-stat vh-stat--30" data-vh-reveal="left"><b>20+</b><span>Years of Experience</span></div>
       <div class="vh-stat vh-stat--500" data-vh-reveal="up"><b>500+</b><span>Satisfied Clients</span></div>
     </div>
   </section>
@@ -197,52 +197,22 @@
     <div class="vh-solutions__canvas">
       <div class="vh-solutions__head" data-vh-reveal>
         <p class="vh-kicker">VECTRA Solutions</p>
-        <h2>Find the right solution for you and your team, fast.</h2>
+        <h2>Responsible Business Transformation That Creates Value</h2>
       </div>
       <div class="vh-solutions__body">
         <div class="vh-solutions__copy" data-vh-sol-copy>
-          <h3 data-vh-sol-title>Responsible Business Performance</h3>
-          <p data-vh-sol-text>Turn stakeholder expectations into clearer decisions, stronger governance, and durable operating practice.</p>
-              <a class="vh-btn vh-btn--green vh-btn--rect" href="#VectraContactModal" data-vh-contact-open data-vh-sol-cta>Build capability</a>
+          <h3 data-vh-sol-title>Operational Resilience</h3>
+          <p data-vh-sol-text>Build stronger operational control, continuity, and response capability so critical work keeps moving when conditions change.</p>
+              <a class="vh-btn vh-btn--green vh-btn--rect" href="#VectraContactModal" data-vh-contact-open data-vh-sol-cta>Explore Operational Resilience</a>
         </div>
         <div class="vh-solutions__gallery">
           <button
             class="vh-sol-shot is-active"
             type="button"
             data-vh-sol-item
-            data-title="Responsible Business Performance"
-            data-text="Turn stakeholder expectations into clearer decisions, stronger governance, and durable operating practice."
-            data-cta="Build capability"
-          >
-            <img src="{{ img_sol_3 }}" alt="Responsible business performance">
-          </button>
-          <button
-            class="vh-sol-shot"
-            type="button"
-            data-vh-sol-item
-            data-title="Governance &amp; Regulatory Readiness"
-            data-text="Translate shifting requirements into accountable controls, reliable evidence, and implementation plans."
-            data-cta="Strengthen visibility"
-          >
-            <img src="{{ img_hero_2 }}" alt="Governance and regulatory readiness">
-          </button>
-          <button
-            class="vh-sol-shot vh-sol-shot--plus"
-            type="button"
-            data-vh-sol-item
-            data-title="Let's Connect: We're Here To Help"
-            data-text="We build custom solutions designed to meet your specific objectives and drive measurable results."
-            data-cta="Customize Your Solution"
-          >
-            <img src="{{ img_sol_4 }}" alt="Let's connect">
-          </button>
-          <button
-            class="vh-sol-shot"
-            type="button"
-            data-vh-sol-item
             data-title="Operational Resilience"
-            data-text="Build operational control, continuity, and a stronger response to disruption."
-            data-cta="Start a briefing."
+            data-text="Build stronger operational control, continuity, and response capability so critical work keeps moving when conditions change."
+            data-cta="Explore Operational Resilience"
           >
             <img src="{{ img_sol_2 }}" alt="Operational resilience">
           </button>
@@ -251,16 +221,56 @@
             type="button"
             data-vh-sol-item
             data-title="Value Chain Resilience &amp; Improvement"
-            data-text="Connect due diligence, supplier improvement, risk visibility, and practical follow-through."
-            data-cta="Explore delivery"
+            data-text="Identify where supplier and supply chain risk sits, prioritize what matters, and turn findings into practical improvement."
+            data-cta="Explore Value Chain Resilience &amp; Improvement"
           >
-            <img src="{{ img_sol_1 }}" alt="Value chain resilience">
+            <img src="{{ img_hero_2 }}" alt="Governance and regulatory readiness">
+          </button>
+          <button
+            class="vh-sol-shot"
+            type="button"
+            data-vh-sol-item
+            data-title="Responsible Business Performance"
+            data-text="Turn responsible-business requirements into clearer decisions, reliable evidence, and practical improvement."
+            data-cta="Explore Responsible Business Performance"
+          >
+            <img src="{{ img_sol_3 }}" alt="Responsible business performance">
+          </button>
+          <button
+            class="vh-sol-shot"
+            type="button"
+            data-vh-sol-item
+            data-title="Governance &amp; Regulatory Readiness"
+            data-text="Turn changing requirements into workable controls, clear ownership, and evidence your teams can defend."
+            data-cta="Explore Governance &amp; Regulatory Readiness"
+          >
+            <img src="{{ img_sol_1 }}" alt="Governance and regulatory readiness">
+          </button>
+          <button
+            class="vh-sol-shot"
+            type="button"
+            data-vh-sol-item
+            data-title="Capability Building at Scale"
+            data-text="Build the practical knowledge and capability teams and suppliers need to apply change and keep it working."
+            data-cta="Explore Capability Building at Scale"
+          >
+            <img src="{{ img_course_4 }}" alt="Capability building at scale">
+          </button>
+          <button
+            class="vh-sol-shot vh-sol-shot--plus"
+            type="button"
+            data-vh-sol-item
+            data-title="Customized Business Solutions"
+            data-text="Some issues span suppliers, systems, evidence, capability, and operations at once. Start with the problem. We'll help identify the right mix of expertise and support."
+            data-cta="Talk to an Expert"
+          >
+            <img src="{{ img_sol_4 }}" alt="Customized business solutions">
           </button>
         </div>
       </div>
       <div class="vh-solutions__cta">
-        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ routes.all_products_collection_url }}">
-          Explore All Solutions →
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="#VectraContactModal" data-vh-contact-open>
+          Talk to an Expert →
         </a>
       </div>
     </div>
@@ -271,10 +281,9 @@
     <div class="vh-market__panel">
     <div class="vh-wrap">
       <div class="vh-market__head">
-        <h2 class="vh-h2">Don’t Know Where To Start?</h2>
-      </div>
-      <div>
-      
+        <h2 class="vh-h2">Learn What Matters. Build Capability That Lasts.</h2>
+        <p class="vh-lead">Explore 100+ expert-led courses across ESG, sustainability, responsible business, compliance, due diligence, and supply chains</p>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ routes.all_products_collection_url }}">Find the Right Course</a>
       </div>
       <form class="vh-searchbar" action="{{ routes.search_url }}" method="get" role="search">
         <label class="vh-searchbar__q">
@@ -287,47 +296,76 @@
         <select aria-label="Stage"><option>Stage</option></select>
       </form>
 
+      <h2 class="vh-h2">Featured Courses</h2>
+      {% liquid
+        assign course_products = collections['courses'].products
+        if course_products.size == 0
+          assign course_products = collections['frontpage'].products
+        endif
+        if course_products.size == 0
+          assign course_products = collections.all.products
+        endif
+      %}
       <div class="vh-courses">
-        <article class="vh-course">
-          <img src="{{ img_course_1 }}" alt="">
-          <div class="vh-course__body">
-            <h3>Acronyms Used in ESG Area</h3>
-            <div class="vh-course__meta">
-              <span class="vh-price">$20.00</span>
-              <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">Access this course</a>
+        {% if course_products.size > 0 %}
+          {% for product in course_products limit: 4 %}
+            <article class="vh-course">
+              {% if product.featured_image %}
+                {{ product.featured_image | image_url: width: 640 | image_tag: loading: 'lazy', alt: product.title }}
+              {% else %}
+                <img src="{{ img_course_1 }}" alt="">
+              {% endif %}
+              <div class="vh-course__body">
+                <h3>{{ product.title }}</h3>
+                <div class="vh-course__meta">
+                  <span class="vh-price">{{ product.price | money }}</span>
+                  <a class="vh-course__cta" href="{{ product.url }}">View Course</a>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        {% else %}
+          <article class="vh-course">
+            <img src="{{ img_course_1 }}" alt="">
+            <div class="vh-course__body">
+              <h3>Acronyms Used in ESG Area</h3>
+              <div class="vh-course__meta">
+                <span class="vh-price">$20.00</span>
+                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">View Course</a>
+              </div>
             </div>
-          </div>
-        </article>
-        <article class="vh-course">
-          <img src="{{ img_course_2 }}" alt="">
-          <div class="vh-course__body">
-            <h3>Preventative and Corrective Measures</h3>
-            <div class="vh-course__meta">
-              <span class="vh-price">$20.00</span>
-              <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">Access this course</a>
+          </article>
+          <article class="vh-course">
+            <img src="{{ img_course_2 }}" alt="">
+            <div class="vh-course__body">
+              <h3>Preventative and Corrective Measures</h3>
+              <div class="vh-course__meta">
+                <span class="vh-price">$20.00</span>
+                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">View Course</a>
+              </div>
             </div>
-          </div>
-        </article>
-        <article class="vh-course">
-          <img src="{{ img_course_3 }}" alt="">
-          <div class="vh-course__body">
-            <h3>Optimizing Purchasing Practices</h3>
-            <div class="vh-course__meta">
-              <span class="vh-price">$20.00</span>
-              <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">Access this course</a>
+          </article>
+          <article class="vh-course">
+            <img src="{{ img_course_3 }}" alt="">
+            <div class="vh-course__body">
+              <h3>Optimizing Purchasing Practices</h3>
+              <div class="vh-course__meta">
+                <span class="vh-price">$20.00</span>
+                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">View Course</a>
+              </div>
             </div>
-          </div>
-        </article>
-        <article class="vh-course">
-          <img src="{{ img_course_4 }}" alt="">
-          <div class="vh-course__body">
-            <h3>Disability Accommodation Training</h3>
-            <div class="vh-course__meta">
-              <span class="vh-price">$20.00</span>
-              <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">Access this course</a>
+          </article>
+          <article class="vh-course">
+            <img src="{{ img_course_4 }}" alt="">
+            <div class="vh-course__body">
+              <h3>Disability Accommodation Training</h3>
+              <div class="vh-course__meta">
+                <span class="vh-price">$20.00</span>
+                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">View Course</a>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
+        {% endif %}
       </div>
 
       <div class="vh-topics">
@@ -338,6 +376,26 @@
           <span class="vh-pill">By Role →</span>
         </div>
         <div class="vh-topics__list">
+          {% if course_products.size > 0 %}
+            {% for product in course_products limit: 3 %}
+              <article class="vh-topic-card">
+                {% if product.featured_image %}
+                  {{ product.featured_image | image_url: width: 640 | image_tag: loading: 'lazy', alt: product.title }}
+                {% else %}
+                  <img src="{{ img_course_2 }}" alt="">
+                {% endif %}
+                <div class="vh-topic-card__body">
+                  <span class="vh-topic-card__label">Certificate Course</span>
+                  <h3>{{ product.title }}</h3>
+                  <p>{{ product.description | strip_html | truncate: 220 }}</p>
+                  <div class="vh-course__meta">
+                    <span class="vh-price">{{ product.price | money }}</span>
+                    <a class="vh-course__cta" href="{{ product.url }}">View Course</a>
+                  </div>
+                </div>
+              </article>
+            {% endfor %}
+          {% else %}
           <article class="vh-topic-card">
             <img src="{{ img_course_2 }}" alt="">
             <div class="vh-topic-card__body">
@@ -348,7 +406,7 @@
               </p>
               <div class="vh-course__meta">
                 <span class="vh-price">$20.00</span>
-                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">Access this course</a>
+                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">View Course</a>
               </div>
             </div>
           </article>
@@ -362,7 +420,7 @@
               </p>
               <div class="vh-course__meta">
                 <span class="vh-price">$20.00</span>
-                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">Access this course</a>
+                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">View Course</a>
               </div>
             </div>
           </article>
@@ -376,10 +434,11 @@
               </p>
               <div class="vh-course__meta">
                 <span class="vh-price">$20.00</span>
-                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">Access this course</a>
+                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">View Course</a>
               </div>
             </div>
           </article>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -390,8 +449,8 @@
 <section class="vh-cases" id="cases" {{ block.shopify_attributes }}>
     <canvas class="vh-cases__grid" data-vh-cases-grid aria-hidden="true"></canvas>
     <div class="vh-wrap">
-      <h2 data-vh-reveal>Tested in real crises.<br>Proven by industry leaders.</h2>
-      <span class="vh-reviews">Based on 500 reviews</span>
+      <h2 data-vh-reveal>Trusted by industry leaders.<br>Proven in practice.</h2>
+      <span class="vh-reviews">5/5 — Based on 500 reviews</span>
       <div class="vh-case-grid">
         <article class="vh-case" data-vh-reveal>
           <div class="vh-case__main">
@@ -464,7 +523,7 @@
         <span></span>
       </div>
       <a class="vh-btn vh-btn--green vh-cases__cta" href="#cases">
-        Explore Case studies
+        Explore Case Studies
         <img src="{{ img_arrow }}" alt="">
       </a>
     </div>
@@ -473,30 +532,52 @@
   {% when 'blog' %}
 <section class="vh-blog" id="resources" {{ block.shopify_attributes }}>
     <div class="vh-wrap">
-      <p class="vh-kicker" data-vh-reveal="scale">Our Blog</p>
-      <h2 class="vh-h2" data-vh-reveal="scale">Our latest Articles</h2>
+      <p class="vh-kicker" data-vh-reveal="scale">Insights</p>
+      <h2 class="vh-h2" data-vh-reveal="scale">Latest Insights</h2>
+      {% liquid
+        assign insight_blog = blogs['insights']
+        if insight_blog == blank or insight_blog.articles_count == 0
+          assign insight_blog = blogs['news']
+        endif
+        assign resources_url = pages['resources'].url | default: '/pages/resources'
+      %}
       <div class="vh-blog__grid">
+        {% if insight_blog != blank and insight_blog.articles_count > 0 %}
+          {% for article in insight_blog.articles limit: 3 %}
+            <article class="vh-article"{% if forloop.first %} data-vh-reveal="up"{% endif %}>
+              {% if article.image %}
+                {{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: article.title }}
+              {% else %}
+                <img src="{{ img_blog_1 }}" alt="">
+              {% endif %}
+              <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time>
+              <h3>{{ article.title }}</h3>
+              <a class="vh-read" href="{{ article.url }}">Read More</a>
+            </article>
+          {% endfor %}
+        {% else %}
         <article class="vh-article" data-vh-reveal="up">
           <img src="{{ img_blog_1 }}" alt="">
           <time datetime="2025-01-25">January 25, 2025</time>
-          <h3>Master the Markets: Trading Tips for Beginners</h3>
-          <a class="vh-read" href="{{ blogs.news.url | default: '/blogs/news' }}">Read More</a>
+          <h3>From insight to the decision that has to follow</h3>
+          <a class="vh-read" href="{{ resources_url }}">Read More</a>
         </article>
         <article class="vh-article">
           <img src="{{ img_blog_2 }}" alt="">
           <time datetime="2025-01-25">January 25, 2025</time>
-          <h3>Master the Markets: Trading Tips for Beginners</h3>
-          <a class="vh-read" href="{{ blogs.news.url | default: '/blogs/news' }}">Read More</a>
+          <h3>Events that add context to a decision you are already making</h3>
+          <a class="vh-read" href="{{ resources_url }}">Read More</a>
         </article>
         <article class="vh-article">
           <img src="{{ img_blog_3 }}" alt="">
           <time datetime="2025-01-25">January 25, 2025</time>
-          <h3>Master the Markets: Trading Tips for Beginners</h3>
-          <a class="vh-read" href="{{ blogs.news.url | default: '/blogs/news' }}">Read More</a>
+          <h3>What changed after the finding — and what still needs a team around it</h3>
+          <a class="vh-read" href="{{ resources_url }}">Read More</a>
         </article>
+        {% endif %}
       </div>
       <div class="vh-blog__more">
-        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ pages.resources.url | default: '/pages/resources' }}">See All Articles →</a>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ resources_url }}">See All Insights →</a>
       </div>
     </div>
   </section>
@@ -506,12 +587,12 @@
     <div class="vh-wrap vh-faq__grid">
       <aside class="vh-contact-card" data-vh-reveal="left">
         <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
-        <p class="vh-contact-card__title">You Have Different Questions?</p>
+        <p class="vh-contact-card__title">Bring Us the Problem That Keeps Coming Back</p>
         <p>
-          Whether you’re here to build muscle, find balance, or boost you’re here to find balan your our state-of the-art equipment, expert muscle It’s the practice.
+          Maybe actions keep stalling. Evidence is scattered. A supplier issue stays open. Or your systems produce information, but the next step is still unclear. Tell us where the work gets stuck. We’ll help you identify the gap and the next step.
         </p>
         <a class="vh-btn vh-btn--white" href="#VectraContactModal" data-vh-contact-open>
-          Contact Us
+          Talk to an Expert
           <img src="{{ img_arrow }}" alt="">
         </a>
         <div class="vh-contact-list">
@@ -519,7 +600,7 @@
             <small>Give Us A Call</small>
             <span>
               <img src="{{ img_phone }}" alt="">
-              <strong>+32 495 239088</strong>
+              <strong>+32 2 620 61 18</strong>
             </span>
           </div>
           <div>
@@ -543,21 +624,40 @@
         <div class="vh-faq__glow" aria-hidden="true"></div>
         <div class="vh-accordion">
           <p class="vh-kicker">Our FAQ</p>
-          <h2 class="vh-h2">Frequently Asked Questions</h2>
+          <h2 class="vh-h2">Questions Business Leaders Ask Us</h2>
           <p class="vh-lead">
-            Whether you’re here to build muscle, find balance, or boost you’re here your our state-of the-art equipment, expert muscle.
+            Straight answers about where VECTRA fits, how we work, and what happens next.
           </p>
-          {% assign faqs = "What are the different types of trading?|What is the difference between trading and investing?|How do I deposit money into my trading account?|How do I protect my trading account?|What is the difference between trading and investing?" | split: '|' %}
-          {% for question in faqs %}
-            <div class="vh-acc{% if forloop.index == 3 %} is-open{% endif %}" data-vh-faq-item>
-              <button type="button" data-vh-faq-btn>
-                {{ question }}
-              </button>
-              <div class="vh-acc__body">
-                Whether you’re here to build muscle, find balance, or boost you’re here to find balan your our state-of the-art equipment, expert muscle It’s the practice.
-              </div>
+          <div class="vh-acc" data-vh-faq-item>
+            <button type="button" data-vh-faq-btn>What does VECTRA help organizations improve?</button>
+            <div class="vh-acc__body">
+              VECTRA helps organizations reduce business risk, strengthen operational and supply chain resilience, improve ESG and sustainability performance, and build the evidence and capability needed to drive measurable results across operations and value chains. We start with the outcome that needs to improve, then bring the relevant expertise and implementation support around it.
             </div>
-          {% endfor %}
+          </div>
+          <div class="vh-acc" data-vh-faq-item>
+            <button type="button" data-vh-faq-btn>We already have consultants, platforms, and dashboards. Where does VECTRA fit?</button>
+            <div class="vh-acc__body">
+              Often, the gap appears after the information already exists. VECTRA works with the systems, expertise, and partners you already have, then focuses on ownership, workflows, evidence, supplier engagement, and follow-through where the work is getting stuck.
+            </div>
+          </div>
+          <div class="vh-acc is-open" data-vh-faq-item>
+            <button type="button" data-vh-faq-btn>Can VECTRA work with the systems we already use?</button>
+            <div class="vh-acc__body">
+              Yes. VECTRA is platform-agnostic. We work with existing systems, data, teams, and partners, then introduce additional technology only where it solves a clear problem.
+            </div>
+          </div>
+          <div class="vh-acc" data-vh-faq-item>
+            <button type="button" data-vh-faq-btn>Where do we start if we know the problem but not the solution?</button>
+            <div class="vh-acc__body">
+              Start with the problem. Tell us what keeps recurring, stalling, or becoming difficult to prove. We’ll help clarify what needs attention and the most practical way forward.
+            </div>
+          </div>
+          <div class="vh-acc" data-vh-faq-item>
+            <button type="button" data-vh-faq-btn>How does VECTRA measure progress?</button>
+            <div class="vh-acc__body">
+              We agree what improvement should look like at the start. Depending on the issue, that may include clearer ownership, closed actions, stronger evidence, improved capability, fewer recurring problems, or better supplier performance.
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -574,7 +674,7 @@
     if is_solutions_portal
       assign portal_heading = 'Start with the <strong>challenge</strong> in front of you.'
     else
-      assign portal_heading = 'Everything your <strong>VECTRA</strong> relationship, in one place.'
+      assign portal_heading = 'Get in Touch'
     endif
   endif
   assign portal_text = block.settings.text
@@ -582,12 +682,18 @@
     if is_solutions_portal
       assign portal_text = 'We will help you determine the right combination of expert support, intelligence, and capability-building.'
     else
-      assign portal_text = 'Access Marketplace purchases, active services, VSuites, current retainers, billing, documentation, and support from a single, secure account.'
+      assign portal_text = 'Tell us where the work gets stuck. We’ll help you identify the gap and the next step.'
     endif
   endif
+  if template.suffix == 'resources'
+    assign portal_heading = 'Better insight should lead somewhere.'
+    assign portal_text = 'If what you have learned needs to become a decision, a plan, or a change to how your team works, VECTRA International can help you move it forward.'
+  endif
   assign portal_submit = 'Send message'
+  assign portal_form_heading = 'Get In Touch'
   if is_solutions_portal
-    assign portal_submit = 'Submit'
+    assign portal_submit = 'Start the Conversation'
+    assign portal_form_heading = 'Talk to a VECTRA Expert'
   endif
 %}
 <section class="vh-portal{% if is_solutions_portal %} vh-portal--sol{% endif %}" id="{{ block.settings.anchor_id | default: 'get-in-touch' }}" {{ block.shopify_attributes }}>
@@ -601,7 +707,7 @@
       </div>
       {% if is_solutions_portal %}
         {% form 'contact', class: 'vh-form', data-vh-reveal: 'scale' %}
-          <h3>Get In Touch</h3>
+          <h3>{{ portal_form_heading }}</h3>
           {% render 'vectra-contact-fields', img_arrow: img_arrow, solutions_form: true, submit_label: portal_submit %}
         {% endform %}
       {% else %}

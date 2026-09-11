@@ -23,6 +23,25 @@
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
   assign og_description = page_description | default: shop.description | default: shop.name
+  assign vectra_meta_locked = false
+
+  if template.name == 'index'
+    assign og_title = 'Responsible Business Partner| Risk Assessment & Supply Chain Risk Consulting'
+    assign og_description = 'Drive responsible business transformation with VECTRA’s ESG consulting, business resilience, operational resilience, supply chain consulting expertise, and resources.'
+    assign vectra_meta_locked = true
+  elsif template.suffix == 'our-story' or template.suffix == 'vectra'
+    assign og_title = 'About VECTRA International | Our DNA & Values'
+    assign og_description = "Discover VECTRA International's DNA, values and global expertise in ESG, responsible business, supply chain resilience and business transformation."
+    assign vectra_meta_locked = true
+  elsif template.suffix == 'resources'
+    assign og_title = 'Responsible Business Resources | VECTRA International'
+    assign og_description = "Explore VECTRA International's resources and insights on responsible business, supply chain, ESG, operational resilience, and risk management."
+    assign vectra_meta_locked = true
+  elsif template.suffix == 'contact-us' or template.suffix == 'contact'
+    assign og_title = 'Contact VECTRA International | Get in Touch'
+    assign og_description = 'Contact VECTRA International for ESG, supply chain, and operational resilience expertise. Reach our consultants by form, email, or phone.'
+    assign vectra_meta_locked = true
+  endif
 
   if request.page_type == 'product'
     assign og_type = 'product'
@@ -104,10 +123,10 @@
 >
 
 <title>
-  {{ page_title }}
+  {{ og_title }}
   {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
   {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-  {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  {%- unless vectra_meta_locked or og_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
 </title>
 
 <link
@@ -115,9 +134,9 @@
   href="{{ canonical_url }}"
 >
 
-{% if page_description %}
+{% if page_description or vectra_meta_locked %}
   <meta
     name="description"
-    content="{{ page_description | escape }}"
+    content="{{ og_description | escape }}"
   >
 {% endif %}

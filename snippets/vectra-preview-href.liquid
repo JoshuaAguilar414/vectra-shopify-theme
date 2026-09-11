@@ -4,7 +4,7 @@
   even when the Shopify admin still has the page on Default.
 
   @param {string} url - Original href
-  @param {string} [view] - Template suffix: our-story, solutions, resources
+  @param {string} [view] - Template suffix: our-story, solutions, resources, contact-us
   @param {string} [title] - Link label; used to infer view when the nav item points at Home
 {%- enddoc -%}
 {%- liquid
@@ -19,6 +19,8 @@
       assign view_name = 'solutions'
     elsif title_key == 'resources'
       assign view_name = 'resources'
+    elsif title_key == 'contact us' or title_key == 'contact' or title_key == 'talk to an expert'
+      assign view_name = 'contact-us'
     endif
   endif
 
@@ -28,6 +30,8 @@
     assign href = pages['solutions'].url | default: '/pages/solutions'
   elsif view_name == 'resources'
     assign href = pages['resources'].url | default: '/pages/resources'
+  elsif view_name == 'contact-us'
+    assign href = pages['contact-us'].url | default: pages['contact'].url | default: '/pages/contact-us'
   endif
 
   if href == blank

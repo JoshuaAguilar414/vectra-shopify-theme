@@ -45,7 +45,7 @@
 
     {% liquid
       assign vectra_shell = false
-      if template.name == 'index' or template.suffix == 'our-story' or template.suffix == 'vectra' or template.suffix == 'solutions' or template.suffix == 'resources'
+      if template.name == 'index' or template.suffix == 'our-story' or template.suffix == 'vectra' or template.suffix == 'solutions' or template.suffix == 'resources' or template.suffix == 'contact-us' or template.suffix == 'contact'
         assign vectra_shell = true
       endif
     %}
@@ -60,7 +60,7 @@
         if template.suffix == 'solutions' or template.suffix == 'resources'
           assign vectra_sol_assets = true
         endif
-        if template.suffix == 'resources'
+        if template.suffix == 'resources' or template.suffix == 'contact-us' or template.suffix == 'contact'
           assign vectra_res_assets = true
         endif
       %}
@@ -87,7 +87,7 @@
     {{ content_for_header }}
   </head>
 
-  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}{% if template.name == 'index' or template.suffix == 'our-story' or template.suffix == 'vectra' or template.suffix == 'solutions' or template.suffix == 'resources' %} vectra-home-page{% endif %}">
+  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}{% if template.name == 'index' or template.suffix == 'our-story' or template.suffix == 'vectra' or template.suffix == 'solutions' or template.suffix == 'resources' or template.suffix == 'contact-us' or template.suffix == 'contact' %} vectra-home-page{% endif %}">
     {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
 
     {% render 'chat-drawer' %}

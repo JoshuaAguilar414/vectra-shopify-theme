@@ -161,15 +161,14 @@
         {% comment %} Fallback matching VECTRA Website Mega Menu (handle: vectra-website-mega-menu) {% endcomment %}
         <div class="vh-menu__item has-children" data-vh-mega-item>
           <div class="vh-menu__anchor">
-            <a href="{{ story }}" aria-haspopup="true" aria-expanded="false">Our DNA</a>
+            <a href="{{ story }}" aria-haspopup="true" aria-expanded="false">About Us</a>
             <div class="vh-mega vh-mega--list vh-dropdown" role="menu">
               <ul class="vh-mega__list">
                 <li><a href="{{ story }}" role="menuitem">Our Story</a></li>
-                <li><a href="{{ home }}" role="menuitem">Our Leadership Team</a></li>
-                <li><a href="{{ home }}" role="menuitem">Our Experts</a></li>
-                <li><a href="{{ home }}" role="menuitem">Associates</a></li>
-                <li><a href="{{ home }}" role="menuitem">Interns</a></li>
-                <li><a href="{{ home }}#careers" role="menuitem">Careers</a></li>
+                <li><a href="{{ story }}#leadership" role="menuitem">Our Leadership Team</a></li>
+                <li><a href="{{ story }}#experts" role="menuitem">Our Experts</a></li>
+                <li><a href="{{ story }}#experts" role="menuitem">Associates</a></li>
+                <li><a href="{{ story }}#careers" role="menuitem">Our Interns</a></li>
               </ul>
             </div>
           </div>
@@ -196,14 +195,18 @@
             <a href="{{ resources }}" aria-haspopup="true" aria-expanded="false">Resources</a>
             <div class="vh-mega vh-mega--list vh-dropdown" role="menu">
               <ul class="vh-mega__list">
-                <li><a href="{{ home }}#cases" role="menuitem">Case Studies</a></li>
                 <li><a href="{{ resources }}#insights" role="menuitem">Insights</a></li>
+                <li><a href="{{ resources }}#ebooks" role="menuitem">Ebooks &amp; Playbooks</a></li>
                 <li><a href="{{ resources }}#events" role="menuitem">Events &amp; Webinars</a></li>
-                <li><a href="{{ resources }}#podcasts" role="menuitem">Podcasts</a></li>
-                <li><a href="{{ resources }}#podcasts" role="menuitem">Press Release</a></li>
+                <li><a href="{{ resources }}#podcasts" role="menuitem">VCASTs</a></li>
+                <li><a href="{{ home }}#cases" role="menuitem">Case Studies</a></li>
+                <li><a href="{{ resources }}#podcasts" role="menuitem">Press Releases</a></li>
               </ul>
             </div>
           </div>
+        </div>
+        <div class="vh-menu__item">
+          <a href="{{ home }}#faq">FAQ</a>
         </div>
       {% endif %}
     </div>
@@ -233,14 +236,13 @@
         {% endfor %}
       {% else %}
         <div class="vh-nav-panel__item has-children">
-          <button type="button" data-vh-mobile-sub aria-expanded="false">Our DNA</button>
+          <button type="button" data-vh-mobile-sub aria-expanded="false">About Us</button>
           <div class="vh-nav-panel__sub">
             <a href="{{ story }}">Our Story</a>
-            <a href="{{ home }}">Our Leadership Team</a>
-            <a href="{{ home }}">Our Experts</a>
-            <a href="{{ home }}">Associates</a>
-            <a href="{{ home }}">Interns</a>
-            <a href="{{ home }}#careers">Careers</a>
+            <a href="{{ story }}#leadership">Our Leadership Team</a>
+            <a href="{{ story }}#experts">Our Experts</a>
+            <a href="{{ story }}#experts">Associates</a>
+            <a href="{{ story }}#careers">Our Interns</a>
           </div>
         </div>
         <div class="vh-nav-panel__item has-children">
@@ -257,13 +259,15 @@
         <div class="vh-nav-panel__item has-children">
           <button type="button" data-vh-mobile-sub aria-expanded="false">Resources</button>
           <div class="vh-nav-panel__sub">
-            <a href="{{ home }}#cases">Case Studies</a>
             <a href="{{ resources }}#insights">Insights</a>
+            <a href="{{ resources }}#ebooks">Ebooks &amp; Playbooks</a>
             <a href="{{ resources }}#events">Events &amp; Webinars</a>
-            <a href="{{ resources }}#podcasts">Podcasts</a>
-            <a href="{{ resources }}#podcasts">Press Release</a>
+            <a href="{{ resources }}#podcasts">VCASTs</a>
+            <a href="{{ home }}#cases">Case Studies</a>
+            <a href="{{ resources }}#podcasts">Press Releases</a>
           </div>
         </div>
+        <a href="{{ home }}#faq">FAQ</a>
       {% endif %}
       <button type="button" data-vh-contact-open>Contact Us</button>
     </div>

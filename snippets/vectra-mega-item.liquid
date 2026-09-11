@@ -20,6 +20,10 @@
       endif
     endfor
   endif
+  assign nav_title = link.title
+  if nav_title == 'Our DNA' or nav_title == 'OUR DNA' or nav_title contains 'Our DNA'
+    assign nav_title = 'About Us'
+  endif
 %}
 {% capture href %}{% render 'vectra-preview-href', url: link.url, title: link.title %}{% endcapture %}
 {% assign href = href | strip %}
@@ -28,11 +32,11 @@
   <div class="vh-nav-panel__item{% if has_kids %} has-children{% endif %}">
     {% if has_kids %}
       <button type="button" data-vh-mobile-sub aria-expanded="false">
-        {{ link.title }}
+        {{ nav_title }}
       </button>
       <div class="vh-nav-panel__sub">
         {% unless link.url == blank or link.url == '#' %}
-          <a href="{{ href }}">{{ link.title }}</a>
+          <a href="{{ href }}">{{ nav_title }}</a>
         {% endunless %}
         {% for child in link.links %}
           <a href="{% render 'vectra-preview-href', url: child.url, title: child.title %}">{{ child.title }}</a>
@@ -44,7 +48,7 @@
         {% endfor %}
       </div>
     {% else %}
-      <a href="{{ href }}">{{ link.title }}</a>
+      <a href="{{ href }}">{{ nav_title }}</a>
     {% endif %}
   </div>
 {% else %}
@@ -60,7 +64,7 @@
           aria-expanded="false"
         {% endif %}
       >
-        {{ link.title }}
+        {{ nav_title }}
       </a>
       {% if has_kids %}
         <div class="vh-mega vh-dropdown{% if has_grand %} vh-mega--cols{% else %} vh-mega--list{% endif %}" role="menu">

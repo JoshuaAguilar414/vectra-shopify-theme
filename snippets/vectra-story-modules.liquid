@@ -12,6 +12,8 @@
   assign img_arrow_white = 'vectra-d640d7e5d10a7b2543900785147430e0c5cd06a1.svg' | asset_url
   assign img_arrow_btn = 'vectra-92b1edc95f4a73dc0740d86ef2953eac763cdc86.svg' | asset_url
   assign img_arrow_send = 'vectra-54db3b2d66b85bf4c6ca264ed1363beb759e512d.svg' | asset_url
+  assign img_arrow = 'vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg' | asset_url
+  assign img_chat = 'vectra-da137306dcbc6716d83295ef75678ab141a500e1.svg' | asset_url
   assign img_social = 'vectra-8edaf1fb1163eb6b857092f513083a6fc9fdc561.svg' | asset_url
   assign img_glow = 'vectra-81e405ef1e5763ccbc49a2e23ee2f5ec21868308.svg' | asset_url
   assign img_ceo = 'vectra-1323aaa74cde58ad7343be0a5de5bcef13017f6c.png' | asset_url
@@ -40,10 +42,12 @@
   assign vid_map = 'vectra-story-map.mp4' | asset_url
   assign home = routes.root_url
   assign story = pages['our-story'].url | default: '/pages/our-story'
-  assign mv_copy = 'We enable positive business impact by partnering with organizations to transform end-to-end operational complexity into resilient, well-governed performance through expert teams and human-led, state-of-the-art technology—creating measurable value for people, operations, and sustainable growth.'
+  assign mv_mission = 'We enable positive business impact by partnering with organizations to transform end-to-end operational complexity into resilient, well-governed performance through expert teams, and human led state of the art technology—creating measurable value for people, operations, and sustainable growth.'
+  assign mv_vision = 'To be the trusted partner in building operational control and resilience and achieving sustainable competitive advantage by transforming business complexity into strategic clarity, human-centered AI capability, and measurable value.'
 %}
 {% case module %}
   {% when 'hero' %}
+{% render 'vectra-seo', page_key: 'about' %}
 <section class="vs-hero" aria-label="Our VECTRA Story" {{ block.shopify_attributes }}>
     <video class="vs-hero__video" autoplay muted loop playsinline>
       <source src="{{ vid_hero }}" type="video/mp4">
@@ -52,15 +56,14 @@
     <img class="vs-hero__glow" src="{{ img_glow }}" alt="">
     <div class="vs-hero__shade"></div>
     <div class="vs-hero__copy">
-      <p class="vs-hero__kicker" data-vh-reveal="up">About us</p>
-      <h1 data-vh-reveal="up">Our VECTRA Story</h1>
+      <p class="vs-hero__kicker" data-vh-reveal="up">Inside VECTRA</p>
+      <h1 data-vh-reveal="up">About VECTRA International – Our DNA, Values &amp; Global Expertise</h1>
       <div class="vs-hero__body" data-vh-reveal="up">
         <p>
-          We co-founded VECTRA International in 2005 to improve the lives of workers in supply chains, for products and services, to enhance the lives of the people in the local communities. Supply chains are where you can reach the most vulnerable people and have the greatest impact to protect people.
+          VECTRA International is a business resilience and operational capability-building partner that helps organizations turn ESG, supply chain, and operational requirements into accountable action. Since 2005, VECTRA International has partnered with global brands to strengthen governance, resolve supplier risk, and build operational resilience — combining expert teams with practical, technology-enabled delivery.
         </p>
         <p>
-          We believe business can be a force for good. Our goal is to improve businesses’ performance while helping their workers. That’s why we created a logo with five stakeholders (workers, workplaces, brand, community, and consumers) and embedded our values in the VECTRA name:
-          Values, Ethics, Community, Transparency, Rights, and Action.
+          We help organizations turn requirements, supplier issues, weak controls, scattered evidence, and changing operations into clear priorities, accountable action, and stronger performance. VECTRA started with a simple belief: business can be a force for good, but commitments have to survive contact with real operations.
         </p>
       </div>
     </div>
@@ -81,9 +84,9 @@
         <p class="vs-ceo__kicker">Meet the Founder</p>
         <h2>A Message from Our CEO</h2>
         <div class="vs-ceo__body">
-          <p>Most organizations don’t struggle because of a lack of data, they struggle when performance, priorities, and execution are not fully aligned.</p>
-          <p>At VECTRA International, we provide end-to-end business solutions with relentless customer focus, helping organizations, from global enterprises to micro businesses, improve performance, strengthen decision-making, and deliver consistent results.</p>
-          <p>We believe business is a force for good when better performance leads to better outcomes for your organization, your customers, people, and society.</p>
+          <p>Most organizations do not struggle because of a lack of ambition. They struggle because operational complexity outpaces their ability to act.</p>
+          <p>At VECTRA International, we partner with organizations to transform that complexity into clarity, control, and competitive advantage. From small and mid-sized businesses to global enterprises, we deliver integrated solutions that strengthen operational capability, reduce risk, and drive measurable results.</p>
+          <p>We believe business is a force for good when better performance creates better outcomes for your organization, your customers, people, and society.</p>
         </div>
       </div>
     </section>
@@ -96,7 +99,7 @@
 
     <section class="vs-who" id="who-we-are">
       <div class="vs-who__copy">
-        <p class="vs-who__kicker">Who We Are</p>
+        <p class="vs-who__kicker">The VECTRA Story</p>
         <h2>Enabling Positive Business Impact</h2>
       </div>
       <div class="vs-who__media">
@@ -115,7 +118,7 @@
           <h3>Our Mission</h3>
         </div>
         <img class="vs-card__rule" src="{{ img_rule }}" alt="">
-        <p>{{ mv_copy }}</p>
+        <p>{{ mv_mission }}</p>
       </article>
       <article class="vs-card">
         <img class="vs-card__watermark" src="{{ img_vision }}" alt="">
@@ -124,13 +127,13 @@
           <h3>Our Vision</h3>
         </div>
         <img class="vs-card__rule" src="{{ img_rule }}" alt="">
-        <p>{{ mv_copy }}</p>
+        <p>{{ mv_vision }}</p>
       </article>
     </section>
 
     <section class="vs-values" id="values">
       <h2>VECTRA Values</h2>
-      <p>Our values make clear how we work with clients, communities, experts, and one another.</p>
+      <p>These values guide the decisions we make, the relationships we build, and the way we turn our commitments into action.</p>
       <div class="vs-values__row">
         <img class="vs-values__line" src="{{ img_values_line }}" alt="">
         <article class="vs-value">
@@ -249,7 +252,7 @@
         </button>
       </div>
       <a class="vs-cta-btn" href="#experts" data-vh-reveal="scale">
-        Meet Our People
+        Meet Our Leadership
         <img src="{{ img_arrow_btn }}" alt="">
       </a>
     </section>
@@ -260,7 +263,7 @@
         <article class="vs-expert">
           <img src="{{ img_exp_1 }}" alt="Beat Grüninger">
           <h3>Beat Grüninger</h3>
-          <p>Senior Technical Advisor and lecturer in sustainability management and standards</p>
+          <p>Senior Technical Advisor and Lecturer in Sustainability Management and Standards</p>
         </article>
         <article class="vs-expert">
           <img src="{{ img_exp_2 }}" alt="Berçin Doğan Öztürk">
@@ -270,12 +273,12 @@
         <article class="vs-expert">
           <img src="{{ img_exp_3 }}" alt="Daniel Ndiwa">
           <h3>Daniel Ndiwa</h3>
-          <p>Sustainability Standards Consultant with 5 years of experience in auditing of Voluntary Sustainability Standards in Coffee, Tea, Avocado and Horticultural in Eastern Africa.</p>
+          <p>Sustainability Standards Consultant with 5 years of experience auditing voluntary sustainability standards in coffee, tea, avocado, and horticulture across Eastern Africa</p>
         </article>
         <article class="vs-expert">
           <img src="{{ img_exp_4 }}" alt="Iddah Ooko">
           <h3>Iddah Ooko</h3>
-          <p>An environmental and social impact consultant with over 15 years’ experience leading Environmental Impact Assessments, audits, ESG and multidisciplinary development projects.</p>
+          <p>Environmental and Social Impact Consultant with 15+ years leading environmental impact assessments, audits, ESG, and multidisciplinary development projects</p>
         </article>
       </div>
       <div class="vs-experts__more">
@@ -293,13 +296,54 @@
     </section>
 
     <section class="vs-people" data-vh-reveal="scale">
-      <h2>People that make VECTRA</h2>
-      <p>Our presence goes beyond locations. It reflects how we help bring structure, clarity, and control into complex global challenges.</p>
+      <h2>The People Behind VECTRA, Across the World</h2>
+      <p>A supplier issue in Eastern Africa and a reporting problem in Brussels do not need the same person. VECTRA International’s associates and experts bring local context and specialist experience across markets and industries so we build the right team around the work, instead of pushing every problem through the same generalist lens.</p>
       <div class="vs-people__map">
         <video autoplay muted loop playsinline>
           <source src="{{ vid_map }}" type="video/mp4">
           <source src="https://mind-heart-53521212.figma.site/_videos/v1/70bd9d70447180d47d644737320fb4e353597bd3" type="video/mp4">
         </video>
+      </div>
+    </section>
+
+    <section class="vh-faq" id="about-faq">
+      <div class="vh-wrap vh-faq__grid">
+        <aside class="vh-contact-card" data-vh-reveal="left">
+          <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
+          <p class="vh-contact-card__title">Have another question?</p>
+          <p>Find more answers about VECTRA International, how we work, our capabilities, and getting started.</p>
+          <a class="vh-btn vh-btn--white" href="#VectraContactModal" data-vh-contact-open>
+            Talk to an Expert
+            <img src="{{ img_arrow }}" alt="">
+          </a>
+        </aside>
+        <div class="vh-faq__right">
+          <div class="vh-faq__glow" aria-hidden="true"></div>
+          <div class="vh-accordion">
+            <p class="vh-kicker">Our FAQ</p>
+            <h2 class="vh-h2">Frequently Asked Questions</h2>
+            <div class="vh-acc is-open" data-vh-faq-item>
+              <button type="button" data-vh-faq-btn>Who is VECTRA International?</button>
+              <div class="vh-acc__body">VECTRA International is a business resilience and operational capability-building partner that helps organizations manage ESG requirements, supplier risk, and operational complexity through expert teams and practical, technology-enabled delivery.</div>
+            </div>
+            <div class="vh-acc" data-vh-faq-item>
+              <button type="button" data-vh-faq-btn>When was VECTRA International founded?</button>
+              <div class="vh-acc__body">VECTRA International was founded in 2005 and has since worked with organizations across industries to strengthen governance, supplier accountability, and operational resilience.</div>
+            </div>
+            <div class="vh-acc" data-vh-faq-item>
+              <button type="button" data-vh-faq-btn>What does VECTRA International do?</button>
+              <div class="vh-acc__body">VECTRA International turns responsible business requirements — supplier issues, audit findings, weak controls, and changing regulations — into clear priorities, accountable action, and measurable performance improvement.</div>
+            </div>
+            <div class="vh-acc" data-vh-faq-item>
+              <button type="button" data-vh-faq-btn>Where does VECTRA International operate?</button>
+              <div class="vh-acc__body">VECTRA International operates globally, with associates and specialist experts delivering local market context across regions including Africa, Europe, Asia, and beyond.</div>
+            </div>
+            <div class="vh-acc" data-vh-faq-item>
+              <button type="button" data-vh-faq-btn>Who leads VECTRA International?</button>
+              <div class="vh-acc__body">VECTRA International is led by CEO Patrick Neyts, alongside a global leadership team spanning operations, sales and marketing, and applied AI.</div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -310,11 +354,11 @@
     <div class="vs-join__inner">
       <div>
         <p class="vs-join__kicker">Be part of a global team</p>
-        <h2>Ready to join<br>our journey?</h2>
-        <p>We’re always looking for talented individuals who share our passion for innovation and excellence.</p>
+        <h2>Bring What Only You Can Contribute</h2>
+        <p>We value people who take ownership, stay curious, challenge ideas respectfully, and care whether the work actually changes something. You will work with colleagues and specialists across markets, disciplines, and time zones.</p>
       </div>
       <a class="vs-cta-btn" href="mailto:info@vectra-intl.com">
-        Join our Team
+        View Open Positions
         <img src="{{ img_arrow_send }}" alt="">
       </a>
     </div>

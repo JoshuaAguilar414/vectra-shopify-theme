@@ -82,6 +82,7 @@ body:has(.vectra-res) {
   text-align: center;
 }
 
+.vectra-res .vres-hero h1,
 .vectra-res .vres-hero__kicker {
   margin: 0 auto 18px;
   color: var(--vres-navy);
@@ -92,7 +93,7 @@ body:has(.vectra-res) {
   text-transform: uppercase;
 }
 
-.vectra-res .vres-hero h1 {
+.vectra-res .vres-hero h2 {
   margin: 0 auto;
   max-width: 16em;
   color: var(--vres-navy);
@@ -429,7 +430,7 @@ body:has(.vectra-res) {
 }
 
 @media (max-width: 1100px) {
-  .vectra-res .vres-hero h1 {
+  .vectra-res .vres-hero h2 {
     font-size: clamp(32px, 6vw, 42px);
   }
 

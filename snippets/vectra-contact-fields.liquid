@@ -3,6 +3,10 @@
 {%- enddoc -%}
 {%- liquid
   assign submit_label = submit_label | default: 'Send message'
+  assign is_contact_page = false
+  if variant == 'contact'
+    assign is_contact_page = true
+  endif
 -%}
 
 <div class="vh-form__grid">
@@ -25,7 +29,7 @@
   <input
     type="email"
     name="contact[email]"
-    placeholder="Email*"
+    placeholder="{% if is_contact_page %}Work Email*{% else %}Email*{% endif %}"
     value="{{ customer.email }}"
     required
     autocomplete="email"
@@ -33,13 +37,15 @@
   <input
     type="tel"
     name="contact[phone]"
-    placeholder="Phone Number*"
+    placeholder="Phone Number{% unless is_contact_page %}*{% endunless %}"
     value="{{ customer.phone }}"
     autocomplete="tel"
     {% if solutions_form %}required{% endif %}
   >
-  <input type="text" name="contact[company]" placeholder="Company*" autocomplete="organization"{% if solutions_form %} required{% endif %}>
-  {% if solutions_form %}
+  <input type="text" name="contact[company]" placeholder="Company*" autocomplete="organization"{% if solutions_form or is_contact_page %} required{% endif %}>
+  {% if is_contact_page %}
+    <input type="text" name="contact[job_title]" placeholder="Job Title / Role" autocomplete="organization-title">
+  {% elsif solutions_form %}
     <input type="text" name="contact[job_title]" placeholder="Job Title*" required autocomplete="organization-title">
   {% else %}
     <label class="vh-form__select">
@@ -56,7 +62,20 @@
     </label>
   {% endif %}
 </div>
-{% unless solutions_form %}
+{% if is_contact_page %}
+  <label class="vh-form__select vh-form__select--wide">
+    <span class="visually-hidden">What would you like to discuss?</span>
+    <select name="contact[interest]" aria-label="What would you like to discuss?" required>
+      <option value="" disabled selected>What would you like to discuss?*</option>
+      <option value="Supplier finding or follow-up">Supplier finding or follow-up</option>
+      <option value="ESG reporting gap">ESG reporting gap</option>
+      <option value="Audit follow-up">Audit follow-up</option>
+      <option value="Operational resilience">Operational resilience</option>
+      <option value="Supply chain risk">Supply chain risk</option>
+      <option value="Not sure yet">Not sure yet</option>
+    </select>
+  </label>
+{% elsif solutions_form == false or solutions_form == nil %}
   <label class="vh-form__select vh-form__select--wide">
     <span class="visually-hidden">I'm interested in</span>
     <select name="contact[interest]" aria-label="I'm interested in">
@@ -69,8 +88,8 @@
       <option value="Other">Other</option>
     </select>
   </label>
-{% endunless %}
-<textarea name="contact[body]" placeholder="Message Here..."></textarea>
+{% endif %}
+<textarea name="contact[body]" placeholder="{% if is_contact_page %}Tell us what is happening, what is getting in the way, and what you would like to improve.{% else %}Message Here...{% endif %}"></textarea>
 <button class="vh-btn vh-btn--green" type="submit">
   {{ submit_label }}
   <img src="{{ img_arrow }}" alt="">

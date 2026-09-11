@@ -54,14 +54,38 @@
 }
 
 .vectra-home h1,
-.vectra-home .vh-hero__copy h1,
 .vectra-home .vh-page-hero h1,
 .vectra-story .vs-hero h1,
 .vectra-story .vs-hero__copy h1,
-.vectra-sol .vsol-hero h1,
-.vectra-res .vres-hero h1 {
+.vectra-sol .vsol-hero h1 {
   font-size: var(--vh-fs-display) !important;
   line-height: 1.2 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.vectra-home .vh-hero__copy h1 {
+  font-size: var(--vh-fs-kicker) !important;
+  line-height: 1.35 !important;
+  letter-spacing: 0.02em !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+}
+
+.vectra-home .vh-hero__copy .vh-hero__display {
+  font-size: var(--vh-fs-display) !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.vectra-res .vres-hero h1 {
+  font-size: var(--vh-fs-kicker) !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0.04em !important;
+}
+
+.vectra-res .vres-hero h2 {
+  font-size: clamp(32px, 3.9vw, 75px) !important;
+  line-height: 1.08 !important;
   letter-spacing: -0.03em !important;
 }
 
@@ -130,7 +154,7 @@
   letter-spacing: 0.04em;
 }
 
-.vectra-home .vh-hero__copy p,
+.vectra-home .vh-hero__copy p:not(.vh-hero__display),
 .vectra-home .vh-page-hero p,
 .vectra-home .vh-lead,
 .vectra-story .vs-hero__body p,
@@ -300,26 +324,30 @@
     height: auto;
   }
 
-  .vectra-home .vh-hero,
-  .vectra-home .vh-hero__track,
-  .vectra-home .vh-hero__slide {
-    width: 100% !important;
-    max-width: 100%;
-  }
-
   .vectra-home .vh-hero {
-    aspect-ratio: auto;
-    min-height: 520px;
+    aspect-ratio: 3 / 4;
+    min-height: 100svh;
     height: auto;
   }
 
+  .vectra-home .vh-hero__track,
+  .vectra-home .vh-hero__slide {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100%;
+    max-width: 100%;
+  }
+
   .vectra-home .vh-hero__copy {
-    left: 16px;
-    right: 16px;
+    left: 50%;
+    right: auto;
     top: auto;
-    bottom: 56px;
-    width: auto;
-    max-width: none;
+    bottom: 16px;
+    width: min(100% - 32px, 640px);
+    max-width: min(100% - 32px, 640px);
+    transform: translateX(-50%);
+    text-align: center;
   }
 
   .vectra-home .vh-wrap,
