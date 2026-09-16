@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "vectra_our_story": {
+      "type": "vectra-our-story",
+      "blocks": {
+        "header": {
+          "type": "vectra-header",
+          "settings": {
+            "menu": "vectra-website-mega-menu"
+          }
+        },
+        "hero": { "type": "vectra-story-hero", "settings": {} },
+        "ceo": { "type": "vectra-story-ceo", "settings": {} },
+        "main": { "type": "vectra-story-main", "settings": {} },
+        "join": { "type": "vectra-story-join", "settings": {} },
+        "footer": { "type": "vectra-footer", "settings": {} }
+      },
+      "block_order": ["header", "hero", "ceo", "main", "join", "footer"],
+      "settings": {
+        "menu": "vectra-website-mega-menu"
+      }
+    }
+  },
+  "order": ["vectra_our_story"]
+}

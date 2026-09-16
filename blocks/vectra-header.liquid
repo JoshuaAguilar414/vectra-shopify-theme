@@ -21,16 +21,19 @@
   .vh-header .vh-mega,
   .vh-header .vh-menu__item.has-children .vh-mega,
   .vh-header .vh-menu__item.has-children:last-child .vh-mega {
-    left: 50% !important;
-    right: auto !important;
-    transform: translateX(-50%) !important;
-    translate: none !important;
-    background: rgba(255, 255, 255, 0.82) !important;
-    background-color: rgba(255, 255, 255, 0.82) !important;
-    backdrop-filter: blur(20px) saturate(1.2);
-    -webkit-backdrop-filter: blur(20px) saturate(1.2);
-    border: 1px solid rgba(255, 255, 255, 0.72) !important;
-    z-index: 60 !important;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    translate: none;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid rgba(9, 37, 67, 0.14) !important;
+    z-index: 60;
+    opacity: 1 !important;
+    color: #092543 !important;
+    text-transform: none;
   }
 
   .vh-header dropdown-localization-component .localization-wrapper,
@@ -38,15 +41,17 @@
   .vh-header .color-custom-popover,
   .vh-header .vh-locale__panel,
   .vh-header .vh-account__menu {
-    --color-background: rgba(255, 255, 255, 0.82);
-    background: rgba(255, 255, 255, 0.82) !important;
-    background-color: rgba(255, 255, 255, 0.82) !important;
-    backdrop-filter: blur(20px) saturate(1.2) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(1.2) !important;
-    border: 1px solid rgba(255, 255, 255, 0.72) !important;
-    color: #fff !important;
-    z-index: 80 !important;
+    --color-background: #ffffff;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid rgba(9, 37, 67, 0.14) !important;
+    color: #092543 !important;
+    z-index: 80;
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22) !important;
+    opacity: 1 !important;
+    text-transform: none;
   }
 
   .vh-header dropdown-localization-component .localization-wrapper,

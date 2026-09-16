@@ -1,0 +1,312 @@
+{%- doc -%}
+  Experts, Associates, Interns, Careers, and FAQ page modules.
+{%- enddoc -%}
+
+{% render 'vectra-assets' %}
+{% liquid
+  assign img_arrow_btn = 'vectra-92b1edc95f4a73dc0740d86ef2953eac763cdc86.svg' | asset_url
+  assign img_arrow_send = 'vectra-54db3b2d66b85bf4c6ca264ed1363beb759e512d.svg' | asset_url
+  assign img_arrow = 'vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg' | asset_url
+  assign img_chat = 'vectra-da137306dcbc6716d83295ef75678ab141a500e1.svg' | asset_url
+  assign img_exp_1 = 'vectra-14b9e6914bc9f1111966be55232cfa8990739462.png' | asset_url
+  assign img_exp_2 = 'vectra-bb37886d23428b36d5a6703f3aa1e71fd1d15929.png' | asset_url
+  assign img_exp_3 = 'vectra-70734a58f670e934fa9e18fa958676614dedc858.png' | asset_url
+  assign img_exp_4 = 'vectra-a7fddb20a7074e9dc372d79b62756ec3622de6d2.png' | asset_url
+  assign img_face_1 = 'vectra-3d90b6de863f4a0f6cfb9e8f77617b9ea7caeff1.png' | asset_url
+  assign img_face_2 = 'vectra-c543bcdfc727d87f2710b5345cea3b7eb76daab1.png' | asset_url
+  assign img_face_3 = 'vectra-26b8a07235b9d48b395528564d6124a59d29f6e3.png' | asset_url
+  assign img_face_4 = 'vectra-portrait-placeholder.png' | asset_url
+  assign img_mail = 'vectra-9a4f80a5b924a881fc96b20219bb1f7c8ca734ab.svg' | asset_url
+  assign img_phone = 'vectra-7c0e54b37d57d95df328b0e4ee1f7b87844a7372.svg' | asset_url
+  assign img_pin = 'vectra-484bca36e3874bd30d1d6dd79807ed0314378e3d.svg' | asset_url
+  assign experts_url = pages['experts'].url | default: '/pages/experts'
+  assign associates_url = pages['associates'].url | default: '/pages/associates'
+  assign interns_url = pages['interns'].url | default: '/pages/interns'
+  assign careers_url = pages['careers'].url | default: '/pages/careers'
+  assign faq_url = pages['faq'].url | default: '/pages/faq'
+  assign jobs_url = ''
+  assign name_1 = ''
+  assign name_2 = ''
+  assign name_3 = ''
+  assign name_4 = ''
+  assign bio_1 = ''
+  assign bio_2 = ''
+  assign bio_3 = ''
+  assign bio_4 = ''
+  assign image_1 = nil
+  assign image_2 = nil
+  assign image_3 = nil
+  assign image_4 = nil
+  if block != blank
+    assign jobs_url = block.settings.jobs_url
+    assign name_1 = block.settings.name_1
+    assign name_2 = block.settings.name_2
+    assign name_3 = block.settings.name_3
+    assign name_4 = block.settings.name_4
+    assign bio_1 = block.settings.bio_1
+    assign bio_2 = block.settings.bio_2
+    assign bio_3 = block.settings.bio_3
+    assign bio_4 = block.settings.bio_4
+    assign image_1 = block.settings.image_1
+    assign image_2 = block.settings.image_2
+    assign image_3 = block.settings.image_3
+    assign image_4 = block.settings.image_4
+  endif
+  if jobs_url == blank
+    assign jobs_url = 'https://vectra-intl.com/job-openings/'
+  endif
+%}
+{% case module %}
+  {% when 'experts' %}
+<section class="vs-experts vh-people-page" id="experts" {{ block.shopify_attributes }}>
+  {% render 'vectra-seo', page_key: 'about' %}
+  <div class="vh-wrap">
+    <p class="vh-kicker">Our people</p>
+    <h1 class="vh-h2">Our Team of Experts</h1>
+    <p class="vh-lead">Behind every engagement is a team of specialists with deep, sector-specific expertise, rather than generalists following a script.</p>
+  </div>
+  <div class="vs-experts__grid">
+    <article class="vs-expert">
+      <img src="{{ img_exp_1 }}" alt="Beat Grüninger">
+      <h3>Beat Grüninger</h3>
+      <p>Senior Technical Advisor and Lecturer in Sustainability Management and Standards</p>
+    </article>
+    <article class="vs-expert">
+      <img src="{{ img_exp_2 }}" alt="Berçin Doğan Öztürk">
+      <h3>Berçin Doğan Öztürk</h3>
+      <p>13+ years of experience in sustainability, social compliance, and responsible business</p>
+    </article>
+    <article class="vs-expert">
+      <img src="{{ img_exp_3 }}" alt="Daniel Ndiwa">
+      <h3>Daniel Ndiwa</h3>
+      <p>Sustainability Standards Consultant with 5 years of experience auditing voluntary sustainability standards in coffee, tea, avocado, and horticulture across Eastern Africa</p>
+    </article>
+    <article class="vs-expert">
+      <img src="{{ img_exp_4 }}" alt="Iddah Ooko">
+      <h3>Iddah Ooko</h3>
+      <p>Environmental and Social Impact Consultant with 15+ years leading environmental impact assessments, audits, ESG, and multidisciplinary development projects</p>
+    </article>
+  </div>
+  <div class="vs-experts__more">
+    <div class="vs-faces">
+      <img src="{{ img_face_1 }}" alt="">
+      <img src="{{ img_face_2 }}" alt="">
+      <img src="{{ img_face_3 }}" alt="">
+      <img src="{{ img_face_4 }}" alt="">
+    </div>
+    <a class="vs-cta-btn" href="mailto:info@vectra-intl.com?subject=Meet%20VECTRA%20experts">
+      Talk with an expert
+      <img src="{{ img_arrow_btn }}" alt="">
+    </a>
+  </div>
+</section>
+
+  {% when 'associates' %}
+<section class="vs-experts vh-people-page" id="associates" {{ block.shopify_attributes }}>
+  <div class="vh-wrap">
+    <p class="vh-kicker">Our people</p>
+    <h1 class="vh-h2">Our Associates</h1>
+    <p class="vh-lead">A supplier issue in Eastern Africa and a reporting problem in Brussels do not need the same person. VECTRA associates bring local context and specialist experience across markets and industries so we build the right team around the work.</p>
+  </div>
+  <div class="vs-experts__grid">
+    <article class="vs-expert">
+      {% if image_1 != blank %}
+        {{ image_1 | image_url: width: 480 | image_tag: loading: 'lazy', alt: name_1 }}
+      {% else %}
+        <img src="{{ img_face_1 }}" alt="{{ name_1 | default: 'VECTRA associate' }}">
+      {% endif %}
+      <h3>{{ name_1 | default: 'Regional Associate — Africa' }}</h3>
+      <p>{{ bio_1 | default: 'Local market context for supplier engagement, social compliance, and operational follow-through across African supply chains.' }}</p>
+    </article>
+    <article class="vs-expert">
+      {% if image_2 != blank %}
+        {{ image_2 | image_url: width: 480 | image_tag: loading: 'lazy', alt: name_2 }}
+      {% else %}
+        <img src="{{ img_face_2 }}" alt="{{ name_2 | default: 'VECTRA associate' }}">
+      {% endif %}
+      <h3>{{ name_2 | default: 'Regional Associate — Europe' }}</h3>
+      <p>{{ bio_2 | default: 'Hands-on support for ESG reporting, due diligence, and capability building with European brands and their supplier networks.' }}</p>
+    </article>
+    <article class="vs-expert">
+      {% if image_3 != blank %}
+        {{ image_3 | image_url: width: 480 | image_tag: loading: 'lazy', alt: name_3 }}
+      {% else %}
+        <img src="{{ img_face_3 }}" alt="{{ name_3 | default: 'VECTRA associate' }}">
+      {% endif %}
+      <h3>{{ name_3 | default: 'Regional Associate — Asia' }}</h3>
+      <p>{{ bio_3 | default: 'Factory, farm, and mill experience that helps teams turn audit findings into practical, locally workable action.' }}</p>
+    </article>
+    <article class="vs-expert">
+      {% if image_4 != blank %}
+        {{ image_4 | image_url: width: 480 | image_tag: loading: 'lazy', alt: name_4 }}
+      {% else %}
+        <img src="{{ img_face_4 }}" alt="{{ name_4 | default: 'VECTRA associate' }}">
+      {% endif %}
+      <h3>{{ name_4 | default: 'Regional Associate — Americas' }}</h3>
+      <p>{{ bio_4 | default: 'Specialist support for responsible sourcing, labour standards, and operational resilience programmes across the Americas.' }}</p>
+    </article>
+  </div>
+  <div class="vs-experts__more">
+    <a class="vs-cta-btn" href="mailto:info@vectra-intl.com?subject=Become%20a%20Consultant">
+      Become an associate
+      <img src="{{ img_arrow_btn }}" alt="">
+    </a>
+  </div>
+</section>
+
+  {% when 'interns' %}
+<section class="vs-experts vh-people-page" id="interns" {{ block.shopify_attributes }}>
+  <div class="vh-wrap">
+    <p class="vh-kicker">Our people</p>
+    <h1 class="vh-h2">Our Interns</h1>
+    <p class="vh-lead">Internships at VECTRA use the same specialist profile as experts and associates. They are immersive, remote-friendly, and built around real work — systems, research, sales operations, and responsible-business delivery.</p>
+  </div>
+  <div class="vs-experts__grid">
+    <article class="vs-expert">
+      {% if image_1 != blank %}
+        {{ image_1 | image_url: width: 480 | image_tag: loading: 'lazy', alt: name_1 }}
+      {% else %}
+        <img src="{{ img_face_1 }}" alt="{{ name_1 | default: 'Systems intern' }}">
+      {% endif %}
+      <h3>{{ name_1 | default: 'Systems intern' }}</h3>
+      <p>{{ bio_1 | default: 'Zoho, process documentation, and operational support across VECTRA teams.' }}</p>
+    </article>
+    <article class="vs-expert">
+      {% if image_2 != blank %}
+        {{ image_2 | image_url: width: 480 | image_tag: loading: 'lazy', alt: name_2 }}
+      {% else %}
+        <img src="{{ img_face_2 }}" alt="{{ name_2 | default: 'Sales operations intern' }}">
+      {% endif %}
+      <h3>{{ name_2 | default: 'Sales operations intern' }}</h3>
+      <p>{{ bio_2 | default: 'Pipeline hygiene, enquiry follow-through, and the admin that keeps client work moving.' }}</p>
+    </article>
+    <article class="vs-expert">
+      {% if image_3 != blank %}
+        {{ image_3 | image_url: width: 480 | image_tag: loading: 'lazy', alt: name_3 }}
+      {% else %}
+        <img src="{{ img_face_3 }}" alt="{{ name_3 | default: 'Business intelligence intern' }}">
+      {% endif %}
+      <h3>{{ name_3 | default: 'Business intelligence intern' }}</h3>
+      <p>{{ bio_3 | default: 'Research, evidence packing, and turning scattered information into something a team can use.' }}</p>
+    </article>
+    <article class="vs-expert">
+      {% if image_4 != blank %}
+        {{ image_4 | image_url: width: 480 | image_tag: loading: 'lazy', alt: name_4 }}
+      {% else %}
+        <img src="{{ img_face_4 }}" alt="{{ name_4 | default: 'Marketing intern' }}">
+      {% endif %}
+      <h3>{{ name_4 | default: 'Marketing intern' }}</h3>
+      <p>{{ bio_4 | default: 'Stories, events, and resources that help the right people find VECTRA without the noise.' }}</p>
+    </article>
+  </div>
+  <div class="vs-experts__more">
+    <a class="vs-cta-btn" href="mailto:info@vectra-intl.com?subject=Internship%20Opportunities">
+      Apply for an internship
+      <img src="{{ img_arrow_btn }}" alt="">
+    </a>
+  </div>
+</section>
+
+  {% when 'careers' %}
+<section class="vh-people-page vh-page-copy" id="careers" {{ block.shopify_attributes }}>
+  <div class="vh-wrap">
+    <p class="vh-kicker">Join the team</p>
+    <h1 class="vh-h2">Careers at VECTRA International</h1>
+    <p class="vh-lead">Responsible business begins with responsible people. VECTRA is a family of experts — thinkers, listeners, practitioners, and problem-solvers who care deeply about the impact businesses leave behind.</p>
+    <div class="vh-page-copy__grid">
+      <article>
+        <h2>How we work</h2>
+        <p>We listen first, learn together, and act with clarity. You will be trusted with space to work with integrity, supported by a team that spans countries and disciplines, and measured on mastery rather than hustle.</p>
+      </article>
+      <article>
+        <h2>Who we welcome</h2>
+        <p>People who see complexity as an invitation to learn, choose empathy over ego, treat clients as partners, and feel at ease in multicultural teams. If that sounds like you, you will find belonging here.</p>
+      </article>
+      <article>
+        <h2>Become a consultant</h2>
+        <p>If you feel aligned with the mission, write to <a href="mailto:info@vectra-intl.com?subject=Become%20a%20Consultant">info@vectra-intl.com</a> with the subject <strong>Become a Consultant</strong> and a brief on your past work.</p>
+      </article>
+    </div>
+    <div class="vh-people-cta-row">
+      <a class="vs-cta-btn" href="{{ jobs_url }}" rel="noopener noreferrer" target="_blank">
+        View open positions
+        <img src="{{ img_arrow_send }}" alt="">
+      </a>
+      <a class="vh-btn vh-btn--outline" href="{{ interns_url }}">Explore internships</a>
+    </div>
+    {% render 'vectra-contact-details' %}
+  </div>
+</section>
+
+  {% when 'faq' %}
+<section class="vh-faq vh-people-page" id="faq" {{ block.shopify_attributes }}>
+  <div class="vh-wrap vh-faq__grid">
+    <aside class="vh-contact-card">
+      <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
+      <p class="vh-contact-card__title">Still need a person?</p>
+      <p>If these answers do not cover what you need, talk with the team. We will help you name the gap and the next step.</p>
+      <a class="vh-btn vh-btn--white" href="#VectraContactModal" data-vh-contact-open>
+        Talk to an expert
+        <img src="{{ img_arrow }}" alt="">
+      </a>
+      {% render 'vectra-contact-details', variant: 'card', img_phone: img_phone, img_mail: img_mail, img_pin: img_pin %}
+    </aside>
+    <div class="vh-faq__right">
+      <div class="vh-faq__glow" aria-hidden="true"></div>
+      <div class="vh-accordion">
+        <p class="vh-kicker">FAQ</p>
+        <h1 class="vh-h2">Frequently asked questions</h1>
+        <p class="vh-lead">Straight answers about VECTRA, our resources, and how to get started.</p>
+        <div class="vh-acc is-open" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>What does VECTRA help organisations improve?</button>
+          <div class="vh-acc__body">VECTRA helps organisations reduce business risk, strengthen operational and supply chain resilience, improve ESG and sustainability performance, and build the evidence and capability needed to drive measurable results.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>We already have consultants, platforms, and dashboards. Where does VECTRA fit?</button>
+          <div class="vh-acc__body">Often the gap appears after the information already exists. VECTRA works with the systems, expertise, and partners you already have, then focuses on ownership, workflows, evidence, supplier engagement, and follow-through.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>Can VECTRA work with the systems we already use?</button>
+          <div class="vh-acc__body">Yes. VECTRA is platform-agnostic. We work with existing systems, data, teams, and partners, then introduce additional technology only where it solves a clear problem.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>Who is VECTRA International?</button>
+          <div class="vh-acc__body">VECTRA International is a business resilience and operational capability-building partner founded in 2005. We help organisations manage ESG requirements, supplier risk, and operational complexity through expert teams and practical, technology-enabled delivery.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>Are VECTRA Resources free to access?</button>
+          <div class="vh-acc__body">Yes. VECTRA Resources are free to explore. Some ebooks, playbooks, and events may require registration.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>Where do we start if we know the problem but not the solution?</button>
+          <div class="vh-acc__body">Start with the problem. Tell us what keeps recurring, stalling, or becoming difficult to prove. We'll help clarify what needs attention and the most practical way forward.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>How does VECTRA measure progress?</button>
+          <div class="vh-acc__body">We agree what improvement should look like at the start. Depending on the issue, that may include clearer ownership, closed actions, stronger evidence, improved capability, fewer recurring problems, or better supplier performance.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>When was VECTRA International founded?</button>
+          <div class="vh-acc__body">VECTRA International was founded in 2005 and has since worked with organizations across industries to strengthen governance, supplier accountability, and operational resilience.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>Where does VECTRA International operate?</button>
+          <div class="vh-acc__body">VECTRA International operates globally, with associates and specialist experts delivering local market context across regions including Africa, Europe, Asia, and beyond.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>What are responsible business resources?</button>
+          <div class="vh-acc__body">Responsible business resources are insights, guides, evidence, and expert analysis that help organizations understand ESG, supply chain, compliance, risk management, business resilience, and operational resilience issues and decide what action to take.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>How do I find the right resource for my question?</button>
+          <div class="vh-acc__body">Use the search bar on the Resources page to find material by topic, regulation, risk, or keyword. You can also browse by format if you already know whether you need a quick Insight, a deeper guide, an expert conversation, or a real-world Case Study.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>How do I apply for a career or internship?</button>
+          <div class="vh-acc__body">Open roles are listed on the Careers page. For internships, email <a href="mailto:info@vectra-intl.com?subject=Internship%20Opportunities">info@vectra-intl.com</a> with the subject Internship Opportunities. To join as a consultant, use the subject Become a Consultant.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endcase %}

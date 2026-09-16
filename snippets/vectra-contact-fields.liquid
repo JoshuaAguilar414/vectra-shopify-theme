@@ -1,5 +1,6 @@
 {%- doc -%}
   Shared Get In Touch fields used by the page form and the header modal.
+  Role is free-form. Company is required. Job Title dropdowns are not used.
 {%- enddoc -%}
 {%- liquid
   assign submit_label = submit_label | default: 'Send message'
@@ -10,63 +11,62 @@
 -%}
 
 <div class="vh-form__grid">
-  <input
-    type="text"
-    name="contact[first_name]"
-    placeholder="First Name*"
-    value="{{ customer.first_name }}"
-    required
-    autocomplete="given-name"
-  >
-  <input
-    type="text"
-    name="contact[last_name]"
-    placeholder="Last Name*"
-    value="{{ customer.last_name }}"
-    required
-    autocomplete="family-name"
-  >
-  <input
-    type="email"
-    name="contact[email]"
-    placeholder="{% if is_contact_page %}Work Email*{% else %}Email*{% endif %}"
-    value="{{ customer.email }}"
-    required
-    autocomplete="email"
-  >
-  <input
-    type="tel"
-    name="contact[phone]"
-    placeholder="Phone Number{% unless is_contact_page %}*{% endunless %}"
-    value="{{ customer.phone }}"
-    autocomplete="tel"
-    {% if solutions_form %}required{% endif %}
-  >
-  <input type="text" name="contact[company]" placeholder="Company*" autocomplete="organization"{% if solutions_form or is_contact_page %} required{% endif %}>
-  {% if is_contact_page %}
-    <input type="text" name="contact[job_title]" placeholder="Job Title / Role" autocomplete="organization-title">
-  {% elsif solutions_form %}
-    <input type="text" name="contact[job_title]" placeholder="Job Title*" required autocomplete="organization-title">
-  {% else %}
-    <label class="vh-form__select">
-      <span class="visually-hidden">Job Title</span>
-      <select name="contact[job_title]" aria-label="Job Title" required>
-        <option value="" disabled selected>Job Title*</option>
-        <option value="Executive / C-level">Executive / C-level</option>
-        <option value="Director">Director</option>
-        <option value="Manager">Manager</option>
-        <option value="Specialist">Specialist</option>
-        <option value="Consultant">Consultant</option>
-        <option value="Other">Other</option>
-      </select>
-    </label>
-  {% endif %}
+  <label class="vh-form__field">
+    <span class="visually-hidden">First name (required)</span>
+    <input
+      type="text"
+      name="contact[first_name]"
+      placeholder="First name*"
+      value="{{ customer.first_name }}"
+      required
+      autocomplete="given-name"
+    >
+  </label>
+  <label class="vh-form__field">
+    <span class="visually-hidden">Last name</span>
+    <input
+      type="text"
+      name="contact[last_name]"
+      placeholder="Last name"
+      value="{{ customer.last_name }}"
+      autocomplete="family-name"
+    >
+  </label>
+  <label class="vh-form__field">
+    <span class="visually-hidden">Email (required)</span>
+    <input
+      type="email"
+      name="contact[email]"
+      placeholder="{% if is_contact_page %}Work email*{% else %}Email*{% endif %}"
+      value="{{ customer.email }}"
+      required
+      autocomplete="email"
+    >
+  </label>
+  <label class="vh-form__field">
+    <span class="visually-hidden">Phone number</span>
+    <input
+      type="tel"
+      name="contact[phone]"
+      placeholder="Phone number"
+      value="{{ customer.phone }}"
+      autocomplete="tel"
+    >
+  </label>
+  <label class="vh-form__field">
+    <span class="visually-hidden">Company (required)</span>
+    <input type="text" name="contact[company]" placeholder="Company*" autocomplete="organization" required>
+  </label>
+  <label class="vh-form__field">
+    <span class="visually-hidden">Role</span>
+    <input type="text" name="contact[role]" placeholder="Role" autocomplete="organization-title">
+  </label>
 </div>
 {% if is_contact_page %}
   <label class="vh-form__select vh-form__select--wide">
     <span class="visually-hidden">What would you like to discuss?</span>
-    <select name="contact[interest]" aria-label="What would you like to discuss?" required>
-      <option value="" disabled selected>What would you like to discuss?*</option>
+    <select name="contact[interest]" aria-label="What would you like to discuss?">
+      <option value="" selected>What would you like to discuss?</option>
       <option value="Supplier finding or follow-up">Supplier finding or follow-up</option>
       <option value="ESG reporting gap">ESG reporting gap</option>
       <option value="Audit follow-up">Audit follow-up</option>
@@ -77,19 +77,21 @@
   </label>
 {% elsif solutions_form == false or solutions_form == nil %}
   <label class="vh-form__select vh-form__select--wide">
-    <span class="visually-hidden">I'm interested in</span>
-    <select name="contact[interest]" aria-label="I'm interested in">
-      <option value="" disabled selected>I'm interested in...</option>
+    <span class="visually-hidden">I am interested in</span>
+    <select name="contact[interest]" aria-label="I am interested in">
+      <option value="" disabled selected>I am interested in...</option>
       <option value="Solutions">Solutions</option>
-      <option value="Marketplace & courses">Marketplace &amp; courses</option>
-      <option value="VSuites">VSuites</option>
+      <option value="Marketplace and courses">Marketplace and courses</option>
       <option value="Partnership">Partnership</option>
       <option value="Careers">Careers</option>
       <option value="Other">Other</option>
     </select>
   </label>
 {% endif %}
-<textarea name="contact[body]" placeholder="{% if is_contact_page %}Tell us what is happening, what is getting in the way, and what you would like to improve.{% else %}Message Here...{% endif %}"></textarea>
+<label class="vh-form__field vh-form__field--wide">
+  <span class="visually-hidden">Message</span>
+  <textarea name="contact[body]" placeholder="{% if is_contact_page %}Tell us what is happening, what is getting in the way, and what you would like to improve.{% else %}Message here...{% endif %}"></textarea>
+</label>
 <button class="vh-btn vh-btn--green" type="submit">
   {{ submit_label }}
   <img src="{{ img_arrow }}" alt="">

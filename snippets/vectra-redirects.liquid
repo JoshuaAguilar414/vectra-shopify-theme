@@ -1,0 +1,52 @@
+{%- doc -%}
+  Client-side fallback for WordPress to Shopify URL migration.
+  Import the same map in Shopify Admin > Navigation > URL redirects for 301s.
+{%- enddoc -%}
+
+<script>
+  (function () {
+    if (window.__vectraRedirects) return;
+    window.__vectraRedirects = true;
+
+    var path = (location.pathname || '/').replace(/\/+$/, '') || '/';
+    var exact = {
+      '/careers': '/pages/careers',
+      '/job-openings': '/pages/careers',
+      '/jobs': '/pages/careers',
+      '/interns': '/pages/interns',
+      '/internships': '/pages/interns',
+      '/our-interns': '/pages/interns',
+      '/our-experts': '/pages/experts',
+      '/experts': '/pages/experts',
+      '/associates': '/pages/associates',
+      '/our-associates': '/pages/associates',
+      '/our-leadership-team': '/pages/our-story',
+      '/our-story': '/pages/our-story',
+      '/about': '/pages/our-story',
+      '/about-us': '/pages/our-story',
+      '/our-dna': '/pages/our-story',
+      '/contact': '/pages/contact-us',
+      '/contact-us': '/pages/contact-us',
+      '/resources': '/pages/resources',
+      '/solutions': '/pages/solutions',
+      '/how-we-help': '/pages/solutions',
+      '/faq': '/pages/faq',
+      '/faqs': '/pages/faq',
+      '/marketplace': '/pages/marketplace',
+      '/courses': '/pages/marketplace',
+      '/course': '/pages/marketplace',
+      '/vsuites': '/pages/marketplace',
+      '/blog': '/blogs/news',
+      '/insights': '/pages/resources'
+    };
+
+    var dest = exact[path];
+    if (!dest) {
+      var blog = path.match(/^\/(?:blog|blogs|uncategorised|uncategorized|insights)\/([^/]+)\/?$/i);
+      if (blog) dest = '/blogs/news/' + blog[1].toLowerCase();
+    }
+    if (dest && dest !== path && dest !== path + '/') {
+      location.replace(dest + location.search + location.hash);
+    }
+  })();
+</script>

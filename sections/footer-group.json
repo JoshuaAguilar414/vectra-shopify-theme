@@ -52,7 +52,7 @@
             "text_LWt8Pz": {
               "type": "text",
               "settings": {
-                "text": "<h2>Join our email list</h2>",
+                "text": "<h2>Website upgrade notice</h2>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -76,7 +76,7 @@
             "text_f9CFLH": {
               "type": "text",
               "settings": {
-                "text": "<p>Get exclusive deals and early access to new products.</p>",
+                "text": "<p>VECTRA International is moving this website from WordPress to Shopify. This is a one-time go-live notice, not an email list. Enter your email if you want to know when the new site is live.</p><p><a href=\"mailto:info@vectra-intl.com\">info@vectra-intl.com</a><br><a href=\"tel:+3226206118\">+32 2 620 61 18</a><br><a href=\"tel:+32495239088\">+32 495 239 088</a><br><a href=\"https://www.google.com/maps/search/?api=1&query=Chauss%C3%A9e%20de%20Wavre%201517B%2C%201160%20Brussels%2C%20Belgium\" target=\"_blank\" rel=\"noopener\">Chaussée de Wavre 1517B, 1160 Brussels, Belgium</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -119,7 +119,7 @@
             "input_type_preset": "paragraph",
             "style_class": "button-unstyled",
             "display_type": "arrow",
-            "label": "Sign up",
+            "label": "Notify me",
             "integrated_button": true,
             "button_type_preset": "paragraph",
             "padding-block-start": 0,
@@ -166,11 +166,12 @@
         "social_links_Ew63Kq": {
           "type": "social-links",
           "settings": {
-            "facebook_url": "https://www.facebook.com/",
-            "instagram_url": "https://www.instagram.com/",
-            "youtube_url": "https://www.youtube.com/",
-            "tiktok_url": "https://www.tiktok.com/",
-            "twitter_url": "https://x.com/"
+            "facebook_url": "https://www.facebook.com/vectrainternational",
+            "instagram_url": "https://www.instagram.com/vectrainternational",
+            "youtube_url": "https://www.youtube.com/@vectrainternational",
+            "tiktok_url": "",
+            "twitter_url": "https://twitter.com/vectraintl",
+            "linkedin_url": "https://www.linkedin.com/company/vectra-international"
           },
           "blocks": {}
         }

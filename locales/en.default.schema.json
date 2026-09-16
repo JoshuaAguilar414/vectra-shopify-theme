@@ -166,8 +166,8 @@
     "navigation": "Navigation"
   },
   "html_defaults": {
-    "join_our_email_list": "<h2>Join our email list</h2>",
-    "get_exclusive_deals_and_early_access_to_new_products": "<p>Get exclusive deals and early access to new products.</p>",
+    "join_our_email_list": "<h2>Website upgrade notice</h2>",
+    "get_exclusive_deals_and_early_access_to_new_products": "<p>VECTRA International is moving this website from WordPress to Shopify. This is a one-time go-live notice, not an email list.</p>",
     "artistry_in_action": "<p>Artistry in action </p>",
     "authentic_materials": "<p>Authentic materials, no compromises </p>",
     "bestseller_h2": "<h2>Bestsellers</h2>",
@@ -216,7 +216,7 @@
     "shop_collection": "<p>Discover our curated collection featuring hand-picked favorites that blend style and quality.</p>",
     "signature_products": "<h2>Our signature product</h2>",
     "styled_with": "<h3>Styled with</h3>",
-    "subscribe": "<h2>Subscribe to our emails</h2>",
+    "subscribe": "<h2>Website upgrade notice</h2>",
     "team_with_goal": "<h2>A team with a goal</h2>",
     "unable_to_accept_returns": "<p>We are unable to accept returns on certain items. These will be carefully marked before purchase.</p>",
     "uncompromising_standards": "<p>Uncompromising standards </p>",

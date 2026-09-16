@@ -4,8 +4,18 @@
   if section.settings.background_color != blank
     render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
   endif
+  assign vectra_handle_page = false
+  if template.name == 'page'
+    case page.handle
+      when 'experts', 'associates', 'interns', 'careers', 'faq', 'marketplace', 'course-esg-acronyms', 'course-preventative-measures', 'course-purchasing-practices', 'course-disability-accommodation'
+        assign vectra_handle_page = true
+    endcase
+  endif
 %}
 
+{% if vectra_handle_page %}
+  {% render 'vectra-page-from-handle' %}
+{% else %}
 <div
   class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
 ></div>
@@ -26,6 +36,7 @@
     {% content_for 'blocks' %}
   </div>
 </div>
+{% endif %}
 
 {% schema %}
 {

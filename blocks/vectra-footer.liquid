@@ -1,4 +1,8 @@
-{% render 'vectra-footer', block: block %}
+{% comment %}
+  The VECTRA footer is rendered once by snippets/vectra-page-shell.liquid
+  so every VECTRA page uses the same module. This block stays in templates
+  for the theme editor and does not print a second footer.
+{% endcomment %}
 
 {% schema %}
 {

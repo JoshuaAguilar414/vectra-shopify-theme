@@ -1,0 +1,37 @@
+{% capture children %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-page-shell', children: children, include_story: true %}
+
+{% schema %}
+{
+  "name": "VECTRA people",
+  "class": "vectra-people-section",
+  "enabled_on": {
+    "templates": ["page"]
+  },
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "MEGA Navigation",
+      "info": "Uses VECTRA Website Mega Menu (handle: vectra-website-mega-menu)."
+    }
+  ],
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA people",
+      "blocks": [
+        { "type": "vectra-header" },
+        { "type": "vectra-page-hero" },
+        { "type": "vectra-people-body" },
+        { "type": "vectra-footer" }
+      ]
+    }
+  ]
+}
+{% endschema %}

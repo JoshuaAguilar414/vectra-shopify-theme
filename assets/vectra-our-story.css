@@ -161,12 +161,13 @@
 
 .vectra-story .vs-ceo__mark {
   position: absolute;
-  left: calc(797px * var(--vs-s));
-  top: 0;
-  width: calc(738px * var(--vs-s));
-  height: calc(745px * var(--vs-s));
+  left: calc(860px * var(--vs-s));
+  top: 24px;
+  width: calc(420px * var(--vs-s));
+  height: auto;
+  max-height: calc(420px * var(--vs-s));
   object-fit: contain;
-  opacity: 0.16;
+  opacity: 0.12;
   pointer-events: none;
 }
 
@@ -233,7 +234,7 @@
   font-weight: 700;
   letter-spacing: -0.05em;
   line-height: 101%;
-  text-transform: capitalize;
+  text-transform: none;
   white-space: nowrap;
 }
 
@@ -289,7 +290,7 @@
   font-weight: 700;
   letter-spacing: -0.05em;
   line-height: 101%;
-  text-transform: capitalize;
+  text-transform: none;
   text-align: center;
   white-space: nowrap;
   transform: translateX(-50%);
@@ -314,7 +315,7 @@
   line-height: 130%;
   letter-spacing: -0.05em;
   text-align: center;
-  text-transform: capitalize;
+  text-transform: none;
   transform: translateX(-50%);
 }
 
@@ -352,7 +353,7 @@
   letter-spacing: -0.05em;
   line-height: 101%;
   text-align: center;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 .vectra-story .vs-who__copy h2 {
@@ -365,23 +366,60 @@
   letter-spacing: -0.05em;
   line-height: 101%;
   text-align: center;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 .vectra-story .vs-who__media {
   position: relative;
   border-radius: 28px;
   overflow: hidden;
-  min-height: 360px;
+  min-height: 420px;
+  aspect-ratio: 16 / 9;
   background: #0b1c14;
+  margin: 0;
 }
 
-.vectra-story .vs-who__media video {
+.vectra-story .vs-who__media video,
+.vectra-story .vs-who__media iframe {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  min-height: 420px;
+  min-height: 0;
   object-fit: cover;
   display: block;
+  border: 0;
+}
+
+.vectra-story .vs-who__caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  margin: 0;
+  padding: 10px 14px;
+  background: rgba(9, 37, 67, 0.78);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.vectra-story .vs-experts__intro {
+  width: min(800px, calc(100% - 80px));
+  margin: -8px auto 32px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.vectra-story .vs-experts--teaser {
+  padding-bottom: 28px;
+}
+
+.vectra-story .vs-experts--teaser .vs-experts__more {
+  margin-top: 4px;
 }
 
 .vectra-story .vs-mv {
@@ -522,7 +560,7 @@
   letter-spacing: -0.05em;
   line-height: 101%;
   text-align: center;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 .vectra-story .vs-values > p {
@@ -606,7 +644,7 @@
   font-weight: 500;
   letter-spacing: -0.05em;
   line-height: calc(26px * var(--vs-s));
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 .vectra-story .vs-leaders,
@@ -694,13 +732,14 @@
 
 .vectra-story .vs-leader img {
   position: absolute;
-  left: 50%;
+  inset: 0;
+  left: 0;
   top: 0;
-  width: calc(570px * var(--vs-s));
-  height: calc(570px * var(--vs-s));
-  transform: translateX(calc(-50% + 4px * var(--vs-s)));
+  width: 100%;
+  height: 100%;
+  transform: none;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 16%;
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
 }
 
@@ -730,7 +769,7 @@
   font-weight: 700;
   letter-spacing: -0.05em;
   line-height: 101%;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 .vectra-story .vs-leader__role {
@@ -741,7 +780,7 @@
   font-weight: 300;
   letter-spacing: -0.05em;
   line-height: 101%;
-  text-transform: capitalize;
+  text-transform: none;
   transition: color 0.35s ease;
 }
 
@@ -763,7 +802,7 @@
   letter-spacing: -0.05em;
   line-height: 145%;
   text-align: center;
-  text-transform: capitalize;
+  text-transform: none;
   transform: translateX(-50%);
   opacity: 0;
   visibility: hidden;
@@ -773,7 +812,7 @@
 
 .vectra-story .vs-leader:hover img {
   filter: blur(18px);
-  transform: translateX(calc(-50% + 4px * var(--vs-s))) scale(1.12);
+  transform: scale(1.06);
 }
 
 .vectra-story .vs-leader:hover .vs-leader__shade {
@@ -873,7 +912,7 @@
   font-size: 25px;
   font-weight: 700;
   letter-spacing: -1.25px;
-  text-transform: capitalize;
+  text-transform: none;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -912,21 +951,22 @@
 }
 
 .vectra-story .vs-expert img {
-  width: 237px;
-  height: 237px;
-  margin: 0 auto 22px;
+  width: min(168px, 72%);
+  height: auto;
+  aspect-ratio: 1;
+  margin: 0 auto 18px;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 18%;
   border-radius: 50%;
 }
 
 .vectra-story .vs-expert h3 {
-  margin: 0 0 12px;
+  margin: 0 0 10px;
   color: #000;
-  font-size: 29px;
-  font-weight: 800;
-  letter-spacing: -1.45px;
-  line-height: 42px;
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
 }
 
 .vectra-story .vs-expert p {
@@ -937,7 +977,7 @@
   font-weight: 400;
   letter-spacing: -0.5px;
   line-height: 1.35;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 .vectra-story .vs-experts__more {
@@ -955,14 +995,15 @@
 
 .vectra-story .vs-faces img {
   box-sizing: border-box;
-  width: 122px;
-  height: 122px;
+  width: 64px;
+  height: 64px;
   object-fit: cover;
+  object-position: center 18%;
   background: #fff;
-  border: 7px solid #ffffff;
-  border-radius: 70.5px;
+  border: 4px solid #ffffff;
+  border-radius: 50%;
   filter: drop-shadow(0 0 11.8px rgba(0, 0, 0, 0.11));
-  margin-left: -32px;
+  margin-left: -16px;
 }
 
 .vectra-story .vs-faces img:first-child {
@@ -970,13 +1011,14 @@
 }
 
 .vectra-story .vs-faces img:last-child {
-  width: 146px;
-  height: 146px;
-  border: 0;
-  filter: none;
-  background: transparent;
-  object-fit: contain;
-  margin-left: -44px;
+  width: 64px;
+  height: 64px;
+  border: 4px solid #ffffff;
+  filter: drop-shadow(0 0 11.8px rgba(0, 0, 0, 0.11));
+  background: #fff;
+  object-fit: cover;
+  object-position: center 18%;
+  margin-left: -16px;
 }
 
 .vectra-story .vs-people__map {
@@ -1436,6 +1478,75 @@
   .vectra-story .vs-leader img,
   .vectra-story .vs-leader:hover img {
     filter: none;
-    transform: translateX(calc(-50% + 4px * var(--vs-s)));
+    transform: none;
+  }
+}
+
+.vectra-home:has(.vh-people-page) .vh-header {
+  position: relative;
+  background: #092543;
+  padding-bottom: 20px;
+}
+
+.vectra-home .vh-people-page {
+  padding: 48px 0 88px;
+}
+
+.vectra-home .vh-people-page > .vh-wrap {
+  text-align: center;
+}
+
+.vectra-home .vh-people-page .vh-lead {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vectra-home .vh-page-copy .vh-lead {
+  max-width: 760px;
+}
+
+.vectra-home .vh-page-copy__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  margin: 36px 0 40px;
+}
+
+.vectra-home .vh-page-copy__grid h2 {
+  margin: 0 0 12px;
+  font-size: 22px;
+}
+
+.vectra-home .vh-people-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  margin: 12px 0 28px;
+}
+
+.vectra-home .vs-who__media {
+  position: relative;
+  overflow: hidden;
+}
+
+.vectra-home .vs-who__media iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.vectra-home .vs-who__caption {
+  margin: 16px 0 0;
+  font-size: 14px;
+  color: rgba(9, 37, 67, 0.7);
+}
+
+@media (max-width: 900px) {
+  .vectra-home .vh-page-copy__grid {
+    grid-template-columns: 1fr;
   }
 }

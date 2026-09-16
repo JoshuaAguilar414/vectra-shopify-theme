@@ -24,7 +24,7 @@
     <h1 class="vres-hero__kicker">Contact VECTRA International</h1>
     <h2>Bring Us the Problem.</h2>
     <p class="vres-hero__lead">
-      You don’t need a finished scope before you talk to us. Tell us what’s happening, what keeps coming back, or where the work is getting stuck — whether that’s a supplier finding, an ESG reporting gap, an audit follow-up, or an operational resilience problem you haven’t fully named yet. You don’t need to decide which VECTRA service it belongs to first. We’ll review what you share, bring the relevant expertise into the conversation, and work out the most useful next step together. Use the form below, email info@vectra-intl.com, or call +32 495 239088.
+      You don’t need a finished scope before you talk to us. Tell us what’s happening, what keeps coming back, or where the work is getting stuck — whether that’s a supplier finding, an ESG reporting gap, an audit follow-up, or an operational resilience problem you haven’t fully named yet. You don’t need to decide which VECTRA service it belongs to first. We’ll review what you share, bring the relevant expertise into the conversation, and work out the most useful next step together. Use the form below, <a href="mailto:info@vectra-intl.com">info@vectra-intl.com</a>, or call <a href="tel:+32495239088">+32 495 239 088</a>.
     </p>
   </div>
 </section>
@@ -67,33 +67,11 @@
       <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
       <p class="vh-contact-card__title">Prefer to reach us directly?</p>
       <p>Already know who you need to speak with? Reach out directly. If you’re not sure which VECTRA specialist fits the issue, use the form and we’ll route the conversation.</p>
-      <a class="vh-btn vh-btn--white" href="#get-in-touch">
+        <a class="vh-btn vh-btn--white" href="#get-in-touch">
         Start the Conversation
         <img src="{{ img_arrow }}" alt="">
       </a>
-      <div class="vh-contact-list">
-        <div>
-          <small>Give Us A Call</small>
-          <span>
-            <img src="{{ img_phone }}" alt="">
-            <strong>+32 495 239088</strong>
-          </span>
-        </div>
-        <div>
-          <small>Have a question</small>
-          <span>
-            <img src="{{ img_mail }}" alt="">
-            <strong class="vh-contact-list__email">info@vectra-intl.com</strong>
-          </span>
-        </div>
-        <div>
-          <small>Our Address</small>
-          <span>
-            <img src="{{ img_pin }}" alt="">
-            <strong>Chaussée de Wavre 1517B<br>1160 Brussels, Belgium</strong>
-          </span>
-        </div>
-      </div>
+      {% render 'vectra-contact-details', variant: 'card', img_phone: img_phone, img_mail: img_mail, img_pin: img_pin %}
     </aside>
     <div class="vh-faq__right">
       <div class="vh-faq__glow" aria-hidden="true"></div>
@@ -129,7 +107,7 @@
   <div class="vh-wrap vh-portal__grid">
     <div class="vh-portal__copy">
       <h2>Contact VECTRA International</h2>
-      <p>Use the form, email info@vectra-intl.com, or call +32 495 239088. Tell us what’s happening — supplier risk, ESG compliance, audit follow-up, or a broader resilience program — and we’ll route the conversation to the right person.</p>
+      <p>Use the form, <a href="mailto:info@vectra-intl.com">info@vectra-intl.com</a>, or call <a href="tel:+32495239088">+32 495 239 088</a>. Tell us what’s happening — supplier risk, ESG compliance, audit follow-up, or a broader resilience program — and we’ll route the conversation to the right person.</p>
     </div>
     {% form 'contact', class: 'vh-form' %}
       <h3>Tell Us What You’re Working Through</h3>

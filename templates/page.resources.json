@@ -22,16 +22,9 @@
         },
         "ebooks": { "type": "vectra-res-ebooks", "settings": {} },
         "faq": { "type": "vectra-res-faq", "settings": {} },
-        "portal": {
-          "type": "vectra-portal",
-          "settings": {
-            "heading": "Better insight should lead somewhere.",
-            "text": "If what you have learned needs to become a decision, a plan, or a change to how your team works, VECTRA International can help you move it forward."
-          }
-        },
         "footer": { "type": "vectra-footer", "settings": {} }
       },
-      "block_order": ["header", "hero", "feed", "ebooks", "faq", "portal", "footer"],
+      "block_order": ["header", "hero", "feed", "ebooks", "faq", "footer"],
       "settings": {
         "menu": "vectra-website-mega-menu"
       }

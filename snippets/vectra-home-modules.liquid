@@ -52,7 +52,29 @@
   assign img_blog_1 = img_sol_1
   assign img_blog_2 = img_sol_4
   assign img_blog_3 = img_sol_2
+  assign careers_url = pages['careers'].url | default: '/pages/careers'
+  assign marketplace_url = pages['marketplace'].url | default: '/pages/marketplace'
+  assign resources_base = pages['resources'].url | default: '/pages/resources'
+  assign course_esg = pages['course-esg-acronyms'].url | default: '/pages/course-esg-acronyms'
+  assign course_prev = pages['course-preventative-measures'].url | default: '/pages/course-preventative-measures'
+  assign course_buy = pages['course-purchasing-practices'].url | default: '/pages/course-purchasing-practices'
+  assign course_dis = pages['course-disability-accommodation'].url | default: '/pages/course-disability-accommodation'
+  assign faq_base = pages['faq'].url | default: '/pages/faq'
 %}
+{% capture faq_href %}{% render 'vectra-preview-href', url: faq_base, view: 'faq' %}{% endcapture %}
+{% capture marketplace_href %}{% render 'vectra-preview-href', url: marketplace_url, view: 'marketplace' %}{% endcapture %}
+{% capture resources_href %}{% render 'vectra-preview-href', url: resources_base, view: 'resources' %}{% endcapture %}
+{% capture course_esg_href %}{% render 'vectra-preview-href', url: course_esg, view: 'course' %}{% endcapture %}
+{% capture course_prev_href %}{% render 'vectra-preview-href', url: course_prev, view: 'course' %}{% endcapture %}
+{% capture course_buy_href %}{% render 'vectra-preview-href', url: course_buy, view: 'course' %}{% endcapture %}
+{% capture course_dis_href %}{% render 'vectra-preview-href', url: course_dis, view: 'course' %}{% endcapture %}
+{% assign faq_href = faq_href | strip %}
+{% assign marketplace_href = marketplace_href | strip %}
+{% assign resources_href = resources_href | strip %}
+{% assign course_esg_href = course_esg_href | strip %}
+{% assign course_prev_href = course_prev_href | strip %}
+{% assign course_buy_href = course_buy_href | strip %}
+{% assign course_dis_href = course_dis_href | strip %}
 {% case module %}
   {% when 'hero' %}
 {% render 'vectra-seo', page_key: 'home' %}
@@ -124,8 +146,10 @@
   {% when 'impact' %}
 <section class="vh-impact" {{ block.shopify_attributes }}>
     <div class="vh-wrap">
-      <h2 data-vh-reveal="scale">
-        Enabling P<img class="vh-impact__mark" src="{{ img_mark }}" alt="" width="37" height="37">siti<img class="vh-impact__v" src="{{ img_check }}" alt="" width="40" height="49">e Business Impact
+      <h2 data-vh-reveal="scale" aria-label="Enabling Positive Business Impact">
+        <span class="vh-impact__word">Enabling</span>
+        <span class="vh-impact__word vh-impact__positive">P<img class="vh-impact__mark" src="{{ img_mark }}" alt="" width="37" height="37">siti<img class="vh-impact__v" src="{{ img_check }}" alt="" width="40" height="49">e</span>
+        <span class="vh-impact__word">Business Impact</span>
       </h2>
     </div>
   </section>
@@ -283,7 +307,7 @@
       <div class="vh-market__head">
         <h2 class="vh-h2">Learn What Matters. Build Capability That Lasts.</h2>
         <p class="vh-lead">Explore 100+ expert-led courses across ESG, sustainability, responsible business, compliance, due diligence, and supply chains</p>
-        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ routes.all_products_collection_url }}">Find the Right Course</a>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ marketplace_href }}">Find the Right Course</a>
       </div>
       <form class="vh-searchbar" action="{{ routes.search_url }}" method="get" role="search">
         <label class="vh-searchbar__q">
@@ -330,8 +354,8 @@
             <div class="vh-course__body">
               <h3>Acronyms Used in ESG Area</h3>
               <div class="vh-course__meta">
-                <span class="vh-price">$20.00</span>
-                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">View Course</a>
+                <span class="vh-price">Coming to Marketplace</span>
+                <a class="vh-course__cta" href="{{ course_esg_href }}">View course</a>
               </div>
             </div>
           </article>
@@ -340,8 +364,8 @@
             <div class="vh-course__body">
               <h3>Preventative and Corrective Measures</h3>
               <div class="vh-course__meta">
-                <span class="vh-price">$20.00</span>
-                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">View Course</a>
+                <span class="vh-price">Coming to Marketplace</span>
+                <a class="vh-course__cta" href="{{ course_prev_href }}">View course</a>
               </div>
             </div>
           </article>
@@ -350,8 +374,8 @@
             <div class="vh-course__body">
               <h3>Optimizing Purchasing Practices</h3>
               <div class="vh-course__meta">
-                <span class="vh-price">$20.00</span>
-                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">View Course</a>
+                <span class="vh-price">Coming to Marketplace</span>
+                <a class="vh-course__cta" href="{{ course_buy_href }}">View course</a>
               </div>
             </div>
           </article>
@@ -360,8 +384,8 @@
             <div class="vh-course__body">
               <h3>Disability Accommodation Training</h3>
               <div class="vh-course__meta">
-                <span class="vh-price">$20.00</span>
-                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">View Course</a>
+                <span class="vh-price">Coming to Marketplace</span>
+                <a class="vh-course__cta" href="{{ course_dis_href }}">View course</a>
               </div>
             </div>
           </article>
@@ -405,8 +429,8 @@
                 This course provides a comprehensive framework for managing supply chain due diligence in 2026. It focuses on the dual approach of using preventative measures as a “proactive shield” to avoid crises and corrective measures as a “surgical fix” to address and remediate existing violations.
               </p>
               <div class="vh-course__meta">
-                <span class="vh-price">$20.00</span>
-                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">View Course</a>
+                <span class="vh-price">Coming to Marketplace</span>
+                <a class="vh-course__cta" href="{{ course_prev_href }}">View course</a>
               </div>
             </div>
           </article>
@@ -419,8 +443,8 @@
                 Learn how purchasing decisions shape supplier performance, cost, and ESG outcomes—and how to build practices that hold up under scrutiny.
               </p>
               <div class="vh-course__meta">
-                <span class="vh-price">$20.00</span>
-                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">View Course</a>
+                <span class="vh-price">Coming to Marketplace</span>
+                <a class="vh-course__cta" href="{{ course_buy_href }}">View course</a>
               </div>
             </div>
           </article>
@@ -433,8 +457,8 @@
                 Build a shared vocabulary for ESG, due diligence, and supply-chain reporting so teams can act faster and with less confusion.
               </p>
               <div class="vh-course__meta">
-                <span class="vh-price">$20.00</span>
-                <a class="vh-course__cta" href="{{ routes.all_products_collection_url }}">View Course</a>
+                <span class="vh-price">Coming to Marketplace</span>
+                <a class="vh-course__cta" href="{{ course_esg_href }}">View course</a>
               </div>
             </div>
           </article>
@@ -522,8 +546,8 @@
         <span></span>
         <span></span>
       </div>
-      <a class="vh-btn vh-btn--green vh-cases__cta" href="#cases">
-        Explore Case Studies
+      <a class="vh-btn vh-btn--green vh-cases__cta" href="{{ resources_href }}">
+        Explore more case studies
         <img src="{{ img_arrow }}" alt="">
       </a>
     </div>
@@ -589,35 +613,13 @@
         <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
         <p class="vh-contact-card__title">Bring Us the Problem That Keeps Coming Back</p>
         <p>
-          Maybe actions keep stalling. Evidence is scattered. A supplier issue stays open. Or your systems produce information, but the next step is still unclear. Tell us where the work gets stuck. We’ll help you identify the gap and the next step.
+          Maybe actions keep stalling. Evidence is scattered. A supplier issue stays open. Or your systems produce information, but the next step is still unclear. Tell us where the work gets stuck. We'll help you identify the gap and the next step.
         </p>
-        <a class="vh-btn vh-btn--white" href="#VectraContactModal" data-vh-contact-open>
-          Talk to an Expert
+        <a class="vh-btn vh-btn--white" href="{{ faq_href }}">
+          More questions?
           <img src="{{ img_arrow }}" alt="">
         </a>
-        <div class="vh-contact-list">
-          <div>
-            <small>Give Us A Call</small>
-            <span>
-              <img src="{{ img_phone }}" alt="">
-              <strong>+32 2 620 61 18</strong>
-            </span>
-          </div>
-          <div>
-            <small>Have a question</small>
-            <span>
-              <img src="{{ img_mail }}" alt="">
-              <strong class="vh-contact-list__email">info@vectra-intl.com</strong>
-            </span>
-          </div>
-          <div>
-            <small>Our Address</small>
-            <span>
-              <img src="{{ img_pin }}" alt="">
-              <strong>Chaussée de Wavre 1517B<br>1160 Brussels, Belgium</strong>
-            </span>
-          </div>
-        </div>
+        {% render 'vectra-contact-details', variant: 'card', img_phone: img_phone, img_mail: img_mail, img_pin: img_pin %}
       </aside>
 
       <div class="vh-faq__right">
@@ -664,9 +666,10 @@
   </section>
 
   {% when 'portal' %}
+{% unless template.suffix == 'resources' %}
 {% liquid
   assign is_solutions_portal = false
-  if template.suffix == 'solutions' or template.suffix == 'resources'
+  if template.suffix == 'solutions'
     assign is_solutions_portal = true
   endif
   assign portal_heading = block.settings.heading
@@ -684,10 +687,6 @@
     else
       assign portal_text = 'Tell us where the work gets stuck. We’ll help you identify the gap and the next step.'
     endif
-  endif
-  if template.suffix == 'resources'
-    assign portal_heading = 'Better insight should lead somewhere.'
-    assign portal_text = 'If what you have learned needs to become a decision, a plan, or a change to how your team works, VECTRA International can help you move it forward.'
   endif
   assign portal_submit = 'Send message'
   assign portal_form_heading = 'Get In Touch'
@@ -718,6 +717,7 @@
       {% endif %}
     </div>
   </section>
+{% endunless %}
 
   {% when 'careers' %}
 <section class="vh-careers" id="careers" {{ block.shopify_attributes }}>
@@ -728,7 +728,7 @@
       <p class="vh-lead">
         At VECTRA International, we believe our greatest asset is our people. We are always looking for passionate, driven individuals eager to make an impact and grow their careers with us.
       </p>
-      <a class="vh-btn vh-btn--green vh-careers__cta" href="mailto:info@vectra-intl.com">
+      <a class="vh-btn vh-btn--green vh-careers__cta" href="{{ careers_url }}">
         Explore our open roles
       </a>
     </div>

@@ -8,8 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/vectra-home.css?v=mobile-fix3">
-<link rel="stylesheet" href="assets/vectra-type.css?v=mobile-fix3">
+<link rel="stylesheet" href="assets/vectra-home.css?v=w3-news">
+<link rel="stylesheet" href="assets/vectra-type.css?v=w3-news">
+<link rel="stylesheet" href="assets/vectra-a11y.css?v=w3-visual2">
 <style>body{margin:0;background:#fff}</style>
 </head>
 <body class="vectra-home-page">
@@ -18,18 +19,42 @@
 <div class="vectra-home" data-vectra-home>
   <header class="vh-header" data-vh-header>
     <div class="vh-util">
-      <a href="#">
-        <img src="assets/vectra-bc13c1ac5973c68a13ce0a8ee907baaf2e4e4828.png" alt="" width="18" height="18">
+      <a class="vh-util__link" href="#careers">
+        <img src="assets/vectra-bc13c1ac5973c68a13ce0a8ee907baaf2e4e4828.png" alt="" width="34" height="34">
         Join us
       </a>
-      <span>
-        <img src="assets/vectra-e75326688c7e0ce3e0b991e45c67a26e49052254.png" alt="" width="18" height="18">
-        ENG
-      </span>
-      <a href="#">
-        <img src="assets/vectra-f07515ab5f0a8f7807c77ab21d02c5eb476eb902.png" alt="" width="18" height="18">
-        Log In
-      </a>
+      <div class="vh-locale">
+        <div class="vh-locale__native">
+          <button type="button" class="vh-locale__summary" aria-expanded="false" aria-controls="preview-locale-panel" aria-label="Language and region">
+            <img src="assets/vectra-e75326688c7e0ce3e0b991e45c67a26e49052254.png" alt="" width="38" height="38">
+            <span class="vh-locale__code">EN</span>
+          </button>
+          <div id="preview-locale-panel" class="vh-locale__panel vh-dropdown localization-wrapper right-bound" hidden>
+            <p class="vh-account__hi">Language</p>
+            <button type="button" class="vh-account__chip">English</button>
+            <button type="button" class="vh-account__chip">Français</button>
+            <button type="button" class="vh-account__chip">Deutsch</button>
+            <button type="button" class="vh-account__chip">Español</button>
+          </div>
+        </div>
+      </div>
+      <div class="vh-account" data-vh-account>
+        <button class="vh-account__avatar" type="button" data-vh-account-toggle aria-expanded="false" aria-haspopup="true" aria-label="Account">
+          <img src="assets/vectra-f07515ab5f0a8f7807c77ab21d02c5eb476eb902.png" alt="" width="32" height="36">
+        </button>
+        <div class="vh-account__menu vh-dropdown" data-vh-account-menu hidden>
+          <div class="vh-account__head">
+            <p class="vh-account__hi">Hi there</p>
+            <p class="vh-account__email">info@vectrainternational.com</p>
+          </div>
+          <div class="vh-account__grid">
+            <a class="vh-account__chip" href="#">Orders</a>
+            <a class="vh-account__chip" href="#">Profile</a>
+            <a class="vh-account__chip vh-account__chip--wide" href="#">My Courses</a>
+            <a class="vh-account__chip" href="#">Log out</a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <nav class="vh-nav" aria-label="Primary">
@@ -38,11 +63,53 @@
       </a>
 
       <div class="vh-menu">
-        <a href="preview-our-story.html">About Us</a>
-        <a href="preview-solutions.html">How We Help</a>
-        <a href="#marketplace">Marketplace</a>
-        <a href="preview-resources.html">Resources</a>
-        <a href="#faq">FAQ</a>
+        <div class="vh-menu__item has-children" data-vh-mega-item>
+          <div class="vh-menu__anchor">
+            <a href="preview-our-story.html" aria-haspopup="true" aria-expanded="false">About Us</a>
+            <div class="vh-mega vh-mega--list vh-dropdown" role="menu">
+              <ul class="vh-mega__list">
+                <li><a href="preview-our-story.html" role="menuitem">Our Story</a></li>
+                <li><a href="preview-our-story.html#leadership" role="menuitem">Our Leadership Team</a></li>
+                <li><a href="preview-experts.html" role="menuitem">Our Experts</a></li>
+                <li><a href="preview-associates.html" role="menuitem">Associates</a></li>
+                <li><a href="preview-interns.html" role="menuitem">Our Interns</a></li>
+                <li><a href="preview.html#careers" role="menuitem">Careers</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="vh-menu__item has-children" data-vh-mega-item>
+          <div class="vh-menu__anchor">
+            <a href="preview-solutions.html" aria-haspopup="true" aria-expanded="false">How We Help</a>
+            <div class="vh-mega vh-mega--list vh-dropdown" role="menu">
+              <ul class="vh-mega__list">
+                <li><a href="preview-solutions.html" role="menuitem">Solutions</a></li>
+                <li><a href="preview-solutions.html#services" role="menuitem">Services</a></li>
+                <li><a href="preview-marketplace.html" role="menuitem">VSuites</a></li>
+                <li><a href="#why-vectra" role="menuitem">Why Partner With Us</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="vh-menu__item">
+          <a href="preview-marketplace.html">Marketplace</a>
+        </div>
+        <div class="vh-menu__item has-children" data-vh-mega-item>
+          <div class="vh-menu__anchor">
+            <a href="preview-resources.html" aria-haspopup="true" aria-expanded="false">Resources</a>
+            <div class="vh-mega vh-mega--list vh-dropdown" role="menu">
+              <ul class="vh-mega__list">
+                <li><a href="preview-resources.html#insights" role="menuitem">Insights</a></li>
+                <li><a href="preview-resources.html#ebooks" role="menuitem">Ebooks &amp; Playbooks</a></li>
+                <li><a href="preview-resources.html#events" role="menuitem">Events &amp; Webinars</a></li>
+                <li><a href="#cases" role="menuitem">Case Studies</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="vh-menu__item">
+          <a href="preview-faq.html">FAQ</a>
+        </div>
       </div>
 
       <div class="vh-nav-end">
@@ -66,9 +133,9 @@
       <div class="vh-nav-panel" data-vh-nav-panel>
         <a href="preview-our-story.html">About Us</a>
         <a href="preview-solutions.html">How We Help</a>
-        <a href="#marketplace">Marketplace</a>
+        <a href="preview-marketplace.html">Marketplace</a>
         <a href="preview-resources.html">Resources</a>
-        <a href="#faq">FAQ</a>
+        <a href="preview-faq.html">FAQ</a>
         <a href="preview-contact.html">Contact Us</a>
       </div>
     </nav>
@@ -124,29 +191,33 @@
 
   <div class="vh-logos" aria-label="Trusted by">
     <div class="vh-logos__track" data-vh-marquee>
-      <img src="assets/vectra-a4cdfe52a81d802c9aaf6b7bf6d694343cbedde4.png" alt="Marks & Spencer">
-      <img src="assets/vectra-e1d133cc580029cb6b8074e5aae5a7dda46406b4.png" alt="The Copper Mark">
-      <img src="assets/vectra-b45406e535c5bbc9c26b808cd8cbca66f572f9e7.png" alt="Responsible Business Alliance">
-      <img src="assets/vectra-f9891ea3bc104013ef4392a154f93dad123a8da6.png" alt="OTTO">
-      <img src="assets/vectra-08b090be3b1f1972589bc05ef1d4cf3d74f30fca.png" alt="Applied Materials">
-      <img src="assets/vectra-cb8e65114981244bc1e02bd76e369c2e9275bc0b.png" alt="adidas">
-      <img src="assets/vectra-ac45449dcc22ca95791fd9c0955f7d62850045d2.png" alt="BetterWork">
-      <img src="assets/vectra-fc0d652f27cfacfaf98915d93a3a90bbb65771bf.png" alt="JYSK">
-      <img src="assets/vectra-a4cdfe52a81d802c9aaf6b7bf6d694343cbedde4.png" alt="">
-      <img src="assets/vectra-e1d133cc580029cb6b8074e5aae5a7dda46406b4.png" alt="">
-      <img src="assets/vectra-b45406e535c5bbc9c26b808cd8cbca66f572f9e7.png" alt="">
-      <img src="assets/vectra-f9891ea3bc104013ef4392a154f93dad123a8da6.png" alt="">
-      <img src="assets/vectra-08b090be3b1f1972589bc05ef1d4cf3d74f30fca.png" alt="">
-      <img src="assets/vectra-cb8e65114981244bc1e02bd76e369c2e9275bc0b.png" alt="">
-      <img src="assets/vectra-ac45449dcc22ca95791fd9c0955f7d62850045d2.png" alt="">
-      <img src="assets/vectra-fc0d652f27cfacfaf98915d93a3a90bbb65771bf.png" alt="">
+      <img src="assets/vectra-a4cdfe52a81d802c9aaf6b7bf6d694343cbedde4.png?v=trim" alt="Marks & Spencer">
+      <img src="assets/vectra-e1d133cc580029cb6b8074e5aae5a7dda46406b4.png?v=trim" alt="The Copper Mark">
+      <img src="assets/vectra-b45406e535c5bbc9c26b808cd8cbca66f572f9e7.png?v=trim" alt="Responsible Business Alliance">
+      <img src="assets/vectra-f9891ea3bc104013ef4392a154f93dad123a8da6.png?v=trim" alt="OTTO">
+      <img src="assets/vectra-08b090be3b1f1972589bc05ef1d4cf3d74f30fca.png?v=trim" alt="Applied Materials">
+      <img src="assets/vectra-cb8e65114981244bc1e02bd76e369c2e9275bc0b.png?v=trim" alt="adidas">
+      <img src="assets/vectra-ac45449dcc22ca95791fd9c0955f7d62850045d2.png?v=trim" alt="BetterWork">
+      <img src="assets/vectra-fc0d652f27cfacfaf98915d93a3a90bbb65771bf.png?v=trim" alt="JYSK">
+      <img src="assets/vectra-a4cdfe52a81d802c9aaf6b7bf6d694343cbedde4.png?v=trim" alt="">
+      <img src="assets/vectra-e1d133cc580029cb6b8074e5aae5a7dda46406b4.png?v=trim" alt="">
+      <img src="assets/vectra-b45406e535c5bbc9c26b808cd8cbca66f572f9e7.png?v=trim" alt="">
+      <img src="assets/vectra-f9891ea3bc104013ef4392a154f93dad123a8da6.png?v=trim" alt="">
+      <img src="assets/vectra-08b090be3b1f1972589bc05ef1d4cf3d74f30fca.png?v=trim" alt="">
+      <img src="assets/vectra-cb8e65114981244bc1e02bd76e369c2e9275bc0b.png?v=trim" alt="">
+      <img src="assets/vectra-ac45449dcc22ca95791fd9c0955f7d62850045d2.png?v=trim" alt="">
+      <img src="assets/vectra-fc0d652f27cfacfaf98915d93a3a90bbb65771bf.png?v=trim" alt="">
     </div>
   </div>
 
   <section class="vh-impact">
     <div class="vh-wrap">
       <h2 data-vh-reveal>
-        Enabling P<img class="vh-impact__mark" src="assets/vectra-impact-icon.png" alt="" width="37" height="37">siti<img class="vh-impact__v" src="assets/vectra-impact-check.png" alt="" width="40" height="49">e Business Impact
+        <h2 data-vh-reveal="scale" aria-label="Enabling Positive Business Impact">
+          <span class="vh-impact__word">Enabling</span>
+          <span class="vh-impact__word">P<img class="vh-impact__mark" src="assets/vectra-impact-icon.png" alt="" width="37" height="37">siti<img class="vh-impact__v" src="assets/vectra-impact-check.png" alt="" width="40" height="49">e</span>
+          <span class="vh-impact__word">Business Impact</span>
+        </h2>
       </h2>
     </div>
   </section>
@@ -300,7 +371,7 @@
       <div class="vh-market__head">
         <h2 class="vh-h2">Learn What Matters. Build Capability That Lasts.</h2>
         <p class="vh-lead">Explore 100+ expert-led courses across ESG, sustainability, responsible business, compliance, due diligence, and supply chains</p>
-        <a class="vh-btn vh-btn--green vh-btn--rect" href="#">Find the Right Course</a>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="preview-marketplace.html">Find the Right Course</a>
       </div>
       <form class="vh-searchbar" action="#" method="get" role="search">
         <label class="vh-searchbar__q">
@@ -318,41 +389,41 @@
         <article class="vh-course">
           <img src="assets/vectra-514da1e5ddd8e93543da62a9818e4183b5547b3a.png" alt="">
           <div class="vh-course__body">
-            <h3>Acronyms Used in ESG Area</h3>
-            <div class="vh-course__meta">
-              <span class="vh-price">$20.00</span>
-              <a class="vh-course__cta" href="#">View Course</a>
-            </div>
+              <h3>Acronyms Used in ESG Area</h3>
+              <div class="vh-course__meta">
+                <span class="vh-price">Coming to Marketplace</span>
+                <a class="vh-course__cta" href="preview-course.html?course=course-esg-acronyms">View course</a>
+              </div>
           </div>
         </article>
         <article class="vh-course">
           <img src="assets/vectra-01d26f601c057ccb6b54759c020d48ae5de18cf3.png" alt="">
           <div class="vh-course__body">
-            <h3>Preventative and Corrective Measures</h3>
-            <div class="vh-course__meta">
-              <span class="vh-price">$20.00</span>
-              <a class="vh-course__cta" href="#">View Course</a>
-            </div>
+              <h3>Preventative and Corrective Measures</h3>
+              <div class="vh-course__meta">
+                <span class="vh-price">Coming to Marketplace</span>
+                <a class="vh-course__cta" href="preview-course.html?course=course-preventative-measures">View course</a>
+              </div>
           </div>
         </article>
         <article class="vh-course">
           <img src="assets/vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png" alt="">
           <div class="vh-course__body">
-            <h3>Optimizing Purchasing Practices</h3>
-            <div class="vh-course__meta">
-              <span class="vh-price">$20.00</span>
-              <a class="vh-course__cta" href="#">View Course</a>
-            </div>
+              <h3>Optimizing Purchasing Practices</h3>
+              <div class="vh-course__meta">
+                <span class="vh-price">Coming to Marketplace</span>
+                <a class="vh-course__cta" href="preview-course.html?course=course-purchasing-practices">View course</a>
+              </div>
           </div>
         </article>
         <article class="vh-course">
           <img src="assets/vectra-ae8b362b8368e8b200e58c921e1c7c274608a975.png" alt="">
           <div class="vh-course__body">
-            <h3>Disability Accommodation Training</h3>
-            <div class="vh-course__meta">
-              <span class="vh-price">$20.00</span>
-              <a class="vh-course__cta" href="#">View Course</a>
-            </div>
+              <h3>Disability Accommodation Training</h3>
+              <div class="vh-course__meta">
+                <span class="vh-price">Coming to Marketplace</span>
+                <a class="vh-course__cta" href="preview-course.html?course=course-disability-accommodation">View course</a>
+              </div>
           </div>
         </article>
       </div>
@@ -374,8 +445,8 @@
                 This course provides a comprehensive framework for managing supply chain due diligence in 2026. It focuses on the dual approach of using preventative measures as a “proactive shield” to avoid crises and corrective measures as a “surgical fix” to address and remediate existing violations.
               </p>
               <div class="vh-course__meta">
-                <span class="vh-price">$20.00</span>
-                <a class="vh-course__cta" href="#">View Course</a>
+                <span class="vh-price">Coming to Marketplace</span>
+                <a class="vh-course__cta" href="preview-course.html?course=course-preventative-measures">View course</a>
               </div>
             </div>
           </article>
@@ -388,8 +459,8 @@
                 Learn how purchasing decisions shape supplier performance, cost, and ESG outcomes—and how to build practices that hold up under scrutiny.
               </p>
               <div class="vh-course__meta">
-                <span class="vh-price">$20.00</span>
-                <a class="vh-course__cta" href="#">View Course</a>
+                <span class="vh-price">Coming to Marketplace</span>
+                <a class="vh-course__cta" href="preview-course.html?course=course-purchasing-practices">View course</a>
               </div>
             </div>
           </article>
@@ -402,8 +473,8 @@
                 Build a shared vocabulary for ESG, due diligence, and supply-chain reporting so teams can act faster and with less confusion.
               </p>
               <div class="vh-course__meta">
-                <span class="vh-price">$20.00</span>
-                <a class="vh-course__cta" href="#">View Course</a>
+                <span class="vh-price">Coming to Marketplace</span>
+                <a class="vh-course__cta" href="preview-course.html?course=course-esg-acronyms">View course</a>
               </div>
             </div>
           </article>
@@ -489,8 +560,8 @@
         <span></span>
         <span></span>
       </div>
-      <a class="vh-btn vh-btn--green vh-cases__cta" href="#cases">
-        Explore Case Studies
+      <a class="vh-btn vh-btn--green vh-cases__cta" href="preview-resources.html">
+        Explore more case studies
         <img src="assets/vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg" alt="">
       </a>
     </div>
@@ -534,31 +605,35 @@
         <p>
           Maybe actions keep stalling. Evidence is scattered. A supplier issue stays open. Or your systems produce information, but the next step is still unclear. Tell us where the work gets stuck. We'll help you identify the gap and the next step.
         </p>
-        <a class="vh-btn vh-btn--white" href="preview-contact.html">
-          Talk to an Expert
+        <a class="vh-btn vh-btn--white" href="preview-faq.html">
+          More questions?
           <img src="assets/vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg" alt="">
         </a>
         <div class="vh-contact-list">
           <div>
-            <small>Give Us A Call</small>
-            <span>
+            <p class="vh-contact-list__label">Give us a call</p>
+            <a class="vh-contact-list__link" href="tel:+3226206118">
               <img src="assets/vectra-7c0e54b37d57d95df328b0e4ee1f7b87844a7372.svg" alt="">
               <strong>+32 2 620 61 18</strong>
-            </span>
+            </a>
+            <a class="vh-contact-list__link" href="tel:+32495239088">
+              <img src="assets/vectra-7c0e54b37d57d95df328b0e4ee1f7b87844a7372.svg" alt="">
+              <strong>+32 495 239 088</strong>
+            </a>
           </div>
           <div>
-            <small>Have a question</small>
-            <span>
+            <p class="vh-contact-list__label">Email</p>
+            <a class="vh-contact-list__link" href="mailto:info@vectra-intl.com">
               <img src="assets/vectra-9a4f80a5b924a881fc96b20219bb1f7c8ca734ab.svg" alt="">
               <strong class="vh-contact-list__email">info@vectra-intl.com</strong>
-            </span>
+            </a>
           </div>
           <div>
-            <small>Our Address</small>
-            <span>
+            <p class="vh-contact-list__label">Our address</p>
+            <a class="vh-contact-list__link" href="https://www.google.com/maps/search/?api=1&query=Chauss%C3%A9e%20de%20Wavre%201517B%2C%201160%20Brussels%2C%20Belgium" rel="noopener noreferrer" target="_blank">
               <img src="assets/vectra-484bca36e3874bd30d1d6dd79807ed0314378e3d.svg" alt="">
               <strong>Chaussée de Wavre 1517B<br>1160 Brussels, Belgium</strong>
-            </span>
+            </a>
           </div>
         </div>
       </aside>
@@ -621,8 +696,8 @@
           <input type="text" name="contact[last_name]" placeholder="Last Name*" required>
           <input type="email" name="contact[email]" placeholder="Email*" required>
           <input type="tel" name="contact[phone]" placeholder="Phone Number*">
-          <input type="text" name="contact[company]" placeholder="Company*">
-          <input type="text" name="contact[job_title]" placeholder="Job Title*" required>
+          <input type="text" name="contact[company]" placeholder="Company*" required autocomplete="organization">
+          <input type="text" name="contact[role]" placeholder="Role" autocomplete="organization-title">
         </div>
         <label class="vh-form__select vh-form__select--wide">
           <select name="contact[interest]" aria-label="I'm interested in">
@@ -652,80 +727,17 @@
       <p class="vh-lead">
         At VECTRA International, we believe our greatest asset is our people. We are always looking for passionate, driven individuals eager to make an impact and grow their careers with us.
       </p>
-      <a class="vh-btn vh-btn--green vh-careers__cta" href="mailto:info@vectra-intl.com">
+      <a class="vh-btn vh-btn--green vh-careers__cta" href="#careers">
         Explore our open roles
       </a>
     </div>
   </section>
 
-  <footer class="vh-footer">
-    <div class="vh-wrap">
-      <div class="vh-footer__top">
-        <div class="vh-footer__brand">
-          <img src="assets/vectra-f1f1bad320cc916c9d3f257211cb366de698a572.png" alt="VECTRA">
-          <p>Your partner for business resilience and operational capability building through an ecosystem of integrated solutions.</p>
-          <p><a href="tel:+3226206118">+32 26206118</a><br><a href="mailto:info@vectra-intl.com">info@vectra-intl.com</a></p>
-          <p>Chaussée de Wavre 1517B<br>1160 Brussels, Belgium</p>
-        </div>
-        <div class="vh-footer__nav">
-          <nav class="vh-footer__col">
-            <h3>Explore</h3>
-            <div class="vh-footer__links">
-              <a href="#solutions">Solutions</a>
-              <a href="#marketplace">Marketplace</a>
-              <a href="preview-resources.html">Resources</a>
-              <a href="#cases">Case studies</a>
-              <a href="#solutions">VSuites</a>
-            </div>
-          </nav>
-          <nav class="vh-footer__col vh-footer__col--wide">
-            <h3>Start here</h3>
-            <div class="vh-footer__links">
-              <a href="preview-contact.html">Talk to an expert</a>
-              <a href="preview-contact.html">Request a demo</a>
-              <a href="preview-contact.html">Readiness assessment</a>
-              <a href="preview-contact.html">Build a capability path</a>
-              <a href="#">Client Portal</a>
-            </div>
-          </nav>
-          <nav class="vh-footer__col vh-footer__col--wide">
-            <h3>Company</h3>
-            <div class="vh-footer__links">
-              <a href="#why-vectra">About VECTRA</a>
-              <a href="#why-vectra">Associates and Experts</a>
-              <a href="#careers">Careers</a>
-              <a href="#why-vectra">Our values and pledges</a>
-              <a href="preview-contact.html">Contact us</a>
-            </div>
-          </nav>
-          <div class="vh-footer__col vh-footer__col--follow">
-            <h3>Follow Us</h3>
-            <div class="vh-social"><img src="assets/vectra-8edaf1fb1163eb6b857092f513083a6fc9fdc561.svg" alt="Social links"></div>
-            <h3 class="vh-footer__subscribe">Subscribe to our newsletter</h3>
-            <form>
-              <input type="hidden" name="contact[tags]" value="newsletter">
-              <div class="vh-news">
-                <input type="email" name="contact[email]" placeholder="Email Address" required>
-                <button type="submit">Send</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <div class="vh-footer__bottom">
-        <span>© 2026 VECTRA International | All Rights Reserved.</span>
-        <span>
-          <a href="https://vectra-intl.com/cookie-policy/">Cookie Policy</a>
-          <a href="https://vectra-intl.com/privacy-policy/">Privacy Policy</a>
-        </span>
-      </div>
-    </div>
-  </footer>
+  <div data-vh-footer></div>
 </div>
 
 
 
-<script src="assets/vectra-home.js?v=portal-fix"></script>
+<script src="assets/vectra-home.js?v=hero-7s"></script>
 </body>
 </html>

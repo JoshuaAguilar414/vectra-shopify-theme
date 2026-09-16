@@ -44,12 +44,12 @@
 }
 
 .vectra-sol .vsol-hero__icon {
-  opacity: 0.4;
+  opacity: 0.22;
   position: absolute;
-  width: calc(901px * var(--vsol-s));
-  height: calc(909px * var(--vsol-s));
-  right: calc(-250px * var(--vsol-s));
-  top: calc(418px * var(--vsol-s));
+  width: min(420px, 55vw);
+  height: auto;
+  right: -8%;
+  top: 28%;
   object-fit: contain;
   pointer-events: none;
   z-index: 0;
@@ -281,7 +281,7 @@
   font-weight: 700;
   letter-spacing: -0.05em;
   line-height: 101%;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 .vectra-sol .vsol-intro__copy p:last-child {
@@ -293,7 +293,7 @@
   font-weight: 500;
   letter-spacing: -0.05em;
   line-height: 130%;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 .vectra-sol .vsol-eco {
@@ -744,7 +744,7 @@
   font-weight: 700;
   letter-spacing: -0.05em;
   line-height: 101%;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 .vectra-sol .vsol-glass p {
@@ -984,7 +984,7 @@
   letter-spacing: -0.05em;
   line-height: 101%;
   text-align: center;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 .vectra-sol .vsol-process__cards {
@@ -1047,7 +1047,7 @@
   font-weight: 700;
   letter-spacing: -0.05em;
   line-height: 101%;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 .vectra-sol .vsol-step h3 {
@@ -1057,7 +1057,7 @@
   font-weight: 700;
   letter-spacing: -0.05em;
   line-height: 101%;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 .vectra-sol .vsol-step--impl h3 {

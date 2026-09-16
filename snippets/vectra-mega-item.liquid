@@ -46,6 +46,27 @@
             {% endfor %}
           {% endif %}
         {% endfor %}
+        {% if nav_title == 'About Us' %}
+          {% liquid
+            assign child_blob = ''
+            for child in link.links
+              assign child_blob = child_blob | append: child.title | append: '|'
+            endfor
+            assign child_blob = child_blob | downcase
+          %}
+          {% unless child_blob contains 'expert' %}
+            <a href="{% render 'vectra-preview-href', url: pages['experts'].url, view: 'experts' %}">Our Experts</a>
+          {% endunless %}
+          {% unless child_blob contains 'associate' %}
+            <a href="{% render 'vectra-preview-href', url: pages['associates'].url, view: 'associates' %}">Associates</a>
+          {% endunless %}
+          {% unless child_blob contains 'intern' %}
+            <a href="{% render 'vectra-preview-href', url: pages['interns'].url, view: 'interns' %}">Our Interns</a>
+          {% endunless %}
+          {% unless child_blob contains 'career' %}
+            <a href="{% render 'vectra-preview-href', url: pages['careers'].url, view: 'careers' %}">Careers</a>
+          {% endunless %}
+        {% endif %}
       </div>
     {% else %}
       <a href="{{ href }}">{{ nav_title }}</a>
@@ -90,6 +111,27 @@
                   <a href="{% render 'vectra-preview-href', url: child.url, title: child.title %}" role="menuitem">{{ child.title }}</a>
                 </li>
               {% endfor %}
+              {% if nav_title == 'About Us' %}
+                {% liquid
+                  assign child_blob = ''
+                  for child in link.links
+                    assign child_blob = child_blob | append: child.title | append: '|'
+                  endfor
+                  assign child_blob = child_blob | downcase
+                %}
+                {% unless child_blob contains 'expert' %}
+                  <li><a href="{% render 'vectra-preview-href', url: pages['experts'].url, view: 'experts' %}" role="menuitem">Our Experts</a></li>
+                {% endunless %}
+                {% unless child_blob contains 'associate' %}
+                  <li><a href="{% render 'vectra-preview-href', url: pages['associates'].url, view: 'associates' %}" role="menuitem">Associates</a></li>
+                {% endunless %}
+                {% unless child_blob contains 'intern' %}
+                  <li><a href="{% render 'vectra-preview-href', url: pages['interns'].url, view: 'interns' %}" role="menuitem">Our Interns</a></li>
+                {% endunless %}
+                {% unless child_blob contains 'career' %}
+                  <li><a href="{% render 'vectra-preview-href', url: pages['careers'].url, view: 'careers' %}" role="menuitem">Careers</a></li>
+                {% endunless %}
+              {% endif %}
             </ul>
           {% endif %}
         </div>

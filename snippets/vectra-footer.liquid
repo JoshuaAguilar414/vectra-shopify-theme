@@ -6,18 +6,35 @@
 
 {% liquid
   assign img_logo = 'vectra-f1f1bad320cc916c9d3f257211cb366de698a572.png' | asset_url
-  assign img_social = 'vectra-8edaf1fb1163eb6b857092f513083a6fc9fdc561.svg' | asset_url
   assign home = home_url | default: routes.root_url
-  assign story_base = story_url | default: pages['our-story'].url | default: '/pages/our-story'
+  assign story_base = story_url | default: pages['about-us'].url | default: pages['our-story'].url | default: '/pages/about-us'
   assign solutions_base = pages['solutions'].url | default: '/pages/solutions'
   assign resources_base = pages['resources'].url | default: '/pages/resources'
+  assign careers_base = pages['careers'].url | default: '/pages/careers'
+  assign faq_base = pages['faq'].url | default: '/pages/faq'
+  assign marketplace_base = pages['marketplace'].url | default: '/pages/marketplace'
+  assign experts_base = pages['experts'].url | default: '/pages/experts'
+  assign associates_base = pages['associates'].url | default: '/pages/associates'
+  assign interns_base = pages['interns'].url | default: '/pages/interns'
 %}
 {% capture story %}{% render 'vectra-preview-href', url: story_base, view: 'our-story' %}{% endcapture %}
 {% capture solutions %}{% render 'vectra-preview-href', url: solutions_base, view: 'solutions' %}{% endcapture %}
 {% capture resources %}{% render 'vectra-preview-href', url: resources_base, view: 'resources' %}{% endcapture %}
+{% capture careers %}{% render 'vectra-preview-href', url: careers_base, view: 'careers' %}{% endcapture %}
+{% capture faq %}{% render 'vectra-preview-href', url: faq_base, view: 'faq' %}{% endcapture %}
+{% capture marketplace %}{% render 'vectra-preview-href', url: marketplace_base, view: 'marketplace' %}{% endcapture %}
+{% capture experts %}{% render 'vectra-preview-href', url: experts_base, view: 'experts' %}{% endcapture %}
+{% capture associates %}{% render 'vectra-preview-href', url: associates_base, view: 'associates' %}{% endcapture %}
+{% capture interns %}{% render 'vectra-preview-href', url: interns_base, view: 'interns' %}{% endcapture %}
 {% assign story = story | strip %}
 {% assign solutions = solutions | strip %}
 {% assign resources = resources | strip %}
+{% assign careers = careers | strip %}
+{% assign faq = faq | strip %}
+{% assign marketplace = marketplace | strip %}
+{% assign experts = experts | strip %}
+{% assign associates = associates | strip %}
+{% assign interns = interns | strip %}
 
 <footer class="vh-footer">
   <div class="vh-wrap">
@@ -25,18 +42,17 @@
       <div class="vh-footer__brand">
         <img src="{{ img_logo }}" alt="{{ shop.name }}">
         <p>Your partner for business resilience and operational capability building through an ecosystem of integrated solutions.</p>
-        <p><a href="tel:+3226206118">+32 26206118</a><br><a href="mailto:info@vectra-intl.com">info@vectra-intl.com</a></p>
-        <p>Chaussée de Wavre 1517B<br>1160 Brussels, Belgium</p>
+        {% render 'vectra-contact-details', variant: 'footer' %}
       </div>
       <div class="vh-footer__nav">
         <nav class="vh-footer__col">
           <h3>Explore</h3>
           <div class="vh-footer__links">
             <a href="{{ solutions }}">Solutions</a>
-            <a href="{{ home }}#marketplace">Marketplace</a>
+            <a href="{{ marketplace }}">Marketplace</a>
             <a href="{{ resources }}">Resources</a>
             <a href="{{ home }}#cases">Case studies</a>
-            <a href="{{ home }}#solutions">VSuites</a>
+            <a href="{{ faq }}">FAQ</a>
           </div>
         </nav>
         <nav class="vh-footer__col vh-footer__col--wide">
@@ -46,38 +62,42 @@
             <a href="#VectraContactModal" data-vh-contact-open>Request a demo</a>
             <a href="#VectraContactModal" data-vh-contact-open>Readiness assessment</a>
             <a href="#VectraContactModal" data-vh-contact-open>Build a capability path</a>
-            <a href="{{ routes.account_url }}">Client Portal</a>
+            <a href="{{ routes.account_url }}">Client portal</a>
           </div>
         </nav>
         <nav class="vh-footer__col vh-footer__col--wide">
           <h3>Company</h3>
           <div class="vh-footer__links">
             <a href="{{ story }}">About VECTRA</a>
-            <a href="{{ story }}#experts">Associates and Experts</a>
-            <a href="{{ home }}#careers">Careers</a>
+            <a href="{{ experts }}">Experts</a>
+            <a href="{{ associates }}">Associates</a>
+            <a href="{{ interns }}">Interns</a>
+            <a href="{{ careers }}">Careers</a>
             <a href="{{ story }}#values">Our values and pledges</a>
             <a href="#VectraContactModal" data-vh-contact-open>Contact us</a>
           </div>
         </nav>
         <div class="vh-footer__col vh-footer__col--follow">
-          <h3>Follow Us</h3>
-          <div class="vh-social"><img src="{{ img_social }}" alt="Social links"></div>
-          <h3 class="vh-footer__subscribe">Subscribe to our newsletter</h3>
+          <h3>Follow us</h3>
+          {% render 'vectra-social-links' %}
+          <h3 class="vh-footer__subscribe">Website upgrade notice</h3>
+          <p class="vh-footer__migrate">VECTRA International is moving this website from WordPress to Shopify. This is a one-time go-live notice, not an email list. Enter your email if you want to know when the new site is live.</p>
           {% form 'customer' %}
-            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input type="hidden" name="contact[tags]" value="site-migration">
             <div class="vh-news">
-              <input type="email" name="contact[email]" placeholder="Email Address" required>
-              <button type="submit">Send</button>
+              <label class="visually-hidden" for="FooterMigrationEmail">Email for the go-live notice</label>
+              <input id="FooterMigrationEmail" type="email" name="contact[email]" placeholder="Your email" required autocomplete="email">
+              <button type="submit">Notify me</button>
             </div>
           {% endform %}
         </div>
       </div>
     </div>
     <div class="vh-footer__bottom">
-      <span>© {{ 'now' | date: '%Y' }} VECTRA International | All Rights Reserved.</span>
+      <span>© {{ 'now' | date: '%Y' }} VECTRA International | All rights reserved.</span>
       <span>
-        <a href="https://vectra-intl.com/cookie-policy/">Cookie Policy</a>
-        <a href="https://vectra-intl.com/privacy-policy/">Privacy Policy</a>
+        <a href="https://vectra-intl.com/cookie-policy/">Cookie policy</a>
+        <a href="https://vectra-intl.com/privacy-policy/">Privacy policy</a>
       </span>
     </div>
   </div>

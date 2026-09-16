@@ -1,0 +1,64 @@
+{%- doc -%}
+  Clickable VECTRA contact details: office phone, mobile, info email, and Brussels address.
+{%- enddoc -%}
+
+{% liquid
+  assign office_tel = '+3226206118'
+  assign office_label = '+32 2 620 61 18'
+  assign mobile_tel = '+32495239088'
+  assign mobile_label = '+32 495 239 088'
+  assign email = 'info@vectra-intl.com'
+  assign maps = 'https://www.google.com/maps/search/?api=1&query=Chauss%C3%A9e%20de%20Wavre%201517B%2C%201160%20Brussels%2C%20Belgium'
+%}
+
+{% if variant == 'card' %}
+  <div class="vh-contact-list">
+    <div>
+      <p class="vh-contact-list__label">Give us a call</p>
+      <a class="vh-contact-list__link" href="tel:{{ office_tel }}">
+        <img src="{{ img_phone }}" alt="">
+        <strong>{{ office_label }}</strong>
+      </a>
+      <a class="vh-contact-list__link" href="tel:{{ mobile_tel }}">
+        <img src="{{ img_phone }}" alt="">
+        <strong>{{ mobile_label }}</strong>
+      </a>
+    </div>
+    <div>
+      <p class="vh-contact-list__label">Email</p>
+      <a class="vh-contact-list__link" href="mailto:{{ email }}">
+        <img src="{{ img_mail }}" alt="">
+        <strong class="vh-contact-list__email">{{ email }}</strong>
+      </a>
+    </div>
+    <div>
+      <p class="vh-contact-list__label">Our address</p>
+      <a class="vh-contact-list__link" href="{{ maps }}" rel="noopener noreferrer" target="_blank">
+        <img src="{{ img_pin }}" alt="">
+        <strong>Chaussée de Wavre 1517B<br>1160 Brussels, Belgium</strong>
+      </a>
+    </div>
+  </div>
+{% elsif variant == 'footer' %}
+  <p class="vh-footer__contact">
+    <a href="tel:{{ office_tel }}">{{ office_label }}</a>
+    <a href="tel:{{ mobile_tel }}">{{ mobile_label }}</a>
+    <a href="mailto:{{ email }}">{{ email }}</a>
+  </p>
+  <p class="vh-footer__address">
+    <a href="{{ maps }}" rel="noopener noreferrer" target="_blank">
+      Chaussée de Wavre 1517B<br>1160 Brussels, Belgium
+    </a>
+  </p>
+{% else %}
+  <p>
+    <a href="mailto:{{ email }}">{{ email }}</a>
+    ·
+    <a href="tel:{{ office_tel }}">{{ office_label }}</a>
+    ·
+    <a href="tel:{{ mobile_tel }}">{{ mobile_label }}</a>
+  </p>
+  <p>
+    <a href="{{ maps }}" rel="noopener noreferrer" target="_blank">Chaussée de Wavre 1517B, 1160 Brussels, Belgium</a>
+  </p>
+{% endif %}

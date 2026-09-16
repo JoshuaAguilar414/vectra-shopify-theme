@@ -1,0 +1,35 @@
+{% capture children %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-page-shell', children: children %}
+
+{% schema %}
+{
+  "name": "VECTRA course",
+  "class": "vectra-course-section",
+  "enabled_on": {
+    "templates": ["page"]
+  },
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "MEGA Navigation"
+    }
+  ],
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA course",
+      "blocks": [
+        { "type": "vectra-header" },
+        { "type": "vectra-course-body" },
+        { "type": "vectra-footer" }
+      ]
+    }
+  ]
+}
+{% endschema %}

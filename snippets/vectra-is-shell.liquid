@@ -1,0 +1,17 @@
+{%- doc -%}
+  Returns 1 when this request should use the VECTRA chrome (header/footer/CSS).
+{%- enddoc -%}
+{%- liquid
+  assign ok = false
+  if template.name == 'index'
+    assign ok = true
+  elsif template.suffix == 'our-story' or template.suffix == 'about-us' or template.suffix == 'vectra' or template.suffix == 'solutions' or template.suffix == 'resources' or template.suffix == 'contact-us' or template.suffix == 'contact' or template.suffix == 'experts' or template.suffix == 'associates' or template.suffix == 'interns' or template.suffix == 'careers' or template.suffix == 'faq' or template.suffix == 'marketplace' or template.suffix == 'course'
+    assign ok = true
+  elsif template.name == 'page'
+    case page.handle
+      when 'experts', 'associates', 'interns', 'careers', 'faq', 'our-story', 'our-dna', 'about-us', 'about', 'resources', 'solutions', 'contact-us', 'contact', 'how-we-help', 'marketplace', 'course-esg-acronyms', 'course-preventative-measures', 'course-purchasing-practices', 'course-disability-accommodation'
+        assign ok = true
+    endcase
+  endif
+-%}
+{%- if ok -%}1{%- endif -%}

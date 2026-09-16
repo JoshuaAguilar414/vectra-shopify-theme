@@ -157,6 +157,7 @@
     --font-body--family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
     --font-body--style: {{ settings.type_body_font.style }};
     --font-body--weight: {{ settings.type_body_font.weight }};
+    --font-body--case: none;
     --font-subheading--family: {{ settings.type_subheading_font.family }}, {{ settings.type_subheading_font.fallback_families }};
     --font-subheading--style: {{ settings.type_subheading_font.style }};
     --font-subheading--weight: {{ settings.type_subheading_font.weight }};
@@ -318,7 +319,7 @@
           assign preset_font = '--font-body--family'
           assign preset_style = '--font-body--style'
           assign preset_weight = '400'
-          assign preset_case = '--font-body--case'
+          assign preset_case_value = 'none'
 
           echo '--font-[preset_name]--weight: [preset_weight];' | replace: '[preset_name]', preset_name | replace: '[preset_weight]', preset_weight
         else
@@ -328,6 +329,10 @@
           assign preset_weight = '--font-[preset_font]--weight' | replace: '[preset_font]', settings[preset_font_id]
           assign preset_case = 'type_case_[preset_name]' | replace: '[preset_name]', preset_name
           assign preset_letter_spacing = 'type_letter_spacing_[preset_name]' | replace: '[preset_name]', preset_name
+          assign preset_case_value = settings[preset_case] | default: 'none'
+          if preset_case_value != 'uppercase'
+            assign preset_case_value = 'none'
+          endif
 
           echo '--font-[preset_name]--weight: var([preset_weight]);' | replace: '[preset_name]', preset_name | replace: '[preset_weight]', preset_weight
           echo '--font-[preset_name]--letter-spacing: var(--letter-spacing--[preset_letter_spacing]);' | replace: '[preset_name]', preset_name | replace: '[preset_letter_spacing]', settings[preset_letter_spacing]
@@ -336,7 +341,7 @@
         echo '--font-[preset_name]--size: var([preset_size]);' | replace: '[preset_name]', preset_name | replace: '[preset_size]', preset_size
         echo '--font-[preset_name]--family: var([preset_font]);' | replace: '[preset_name]', preset_name | replace: '[preset_font]', preset_font
         echo '--font-[preset_name]--style: var([preset_style]);' | replace: '[preset_name]', preset_name | replace: '[preset_style]', preset_style
-        echo '--font-[preset_name]--case: [preset_case];' | replace: '[preset_name]', preset_name | replace: '[preset_case]', settings[preset_case]
+        echo '--font-[preset_name]--case: [preset_case];' | replace: '[preset_name]', preset_name | replace: '[preset_case]', preset_case_value
         echo '--font-[preset_name]--line-height: var(--line-height--[preset_line_height]);' | replace: '[preset_name]', preset_name | replace: '[preset_line_height]', settings[preset_line_height]
       endfor
     %}
@@ -563,9 +568,9 @@
     --button-font-family-primary: var(--font-{{ settings.type_font_button_primary }}--family);
     --button-font-family-secondary: var(--font-{{ settings.type_font_button_secondary }}--family);
 
-    /* Button text case */
-    --button-text-case-primary: {{ settings.button_text_case_primary }};
-    --button-text-case-secondary: {{ settings.button_text_case_secondary }};
+    /* Button text case — "default" is not a valid CSS text-transform value */
+    --button-text-case-primary: {% if settings.button_text_case_primary == 'uppercase' %}uppercase{% else %}none{% endif %};
+    --button-text-case-secondary: {% if settings.button_text_case_secondary == 'uppercase' %}uppercase{% else %}none{% endif %};
 
     /* Borders */
     --border-color: rgb(var(--color-border-rgb) / var(--opacity-50));

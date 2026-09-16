@@ -132,9 +132,9 @@
       "error_heading": "Please adjust the following:"
     },
     "email_signup": {
-      "label": "Email",
-      "placeholder": "Email address",
-      "success": "Thanks for subscribing!"
+      "label": "Email for the go-live notice",
+      "placeholder": "Email for the go-live notice",
+      "success": "Thanks. We'll send one notice when the new site is live."
     },
     "filter": "Filter",
     "load_video": "Load video: {{ description }}",

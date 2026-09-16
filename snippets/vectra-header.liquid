@@ -14,9 +14,15 @@
   assign img_case = 'vectra-bc13c1ac5973c68a13ce0a8ee907baaf2e4e4828.png' | asset_url
   assign img_arrow_white = 'vectra-d640d7e5d10a7b2543900785147430e0c5cd06a1.svg' | asset_url
   assign home = routes.root_url
-  assign story_base = pages['our-story'].url | default: '/pages/our-story'
+  assign story_base = pages['about-us'].url | default: pages['our-story'].url | default: '/pages/about-us'
   assign solutions_base = pages['solutions'].url | default: '/pages/solutions'
   assign resources_base = pages['resources'].url | default: '/pages/resources'
+  assign faq_base = pages['faq'].url | default: '/pages/faq'
+  assign marketplace_base = pages['marketplace'].url | default: '/pages/marketplace'
+  assign experts_base = pages['experts'].url | default: '/pages/experts'
+  assign associates_base = pages['associates'].url | default: '/pages/associates'
+  assign interns_base = pages['interns'].url | default: '/pages/interns'
+  assign careers_base = pages['careers'].url | default: '/pages/careers'
   assign login_url = routes.account_login_url
   assign register_url = routes.account_register_url | default: routes.account_login_url
 
@@ -60,14 +66,26 @@
 {% capture story %}{% render 'vectra-preview-href', url: story_base, view: 'our-story' %}{% endcapture %}
 {% capture solutions %}{% render 'vectra-preview-href', url: solutions_base, view: 'solutions' %}{% endcapture %}
 {% capture resources %}{% render 'vectra-preview-href', url: resources_base, view: 'resources' %}{% endcapture %}
+{% capture faq %}{% render 'vectra-preview-href', url: faq_base, view: 'faq' %}{% endcapture %}
+{% capture marketplace %}{% render 'vectra-preview-href', url: marketplace_base, view: 'marketplace' %}{% endcapture %}
+{% capture experts %}{% render 'vectra-preview-href', url: experts_base, view: 'experts' %}{% endcapture %}
+{% capture associates %}{% render 'vectra-preview-href', url: associates_base, view: 'associates' %}{% endcapture %}
+{% capture interns %}{% render 'vectra-preview-href', url: interns_base, view: 'interns' %}{% endcapture %}
+{% capture careers %}{% render 'vectra-preview-href', url: careers_base, view: 'careers' %}{% endcapture %}
 {% assign story = story | strip %}
 {% assign solutions = solutions | strip %}
 {% assign resources = resources | strip %}
+{% assign faq = faq | strip %}
+{% assign marketplace = marketplace | strip %}
+{% assign experts = experts | strip %}
+{% assign associates = associates | strip %}
+{% assign interns = interns | strip %}
+{% assign careers = careers | strip %}
 
 <header class="vh-header" data-vh-header>
   <div class="vh-util">
     {% unless customer %}
-      <a class="vh-util__link" href="{{ register_url }}">
+      <a class="vh-util__link" href="{{ careers }}">
         <img src="{{ img_case }}" alt="" width="34" height="34">
         Join us
       </a>
@@ -135,6 +153,7 @@
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M4 6.5c3.2-1.4 6.2.2 8 1.8 1.8-1.6 4.8-3.2 8-1.8v11c-3.2-1.4-6.2.2-8 1.8-1.8-1.6-4.8-3.2-8-1.8v-11Z"/><path fill="none" stroke="currentColor" stroke-width="1.7" d="M12 8.3v11"/></svg>
                 My Courses
               </a>
+              <a class="vh-account__chip" href="{{ routes.account_logout_url }}">Log out</a>
             </div>
           </div>
         </div>
@@ -166,9 +185,10 @@
               <ul class="vh-mega__list">
                 <li><a href="{{ story }}" role="menuitem">Our Story</a></li>
                 <li><a href="{{ story }}#leadership" role="menuitem">Our Leadership Team</a></li>
-                <li><a href="{{ story }}#experts" role="menuitem">Our Experts</a></li>
-                <li><a href="{{ story }}#experts" role="menuitem">Associates</a></li>
-                <li><a href="{{ story }}#careers" role="menuitem">Our Interns</a></li>
+                <li><a href="{{ experts }}" role="menuitem">Our Experts</a></li>
+                <li><a href="{{ associates }}" role="menuitem">Associates</a></li>
+                <li><a href="{{ interns }}" role="menuitem">Our Interns</a></li>
+                <li><a href="{{ careers }}" role="menuitem">Careers</a></li>
               </ul>
             </div>
           </div>
@@ -180,7 +200,7 @@
               <ul class="vh-mega__list">
                 <li><a href="{{ solutions }}" role="menuitem">Solutions</a></li>
                 <li><a href="{{ solutions }}#services" role="menuitem">Services</a></li>
-                <li><a href="{{ home }}#solutions" role="menuitem">VSuites</a></li>
+                <li><a href="{{ marketplace }}" role="menuitem">VSuites</a></li>
                 <li><a href="{{ home }}#why-vectra" role="menuitem">Why Partner With Us</a></li>
                 <li><a href="{{ solutions }}#custom" role="menuitem">Customized Solutions</a></li>
               </ul>
@@ -188,7 +208,7 @@
           </div>
         </div>
         <div class="vh-menu__item">
-          <a href="{{ home }}#marketplace">Marketplace</a>
+          <a href="{{ marketplace }}">Marketplace</a>
         </div>
         <div class="vh-menu__item has-children" data-vh-mega-item>
           <div class="vh-menu__anchor">
@@ -206,7 +226,7 @@
           </div>
         </div>
         <div class="vh-menu__item">
-          <a href="{{ home }}#faq">FAQ</a>
+          <a href="{{ faq }}">FAQ</a>
         </div>
       {% endif %}
     </div>
@@ -240,9 +260,10 @@
           <div class="vh-nav-panel__sub">
             <a href="{{ story }}">Our Story</a>
             <a href="{{ story }}#leadership">Our Leadership Team</a>
-            <a href="{{ story }}#experts">Our Experts</a>
-            <a href="{{ story }}#experts">Associates</a>
-            <a href="{{ story }}#careers">Our Interns</a>
+            <a href="{{ experts }}">Our Experts</a>
+            <a href="{{ associates }}">Associates</a>
+            <a href="{{ interns }}">Our Interns</a>
+            <a href="{{ careers }}">Careers</a>
           </div>
         </div>
         <div class="vh-nav-panel__item has-children">
@@ -250,12 +271,12 @@
           <div class="vh-nav-panel__sub">
             <a href="{{ solutions }}">Solutions</a>
             <a href="{{ solutions }}#services">Services</a>
-            <a href="{{ home }}#solutions">VSuites</a>
+            <a href="{{ marketplace }}">VSuites</a>
             <a href="{{ home }}#why-vectra">Why Partner With Us</a>
             <a href="{{ solutions }}#custom">Customized Solutions</a>
           </div>
         </div>
-        <a href="{{ home }}#marketplace">Marketplace</a>
+        <a href="{{ marketplace }}">Marketplace</a>
         <div class="vh-nav-panel__item has-children">
           <button type="button" data-vh-mobile-sub aria-expanded="false">Resources</button>
           <div class="vh-nav-panel__sub">
@@ -267,7 +288,7 @@
             <a href="{{ resources }}#podcasts">Press Releases</a>
           </div>
         </div>
-        <a href="{{ home }}#faq">FAQ</a>
+        <a href="{{ faq }}">FAQ</a>
       {% endif %}
       <button type="button" data-vh-contact-open>Contact Us</button>
     </div>

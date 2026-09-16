@@ -1,0 +1,32 @@
+{%- doc -%}
+  Renders Experts / Associates / Interns / Careers / FAQ when a Shopify page
+  uses the Default template instead of the dedicated VECTRA template.
+{%- enddoc -%}
+{%- liquid
+  assign handle = page.handle
+  assign people = false
+  assign course = false
+  case handle
+    when 'experts', 'associates', 'interns', 'careers', 'faq'
+      assign people = true
+    when 'marketplace', 'course-esg-acronyms', 'course-preventative-measures', 'course-purchasing-practices', 'course-disability-accommodation'
+      assign course = true
+  endcase
+-%}
+{%- if people -%}
+  {% capture children %}
+    {% render 'vectra-header' %}
+    {% render 'vectra-people-modules', module: handle %}
+  {% endcapture %}
+  {% render 'vectra-page-shell', children: children, include_story: true %}
+{%- elsif course -%}
+  {% capture children %}
+    {% render 'vectra-header' %}
+    {% if handle == 'marketplace' %}
+      {% render 'vectra-course-modules', module: 'catalog' %}
+    {% else %}
+      {% render 'vectra-course-modules', module: 'detail', course_key: handle %}
+    {% endif %}
+  {% endcapture %}
+  {% render 'vectra-page-shell', children: children %}
+{%- endif -%}

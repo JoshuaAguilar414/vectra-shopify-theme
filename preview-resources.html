@@ -8,11 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/vectra-home.css?v=cms-fix">
+<link rel="stylesheet" href="assets/vectra-home.css?v=w3-news">
 <link rel="stylesheet" href="assets/vectra-widgets.css">
 <link rel="stylesheet" href="assets/vectra-solutions.css?v=join-grid">
 <link rel="stylesheet" href="assets/vectra-resources.css?v=cms-fix">
-<link rel="stylesheet" href="assets/vectra-type.css?v=cms-fix">
+<link rel="stylesheet" href="assets/vectra-type.css?v=w3-news">
+<link rel="stylesheet" href="assets/vectra-a11y.css">
 <style>
   body{margin:0;background:#fff}
   .visually-hidden:not(:focus,:active){position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -33,9 +34,9 @@
       <div class="vh-menu">
         <a href="preview-our-story.html">About Us</a>
         <a href="preview-solutions.html">How We Help</a>
-        <a href="preview.html#marketplace">Marketplace</a>
+        <a href="preview-marketplace.html">Marketplace</a>
         <a href="preview-resources.html">Resources</a>
-        <a href="preview.html#faq">FAQ</a>
+        <a href="preview-faq.html">FAQ</a>
       </div>
       <div class="vh-nav-end">
         <a class="vh-contact-link" href="preview-contact.html">Contact Us <img src="assets/vectra-d640d7e5d10a7b2543900785147430e0c5cd06a1.svg" alt="" width="16" height="9"></a>
@@ -46,9 +47,9 @@
       <div class="vh-nav-panel" data-vh-nav-panel>
         <a href="preview-our-story.html">About Us</a>
         <a href="preview-solutions.html">How We Help</a>
-        <a href="preview.html#marketplace">Marketplace</a>
+        <a href="preview-marketplace.html">Marketplace</a>
         <a href="preview-resources.html">Resources</a>
-        <a href="preview.html#faq">FAQ</a>
+        <a href="preview-faq.html">FAQ</a>
         <a href="preview-contact.html">Contact Us</a>
       </div>
     </nav>
@@ -241,18 +242,46 @@
     <div class="vh-wrap vh-faq__grid">
       <aside class="vh-contact-card">
         <img class="vh-contact-card__icon" src="assets/vectra-da137306dcbc6716d83295ef75678ab141a500e1.svg" alt="">
-        <p class="vh-contact-card__title">Have another question?</p>
+        <p class="vh-contact-card__title">More questions?</p>
         <p>Find more answers about VECTRA International, how we work, our capabilities, and getting started.</p>
-        <a class="vh-btn vh-btn--white" href="preview-contact.html">
-          Talk to an Expert
+        <a class="vh-btn vh-btn--white" href="preview-faq.html">
+          More questions?
           <img src="assets/vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg" alt="">
         </a>
+        <div class="vh-contact-list">
+          <div>
+            <p class="vh-contact-list__label">Give us a call</p>
+            <a class="vh-contact-list__link" href="tel:+3226206118">
+              <img src="assets/vectra-7c0e54b37d57d95df328b0e4ee1f7b87844a7372.svg" alt="">
+              <strong>+32 2 620 61 18</strong>
+            </a>
+            <a class="vh-contact-list__link" href="tel:+32495239088">
+              <img src="assets/vectra-7c0e54b37d57d95df328b0e4ee1f7b87844a7372.svg" alt="">
+              <strong>+32 495 239 088</strong>
+            </a>
+          </div>
+          <div>
+            <p class="vh-contact-list__label">Email</p>
+            <a class="vh-contact-list__link" href="mailto:info@vectra-intl.com">
+              <img src="assets/vectra-9a4f80a5b924a881fc96b20219bb1f7c8ca734ab.svg" alt="">
+              <strong class="vh-contact-list__email">info@vectra-intl.com</strong>
+            </a>
+          </div>
+          <div>
+            <p class="vh-contact-list__label">Our address</p>
+            <a class="vh-contact-list__link" href="https://www.google.com/maps/search/?api=1&query=Chauss%C3%A9e%20de%20Wavre%201517B%2C%201160%20Brussels%2C%20Belgium" rel="noopener noreferrer" target="_blank">
+              <img src="assets/vectra-484bca36e3874bd30d1d6dd79807ed0314378e3d.svg" alt="">
+              <strong>Chaussée de Wavre 1517B<br>1160 Brussels, Belgium</strong>
+            </a>
+          </div>
+        </div>
       </aside>
       <div class="vh-faq__right">
         <div class="vh-faq__glow" aria-hidden="true"></div>
         <div class="vh-accordion">
           <p class="vh-kicker">Our FAQ</p>
           <h2 class="vh-h2">Frequently Asked Questions</h2>
+          <p class="vh-lead">Answers about VECTRA Resources and how to find the right material.</p>
           <div class="vh-acc is-open" data-vh-faq-item>
             <button type="button" data-vh-faq-btn>What are responsible business resources?</button>
             <div class="vh-acc__body">Responsible business resources are insights, guides, evidence, and expert analysis that help organizations understand ESG, supply chain, compliance, risk management, business resilience, and operational resilience issues and decide what action to take.</div>
@@ -278,94 +307,9 @@
     </div>
   </section>
 
-  <section class="vh-portal vh-portal--sol" id="get-in-touch">
-    <canvas class="vh-portal__cells" data-vs-join-grid aria-hidden="true"></canvas>
-    <div class="vh-wrap vh-portal__grid">
-      <div class="vh-portal__copy">
-        <h2>Better insight should lead somewhere.</h2>
-        <p>If what you have learned needs to become a decision, a plan, or a change to how your team works, VECTRA International can help you move it forward.</p>
-      </div>
-      <form class="vh-form" action="#" method="post" data-vh-reveal="scale">
-        <h3>Talk to a VECTRA Expert</h3>
-        <div class="vh-form__grid">
-          <input type="text" placeholder="First Name*" required>
-          <input type="text" placeholder="Last Name*" required>
-          <input type="email" placeholder="Email*" required>
-          <input type="tel" placeholder="Phone Number*" required>
-          <input type="text" placeholder="Company*" required>
-          <input type="text" placeholder="Job Title*" required>
-        </div>
-        <textarea placeholder="Message Here..."></textarea>
-        <button class="vh-btn vh-btn--green" type="submit">Start the Conversation <img src="assets/vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg" alt=""></button>
-      </form>
-    </div>
-  </section>
-
-  <footer class="vh-footer">
-    <div class="vh-wrap">
-      <div class="vh-footer__top">
-        <div class="vh-footer__brand">
-          <img src="assets/vectra-f1f1bad320cc916c9d3f257211cb366de698a572.png" alt="VECTRA">
-          <p>Your partner for business resilience and operational capability building through an ecosystem of integrated solutions.</p>
-          <p><a href="tel:+3226206118">+32 26206118</a><br><a href="mailto:info@vectra-intl.com">info@vectra-intl.com</a></p>
-          <p>Chaussée de Wavre 1517B<br>1160 Brussels, Belgium</p>
-        </div>
-        <div class="vh-footer__nav">
-          <nav class="vh-footer__col">
-            <h3>Explore</h3>
-            <div class="vh-footer__links">
-              <a href="preview-solutions.html">Solutions</a>
-              <a href="preview.html#marketplace">Marketplace</a>
-              <a href="preview-resources.html">Resources</a>
-              <a href="preview.html#cases">Case studies</a>
-              <a href="preview.html#solutions">VSuites</a>
-            </div>
-          </nav>
-          <nav class="vh-footer__col vh-footer__col--wide">
-            <h3>Start here</h3>
-            <div class="vh-footer__links">
-              <a href="preview-contact.html">Talk to an expert</a>
-              <a href="preview-contact.html">Request a demo</a>
-              <a href="preview-contact.html">Readiness assessment</a>
-              <a href="preview-contact.html">Build a capability path</a>
-              <a href="#">Client Portal</a>
-            </div>
-          </nav>
-          <nav class="vh-footer__col vh-footer__col--wide">
-            <h3>Company</h3>
-            <div class="vh-footer__links">
-              <a href="preview-our-story.html">About VECTRA</a>
-              <a href="preview-our-story.html#experts">Associates and Experts</a>
-              <a href="preview.html#careers">Careers</a>
-              <a href="preview-our-story.html#values">Our values and pledges</a>
-              <a href="preview-contact.html">Contact us</a>
-            </div>
-          </nav>
-          <div class="vh-footer__col vh-footer__col--follow">
-            <h3>Follow Us</h3>
-            <div class="vh-social"><img src="assets/vectra-8edaf1fb1163eb6b857092f513083a6fc9fdc561.svg" alt="Social links"></div>
-            <h3 class="vh-footer__subscribe">Subscribe to our newsletter</h3>
-            <form>
-              <input type="hidden" name="contact[tags]" value="newsletter">
-              <div class="vh-news">
-                <input type="email" name="contact[email]" placeholder="Email Address" required>
-                <button type="submit">Send</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="vh-footer__bottom">
-        <span>© 2026 VECTRA International | All Rights Reserved.</span>
-        <span>
-          <a href="https://vectra-intl.com/cookie-policy/">Cookie Policy</a>
-          <a href="https://vectra-intl.com/privacy-policy/">Privacy Policy</a>
-        </span>
-      </div>
-    </div>
-  </footer>
+    <div data-vh-footer></div>
 </div>
-<script src="assets/vectra-home.js?v=join-grid" defer></script>
+<script src="assets/vectra-home.js?v=footer-mod" defer></script>
 <script src="assets/vectra-widgets.js" defer></script>
 <script src="assets/vectra-solutions.js" defer></script>
 </body>

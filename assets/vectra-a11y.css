@@ -1,0 +1,231 @@
+/* European Accessibility Act / WCAG 2.2 AA helpers for VECTRA pages. */
+
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.vectra-home :focus-visible,
+.vh-contact-modal :focus-visible,
+.skip-to-content-link:focus-visible,
+.localization-wrapper :focus-visible,
+shopify-account :focus-visible {
+  outline: 3px solid #54bd01;
+  outline-offset: 3px;
+}
+
+.vectra-home a[href^='mailto:'],
+.vectra-home a[href^='tel:'],
+.vh-contact-list a,
+.vh-footer a[href^='mailto:'],
+.vh-footer a[href^='tel:'] {
+  text-transform: none !important;
+  letter-spacing: 0;
+}
+
+.vh-contact-list a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.vh-contact-list a strong {
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
+
+.vectra-home a:hover,
+.vectra-home button:hover {
+  text-decoration-thickness: 0.08em;
+}
+
+.vectra-home .vh-form label.vh-form__label {
+  display: block;
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: inherit;
+}
+
+.vectra-home .vh-contact-list a,
+.vectra-home .vh-footer a {
+  text-underline-offset: 0.18em;
+}
+
+.vectra-home .vh-contact-list a:hover,
+.vectra-home .vh-footer a:hover,
+.vectra-home .vh-contact-list a:focus-visible,
+.vh-contact-list a:hover,
+.vh-contact-list a:focus-visible {
+  text-decoration: underline;
+}
+
+.vectra-home .vs-video-frame,
+.vectra-home .vs-who__media {
+  position: relative;
+}
+
+.vectra-home .vh-media-controls {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 3;
+}
+
+.vectra-home .vh-media-controls button {
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: #092543;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vectra-home *,
+  .vectra-home *::before,
+  .vectra-home *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .vectra-home video[autoplay] {
+    display: none;
+  }
+}
+
+/* Horizon header, language selector, and Shopify account menus must stay opaque. */
+shopify-account {
+  --shopify-account-color-background: #ffffff;
+  --shopify-account-color-text: #092543;
+  --shopify-account-color-accent: #54bd01;
+  --shopify-account-color-accent-text: #092543;
+  color-scheme: light;
+}
+
+.shopify-section--account,
+#customer-account,
+.customer,
+.vectra-account-page,
+.vectra-account-page .shopify-section,
+.vectra-account-page main,
+.shopify-section-group-header-group .localization-wrapper,
+.header-actions .localization-wrapper,
+.color-custom-popover[popover],
+[popover].localization-wrapper,
+dropdown-localization-component .localization-wrapper,
+.vh-dropdown,
+.vh-mega,
+.vh-locale__panel,
+.vh-account__menu,
+.menu-drawer__localization .localization-wrapper,
+.header__submenu,
+.header-menu__submenu,
+.mega-menu__content {
+  --color-background: #ffffff;
+  --color-foreground: #092543;
+  --shopify-account-color-background: #ffffff;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #092543 !important;
+  color-scheme: light;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  text-transform: none;
+}
+
+.shopify-section--account .popover,
+.shopify-section--account .disclosure,
+#customer-account .menu,
+.customer .account-menu,
+shopify-account::part(dialog),
+shopify-account::part(popover),
+shopify-account [popover],
+.vectra-account-page form,
+.vectra-account-page .customer,
+.vectra-account-page .account {
+  background: #ffffff !important;
+  color: #092543 !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  text-transform: none;
+}
+
+dropdown-localization-component .localization-wrapper:not([hidden]),
+.localization-wrapper:not([hidden]),
+.vh-locale__panel:not([hidden]),
+.vh-account__menu:not([hidden]) {
+  opacity: 1 !important;
+  visibility: visible;
+}
+
+.localization-wrapper[hidden],
+.vh-locale__panel[hidden],
+.vh-account__menu[hidden] {
+  display: none !important;
+}
+
+.vectra-home,
+.vectra-home h1,
+.vectra-home h2,
+.vectra-home h3,
+.vectra-home h4,
+.vectra-account-page,
+.vectra-account-page h1,
+.vectra-account-page h2,
+.vectra-account-page p,
+.vectra-account-page a,
+.vectra-account-page button,
+.vectra-account-page input,
+.vectra-account-page label,
+.vh-header,
+.vh-header a,
+.vh-header button,
+.vh-header p,
+.vh-mega a,
+.vh-account__menu,
+shopify-account {
+  text-transform: none;
+  font-variant: normal;
+}
+
+.vh-kicker--arrows,
+.vh-page-hero__kicker,
+.vh-accordion .vh-kicker {
+  text-transform: uppercase;
+}
+
+.blog-post-card__title-link,
+.blog-post-card__title-link .text-block,
+.blog-post-card__content .h4,
+.blog-post-card__content h2,
+.blog-post-card__content h3,
+.blog-post-card__content h4 {
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem) !important;
+  line-height: 1.3 !important;
+  letter-spacing: -0.02em;
+}
+
+.blog-post-details,
+.blog-post-details time,
+.blog-post-details span {
+  font-size: 0.8125rem !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}

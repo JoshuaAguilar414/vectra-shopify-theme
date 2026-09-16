@@ -1,19 +1,21 @@
 {{ 'overflow-list.css' | asset_url | preload_tag: as: 'style' }}
 {{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
-{% if template.name == 'index' or template.suffix == 'our-story' or template.suffix == 'vectra' or template.suffix == 'solutions' or template.suffix == 'resources' %}
+{% capture vectra_shell %}{% render 'vectra-is-shell' %}{% endcapture %}
+{% assign vectra_shell = vectra_shell | strip %}
+{% if vectra_shell == '1' %}
   {{ 'vectra-home.css' | asset_url | stylesheet_tag: preload: true }}
   <link rel="stylesheet" href="{{ 'vectra-home.css' | asset_url }}" media="all">
   {{ 'vectra-widgets.css' | asset_url | stylesheet_tag: preload: true }}
   <link rel="stylesheet" href="{{ 'vectra-widgets.css' | asset_url }}" media="all">
-  {% if template.suffix == 'our-story' or template.suffix == 'vectra' %}
+  {% if template.suffix == 'our-story' or template.suffix == 'vectra' or template.suffix == 'experts' or template.suffix == 'associates' or template.suffix == 'interns' or template.suffix == 'careers' or template.suffix == 'faq' or page.handle == 'experts' or page.handle == 'associates' or page.handle == 'interns' or page.handle == 'careers' or page.handle == 'faq' or page.handle == 'our-story' or page.handle == 'about-us' %}
     {{ 'vectra-our-story.css' | asset_url | stylesheet_tag: preload: true }}
     <link rel="stylesheet" href="{{ 'vectra-our-story.css' | asset_url }}" media="all">
   {% endif %}
-  {% if template.suffix == 'solutions' or template.suffix == 'resources' %}
+  {% if template.suffix == 'solutions' or template.suffix == 'resources' or page.handle == 'solutions' or page.handle == 'resources' %}
     {{ 'vectra-solutions.css' | asset_url | stylesheet_tag: preload: true }}
     <link rel="stylesheet" href="{{ 'vectra-solutions.css' | asset_url }}" media="all">
   {% endif %}
-  {% if template.suffix == 'resources' %}
+  {% if template.suffix == 'resources' or page.handle == 'resources' %}
     {{ 'vectra-resources.css' | asset_url | stylesheet_tag: preload: true }}
     <link rel="stylesheet" href="{{ 'vectra-resources.css' | asset_url }}" media="all">
   {% endif %}

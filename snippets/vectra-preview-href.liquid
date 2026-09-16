@@ -4,7 +4,7 @@
   even when the Shopify admin still has the page on Default.
 
   @param {string} url - Original href
-  @param {string} [view] - Template suffix: our-story, solutions, resources, contact-us
+  @param {string} [view] - Template suffix: our-story, solutions, resources, contact-us, experts, associates, interns, careers, faq
   @param {string} [title] - Link label; used to infer view when the nav item points at Home
 {%- enddoc -%}
 {%- liquid
@@ -13,7 +13,7 @@
   assign title_key = title | downcase | strip
 
   if view_name == blank
-    if title_key == 'our story' or title_key == 'our dna' or title_key == 'about vectra'
+    if title_key == 'our story' or title_key == 'our dna' or title_key == 'about vectra' or title_key == 'about us'
       assign view_name = 'our-story'
     elsif title_key == 'solutions' or title_key == 'how we help'
       assign view_name = 'solutions'
@@ -21,17 +21,55 @@
       assign view_name = 'resources'
     elsif title_key == 'contact us' or title_key == 'contact' or title_key == 'talk to an expert'
       assign view_name = 'contact-us'
+    elsif title_key == 'our experts' or title_key == 'experts'
+      assign view_name = 'experts'
+    elsif title_key == 'associates' or title_key == 'our associates'
+      assign view_name = 'associates'
+    elsif title_key == 'our interns' or title_key == 'interns' or title_key == 'internships'
+      assign view_name = 'interns'
+    elsif title_key == 'careers' or title_key == 'join the team'
+      assign view_name = 'careers'
+    elsif title_key == 'faq' or title_key == 'faqs'
+      assign view_name = 'faq'
+    elsif title_key == 'marketplace' or title_key == 'vsuites' or title_key contains 'course'
+      assign view_name = 'marketplace'
     endif
   endif
 
-  if view_name == 'our-story'
-    assign href = pages['our-story'].url | default: '/pages/our-story'
+  if view_name == 'our-story' or view_name == 'about-us'
+    if pages['about-us'].url != blank
+      assign href = pages['about-us'].url
+      assign view_name = 'about-us'
+    elsif pages['our-story'].url != blank
+      assign href = pages['our-story'].url
+      assign view_name = 'our-story'
+    else
+      assign href = '/pages/about-us'
+      assign view_name = 'about-us'
+    endif
   elsif view_name == 'solutions'
     assign href = pages['solutions'].url | default: '/pages/solutions'
   elsif view_name == 'resources'
     assign href = pages['resources'].url | default: '/pages/resources'
   elsif view_name == 'contact-us'
     assign href = pages['contact-us'].url | default: pages['contact'].url | default: '/pages/contact-us'
+  elsif view_name == 'experts'
+    assign href = pages['experts'].url | default: '/pages/experts'
+  elsif view_name == 'associates'
+    assign href = pages['associates'].url | default: '/pages/associates'
+  elsif view_name == 'interns'
+    assign href = pages['interns'].url | default: '/pages/interns'
+  elsif view_name == 'careers'
+    assign href = pages['careers'].url | default: '/pages/careers'
+  elsif view_name == 'faq'
+    assign href = pages['faq'].url | default: '/pages/faq'
+  elsif view_name == 'marketplace'
+    assign href = pages['marketplace'].url | default: '/pages/marketplace'
+  elsif view_name == 'course'
+    assign href = url
+    if href == blank
+      assign href = pages['marketplace'].url | default: '/pages/marketplace'
+    endif
   endif
 
   if href == blank

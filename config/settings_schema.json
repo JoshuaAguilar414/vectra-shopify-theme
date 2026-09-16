@@ -2116,5 +2116,21 @@
         "default": "equal-width-buttons"
       }
     ]
+  },
+  {
+    "name": "VECTRA accessibility",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "European Accessibility Act helpers: skip link, visible focus, reduced-motion video pause, labelled form fields, and opaque menus. Keep this enabled when the site is published."
+      },
+      {
+        "type": "checkbox",
+        "id": "vectra_a11y_enabled",
+        "label": "Enable European accessibility support",
+        "default": true,
+        "info": "Loads contrast, focus, and reduced-motion rules required for the EU accessibility standard."
+      }
+    ]
   }
 ]

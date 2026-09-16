@@ -13,7 +13,13 @@
   assign img_ebook_1 = 'vectra-ebook-1.png' | asset_url
   assign img_ebook_2 = 'vectra-ebook-2.png' | asset_url
   assign img_ebook_3 = 'vectra-ebook-3.png' | asset_url
+  assign img_mail = 'vectra-9a4f80a5b924a881fc96b20219bb1f7c8ca734ab.svg' | asset_url
+  assign img_phone = 'vectra-7c0e54b37d57d95df328b0e4ee1f7b87844a7372.svg' | asset_url
+  assign img_pin = 'vectra-484bca36e3874bd30d1d6dd79807ed0314378e3d.svg' | asset_url
+  assign faq_base = pages['faq'].url | default: '/pages/faq'
 %}
+{% capture faq_href %}{% render 'vectra-preview-href', url: faq_base, view: 'faq' %}{% endcapture %}
+{% assign faq_href = faq_href | strip %}
 {% case module %}
   {% when 'hero' %}
 {% render 'vectra-seo', page_key: 'resources' %}
@@ -159,18 +165,20 @@
   <div class="vh-wrap vh-faq__grid">
     <aside class="vh-contact-card" data-vh-reveal="left">
       <img class="vh-contact-card__icon" src="{{ 'vectra-da137306dcbc6716d83295ef75678ab141a500e1.svg' | asset_url }}" alt="">
-      <p class="vh-contact-card__title">Have another question?</p>
+      <p class="vh-contact-card__title">More questions?</p>
       <p>Find more answers about VECTRA International, how we work, our capabilities, and getting started.</p>
-      <a class="vh-btn vh-btn--white" href="#VectraContactModal" data-vh-contact-open>
-        Talk to an Expert
+      <a class="vh-btn vh-btn--white" href="{{ faq_href }}">
+        More questions?
         <img src="{{ 'vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg' | asset_url }}" alt="">
       </a>
+      {% render 'vectra-contact-details', variant: 'card', img_phone: img_phone, img_mail: img_mail, img_pin: img_pin %}
     </aside>
     <div class="vh-faq__right">
       <div class="vh-faq__glow" aria-hidden="true"></div>
       <div class="vh-accordion">
         <p class="vh-kicker">Our FAQ</p>
         <h2 class="vh-h2">Frequently Asked Questions</h2>
+        <p class="vh-lead">Answers about VECTRA Resources and how to find the right material.</p>
         <div class="vh-acc is-open" data-vh-faq-item>
           <button type="button" data-vh-faq-btn>What are responsible business resources?</button>
           <div class="vh-acc__body">Responsible business resources are insights, guides, evidence, and expert analysis that help organizations understand ESG, supply chain, compliance, risk management, business resilience, and operational resilience issues and decide what action to take.</div>

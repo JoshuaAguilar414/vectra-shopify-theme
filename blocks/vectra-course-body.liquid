@@ -1,0 +1,39 @@
+{% liquid
+  assign key = block.settings.course_key | default: 'auto'
+  if key == 'auto' or key == blank
+    if template.suffix == 'marketplace' or page.handle == 'marketplace'
+      assign key = 'marketplace'
+    else
+      assign key = page.handle
+    endif
+  endif
+  if key == 'marketplace'
+    render 'vectra-course-modules', module: 'catalog', block: block
+  else
+    render 'vectra-course-modules', module: 'detail', course_key: key, block: block
+  endif
+%}
+
+{% schema %}
+{
+  "name": "VECTRA: Course body",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "course_key",
+      "label": "Page",
+      "options": [
+        { "value": "auto", "label": "Use page handle" },
+        { "value": "marketplace", "label": "Marketplace catalog" },
+        { "value": "course-esg-acronyms", "label": "ESG acronyms" },
+        { "value": "course-preventative-measures", "label": "Preventative measures" },
+        { "value": "course-purchasing-practices", "label": "Purchasing practices" },
+        { "value": "course-disability-accommodation", "label": "Disability accommodation" }
+      ],
+      "default": "auto"
+    }
+  ],
+  "presets": [{ "name": "VECTRA: Course body" }]
+}
+{% endschema %}

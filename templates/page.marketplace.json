@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "vectra_course": {
+      "type": "vectra-course-page",
+      "blocks": {
+        "header": {
+          "type": "vectra-header",
+          "settings": { "menu": "vectra-website-mega-menu" }
+        },
+        "body": {
+          "type": "vectra-course-body",
+          "settings": { "course_key": "marketplace" }
+        },
+        "footer": { "type": "vectra-footer", "settings": {} }
+      },
+      "block_order": ["header", "body", "footer"],
+      "settings": { "menu": "vectra-website-mega-menu" }
+    }
+  },
+  "order": ["vectra_course"]
+}

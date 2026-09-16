@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "vectra_people": {
+      "type": "vectra-people-page",
+      "blocks": {
+        "header": {
+          "type": "vectra-header",
+          "settings": { "menu": "vectra-website-mega-menu" }
+        },
+        "body": {
+          "type": "vectra-people-body",
+          "settings": {
+            "page_type": "careers",
+            "jobs_url": "https://vectra-intl.com/job-openings/"
+          }
+        },
+        "footer": { "type": "vectra-footer", "settings": {} }
+      },
+      "block_order": ["header", "body", "footer"],
+      "settings": { "menu": "vectra-website-mega-menu" }
+    }
+  },
+  "order": ["vectra_people"]
+}

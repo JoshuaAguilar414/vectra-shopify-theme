@@ -1,0 +1,145 @@
+{%- doc -%}
+  Course placeholders and marketplace landing until Shopify commerce is live.
+{%- enddoc -%}
+
+{% render 'vectra-assets' %}
+{% liquid
+  assign img_arrow = 'vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg' | asset_url
+  assign img_1 = 'vectra-514da1e5ddd8e93543da62a9818e4183b5547b3a.png' | asset_url
+  assign img_2 = 'vectra-01d26f601c057ccb6b54759c020d48ae5de18cf3.png' | asset_url
+  assign img_3 = 'vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png' | asset_url
+  assign img_4 = 'vectra-ae8b362b8368e8b200e58c921e1c7c274608a975.png' | asset_url
+  assign market_base = pages['marketplace'].url | default: '/pages/marketplace'
+  assign c1 = pages['course-esg-acronyms'].url | default: '/pages/course-esg-acronyms'
+  assign c2 = pages['course-preventative-measures'].url | default: '/pages/course-preventative-measures'
+  assign c3 = pages['course-purchasing-practices'].url | default: '/pages/course-purchasing-practices'
+  assign c4 = pages['course-disability-accommodation'].url | default: '/pages/course-disability-accommodation'
+  assign key = course_key | default: page.handle
+  if module == 'catalog' or key == 'marketplace'
+    assign view = 'catalog'
+  else
+    assign view = 'detail'
+  endif
+%}
+{% capture market_href %}{% render 'vectra-preview-href', url: market_base, view: 'marketplace' %}{% endcapture %}
+{% capture href_1 %}{% render 'vectra-preview-href', url: c1, view: 'course' %}{% endcapture %}
+{% capture href_2 %}{% render 'vectra-preview-href', url: c2, view: 'course' %}{% endcapture %}
+{% capture href_3 %}{% render 'vectra-preview-href', url: c3, view: 'course' %}{% endcapture %}
+{% capture href_4 %}{% render 'vectra-preview-href', url: c4, view: 'course' %}{% endcapture %}
+{% assign market_href = market_href | strip %}
+{% assign href_1 = href_1 | strip %}
+{% assign href_2 = href_2 | strip %}
+{% assign href_3 = href_3 | strip %}
+{% assign href_4 = href_4 | strip %}
+
+{% if view == 'catalog' %}
+<section class="vh-course-land" {{ block.shopify_attributes }}>
+  <div class="vh-wrap">
+    <p class="vh-kicker">Marketplace</p>
+    <h1 class="vh-h2">Courses and capability paths</h1>
+    <p class="vh-lead">Checkout and enrolment are not live on this first release. These landing pages are the real course experience until Shopify commerce is connected. Enquire and we will place you on the right path.</p>
+  </div>
+  <div class="vh-wrap vh-courses vh-course-land__grid">
+    <article class="vh-course">
+      <img src="{{ img_1 }}" alt="">
+      <div class="vh-course__body">
+        <h2>Acronyms Used in ESG Area</h2>
+        <div class="vh-course__meta">
+          <span class="vh-price">Coming to Marketplace</span>
+          <a class="vh-course__cta" href="{{ href_1 }}">View landing page</a>
+        </div>
+      </div>
+    </article>
+    <article class="vh-course">
+      <img src="{{ img_2 }}" alt="">
+      <div class="vh-course__body">
+        <h2>Preventative and Corrective Measures</h2>
+        <div class="vh-course__meta">
+          <span class="vh-price">Coming to Marketplace</span>
+          <a class="vh-course__cta" href="{{ href_2 }}">View landing page</a>
+        </div>
+      </div>
+    </article>
+    <article class="vh-course">
+      <img src="{{ img_3 }}" alt="">
+      <div class="vh-course__body">
+        <h2>Optimizing Purchasing Practices</h2>
+        <div class="vh-course__meta">
+          <span class="vh-price">Coming to Marketplace</span>
+          <a class="vh-course__cta" href="{{ href_3 }}">View landing page</a>
+        </div>
+      </div>
+    </article>
+    <article class="vh-course">
+      <img src="{{ img_4 }}" alt="">
+      <div class="vh-course__body">
+        <h2>Disability Accommodation Training</h2>
+        <div class="vh-course__meta">
+          <span class="vh-price">Coming to Marketplace</span>
+          <a class="vh-course__cta" href="{{ href_4 }}">View landing page</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+{% else %}
+{% liquid
+  assign title = 'Course'
+  assign img = img_1
+  assign summary = ''
+  assign audience = ''
+  assign outcome = ''
+  if key == 'course-preventative-measures'
+    assign title = 'Preventative and Corrective Measures'
+    assign img = img_2
+    assign summary = 'A practical framework for supply chain due diligence: prevent issues before they escalate, and correct findings with a clear owner and evidence trail.'
+    assign audience = 'Procurement, compliance, sustainability, and supplier-engagement leads who sit on audit results and need a next step, not another report.'
+    assign outcome = 'You leave with a dual approach: preventative measures as a proactive shield, and corrective measures as a focused fix for existing gaps.'
+  elsif key == 'course-purchasing-practices'
+    assign title = 'Optimizing Purchasing Practices'
+    assign img = img_3
+    assign summary = 'How buying decisions shape supplier performance, cost, and ESG outcomes — and how to build practices that hold up under scrutiny.'
+    assign audience = 'Buyers, category managers, and responsible-sourcing teams who need purchasing rules that survive contact with real operations.'
+    assign outcome = 'A shared way to brief suppliers, set expectations, and keep commercial pressure from undoing social and environmental commitments.'
+  elsif key == 'course-disability-accommodation'
+    assign title = 'Disability Accommodation Training'
+    assign img = img_4
+    assign summary = 'Practical capability for teams who need to make accommodation part of normal work, not a one-off exception.'
+    assign audience = 'HR, site managers, and operations leads responsible for inclusive workplaces and supplier facilities.'
+    assign outcome = 'Clearer ownership, better conversations with workers and suppliers, and evidence you can stand behind if a requirement is challenged.'
+  else
+    assign title = 'Acronyms Used in ESG Area'
+    assign img = img_1
+    assign summary = 'A shared vocabulary for ESG, due diligence, and supply-chain reporting so teams can act faster and with less confusion.'
+    assign audience = 'Anyone who has to read, write, or defend ESG and due-diligence language across operations, procurement, and reporting.'
+    assign outcome = 'Teams stop talking past each other. Requirements, evidence, and next actions use the same terms.'
+  endif
+%}
+<section class="vh-course-land" {{ block.shopify_attributes }}>
+  <div class="vh-wrap vh-course-land__hero">
+    <p class="vh-kicker">Course landing page</p>
+    <h1 class="vh-h2">{{ title }}</h1>
+    <p class="vh-lead">{{ summary }}</p>
+    <p class="vh-course-land__note">Enrolment and checkout are not enabled on this release. This page is the live course experience until Marketplace commerce is connected.</p>
+    <img src="{{ img }}" alt="{{ title }}">
+  </div>
+  <div class="vh-wrap vh-course-land__grid-copy">
+    <article>
+      <h2>Who it is for</h2>
+      <p>{{ audience }}</p>
+    </article>
+    <article>
+      <h2>What you take away</h2>
+      <p>{{ outcome }}</p>
+    </article>
+  </div>
+  <div class="vh-wrap vh-course-land__actions">
+    <a class="vh-btn vh-btn--green" href="#VectraContactModal" data-vh-contact-open>
+      Enquire about this course
+      <img src="{{ img_arrow }}" alt="">
+    </a>
+    <a class="vh-btn vh-btn--outline" href="{{ market_href }}">Back to Marketplace</a>
+  </div>
+</section>
+{% endif %}

@@ -8,9 +8,14 @@
   const qs = (sel, el = root) => el.querySelector(sel);
   const qsa = (sel, el = root) => [...el.querySelectorAll(sel)];
 
-  qsa('video').forEach((video) => {
+  qsa('[data-vh-video], video').forEach((video) => {
     video.muted = true;
     video.playsInline = true;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      video.removeAttribute('autoplay');
+      video.pause();
+      return;
+    }
     video.play().catch(() => {});
   });
 
@@ -40,7 +45,7 @@
     const startLeaders = () => {
       window.clearInterval(leaderTimer);
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || count < 2) return;
-      leaderTimer = window.setInterval(() => go(index + 1), 5000);
+      leaderTimer = window.setInterval(() => go(index + 1), 7000);
     };
     startLeaders();
   }

@@ -13,9 +13,17 @@
   --vh-fs-nav: 14px;
   --vh-fs-btn: 14px;
   --vh-fs-stat: clamp(28px, 3.2vw, 40px);
-  overflow-x: clip;
+  overflow-x: visible;
   max-width: 100%;
   letter-spacing: -0.02em;
+  text-transform: none;
+  font-variant: normal;
+}
+
+.vectra-home > section,
+.vectra-home > footer,
+.vectra-home .vh-footer {
+  max-width: 100%;
 }
 
 .vectra-home img {
@@ -51,6 +59,30 @@
 .vectra-home .vh-form .vh-btn,
 .vectra-sol .vh-form .vh-btn {
   font-size: var(--vh-fs-btn);
+}
+
+.vectra-home h1,
+.vectra-home h2,
+.vectra-home h3,
+.vectra-home h4,
+.vectra-home .vh-h2,
+.vectra-home .vh-menu a,
+.vectra-home .vh-mega a,
+.vectra-home .vh-account__menu,
+.vectra-home .vh-locale__panel,
+.vectra-home .vh-form input,
+.vectra-home .vh-form textarea,
+.vectra-home .vh-form select,
+.vectra-home .vh-contact-list,
+.vectra-home .vh-footer a,
+.vectra-home .vh-footer p {
+  text-transform: none;
+}
+
+.vectra-home .vh-kicker--arrows,
+.vectra-home .vh-page-hero__kicker,
+.vectra-home .vh-accordion .vh-kicker {
+  text-transform: uppercase;
 }
 
 .vectra-home h1,
@@ -98,7 +130,6 @@
 .vectra-home .vh-impact h2,
 .vectra-home .vh-portal h2,
 .vectra-home .vh-blog .vh-h2,
-.vectra-home .vh-accordion .vh-h2,
 .vectra-home .vh-careers .vh-h2,
 .vectra-home .vh-form h3,
 .vectra-story .vs-ceo__copy h2,
@@ -121,7 +152,6 @@
 }
 
 .vectra-home h3,
-.vectra-home .vh-article h3,
 .vectra-home .vh-case h3,
 .vectra-home .vh-course h3,
 .vectra-home .vh-why__item h3,
@@ -191,8 +221,6 @@
 .vectra-sol .vsol-step p,
 .vectra-res .vres-prose p,
 .vectra-res .vres-search input,
-.vectra-home .vh-recent__list time,
-.vectra-home .vh-recent__list strong,
 .vectra-home .vh-tags__list button {
   font-size: var(--vh-fs-body);
   line-height: 1.5;
@@ -216,16 +244,29 @@
 
 .vectra-home .vh-contact-card__title,
 .vectra-home .vh-solutions__copy h3,
-.vectra-home .vh-accordion .vh-h2,
 .vectra-sol .vh-form h3 {
   font-size: var(--vh-fs-section) !important;
   line-height: 1.3 !important;
   letter-spacing: -0.03em !important;
 }
 
+.vectra-home .vh-faq .vh-accordion .vh-h2 {
+  font-size: clamp(28px, 2.8vw, 42px) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.03em !important;
+  color: #092543 !important;
+  font-weight: 700 !important;
+}
+
+.vectra-home .vh-faq .vh-kicker {
+  width: auto !important;
+  height: auto !important;
+  font-size: 14px !important;
+  color: #54bd01 !important;
+}
+
 .vectra-home .vh-course h3,
 .vectra-home .vh-topic-card h3,
-.vectra-home .vh-article h3,
 .vectra-home .vh-price,
 .vectra-sol .vsol-card__title,
 .vectra-sol .vsol-custom-card {
@@ -235,14 +276,41 @@
 }
 
 .vectra-home .vh-footer h3,
-.vectra-home .vh-footer__subscribe,
-.vectra-home .vh-contact-list strong,
-.vectra-home .vh-topic-card__label,
-.vectra-sol .vsol-card__num,
-.vectra-home .vh-acc button {
+.vectra-home .vh-footer__subscribe {
   font-size: var(--vh-fs-nav) !important;
   line-height: 1.3 !important;
   letter-spacing: -0.02em !important;
+}
+
+.vectra-home .vh-footer .vh-footer__links,
+.vectra-home .vh-footer .vh-footer__col--wide .vh-footer__links {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: 100%;
+}
+
+.vectra-home .vh-footer .vh-footer__links a,
+.vectra-home .vh-footer .vh-footer__links button {
+  display: block;
+  width: 100%;
+  white-space: normal;
+}
+
+.vectra-home .vh-footer .vh-news {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+.vectra-home .vh-footer .vh-news input,
+.vectra-home .vh-footer .vh-news button {
+  height: 32px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
 }
 
 .vectra-story .vs-join h2 {
@@ -302,10 +370,6 @@
     width: 100%;
     height: auto;
     min-height: 0;
-  }
-
-  .vectra-home .vh-faq__grid {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -394,4 +458,49 @@
     gap: 10px;
     font-size: 12px;
   }
+}
+
+.vectra-home .vh-article h3 {
+  font-size: 26px !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.vectra-home .vh-article time {
+  font-size: 11px !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0.04em !important;
+  font-weight: 400 !important;
+}
+
+.vectra-home .vh-recent__list strong {
+  font-size: 20px !important;
+  line-height: 1.25 !important;
+}
+
+.vectra-home .vh-recent__list time {
+  font-size: 11px !important;
+  line-height: 1.4 !important;
+  font-weight: 400 !important;
+}
+
+.vectra-home .vh-cases__cta {
+  font-size: 22px !important;
+  line-height: 1.2 !important;
+  font-weight: 700 !important;
+}
+
+.vectra-home .vh-reviews {
+  font-size: 20px !important;
+  font-weight: 600 !important;
+}
+
+.vectra-home .vh-read,
+.vectra-home .vh-course__cta,
+.vectra-home .vh-market__head .vh-btn,
+.vectra-home .vh-solutions__cta .vh-btn,
+.vectra-home .vh-blog__more .vh-btn,
+.vectra-home .vh-course-land__actions .vh-btn {
+  font-size: 16px !important;
+  font-weight: 700 !important;
 }

@@ -62,13 +62,13 @@ body:has(.vectra-res) {
 .vectra-res .vres-hero__mark {
   position: absolute;
   left: 50%;
-  top: calc(6px * var(--vres-s));
-  width: calc(901px * var(--vres-s));
-  height: calc(909px * var(--vres-s));
-  max-width: none;
+  top: 8%;
+  width: min(420px, 70vw);
+  height: auto;
+  max-width: 70vw;
   transform: translateX(-50%);
   object-fit: contain;
-  opacity: 0.2;
+  opacity: 0.14;
   pointer-events: none;
   z-index: 0;
 }
@@ -78,7 +78,7 @@ body:has(.vectra-res) {
   z-index: 1;
   width: min(calc(1221px * var(--vres-s)), calc(100% - 32px));
   margin: 0 auto;
-  padding-top: calc(352px * var(--vres-s));
+  padding-top: clamp(96px, 14vw, 160px);
   text-align: center;
 }
 

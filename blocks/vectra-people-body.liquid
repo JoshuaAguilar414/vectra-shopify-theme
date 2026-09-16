@@ -1,0 +1,42 @@
+{% render 'vectra-people-modules', module: block.settings.page_type, block: block %}
+
+{% schema %}
+{
+  "name": "VECTRA: People page",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "page_type",
+      "label": "Page",
+      "options": [
+        { "value": "experts", "label": "Experts" },
+        { "value": "associates", "label": "Associates" },
+        { "value": "interns", "label": "Interns" },
+        { "value": "careers", "label": "Careers" },
+        { "value": "faq", "label": "FAQ" }
+      ],
+      "default": "experts"
+    },
+    {
+      "type": "url",
+      "id": "jobs_url",
+      "label": "External careers / jobs URL",
+      "info": "Used on the Careers page until a Shopify jobs board is available."
+    },
+    { "type": "text", "id": "name_1", "label": "Profile 1 name" },
+    { "type": "textarea", "id": "bio_1", "label": "Profile 1 bio" },
+    { "type": "image_picker", "id": "image_1", "label": "Profile 1 photo" },
+    { "type": "text", "id": "name_2", "label": "Profile 2 name" },
+    { "type": "textarea", "id": "bio_2", "label": "Profile 2 bio" },
+    { "type": "image_picker", "id": "image_2", "label": "Profile 2 photo" },
+    { "type": "text", "id": "name_3", "label": "Profile 3 name" },
+    { "type": "textarea", "id": "bio_3", "label": "Profile 3 bio" },
+    { "type": "image_picker", "id": "image_3", "label": "Profile 3 photo" },
+    { "type": "text", "id": "name_4", "label": "Profile 4 name" },
+    { "type": "textarea", "id": "bio_4", "label": "Profile 4 bio" },
+    { "type": "image_picker", "id": "image_4", "label": "Profile 4 photo" }
+  ],
+  "presets": [{ "name": "VECTRA: People page" }]
+}
+{% endschema %}

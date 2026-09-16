@@ -1,4 +1,16 @@
 (() => {
+  const footerSlots = [...document.querySelectorAll('[data-vh-footer]')];
+  if (footerSlots.length) {
+    fetch('preview-footer.html')
+      .then((res) => (res.ok ? res.text() : Promise.reject(res.status)))
+      .then((html) => {
+        footerSlots.forEach((slot) => {
+          slot.outerHTML = html;
+        });
+      })
+      .catch(() => {});
+  }
+
   if (window.__vectraHomeInit) return;
   window.__vectraHomeInit = true;
 
@@ -83,6 +95,23 @@
     });
   });
 
+  const closeHeaderPopovers = (keep) => {
+    document.querySelectorAll('[data-vh-account]').forEach((account) => {
+      if (keep && account.contains(keep)) return;
+      const toggle = account.querySelector('[data-vh-account-toggle]');
+      const menu = account.querySelector('[data-vh-account-menu]');
+      if (menu) menu.hidden = true;
+      toggle?.setAttribute('aria-expanded', 'false');
+    });
+    document.querySelectorAll('.vh-locale__native').forEach((locale) => {
+      if (keep && locale.contains(keep)) return;
+      const button = locale.querySelector('.vh-locale__summary');
+      const panel = locale.querySelector('.vh-locale__panel');
+      panel?.setAttribute('hidden', '');
+      button?.setAttribute('aria-expanded', 'false');
+    });
+  };
+
   document.querySelectorAll('[data-vh-account]').forEach((account) => {
     const toggle = account.querySelector('[data-vh-account-toggle]');
     const menu = account.querySelector('[data-vh-account-menu]');
@@ -95,6 +124,7 @@
       event.preventDefault();
       event.stopPropagation();
       const open = menu.hidden;
+      closeHeaderPopovers(account);
       menu.hidden = !open;
       toggle.setAttribute('aria-expanded', String(open));
     });
@@ -115,6 +145,7 @@
       if (customElements.get('dropdown-localization-component')) return;
       event.preventDefault();
       const willOpen = panel.hasAttribute('hidden');
+      closeHeaderPopovers(locale);
       panel.toggleAttribute('hidden', !willOpen);
       button.setAttribute('aria-expanded', String(willOpen));
     });
@@ -136,6 +167,7 @@
     if (slides.length < 2) return;
     let index = Math.max(0, slides.findIndex((slide) => slide.classList.contains('is-active')));
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const HERO_INTERVAL_MS = 7000;
     let timer = 0;
     const go = (next) => {
       index = (next + slides.length) % slides.length;
@@ -151,7 +183,7 @@
     const start = () => {
       if (reduceMotion) return;
       stop();
-      timer = window.setInterval(() => go(index + 1), 5000);
+      timer = window.setInterval(() => go(index + 1), HERO_INTERVAL_MS);
     };
     qs('[data-vh-prev]', carousel)?.addEventListener('click', () => {
       go(index - 1);
@@ -268,7 +300,7 @@
       solTimer = window.setInterval(() => {
         const shots = qsa('[data-vh-sol-item]', gallery || solutions);
         if (shots[1]) activate(shots[1]);
-      }, 5000);
+      }, 7000);
     };
     startSol();
   }

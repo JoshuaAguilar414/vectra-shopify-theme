@@ -14,6 +14,9 @@
   assign img_arrow_send = 'vectra-54db3b2d66b85bf4c6ca264ed1363beb759e512d.svg' | asset_url
   assign img_arrow = 'vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg' | asset_url
   assign img_chat = 'vectra-da137306dcbc6716d83295ef75678ab141a500e1.svg' | asset_url
+  assign img_mail = 'vectra-9a4f80a5b924a881fc96b20219bb1f7c8ca734ab.svg' | asset_url
+  assign img_phone = 'vectra-7c0e54b37d57d95df328b0e4ee1f7b87844a7372.svg' | asset_url
+  assign img_pin = 'vectra-484bca36e3874bd30d1d6dd79807ed0314378e3d.svg' | asset_url
   assign img_social = 'vectra-8edaf1fb1163eb6b857092f513083a6fc9fdc561.svg' | asset_url
   assign img_glow = 'vectra-81e405ef1e5763ccbc49a2e23ee2f5ec21868308.svg' | asset_url
   assign img_ceo = 'vectra-1323aaa74cde58ad7343be0a5de5bcef13017f6c.png' | asset_url
@@ -36,22 +39,33 @@
   assign img_face_1 = 'vectra-3d90b6de863f4a0f6cfb9e8f77617b9ea7caeff1.png' | asset_url
   assign img_face_2 = 'vectra-c543bcdfc727d87f2710b5345cea3b7eb76daab1.png' | asset_url
   assign img_face_3 = 'vectra-26b8a07235b9d48b395528564d6124a59d29f6e3.png' | asset_url
-  assign img_face_4 = 'vectra-8d90f000de5e274a0c256afc80b101856c4f87b8.svg' | asset_url
+  assign img_face_4 = 'vectra-portrait-placeholder.png' | asset_url
   assign vid_hero = 'vectra-story-hero.mp4' | asset_url
-  assign vid_who = 'vectra-story-who.mp4' | asset_url
   assign vid_map = 'vectra-story-map.mp4' | asset_url
   assign home = routes.root_url
-  assign story = pages['our-story'].url | default: '/pages/our-story'
+  assign story = pages['about-us'].url | default: pages['our-story'].url | default: '/pages/about-us'
+  assign experts_url = pages['experts'].url | default: '/pages/experts'
+  assign associates_url = pages['associates'].url | default: '/pages/associates'
+  assign interns_url = pages['interns'].url | default: '/pages/interns'
+  assign careers_url = pages['careers'].url | default: '/pages/careers'
+  assign faq_url = pages['faq'].url | default: '/pages/faq'
   assign mv_mission = 'We enable positive business impact by partnering with organizations to transform end-to-end operational complexity into resilient, well-governed performance through expert teams, and human led state of the art technology—creating measurable value for people, operations, and sustainable growth.'
   assign mv_vision = 'To be the trusted partner in building operational control and resilience and achieving sustainable competitive advantage by transforming business complexity into strategic clarity, human-centered AI capability, and measurable value.'
 %}
+{% capture faq_href %}{% render 'vectra-preview-href', url: faq_url, view: 'faq' %}{% endcapture %}
+{% capture experts_href %}{% render 'vectra-preview-href', url: experts_url, view: 'experts' %}{% endcapture %}
+{% capture associates_href %}{% render 'vectra-preview-href', url: associates_url, view: 'associates' %}{% endcapture %}
+{% capture interns_href %}{% render 'vectra-preview-href', url: interns_url, view: 'interns' %}{% endcapture %}
+{% assign faq_href = faq_href | strip %}
+{% assign experts_href = experts_href | strip %}
+{% assign associates_href = associates_href | strip %}
+{% assign interns_href = interns_href | strip %}
 {% case module %}
   {% when 'hero' %}
 {% render 'vectra-seo', page_key: 'about' %}
 <section class="vs-hero" aria-label="Our VECTRA Story" {{ block.shopify_attributes }}>
-    <video class="vs-hero__video" autoplay muted loop playsinline>
+    <video class="vs-hero__video" muted loop playsinline poster="{{ img_ceo }}" data-vh-video>
       <source src="{{ vid_hero }}" type="video/mp4">
-      <source src="https://mind-heart-53521212.figma.site/_videos/v1/cf35e8be90772b3ab01cf2fb07d3d88607a4d291" type="video/mp4">
     </video>
     <img class="vs-hero__glow" src="{{ img_glow }}" alt="">
     <div class="vs-hero__shade"></div>
@@ -102,12 +116,16 @@
         <p class="vs-who__kicker">The VECTRA Story</p>
         <h2>Enabling Positive Business Impact</h2>
       </div>
-      <div class="vs-who__media">
-        <video autoplay muted loop playsinline>
-          <source src="{{ vid_who }}" type="video/mp4">
-          <source src="https://mind-heart-53521212.figma.site/_videos/v1/9d111e59b40b7ea7e50837a852bb6a4b1c53a99c" type="video/mp4">
-        </video>
-      </div>
+      <figure class="vs-who__media">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/C4JHZ69N9Sg?rel=0"
+          title="Patrick Neyts, CEO of VECTRA International: How to manage supply chain risks and build resilience"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+        <figcaption class="vs-who__caption">Temporary company film: Patrick Neyts on supply-chain risk and resilience, used while a new VECTRA film is produced.</figcaption>
+      </figure>
     </section>
 
     <section class="vs-mv">
@@ -288,8 +306,42 @@
           <img src="{{ img_face_3 }}" alt="">
           <img src="{{ img_face_4 }}" alt="">
         </div>
-        <a class="vs-cta-btn" href="mailto:info@vectra-intl.com" data-vh-reveal="scale">
+        <a class="vs-cta-btn" href="{{ experts_href }}" data-vh-reveal="scale">
           Meet All Experts
+          <img src="{{ img_arrow_btn }}" alt="">
+        </a>
+      </div>
+    </section>
+
+    <section class="vs-experts vs-experts--teaser" id="associates">
+      <h2>Our Associates</h2>
+      <p class="vs-experts__intro">Associates are the local practitioners we build around the work. Named portraits and regional profiles live on the Associates page so this story page stays about VECTRA, not a second people grid.</p>
+      <div class="vs-experts__more">
+        <div class="vs-faces" data-vh-reveal="fade">
+          <img src="{{ img_face_1 }}" alt="">
+          <img src="{{ img_face_2 }}" alt="">
+          <img src="{{ img_face_3 }}" alt="">
+          <img src="{{ img_face_4 }}" alt="">
+        </div>
+        <a class="vs-cta-btn" href="{{ associates_href }}" data-vh-reveal="scale">
+          Meet our associates
+          <img src="{{ img_arrow_btn }}" alt="">
+        </a>
+      </div>
+    </section>
+
+    <section class="vs-experts vs-experts--teaser" id="interns">
+      <h2>Our Interns</h2>
+      <p class="vs-experts__intro">Internships use the same specialist profile as experts and associates. Open the Interns page for the roles and how to apply.</p>
+      <div class="vs-experts__more">
+        <div class="vs-faces" data-vh-reveal="fade">
+          <img src="{{ img_face_1 }}" alt="">
+          <img src="{{ img_face_2 }}" alt="">
+          <img src="{{ img_face_3 }}" alt="">
+          <img src="{{ img_face_4 }}" alt="">
+        </div>
+        <a class="vs-cta-btn" href="{{ interns_href }}" data-vh-reveal="scale">
+          Meet our interns
           <img src="{{ img_arrow_btn }}" alt="">
         </a>
       </div>
@@ -299,9 +351,8 @@
       <h2>The People Behind VECTRA, Across the World</h2>
       <p>A supplier issue in Eastern Africa and a reporting problem in Brussels do not need the same person. VECTRA International’s associates and experts bring local context and specialist experience across markets and industries so we build the right team around the work, instead of pushing every problem through the same generalist lens.</p>
       <div class="vs-people__map">
-        <video autoplay muted loop playsinline>
+        <video muted loop playsinline poster="{{ img_ceo }}" data-vh-video>
           <source src="{{ vid_map }}" type="video/mp4">
-          <source src="https://mind-heart-53521212.figma.site/_videos/v1/70bd9d70447180d47d644737320fb4e353597bd3" type="video/mp4">
         </video>
       </div>
     </section>
@@ -310,18 +361,20 @@
       <div class="vh-wrap vh-faq__grid">
         <aside class="vh-contact-card" data-vh-reveal="left">
           <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
-          <p class="vh-contact-card__title">Have another question?</p>
+          <p class="vh-contact-card__title">More questions?</p>
           <p>Find more answers about VECTRA International, how we work, our capabilities, and getting started.</p>
-          <a class="vh-btn vh-btn--white" href="#VectraContactModal" data-vh-contact-open>
-            Talk to an Expert
+          <a class="vh-btn vh-btn--white" href="{{ faq_href }}">
+            More questions?
             <img src="{{ img_arrow }}" alt="">
           </a>
+          {% render 'vectra-contact-details', variant: 'card', img_phone: img_phone, img_mail: img_mail, img_pin: img_pin %}
         </aside>
         <div class="vh-faq__right">
           <div class="vh-faq__glow" aria-hidden="true"></div>
           <div class="vh-accordion">
             <p class="vh-kicker">Our FAQ</p>
             <h2 class="vh-h2">Frequently Asked Questions</h2>
+            <p class="vh-lead">Answers about who we are, how we work, and where we operate.</p>
             <div class="vh-acc is-open" data-vh-faq-item>
               <button type="button" data-vh-faq-btn>Who is VECTRA International?</button>
               <div class="vh-acc__body">VECTRA International is a business resilience and operational capability-building partner that helps organizations manage ESG requirements, supplier risk, and operational complexity through expert teams and practical, technology-enabled delivery.</div>
@@ -357,7 +410,7 @@
         <h2>Bring What Only You Can Contribute</h2>
         <p>We value people who take ownership, stay curious, challenge ideas respectfully, and care whether the work actually changes something. You will work with colleagues and specialists across markets, disciplines, and time zones.</p>
       </div>
-      <a class="vs-cta-btn" href="mailto:info@vectra-intl.com">
+      <a class="vs-cta-btn" href="{{ careers_url }}">
         View Open Positions
         <img src="{{ img_arrow_send }}" alt="">
       </a>
