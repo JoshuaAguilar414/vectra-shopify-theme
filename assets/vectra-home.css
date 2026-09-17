@@ -92,9 +92,9 @@
   color: var(--vh-white);
   border-radius: 15px;
   padding: 16px 28px;
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: -1.25px;
+  letter-spacing: -0.04em;
   box-shadow: 0 0 25px 0 rgba(84, 189, 1, 0.6);
 }
 
@@ -105,10 +105,10 @@
 
 .vh-btn--rect {
   border-radius: 15px;
-  padding: 18px 32px;
-  font-size: 25px;
+  padding: 16px 28px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: -1.25px;
+  letter-spacing: -0.04em;
 }
 
 .vh-btn--green img {
@@ -119,8 +119,8 @@
   background: var(--vh-white);
   color: var(--vh-navy);
   border-radius: 999px;
-  padding: 12px 22px;
-  font-size: 14px;
+  padding: 14px 24px;
+  font-size: 18px;
 }
 
 .vh-btn--outline {
@@ -128,10 +128,10 @@
   color: var(--vh-navy);
   border: 1px solid rgba(9, 37, 67, 0.18);
   border-radius: 10px;
-  padding: 10px 16px;
-  font-size: 14px;
+  padding: 14px 24px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: -0.7px;
+  letter-spacing: -0.04em;
 }
 
 .vh-btn--outline:hover {
@@ -266,14 +266,15 @@
 .vh-nav {
   position: relative;
   z-index: 40;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   gap: 0;
   width: 100%;
   margin: 0;
   height: 81.31px;
   min-height: 81px;
-  padding: 0 18px 0 0;
+  padding: 0 22px;
   border-radius: 15px;
   background: transparent;
   border: 0;
@@ -322,7 +323,8 @@
   display: flex;
   align-items: center;
   flex: none;
-  margin-left: 7.66vw;
+  margin-left: 0;
+  justify-self: start;
 }
 
 .vectra-home .vh-logo img,
@@ -337,10 +339,11 @@
 .vh-menu {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: clamp(28px, 4.2vw, 80px);
-  flex: 1;
-  margin-left: 11.67vw;
+  flex: none;
+  margin-left: 0;
+  justify-self: center;
   font-size: 16px;
   font-weight: 500;
   letter-spacing: -0.05em;
@@ -386,11 +389,13 @@
 .vh-nav-end {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 22px;
-  margin-left: auto;
-  padding-right: 22px;
+  margin-left: 0;
+  padding-right: 0;
   height: 100%;
   flex: none;
+  justify-self: end;
 }
 
 .vh-menu__item.has-children > a,
@@ -826,10 +831,10 @@
   border-radius: 15px;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: -1.25px;
-  line-height: 1;
+  letter-spacing: -0.04em;
+  line-height: 1.25;
   text-align: center;
   text-transform: none;
   color: #ffffff;
@@ -899,7 +904,7 @@
   margin: 0 auto;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
-  font-size: clamp(28px, 4.2vw, 55px);
+  font-size: clamp(24px, 2.6vw, 32px);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.03em;
@@ -1027,9 +1032,9 @@
   border-radius: 13px;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 25px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
   letter-spacing: 0;
   text-transform: none;
   color: #ffffff;
@@ -1072,10 +1077,12 @@
 }
 
 .vh-why__item img {
-  width: 58px;
-  height: 57px;
+  width: 72px;
+  height: 72px;
   object-fit: contain;
-  margin: 0 0 43px;
+  object-position: center;
+  background: transparent;
+  margin: 0 0 28px;
 }
 
 .vh-why__item h3 {
@@ -1354,14 +1361,18 @@
 }
 
 .vh-solutions__copy .vh-btn {
-  width: min(368px, 100%);
+  width: 100%;
+  max-width: 100%;
   height: auto;
   min-height: 52px;
-  padding: 0 16px;
+  padding: 14px 18px;
   border-radius: 15px;
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
+  line-height: 1.25;
+  white-space: normal;
+  text-align: center;
   text-transform: none;
   box-shadow: none;
   filter: none;
@@ -1460,13 +1471,17 @@
 }
 
 .vh-solutions__cta .vh-btn {
-  width: 368px;
-  height: 76px;
-  padding: 0 16px;
+  width: auto;
+  max-width: 100%;
+  min-width: min(280px, 100%);
+  height: auto;
+  min-height: 52px;
+  padding: 16px 28px;
   border-radius: 15px;
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
+  line-height: 1.25;
   text-transform: none;
   box-shadow: none;
   filter: drop-shadow(0px 4px 34.8px #54bd01);
@@ -1698,14 +1713,15 @@
   justify-content: center;
   width: auto;
   min-width: 168px;
-  height: 44px;
-  padding: 0 16px;
+  height: auto;
+  min-height: 44px;
+  padding: 10px 16px;
   background: #ffffff;
   border: 1px solid transparent;
   border-radius: 5px;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   line-height: 120%;
   letter-spacing: -0.03em;
@@ -2160,13 +2176,14 @@
 .vh-cases__cta {
   width: min(520px, 100%);
   height: auto;
-  min-height: 72px;
+  min-height: 52px;
   margin: 48px auto 0;
-  padding: 20px 36px;
+  padding: 16px 28px;
   border-radius: 40px;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
+  line-height: 1.25;
   text-transform: none;
   box-shadow: 0 0 28px rgba(84, 189, 1, 0.5);
   color: #ffffff;
@@ -2273,25 +2290,25 @@
   max-width: 100%;
   margin: 8px 0 0;
   font-family: 'Poppins', sans-serif;
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.25;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
   color: #000000;
 }
 
 .vh-read {
   display: inline-block;
-  margin-top: 30px;
-  padding-top: 30px;
+  margin-top: 16px;
+  padding-top: 14px;
   border-top: 1px solid rgba(0, 0, 0, 0.3);
   width: 100%;
   color: #000000;
   font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 25px;
-  letter-spacing: -0.03em;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
 }
 
 .vh-blog__more {
@@ -2299,13 +2316,17 @@
 }
 
 .vh-blog__more .vh-btn {
-  width: 368px;
-  height: 76px;
-  padding: 0 16px;
+  width: auto;
+  max-width: 100%;
+  min-width: min(280px, 100%);
+  height: auto;
+  min-height: 52px;
+  padding: 16px 28px;
   border-radius: 15px;
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
+  line-height: 1.25;
   text-transform: none;
   box-shadow: none;
   color: #ffffff;
@@ -2394,14 +2415,14 @@
   height: auto;
   min-height: 44px;
   margin: 24px auto 0;
-  padding: 10px 22px;
+  padding: 12px 24px;
   align-self: center;
   background: #ffffff;
   color: #54bd01;
   border-radius: 999px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   box-shadow: none;
 }
 
@@ -2873,10 +2894,10 @@
   background: #54bd01;
   border: 3px solid #ffffff;
   border-radius: 13px;
-  padding: 20px 40px;
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -1.1px;
+  padding: 16px 28px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
   text-transform: none;
   color: #ffffff;
   box-shadow: none;
@@ -2942,14 +2963,18 @@
 }
 
 .vh-careers__cta {
-  width: 433px;
-  height: 70px;
+  width: auto;
+  max-width: 100%;
+  min-width: min(280px, 100%);
+  height: auto;
+  min-height: 52px;
   margin-top: 66px;
-  padding: 0 24px;
+  padding: 16px 28px;
   border-radius: 34px;
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
+  line-height: 1.25;
   text-transform: none;
   box-shadow: none;
   color: #ffffff;
@@ -3586,7 +3611,17 @@ body:has(.vectra-home) #MainContent {
   }
 
   .vh-nav {
+    display: flex;
     position: relative;
+    padding: 0 12px;
+  }
+
+  .vh-logo {
+    margin-left: 4px;
+  }
+
+  .vh-nav-end {
+    margin-left: auto;
   }
 
   .vh-trust__row,
@@ -3786,9 +3821,9 @@ body:has(.vectra-home) #MainContent {
   .vh-cases__cta {
     width: min(520px, 100%);
     height: auto;
-    min-height: 72px;
-    padding: 18px 20px;
-    font-size: 20px;
+    min-height: 52px;
+    padding: 16px 20px;
+    font-size: 18px;
   }
 
   .vh-faq {
@@ -4834,9 +4869,9 @@ body.vh-contact-open .page-wrapper {
 }
 
 .vh-course-land__actions .vh-btn {
-  min-height: 48px;
-  padding: 12px 24px;
-  font-size: 16px;
+  min-height: 52px;
+  padding: 16px 28px;
+  font-size: 18px;
   font-weight: 700;
 }
 

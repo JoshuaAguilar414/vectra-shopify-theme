@@ -11,7 +11,7 @@
   --vh-fs-body: 14px;
   --vh-fs-kicker: 12px;
   --vh-fs-nav: 14px;
-  --vh-fs-btn: 14px;
+  --vh-fs-btn: 18px;
   --vh-fs-stat: clamp(28px, 3.2vw, 40px);
   overflow-x: visible;
   max-width: 100%;
@@ -127,7 +127,6 @@
 .vectra-home .vh-esg__copy h2,
 .vectra-home .vh-cases h2,
 .vectra-home .vh-solutions__copy h3,
-.vectra-home .vh-impact h2,
 .vectra-home .vh-portal h2,
 .vectra-home .vh-blog .vh-h2,
 .vectra-home .vh-careers .vh-h2,
@@ -148,6 +147,12 @@
 .vectra-res .vres-follow h3 {
   font-size: var(--vh-fs-title) !important;
   line-height: 1.25 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.vectra-home .vh-impact h2 {
+  font-size: clamp(24px, 2.6vw, 32px) !important;
+  line-height: 1.2 !important;
   letter-spacing: -0.03em !important;
 }
 
@@ -327,7 +332,7 @@
 }
 
 .vectra-story .vs-join .vs-cta-btn {
-  font-size: var(--vh-fs-btn) !important;
+  font-size: 18px !important;
 }
 
 .vectra-home .vh-searchbar input,
@@ -461,9 +466,16 @@
 }
 
 .vectra-home .vh-article h3 {
-  font-size: 26px !important;
-  line-height: 1.25 !important;
-  letter-spacing: -0.03em !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.vectra-home .vh-article .vh-read {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
 }
 
 .vectra-home .vh-article time {
@@ -484,23 +496,35 @@
   font-weight: 400 !important;
 }
 
-.vectra-home .vh-cases__cta {
-  font-size: 22px !important;
-  line-height: 1.2 !important;
-  font-weight: 700 !important;
-}
-
 .vectra-home .vh-reviews {
   font-size: 20px !important;
   font-weight: 600 !important;
 }
 
-.vectra-home .vh-read,
+.vectra-home .vh-btn--white,
+.vectra-home .vh-btn--outline,
+.vectra-home .vh-contact-card .vh-btn--white,
 .vectra-home .vh-course__cta,
 .vectra-home .vh-market__head .vh-btn,
+.vectra-home .vh-solutions__copy .vh-btn,
 .vectra-home .vh-solutions__cta .vh-btn,
 .vectra-home .vh-blog__more .vh-btn,
-.vectra-home .vh-course-land__actions .vh-btn {
-  font-size: 16px !important;
+.vectra-home .vh-course-land__actions .vh-btn,
+.vectra-home .vh-trust .vh-btn,
+.vectra-home .vh-trust .vh-btn--green,
+.vectra-home .vh-trust .vh-btn--rect,
+.vectra-home .vh-cases__cta,
+.vectra-home .vh-careers__cta,
+.vectra-home .vh-form .vh-btn,
+.vectra-home .vh-btn--green,
+.vectra-home .vh-btn--rect,
+.vectra-home .vh-why__copy .vh-btn,
+.vectra-story .vs-cta-btn {
+  font-size: 18px !important;
   font-weight: 700 !important;
+  line-height: 1.25 !important;
+}
+
+.vectra-home .vh-solutions__copy .vh-btn {
+  white-space: normal !important;
 }

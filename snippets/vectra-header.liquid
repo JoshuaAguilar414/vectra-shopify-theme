@@ -172,63 +172,20 @@
     </a>
 
     <div class="vh-menu">
-      {% if mega != blank and mega.links.size > 0 %}
-        {% for link in mega.links %}
-          {% render 'vectra-mega-item', link: link, mode: 'desktop' %}
-        {% endfor %}
-      {% else %}
-        {% comment %} Fallback matching VECTRA Website Mega Menu (handle: vectra-website-mega-menu) {% endcomment %}
-        <div class="vh-menu__item has-children" data-vh-mega-item>
-          <div class="vh-menu__anchor">
-            <a href="{{ story }}" aria-haspopup="true" aria-expanded="false">About Us</a>
-            <div class="vh-mega vh-mega--list vh-dropdown" role="menu">
-              <ul class="vh-mega__list">
-                <li><a href="{{ story }}" role="menuitem">Our Story</a></li>
-                <li><a href="{{ story }}#leadership" role="menuitem">Our Leadership Team</a></li>
-                <li><a href="{{ experts }}" role="menuitem">Our Experts</a></li>
-                <li><a href="{{ associates }}" role="menuitem">Associates</a></li>
-                <li><a href="{{ interns }}" role="menuitem">Our Interns</a></li>
-                <li><a href="{{ careers }}" role="menuitem">Careers</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="vh-menu__item has-children" data-vh-mega-item>
-          <div class="vh-menu__anchor">
-            <a href="{{ solutions }}" aria-haspopup="true" aria-expanded="false">How We Help</a>
-            <div class="vh-mega vh-mega--list vh-dropdown" role="menu">
-              <ul class="vh-mega__list">
-                <li><a href="{{ solutions }}" role="menuitem">Solutions</a></li>
-                <li><a href="{{ solutions }}#services" role="menuitem">Services</a></li>
-                <li><a href="{{ marketplace }}" role="menuitem">VSuites</a></li>
-                <li><a href="{{ home }}#why-vectra" role="menuitem">Why Partner With Us</a></li>
-                <li><a href="{{ solutions }}#custom" role="menuitem">Customized Solutions</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="vh-menu__item">
-          <a href="{{ marketplace }}">Marketplace</a>
-        </div>
-        <div class="vh-menu__item has-children" data-vh-mega-item>
-          <div class="vh-menu__anchor">
-            <a href="{{ resources }}" aria-haspopup="true" aria-expanded="false">Resources</a>
-            <div class="vh-mega vh-mega--list vh-dropdown" role="menu">
-              <ul class="vh-mega__list">
-                <li><a href="{{ resources }}#insights" role="menuitem">Insights</a></li>
-                <li><a href="{{ resources }}#ebooks" role="menuitem">Ebooks &amp; Playbooks</a></li>
-                <li><a href="{{ resources }}#events" role="menuitem">Events &amp; Webinars</a></li>
-                <li><a href="{{ resources }}#podcasts" role="menuitem">VCASTs</a></li>
-                <li><a href="{{ home }}#cases" role="menuitem">Case Studies</a></li>
-                <li><a href="{{ resources }}#podcasts" role="menuitem">Press Releases</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="vh-menu__item">
-          <a href="{{ faq }}">FAQ</a>
-        </div>
-      {% endif %}
+      {% render 'vectra-nav-primary',
+        mode: 'desktop',
+        mega: mega,
+        home: home,
+        story: story,
+        solutions: solutions,
+        marketplace: marketplace,
+        resources: resources,
+        faq: faq,
+        experts: experts,
+        associates: associates,
+        interns: interns,
+        careers: careers
+      %}
     </div>
 
     <div class="vh-nav-end">
@@ -250,46 +207,20 @@
     </div>
 
     <div class="vh-nav-panel" data-vh-nav-panel>
-      {% if mega != blank and mega.links.size > 0 %}
-        {% for link in mega.links %}
-          {% render 'vectra-mega-item', link: link, mode: 'mobile' %}
-        {% endfor %}
-      {% else %}
-        <div class="vh-nav-panel__item has-children">
-          <button type="button" data-vh-mobile-sub aria-expanded="false">About Us</button>
-          <div class="vh-nav-panel__sub">
-            <a href="{{ story }}">Our Story</a>
-            <a href="{{ story }}#leadership">Our Leadership Team</a>
-            <a href="{{ experts }}">Our Experts</a>
-            <a href="{{ associates }}">Associates</a>
-            <a href="{{ interns }}">Our Interns</a>
-            <a href="{{ careers }}">Careers</a>
-          </div>
-        </div>
-        <div class="vh-nav-panel__item has-children">
-          <button type="button" data-vh-mobile-sub aria-expanded="false">How We Help</button>
-          <div class="vh-nav-panel__sub">
-            <a href="{{ solutions }}">Solutions</a>
-            <a href="{{ solutions }}#services">Services</a>
-            <a href="{{ marketplace }}">VSuites</a>
-            <a href="{{ home }}#why-vectra">Why Partner With Us</a>
-            <a href="{{ solutions }}#custom">Customized Solutions</a>
-          </div>
-        </div>
-        <a href="{{ marketplace }}">Marketplace</a>
-        <div class="vh-nav-panel__item has-children">
-          <button type="button" data-vh-mobile-sub aria-expanded="false">Resources</button>
-          <div class="vh-nav-panel__sub">
-            <a href="{{ resources }}#insights">Insights</a>
-            <a href="{{ resources }}#ebooks">Ebooks &amp; Playbooks</a>
-            <a href="{{ resources }}#events">Events &amp; Webinars</a>
-            <a href="{{ resources }}#podcasts">VCASTs</a>
-            <a href="{{ home }}#cases">Case Studies</a>
-            <a href="{{ resources }}#podcasts">Press Releases</a>
-          </div>
-        </div>
-        <a href="{{ faq }}">FAQ</a>
-      {% endif %}
+      {% render 'vectra-nav-primary',
+        mode: 'mobile',
+        mega: mega,
+        home: home,
+        story: story,
+        solutions: solutions,
+        marketplace: marketplace,
+        resources: resources,
+        faq: faq,
+        experts: experts,
+        associates: associates,
+        interns: interns,
+        careers: careers
+      %}
       <button type="button" data-vh-contact-open>Contact Us</button>
     </div>
   </nav>
