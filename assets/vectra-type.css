@@ -109,10 +109,12 @@
   letter-spacing: -0.03em !important;
 }
 
-.vectra-res .vres-hero h1 {
-  font-size: var(--vh-fs-kicker) !important;
+.vectra-res .vres-hero h1,
+.vectra-res .vres-hero__kicker {
+  font-size: clamp(14px, 1.05vw, 20px) !important;
   line-height: 1.3 !important;
-  letter-spacing: 0.04em !important;
+  letter-spacing: -0.05em !important;
+  text-transform: uppercase;
 }
 
 .vectra-res .vres-hero h2 {
@@ -142,9 +144,7 @@
 .vectra-sol .vsol-out h2,
 .vectra-sol .vsol-svc__head h2,
 .vectra-sol .vsol-process h2,
-.vectra-sol .vh-portal h2,
-.vectra-res .vres-feature h3,
-.vectra-res .vres-follow h3 {
+.vectra-sol .vh-portal h2 {
   font-size: var(--vh-fs-title) !important;
   line-height: 1.25 !important;
   letter-spacing: -0.03em !important;
@@ -169,9 +169,7 @@
 .vectra-sol .vsol-glass h3,
 .vectra-sol .vsol-svc-card h3,
 .vectra-sol .vsol-step h3,
-.vectra-sol .vsol-custom-card,
-.vectra-res .vres-split h3,
-.vectra-res .vres-label h2 {
+.vectra-sol .vsol-custom-card {
   font-size: var(--vh-fs-section) !important;
   line-height: 1.3 !important;
   letter-spacing: -0.03em !important;
@@ -182,8 +180,7 @@
 .vectra-story .vs-hero__kicker,
 .vectra-story .vs-ceo__kicker,
 .vectra-sol .vsol-kicker,
-.vectra-sol .vsol-hero__kicker,
-.vectra-res .vres-hero__kicker {
+.vectra-sol .vsol-hero__kicker {
   font-size: var(--vh-fs-kicker) !important;
   line-height: 1.3 !important;
   letter-spacing: 0.04em;
@@ -198,7 +195,6 @@
 .vectra-sol .vsol-eco__head > p:not(.vsol-kicker),
 .vectra-sol .vsol-svc__head p,
 .vectra-sol .vh-portal p,
-.vectra-res .vres-hero__lead,
 .vectra-home .vh-portal p,
 .vectra-home .vh-solutions__copy p {
   font-size: var(--vh-fs-lead) !important;
@@ -527,4 +523,41 @@
 
 .vectra-home .vh-solutions__copy .vh-btn {
   white-space: normal !important;
+}
+
+.vectra-res .vres-hero__lead {
+  font-size: clamp(15px, 1.05vw, 20px) !important;
+  line-height: 1.45 !important;
+  color: #092543 !important;
+}
+
+.vectra-res .vres-feature h3 {
+  font-size: clamp(26px, 3vw, 57px) !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.04em !important;
+}
+
+.vectra-res .vres-follow h3 {
+  font-size: clamp(22px, 1.8vw, 30px) !important;
+  line-height: 1.2 !important;
+}
+
+.vectra-res .vres-split h3 {
+  font-size: clamp(18px, 1.4vw, 24px) !important;
+  line-height: 1.2 !important;
+}
+
+.vectra-res .vres-label h2 {
+  font-size: clamp(16px, 1.4vw, 25px) !important;
+  line-height: 1.2 !important;
+  text-transform: uppercase;
+}
+
+.vectra-res .vres-prose p {
+  font-size: 17px !important;
+  line-height: 1.5 !important;
+}
+
+.vectra-res .vres-cat {
+  font-size: clamp(13px, 0.95vw, 18px) !important;
 }
