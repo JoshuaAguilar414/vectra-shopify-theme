@@ -1,20 +1,33 @@
 {%- doc -%}
   Clickable VECTRA contact details: office phone, mobile, info email, and Brussels address.
+  Reads Theme settings (VECTRA contact) so merchants can update once for the whole site.
 {%- enddoc -%}
 
 {% liquid
-  assign office_tel = '+3226206118'
-  assign office_label = '+32 2 620 61 18'
-  assign mobile_tel = '+32495239088'
-  assign mobile_label = '+32 495 239 088'
-  assign email = 'info@vectra-intl.com'
-  assign maps = 'https://www.google.com/maps/search/?api=1&query=Chauss%C3%A9e%20de%20Wavre%201517B%2C%201160%20Brussels%2C%20Belgium'
+  assign office_label = settings.vectra_office_phone | default: '+32 2 620 61 18'
+  assign office_tel = settings.vectra_office_phone_tel | default: '+3226206118'
+  assign mobile_label = settings.vectra_mobile_phone | default: '+32 495 239 088'
+  assign mobile_tel = settings.vectra_mobile_phone_tel | default: '+32495239088'
+  assign email = settings.vectra_email | default: 'info@vectra-intl.com'
+  assign maps = settings.vectra_maps_url
+  if maps == blank
+    assign maps = 'https://www.google.com/maps/search/?api=1&query=Chauss%C3%A9e%20de%20Wavre%201517B%2C%201160%20Brussels%2C%20Belgium'
+  endif
+  assign call_label = settings.vectra_call_label | default: 'Give us a call'
+  assign email_label = settings.vectra_email_label | default: 'Email'
+  assign address_label = settings.vectra_address_label | default: 'Our address'
+  assign address_raw = settings.vectra_address
+  if address_raw == blank
+    assign address_raw = 'Chaussée de Wavre 1517B, 1160 Brussels, Belgium'
+  endif
+  assign address_html = address_raw | newline_to_br
+  assign address_inline = address_raw | strip_newlines | replace: '  ', ' '
 %}
 
 {% if variant == 'card' %}
   <div class="vh-contact-list">
     <div>
-      <p class="vh-contact-list__label">Give us a call</p>
+      <p class="vh-contact-list__label">{{ call_label }}</p>
       <a class="vh-contact-list__link" href="tel:{{ office_tel }}">
         <img src="{{ img_phone }}" alt="">
         <strong>{{ office_label }}</strong>
@@ -25,17 +38,17 @@
       </a>
     </div>
     <div>
-      <p class="vh-contact-list__label">Email</p>
+      <p class="vh-contact-list__label">{{ email_label }}</p>
       <a class="vh-contact-list__link" href="mailto:{{ email }}">
         <img src="{{ img_mail }}" alt="">
         <strong class="vh-contact-list__email">{{ email }}</strong>
       </a>
     </div>
     <div>
-      <p class="vh-contact-list__label">Our address</p>
+      <p class="vh-contact-list__label">{{ address_label }}</p>
       <a class="vh-contact-list__link" href="{{ maps }}" rel="noopener noreferrer" target="_blank">
         <img src="{{ img_pin }}" alt="">
-        <strong>Chaussée de Wavre 1517B<br>1160 Brussels, Belgium</strong>
+        <strong>{{ address_html }}</strong>
       </a>
     </div>
   </div>
@@ -47,7 +60,7 @@
   </p>
   <p class="vh-footer__address">
     <a href="{{ maps }}" rel="noopener noreferrer" target="_blank">
-      Chaussée de Wavre 1517B<br>1160 Brussels, Belgium
+      {{ address_html }}
     </a>
   </p>
 {% else %}
@@ -59,6 +72,6 @@
     <a href="tel:{{ mobile_tel }}">{{ mobile_label }}</a>
   </p>
   <p>
-    <a href="{{ maps }}" rel="noopener noreferrer" target="_blank">Chaussée de Wavre 1517B, 1160 Brussels, Belgium</a>
+    <a href="{{ maps }}" rel="noopener noreferrer" target="_blank">{{ address_inline }}</a>
   </p>
 {% endif %}

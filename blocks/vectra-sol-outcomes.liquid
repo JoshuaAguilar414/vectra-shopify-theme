@@ -1,10 +1,26 @@
-{% render 'vectra-solutions-modules', module: 'outcomes', block: block %}
+{% capture nested_cards %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-solutions-modules', module: 'outcomes', block: block, nested_cards: nested_cards %}
 
 {% schema %}
 {
   "name": "VECTRA: Sol outcomes",
   "tag": null,
-  "settings": [],
-  "presets": [{ "name": "VECTRA: Sol outcomes" }]
+  "blocks": [{ "type": "_vectra-outcome-card" }],
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "From complexity to clearer, more resilient performance." }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA: Sol outcomes",
+      "blocks": [
+        { "type": "_vectra-outcome-card", "settings": { "heading": "Operational control", "text": "Priorities, responsibilities, and next steps are clearer across the work.", "fallback_asset": "vectra-7e32b8cb91105f95e3244070f5f535fb9ce04c02.svg" } },
+        { "type": "_vectra-outcome-card", "settings": { "heading": "Stronger resilience", "text": "Teams and systems are better prepared to adapt, respond, and sustain performance.", "fallback_asset": "vectra-7e32b8cb91105f95e3244070f5f535fb9ce04c02.svg" } },
+        { "type": "_vectra-outcome-card", "settings": { "heading": "Measurable progress", "text": "Evidence is structured so leaders can see what is moving and why.", "fallback_asset": "vectra-7e32b8cb91105f95e3244070f5f535fb9ce04c02.svg" } },
+        { "type": "_vectra-outcome-card", "settings": { "heading": "Lasting capability", "text": "People build the knowledge and confidence to improve performance over time.", "fallback_asset": "vectra-7e32b8cb91105f95e3244070f5f535fb9ce04c02.svg" } }
+      ]
+    }
+  ]
 }
 {% endschema %}

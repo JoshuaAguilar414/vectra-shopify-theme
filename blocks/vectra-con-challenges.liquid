@@ -1,10 +1,28 @@
-{% render 'vectra-contact-modules', module: 'challenges', block: block %}
+{% capture nested_cards %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-contact-modules', module: 'challenges', block: block, nested_cards: nested_cards %}
 
 {% schema %}
 {
   "name": "VECTRA: Contact challenges",
   "tag": null,
-  "settings": [],
-  "presets": [{ "name": "VECTRA: Contact challenges" }]
+  "blocks": [{ "type": "_vectra-why-card" }],
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Not sure where it fits?" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Start With What’s Happening" },
+    { "type": "textarea", "id": "text", "label": "Text" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA: Contact challenges",
+      "blocks": [
+        { "type": "_vectra-why-card", "settings": { "heading": "The same problem keeps coming back", "text": "It gets corrected. A few weeks or months later, the same finding, gap, or issue is back — a sign the root cause, not just the symptom, needs attention.", "fallback_asset": "vectra-be208e26a6843edcaa8fc4443996531be291a3b4.svg" } },
+        { "type": "_vectra-why-card", "settings": { "heading": "You have supplier findings, but no clear priority", "text": "You’re sitting on audit results, supplier risk data, or compliance evidence. The harder part is deciding what needs attention first and who owns the next action.", "fallback_asset": "vectra-0741b53e27e031962e5853d5e609fc42e3000a0a.svg" } },
+        { "type": "_vectra-why-card", "settings": { "heading": "The evidence exists, but using it takes too much work", "text": "ESG data, audit records, and compliance evidence are scattered across files, systems, emails, and teams — making it difficult to use, verify, or defend when it matters.", "fallback_asset": "vectra-7710da89715977538c6f4fe9c6dc34d7e755efbe.svg" } },
+        { "type": "_vectra-why-card", "settings": { "heading": "The change makes sense on paper, but it isn’t sticking", "text": "The requirement, process, or system is clear. The people who need to use it day to day are still struggling to make it part of normal work.", "fallback_asset": "vectra-2ff6aff392536da49f749783879fa1d814bae954.svg" } }
+      ]
+    }
+  ]
 }
 {% endschema %}

@@ -9,6 +9,13 @@
         },
         "body": {
           "type": "vectra-people-body",
+          "blocks": {
+            "p1": { "type": "_vectra-person", "settings": { "name": "Systems intern", "bio": "Zoho, process documentation, and operational support across VECTRA teams.", "fallback_asset": "vectra-3d90b6de863f4a0f6cfb9e8f77617b9ea7caeff1.png" } },
+            "p2": { "type": "_vectra-person", "settings": { "name": "Sales operations intern", "bio": "Pipeline hygiene, enquiry follow-through, and the admin that keeps client work moving.", "fallback_asset": "vectra-c543bcdfc727d87f2710b5345cea3b7eb76daab1.png" } },
+            "p3": { "type": "_vectra-person", "settings": { "name": "Business intelligence intern", "bio": "Research, evidence packing, and turning scattered information into something a team can use.", "fallback_asset": "vectra-26b8a07235b9d48b395528564d6124a59d29f6e3.png" } },
+            "p4": { "type": "_vectra-person", "settings": { "name": "Marketing intern", "bio": "Stories, events, and resources that help the right people find VECTRA without the noise.", "fallback_asset": "vectra-portrait-placeholder.png" } }
+          },
+          "block_order": ["p1", "p2", "p3", "p4"],
           "settings": { "page_type": "interns" }
         },
         "footer": { "type": "vectra-footer", "settings": {} }

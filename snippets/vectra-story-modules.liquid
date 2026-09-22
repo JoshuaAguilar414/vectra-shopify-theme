@@ -63,44 +63,69 @@
 {% case module %}
   {% when 'hero' %}
 {% render 'vectra-seo', page_key: 'about' %}
+{% liquid
+  assign story_kicker = block.settings.kicker | default: 'Inside VECTRA'
+  assign story_heading = block.settings.heading | default: 'About VECTRA International – Our DNA, Values &amp; Global Expertise'
+  assign story_poster = img_ceo
+  if block.settings.poster != blank
+    assign story_poster = block.settings.poster | image_url: width: 1920
+  endif
+%}
 <section class="vs-hero" aria-label="Our VECTRA Story" {{ block.shopify_attributes }}>
-    <video class="vs-hero__video" muted loop playsinline poster="{{ img_ceo }}" data-vh-video>
+    {% if block.settings.video != blank %}
+      {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '1920x', class: 'vs-hero__video' }}
+    {% else %}
+    <video class="vs-hero__video" muted loop playsinline poster="{{ story_poster }}" data-vh-video>
       <source src="{{ vid_hero }}" type="video/mp4">
     </video>
+    {% endif %}
     <img class="vs-hero__glow" src="{{ img_glow }}" alt="">
     <div class="vs-hero__shade"></div>
     <div class="vs-hero__copy">
-      <p class="vs-hero__kicker" data-vh-reveal="up">Inside VECTRA</p>
-      <h1 data-vh-reveal="up">About VECTRA International – Our DNA, Values &amp; Global Expertise</h1>
+      <p class="vs-hero__kicker" data-vh-reveal="up">{{ story_kicker }}</p>
+      <h1 data-vh-reveal="up">{{ story_heading }}</h1>
       <div class="vs-hero__body" data-vh-reveal="up">
+        {% if block.settings.text != blank %}
+          {{ block.settings.text }}
+        {% else %}
         <p>
           VECTRA International is a business resilience and operational capability-building partner that helps organizations turn ESG, supply chain, and operational requirements into accountable action. Since 2005, VECTRA International has partnered with global brands to strengthen governance, resolve supplier risk, and build operational resilience — combining expert teams with practical, technology-enabled delivery.
         </p>
         <p>
           We help organizations turn requirements, supplier issues, weak controls, scattered evidence, and changing operations into clear priorities, accountable action, and stronger performance. VECTRA started with a simple belief: business can be a force for good, but commitments have to survive contact with real operations.
         </p>
+        {% endif %}
       </div>
     </div>
   </section>
 
   {% when 'ceo' %}
+{% liquid
+  assign ceo_name = block.settings.name | default: 'Patrick Neyts'
+  assign ceo_kicker = block.settings.kicker | default: 'Meet the Founder'
+  assign ceo_heading = block.settings.heading | default: 'A Message from Our CEO'
+%}
 <div class="vs-sheet" {{ block.shopify_attributes }}>
     <section class="vs-ceo" id="founder">
       <img class="vs-ceo__mark" src="{{ img_mark }}" alt="">
       <div class="vs-ceo__photo">
-        <img class="vs-ceo__arch" src="{{ img_ceo }}" alt="Patrick Neyts, CEO of VECTRA International" width="620" height="574" data-vh-reveal="fade">
+        {% render 'vectra-image', image: block.settings.image, fallback: img_ceo, alt: ceo_name, class: 'vs-ceo__arch', width: 620, height: 574, image_width: 1240 %}
         <div class="vs-ceo__tag" data-vh-reveal="left">
-          <span>Patrick Neyts</span>
+          <span>{{ ceo_name }}</span>
         </div>
         <img class="vs-ceo__line" src="{{ img_ceo_line }}" alt="" data-vh-reveal="left">
       </div>
       <div class="vs-ceo__copy" data-vh-reveal="pop">
-        <p class="vs-ceo__kicker">Meet the Founder</p>
-        <h2>A Message from Our CEO</h2>
+        <p class="vs-ceo__kicker">{{ ceo_kicker }}</p>
+        <h2>{{ ceo_heading }}</h2>
         <div class="vs-ceo__body">
+          {% if block.settings.text != blank %}
+            {{ block.settings.text }}
+          {% else %}
           <p>Most organizations do not struggle because of a lack of ambition. They struggle because operational complexity outpaces their ability to act.</p>
           <p>At VECTRA International, we partner with organizations to transform that complexity into clarity, control, and competitive advantage. From small and mid-sized businesses to global enterprises, we deliver integrated solutions that strengthen operational capability, reduce risk, and drive measurable results.</p>
           <p>We believe business is a force for good when better performance creates better outcomes for your organization, your customers, people, and society.</p>
+          {% endif %}
         </div>
       </div>
     </section>
@@ -113,18 +138,18 @@
 
     <section class="vs-who" id="who-we-are">
       <div class="vs-who__copy">
-        <p class="vs-who__kicker">The VECTRA Story</p>
-        <h2>Enabling Positive Business Impact</h2>
+        <p class="vs-who__kicker">{{ block.settings.kicker | default: 'The VECTRA Story' }}</p>
+        <h2>{{ block.settings.heading | default: 'Enabling Positive Business Impact' }}</h2>
       </div>
       <figure class="vs-who__media">
         <iframe
-          src="https://www.youtube-nocookie.com/embed/C4JHZ69N9Sg?rel=0"
-          title="Patrick Neyts, CEO of VECTRA International: How to manage supply chain risks and build resilience"
+          src="{{ block.settings.video_url | default: 'https://www.youtube-nocookie.com/embed/C4JHZ69N9Sg?rel=0' }}"
+          title="{{ block.settings.video_title | default: 'Patrick Neyts, CEO of VECTRA International: How to manage supply chain risks and build resilience' }}"
           allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
           loading="lazy"
         ></iframe>
-        <figcaption class="vs-who__caption">Temporary company film: Patrick Neyts on supply-chain risk and resilience, used while a new VECTRA film is produced.</figcaption>
+        <figcaption class="vs-who__caption">{{ block.settings.video_caption | default: 'Temporary company film: Patrick Neyts on supply-chain risk and resilience, used while a new VECTRA film is produced.' }}</figcaption>
       </figure>
     </section>
 
@@ -133,65 +158,69 @@
         <img class="vs-card__watermark" src="{{ img_mission }}" alt="">
         <div class="vs-card__head">
           <img src="{{ img_mission }}" alt="" width="69" height="69">
-          <h3>Our Mission</h3>
+          <h3>{{ block.settings.mission_heading | default: 'Our Mission' }}</h3>
         </div>
         <img class="vs-card__rule" src="{{ img_rule }}" alt="">
-        <p>{{ mv_mission }}</p>
+        <p>{{ block.settings.mission | default: mv_mission }}</p>
       </article>
       <article class="vs-card">
         <img class="vs-card__watermark" src="{{ img_vision }}" alt="">
         <div class="vs-card__head">
           <img src="{{ img_vision }}" alt="" width="79" height="79">
-          <h3>Our Vision</h3>
+          <h3>{{ block.settings.vision_heading | default: 'Our Vision' }}</h3>
         </div>
         <img class="vs-card__rule" src="{{ img_rule }}" alt="">
-        <p>{{ mv_vision }}</p>
+        <p>{{ block.settings.vision | default: mv_vision }}</p>
       </article>
     </section>
 
     <section class="vs-values" id="values">
-      <h2>VECTRA Values</h2>
-      <p>These values guide the decisions we make, the relationships we build, and the way we turn our commitments into action.</p>
+      <h2>{{ block.settings.values_heading | default: 'VECTRA Values' }}</h2>
+      <p>{{ block.settings.values_text | default: 'These values guide the decisions we make, the relationships we build, and the way we turn our commitments into action.' }}</p>
       <div class="vs-values__row">
         <img class="vs-values__line" src="{{ img_values_line }}" alt="">
         <article class="vs-value">
-          <div class="vs-value__letter">v</div>
-          <h3>Values</h3>
-          <p>We are guided by respect, innovation, integrity, and accountability.</p>
+          <div class="vs-value__letter">{{ block.settings.value_1_letter | default: 'v' }}</div>
+          <h3>{{ block.settings.value_1_heading | default: 'Values' }}</h3>
+          <p>{{ block.settings.value_1_text | default: 'We are guided by respect, innovation, integrity, and accountability.' }}</p>
         </article>
         <article class="vs-value">
-          <div class="vs-value__letter">e</div>
-          <h3>Ethics</h3>
-          <p>We prioritize ethically sourcing goods, empowering others, and creating positive impact.</p>
+          <div class="vs-value__letter">{{ block.settings.value_2_letter | default: 'e' }}</div>
+          <h3>{{ block.settings.value_2_heading | default: 'Ethics' }}</h3>
+          <p>{{ block.settings.value_2_text | default: 'We prioritize ethically sourcing goods, empowering others, and creating positive impact.' }}</p>
         </article>
         <article class="vs-value">
-          <div class="vs-value__letter">c</div>
-          <h3>Community</h3>
-          <p>We actively build strong, supportive communities, fostering connections that uplift.</p>
+          <div class="vs-value__letter">{{ block.settings.value_3_letter | default: 'c' }}</div>
+          <h3>{{ block.settings.value_3_heading | default: 'Community' }}</h3>
+          <p>{{ block.settings.value_3_text | default: 'We actively build strong, supportive communities, fostering connections that uplift.' }}</p>
         </article>
         <article class="vs-value">
-          <div class="vs-value__letter">t</div>
-          <h3>Transparency</h3>
-          <p>We are honest, clear, and open, so you can trust us and know where you stand.</p>
+          <div class="vs-value__letter">{{ block.settings.value_4_letter | default: 't' }}</div>
+          <h3>{{ block.settings.value_4_heading | default: 'Transparency' }}</h3>
+          <p>{{ block.settings.value_4_text | default: 'We are honest, clear, and open, so you can trust us and know where you stand.' }}</p>
         </article>
         <article class="vs-value">
-          <div class="vs-value__letter">r</div>
-          <h3>Rights</h3>
-          <p>We defend human rights and champion fair treatment for all.</p>
+          <div class="vs-value__letter">{{ block.settings.value_5_letter | default: 'r' }}</div>
+          <h3>{{ block.settings.value_5_heading | default: 'Rights' }}</h3>
+          <p>{{ block.settings.value_5_text | default: 'We defend human rights and champion fair treatment for all.' }}</p>
         </article>
         <article class="vs-value">
-          <div class="vs-value__letter">a</div>
-          <h3>Action</h3>
-          <p>We turn words into real actions that drive meaningful change.</p>
+          <div class="vs-value__letter">{{ block.settings.value_6_letter | default: 'a' }}</div>
+          <h3>{{ block.settings.value_6_heading | default: 'Action' }}</h3>
+          <p>{{ block.settings.value_6_text | default: 'We turn words into real actions that drive meaningful change.' }}</p>
         </article>
       </div>
     </section>
     </div>
 
     <section class="vs-leaders" id="leadership" data-vs-reveal-group>
-      <h2>Our Leadership Team</h2>
+      <h2>{{ block.settings.leaders_heading | default: 'Our Leadership Team' }}</h2>
       <div class="vs-leaders__viewport">
         <div class="vs-leaders__track" data-vs-leaders-track>
+          {% assign nested_leaders = nested_leaders | strip %}
+          {% if nested_leaders != blank %}
+            {{ nested_leaders }}
+          {% else %}
           <article class="vs-leader" data-vs-leader data-vh-reveal="right">
             <div class="vs-leader__frame">
               <div class="vs-leader__media">
@@ -257,6 +286,7 @@
               </div>
             </div>
           </article>
+          {% endif %}
         </div>
       </div>
       <div class="vs-arrows" data-vh-reveal="right">
@@ -269,14 +299,14 @@
           <img class="vs-arrows__icon" src="{{ img_arrow_white }}" alt="">
         </button>
       </div>
-      <a class="vs-cta-btn" href="#experts" data-vh-reveal="scale">
-        Meet Our Leadership
+      <a class="vs-cta-btn" href="{{ block.settings.leaders_button_link | default: '#experts' }}" data-vh-reveal="scale">
+        {{ block.settings.leaders_button_label | default: 'Meet Our Leadership' }}
         <img src="{{ img_arrow_btn }}" alt="">
       </a>
     </section>
 
     <section class="vs-experts" id="experts">
-      <h2>Our Team of Experts</h2>
+      <h2>{{ block.settings.experts_heading | default: 'Our Team of Experts' }}</h2>
       <div class="vs-experts__grid">
         <article class="vs-expert">
           <img src="{{ img_exp_1 }}" alt="Beat Grüninger">
@@ -306,15 +336,15 @@
           <img src="{{ img_face_3 }}" alt="">
           <img src="{{ img_face_4 }}" alt="">
         </div>
-        <a class="vs-cta-btn" href="{{ experts_href }}" data-vh-reveal="scale">
-          Meet All Experts
+        <a class="vs-cta-btn" href="{{ block.settings.experts_button_link | default: experts_href }}" data-vh-reveal="scale">
+          {{ block.settings.experts_button_label | default: 'Meet All Experts' }}
           <img src="{{ img_arrow_btn }}" alt="">
         </a>
       </div>
     </section>
 
     <section class="vs-experts" id="associates">
-      <h2>Our Associates</h2>
+      <h2>{{ block.settings.associates_heading | default: 'Our Associates' }}</h2>
       <div class="vs-experts__grid">
         <article class="vs-expert">
           <img src="{{ img_face_1 }}" alt="Regional associate, Africa">
@@ -344,15 +374,15 @@
           <img src="{{ img_face_3 }}" alt="">
           <img src="{{ img_face_4 }}" alt="">
         </div>
-        <a class="vs-cta-btn" href="{{ associates_href }}" data-vh-reveal="scale">
-          Meet our associates
+        <a class="vs-cta-btn" href="{{ block.settings.associates_button_link | default: associates_href }}" data-vh-reveal="scale">
+          {{ block.settings.associates_button_label | default: 'Meet our associates' }}
           <img src="{{ img_arrow_btn }}" alt="">
         </a>
       </div>
     </section>
 
     <section class="vs-experts" id="interns">
-      <h2>Our Interns</h2>
+      <h2>{{ block.settings.interns_heading | default: 'Our Interns' }}</h2>
       <div class="vs-experts__grid">
         <article class="vs-expert">
           <img src="{{ img_face_1 }}" alt="Systems intern">
@@ -382,78 +412,111 @@
           <img src="{{ img_face_3 }}" alt="">
           <img src="{{ img_face_4 }}" alt="">
         </div>
-        <a class="vs-cta-btn" href="{{ interns_href }}" data-vh-reveal="scale">
-          Meet our interns
+        <a class="vs-cta-btn" href="{{ block.settings.interns_button_link | default: interns_href }}" data-vh-reveal="scale">
+          {{ block.settings.interns_button_label | default: 'Meet our interns' }}
           <img src="{{ img_arrow_btn }}" alt="">
         </a>
       </div>
     </section>
 
     <section class="vs-people" data-vh-reveal="scale">
-      <h2>The People Behind VECTRA, Across the World</h2>
-      <p>A supplier issue in Eastern Africa and a reporting problem in Brussels do not need the same person. VECTRA International’s associates and experts bring local context and specialist experience across markets and industries so we build the right team around the work, instead of pushing every problem through the same generalist lens.</p>
+      <h2>{{ block.settings.people_heading | default: 'The People Behind VECTRA, Across the World' }}</h2>
+      <p>{{ block.settings.people_text | default: 'A supplier issue in Eastern Africa and a reporting problem in Brussels do not need the same person. VECTRA International’s associates and experts bring local context and specialist experience across markets and industries so we build the right team around the work, instead of pushing every problem through the same generalist lens.' }}</p>
       <div class="vs-people__map">
-        <video muted loop playsinline poster="{{ img_ceo }}" data-vh-video>
+        {% if block.settings.map_video != blank %}
+          {{ block.settings.map_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '1600x' }}
+        {% else %}
+        <video muted loop playsinline poster="{% if block.settings.map_poster != blank %}{{ block.settings.map_poster | image_url: width: 1600 }}{% else %}{{ img_ceo }}{% endif %}" data-vh-video>
           <source src="{{ vid_map }}" type="video/mp4">
         </video>
+        {% endif %}
       </div>
     </section>
 
-    <section class="vh-faq" id="about-faq">
-      <div class="vh-wrap vh-faq__grid">
-        <aside class="vh-contact-card" data-vh-reveal="left">
-          <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
-          <p class="vh-contact-card__title">More questions?</p>
-          <p>Find more answers about VECTRA International, how we work, our capabilities, and getting started.</p>
-          <a class="vh-btn vh-btn--white" href="{{ faq_href }}">
-            More questions?
-            <img src="{{ img_arrow }}" alt="">
-          </a>
-          {% render 'vectra-contact-details', variant: 'card', img_phone: img_phone, img_mail: img_mail, img_pin: img_pin %}
-        </aside>
-        <div class="vh-faq__right">
-          <div class="vh-faq__glow" aria-hidden="true"></div>
-          <div class="vh-accordion">
-            <p class="vh-kicker">Our FAQ</p>
-            <h2 class="vh-h2">Frequently Asked Questions</h2>
-            <p class="vh-lead">Answers about who we are, how we work, and where we operate.</p>
-            <div class="vh-acc is-open" data-vh-faq-item>
-              <button type="button" data-vh-faq-btn>Who is VECTRA International?</button>
-              <div class="vh-acc__body">VECTRA International is a business resilience and operational capability-building partner that helps organizations manage ESG requirements, supplier risk, and operational complexity through expert teams and practical, technology-enabled delivery.</div>
-            </div>
-            <div class="vh-acc" data-vh-faq-item>
-              <button type="button" data-vh-faq-btn>When was VECTRA International founded?</button>
-              <div class="vh-acc__body">VECTRA International was founded in 2005 and has since worked with organizations across industries to strengthen governance, supplier accountability, and operational resilience.</div>
-            </div>
-            <div class="vh-acc" data-vh-faq-item>
-              <button type="button" data-vh-faq-btn>What does VECTRA International do?</button>
-              <div class="vh-acc__body">VECTRA International turns responsible business requirements — supplier issues, audit findings, weak controls, and changing regulations — into clear priorities, accountable action, and measurable performance improvement.</div>
-            </div>
-            <div class="vh-acc" data-vh-faq-item>
-              <button type="button" data-vh-faq-btn>Where does VECTRA International operate?</button>
-              <div class="vh-acc__body">VECTRA International operates globally, with associates and specialist experts delivering local market context across regions including Africa, Europe, Asia, and beyond.</div>
-            </div>
-            <div class="vh-acc" data-vh-faq-item>
-              <button type="button" data-vh-faq-btn>Who leads VECTRA International?</button>
-              <div class="vh-acc__body">VECTRA International is led by CEO Patrick Neyts, alongside a global leadership team spanning operations, sales and marketing, and applied AI.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
+</div>
+
+  {% when 'faq' %}
+{% liquid
+  assign faq_card_title = block.settings.card_title | default: 'More questions?'
+  assign faq_card_text = block.settings.card_text | default: 'Find more answers about VECTRA International, how we work, our capabilities, and getting started.'
+  assign faq_btn = block.settings.button_label | default: 'More questions?'
+  if block.settings.button_link != blank
+    assign faq_btn_href = block.settings.button_link
+  else
+    assign faq_btn_href = faq_href
+  endif
+  assign nested_items = nested_items | strip
+%}
+<section class="vh-faq" id="about-faq" {{ block.shopify_attributes }}>
+  <div class="vh-wrap vh-faq__grid">
+    <aside class="vh-contact-card" data-vh-reveal="left">
+      <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
+      <p class="vh-contact-card__title">{{ faq_card_title }}</p>
+      <p>{{ faq_card_text }}</p>
+      <a class="vh-btn vh-btn--white" href="{{ faq_btn_href }}">
+        {{ faq_btn }}
+        <img src="{{ img_arrow }}" alt="">
+      </a>
+      {% render 'vectra-contact-details', variant: 'card', img_phone: img_phone, img_mail: img_mail, img_pin: img_pin %}
+    </aside>
+    <div class="vh-faq__right">
+      <div class="vh-faq__glow" aria-hidden="true"></div>
+      <div class="vh-accordion">
+        <p class="vh-kicker">{{ block.settings.kicker | default: 'Our FAQ' }}</p>
+        <h2 class="vh-h2">{{ block.settings.heading | default: 'Frequently Asked Questions' }}</h2>
+        <p class="vh-lead">{{ block.settings.lead | default: 'Answers about who we are, how we work, and where we operate.' }}</p>
+        {% if nested_items != blank %}
+          {{ nested_items }}
+        {% else %}
+        <div class="vh-acc is-open" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>Who is VECTRA International?</button>
+          <div class="vh-acc__body">VECTRA International is a business resilience and operational capability-building partner that helps organizations manage ESG requirements, supplier risk, and operational complexity through expert teams and practical, technology-enabled delivery.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>When was VECTRA International founded?</button>
+          <div class="vh-acc__body">VECTRA International was founded in 2005 and has since worked with organizations across industries to strengthen governance, supplier accountability, and operational resilience.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>What does VECTRA International do?</button>
+          <div class="vh-acc__body">VECTRA International turns responsible business requirements — supplier issues, audit findings, weak controls, and changing regulations — into clear priorities, accountable action, and measurable performance improvement.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>Where does VECTRA International operate?</button>
+          <div class="vh-acc__body">VECTRA International operates globally, with associates and specialist experts delivering local market context across regions including Africa, Europe, Asia, and beyond.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>Who leads VECTRA International?</button>
+          <div class="vh-acc__body">VECTRA International is led by CEO Patrick Neyts, alongside a global leadership team spanning operations, sales and marketing, and applied AI.</div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
 
   {% when 'join' %}
+{% liquid
+  assign join_kicker = block.settings.kicker | default: 'Be part of a global team'
+  assign join_heading = block.settings.heading | default: 'Bring What Only You Can Contribute'
+  assign join_text = block.settings.text | default: 'We value people who take ownership, stay curious, challenge ideas respectfully, and care whether the work actually changes something. You will work with colleagues and specialists across markets, disciplines, and time zones.'
+  assign join_btn = block.settings.button_label | default: 'View Open Positions'
+  if block.settings.button_link != blank
+    assign join_cta = block.settings.button_link
+  else
+    assign join_cta = careers_url
+  endif
+%}
 <section class="vs-join" id="careers" {{ block.shopify_attributes }}>
     <canvas class="vs-join__grid" data-vs-join-grid aria-hidden="true"></canvas>
     <div class="vs-join__inner">
       <div>
-        <p class="vs-join__kicker">Be part of a global team</p>
-        <h2>Bring What Only You Can Contribute</h2>
-        <p>We value people who take ownership, stay curious, challenge ideas respectfully, and care whether the work actually changes something. You will work with colleagues and specialists across markets, disciplines, and time zones.</p>
+        <p class="vs-join__kicker">{{ join_kicker }}</p>
+        <h2>{{ join_heading }}</h2>
+        <p>{{ join_text }}</p>
       </div>
-      <a class="vs-cta-btn" href="{{ careers_url }}">
-        View Open Positions
+      <a class="vs-cta-btn" href="{{ join_cta }}">
+        {{ join_btn }}
         <img src="{{ img_arrow_send }}" alt="">
       </a>
     </div>

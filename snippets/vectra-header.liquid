@@ -12,6 +12,12 @@
   assign img_globe = 'vectra-e75326688c7e0ce3e0b991e45c67a26e49052254.png' | asset_url
   assign img_user = 'vectra-f07515ab5f0a8f7807c77ab21d02c5eb476eb902.png' | asset_url
   assign img_case = 'vectra-bc13c1ac5973c68a13ce0a8ee907baaf2e4e4828.png' | asset_url
+  if block != blank and block.settings.logo != blank
+    assign img_logo = block.settings.logo | image_url: width: 440
+  endif
+  if block != blank and block.settings.join_icon != blank
+    assign img_case = block.settings.join_icon | image_url: width: 80
+  endif
   assign img_arrow_white = 'vectra-d640d7e5d10a7b2543900785147430e0c5cd06a1.svg' | asset_url
   assign home = routes.root_url
   assign story_base = pages['about-us'].url | default: pages['our-story'].url | default: '/pages/about-us'

@@ -9,6 +9,13 @@
         },
         "body": {
           "type": "vectra-course-body",
+          "blocks": {
+            "c1": { "type": "_vectra-course-card", "settings": { "title": "Acronyms Used in ESG Area", "price": "Coming to Marketplace", "cta_label": "View landing page", "cta_link": "/pages/course-esg-acronyms", "fallback_asset": "vectra-514da1e5ddd8e93543da62a9818e4183b5547b3a.png" } },
+            "c2": { "type": "_vectra-course-card", "settings": { "title": "Preventative and Corrective Measures", "price": "Coming to Marketplace", "cta_label": "View landing page", "cta_link": "/pages/course-preventative-measures", "fallback_asset": "vectra-01d26f601c057ccb6b54759c020d48ae5de18cf3.png" } },
+            "c3": { "type": "_vectra-course-card", "settings": { "title": "Optimizing Purchasing Practices", "price": "Coming to Marketplace", "cta_label": "View landing page", "cta_link": "/pages/course-purchasing-practices", "fallback_asset": "vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png" } },
+            "c4": { "type": "_vectra-course-card", "settings": { "title": "Disability Accommodation Training", "price": "Coming to Marketplace", "cta_label": "View landing page", "cta_link": "/pages/course-disability-accommodation", "fallback_asset": "vectra-ae8b362b8368e8b200e58c921e1c7c274608a975.png" } }
+          },
+          "block_order": ["c1", "c2", "c3", "c4"],
           "settings": { "course_key": "marketplace" }
         },
         "footer": { "type": "vectra-footer", "settings": {} }

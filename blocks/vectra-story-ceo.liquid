@@ -4,7 +4,13 @@
 {
   "name": "VECTRA: CEO message",
   "tag": null,
-  "settings": [],
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "name", "label": "Name", "default": "Patrick Neyts" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Meet the Founder" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A Message from Our CEO" },
+    { "type": "richtext", "id": "text", "label": "Message" }
+  ],
   "presets": [{ "name": "VECTRA: CEO message" }]
 }
 {% endschema %}

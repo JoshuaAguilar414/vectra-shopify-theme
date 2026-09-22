@@ -1,0 +1,32 @@
+<article class="vs-expert" {{ block.shopify_attributes }}>
+  {% render 'vectra-image',
+    image: block.settings.image,
+    fallback: block.settings.fallback_asset,
+    alt: block.settings.name,
+    image_width: 480
+  %}
+  {% if block.settings.name != blank %}
+    <h3>{{ block.settings.name }}</h3>
+  {% endif %}
+  {% if block.settings.bio != blank %}
+    <p>{{ block.settings.bio }}</p>
+  {% endif %}
+</article>
+
+{% schema %}
+{
+  "name": "Person",
+  "tag": null,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "name", "label": "Name" },
+    { "type": "textarea", "id": "bio", "label": "Bio" },
+    {
+      "type": "text",
+      "id": "fallback_asset",
+      "label": "Theme fallback photo",
+      "info": "Filename in the theme assets folder. Used until you upload a photo."
+    }
+  ]
+}
+{% endschema %}

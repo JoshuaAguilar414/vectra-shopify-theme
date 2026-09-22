@@ -9,7 +9,14 @@
   endif
 %}
 
-<section class="vh-page-hero" {{ block.shopify_attributes }}>
+<section class="vh-page-hero{% if block.settings.image != blank %} has-image{% endif %}" {{ block.shopify_attributes }}>
+  {% if block.settings.image != blank %}
+    {{
+      block.settings.image
+      | image_url: width: 2400
+      | image_tag: class: 'vh-page-hero__bg', loading: 'eager', alt: ''
+    }}
+  {% endif %}
   <div class="vh-wrap vh-page-hero__inner">
     {% if block.settings.kicker != blank %}
       <p class="vh-page-hero__kicker">{{ block.settings.kicker }}</p>
@@ -41,6 +48,12 @@
       "type": "textarea",
       "id": "text",
       "label": "Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "info": "Optional. Sits over the green gradient."
     }
   ],
   "presets": [{ "name": "VECTRA: Page hero" }]

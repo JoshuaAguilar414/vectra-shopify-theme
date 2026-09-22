@@ -1,7 +1,7 @@
 {% capture children %}
   {% content_for 'blocks' %}
 {% endcapture %}
-{% render 'vectra-page-shell', children: children, include_story: true %}
+{% render 'vectra-page-shell', children: children, include_story: true, skip_footer: true %}
 
 {% schema %}
 {
@@ -30,6 +30,7 @@
         { "type": "vectra-story-hero" },
         { "type": "vectra-story-ceo" },
         { "type": "vectra-story-main" },
+        { "type": "vectra-story-faq" },
         { "type": "vectra-story-join" },
         { "type": "vectra-footer" }
       ]

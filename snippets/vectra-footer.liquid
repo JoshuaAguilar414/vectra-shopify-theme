@@ -6,6 +6,67 @@
 
 {% liquid
   assign img_logo = 'vectra-f1f1bad320cc916c9d3f257211cb366de698a572.png' | asset_url
+  assign tagline = 'Your partner for business resilience and operational capability building through an ecosystem of integrated solutions.'
+  assign explore_heading = 'Explore'
+  assign start_heading = 'Start here'
+  assign company_heading = 'Company'
+  assign follow_heading = 'Follow us'
+  assign notice_heading = 'Website upgrade notice'
+  assign notice_text = 'VECTRA International is moving this website from WordPress to Shopify. This is a one-time go-live notice, not an email list. Enter your email if you want to know when the new site is live.'
+  assign cookie_url = 'https://vectra-intl.com/cookie-policy/'
+  assign privacy_url = 'https://vectra-intl.com/privacy-policy/'
+  assign copyright_text = 'VECTRA International | All rights reserved.'
+  assign explore_menu = nil
+  assign start_menu = nil
+  assign company_menu = nil
+  assign linkedin_url = ''
+  assign youtube_url = ''
+  assign instagram_url = ''
+  assign facebook_url = ''
+  assign x_url = ''
+  if block != blank
+    if block.settings.logo != blank
+      assign img_logo = block.settings.logo | image_url: width: 440
+    endif
+    if block.settings.tagline != blank
+      assign tagline = block.settings.tagline
+    endif
+    if block.settings.explore_heading != blank
+      assign explore_heading = block.settings.explore_heading
+    endif
+    if block.settings.start_heading != blank
+      assign start_heading = block.settings.start_heading
+    endif
+    if block.settings.company_heading != blank
+      assign company_heading = block.settings.company_heading
+    endif
+    if block.settings.follow_heading != blank
+      assign follow_heading = block.settings.follow_heading
+    endif
+    if block.settings.notice_heading != blank
+      assign notice_heading = block.settings.notice_heading
+    endif
+    if block.settings.notice_text != blank
+      assign notice_text = block.settings.notice_text
+    endif
+    if block.settings.cookie_url != blank
+      assign cookie_url = block.settings.cookie_url
+    endif
+    if block.settings.privacy_url != blank
+      assign privacy_url = block.settings.privacy_url
+    endif
+    if block.settings.copyright_text != blank
+      assign copyright_text = block.settings.copyright_text
+    endif
+    assign explore_menu = block.settings.explore_menu
+    assign start_menu = block.settings.start_menu
+    assign company_menu = block.settings.company_menu
+    assign linkedin_url = block.settings.linkedin_url
+    assign youtube_url = block.settings.youtube_url
+    assign instagram_url = block.settings.instagram_url
+    assign facebook_url = block.settings.facebook_url
+    assign x_url = block.settings.x_url
+  endif
   assign home = home_url | default: routes.root_url
   assign story_base = story_url | default: pages['about-us'].url | default: pages['our-story'].url | default: '/pages/about-us'
   assign solutions_base = pages['solutions'].url | default: '/pages/solutions'
@@ -36,52 +97,70 @@
 {% assign associates = associates | strip %}
 {% assign interns = interns | strip %}
 
-<footer class="vh-footer">
+<footer class="vh-footer" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
   <div class="vh-wrap">
     <div class="vh-footer__top">
       <div class="vh-footer__brand">
         <img src="{{ img_logo }}" alt="{{ shop.name }}">
-        <p>Your partner for business resilience and operational capability building through an ecosystem of integrated solutions.</p>
+        <p>{{ tagline }}</p>
         {% render 'vectra-contact-details', variant: 'footer' %}
       </div>
       <div class="vh-footer__nav">
         <nav class="vh-footer__col">
-          <h3>Explore</h3>
+          <h3>{{ explore_heading }}</h3>
           <div class="vh-footer__links">
-            <a href="{{ solutions }}">Solutions</a>
-            <a href="{{ marketplace }}">Marketplace</a>
-            <a href="{{ resources }}">Resources</a>
-            <a href="{{ home }}#cases">Case studies</a>
-            <a href="{{ faq }}">FAQ</a>
+            {% if explore_menu != blank and explore_menu.links.size > 0 %}
+              {% for link in explore_menu.links %}
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              {% endfor %}
+            {% else %}
+              <a href="{{ solutions }}">Solutions</a>
+              <a href="{{ marketplace }}">Marketplace</a>
+              <a href="{{ resources }}">Resources</a>
+              <a href="{{ home }}#cases">Case studies</a>
+              <a href="{{ faq }}">FAQ</a>
+            {% endif %}
           </div>
         </nav>
         <nav class="vh-footer__col vh-footer__col--wide">
-          <h3>Start here</h3>
+          <h3>{{ start_heading }}</h3>
           <div class="vh-footer__links">
-            <a href="#VectraContactModal" data-vh-contact-open>Talk to an expert</a>
-            <a href="#VectraContactModal" data-vh-contact-open>Request a demo</a>
-            <a href="#VectraContactModal" data-vh-contact-open>Readiness assessment</a>
-            <a href="#VectraContactModal" data-vh-contact-open>Build a capability path</a>
-            <a href="{{ routes.account_url }}">Client portal</a>
+            {% if start_menu != blank and start_menu.links.size > 0 %}
+              {% for link in start_menu.links %}
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              {% endfor %}
+            {% else %}
+              <a href="#VectraContactModal" data-vh-contact-open>Talk to an expert</a>
+              <a href="#VectraContactModal" data-vh-contact-open>Request a demo</a>
+              <a href="#VectraContactModal" data-vh-contact-open>Readiness assessment</a>
+              <a href="#VectraContactModal" data-vh-contact-open>Build a capability path</a>
+              <a href="{{ routes.account_url }}">Client portal</a>
+            {% endif %}
           </div>
         </nav>
         <nav class="vh-footer__col vh-footer__col--wide">
-          <h3>Company</h3>
+          <h3>{{ company_heading }}</h3>
           <div class="vh-footer__links">
-            <a href="{{ story }}">About VECTRA</a>
-            <a href="{{ experts }}">Experts</a>
-            <a href="{{ associates }}">Associates</a>
-            <a href="{{ interns }}">Interns</a>
-            <a href="{{ careers }}">Careers</a>
-            <a href="{{ story }}#values">Our values and pledges</a>
-            <a href="#VectraContactModal" data-vh-contact-open>Contact us</a>
+            {% if company_menu != blank and company_menu.links.size > 0 %}
+              {% for link in company_menu.links %}
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              {% endfor %}
+            {% else %}
+              <a href="{{ story }}">About VECTRA</a>
+              <a href="{{ experts }}">Experts</a>
+              <a href="{{ associates }}">Associates</a>
+              <a href="{{ interns }}">Interns</a>
+              <a href="{{ careers }}">Careers</a>
+              <a href="{{ story }}#values">Our values and pledges</a>
+              <a href="#VectraContactModal" data-vh-contact-open>Contact us</a>
+            {% endif %}
           </div>
         </nav>
         <div class="vh-footer__col vh-footer__col--follow">
-          <h3>Follow us</h3>
-          {% render 'vectra-social-links' %}
-          <h3 class="vh-footer__subscribe">Website upgrade notice</h3>
-          <p class="vh-footer__migrate">VECTRA International is moving this website from WordPress to Shopify. This is a one-time go-live notice, not an email list. Enter your email if you want to know when the new site is live.</p>
+          <h3>{{ follow_heading }}</h3>
+          {% render 'vectra-social-links', linkedin_url: linkedin_url, youtube_url: youtube_url, instagram_url: instagram_url, facebook_url: facebook_url, x_url: x_url %}
+          <h3 class="vh-footer__subscribe">{{ notice_heading }}</h3>
+          <p class="vh-footer__migrate">{{ notice_text }}</p>
           {% form 'customer' %}
             <input type="hidden" name="contact[tags]" value="site-migration">
             <div class="vh-news">
@@ -94,10 +173,10 @@
       </div>
     </div>
     <div class="vh-footer__bottom">
-      <span>© {{ 'now' | date: '%Y' }} VECTRA International | All rights reserved.</span>
+      <span>© {{ 'now' | date: '%Y' }} {{ copyright_text }}</span>
       <span>
-        <a href="https://vectra-intl.com/cookie-policy/">Cookie policy</a>
-        <a href="https://vectra-intl.com/privacy-policy/">Privacy policy</a>
+        <a href="{{ cookie_url }}">Cookie policy</a>
+        <a href="{{ privacy_url }}">Privacy policy</a>
       </span>
     </div>
   </div>

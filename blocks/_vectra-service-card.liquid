@@ -1,0 +1,38 @@
+<article class="vsol-svc-card" data-vh-reveal {{ block.shopify_attributes }}>
+  {% render 'vectra-image',
+    image: block.settings.image,
+    fallback: block.settings.fallback_asset,
+    alt: '',
+    image_width: 800
+  %}
+  {% if block.settings.number != blank %}
+    <span class="vsol-svc-card__num">{{ block.settings.number }}</span>
+  {% endif %}
+  <div class="vsol-svc-card__body">
+    {% if block.settings.heading != blank %}
+      <h3>{{ block.settings.heading }}</h3>
+    {% endif %}
+    {% if block.settings.text != blank %}
+      <p>{{ block.settings.text }}</p>
+    {% endif %}
+    {% if block.settings.cta_label != blank %}
+      <a href="{{ block.settings.cta_link | default: '#VectraContactModal' }}" {% if block.settings.cta_link == blank or block.settings.cta_link == '#VectraContactModal' %}data-vh-contact-open{% endif %}>{{ block.settings.cta_label }}</a>
+    {% endif %}
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Service card",
+  "tag": null,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "number", "label": "Number", "default": "01" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "cta_label", "label": "Link label", "default": "Explore This Service →" },
+    { "type": "url", "id": "cta_link", "label": "Link" },
+    { "type": "text", "id": "fallback_asset", "label": "Theme fallback image" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,36 @@
+<article class="vh-course" {{ block.shopify_attributes }}>
+  {% render 'vectra-image',
+    image: block.settings.image,
+    fallback: block.settings.fallback_asset,
+    alt: block.settings.title,
+    image_width: 640
+  %}
+  <div class="vh-course__body">
+    {% if block.settings.title != blank %}
+      <h2>{{ block.settings.title }}</h2>
+    {% endif %}
+    <div class="vh-course__meta">
+      {% if block.settings.price != blank %}
+        <span class="vh-price">{{ block.settings.price }}</span>
+      {% endif %}
+      {% if block.settings.cta_label != blank %}
+        <a class="vh-course__cta" href="{{ block.settings.cta_link | default: '#' }}">{{ block.settings.cta_label }}</a>
+      {% endif %}
+    </div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Course card",
+  "tag": null,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "title", "label": "Title" },
+    { "type": "text", "id": "price", "label": "Price label", "default": "Coming to Marketplace" },
+    { "type": "text", "id": "cta_label", "label": "Link label", "default": "View landing page" },
+    { "type": "url", "id": "cta_link", "label": "Link" },
+    { "type": "text", "id": "fallback_asset", "label": "Theme fallback image" }
+  ]
+}
+{% endschema %}

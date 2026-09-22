@@ -1,0 +1,24 @@
+<article class="vsol-step{% if block.settings.featured %} vsol-step--impl{% endif %}" data-vh-reveal="down" {{ block.shopify_attributes }}>
+  {% if block.settings.number != blank %}
+    <span>{{ block.settings.number }}</span>
+  {% endif %}
+  {% if block.settings.heading != blank %}
+    <h3>{{ block.settings.heading }}</h3>
+  {% endif %}
+  {% if block.settings.text != blank %}
+    <p>{{ block.settings.text }}</p>
+  {% endif %}
+</article>
+
+{% schema %}
+{
+  "name": "Process step",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "number", "label": "Number", "default": "01" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "checkbox", "id": "featured", "label": "Highlight this step", "default": false }
+  ]
+}
+{% endschema %}

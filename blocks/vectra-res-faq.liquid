@@ -1,10 +1,31 @@
-{% render 'vectra-resources-modules', module: 'faq', block: block %}
+{% capture nested_items %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-resources-modules', module: 'faq', block: block, nested_items: nested_items %}
 
 {% schema %}
 {
   "name": "VECTRA: Res FAQ",
   "tag": null,
-  "settings": [],
-  "presets": [{ "name": "VECTRA: Res FAQ" }]
+  "blocks": [{ "type": "_vectra-faq-item" }],
+  "settings": [
+    { "type": "text", "id": "card_title", "label": "Side card title", "default": "More questions?" },
+    { "type": "textarea", "id": "card_text", "label": "Side card text" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Our FAQ" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" },
+    { "type": "textarea", "id": "lead", "label": "Lead" },
+    { "type": "text", "id": "button_label", "label": "Side card button", "default": "More questions?" },
+    { "type": "url", "id": "button_link", "label": "Side card button link" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA: Res FAQ",
+      "blocks": [
+        { "type": "_vectra-faq-item", "settings": { "open": true, "question": "What are responsible business resources?", "answer": "Responsible business resources are insights, guides, evidence, and expert analysis that help organizations understand ESG, supply chain, compliance, risk management, business resilience, and operational resilience issues and decide what action to take." } },
+        { "type": "_vectra-faq-item", "settings": { "question": "Who are VECTRA Resources written for?", "answer": "VECTRA Resources are written for procurement, operations, supply chain, risk, compliance, sustainability, and transformation leaders who need to understand an issue before making or defending a decision." } },
+        { "type": "_vectra-faq-item", "settings": { "question": "Are VECTRA Resources free to access?", "answer": "Yes. VECTRA Resources are free to explore. Some Ebooks, Playbooks, and Events may require registration." } }
+      ]
+    }
+  ]
 }
 {% endschema %}

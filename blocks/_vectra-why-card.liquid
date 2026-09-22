@@ -1,0 +1,32 @@
+<article class="vh-why__item" data-vh-reveal {{ block.shopify_attributes }}>
+  {% render 'vectra-image',
+    image: block.settings.icon,
+    fallback: block.settings.fallback_asset,
+    alt: '',
+    image_width: 144
+  %}
+  {% if block.settings.heading != blank %}
+    <h3>{{ block.settings.heading }}</h3>
+  {% endif %}
+  {% if block.settings.text != blank %}
+    <p>{{ block.settings.text }}</p>
+  {% endif %}
+</article>
+
+{% schema %}
+{
+  "name": "Why card",
+  "tag": null,
+  "settings": [
+    { "type": "image_picker", "id": "icon", "label": "Icon" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    {
+      "type": "text",
+      "id": "fallback_asset",
+      "label": "Theme fallback icon",
+      "info": "Filename in the theme assets folder. Used until you upload an icon."
+    }
+  ]
+}
+{% endschema %}

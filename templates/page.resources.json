@@ -21,7 +21,18 @@
           "settings": {}
         },
         "ebooks": { "type": "vectra-res-ebooks", "settings": {} },
-        "faq": { "type": "vectra-res-faq", "settings": {} },
+        "faq": {
+          "type": "vectra-res-faq",
+          "blocks": {
+            "faq_1": { "type": "_vectra-faq-item", "settings": { "open": true, "question": "What are responsible business resources?", "answer": "Responsible business resources are insights, guides, evidence, and expert analysis that help organizations understand ESG, supply chain, compliance, risk management, business resilience, and operational resilience issues and decide what action to take." } },
+            "faq_2": { "type": "_vectra-faq-item", "settings": { "question": "Who are VECTRA Resources written for?", "answer": "VECTRA Resources are written for procurement, operations, supply chain, risk, compliance, sustainability, and transformation leaders who need to understand an issue before making or defending a decision." } },
+            "faq_3": { "type": "_vectra-faq-item", "settings": { "question": "What types of resources does VECTRA International offer?", "answer": "VECTRA International offers Insights, Ebooks and Playbooks, Events and Webinars, VCASTs, Case Studies, and Press Releases. Across these formats, you can explore ESG resources, supply chain resources, business resilience resources, risk management resources, and operational resilience resources." } },
+            "faq_4": { "type": "_vectra-faq-item", "settings": { "question": "Are VECTRA Resources free to access?", "answer": "Yes. VECTRA Resources are free to explore. Some Ebooks, Playbooks, and Events may require registration." } },
+            "faq_5": { "type": "_vectra-faq-item", "settings": { "question": "How do I find the right resource for my question?", "answer": "Use the search bar to find resources by topic, regulation, risk, or keyword. You can also browse by format if you already know whether you need a quick Insight, a deeper guide, an expert conversation, or a real-world Case Study." } }
+          },
+          "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"],
+          "settings": {}
+        },
         "footer": { "type": "vectra-footer", "settings": {} }
       },
       "block_order": ["header", "hero", "feed", "ebooks", "faq", "footer"],

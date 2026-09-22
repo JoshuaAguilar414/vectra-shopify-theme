@@ -19,24 +19,39 @@
   {% when 'hero' %}
 {% render 'vectra-seo', page_key: 'contact' %}
 <section class="vres-hero" aria-label="Contact VECTRA International" {{ block.shopify_attributes }}>
-  <img class="vres-hero__mark" src="{{ img_mark }}" alt="" width="901" height="909">
+  {% render 'vectra-image', image: block.settings.watermark, fallback: img_mark, alt: '', class: 'vres-hero__mark', width: 901, height: 909, image_width: 900 %}
   <div class="vres-hero__copy" data-vh-reveal="up">
-    <h1 class="vres-hero__kicker">Contact VECTRA International</h1>
-    <h2>Bring Us the Problem.</h2>
-    <p class="vres-hero__lead">
+    <h1 class="vres-hero__kicker">{{ block.settings.kicker | default: 'Contact VECTRA International' }}</h1>
+    <h2>{{ block.settings.heading | default: 'Bring Us the Problem.' }}</h2>
+    <div class="vres-hero__lead">
+      {% if block.settings.text != blank %}
+        {{ block.settings.text }}
+      {% else %}
+      <p>
       You don’t need a finished scope before you talk to us. Tell us what’s happening, what keeps coming back, or where the work is getting stuck — whether that’s a supplier finding, an ESG reporting gap, an audit follow-up, or an operational resilience problem you haven’t fully named yet. You don’t need to decide which VECTRA service it belongs to first. We’ll review what you share, bring the relevant expertise into the conversation, and work out the most useful next step together. Use the form below, <a href="mailto:info@vectra-intl.com">info@vectra-intl.com</a>, or call <a href="tel:+32495239088">+32 495 239 088</a>.
-    </p>
+      </p>
+      {% endif %}
+    </div>
   </div>
 </section>
 
   {% when 'challenges' %}
+{% liquid
+  assign ch_kicker = block.settings.kicker | default: 'Not sure where it fits?'
+  assign ch_heading = block.settings.heading | default: 'Start With What’s Happening'
+  assign ch_text = block.settings.text | default: 'You may already know exactly what support you need. Or you may simply know that something isn’t working as it should — either way, this is the right place to start.'
+  assign nested_cards = nested_cards | strip
+%}
 <section class="vh-why" id="challenges" {{ block.shopify_attributes }}>
   <div class="vh-wrap">
-    <p class="vh-kicker">Not sure where it fits?</p>
-    <h2 class="vh-h2">Start With What’s Happening</h2>
-    <p class="vh-lead">You may already know exactly what support you need. Or you may simply know that something isn’t working as it should — either way, this is the right place to start.</p>
+    <p class="vh-kicker">{{ ch_kicker }}</p>
+    <h2 class="vh-h2">{{ ch_heading }}</h2>
+    <p class="vh-lead">{{ ch_text }}</p>
   </div>
   <div class="vh-wrap vh-why__list">
+    {% if nested_cards != blank %}
+      {{ nested_cards }}
+    {% else %}
     <article class="vh-why__item" data-vh-reveal>
       <img src="{{ img_icon_4 }}" alt="">
       <h3>The same problem keeps coming back</h3>
@@ -57,16 +72,18 @@
       <h3>The change makes sense on paper, but it isn’t sticking</h3>
       <p>The requirement, process, or system is clear. The people who need to use it day to day are still struggling to make it part of normal work.</p>
     </article>
+    {% endif %}
   </div>
 </section>
 
   {% when 'next' %}
+{% assign nested_items = nested_items | strip %}
 <section class="vh-faq" id="what-happens-next" {{ block.shopify_attributes }}>
   <div class="vh-wrap vh-faq__grid">
     <aside class="vh-contact-card" data-vh-reveal="left">
       <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
-      <p class="vh-contact-card__title">Prefer to reach us directly?</p>
-      <p>Already know who you need to speak with? Reach out directly. If you’re not sure which VECTRA specialist fits the issue, use the form and we’ll route the conversation.</p>
+      <p class="vh-contact-card__title">{{ block.settings.card_title | default: 'Prefer to reach us directly?' }}</p>
+      <p>{{ block.settings.card_text | default: "Already know who you need to speak with? Reach out directly. If you’re not sure which VECTRA specialist fits the issue, use the form and we’ll route the conversation." }}</p>
         <a class="vh-btn vh-btn--white" href="#get-in-touch">
         Start the Conversation
         <img src="{{ img_arrow }}" alt="">
@@ -76,9 +93,12 @@
     <div class="vh-faq__right">
       <div class="vh-faq__glow" aria-hidden="true"></div>
       <div class="vh-accordion">
-        <p class="vh-kicker">Next</p>
-        <h2 class="vh-h2">You Send the Context. We Work Out the Next Move Together.</h2>
+        <p class="vh-kicker">{{ block.settings.kicker | default: 'Next' }}</p>
+        <h2 class="vh-h2">{{ block.settings.heading | default: 'You Send the Context. We Work Out the Next Move Together.' }}</h2>
         <p class="vh-lead">Three steps from first message to a useful next move.</p>
+        {% if nested_items != blank %}
+          {{ nested_items }}
+        {% else %}
         <div class="vh-acc is-open" data-vh-faq-item>
           <button type="button" data-vh-faq-btn>01 — Tell Us What’s Happening</button>
           <div class="vh-acc__body">
@@ -97,6 +117,7 @@
             The first useful step might be a focused assessment, specialist support, implementation work, capability building, or simply a clearer direction. We agree on that together, rather than assuming the answer before we understand the situation.
           </div>
         </div>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -106,11 +127,15 @@
 <section class="vh-portal" id="get-in-touch" {{ block.shopify_attributes }}>
   <div class="vh-wrap vh-portal__grid">
     <div class="vh-portal__copy">
-      <h2>Contact VECTRA International</h2>
+      <h2>{{ block.settings.heading | default: 'Contact VECTRA International' }}</h2>
+      {% if block.settings.text != blank %}
+        {{ block.settings.text }}
+      {% else %}
       <p>Use the form, <a href="mailto:info@vectra-intl.com">info@vectra-intl.com</a>, or call <a href="tel:+32495239088">+32 495 239 088</a>. Tell us what’s happening — supplier risk, ESG compliance, audit follow-up, or a broader resilience program — and we’ll route the conversation to the right person.</p>
+      {% endif %}
     </div>
     {% form 'contact', class: 'vh-form' %}
-      <h3>Tell Us What You’re Working Through</h3>
+      <h3>{{ block.settings.form_heading | default: 'Tell Us What You’re Working Through' }}</h3>
       {% if form.posted_successfully? %}
         <p class="vh-contact-modal__success">Thanks — we received your message and will be in touch shortly.</p>
       {% endif %}

@@ -11,10 +11,54 @@
         },
         "hero": { "type": "vectra-sol-hero", "settings": {} },
         "intro": { "type": "vectra-sol-intro", "settings": {} },
-        "ecosystem": { "type": "vectra-sol-ecosystem", "settings": {} },
-        "outcomes": { "type": "vectra-sol-outcomes", "settings": {} },
-        "services": { "type": "vectra-sol-services", "settings": {} },
-        "process": { "type": "vectra-sol-process", "settings": {} },
+        "ecosystem": {
+          "type": "vectra-sol-ecosystem",
+          "blocks": {
+            "eco_1": { "type": "_vectra-eco-card", "settings": { "number": "01", "title": "Operational Resilience", "text": "Build operational control, continuity, and a stronger response to disruption.", "cta_label": "Start a briefing", "fallback_asset": "vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png" } },
+            "eco_2": { "type": "_vectra-eco-card", "settings": { "number": "02", "title": "Value Chain Resilience & Improvement", "text": "Connect due diligence, supplier improvement, risk visibility, and practical follow-through.", "cta_label": "Explore delivery", "fallback_asset": "vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png" } },
+            "eco_3": { "type": "_vectra-eco-card", "settings": { "number": "03", "title": "Responsible Business Performance", "text": "Turn stakeholder expectations into clearer decisions, stronger governance, and durable operating practice.", "cta_label": "Build capability", "fallback_asset": "vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png" } },
+            "eco_4": { "type": "_vectra-eco-card", "settings": { "number": "04", "title": "Governance & Regulatory Readiness", "text": "Translate shifting requirements into accountable controls, reliable evidence, and implementation plans.", "cta_label": "Start a briefing", "fallback_asset": "vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png" } },
+            "eco_5": { "type": "_vectra-eco-card", "settings": { "number": "05", "title": "Capability Building at Scale", "text": "Equip teams, leaders, and networks with the confidence and tools to carry the work forward.", "cta_label": "Explore delivery", "fallback_asset": "vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png" } },
+            "eco_6": { "type": "_vectra-eco-card", "settings": { "number": "06", "title": "Human-Centered<br>AI-Enabled Intelligence", "text": "Use technology to strengthen expert judgment, surface relevant signals, and accelerate action.", "cta_label": "Build capability", "fallback_asset": "vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png" } }
+          },
+          "block_order": ["eco_1", "eco_2", "eco_3", "eco_4", "eco_5", "eco_6"],
+          "settings": {}
+        },
+        "outcomes": {
+          "type": "vectra-sol-outcomes",
+          "blocks": {
+            "out_1": { "type": "_vectra-outcome-card", "settings": { "heading": "Operational control", "text": "Priorities, responsibilities, and next steps are clearer across the work.", "fallback_asset": "vectra-7e32b8cb91105f95e3244070f5f535fb9ce04c02.svg" } },
+            "out_2": { "type": "_vectra-outcome-card", "settings": { "heading": "Stronger resilience", "text": "Teams and systems are better prepared to adapt, respond, and sustain performance.", "fallback_asset": "vectra-7e32b8cb91105f95e3244070f5f535fb9ce04c02.svg" } },
+            "out_3": { "type": "_vectra-outcome-card", "settings": { "heading": "Measurable progress", "text": "Evidence is structured so leaders can see what is moving and why.", "fallback_asset": "vectra-7e32b8cb91105f95e3244070f5f535fb9ce04c02.svg" } },
+            "out_4": { "type": "_vectra-outcome-card", "settings": { "heading": "Lasting capability", "text": "People build the knowledge and confidence to improve performance over time.", "fallback_asset": "vectra-7e32b8cb91105f95e3244070f5f535fb9ce04c02.svg" } }
+          },
+          "block_order": ["out_1", "out_2", "out_3", "out_4"],
+          "settings": {}
+        },
+        "services": {
+          "type": "vectra-sol-services",
+          "blocks": {
+            "svc_1": { "type": "_vectra-service-card", "settings": { "number": "01", "heading": "Audit Readiness & Practical Remediation", "text": "Prepare with confidence, address findings with structure, and convert assurance pressure into operational improvement.", "cta_label": "Explore This Service →", "fallback_asset": "vectra-fba768472f693dc9d17736644f117390ddfce96f.png" } },
+            "svc_2": { "type": "_vectra-service-card", "settings": { "number": "02", "heading": "Due Diligence & Value Chain Risk Management", "text": "Identify priority exposure, strengthen decision-making, and establish practical controls across complex value chains.", "cta_label": "Explore This Service →", "fallback_asset": "vectra-fba768472f693dc9d17736644f117390ddfce96f.png" } },
+            "svc_3": { "type": "_vectra-service-card", "settings": { "number": "03", "heading": "Operational Performance & Improvement", "text": "Support factories, farms, mines, and operating sites to build stronger performance, capability, and responsible practice.", "cta_label": "Explore This Service →", "fallback_asset": "vectra-fba768472f693dc9d17736644f117390ddfce96f.png" } },
+            "svc_4": { "type": "_vectra-service-card", "settings": { "number": "04", "heading": "Independent Assurance, Governance & Oversight", "text": "Bring trusted review, quality assurance, and governance visibility to high-stakes programmes and commitments.", "cta_label": "Explore This Service →", "fallback_asset": "vectra-fba768472f693dc9d17736644f117390ddfce96f.png" } },
+            "svc_5": { "type": "_vectra-service-card", "settings": { "number": "05", "heading": "Responsible Business Reporting & Disclosure", "text": "Build credible reporting processes and stronger evidence that connects disclosure with better operational decisions.", "cta_label": "Explore This Service →", "fallback_asset": "vectra-fba768472f693dc9d17736644f117390ddfce96f.png" } },
+            "svc_6": { "type": "_vectra-service-card", "settings": { "number": "06", "heading": "Capability Building & Change Enablement", "text": "Build practical confidence across leaders, teams, and suppliers through learning, coaching, and tailored pathways.", "cta_label": "Explore This Service →", "fallback_asset": "vectra-fba768472f693dc9d17736644f117390ddfce96f.png" } }
+          },
+          "block_order": ["svc_1", "svc_2", "svc_3", "svc_4", "svc_5", "svc_6"],
+          "settings": {}
+        },
+        "process": {
+          "type": "vectra-sol-process",
+          "blocks": {
+            "step_1": { "type": "_vectra-process-step", "settings": { "number": "01", "heading": "Context", "text": "See the real operating environment." } },
+            "step_2": { "type": "_vectra-process-step", "settings": { "number": "02", "heading": "Path", "text": "Design the practical route forward." } },
+            "step_3": { "type": "_vectra-process-step", "settings": { "number": "03", "heading": "Implementation", "text": "Work alongside accountable owners.", "featured": true } },
+            "step_4": { "type": "_vectra-process-step", "settings": { "number": "04", "heading": "Impact", "text": "Measure what changed for the business." } }
+          },
+          "block_order": ["step_1", "step_2", "step_3", "step_4"],
+          "settings": {}
+        },
         "portal": {
           "type": "vectra-portal",
           "settings": {

@@ -1,10 +1,30 @@
-{% render 'vectra-home-modules', module: 'solutions', block: block %}
+{% capture nested_shots %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-home-modules', module: 'solutions', block: block, nested_shots: nested_shots %}
 
 {% schema %}
 {
   "name": "VECTRA: Solutions",
   "tag": null,
-  "settings": [],
-  "presets": [{ "name": "VECTRA: Solutions" }]
+  "blocks": [{ "type": "_vectra-solution-shot" }],
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "VECTRA Solutions" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Responsible Business Transformation That Creates Value" },
+    { "type": "text", "id": "button_label", "label": "Bottom button label", "default": "Talk to an Expert →" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA: Solutions",
+      "blocks": [
+        { "type": "_vectra-solution-shot", "settings": { "is_active": true, "title": "Operational Resilience", "text": "Build stronger operational control, continuity, and response capability so critical work keeps moving when conditions change.", "cta_label": "Explore Operational Resilience", "fallback_asset": "vectra-add817f67c59297c528c5d57486a2794644fb47c.png" } },
+        { "type": "_vectra-solution-shot", "settings": { "title": "Value Chain Resilience & Improvement", "text": "Identify where supplier and supply chain risk sits, prioritize what matters, and turn findings into practical improvement.", "cta_label": "Explore Value Chain Resilience & Improvement", "fallback_asset": "vectra-6a69557ce365aa215c5c28bca6a6e51af0a2c987.png" } },
+        { "type": "_vectra-solution-shot", "settings": { "title": "Responsible Business Performance", "text": "Turn responsible-business requirements into clearer decisions, reliable evidence, and practical improvement.", "cta_label": "Explore Responsible Business Performance", "fallback_asset": "vectra-d9fea5c48820c581c90942feb5bfc3997b28135f.png" } },
+        { "type": "_vectra-solution-shot", "settings": { "title": "Governance & Regulatory Readiness", "text": "Turn changing requirements into workable controls, clear ownership, and evidence your teams can defend.", "cta_label": "Explore Governance & Regulatory Readiness", "fallback_asset": "vectra-d7047ac7e66609406a0cb2e3fa6ac8ad2faf5cca.png" } },
+        { "type": "_vectra-solution-shot", "settings": { "title": "Capability Building at Scale", "text": "Build the practical knowledge and capability teams and suppliers need to apply change and keep it working.", "cta_label": "Explore Capability Building at Scale", "fallback_asset": "vectra-ae8b362b8368e8b200e58c921e1c7c274608a975.png" } },
+        { "type": "_vectra-solution-shot", "settings": { "plus_overlay": true, "title": "Customized Business Solutions", "text": "Some issues span suppliers, systems, evidence, capability, and operations at once. Start with the problem. We'll help identify the right mix of expertise and support.", "cta_label": "Talk to an Expert", "fallback_asset": "vectra-a22c67e8c858a4742869caed8035aebee50f5996.png" } }
+      ]
+    }
+  ]
 }
 {% endschema %}

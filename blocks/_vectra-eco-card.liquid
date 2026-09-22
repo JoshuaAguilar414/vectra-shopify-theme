@@ -1,0 +1,42 @@
+<article class="vsol-card" data-vsol-card {{ block.shopify_attributes }}>
+  <button class="vsol-card__hit" type="button" aria-expanded="false" onclick="window.vsolToggleCard && window.vsolToggleCard(this)">
+    <span class="vsol-card__title">{{ block.settings.title }}</span>
+    <span class="vsol-card__num">{{ block.settings.number }}</span>
+  </button>
+  <div class="vsol-card__panel">
+    {% render 'vectra-image',
+      image: block.settings.image,
+      fallback: block.settings.fallback_asset,
+      alt: block.settings.title,
+      image_width: 800
+    %}
+    <div>
+      {% if block.settings.text != blank %}
+        <p>{{ block.settings.text }}</p>
+      {% endif %}
+      {% if block.settings.cta_label != blank %}
+        <a class="vsol-card__cta" href="{{ block.settings.cta_link | default: '#VectraContactModal' }}" {% if block.settings.cta_link == blank or block.settings.cta_link == '#VectraContactModal' %}data-vh-contact-open{% endif %}>{{ block.settings.cta_label }}</a>
+      {% endif %}
+    </div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Ecosystem card",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "number", "label": "Number", "default": "01" },
+    { "type": "inline_richtext", "id": "title", "label": "Title" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "cta_label", "label": "Link label" },
+    { "type": "url", "id": "cta_link", "label": "Link" },
+    {
+      "type": "text",
+      "id": "fallback_asset",
+      "label": "Theme fallback image"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,48 @@
+{%- doc -%}
+  Theme-editor image with a theme-asset fallback so current photos stay
+  until a merchant uploads a replacement.
+
+  @param {object} image - Shopify image picker value
+  @param {string} fallback - Asset filename or already-resolved URL
+  @param {string} alt
+  @param {string} class
+  @param {number} width
+  @param {number} height
+  @param {string} loading
+  @param {string} fetchpriority
+  @param {number} image_width
+{%- enddoc -%}
+{% liquid
+  assign alt_text = alt | default: ''
+  assign load = loading | default: 'lazy'
+  assign src_width = image_width | default: 1920
+  assign fallback_src = ''
+  if fallback contains '://' or fallback contains '/cdn/' or fallback contains '/assets/'
+    assign fallback_src = fallback
+  elsif fallback != blank
+    assign fallback_src = fallback | asset_url
+  endif
+%}
+{% if image != blank %}
+  {{
+    image
+    | image_url: width: src_width
+    | image_tag:
+      alt: alt_text,
+      class: class,
+      loading: load,
+      fetchpriority: fetchpriority,
+      width: width,
+      height: height
+  }}
+{% elsif fallback_src != blank %}
+  <img
+    src="{{ fallback_src }}"
+    alt="{{ alt_text }}"
+    {% if class != blank %}class="{{ class }}"{% endif %}
+    {% if width != blank %}width="{{ width }}"{% endif %}
+    {% if height != blank %}height="{{ height }}"{% endif %}
+    {% if load != blank %}loading="{{ load }}"{% endif %}
+    {% if fetchpriority != blank %}fetchpriority="{{ fetchpriority }}"{% endif %}
+  >
+{% endif %}

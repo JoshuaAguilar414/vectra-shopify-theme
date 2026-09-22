@@ -1,0 +1,27 @@
+<article class="vsol-glass" data-vh-reveal="down" {{ block.shopify_attributes }}>
+  {% render 'vectra-image',
+    image: block.settings.icon,
+    fallback: block.settings.fallback_asset,
+    alt: '',
+    image_width: 120
+  %}
+  {% if block.settings.heading != blank %}
+    <h3>{{ block.settings.heading }}</h3>
+  {% endif %}
+  {% if block.settings.text != blank %}
+    <p>{{ block.settings.text }}</p>
+  {% endif %}
+</article>
+
+{% schema %}
+{
+  "name": "Outcome card",
+  "tag": null,
+  "settings": [
+    { "type": "image_picker", "id": "icon", "label": "Icon" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "fallback_asset", "label": "Theme fallback icon" }
+  ]
+}
+{% endschema %}

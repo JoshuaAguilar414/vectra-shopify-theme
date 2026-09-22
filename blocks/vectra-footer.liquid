@@ -1,14 +1,49 @@
-{% comment %}
-  The VECTRA footer is rendered once by snippets/vectra-page-shell.liquid
-  so every VECTRA page uses the same module. This block stays in templates
-  for the theme editor and does not print a second footer.
-{% endcomment %}
+{% render 'vectra-footer', block: block %}
 
 {% schema %}
 {
   "name": "VECTRA: Footer",
   "tag": null,
-  "settings": [],
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Your partner for business resilience and operational capability building through an ecosystem of integrated solutions."
+    },
+    { "type": "header", "content": "Link columns" },
+    { "type": "text", "id": "explore_heading", "label": "Explore heading", "default": "Explore" },
+    { "type": "link_list", "id": "explore_menu", "label": "Explore menu", "info": "Leave empty to keep the current Explore links." },
+    { "type": "text", "id": "start_heading", "label": "Start here heading", "default": "Start here" },
+    { "type": "link_list", "id": "start_menu", "label": "Start here menu", "info": "Leave empty to keep the current Start here links." },
+    { "type": "text", "id": "company_heading", "label": "Company heading", "default": "Company" },
+    { "type": "link_list", "id": "company_menu", "label": "Company menu", "info": "Leave empty to keep the current Company links." },
+    { "type": "text", "id": "follow_heading", "label": "Follow heading", "default": "Follow us" },
+    { "type": "header", "content": "Social profiles" },
+    { "type": "url", "id": "linkedin_url", "label": "LinkedIn" },
+    { "type": "url", "id": "youtube_url", "label": "YouTube" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram" },
+    { "type": "url", "id": "facebook_url", "label": "Facebook" },
+    { "type": "url", "id": "x_url", "label": "X" },
+    { "type": "header", "content": "Notice and legal" },
+    { "type": "text", "id": "notice_heading", "label": "Notice heading", "default": "Website upgrade notice" },
+    {
+      "type": "textarea",
+      "id": "notice_text",
+      "label": "Notice text",
+      "default": "VECTRA International is moving this website from WordPress to Shopify. This is a one-time go-live notice, not an email list. Enter your email if you want to know when the new site is live."
+    },
+    { "type": "url", "id": "cookie_url", "label": "Cookie policy" },
+    { "type": "url", "id": "privacy_url", "label": "Privacy policy" },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text",
+      "default": "VECTRA International | All rights reserved.",
+      "info": "Shown after the year. Example: VECTRA International | All rights reserved."
+    }
+  ],
   "presets": [{ "name": "VECTRA: Footer" }]
 }
 {% endschema %}

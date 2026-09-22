@@ -1,0 +1,39 @@
+<article class="vs-leader" data-vs-leader data-vh-reveal="right" {{ block.shopify_attributes }}>
+  <div class="vs-leader__frame">
+    <div class="vs-leader__media">
+      {% render 'vectra-image',
+        image: block.settings.image,
+        fallback: block.settings.fallback_asset,
+        alt: block.settings.name,
+        image_width: 800
+      %}
+      <div class="vs-leader__shade"></div>
+    </div>
+    <div class="vs-leader__id">
+      {% if block.settings.name != blank %}
+        <h3>{{ block.settings.name }}</h3>
+      {% endif %}
+      {% if block.settings.role != blank %}
+        <p class="vs-leader__role{% if block.settings.large_role %} vs-leader__role--lg{% endif %}">{{ block.settings.role }}</p>
+      {% endif %}
+      {% if block.settings.bio != blank %}
+        <p class="vs-leader__bio">{{ block.settings.bio }}</p>
+      {% endif %}
+    </div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Leader",
+  "tag": null,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "name", "label": "Name" },
+    { "type": "inline_richtext", "id": "role", "label": "Role" },
+    { "type": "textarea", "id": "bio", "label": "Bio" },
+    { "type": "checkbox", "id": "large_role", "label": "Larger role label", "default": false },
+    { "type": "text", "id": "fallback_asset", "label": "Theme fallback photo" }
+  ]
+}
+{% endschema %}

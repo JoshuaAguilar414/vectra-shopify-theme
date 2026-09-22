@@ -7,17 +7,21 @@
       assign key = page.handle
     endif
   endif
-  if key == 'marketplace'
-    render 'vectra-course-modules', module: 'catalog', block: block
-  else
-    render 'vectra-course-modules', module: 'detail', course_key: key, block: block
-  endif
 %}
+{% capture nested_courses %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% if key == 'marketplace' %}
+  {% render 'vectra-course-modules', module: 'catalog', block: block, nested_courses: nested_courses %}
+{% else %}
+  {% render 'vectra-course-modules', module: 'detail', course_key: key, block: block %}
+{% endif %}
 
 {% schema %}
 {
   "name": "VECTRA: Course body",
   "tag": null,
+  "blocks": [{ "type": "_vectra-course-card" }],
   "settings": [
     {
       "type": "select",
@@ -32,7 +36,14 @@
         { "value": "course-disability-accommodation", "label": "Disability accommodation" }
       ],
       "default": "auto"
-    }
+    },
+    { "type": "text", "id": "kicker", "label": "Kicker" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "image_picker", "id": "image", "label": "Detail page image" },
+    { "type": "textarea", "id": "summary", "label": "Summary" },
+    { "type": "textarea", "id": "audience", "label": "Who it is for" },
+    { "type": "textarea", "id": "outcome", "label": "What you take away" }
   ],
   "presets": [{ "name": "VECTRA: Course body" }]
 }

@@ -1,10 +1,79 @@
-{% render 'vectra-story-modules', module: 'main', block: block %}
+{% capture nested_leaders %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-story-modules', module: 'main', block: block, nested_leaders: nested_leaders %}
 
 {% schema %}
 {
   "name": "VECTRA: Who we are",
   "tag": null,
-  "settings": [],
-  "presets": [{ "name": "VECTRA: Who we are" }]
+  "blocks": [{ "type": "_vectra-leader" }],
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "The VECTRA Story" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Enabling Positive Business Impact" },
+    { "type": "text", "id": "video_url", "label": "YouTube URL", "default": "https://www.youtube-nocookie.com/embed/C4JHZ69N9Sg?rel=0" },
+    { "type": "text", "id": "video_title", "label": "Video title" },
+    { "type": "textarea", "id": "video_caption", "label": "Video caption" },
+    { "type": "textarea", "id": "mission", "label": "Mission" },
+    { "type": "textarea", "id": "vision", "label": "Vision" },
+    { "type": "header", "content": "Values" },
+    { "type": "text", "id": "values_heading", "label": "Values heading", "default": "VECTRA Values" },
+    {
+      "type": "textarea",
+      "id": "values_text",
+      "label": "Values intro",
+      "default": "These values guide the decisions we make, the relationships we build, and the way we turn our commitments into action."
+    },
+    { "type": "header", "content": "Value cards (used if no Value blocks are added)" },
+    { "type": "text", "id": "value_1_letter", "label": "Value 1 letter", "default": "v" },
+    { "type": "text", "id": "value_1_heading", "label": "Value 1 heading", "default": "Values" },
+    { "type": "textarea", "id": "value_1_text", "label": "Value 1 text", "default": "We are guided by respect, innovation, integrity, and accountability." },
+    { "type": "text", "id": "value_2_letter", "label": "Value 2 letter", "default": "e" },
+    { "type": "text", "id": "value_2_heading", "label": "Value 2 heading", "default": "Ethics" },
+    { "type": "textarea", "id": "value_2_text", "label": "Value 2 text", "default": "We prioritize ethically sourcing goods, empowering others, and creating positive impact." },
+    { "type": "text", "id": "value_3_letter", "label": "Value 3 letter", "default": "c" },
+    { "type": "text", "id": "value_3_heading", "label": "Value 3 heading", "default": "Community" },
+    { "type": "textarea", "id": "value_3_text", "label": "Value 3 text", "default": "We actively build strong, supportive communities, fostering connections that uplift." },
+    { "type": "text", "id": "value_4_letter", "label": "Value 4 letter", "default": "t" },
+    { "type": "text", "id": "value_4_heading", "label": "Value 4 heading", "default": "Transparency" },
+    { "type": "textarea", "id": "value_4_text", "label": "Value 4 text", "default": "We are honest, clear, and open, so you can trust us and know where you stand." },
+    { "type": "text", "id": "value_5_letter", "label": "Value 5 letter", "default": "r" },
+    { "type": "text", "id": "value_5_heading", "label": "Value 5 heading", "default": "Rights" },
+    { "type": "textarea", "id": "value_5_text", "label": "Value 5 text", "default": "We defend human rights and champion fair treatment for all." },
+    { "type": "text", "id": "value_6_letter", "label": "Value 6 letter", "default": "a" },
+    { "type": "text", "id": "value_6_heading", "label": "Value 6 heading", "default": "Action" },
+    { "type": "textarea", "id": "value_6_text", "label": "Value 6 text", "default": "We turn words into real actions that drive meaningful change." },
+    { "type": "header", "content": "Leadership and people teasers" },
+    { "type": "text", "id": "leaders_heading", "label": "Leaders heading", "default": "Our Leadership Team" },
+    { "type": "text", "id": "leaders_button_label", "label": "Leaders button", "default": "Meet Our Leadership" },
+    { "type": "url", "id": "leaders_button_link", "label": "Leaders button link" },
+    { "type": "text", "id": "experts_heading", "label": "Experts heading", "default": "Our Team of Experts" },
+    { "type": "text", "id": "experts_button_label", "label": "Experts button", "default": "Meet All Experts" },
+    { "type": "url", "id": "experts_button_link", "label": "Experts button link" },
+    { "type": "text", "id": "associates_heading", "label": "Associates heading", "default": "Our Associates" },
+    { "type": "text", "id": "associates_button_label", "label": "Associates button", "default": "Meet our associates" },
+    { "type": "url", "id": "associates_button_link", "label": "Associates button link" },
+    { "type": "text", "id": "interns_heading", "label": "Interns heading", "default": "Our Interns" },
+    { "type": "text", "id": "interns_button_label", "label": "Interns button", "default": "Meet our interns" },
+    { "type": "url", "id": "interns_button_link", "label": "Interns button link" },
+    { "type": "text", "id": "people_heading", "label": "Global people heading", "default": "The People Behind VECTRA, Across the World" },
+    { "type": "textarea", "id": "people_text", "label": "Global people text" },
+    { "type": "text", "id": "mission_heading", "label": "Mission heading", "default": "Our Mission" },
+    { "type": "text", "id": "vision_heading", "label": "Vision heading", "default": "Our Vision" },
+    { "type": "video", "id": "map_video", "label": "Map video" },
+    { "type": "image_picker", "id": "map_poster", "label": "Map poster" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA: Who we are",
+      "blocks": [
+        { "type": "_vectra-leader", "settings": { "name": "Patrick Neyts", "role": "CEO", "large_role": true, "bio": "With over 30 years of experience in ESG programs, Corporate Codes, and Responsible Business practices across 11 industry sectors and 40 countries.", "fallback_asset": "vectra-4a782677c9907a899d2e84025df9fda627b7fbf8.png" } },
+        { "type": "_vectra-leader", "settings": { "name": "Shelly Sanders", "role": "SVP, Global Sales, Marketing & Communications", "bio": "With over 30 years of leadership experience in consultative and solution-based sales & operations.", "fallback_asset": "vectra-5a45cef3c985f7964fd6f04020f73a021850f52c.png" } },
+        { "type": "_vectra-leader", "settings": { "name": "Lorenz Berzau", "role": "VP Operations", "bio": "With a focus on sustainability strategy, human rights, and social compliance, backed by 20 years of consultancy experience and a background in law.", "fallback_asset": "vectra-dc0daa0599cf1e7890ac477b6fd8c91f8bc1743a.png" } },
+        { "type": "_vectra-leader", "settings": { "name": "Alana van Wouw", "role": "AI Architect", "bio": "With over 20 years of experience in project management, ESG, financial modeling, and AI.", "fallback_asset": "vectra-dd46b740bdec4d3fe0852fbab0c2855306beb4e4.png" } },
+        { "type": "_vectra-leader", "settings": { "name": "Elizabeth Korban", "role": "Director of Organizational Enablement", "bio": "Elizabeth has 15+ years of experience as a leader responsible for embedding ESG principles into organisational culture, governance and operations.", "fallback_asset": "vectra-8606670d35448bf9a7c0b601a64c49b9be7e86de.png" } }
+      ]
+    }
+  ]
 }
 {% endschema %}

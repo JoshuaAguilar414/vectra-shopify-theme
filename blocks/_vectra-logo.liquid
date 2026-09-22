@@ -1,0 +1,26 @@
+<span class="vh-logos__item" {{ block.shopify_attributes }}>
+  {% render 'vectra-image',
+    image: block.settings.image,
+    fallback: block.settings.fallback_asset,
+    alt: block.settings.alt,
+    height: 52,
+    image_width: 400
+  %}
+</span>
+
+{% schema %}
+{
+  "name": "Logo",
+  "tag": null,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Logo" },
+    { "type": "text", "id": "alt", "label": "Alt text" },
+    {
+      "type": "text",
+      "id": "fallback_asset",
+      "label": "Theme fallback image",
+      "info": "Filename in the theme assets folder. Used until you upload a logo."
+    }
+  ]
+}
+{% endschema %}

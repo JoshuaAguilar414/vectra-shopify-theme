@@ -1,10 +1,33 @@
-{% render 'vectra-home-modules', module: 'logos', block: block %}
+{% capture nested_logos %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-home-modules', module: 'logos', block: block, nested_logos: nested_logos %}
 
 {% schema %}
 {
   "name": "VECTRA: Logo marquee",
   "tag": null,
-  "settings": [],
-  "presets": [{ "name": "VECTRA: Logo marquee" }]
+  "blocks": [{ "type": "_vectra-logo" }],
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Add client logos here. Upload a file on each logo block to replace the current mark."
+    }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA: Logo marquee",
+      "blocks": [
+        { "type": "_vectra-logo", "settings": { "alt": "Marks & Spencer", "fallback_asset": "vectra-a4cdfe52a81d802c9aaf6b7bf6d694343cbedde4.png" } },
+        { "type": "_vectra-logo", "settings": { "alt": "The Copper Mark", "fallback_asset": "vectra-e1d133cc580029cb6b8074e5aae5a7dda46406b4.png" } },
+        { "type": "_vectra-logo", "settings": { "alt": "Responsible Business Alliance", "fallback_asset": "vectra-b45406e535c5bbc9c26b808cd8cbca66f572f9e7.png" } },
+        { "type": "_vectra-logo", "settings": { "alt": "OTTO", "fallback_asset": "vectra-f9891ea3bc104013ef4392a154f93dad123a8da6.png" } },
+        { "type": "_vectra-logo", "settings": { "alt": "Applied Materials", "fallback_asset": "vectra-08b090be3b1f1972589bc05ef1d4cf3d74f30fca.png" } },
+        { "type": "_vectra-logo", "settings": { "alt": "adidas", "fallback_asset": "vectra-cb8e65114981244bc1e02bd76e369c2e9275bc0b.png" } },
+        { "type": "_vectra-logo", "settings": { "alt": "BetterWork", "fallback_asset": "vectra-ac45449dcc22ca95791fd9c0955f7d62850045d2.png" } },
+        { "type": "_vectra-logo", "settings": { "alt": "JYSK", "fallback_asset": "vectra-fc0d652f27cfacfaf98915d93a3a90bbb65771bf.png" } }
+      ]
+    }
+  ]
 }
 {% endschema %}

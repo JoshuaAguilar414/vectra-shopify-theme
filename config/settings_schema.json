@@ -8,6 +8,75 @@
     "theme_support_url": "https://support.shopify.com/"
   },
   {
+    "name": "VECTRA contact",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Used across the footer, FAQ side cards, and contact sections. Leave blank to keep the current VECTRA defaults."
+      },
+      {
+        "type": "text",
+        "id": "vectra_office_phone",
+        "label": "Office phone",
+        "default": "+32 2 620 61 18"
+      },
+      {
+        "type": "text",
+        "id": "vectra_office_phone_tel",
+        "label": "Office phone (tel link)",
+        "default": "+3226206118",
+        "info": "Digits only for the clickable tel: link."
+      },
+      {
+        "type": "text",
+        "id": "vectra_mobile_phone",
+        "label": "Mobile phone",
+        "default": "+32 495 239 088"
+      },
+      {
+        "type": "text",
+        "id": "vectra_mobile_phone_tel",
+        "label": "Mobile phone (tel link)",
+        "default": "+32495239088"
+      },
+      {
+        "type": "text",
+        "id": "vectra_email",
+        "label": "Email",
+        "default": "info@vectra-intl.com"
+      },
+      {
+        "type": "textarea",
+        "id": "vectra_address",
+        "label": "Address",
+        "default": "Chaussée de Wavre 1517B, 1160 Brussels, Belgium"
+      },
+      {
+        "type": "url",
+        "id": "vectra_maps_url",
+        "label": "Google Maps link"
+      },
+      {
+        "type": "text",
+        "id": "vectra_call_label",
+        "label": "Call label",
+        "default": "Give us a call"
+      },
+      {
+        "type": "text",
+        "id": "vectra_email_label",
+        "label": "Email label",
+        "default": "Email"
+      },
+      {
+        "type": "text",
+        "id": "vectra_address_label",
+        "label": "Address label",
+        "default": "Our address"
+      }
+    ]
+  },
+  {
     "name": "t:names.logo_and_favicon",
     "settings": [
       {

@@ -237,8 +237,17 @@
       if (!item || shots[0] === item) return;
 
       const firstRects = shots.map((el) => el.getBoundingClientRect());
+      const wrapOf = (el) => {
+        if (!gallery || !el) return el;
+        let node = el;
+        while (node.parentElement && node.parentElement !== gallery) {
+          node = node.parentElement;
+        }
+        return node;
+      };
       if (gallery) {
-        while (gallery.firstElementChild && gallery.firstElementChild !== item) {
+        const wrap = wrapOf(item);
+        while (gallery.firstElementChild && gallery.firstElementChild !== wrap) {
           gallery.appendChild(gallery.firstElementChild);
         }
       }

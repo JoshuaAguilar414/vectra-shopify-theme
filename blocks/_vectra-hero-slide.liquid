@@ -1,0 +1,48 @@
+<article
+  class="vh-hero__slide{% if block.settings.is_active %} is-active{% endif %}"
+  data-vh-slide
+  {{ block.shopify_attributes }}
+>
+  {% render 'vectra-image',
+    image: block.settings.image,
+    fallback: block.settings.fallback_asset,
+    alt: block.settings.alt,
+    width: 1920,
+    height: 1080,
+    loading: 'eager',
+    fetchpriority: 'high',
+    image_width: 2400
+  %}
+  <div class="vh-hero__copy">
+    {% if block.settings.heading != blank %}
+      <h1 data-vh-hero-el>{{ block.settings.heading }}</h1>
+    {% endif %}
+    {% if block.settings.subheading != blank %}
+      <p class="vh-hero__display" data-vh-hero-el>{{ block.settings.subheading }}</p>
+    {% endif %}
+    {% if block.settings.text != blank %}
+      <p data-vh-hero-el>{{ block.settings.text }}</p>
+    {% endif %}
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Hero slide",
+  "tag": null,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "alt", "label": "Image alt text" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "info": "Rendered as the page H1. Use on one slide only." },
+    { "type": "inline_richtext", "id": "subheading", "label": "Subheading" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "checkbox", "id": "is_active", "label": "Show this slide first", "default": false },
+    {
+      "type": "text",
+      "id": "fallback_asset",
+      "label": "Theme fallback image",
+      "info": "Filename in the theme assets folder. Used until you upload an image."
+    }
+  ]
+}
+{% endschema %}

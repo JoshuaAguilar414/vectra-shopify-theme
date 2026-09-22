@@ -10,8 +10,27 @@
           }
         },
         "hero": { "type": "vectra-con-hero", "settings": {} },
-        "challenges": { "type": "vectra-con-challenges", "settings": {} },
-        "next": { "type": "vectra-con-next", "settings": {} },
+        "challenges": {
+          "type": "vectra-con-challenges",
+          "blocks": {
+            "ch_1": { "type": "_vectra-why-card", "settings": { "heading": "The same problem keeps coming back", "text": "It gets corrected. A few weeks or months later, the same finding, gap, or issue is back — a sign the root cause, not just the symptom, needs attention.", "fallback_asset": "vectra-be208e26a6843edcaa8fc4443996531be291a3b4.svg" } },
+            "ch_2": { "type": "_vectra-why-card", "settings": { "heading": "You have supplier findings, but no clear priority", "text": "You’re sitting on audit results, supplier risk data, or compliance evidence. The harder part is deciding what needs attention first and who owns the next action.", "fallback_asset": "vectra-0741b53e27e031962e5853d5e609fc42e3000a0a.svg" } },
+            "ch_3": { "type": "_vectra-why-card", "settings": { "heading": "The evidence exists, but using it takes too much work", "text": "ESG data, audit records, and compliance evidence are scattered across files, systems, emails, and teams — making it difficult to use, verify, or defend when it matters.", "fallback_asset": "vectra-7710da89715977538c6f4fe9c6dc34d7e755efbe.svg" } },
+            "ch_4": { "type": "_vectra-why-card", "settings": { "heading": "The change makes sense on paper, but it isn’t sticking", "text": "The requirement, process, or system is clear. The people who need to use it day to day are still struggling to make it part of normal work.", "fallback_asset": "vectra-2ff6aff392536da49f749783879fa1d814bae954.svg" } }
+          },
+          "block_order": ["ch_1", "ch_2", "ch_3", "ch_4"],
+          "settings": {}
+        },
+        "next": {
+          "type": "vectra-con-next",
+          "blocks": {
+            "n1": { "type": "_vectra-faq-item", "settings": { "open": true, "question": "01 — Tell Us What’s Happening", "answer": "Share what you already know — a recurring issue, an audit finding, a customer or regulatory requirement, supplier data, an internal process, or something that simply isn’t working as expected. You don’t need to turn it into a formal brief first." } },
+            "n2": { "type": "_vectra-faq-item", "settings": { "question": "02 — We Bring in the Relevant Expertise", "answer": "We review what you’ve shared and bring in the VECTRA International specialists whose experience best fits the issue — in ESG, supply chain resilience, audit, or operational capability building. You won’t have to re-explain the problem through several layers before reaching someone who understands the work." } },
+            "n3": { "type": "_vectra-faq-item", "settings": { "question": "03 — Agree on the Most Useful Next Step", "answer": "The first useful step might be a focused assessment, specialist support, implementation work, capability building, or simply a clearer direction. We agree on that together, rather than assuming the answer before we understand the situation." } }
+          },
+          "block_order": ["n1", "n2", "n3"],
+          "settings": {}
+        },
         "direct": { "type": "vectra-con-direct", "settings": {} },
         "footer": { "type": "vectra-footer", "settings": {} }
       },

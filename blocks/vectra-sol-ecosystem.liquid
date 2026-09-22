@@ -1,10 +1,31 @@
-{% render 'vectra-solutions-modules', module: 'ecosystem', block: block %}
+{% capture nested_cards %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-solutions-modules', module: 'ecosystem', block: block, nested_cards: nested_cards %}
 
 {% schema %}
 {
   "name": "VECTRA: Sol ecosystem",
   "tag": null,
-  "settings": [],
-  "presets": [{ "name": "VECTRA: Sol ecosystem" }]
+  "blocks": [{ "type": "_vectra-eco-card" }],
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Our ecosystem of solutions" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Design. Govern. Execute." },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "custom_label", "label": "Custom card label", "default": "Customized Solution Catered To Your Business Needs" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA: Sol ecosystem",
+      "blocks": [
+        { "type": "_vectra-eco-card", "settings": { "number": "01", "title": "Operational Resilience", "text": "Build operational control, continuity, and a stronger response to disruption.", "cta_label": "Start a briefing", "fallback_asset": "vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png" } },
+        { "type": "_vectra-eco-card", "settings": { "number": "02", "title": "Value Chain Resilience & Improvement", "text": "Connect due diligence, supplier improvement, risk visibility, and practical follow-through.", "cta_label": "Explore delivery", "fallback_asset": "vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png" } },
+        { "type": "_vectra-eco-card", "settings": { "number": "03", "title": "Responsible Business Performance", "text": "Turn stakeholder expectations into clearer decisions, stronger governance, and durable operating practice.", "cta_label": "Build capability", "fallback_asset": "vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png" } },
+        { "type": "_vectra-eco-card", "settings": { "number": "04", "title": "Governance & Regulatory Readiness", "text": "Translate shifting requirements into accountable controls, reliable evidence, and implementation plans.", "cta_label": "Start a briefing", "fallback_asset": "vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png" } },
+        { "type": "_vectra-eco-card", "settings": { "number": "05", "title": "Capability Building at Scale", "text": "Equip teams, leaders, and networks with the confidence and tools to carry the work forward.", "cta_label": "Explore delivery", "fallback_asset": "vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png" } },
+        { "type": "_vectra-eco-card", "settings": { "number": "06", "title": "Human-Centered<br>AI-Enabled Intelligence", "text": "Use technology to strengthen expert judgment, surface relevant signals, and accelerate action.", "cta_label": "Build capability", "fallback_asset": "vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png" } }
+      ]
+    }
+  ]
 }
 {% endschema %}

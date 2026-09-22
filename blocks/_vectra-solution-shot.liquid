@@ -1,0 +1,37 @@
+<button
+  class="vh-sol-shot{% if block.settings.plus_overlay %} vh-sol-shot--plus{% endif %}{% if block.settings.is_active %} is-active{% endif %}"
+  type="button"
+  data-vh-sol-item
+  data-title="{{ block.settings.title | escape }}"
+  data-text="{{ block.settings.text | escape }}"
+  data-cta="{{ block.settings.cta_label | escape }}"
+  {{ block.shopify_attributes }}
+>
+  {% render 'vectra-image',
+    image: block.settings.image,
+    fallback: block.settings.fallback_asset,
+    alt: block.settings.title,
+    image_width: 800
+  %}
+</button>
+
+{% schema %}
+{
+  "name": "Solution shot",
+  "tag": null,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "title", "label": "Title" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "cta_label", "label": "Button label" },
+    { "type": "checkbox", "id": "plus_overlay", "label": "Show plus overlay", "default": false },
+    { "type": "checkbox", "id": "is_active", "label": "Start as the featured shot", "default": false },
+    {
+      "type": "text",
+      "id": "fallback_asset",
+      "label": "Theme fallback image",
+      "info": "Filename in the theme assets folder. Used until you upload an image."
+    }
+  ]
+}
+{% endschema %}

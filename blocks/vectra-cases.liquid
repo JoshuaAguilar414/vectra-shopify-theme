@@ -1,10 +1,28 @@
-{% render 'vectra-home-modules', module: 'cases', block: block %}
+{% capture nested_cases %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-home-modules', module: 'cases', block: block, nested_cases: nested_cases %}
 
 {% schema %}
 {
   "name": "VECTRA: Case studies",
   "tag": null,
-  "settings": [],
-  "presets": [{ "name": "VECTRA: Case studies" }]
+  "blocks": [{ "type": "_vectra-case-card" }],
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Trusted by industry leaders.<br>Proven in practice." },
+    { "type": "text", "id": "reviews_label", "label": "Reviews label", "default": "5/5 — Based on 500 reviews" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Explore more case studies" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA: Case studies",
+      "blocks": [
+        { "type": "_vectra-case-card", "settings": { "name": "OTTO Group", "location": "Hamburg, Germany", "quote": "“Working together transformed our ESG compliance framework. The team simplified complex EU CSRD reporting into a clear roadmap, cutting our data collection timeline by 40% and delivering our annual sustainability report six weeks ahead of schedule.”", "fallback_asset": "vectra-f9891ea3bc104013ef4392a154f93dad123a8da6.png" } },
+        { "type": "_vectra-case-card", "settings": { "name": "CRH", "location": "Hamburg, Germany", "quote": "\"An essential partner for our climate tech scale-up. They optimized our carbon accounting infrastructure to handle rapid user growth while maintaining 100% compliance during intensive third-party client audits.\"", "fallback_asset": "vectra-28a1d7e111c00e8a7fc45b900983e7447e9874e4.png" } },
+        { "type": "_vectra-case-card", "settings": { "name": "Kodak", "location": "Hamburg, Germany", "quote": "\"Finding partners who truly understand Scope 3 emissions tracing is rare. They brought deep domain expertise and seamless execution, enabling us to verify and onboard over 150 sustainable suppliers in under six months.\"", "fallback_asset": "vectra-c581678ac8eabd45e9273d17ceb6fa657d364dc9.png" } }
+      ]
+    }
+  ]
 }
 {% endschema %}

@@ -9,6 +9,13 @@
         },
         "body": {
           "type": "vectra-people-body",
+          "blocks": {
+            "p1": { "type": "_vectra-person", "settings": { "name": "Beat Grüninger", "bio": "Senior Technical Advisor and Lecturer in Sustainability Management and Standards", "fallback_asset": "vectra-14b9e6914bc9f1111966be55232cfa8990739462.png" } },
+            "p2": { "type": "_vectra-person", "settings": { "name": "Berçin Doğan Öztürk", "bio": "13+ years of experience in sustainability, social compliance, and responsible business", "fallback_asset": "vectra-bb37886d23428b36d5a6703f3aa1e71fd1d15929.png" } },
+            "p3": { "type": "_vectra-person", "settings": { "name": "Daniel Ndiwa", "bio": "Sustainability Standards Consultant with 5 years of experience auditing voluntary sustainability standards in coffee, tea, avocado, and horticulture across Eastern Africa", "fallback_asset": "vectra-70734a58f670e934fa9e18fa958676614dedc858.png" } },
+            "p4": { "type": "_vectra-person", "settings": { "name": "Iddah Ooko", "bio": "Environmental and Social Impact Consultant with 15+ years leading environmental impact assessments, audits, ESG, and multidisciplinary development projects", "fallback_asset": "vectra-a7fddb20a7074e9dc372d79b62756ec3622de6d2.png" } }
+          },
+          "block_order": ["p1", "p2", "p3", "p4"],
           "settings": { "page_type": "experts" }
         },
         "footer": { "type": "vectra-footer", "settings": {} }

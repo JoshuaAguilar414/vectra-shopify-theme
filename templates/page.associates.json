@@ -9,6 +9,13 @@
         },
         "body": {
           "type": "vectra-people-body",
+          "blocks": {
+            "p1": { "type": "_vectra-person", "settings": { "name": "Regional Associate — Africa", "bio": "Local market context for supplier engagement, social compliance, and operational follow-through across African supply chains.", "fallback_asset": "vectra-3d90b6de863f4a0f6cfb9e8f77617b9ea7caeff1.png" } },
+            "p2": { "type": "_vectra-person", "settings": { "name": "Regional Associate — Europe", "bio": "Hands-on support for ESG reporting, due diligence, and capability building with European brands and their supplier networks.", "fallback_asset": "vectra-c543bcdfc727d87f2710b5345cea3b7eb76daab1.png" } },
+            "p3": { "type": "_vectra-person", "settings": { "name": "Regional Associate — Asia", "bio": "Factory, farm, and mill experience that helps teams turn audit findings into practical, locally workable action.", "fallback_asset": "vectra-26b8a07235b9d48b395528564d6124a59d29f6e3.png" } },
+            "p4": { "type": "_vectra-person", "settings": { "name": "Regional Associate — Americas", "bio": "Specialist support for responsible sourcing, labour standards, and operational resilience programmes across the Americas.", "fallback_asset": "vectra-portrait-placeholder.png" } }
+          },
+          "block_order": ["p1", "p2", "p3", "p4"],
           "settings": { "page_type": "associates" }
         },
         "footer": { "type": "vectra-footer", "settings": {} }

@@ -347,6 +347,16 @@
   margin: 0 auto;
 }
 
+.vectra-sol .vsol-eco__cols > *:not(.vsol-eco__col) {
+  min-width: 0;
+}
+
+.vectra-sol .vsol-svc__grid > *:not(.vsol-svc-card),
+.vectra-sol .vsol-out__cards > *:not(.vsol-glass),
+.vectra-sol .vsol-process__cards > *:not(.vsol-step) {
+  min-width: 0;
+}
+
 .vectra-sol .vsol-eco__cols {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

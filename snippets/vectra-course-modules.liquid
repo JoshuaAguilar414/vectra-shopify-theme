@@ -35,11 +35,15 @@
 {% if view == 'catalog' %}
 <section class="vh-course-land" {{ block.shopify_attributes }}>
   <div class="vh-wrap">
-    <p class="vh-kicker">Marketplace</p>
-    <h1 class="vh-h2">Courses and capability paths</h1>
-    <p class="vh-lead">Checkout and enrolment are not live on this first release. These landing pages are the real course experience until Shopify commerce is connected. Enquire and we will place you on the right path.</p>
+    <p class="vh-kicker">{{ block.settings.kicker | default: 'Marketplace' }}</p>
+    <h1 class="vh-h2">{{ block.settings.heading | default: 'Courses and capability paths' }}</h1>
+    <p class="vh-lead">{{ block.settings.text | default: 'Checkout and enrolment are not live on this first release. These landing pages are the real course experience until Shopify commerce is connected. Enquire and we will place you on the right path.' }}</p>
   </div>
   <div class="vh-wrap vh-courses vh-course-land__grid">
+    {% assign nested_courses = nested_courses | strip %}
+    {% if nested_courses != blank %}
+      {{ nested_courses }}
+    {% else %}
     <article class="vh-course">
       <img src="{{ img_1 }}" alt="">
       <div class="vh-course__body">
@@ -80,6 +84,7 @@
         </div>
       </div>
     </article>
+    {% endif %}
   </div>
 </section>
 
@@ -115,10 +120,25 @@
     assign audience = 'Anyone who has to read, write, or defend ESG and due-diligence language across operations, procurement, and reporting.'
     assign outcome = 'Teams stop talking past each other. Requirements, evidence, and next actions use the same terms.'
   endif
+  if block.settings.heading != blank
+    assign title = block.settings.heading
+  endif
+  if block.settings.summary != blank
+    assign summary = block.settings.summary
+  endif
+  if block.settings.audience != blank
+    assign audience = block.settings.audience
+  endif
+  if block.settings.outcome != blank
+    assign outcome = block.settings.outcome
+  endif
+  if block.settings.image != blank
+    assign img = block.settings.image | image_url: width: 1200
+  endif
 %}
 <section class="vh-course-land" {{ block.shopify_attributes }}>
   <div class="vh-wrap vh-course-land__hero">
-    <p class="vh-kicker">Course landing page</p>
+    <p class="vh-kicker">{{ block.settings.kicker | default: 'Course landing page' }}</p>
     <h1 class="vh-h2">{{ title }}</h1>
     <p class="vh-lead">{{ summary }}</p>
     <p class="vh-course-land__note">Enrolment and checkout are not enabled on this release. This page is the live course experience until Marketplace commerce is connected.</p>

@@ -1,7 +1,7 @@
 {% capture children %}
   {% content_for 'blocks' %}
 {% endcapture %}
-{% render 'vectra-page-shell', children: children, include_solutions: true %}
+{% render 'vectra-page-shell', children: children, include_solutions: true, skip_footer: true %}
 
 {% schema %}
 {

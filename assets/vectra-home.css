@@ -699,6 +699,45 @@
   opacity: 0.85;
 }
 
+.vh-hero__track > *:not(.vh-hero__slide) {
+  position: absolute;
+  inset: 0;
+}
+
+.vh-hero__track > *:not(.vh-hero__slide) .vh-hero__slide {
+  position: absolute;
+  inset: 0;
+}
+
+.vh-logos__track > *:not(img) {
+  display: flex;
+  align-items: center;
+  flex: none;
+  height: 52px;
+}
+
+.vh-logos__item {
+  display: flex;
+  align-items: center;
+  height: 52px;
+}
+
+.vh-why__list > *:not(.vh-why__item),
+.vh-case-grid > *:not(.vh-case),
+.vs-experts__grid > *:not(.vs-expert) {
+  min-width: 0;
+}
+
+.vh-solutions__gallery > *:not(.vh-sol-shot) {
+  display: flex;
+  flex: none;
+  align-items: flex-end;
+}
+
+.vh-solutions__gallery > *:not(.vh-sol-shot) .vh-sol-shot {
+  flex: none;
+}
+
 /* Interior page hero — shared by VECTRA subpages */
 .vh-page-hero {
   position: relative;
@@ -721,6 +760,20 @@
   border-radius: 50% 50% 0 0;
   z-index: 0;
   pointer-events: none;
+}
+
+.vh-page-hero.has-image {
+  background: #092543;
+}
+
+.vh-page-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.38;
 }
 
 .vh-page-hero__inner {

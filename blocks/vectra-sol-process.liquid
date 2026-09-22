@@ -1,10 +1,26 @@
-{% render 'vectra-solutions-modules', module: 'process', block: block %}
+{% capture nested_steps %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-solutions-modules', module: 'process', block: block, nested_steps: nested_steps %}
 
 {% schema %}
 {
   "name": "VECTRA: Sol process",
   "tag": null,
-  "settings": [],
-  "presets": [{ "name": "VECTRA: Sol process" }]
+  "blocks": [{ "type": "_vectra-process-step" }],
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "From complexity to clearer, more resilient performance." }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA: Sol process",
+      "blocks": [
+        { "type": "_vectra-process-step", "settings": { "number": "01", "heading": "Context", "text": "See the real operating environment." } },
+        { "type": "_vectra-process-step", "settings": { "number": "02", "heading": "Path", "text": "Design the practical route forward." } },
+        { "type": "_vectra-process-step", "settings": { "number": "03", "heading": "Implementation", "text": "Work alongside accountable owners.", "featured": true } },
+        { "type": "_vectra-process-step", "settings": { "number": "04", "heading": "Impact", "text": "Measure what changed for the business." } }
+      ]
+    }
+  ]
 }
 {% endschema %}

@@ -6,6 +6,7 @@
   @param {boolean} [include_story] - Also load Our Story CSS/JS
   @param {boolean} [include_solutions] - Also load Solutions CSS/JS
   @param {boolean} [include_resources] - Also load Resources CSS/JS
+  @param {boolean} [skip_footer] - Footer is rendered by the VECTRA footer block instead
 {%- enddoc -%}
 
 {% render 'vectra-assets', include_css: true, include_js: true, include_story: include_story, include_solutions: include_solutions, include_resources: include_resources %}
@@ -24,5 +25,7 @@
   {% endif %}
 >
   {{ children }}
-  {% render 'vectra-footer' %}
+  {% unless skip_footer %}
+    {% render 'vectra-footer' %}
+  {% endunless %}
 </div>

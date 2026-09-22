@@ -1,10 +1,28 @@
-{% render 'vectra-contact-modules', module: 'next', block: block %}
+{% capture nested_items %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-contact-modules', module: 'next', block: block, nested_items: nested_items %}
 
 {% schema %}
 {
   "name": "VECTRA: Contact next",
   "tag": null,
-  "settings": [],
-  "presets": [{ "name": "VECTRA: Contact next" }]
+  "blocks": [{ "type": "_vectra-faq-item" }],
+  "settings": [
+    { "type": "text", "id": "card_title", "label": "Side card title", "default": "Prefer to reach us directly?" },
+    { "type": "textarea", "id": "card_text", "label": "Side card text" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Next" },
+    { "type": "text", "id": "heading", "label": "Heading" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA: Contact next",
+      "blocks": [
+        { "type": "_vectra-faq-item", "settings": { "open": true, "question": "01 — Tell Us What’s Happening", "answer": "Share what you already know — a recurring issue, an audit finding, a customer or regulatory requirement, supplier data, an internal process, or something that simply isn’t working as expected. You don’t need to turn it into a formal brief first." } },
+        { "type": "_vectra-faq-item", "settings": { "question": "02 — We Bring in the Relevant Expertise", "answer": "We review what you’ve shared and bring in the VECTRA International specialists whose experience best fits the issue — in ESG, supply chain resilience, audit, or operational capability building." } },
+        { "type": "_vectra-faq-item", "settings": { "question": "03 — Agree on the Most Useful Next Step", "answer": "The first useful step might be a focused assessment, specialist support, implementation work, capability building, or simply a clearer direction. We agree on that together." } }
+      ]
+    }
+  ]
 }
 {% endschema %}

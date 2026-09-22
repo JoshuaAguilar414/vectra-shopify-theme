@@ -1,0 +1,16 @@
+<div class="vh-acc{% if block.settings.open %} is-open{% endif %}" data-vh-faq-item {{ block.shopify_attributes }}>
+  <button type="button" data-vh-faq-btn>{{ block.settings.question }}</button>
+  <div class="vh-acc__body">{{ block.settings.answer }}</div>
+</div>
+
+{% schema %}
+{
+  "name": "FAQ item",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "question", "label": "Question" },
+    { "type": "textarea", "id": "answer", "label": "Answer" },
+    { "type": "checkbox", "id": "open", "label": "Start open", "default": false }
+  ]
+}
+{% endschema %}

@@ -702,6 +702,10 @@
   transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.vectra-story .vs-leaders__track > *:not(.vs-leader) {
+  flex: none;
+}
+
 .vectra-story .vs-leader {
   position: relative;
   flex: none;
@@ -940,6 +944,10 @@
   gap: 28px 20px;
   width: min(1600px, calc(100% - 80px));
   margin: 0 auto 40px;
+}
+
+.vectra-story .vs-experts__grid > *:not(.vs-expert) {
+  min-width: 0;
 }
 
 .vectra-story .vs-expert {

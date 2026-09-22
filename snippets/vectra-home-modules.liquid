@@ -78,8 +78,12 @@
 {% case module %}
   {% when 'hero' %}
 {% render 'vectra-seo', page_key: 'home' %}
+{% assign nested_slides = nested_slides | strip %}
 <section class="vh-hero" data-vh-carousel aria-label="Featured" {{ block.shopify_attributes }}>
     <div class="vh-hero__track" data-vh-track>
+      {% if nested_slides != blank %}
+        {{ nested_slides }}
+      {% else %}
       <article class="vh-hero__slide is-active" data-vh-slide>
         <img src="{{ img_hero }}" alt="VECTRA team collaborating" width="1920" height="1080">
         <div class="vh-hero__copy">
@@ -99,6 +103,7 @@
           </p>
         </div>
       </article>
+      {% endif %}
     </div>
     <button class="vh-hero__arrow vh-hero__arrow--prev" type="button" data-vh-prev aria-label="Previous slide">
       <img class="vh-hero__arrow-bg" src="{{ img_arrow_circle }}" alt="">
@@ -111,16 +116,21 @@
   </section>
 
   {% when 'trust' %}
+{% liquid
+  assign trust_heading = block.settings.heading | default: '20+ Years of Experience. 500+ Organizations Supported.'
+  assign trust_btn = block.settings.button_label | default: 'Explore Case Studies'
+  assign trust_link = block.settings.button_link | default: '#cases'
+%}
 <section class="vh-trust" {{ block.shopify_attributes }}>
     <div class="vh-wrap">
       <div class="vh-trust__row">
         <div class="vh-seal" aria-hidden="true">
-          <img src="{{ img_seal }}" alt="" width="198" height="193" data-vh-reveal="scale">
+          {% render 'vectra-image', image: block.settings.badge, fallback: img_seal, alt: '', width: 198, height: 193, image_width: 400 %}
         </div>
         <div class="vh-trust__copy">
-          <h2 data-vh-reveal="left">20+ Years of Experience. 500+ Organizations Supported.</h2>
-          <a class="vh-btn vh-btn--green vh-btn--rect" href="#cases" data-vh-reveal="scale">
-            Explore Case Studies
+          <h2 data-vh-reveal="left">{{ trust_heading }}</h2>
+          <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ trust_link }}" data-vh-reveal="scale">
+            {{ trust_btn }}
           </a>
         </div>
       </div>
@@ -128,8 +138,12 @@
   </section>
 
   {% when 'logos' %}
+{% assign nested_logos = nested_logos | strip %}
 <div class="vh-logos" aria-label="Trusted by" {{ block.shopify_attributes }}>
     <div class="vh-logos__track" data-vh-marquee>
+      {% if nested_logos != blank %}
+        {{ nested_logos }}
+      {% else %}
       {% for i in (1..2) %}
         <img src="{{ img_logo_ms }}" alt="{% if i == 1 %}Marks & Spencer{% endif %}">
         <img src="{{ img_logo_copper }}" alt="{% if i == 1 %}The Copper Mark{% endif %}">
@@ -140,43 +154,57 @@
         <img src="{{ img_logo_better }}" alt="{% if i == 1 %}BetterWork{% endif %}">
         <img src="{{ img_logo_jysk }}" alt="{% if i == 1 %}JYSK{% endif %}">
       {% endfor %}
+      {% endif %}
     </div>
   </div>
 
   {% when 'impact' %}
 <section class="vh-impact" {{ block.shopify_attributes }}>
     <div class="vh-wrap">
+      {% if block.settings.image != blank %}
+        {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: 'Enabling Positive Business Impact' }}
+      {% else %}
       <h2 data-vh-reveal="scale" aria-label="Enabling Positive Business Impact">
         <span class="vh-impact__word">Enabling</span>
         <span class="vh-impact__word vh-impact__positive">P<img class="vh-impact__mark" src="{{ img_mark }}" alt="" width="37" height="37">siti<img class="vh-impact__v" src="{{ img_check }}" alt="" width="40" height="49">e</span>
         <span class="vh-impact__word">Business Impact</span>
       </h2>
+      {% endif %}
     </div>
   </section>
 
   {% when 'why' %}
+{% liquid
+  assign why_kicker = block.settings.kicker | default: 'WHY VECTRA'
+  assign why_heading = block.settings.heading | default: 'Why Choose VECTRA as Your<br>Business Resilience Partner'
+  assign why_text = block.settings.text | default: 'A report can tell you what needs to change. A dashboard can show you where the problem is showing up. The harder part is turning that information into clear ownership, practical action, and a change that holds. VECTRA works with your teams, suppliers, and existing systems as decisions move into practice.'
+  assign why_btn = block.settings.button_label | default: 'See Why VECTRA'
+  assign why_link = block.settings.button_link | default: '#solutions'
+  assign nested_cards = nested_cards | strip
+%}
 <section class="vh-why" id="why-vectra" {{ block.shopify_attributes }}>
     <div class="vh-wrap vh-why__grid">
       <div class="vh-why__media">
-        <img src="{{ img_why }}" alt="VECTRA International facility" width="980" height="720">
+        {% render 'vectra-image', image: block.settings.image, fallback: img_why, alt: 'VECTRA International facility', width: 980, height: 720, image_width: 1600 %}
       </div>
       <div class="vh-why__copy" data-vh-reveal>
         <p class="vh-kicker vh-kicker--arrows">
           <img src="{{ img_kicker_l }}" alt="" class="vh-kicker__arrow vh-kicker__arrow--l">
-          WHY VECTRA
+          {{ why_kicker }}
           <img src="{{ img_kicker_r }}" alt="" class="vh-kicker__arrow">
         </p>
-        <h2>Why Choose VECTRA as Your<br>Business Resilience Partner</h2>
-        <p>
-          A report can tell you what needs to change. A dashboard can show you where the problem is showing up. The harder part is turning that information into clear ownership, practical action, and a change that holds. VECTRA works with your teams, suppliers, and existing systems as decisions move into practice.
-        </p>
-        <a class="vh-btn vh-btn--green vh-btn--rect" href="#solutions">
-          See Why VECTRA
+        <h2>{{ why_heading }}</h2>
+        <p>{{ why_text }}</p>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ why_link }}">
+          {{ why_btn }}
           <img src="{{ img_arrow }}" alt="">
         </a>
       </div>
     </div>
     <div class="vh-wrap vh-why__list">
+      {% if nested_cards != blank %}
+        {{ nested_cards }}
+      {% else %}
       <article class="vh-why__item" data-vh-reveal>
         <img src="{{ img_icon_4 }}" alt="">
         <h3>Partnership With Accountability</h3>
@@ -197,31 +225,46 @@
         <h3>Progress You Can Measure</h3>
         <p>We agree what improvement should look like at the start, then track what changed and what still needs attention.</p>
       </article>
+      {% endif %}
     </div>
   </section>
 
   {% when 'esg' %}
+{% liquid
+  assign esg_heading = block.settings.heading | default: 'Helping Organizations Build<br>Long-Term Business Resilience'
+  assign esg_text = block.settings.text | default: 'Since 2005, VECTRA International has worked across responsible business, supply chains, and operational improvement. That experience now supports a broader role in business resilience and operational capability building.'
+  assign esg_s1v = block.settings.stat_1_value | default: '100+'
+  assign esg_s1l = block.settings.stat_1_label | default: 'Experts Worldwide'
+  assign esg_s2v = block.settings.stat_2_value | default: '20+'
+  assign esg_s2l = block.settings.stat_2_label | default: 'Years of Experience'
+  assign esg_s3v = block.settings.stat_3_value | default: '500+'
+  assign esg_s3l = block.settings.stat_3_label | default: 'Satisfied Clients'
+%}
 <section class="vh-esg" {{ block.shopify_attributes }}>
     <div class="vh-esg__stage">
       <div class="vh-esg__glow" aria-hidden="true"></div>
       <div class="vh-esg__copy" data-vh-reveal>
-        <h2>Helping Organizations Build<br>Long-Term Business Resilience</h2>
-        <p class="vh-lead">
-          Since 2005, VECTRA International has worked across responsible business, supply chains, and operational improvement. That experience now supports a broader role in business resilience and operational capability building.
-        </p>
+        <h2>{{ esg_heading }}</h2>
+        <p class="vh-lead">{{ esg_text }}</p>
       </div>
-      <div class="vh-stat vh-stat--100" data-vh-reveal="right"><b>100+</b><span>Experts Worldwide</span></div>
-      <div class="vh-stat vh-stat--30" data-vh-reveal="left"><b>20+</b><span>Years of Experience</span></div>
-      <div class="vh-stat vh-stat--500" data-vh-reveal="up"><b>500+</b><span>Satisfied Clients</span></div>
+      <div class="vh-stat vh-stat--100" data-vh-reveal="right"><b>{{ esg_s1v }}</b><span>{{ esg_s1l }}</span></div>
+      <div class="vh-stat vh-stat--30" data-vh-reveal="left"><b>{{ esg_s2v }}</b><span>{{ esg_s2l }}</span></div>
+      <div class="vh-stat vh-stat--500" data-vh-reveal="up"><b>{{ esg_s3v }}</b><span>{{ esg_s3l }}</span></div>
     </div>
   </section>
 
   {% when 'solutions' %}
+{% liquid
+  assign sol_kicker = block.settings.kicker | default: 'VECTRA Solutions'
+  assign sol_heading = block.settings.heading | default: 'Responsible Business Transformation That Creates Value'
+  assign sol_btn = block.settings.button_label | default: 'Talk to an Expert →'
+  assign nested_shots = nested_shots | strip
+%}
 <section class="vh-solutions" id="solutions" data-vh-solutions {{ block.shopify_attributes }}>
     <div class="vh-solutions__canvas">
       <div class="vh-solutions__head" data-vh-reveal>
-        <p class="vh-kicker">VECTRA Solutions</p>
-        <h2>Responsible Business Transformation That Creates Value</h2>
+        <p class="vh-kicker">{{ sol_kicker }}</p>
+        <h2>{{ sol_heading }}</h2>
       </div>
       <div class="vh-solutions__body">
         <div class="vh-solutions__copy" data-vh-sol-copy>
@@ -230,6 +273,9 @@
               <a class="vh-btn vh-btn--green vh-btn--rect" href="#VectraContactModal" data-vh-contact-open data-vh-sol-cta>Explore Operational Resilience</a>
         </div>
         <div class="vh-solutions__gallery">
+          {% if nested_shots != blank %}
+            {{ nested_shots }}
+          {% else %}
           <button
             class="vh-sol-shot is-active"
             type="button"
@@ -290,24 +336,53 @@
           >
             <img src="{{ img_sol_4 }}" alt="Customized business solutions">
           </button>
+          {% endif %}
         </div>
       </div>
       <div class="vh-solutions__cta">
         <a class="vh-btn vh-btn--green vh-btn--rect" href="#VectraContactModal" data-vh-contact-open>
-          Talk to an Expert →
+          {{ sol_btn }}
         </a>
       </div>
     </div>
   </section>
 
   {% when 'marketplace' %}
+{% liquid
+  assign market_heading = block.settings.heading | default: 'Learn What Matters. Build Capability That Lasts.'
+  assign market_text = block.settings.text | default: 'Explore 100+ expert-led courses across ESG, sustainability, responsible business, compliance, due diligence, and supply chains'
+  assign market_btn = block.settings.button_label | default: 'Find the Right Course'
+  if block.settings.button_link != blank
+    assign market_cta = block.settings.button_link
+  else
+    assign market_cta = marketplace_href
+  endif
+  assign topics_heading = block.settings.topics_heading | default: 'Relevant Topics'
+  assign topic_label = block.settings.topic_label | default: 'Certificate Course'
+  assign price_label = block.settings.price_label | default: 'Coming to Marketplace'
+  assign pill_1 = block.settings.pill_1 | default: 'Most Popular →'
+  assign pill_2 = block.settings.pill_2 | default: 'By Regulation →'
+  assign pill_3 = block.settings.pill_3 | default: 'By Role →'
+  if block.settings.course_image_1 != blank
+    assign img_course_1 = block.settings.course_image_1 | image_url: width: 640
+  endif
+  if block.settings.course_image_2 != blank
+    assign img_course_2 = block.settings.course_image_2 | image_url: width: 640
+  endif
+  if block.settings.course_image_3 != blank
+    assign img_course_3 = block.settings.course_image_3 | image_url: width: 640
+  endif
+  if block.settings.course_image_4 != blank
+    assign img_course_4 = block.settings.course_image_4 | image_url: width: 640
+  endif
+%}
 <section class="vh-market" id="marketplace" {{ block.shopify_attributes }}>
     <div class="vh-market__panel">
     <div class="vh-wrap">
       <div class="vh-market__head">
-        <h2 class="vh-h2">Learn What Matters. Build Capability That Lasts.</h2>
-        <p class="vh-lead">Explore 100+ expert-led courses across ESG, sustainability, responsible business, compliance, due diligence, and supply chains</p>
-        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ marketplace_href }}">Find the Right Course</a>
+        <h2 class="vh-h2">{{ market_heading }}</h2>
+        <p class="vh-lead">{{ market_text }}</p>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ market_cta }}">{{ market_btn }}</a>
       </div>
       <form class="vh-searchbar" action="{{ routes.search_url }}" method="get" role="search">
         <label class="vh-searchbar__q">
@@ -323,6 +398,9 @@
       <h2 class="vh-h2">Featured Courses</h2>
       {% liquid
         assign course_products = collections['courses'].products
+        if block.settings.collection != blank
+          assign course_products = block.settings.collection.products
+        endif
         if course_products.size == 0
           assign course_products = collections['frontpage'].products
         endif
@@ -342,7 +420,7 @@
               <div class="vh-course__body">
                 <h3>{{ product.title }}</h3>
                 <div class="vh-course__meta">
-                  <span class="vh-price">Coming to Marketplace</span>
+                  <span class="vh-price">{{ price_label }}</span>
                   <a class="vh-course__cta" href="{{ product.url }}">View Course</a>
                 </div>
               </div>
@@ -354,7 +432,7 @@
             <div class="vh-course__body">
               <h3>Acronyms Used in ESG Area</h3>
               <div class="vh-course__meta">
-                <span class="vh-price">Coming to Marketplace</span>
+                <span class="vh-price">{{ price_label }}</span>
                 <a class="vh-course__cta" href="{{ course_esg_href }}">View course</a>
               </div>
             </div>
@@ -364,7 +442,7 @@
             <div class="vh-course__body">
               <h3>Preventative and Corrective Measures</h3>
               <div class="vh-course__meta">
-                <span class="vh-price">Coming to Marketplace</span>
+                <span class="vh-price">{{ price_label }}</span>
                 <a class="vh-course__cta" href="{{ course_prev_href }}">View course</a>
               </div>
             </div>
@@ -374,7 +452,7 @@
             <div class="vh-course__body">
               <h3>Optimizing Purchasing Practices</h3>
               <div class="vh-course__meta">
-                <span class="vh-price">Coming to Marketplace</span>
+                <span class="vh-price">{{ price_label }}</span>
                 <a class="vh-course__cta" href="{{ course_buy_href }}">View course</a>
               </div>
             </div>
@@ -384,7 +462,7 @@
             <div class="vh-course__body">
               <h3>Disability Accommodation Training</h3>
               <div class="vh-course__meta">
-                <span class="vh-price">Coming to Marketplace</span>
+                <span class="vh-price">{{ price_label }}</span>
                 <a class="vh-course__cta" href="{{ course_dis_href }}">View course</a>
               </div>
             </div>
@@ -393,11 +471,11 @@
       </div>
 
       <div class="vh-topics">
-        <h2 class="vh-h2">Relevant Topics</h2>
+        <h2 class="vh-h2">{{ topics_heading }}</h2>
         <div class="vh-pills">
-          <span class="vh-pill">Most Popular →</span>
-          <span class="vh-pill">By Regulation →</span>
-          <span class="vh-pill">By Role →</span>
+          {% if pill_1 != blank %}<span class="vh-pill">{{ pill_1 }}</span>{% endif %}
+          {% if pill_2 != blank %}<span class="vh-pill">{{ pill_2 }}</span>{% endif %}
+          {% if pill_3 != blank %}<span class="vh-pill">{{ pill_3 }}</span>{% endif %}
         </div>
         <div class="vh-topics__list">
           {% if course_products.size > 0 %}
@@ -409,11 +487,11 @@
                   <img src="{{ img_course_2 }}" alt="">
                 {% endif %}
                 <div class="vh-topic-card__body">
-                  <span class="vh-topic-card__label">Certificate Course</span>
+                  <span class="vh-topic-card__label">{{ topic_label }}</span>
                   <h3>{{ product.title }}</h3>
                   <p>{{ product.description | strip_html | truncate: 220 }}</p>
                   <div class="vh-course__meta">
-                    <span class="vh-price">Coming to Marketplace</span>
+                    <span class="vh-price">{{ price_label }}</span>
                     <a class="vh-course__cta" href="{{ product.url }}">View Course</a>
                   </div>
                 </div>
@@ -423,13 +501,13 @@
           <article class="vh-topic-card">
             <img src="{{ img_course_2 }}" alt="">
             <div class="vh-topic-card__body">
-              <span class="vh-topic-card__label">Certificate Course</span>
+              <span class="vh-topic-card__label">{{ topic_label }}</span>
               <h3>Preventative and Corrective Measures</h3>
               <p>
                 This course provides a comprehensive framework for managing supply chain due diligence in 2026. It focuses on the dual approach of using preventative measures as a “proactive shield” to avoid crises and corrective measures as a “surgical fix” to address and remediate existing violations.
               </p>
               <div class="vh-course__meta">
-                <span class="vh-price">Coming to Marketplace</span>
+                <span class="vh-price">{{ price_label }}</span>
                 <a class="vh-course__cta" href="{{ course_prev_href }}">View course</a>
               </div>
             </div>
@@ -437,13 +515,13 @@
           <article class="vh-topic-card">
             <img src="{{ img_course_3 }}" alt="">
             <div class="vh-topic-card__body">
-              <span class="vh-topic-card__label">Certificate Course</span>
+              <span class="vh-topic-card__label">{{ topic_label }}</span>
               <h3>Optimizing Purchasing Practices</h3>
               <p>
                 Learn how purchasing decisions shape supplier performance, cost, and ESG outcomes—and how to build practices that hold up under scrutiny.
               </p>
               <div class="vh-course__meta">
-                <span class="vh-price">Coming to Marketplace</span>
+                <span class="vh-price">{{ price_label }}</span>
                 <a class="vh-course__cta" href="{{ course_buy_href }}">View course</a>
               </div>
             </div>
@@ -451,13 +529,13 @@
           <article class="vh-topic-card">
             <img src="{{ img_course_1 }}" alt="">
             <div class="vh-topic-card__body">
-              <span class="vh-topic-card__label">Certificate Course</span>
+              <span class="vh-topic-card__label">{{ topic_label }}</span>
               <h3>Acronyms Used in ESG Area</h3>
               <p>
                 Build a shared vocabulary for ESG, due diligence, and supply-chain reporting so teams can act faster and with less confusion.
               </p>
               <div class="vh-course__meta">
-                <span class="vh-price">Coming to Marketplace</span>
+                <span class="vh-price">{{ price_label }}</span>
                 <a class="vh-course__cta" href="{{ course_esg_href }}">View course</a>
               </div>
             </div>
@@ -470,12 +548,26 @@
   </section>
 
   {% when 'cases' %}
+{% liquid
+  assign cases_heading = block.settings.heading | default: 'Trusted by industry leaders.<br>Proven in practice.'
+  assign cases_reviews = block.settings.reviews_label | default: '5/5 — Based on 500 reviews'
+  assign cases_btn = block.settings.button_label | default: 'Explore more case studies'
+  if block.settings.button_link != blank
+    assign cases_cta = block.settings.button_link
+  else
+    assign cases_cta = resources_href
+  endif
+  assign nested_cases = nested_cases | strip
+%}
 <section class="vh-cases" id="cases" {{ block.shopify_attributes }}>
     <canvas class="vh-cases__grid" data-vh-cases-grid aria-hidden="true"></canvas>
     <div class="vh-wrap">
-      <h2 data-vh-reveal>Trusted by industry leaders.<br>Proven in practice.</h2>
-      <span class="vh-reviews">5/5 — Based on 500 reviews</span>
+      <h2 data-vh-reveal>{{ cases_heading }}</h2>
+      <span class="vh-reviews">{{ cases_reviews }}</span>
       <div class="vh-case-grid">
+        {% if nested_cases != blank %}
+          {{ nested_cases }}
+        {% else %}
         <article class="vh-case" data-vh-reveal>
           <div class="vh-case__main">
             <div class="vh-case__photo"><img src="{{ img_logo_otto }}" alt=""></div>
@@ -539,6 +631,7 @@
             </blockquote>
           </div>
         </article>
+        {% endif %}
       </div>
       <div class="vh-case-dots" aria-hidden="true">
         <span></span>
@@ -546,8 +639,8 @@
         <span></span>
         <span></span>
       </div>
-      <a class="vh-btn vh-btn--green vh-cases__cta" href="{{ resources_href }}">
-        Explore more case studies
+      <a class="vh-btn vh-btn--green vh-cases__cta" href="{{ cases_cta }}">
+        {{ cases_btn }}
         <img src="{{ img_arrow }}" alt="">
       </a>
     </div>
@@ -556,14 +649,30 @@
   {% when 'blog' %}
 <section class="vh-blog" id="resources" {{ block.shopify_attributes }}>
     <div class="vh-wrap">
-      <p class="vh-kicker" data-vh-reveal="scale">Insights</p>
-      <h2 class="vh-h2" data-vh-reveal="scale">Latest Insights</h2>
+      <p class="vh-kicker" data-vh-reveal="scale">{{ block.settings.kicker | default: 'Insights' }}</p>
+      <h2 class="vh-h2" data-vh-reveal="scale">{{ block.settings.heading | default: 'Latest Insights' }}</h2>
       {% liquid
-        assign insight_blog = blogs['insights']
+        assign insight_blog = block.settings.blog
+        if insight_blog == blank or insight_blog.articles_count == 0
+          assign insight_blog = blogs['insights']
+        endif
         if insight_blog == blank or insight_blog.articles_count == 0
           assign insight_blog = blogs['news']
         endif
-        assign resources_url = pages['resources'].url | default: '/pages/resources'
+        if block.settings.button_link != blank
+          assign resources_url = block.settings.button_link
+        else
+          assign resources_url = pages['resources'].url | default: '/pages/resources'
+        endif
+        if block.settings.image_1 != blank
+          assign img_blog_1 = block.settings.image_1 | image_url: width: 800
+        endif
+        if block.settings.image_2 != blank
+          assign img_blog_2 = block.settings.image_2 | image_url: width: 800
+        endif
+        if block.settings.image_3 != blank
+          assign img_blog_3 = block.settings.image_3 | image_url: width: 800
+        endif
       %}
       <div class="vh-blog__grid">
         {% if insight_blog != blank and insight_blog.articles_count > 0 %}
@@ -601,22 +710,28 @@
         {% endif %}
       </div>
       <div class="vh-blog__more">
-        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ resources_url }}">See All Insights →</a>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ resources_url }}">{{ block.settings.button_label | default: 'See All Insights →' }}</a>
       </div>
     </div>
   </section>
 
   {% when 'faq' %}
+{% liquid
+  assign faq_card_title = block.settings.card_title | default: 'Bring Us the Problem That Keeps Coming Back'
+  assign faq_card_text = block.settings.card_text | default: "Maybe actions keep stalling. Evidence is scattered. A supplier issue stays open. Or your systems produce information, but the next step is still unclear. Tell us where the work gets stuck. We'll help you identify the gap and the next step."
+  assign faq_kicker = block.settings.kicker | default: 'Our FAQ'
+  assign faq_heading = block.settings.heading | default: 'Questions Business Leaders Ask Us'
+  assign faq_lead = block.settings.lead | default: 'Straight answers about where VECTRA fits, how we work, and what happens next.'
+  assign nested_items = nested_items | strip
+%}
 <section class="vh-faq" id="faq" {{ block.shopify_attributes }}>
     <div class="vh-wrap vh-faq__grid">
       <aside class="vh-contact-card" data-vh-reveal="left">
         <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
-        <p class="vh-contact-card__title">Bring Us the Problem That Keeps Coming Back</p>
-        <p>
-          Maybe actions keep stalling. Evidence is scattered. A supplier issue stays open. Or your systems produce information, but the next step is still unclear. Tell us where the work gets stuck. We'll help you identify the gap and the next step.
-        </p>
-        <a class="vh-btn vh-btn--white" href="{{ faq_href }}">
-          More questions?
+        <p class="vh-contact-card__title">{{ faq_card_title }}</p>
+        <p>{{ faq_card_text }}</p>
+        <a class="vh-btn vh-btn--white" href="{{ block.settings.button_link | default: faq_href }}">
+          {{ block.settings.button_label | default: 'More questions?' }}
           <img src="{{ img_arrow }}" alt="">
         </a>
         {% render 'vectra-contact-details', variant: 'card', img_phone: img_phone, img_mail: img_mail, img_pin: img_pin %}
@@ -625,11 +740,12 @@
       <div class="vh-faq__right">
         <div class="vh-faq__glow" aria-hidden="true"></div>
         <div class="vh-accordion">
-          <p class="vh-kicker">Our FAQ</p>
-          <h2 class="vh-h2">Questions Business Leaders Ask Us</h2>
-          <p class="vh-lead">
-            Straight answers about where VECTRA fits, how we work, and what happens next.
-          </p>
+          <p class="vh-kicker">{{ faq_kicker }}</p>
+          <h2 class="vh-h2">{{ faq_heading }}</h2>
+          <p class="vh-lead">{{ faq_lead }}</p>
+          {% if nested_items != blank %}
+            {{ nested_items }}
+          {% else %}
           <div class="vh-acc" data-vh-faq-item>
             <button type="button" data-vh-faq-btn>What does VECTRA help organizations improve?</button>
             <div class="vh-acc__body">
@@ -660,6 +776,7 @@
               We agree what improvement should look like at the start. Depending on the issue, that may include clearer ownership, closed actions, stronger evidence, improved capability, fewer recurring problems, or better supplier performance.
             </div>
           </div>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -720,16 +837,25 @@
 {% endunless %}
 
   {% when 'careers' %}
+{% liquid
+  assign careers_kicker = block.settings.kicker | default: 'Careers'
+  assign careers_heading = block.settings.heading | default: 'Join Our Team'
+  assign careers_text = block.settings.text | default: 'At VECTRA International, we believe our greatest asset is our people. We are always looking for passionate, driven individuals eager to make an impact and grow their careers with us.'
+  assign careers_btn = block.settings.button_label | default: 'Explore our open roles'
+  if block.settings.button_link != blank
+    assign careers_cta = block.settings.button_link
+  else
+    assign careers_cta = careers_url
+  endif
+%}
 <section class="vh-careers" id="careers" {{ block.shopify_attributes }}>
     <canvas class="vh-careers__grid" data-vh-careers-grid aria-hidden="true"></canvas>
     <div class="vh-careers__inner">
-      <p class="vh-kicker">Careers</p>
-      <h2 class="vh-h2">Join Our Team</h2>
-      <p class="vh-lead">
-        At VECTRA International, we believe our greatest asset is our people. We are always looking for passionate, driven individuals eager to make an impact and grow their careers with us.
-      </p>
-      <a class="vh-btn vh-btn--green vh-careers__cta" href="{{ careers_url }}">
-        Explore our open roles
+      <p class="vh-kicker">{{ careers_kicker }}</p>
+      <h2 class="vh-h2">{{ careers_heading }}</h2>
+      <p class="vh-lead">{{ careers_text }}</p>
+      <a class="vh-btn vh-btn--green vh-careers__cta" href="{{ careers_cta }}">
+        {{ careers_btn }}
       </a>
     </div>
   </section>

@@ -9,17 +9,146 @@
             "menu": "vectra-website-mega-menu"
           }
         },
-        "hero": { "type": "vectra-story-hero", "settings": {} },
-        "ceo": { "type": "vectra-story-ceo", "settings": {} },
-        "main": { "type": "vectra-story-main", "settings": {} },
-        "join": { "type": "vectra-story-join", "settings": {} },
-        "footer": { "type": "vectra-footer", "settings": {} }
+        "hero": {
+          "type": "vectra-story-hero",
+          "settings": {}
+        },
+        "ceo": {
+          "type": "vectra-story-ceo",
+          "settings": {}
+        },
+        "main": {
+          "type": "vectra-story-main",
+          "blocks": {
+            "lead_1": {
+              "type": "_vectra-leader",
+              "settings": {
+                "name": "Patrick Neyts",
+                "role": "CEO",
+                "large_role": true,
+                "bio": "With over 30 years of experience in ESG programs, Corporate Codes, and Responsible Business practices across 11 industry sectors and 40 countries.",
+                "fallback_asset": "vectra-4a782677c9907a899d2e84025df9fda627b7fbf8.png"
+              }
+            },
+            "lead_2": {
+              "type": "_vectra-leader",
+              "settings": {
+                "name": "Shelly Sanders",
+                "role": "SVP, Global Sales, Marketing & Communications",
+                "bio": "With over 30 years of leadership experience in consultative and solution-based sales & operations.",
+                "fallback_asset": "vectra-5a45cef3c985f7964fd6f04020f73a021850f52c.png"
+              }
+            },
+            "lead_3": {
+              "type": "_vectra-leader",
+              "settings": {
+                "name": "Lorenz Berzau",
+                "role": "VP Operations",
+                "bio": "With a focus on sustainability strategy, human rights, and social compliance, backed by 20 years of consultancy experience and a background in law.",
+                "fallback_asset": "vectra-dc0daa0599cf1e7890ac477b6fd8c91f8bc1743a.png"
+              }
+            },
+            "lead_4": {
+              "type": "_vectra-leader",
+              "settings": {
+                "name": "Alana van Wouw",
+                "role": "AI Architect",
+                "bio": "With over 20 years of experience in project management, ESG, financial modeling, and AI.",
+                "fallback_asset": "vectra-dd46b740bdec4d3fe0852fbab0c2855306beb4e4.png"
+              }
+            },
+            "lead_5": {
+              "type": "_vectra-leader",
+              "settings": {
+                "name": "Elizabeth Korban",
+                "role": "Director of Organizational Enablement",
+                "bio": "Elizabeth has 15+ years of experience as a leader responsible for embedding ESG principles into organisational culture, governance and operations.",
+                "fallback_asset": "vectra-8606670d35448bf9a7c0b601a64c49b9be7e86de.png"
+              }
+            }
+          },
+          "block_order": [
+            "lead_1",
+            "lead_2",
+            "lead_3",
+            "lead_4",
+            "lead_5"
+          ],
+          "settings": {}
+        },
+        "join": {
+          "type": "vectra-story-join",
+          "settings": {}
+        },
+        "footer": {
+          "type": "vectra-footer",
+          "settings": {}
+        },
+        "story_faq": {
+          "type": "vectra-story-faq",
+          "blocks": {
+            "faq_1": {
+              "type": "_vectra-faq-item",
+              "settings": {
+                "open": true,
+                "question": "Who is VECTRA International?",
+                "answer": "VECTRA International is a business resilience and operational capability-building partner that helps organizations manage ESG requirements, supplier risk, and operational complexity through expert teams and practical, technology-enabled delivery."
+              }
+            },
+            "faq_2": {
+              "type": "_vectra-faq-item",
+              "settings": {
+                "question": "When was VECTRA International founded?",
+                "answer": "VECTRA International was founded in 2005 and has since worked with organizations across industries to strengthen governance, supplier accountability, and operational resilience."
+              }
+            },
+            "faq_3": {
+              "type": "_vectra-faq-item",
+              "settings": {
+                "question": "What does VECTRA International do?",
+                "answer": "VECTRA International turns responsible business requirements — supplier issues, audit findings, weak controls, and changing regulations — into clear priorities, accountable action, and measurable performance improvement."
+              }
+            },
+            "faq_4": {
+              "type": "_vectra-faq-item",
+              "settings": {
+                "question": "Where does VECTRA International operate?",
+                "answer": "VECTRA International operates globally, with associates and specialist experts delivering local market context across regions including Africa, Europe, Asia, and beyond."
+              }
+            },
+            "faq_5": {
+              "type": "_vectra-faq-item",
+              "settings": {
+                "question": "Who leads VECTRA International?",
+                "answer": "VECTRA International is led by CEO Patrick Neyts, alongside a global leadership team spanning operations, sales and marketing, and applied AI."
+              }
+            }
+          },
+          "block_order": [
+            "faq_1",
+            "faq_2",
+            "faq_3",
+            "faq_4",
+            "faq_5"
+          ],
+          "settings": {}
+        }
       },
-      "block_order": ["header", "hero", "ceo", "main", "join", "footer"],
+      "block_order": [
+        "header",
+        "hero",
+        "ceo",
+        "main",
+        "story_faq",
+        "join",
+        "footer"
+      ],
       "settings": {
         "menu": "vectra-website-mega-menu"
       }
     }
   },
-  "order": ["vectra_our_story"]
+  "order": [
+    "vectra_our_story"
+  ]
 }

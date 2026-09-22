@@ -9,17 +9,99 @@
             "menu": "vectra-website-mega-menu"
           }
         },
-        "hero": { "type": "vectra-hero", "settings": {} },
+        "hero": {
+          "type": "vectra-hero",
+          "blocks": {
+            "slide_1": {
+              "type": "_vectra-hero-slide",
+              "settings": {
+                "is_active": true,
+                "alt": "VECTRA team collaborating",
+                "heading": "Business Resilience Partner for Responsible Business & Operational Resilience",
+                "subheading": "Turn Business Complexity Into Resilient Performance",
+                "text": "Responsible business practices are the standards, controls, and decisions organizations use to manage supplier risk, environmental and social impact, and regulatory obligations across their operations. VECTRA International is a business resilience partner that turns those practices into clear ownership, practical action, and measurable performance, not just policy.",
+                "fallback_asset": "vectra-e5f2730422a9a0516df81d548f5c3f4383f99969.png"
+              }
+            },
+            "slide_2": {
+              "type": "_vectra-hero-slide",
+              "settings": {
+                "alt": "Responsible supply chains in motion",
+                "subheading": "Business Resilience & Operational Capability Building",
+                "text": "VECTRA helps organizations turn complex operational, supplier, and responsible business issues into clear ownership, practical action, and stronger control. From strategy through implementation, we stay accountable for moving the work forward.",
+                "fallback_asset": "vectra-6a69557ce365aa215c5c28bca6a6e51af0a2c987.png"
+              }
+            }
+          },
+          "block_order": ["slide_1", "slide_2"],
+          "settings": {}
+        },
         "trust": { "type": "vectra-trust", "settings": {} },
-        "logos": { "type": "vectra-logos", "settings": {} },
+        "logos": {
+          "type": "vectra-logos",
+          "blocks": {
+            "logo_1": { "type": "_vectra-logo", "settings": { "alt": "Marks & Spencer", "fallback_asset": "vectra-a4cdfe52a81d802c9aaf6b7bf6d694343cbedde4.png" } },
+            "logo_2": { "type": "_vectra-logo", "settings": { "alt": "The Copper Mark", "fallback_asset": "vectra-e1d133cc580029cb6b8074e5aae5a7dda46406b4.png" } },
+            "logo_3": { "type": "_vectra-logo", "settings": { "alt": "Responsible Business Alliance", "fallback_asset": "vectra-b45406e535c5bbc9c26b808cd8cbca66f572f9e7.png" } },
+            "logo_4": { "type": "_vectra-logo", "settings": { "alt": "OTTO", "fallback_asset": "vectra-f9891ea3bc104013ef4392a154f93dad123a8da6.png" } },
+            "logo_5": { "type": "_vectra-logo", "settings": { "alt": "Applied Materials", "fallback_asset": "vectra-08b090be3b1f1972589bc05ef1d4cf3d74f30fca.png" } },
+            "logo_6": { "type": "_vectra-logo", "settings": { "alt": "adidas", "fallback_asset": "vectra-cb8e65114981244bc1e02bd76e369c2e9275bc0b.png" } },
+            "logo_7": { "type": "_vectra-logo", "settings": { "alt": "BetterWork", "fallback_asset": "vectra-ac45449dcc22ca95791fd9c0955f7d62850045d2.png" } },
+            "logo_8": { "type": "_vectra-logo", "settings": { "alt": "JYSK", "fallback_asset": "vectra-fc0d652f27cfacfaf98915d93a3a90bbb65771bf.png" } }
+          },
+          "block_order": ["logo_1", "logo_2", "logo_3", "logo_4", "logo_5", "logo_6", "logo_7", "logo_8"],
+          "settings": {}
+        },
         "impact": { "type": "vectra-impact", "settings": {} },
-        "why": { "type": "vectra-why", "settings": {} },
+        "why": {
+          "type": "vectra-why",
+          "blocks": {
+            "why_1": { "type": "_vectra-why-card", "settings": { "heading": "Partnership With Accountability", "text": "We agree what needs to improve first, then keep the work tied to that outcome as it moves into practice.", "fallback_asset": "vectra-why-icon-partnership.png" } },
+            "why_2": { "type": "_vectra-why-card", "settings": { "heading": "Human-Led.<br>AI-Enabled", "text": "Technology helps us work through large volumes of supplier information, identify patterns behind repeat findings, and keep evidence current. Experienced people remain accountable for judgment, context, and decisions.", "fallback_asset": "vectra-why-icon-ai.png" } },
+            "why_3": { "type": "_vectra-why-card", "settings": { "heading": "Expertise Built Around Your Challenge", "text": "Your problem should not have to fit our org chart. We bring together the specialists and capabilities the work requires.", "fallback_asset": "vectra-why-icon-expertise.png" } },
+            "why_4": { "type": "_vectra-why-card", "settings": { "heading": "Progress You Can Measure", "text": "We agree what improvement should look like at the start, then track what changed and what still needs attention.", "fallback_asset": "vectra-why-icon-progress.png" } }
+          },
+          "block_order": ["why_1", "why_2", "why_3", "why_4"],
+          "settings": {}
+        },
         "esg": { "type": "vectra-esg", "settings": {} },
-        "solutions": { "type": "vectra-solutions", "settings": {} },
+        "solutions": {
+          "type": "vectra-solutions",
+          "blocks": {
+            "shot_1": { "type": "_vectra-solution-shot", "settings": { "is_active": true, "title": "Operational Resilience", "text": "Build stronger operational control, continuity, and response capability so critical work keeps moving when conditions change.", "cta_label": "Explore Operational Resilience", "fallback_asset": "vectra-add817f67c59297c528c5d57486a2794644fb47c.png" } },
+            "shot_2": { "type": "_vectra-solution-shot", "settings": { "title": "Value Chain Resilience & Improvement", "text": "Identify where supplier and supply chain risk sits, prioritize what matters, and turn findings into practical improvement.", "cta_label": "Explore Value Chain Resilience & Improvement", "fallback_asset": "vectra-6a69557ce365aa215c5c28bca6a6e51af0a2c987.png" } },
+            "shot_3": { "type": "_vectra-solution-shot", "settings": { "title": "Responsible Business Performance", "text": "Turn responsible-business requirements into clearer decisions, reliable evidence, and practical improvement.", "cta_label": "Explore Responsible Business Performance", "fallback_asset": "vectra-d9fea5c48820c581c90942feb5bfc3997b28135f.png" } },
+            "shot_4": { "type": "_vectra-solution-shot", "settings": { "title": "Governance & Regulatory Readiness", "text": "Turn changing requirements into workable controls, clear ownership, and evidence your teams can defend.", "cta_label": "Explore Governance & Regulatory Readiness", "fallback_asset": "vectra-d7047ac7e66609406a0cb2e3fa6ac8ad2faf5cca.png" } },
+            "shot_5": { "type": "_vectra-solution-shot", "settings": { "title": "Capability Building at Scale", "text": "Build the practical knowledge and capability teams and suppliers need to apply change and keep it working.", "cta_label": "Explore Capability Building at Scale", "fallback_asset": "vectra-ae8b362b8368e8b200e58c921e1c7c274608a975.png" } },
+            "shot_6": { "type": "_vectra-solution-shot", "settings": { "plus_overlay": true, "title": "Customized Business Solutions", "text": "Some issues span suppliers, systems, evidence, capability, and operations at once. Start with the problem. We'll help identify the right mix of expertise and support.", "cta_label": "Talk to an Expert", "fallback_asset": "vectra-a22c67e8c858a4742869caed8035aebee50f5996.png" } }
+          },
+          "block_order": ["shot_1", "shot_2", "shot_3", "shot_4", "shot_5", "shot_6"],
+          "settings": {}
+        },
         "marketplace": { "type": "vectra-marketplace", "settings": {} },
-        "cases": { "type": "vectra-cases", "settings": {} },
+        "cases": {
+          "type": "vectra-cases",
+          "blocks": {
+            "case_1": { "type": "_vectra-case-card", "settings": { "name": "OTTO Group", "location": "Hamburg, Germany", "quote": "“Working together transformed our ESG compliance framework. The team simplified complex EU CSRD reporting into a clear roadmap, cutting our data collection timeline by 40% and delivering our annual sustainability report six weeks ahead of schedule.”", "fallback_asset": "vectra-f9891ea3bc104013ef4392a154f93dad123a8da6.png" } },
+            "case_2": { "type": "_vectra-case-card", "settings": { "name": "CRH", "location": "Hamburg, Germany", "quote": "\"An essential partner for our climate tech scale-up. They optimized our carbon accounting infrastructure to handle rapid user growth while maintaining 100% compliance during intensive third-party client audits.\"", "fallback_asset": "vectra-28a1d7e111c00e8a7fc45b900983e7447e9874e4.png" } },
+            "case_3": { "type": "_vectra-case-card", "settings": { "name": "Kodak", "location": "Hamburg, Germany", "quote": "\"Finding partners who truly understand Scope 3 emissions tracing is rare. They brought deep domain expertise and seamless execution, enabling us to verify and onboard over 150 sustainable suppliers in under six months.\"", "fallback_asset": "vectra-c581678ac8eabd45e9273d17ceb6fa657d364dc9.png" } }
+          },
+          "block_order": ["case_1", "case_2", "case_3"],
+          "settings": {}
+        },
         "blog": { "type": "vectra-blog", "settings": {} },
-        "faq": { "type": "vectra-faq", "settings": {} },
+        "faq": {
+          "type": "vectra-faq",
+          "blocks": {
+            "faq_1": { "type": "_vectra-faq-item", "settings": { "question": "What does VECTRA help organizations improve?", "answer": "VECTRA helps organizations reduce business risk, strengthen operational and supply chain resilience, improve ESG and sustainability performance, and build the evidence and capability needed to drive measurable results across operations and value chains. We start with the outcome that needs to improve, then bring the relevant expertise and implementation support around it." } },
+            "faq_2": { "type": "_vectra-faq-item", "settings": { "question": "We already have consultants, platforms, and dashboards. Where does VECTRA fit?", "answer": "Often, the gap appears after the information already exists. VECTRA works with the systems, expertise, and partners you already have, then focuses on ownership, workflows, evidence, supplier engagement, and follow-through where the work is getting stuck." } },
+            "faq_3": { "type": "_vectra-faq-item", "settings": { "open": true, "question": "Can VECTRA work with the systems we already use?", "answer": "Yes. VECTRA is platform-agnostic. We work with existing systems, data, teams, and partners, then introduce additional technology only where it solves a clear problem." } },
+            "faq_4": { "type": "_vectra-faq-item", "settings": { "question": "Where do we start if we know the problem but not the solution?", "answer": "Start with the problem. Tell us what keeps recurring, stalling, or becoming difficult to prove. We’ll help clarify what needs attention and the most practical way forward." } },
+            "faq_5": { "type": "_vectra-faq-item", "settings": { "question": "How does VECTRA measure progress?", "answer": "We agree what improvement should look like at the start. Depending on the issue, that may include clearer ownership, closed actions, stronger evidence, improved capability, fewer recurring problems, or better supplier performance." } }
+          },
+          "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"],
+          "settings": {}
+        },
         "portal": { "type": "vectra-portal", "settings": {} },
         "careers": { "type": "vectra-careers", "settings": {} },
         "footer": { "type": "vectra-footer", "settings": {} }

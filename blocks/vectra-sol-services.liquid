@@ -1,10 +1,30 @@
-{% render 'vectra-solutions-modules', module: 'services', block: block %}
+{% capture nested_cards %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-solutions-modules', module: 'services', block: block, nested_cards: nested_cards %}
 
 {% schema %}
 {
   "name": "VECTRA: Sol services",
   "tag": null,
-  "settings": [],
-  "presets": [{ "name": "VECTRA: Sol services" }]
+  "blocks": [{ "type": "_vectra-service-card" }],
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Our ecosystem of services" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "text", "label": "Text" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA: Sol services",
+      "blocks": [
+        { "type": "_vectra-service-card", "settings": { "number": "01", "heading": "Audit Readiness & Practical Remediation", "text": "Prepare with confidence, address findings with structure, and convert assurance pressure into operational improvement.", "cta_label": "Explore This Service →", "fallback_asset": "vectra-fba768472f693dc9d17736644f117390ddfce96f.png" } },
+        { "type": "_vectra-service-card", "settings": { "number": "02", "heading": "Due Diligence & Value Chain Risk Management", "text": "Identify priority exposure, strengthen decision-making, and establish practical controls across complex value chains.", "cta_label": "Explore This Service →", "fallback_asset": "vectra-fba768472f693dc9d17736644f117390ddfce96f.png" } },
+        { "type": "_vectra-service-card", "settings": { "number": "03", "heading": "Operational Performance & Improvement", "text": "Support factories, farms, mines, and operating sites to build stronger performance, capability, and responsible practice.", "cta_label": "Explore This Service →", "fallback_asset": "vectra-fba768472f693dc9d17736644f117390ddfce96f.png" } },
+        { "type": "_vectra-service-card", "settings": { "number": "04", "heading": "Independent Assurance, Governance & Oversight", "text": "Bring trusted review, quality assurance, and governance visibility to high-stakes programmes and commitments.", "cta_label": "Explore This Service →", "fallback_asset": "vectra-fba768472f693dc9d17736644f117390ddfce96f.png" } },
+        { "type": "_vectra-service-card", "settings": { "number": "05", "heading": "Responsible Business Reporting & Disclosure", "text": "Build credible reporting processes and stronger evidence that connects disclosure with better operational decisions.", "cta_label": "Explore This Service →", "fallback_asset": "vectra-fba768472f693dc9d17736644f117390ddfce96f.png" } },
+        { "type": "_vectra-service-card", "settings": { "number": "06", "heading": "Capability Building & Change Enablement", "text": "Build practical confidence across leaders, teams, and suppliers through learning, coaching, and tailored pathways.", "cta_label": "Explore This Service →", "fallback_asset": "vectra-fba768472f693dc9d17736644f117390ddfce96f.png" } }
+      ]
+    }
+  ]
 }
 {% endschema %}

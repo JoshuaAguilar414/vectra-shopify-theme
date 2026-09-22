@@ -1,10 +1,31 @@
-{% render 'vectra-home-modules', module: 'faq', block: block %}
+{% capture nested_items %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-home-modules', module: 'faq', block: block, nested_items: nested_items %}
 
 {% schema %}
 {
   "name": "VECTRA: FAQ",
   "tag": null,
-  "settings": [],
-  "presets": [{ "name": "VECTRA: FAQ" }]
+  "blocks": [{ "type": "_vectra-faq-item" }],
+  "settings": [
+    { "type": "text", "id": "card_title", "label": "Side card title", "default": "Bring Us the Problem That Keeps Coming Back" },
+    { "type": "textarea", "id": "card_text", "label": "Side card text" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Our FAQ" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Questions Business Leaders Ask Us" },
+    { "type": "textarea", "id": "lead", "label": "Lead" },
+    { "type": "text", "id": "button_label", "label": "Side card button", "default": "More questions?" },
+    { "type": "url", "id": "button_link", "label": "Side card button link" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA: FAQ",
+      "blocks": [
+        { "type": "_vectra-faq-item", "settings": { "question": "What does VECTRA help organizations improve?", "answer": "VECTRA helps organizations reduce business risk, strengthen operational and supply chain resilience, improve ESG and sustainability performance, and build the evidence and capability needed to drive measurable results across operations and value chains. We start with the outcome that needs to improve, then bring the relevant expertise and implementation support around it." } },
+        { "type": "_vectra-faq-item", "settings": { "question": "We already have consultants, platforms, and dashboards. Where does VECTRA fit?", "answer": "Often, the gap appears after the information already exists. VECTRA works with the systems, expertise, and partners you already have, then focuses on ownership, workflows, evidence, supplier engagement, and follow-through where the work is getting stuck." } },
+        { "type": "_vectra-faq-item", "settings": { "open": true, "question": "Can VECTRA work with the systems we already use?", "answer": "Yes. VECTRA is platform-agnostic. We work with existing systems, data, teams, and partners, then introduce additional technology only where it solves a clear problem." } }
+      ]
+    }
+  ]
 }
 {% endschema %}
