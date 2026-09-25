@@ -230,6 +230,15 @@
       fade(title, item.dataset.title);
       fade(text, item.dataset.text);
       fade(cta, item.dataset.cta);
+      if (cta && item.dataset.href) {
+        const href = item.dataset.href;
+        cta.setAttribute('href', href);
+        if (href === '#VectraContactModal') {
+          cta.setAttribute('data-vh-contact-open', '');
+        } else {
+          cta.removeAttribute('data-vh-contact-open');
+        }
+      }
     };
 
     const activate = (item) => {

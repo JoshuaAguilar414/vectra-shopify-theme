@@ -543,10 +543,61 @@
   z-index: 1;
 }
 
-.vh-hero__slide img {
+.vh-hero__slide img,
+.vh-hero__slide video,
+.vh-hero__media {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: var(--vh-object-position, center center);
+}
+
+.vh-hero__media--mobile {
+  display: none;
+}
+
+.vh-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: rgba(0, 0, 0, calc(var(--vh-overlay, 0) / 100));
+}
+
+.vh-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.vh-hero__slide--align-center .vh-hero__copy {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.vh-hero__slide--align-center .vh-hero__copy .vh-hero__display::after {
+  margin-inline: auto;
+}
+
+.vh-hero__slide--align-center .vh-hero__actions {
+  justify-content: center;
+}
+
+.vh-hero__slide--align-right .vh-hero__copy {
+  left: auto;
+  right: 8.6458%;
+  text-align: right;
+}
+
+.vh-hero__slide--align-right .vh-hero__copy .vh-hero__display::after {
+  margin-left: auto;
+}
+
+.vh-hero__slide--align-right .vh-hero__actions {
+  justify-content: flex-end;
 }
 
 .vh-hero__slide::before {
@@ -742,8 +793,8 @@
 .vh-page-hero {
   position: relative;
   isolation: isolate;
-  min-height: 420px;
-  padding: 160px 0 120px;
+  min-height: var(--vh-min-height, 420px);
+  padding: calc(160px + var(--vh-pad-top, 0px)) 0 calc(120px + var(--vh-pad-bottom, 0px));
   overflow: hidden;
   color: var(--vh-white);
   background: linear-gradient(180deg, #092543 0%, #54bd01 101.41%);
@@ -772,8 +823,17 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: var(--vh-object-position, center center);
   z-index: 0;
   opacity: 0.38;
+}
+
+.vh-page-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: rgba(0, 0, 0, calc(var(--vh-overlay, 0) / 100));
 }
 
 .vh-page-hero__inner {
@@ -781,7 +841,32 @@
   z-index: 1;
   max-width: 900px;
   margin-inline: auto;
-  text-align: center;
+  text-align: var(--vh-text-align, center);
+}
+
+.vh-page-hero--align-left .vh-page-hero__inner {
+  margin-inline: 0 auto;
+  text-align: left;
+}
+
+.vh-page-hero--align-right .vh-page-hero__inner {
+  margin-inline: auto 0;
+  text-align: right;
+}
+
+.vh-page-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.vh-page-hero--align-center .vh-page-hero__actions {
+  justify-content: center;
+}
+
+.vh-page-hero--align-right .vh-page-hero__actions {
+  justify-content: flex-end;
 }
 
 .vh-page-hero__kicker {
@@ -818,10 +903,17 @@
   margin-top: -112px;
   background: var(--vh-white);
   border-radius: 60px 60px 0 0;
-  padding: 135px 0 81px;
+  padding: calc(135px + var(--vh-pad-top, 0px)) 0 calc(81px + var(--vh-pad-bottom, 0px));
   z-index: 5;
   height: auto;
   min-height: 0;
+}
+
+.vh-trust__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
 }
 
 .vh-trust__row {
@@ -997,7 +1089,7 @@
 
 /* Why VECTRA — Figma Group 186647, 1482×841 */
 .vh-why {
-  padding: 0 0 88px;
+  padding: var(--vh-pad-top, 0px) 0 calc(88px + var(--vh-pad-bottom, 0px));
   height: auto;
   min-height: 0;
 }
@@ -2961,7 +3053,7 @@
   position: relative;
   height: auto;
   min-height: 0;
-  padding: 161px 0 90px;
+  padding: calc(161px + var(--vh-pad-top, 0px)) 0 calc(90px + var(--vh-pad-bottom, 0px));
   text-align: center;
   overflow: hidden;
   background: #ffffff;
@@ -4180,6 +4272,18 @@ body:has(.vectra-home) #MainContent {
     min-height: 100svh;
   }
 
+  .vh-hero__slide:has(.vh-hero__media--mobile) .vh-hero__media--desktop {
+    display: none;
+  }
+
+  .vh-hero__media--mobile {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--vh-object-position, center center);
+  }
+
   .vh-hero__arrow--prev {
     left: 12px;
   }
@@ -4950,4 +5054,338 @@ body.vh-contact-open .page-wrapper {
   .vh-course-land__grid-copy {
     grid-template-columns: 1fr;
   }
+}
+
+/* VECTRA appearance controls (native-style padding / align / CTAs) */
+.vh-careers__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.vh-case__link {
+  display: inline-block;
+  margin-top: 12px;
+  font-weight: 600;
+  color: var(--vh-green);
+  text-decoration: none;
+}
+
+.vh-case__link:hover {
+  text-decoration: underline;
+}
+
+.vh-btn--outline-light {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.7);
+  background: transparent;
+}
+
+.vh-btn--outline-light:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #fff;
+}
+
+.vs-hero__actions,
+.vres-hero__actions,
+.vsol-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.vs-hero--align-center .vs-hero__copy,
+.vres-hero--align-center .vres-hero__copy,
+.vsol-hero--align-center .vsol-hero__inner {
+  text-align: center;
+}
+
+.vs-hero--align-right .vs-hero__copy,
+.vres-hero--align-right .vres-hero__copy,
+.vsol-hero--align-right .vsol-hero__inner {
+  text-align: right;
+}
+
+.vs-hero,
+.vres-hero,
+.vsol-hero {
+  padding-block-start: var(--vh-pad-top, 0px);
+  padding-block-end: var(--vh-pad-bottom, 0px);
+}
+
+.vh-logos {
+  padding-block-start: var(--vh-pad-top, 0px);
+  padding-block-end: var(--vh-pad-bottom, 0px);
+}
+
+.vh-cases {
+  padding-block-start: var(--vh-pad-top, 0px);
+  padding-block-end: var(--vh-pad-bottom, 0px);
+}
+
+.vh-hero {
+  padding-block-start: var(--vh-pad-top, 0px);
+  padding-block-end: var(--vh-pad-bottom, 0px);
+}
+
+.vh-esg {
+  padding-block-start: var(--vh-pad-top, 0px);
+  padding-block-end: var(--vh-pad-bottom, 0px);
+}
+
+.vh-impact {
+  padding-block-start: var(--vh-pad-top, 0px);
+  padding-block-end: var(--vh-pad-bottom, 0px);
+}
+
+.vh-solutions {
+  padding-block-start: var(--vh-pad-top, 0px);
+  padding-block-end: var(--vh-pad-bottom, 0px);
+}
+
+.vres-panel {
+  padding: calc(80px + var(--vh-pad-top, 0px)) 0 calc(80px + var(--vh-pad-bottom, 0px));
+}
+
+.vres-panel__image {
+  display: block;
+  width: min(100%, 960px);
+  height: auto;
+  margin: 28px auto 0;
+  border-radius: var(--vh-radius-lg);
+}
+
+/* Native-parity appearance (colors, overlay, radius, 4-side padding) */
+.vh-hero__slide,
+.vh-page-hero,
+.vh-trust,
+.vh-why,
+.vh-logos,
+.vh-cases,
+.vh-careers,
+.vh-esg,
+.vh-impact,
+.vh-solutions,
+.vh-market,
+.vh-blog,
+.vh-faq,
+.vh-portal,
+.vsol-hero,
+.vs-hero,
+.vres-hero,
+.vsol-intro,
+.vsol-eco,
+.vsol-out,
+.vsol-svc,
+.vsol-process,
+.vh-why__item,
+.vh-case,
+.vsol-svc-card,
+.vsol-glass {
+  padding-inline-start: var(--vh-pad-left, 0px);
+  padding-inline-end: var(--vh-pad-right, 0px);
+}
+
+.vh-page-hero.has-custom-bg {
+  background: var(--vh-bg) !important;
+}
+
+.vh-hero__slide,
+.vh-page-hero,
+.vh-trust,
+.vh-why,
+.vh-cases,
+.vh-careers,
+.vh-esg,
+.vh-impact,
+.vh-solutions,
+.vh-market,
+.vh-blog,
+.vh-faq,
+.vh-portal,
+.vsol-hero,
+.vs-hero,
+.vres-hero {
+  color: var(--vh-fg, inherit);
+}
+
+.vh-hero__copy,
+.vh-page-hero__inner {
+  color: var(--vh-fg, inherit);
+  max-width: var(--vh-content-max, none);
+}
+
+.vh-hero__overlay,
+.vh-page-hero__overlay {
+  background: color-mix(in srgb, var(--vh-overlay-color, #000) calc(var(--vh-overlay, 20) * 1%), transparent);
+}
+
+.vh-hero__overlay--gradient,
+.vh-page-hero__overlay--gradient {
+  background: linear-gradient(
+    var(--vh-grad-dir, to bottom),
+    color-mix(in srgb, var(--vh-overlay-color, #000) calc(var(--vh-overlay, 40) * 1%), transparent),
+    transparent
+  );
+}
+
+.vh-hero__overlay--to-top,
+.vh-page-hero__overlay--to-top {
+  --vh-grad-dir: to top;
+}
+
+.vh-hero__overlay--to-bottom,
+.vh-page-hero__overlay--to-bottom {
+  --vh-grad-dir: to bottom;
+}
+
+.vh-page-hero,
+.vh-why__item,
+.vh-case,
+.vsol-svc-card,
+.vsol-glass {
+  border-radius: var(--vh-radius, inherit);
+}
+
+.vh-why__item,
+.vh-case,
+.vsol-svc-card,
+.vsol-glass {
+  background-color: var(--vh-bg, unset);
+  color: var(--vh-fg, inherit);
+}
+
+.vh-btn--custom {
+  background: var(--vh-btn-bg, var(--vh-green));
+  color: var(--vh-btn-fg, #fff);
+  border: 0;
+}
+
+.vh-btn--custom:hover {
+  filter: brightness(0.95);
+}
+
+.vh-hero__slide {
+  padding-block-start: var(--vh-pad-top, 0px);
+  padding-block-end: var(--vh-pad-bottom, 0px);
+}
+
+.vh-trust,
+.vh-why,
+.vh-logos,
+.vh-cases,
+.vh-careers,
+.vh-esg,
+.vh-impact,
+.vh-solutions,
+.vh-market,
+.vh-blog,
+.vh-faq,
+.vh-portal,
+.vsol-intro,
+.vsol-eco,
+.vsol-out,
+.vsol-svc,
+.vsol-process,
+.vs-main,
+.vres-ebooks,
+.vres-feed,
+.vres-panel {
+  background-color: var(--vh-bg, unset);
+}
+
+/* Typography / borders / gap (native-parity) */
+.vh-hero__copy h1,
+.vh-page-hero h1,
+.vh-trust__copy h2,
+.vh-why__copy h2,
+.vh-cases h2,
+.vh-careers .vh-h2,
+.vh-esg__copy h2,
+.vh-solutions__head h2,
+.vh-market .vh-h2,
+.vh-blog .vh-h2,
+.vh-faq .vh-h2,
+.vh-portal__copy h2,
+.vsol-hero__inner h1,
+.vs-hero__copy h1,
+.vres-hero__copy h1,
+.vsol-intro__copy h2,
+.vsol-eco__head h2,
+.vsol-out__inner h2,
+.vsol-svc h2,
+.vsol-process h2 {
+  font-size: var(--vh-heading-size, unset);
+  font-weight: var(--vh-font-weight, unset);
+  line-height: var(--vh-line-height, unset);
+  letter-spacing: var(--vh-letter-spacing, unset);
+  text-transform: var(--vh-text-case, unset);
+}
+
+.vh-hero__copy p,
+.vh-page-hero__text,
+.vh-why__copy > p:not(.vh-kicker),
+.vh-careers .vh-lead,
+.vh-esg__copy .vh-lead,
+.vh-market .vh-lead,
+.vh-portal__copy p,
+.vsol-hero__inner p,
+.vs-hero__body,
+.vres-hero__lead,
+.vsol-intro__copy p {
+  font-size: var(--vh-text-size, unset);
+  line-height: var(--vh-line-height, unset);
+  letter-spacing: var(--vh-letter-spacing, unset);
+}
+
+.vh-hero__copy,
+.vh-page-hero__inner {
+  align-self: var(--vh-align-items, auto);
+}
+
+.vh-why__list,
+.vh-case-grid,
+.vsol-out__cards,
+.vsol-svc__grid,
+.vh-logos__track {
+  gap: var(--vh-gap, unset);
+}
+
+.vh-trust,
+.vh-why,
+.vh-cases,
+.vh-careers,
+.vh-esg,
+.vh-impact,
+.vh-solutions,
+.vh-market,
+.vh-blog,
+.vh-faq,
+.vh-portal,
+.vh-page-hero,
+.vh-why__item,
+.vh-case,
+.vsol-svc-card,
+.vsol-glass,
+.vsol-card {
+  border-style: var(--vh-border-style, none);
+  border-width: var(--vh-border-width, 0);
+  border-color: color-mix(in srgb, var(--vh-border-color, currentColor) calc(var(--vh-border-opacity, 100) * 1%), transparent);
+}
+
+.vh-block-extras,
+.vh-page-hero__extras {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+  width: 100%;
+}
+
+.vh-hero__slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: var(--vh-align-items, flex-end);
 }

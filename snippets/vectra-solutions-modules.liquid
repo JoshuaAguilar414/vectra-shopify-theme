@@ -22,7 +22,13 @@
 %}
 {% case module %}
   {% when 'hero' %}
-<section class="vsol-hero" aria-label="How We Help" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+<section
+  class="vsol-hero vsol-hero--align-{{ block.settings.text_align | default: 'left' }}"
+  aria-label="How We Help"
+  style="{% render 'vectra-block-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
     {% render 'vectra-image', image: block.settings.watermark, fallback: img_mark, alt: '', class: 'vsol-hero__icon', width: 901, height: 909, image_width: 900 %}
     <div class="vsol-hero__inner" data-vh-reveal="up">
       <p class="vsol-hero__kicker">{{ block.settings.kicker | default: 'Business resilience &amp; operational capability building' }}</p>
@@ -30,14 +36,34 @@
       <p>
         {{ block.settings.text | default: 'For SMBs, enterprises, and value chain partners navigating supply chain, procurement, and operational complexity, VECTRA combines expert teams, ecosystem solutions, and practical implementation.' }}
       </p>
+      {% if block.settings.button_2_label != blank %}
+        <div class="vsol-hero__actions">
+          {% if block.settings.button_link != blank %}
+            <a class="vh-btn vh-btn--green" href="{{ block.settings.button_link }}">{{ block.settings.button_label | default: 'Request a Quote' }}</a>
+          {% else %}
+            <button class="vsol-quote" type="button" data-vh-contact-open>{{ block.settings.button_label | default: 'Request a Quote' }}</button>
+          {% endif %}
+          <a class="vh-btn vh-btn--outline" href="{{ block.settings.button_2_link | default: '#' }}">{{ block.settings.button_2_label }}</a>
+        </div>
+      {% endif %}
     </div>
-    <button class="vsol-quote" type="button" data-vh-contact-open data-vh-reveal="scale">
-      {{ block.settings.button_label | default: 'Request a Quote' }}
-    </button>
+    {% if block.settings.button_2_label == blank %}
+      {% if block.settings.button_link != blank %}
+        <a class="vsol-quote" href="{{ block.settings.button_link }}" data-vh-reveal="scale">
+          {{ block.settings.button_label | default: 'Request a Quote' }}
+        </a>
+      {% else %}
+        <button class="vsol-quote" type="button" data-vh-contact-open data-vh-reveal="scale">
+          {{ block.settings.button_label | default: 'Request a Quote' }}
+        </button>
+      {% endif %}
+    {% endif %}
   </section>
+{% endunless %}
 
   {% when 'intro' %}
-<section class="vsol-intro" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+<section class="vsol-intro" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vsol-intro__grid">
       <div class="vsol-collage">
         {% render 'vectra-image', image: block.settings.image_1, fallback: img_collage_1, alt: 'Teams reviewing operational dashboards', class: 'vsol-collage__a', width: 246, height: 246, image_width: 500 %}
@@ -52,13 +78,19 @@
         <p>
           {{ block.settings.text | default: 'We connect the right expertise, specialist partners, AI-enabled intelligence, and capability building around the outcome your organisation needs to achieve.' }}
         </p>
+        {% assign nested_extras = nested_extras | strip %}
+        {% if nested_extras != blank %}
+          <div class="vh-block-extras">{{ nested_extras }}</div>
+        {% endif %}
       </div>
     </div>
   </section>
+{% endunless %}
 
   {% when 'ecosystem' %}
+{% unless block.settings.hide_section %}
 {% assign nested_cards = nested_cards | strip %}
-<section class="vsol-eco" id="solutions" data-vsol-eco {{ block.shopify_attributes }}>
+<section class="vsol-eco" id="solutions" data-vsol-eco style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vsol-eco__head" data-vh-reveal>
       <p class="vsol-kicker vsol-kicker--center">{{ block.settings.kicker | default: 'Our ecosystem of solutions' }}</p>
       <h2>{{ block.settings.heading | default: 'Design. Govern. Execute.' }}</h2>
@@ -161,10 +193,12 @@
       </div>
     </div>
   </section>
+{% endunless %}
 
   {% when 'outcomes' %}
+{% unless block.settings.hide_section %}
 {% assign nested_cards = nested_cards | strip %}
-<section class="vsol-out" {{ block.shopify_attributes }}>
+<section class="vsol-out" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <canvas class="vsol-out__grid" data-vsol-cell-grid aria-hidden="true"></canvas>
     <div class="vsol-out__inner">
       <h2 data-vh-reveal>{{ block.settings.heading | default: 'From complexity to clearer, more resilient performance.' }}</h2>
@@ -196,10 +230,12 @@
       </div>
     </div>
   </section>
+{% endunless %}
 
   {% when 'services' %}
+{% unless block.settings.hide_section %}
 {% assign nested_cards = nested_cards | strip %}
-<section class="vsol-svc" id="services" {{ block.shopify_attributes }}>
+<section class="vsol-svc" id="services" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vsol-svc__head" data-vh-reveal>
       <p class="vsol-kicker vsol-kicker--center">{{ block.settings.kicker | default: 'Our ecosystem of services' }}</p>
       <h2>{{ block.settings.heading | default: 'Every engagement starts with the business outcome.' }}</h2>
@@ -268,10 +304,12 @@
       {% endif %}
     </div>
   </section>
+{% endunless %}
 
   {% when 'process' %}
+{% unless block.settings.hide_section %}
 {% assign nested_steps = nested_steps | strip %}
-<section class="vsol-process" {{ block.shopify_attributes }}>
+<section class="vsol-process" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vsol-process__inner">
       <canvas class="vsol-process__grid" data-vsol-cell-grid aria-hidden="true"></canvas>
       <h2 data-vh-reveal>{{ block.settings.heading | default: 'From complexity to clearer, more resilient performance.' }}</h2>
@@ -305,3 +343,4 @@
   </section>
 
 {% endcase %}
+{% endunless %}

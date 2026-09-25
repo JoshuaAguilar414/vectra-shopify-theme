@@ -1,19 +1,52 @@
 <article
-  class="vh-hero__slide{% if block.settings.is_active %} is-active{% endif %}"
+  class="vh-hero__slide{% if block.settings.is_active %} is-active{% endif %} vh-hero__slide--align-{{ block.settings.text_align | default: 'left' }}"
   data-vh-slide
+  style="{% render 'vectra-block-style', settings: block.settings %}"
   {{ block.shopify_attributes }}
 >
-  {% render 'vectra-image',
-    image: block.settings.image,
-    fallback: block.settings.fallback_asset,
-    alt: block.settings.alt,
-    width: 1920,
-    height: 1080,
-    loading: 'eager',
-    fetchpriority: 'high',
-    image_width: 2400
-  %}
-  <div class="vh-hero__copy">
+  {% if block.settings.toggle_overlay or block.settings.overlay_opacity != blank %}
+    <span
+      class="vh-hero__overlay{% if block.settings.overlay_style == 'gradient' %} vh-hero__overlay--gradient vh-hero__overlay--{{ block.settings.gradient_direction | default: 'to-bottom' }}{% endif %}"
+      aria-hidden="true"
+    ></span>
+  {% endif %}
+  {% if block.settings.video != blank %}
+    {{
+      block.settings.video
+      | video_tag:
+        autoplay: true,
+        loop: true,
+        muted: true,
+        controls: false,
+        image_size: '1920x',
+        class: 'vh-hero__media vh-hero__media--desktop'
+    }}
+  {% else %}
+    {% render 'vectra-image',
+      image: block.settings.image,
+      fallback: block.settings.fallback_asset,
+      alt: block.settings.alt,
+      class: 'vh-hero__media vh-hero__media--desktop',
+      width: 1920,
+      height: 1080,
+      loading: 'eager',
+      fetchpriority: 'high',
+      image_width: 2400
+    %}
+  {% endif %}
+  {% if block.settings.image_mobile != blank %}
+    {{
+      block.settings.image_mobile
+      | image_url: width: 1200
+      | image_tag:
+        class: 'vh-hero__media vh-hero__media--mobile',
+        loading: 'eager',
+        alt: block.settings.alt,
+        width: 750,
+        height: 1100
+    }}
+  {% endif %}
+  <div class="vh-hero__copy" {% if block.settings.content_max_width != blank and block.settings.content_max_width > 0 %}style="max-width: {{ block.settings.content_max_width }}px;"{% endif %}>
     {% if block.settings.heading != blank %}
       <h1 data-vh-hero-el>{{ block.settings.heading }}</h1>
     {% endif %}
@@ -23,6 +56,35 @@
     {% if block.settings.text != blank %}
       <p data-vh-hero-el>{{ block.settings.text }}</p>
     {% endif %}
+    {% if block.settings.button_label != blank or block.settings.button_2_label != blank %}
+      <div class="vh-hero__actions" data-vh-hero-el>
+        {% if block.settings.button_label != blank %}
+          <a
+            class="vh-btn vh-btn--{{ block.settings.button_style | default: 'green' }}"
+            href="{{ block.settings.button_link | default: '#VectraContactModal' }}"
+            {% if block.settings.button_link == blank or block.settings.button_link == '#VectraContactModal' %}
+              data-vh-contact-open
+            {% endif %}
+            {% if block.settings.open_in_new_tab and block.settings.button_link != blank %}
+              target="_blank" rel="noopener noreferrer"
+            {% endif %}
+          >
+            {{ block.settings.button_label }}
+          </a>
+        {% endif %}
+        {% if block.settings.button_2_label != blank %}
+          <a
+            class="vh-btn vh-btn--{{ block.settings.button_2_style | default: 'outline-light' }}"
+            href="{{ block.settings.button_2_link | default: '#' }}"
+            {% if block.settings.open_in_new_tab and block.settings.button_2_link != blank %}
+              target="_blank" rel="noopener noreferrer"
+            {% endif %}
+          >
+            {{ block.settings.button_2_label }}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
   </div>
 </article>
 
@@ -31,17 +93,539 @@
   "name": "Hero slide",
   "tag": null,
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Background image" },
-    { "type": "text", "id": "alt", "label": "Image alt text" },
-    { "type": "inline_richtext", "id": "heading", "label": "Heading", "info": "Rendered as the page H1. Use on one slide only." },
-    { "type": "inline_richtext", "id": "subheading", "label": "Subheading" },
-    { "type": "textarea", "id": "text", "label": "Text" },
-    { "type": "checkbox", "id": "is_active", "label": "Show this slide first", "default": false },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image",
+      "info": "Optional. Shown below 750px."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Background video",
+      "info": "Optional. Replaces the desktop image when set."
+    },
+    {
+      "type": "text",
+      "id": "alt",
+      "label": "Image alt text"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image focal point",
+      "options": [
+        {
+          "value": "center center",
+          "label": "Center"
+        },
+        {
+          "value": "top center",
+          "label": "Top"
+        },
+        {
+          "value": "bottom center",
+          "label": "Bottom"
+        },
+        {
+          "value": "center left",
+          "label": "Left"
+        },
+        {
+          "value": "center right",
+          "label": "Right"
+        }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "checkbox",
+      "id": "toggle_overlay",
+      "label": "Show media overlay",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000",
+      "alpha": true,
+      "visible_if": "{{ block.settings.toggle_overlay }}"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 20,
+      "visible_if": "{{ block.settings.toggle_overlay }}"
+    },
+    {
+      "type": "select",
+      "id": "overlay_style",
+      "label": "Overlay style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.toggle_overlay }}"
+    },
+    {
+      "type": "select",
+      "id": "gradient_direction",
+      "label": "Gradient direction",
+      "options": [
+        {
+          "value": "to-top",
+          "label": "Up"
+        },
+        {
+          "value": "to-bottom",
+          "label": "Down"
+        }
+      ],
+      "default": "to-bottom",
+      "visible_if": "{{ block.settings.toggle_overlay and block.settings.overlay_style == 'gradient' }}"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Rendered as the page H1. Use on one slide only."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text_alignment",
+      "id": "text_align",
+      "label": "Text alignment",
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "min": 0,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "default": 0,
+      "info": "0 keeps the design default."
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Primary button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Primary button style",
+      "options": [
+        {
+          "value": "green",
+          "label": "Green"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        },
+        {
+          "value": "outline-light",
+          "label": "Outline light"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "green"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Custom button background",
+      "visible_if": "{{ block.settings.button_style == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Custom button text",
+      "visible_if": "{{ block.settings.button_style == 'custom' }}"
+    },
+    {
+      "type": "text",
+      "id": "button_2_label",
+      "label": "Secondary button label"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "select",
+      "id": "button_2_style",
+      "label": "Secondary button style",
+      "options": [
+        {
+          "value": "outline-light",
+          "label": "Outline light"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        },
+        {
+          "value": "green",
+          "label": "Green"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        }
+      ],
+      "default": "outline-light"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab",
+      "label": "Open links in a new tab",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "Left",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "Right",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Slide"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_active",
+      "label": "Show this slide first",
+      "default": false
+    },
     {
       "type": "text",
       "id": "fallback_asset",
       "label": "Theme fallback image",
       "info": "Filename in the theme assets folder. Used until you upload an image."
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        },
+        {
+          "value": "2.5rem",
+          "label": "40px"
+        },
+        {
+          "value": "3rem",
+          "label": "48px"
+        },
+        {
+          "value": "4rem",
+          "label": "64px"
+        },
+        {
+          "value": "4.5rem",
+          "label": "72px"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "Body text size",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        },
+        {
+          "value": "2.5rem",
+          "label": "40px"
+        },
+        {
+          "value": "3rem",
+          "label": "48px"
+        },
+        {
+          "value": "4rem",
+          "label": "64px"
+        },
+        {
+          "value": "4.5rem",
+          "label": "72px"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Heading weight",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "line_height",
+      "label": "Line height",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "tight",
+          "label": "Tight"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "loose",
+          "label": "Loose"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "letter_spacing",
+      "label": "Letter spacing",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "tight",
+          "label": "Tight"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "loose",
+          "label": "Loose"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "text_case",
+      "label": "Text case",
+      "options": [
+        {
+          "value": "none",
+          "label": "Default"
+        },
+        {
+          "value": "uppercase",
+          "label": "Uppercase"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "flex-end"
     }
   ]
 }

@@ -5,23 +5,420 @@
   "name": "VECTRA: Marketplace",
   "tag": null,
   "settings": [
-    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Learn What Matters. Build Capability That Lasts." },
-    { "type": "textarea", "id": "text", "label": "Text" },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Find the Right Course" },
-    { "type": "url", "id": "button_link", "label": "Button link" },
-    { "type": "collection", "id": "collection", "label": "Featured courses collection" },
-    { "type": "text", "id": "topics_heading", "label": "Topics heading", "default": "Relevant Topics" },
-    { "type": "text", "id": "pill_1", "label": "Pill 1", "default": "Most Popular →" },
-    { "type": "text", "id": "pill_2", "label": "Pill 2", "default": "By Regulation →" },
-    { "type": "text", "id": "pill_3", "label": "Pill 3", "default": "By Role →" },
-    { "type": "text", "id": "topic_label", "label": "Topic card label", "default": "Certificate Course" },
-    { "type": "text", "id": "price_label", "label": "Price label", "default": "Coming to Marketplace" },
-    { "type": "header", "content": "Fallback course images" },
-    { "type": "image_picker", "id": "course_image_1", "label": "Course image 1" },
-    { "type": "image_picker", "id": "course_image_2", "label": "Course image 2" },
-    { "type": "image_picker", "id": "course_image_3", "label": "Course image 3" },
-    { "type": "image_picker", "id": "course_image_4", "label": "Course image 4" }
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Learn What Matters. Build Capability That Lasts."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Find the Right Course"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Featured courses collection"
+    },
+    {
+      "type": "text",
+      "id": "topics_heading",
+      "label": "Topics heading",
+      "default": "Relevant Topics"
+    },
+    {
+      "type": "text",
+      "id": "pill_1",
+      "label": "Pill 1",
+      "default": "Most Popular →"
+    },
+    {
+      "type": "text",
+      "id": "pill_2",
+      "label": "Pill 2",
+      "default": "By Regulation →"
+    },
+    {
+      "type": "text",
+      "id": "pill_3",
+      "label": "Pill 3",
+      "default": "By Role →"
+    },
+    {
+      "type": "text",
+      "id": "topic_label",
+      "label": "Topic card label",
+      "default": "Certificate Course"
+    },
+    {
+      "type": "text",
+      "id": "price_label",
+      "label": "Price label",
+      "default": "Coming to Marketplace"
+    },
+    {
+      "type": "header",
+      "content": "Fallback course images"
+    },
+    {
+      "type": "image_picker",
+      "id": "course_image_1",
+      "label": "Course image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "course_image_2",
+      "label": "Course image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "course_image_3",
+      "label": "Course image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "course_image_4",
+      "label": "Course image 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_section",
+      "label": "Hide this section",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "Left",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "Right",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        },
+        {
+          "value": "2.5rem",
+          "label": "40px"
+        },
+        {
+          "value": "3rem",
+          "label": "48px"
+        },
+        {
+          "value": "4rem",
+          "label": "64px"
+        },
+        {
+          "value": "4.5rem",
+          "label": "72px"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "Body text size",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        },
+        {
+          "value": "2.5rem",
+          "label": "40px"
+        },
+        {
+          "value": "3rem",
+          "label": "48px"
+        },
+        {
+          "value": "4rem",
+          "label": "64px"
+        },
+        {
+          "value": "4.5rem",
+          "label": "72px"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Heading weight",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "line_height",
+      "label": "Line height",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "tight",
+          "label": "Tight"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "loose",
+          "label": "Loose"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "letter_spacing",
+      "label": "Letter spacing",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "tight",
+          "label": "Tight"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "loose",
+          "label": "Loose"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "text_case",
+      "label": "Text case",
+      "options": [
+        {
+          "value": "none",
+          "label": "Default"
+        },
+        {
+          "value": "uppercase",
+          "label": "Uppercase"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "header",
+      "content": "Borders"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "Border",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border thickness",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 1,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "label": "Border opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    }
   ],
-  "presets": [{ "name": "VECTRA: Marketplace" }]
+  "presets": [
+    {
+      "name": "VECTRA: Marketplace"
+    }
+  ]
 }
 {% endschema %}

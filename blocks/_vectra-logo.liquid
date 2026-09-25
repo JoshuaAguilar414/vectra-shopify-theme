@@ -1,4 +1,13 @@
+{% if block.settings.link != blank %}
+<a
+  class="vh-logos__item"
+  href="{{ block.settings.link }}"
+  {% if block.settings.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+  {{ block.shopify_attributes }}
+>
+{% else %}
 <span class="vh-logos__item" {{ block.shopify_attributes }}>
+{% endif %}
   {% render 'vectra-image',
     image: block.settings.image,
     fallback: block.settings.fallback_asset,
@@ -6,7 +15,11 @@
     height: 52,
     image_width: 400
   %}
+{% if block.settings.link != blank %}
+</a>
+{% else %}
 </span>
+{% endif %}
 
 {% schema %}
 {
@@ -15,6 +28,8 @@
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Logo" },
     { "type": "text", "id": "alt", "label": "Alt text" },
+    { "type": "url", "id": "link", "label": "Logo link" },
+    { "type": "checkbox", "id": "open_in_new_tab", "label": "Open link in a new tab", "default": false },
     {
       "type": "text",
       "id": "fallback_asset",

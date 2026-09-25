@@ -7,25 +7,124 @@
 {
   "name": "VECTRA: Story FAQ",
   "tag": null,
-  "blocks": [{ "type": "_vectra-faq-item" }],
+  "blocks": [
+    {
+      "type": "_vectra-faq-item"
+    }
+  ],
   "settings": [
-    { "type": "text", "id": "card_title", "label": "Side card title", "default": "More questions?" },
-    { "type": "textarea", "id": "card_text", "label": "Side card text", "default": "Find more answers about VECTRA International, how we work, our capabilities, and getting started." },
-    { "type": "text", "id": "button_label", "label": "Side card button", "default": "More questions?" },
-    { "type": "url", "id": "button_link", "label": "Side card button link" },
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Our FAQ" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" },
-    { "type": "textarea", "id": "lead", "label": "Lead", "default": "Answers about who we are, how we work, and where we operate." }
+    {
+      "type": "text",
+      "id": "card_title",
+      "label": "Side card title",
+      "default": "More questions?"
+    },
+    {
+      "type": "textarea",
+      "id": "card_text",
+      "label": "Side card text",
+      "default": "Find more answers about VECTRA International, how we work, our capabilities, and getting started."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Side card button",
+      "default": "More questions?"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Side card button link"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Our FAQ"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Lead",
+      "default": "Answers about who we are, how we work, and where we operate."
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_section",
+      "label": "Hide this section",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
   ],
   "presets": [
     {
       "name": "VECTRA: Story FAQ",
       "blocks": [
-        { "type": "_vectra-faq-item", "settings": { "open": true, "question": "Who is VECTRA International?", "answer": "VECTRA International is a business resilience and operational capability-building partner that helps organizations manage ESG requirements, supplier risk, and operational complexity through expert teams and practical, technology-enabled delivery." } },
-        { "type": "_vectra-faq-item", "settings": { "question": "When was VECTRA International founded?", "answer": "VECTRA International was founded in 2005 and has since worked with organizations across industries to strengthen governance, supplier accountability, and operational resilience." } },
-        { "type": "_vectra-faq-item", "settings": { "question": "What does VECTRA International do?", "answer": "VECTRA International turns responsible business requirements — supplier issues, audit findings, weak controls, and changing regulations — into clear priorities, accountable action, and measurable performance improvement." } },
-        { "type": "_vectra-faq-item", "settings": { "question": "Where does VECTRA International operate?", "answer": "VECTRA International operates globally, with associates and specialist experts delivering local market context across regions including Africa, Europe, Asia, and beyond." } },
-        { "type": "_vectra-faq-item", "settings": { "question": "Who leads VECTRA International?", "answer": "VECTRA International is led by CEO Patrick Neyts, alongside a global leadership team spanning operations, sales and marketing, and applied AI." } }
+        {
+          "type": "_vectra-faq-item",
+          "settings": {
+            "open": true,
+            "question": "Who is VECTRA International?",
+            "answer": "VECTRA International is a business resilience and operational capability-building partner that helps organizations manage ESG requirements, supplier risk, and operational complexity through expert teams and practical, technology-enabled delivery."
+          }
+        },
+        {
+          "type": "_vectra-faq-item",
+          "settings": {
+            "question": "When was VECTRA International founded?",
+            "answer": "VECTRA International was founded in 2005 and has since worked with organizations across industries to strengthen governance, supplier accountability, and operational resilience."
+          }
+        },
+        {
+          "type": "_vectra-faq-item",
+          "settings": {
+            "question": "What does VECTRA International do?",
+            "answer": "VECTRA International turns responsible business requirements — supplier issues, audit findings, weak controls, and changing regulations — into clear priorities, accountable action, and measurable performance improvement."
+          }
+        },
+        {
+          "type": "_vectra-faq-item",
+          "settings": {
+            "question": "Where does VECTRA International operate?",
+            "answer": "VECTRA International operates globally, with associates and specialist experts delivering local market context across regions including Africa, Europe, Asia, and beyond."
+          }
+        },
+        {
+          "type": "_vectra-faq-item",
+          "settings": {
+            "question": "Who leads VECTRA International?",
+            "answer": "VECTRA International is led by CEO Patrick Neyts, alongside a global leadership team spanning operations, sales and marketing, and applied AI."
+          }
+        }
       ]
     }
   ]

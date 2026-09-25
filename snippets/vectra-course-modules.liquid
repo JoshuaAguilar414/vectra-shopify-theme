@@ -33,7 +33,7 @@
 {% assign href_4 = href_4 | strip %}
 
 {% if view == 'catalog' %}
-<section class="vh-course-land" {{ block.shopify_attributes }}>
+<section class="vh-course-land" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap">
     <p class="vh-kicker">{{ block.settings.kicker | default: 'Marketplace' }}</p>
     <h1 class="vh-h2">{{ block.settings.heading | default: 'Courses and capability paths' }}</h1>
@@ -136,7 +136,7 @@
     assign img = block.settings.image | image_url: width: 1200
   endif
 %}
-<section class="vh-course-land" {{ block.shopify_attributes }}>
+<section class="vh-course-land" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap vh-course-land__hero">
     <p class="vh-kicker">{{ block.settings.kicker | default: 'Course landing page' }}</p>
     <h1 class="vh-h2">{{ title }}</h1>

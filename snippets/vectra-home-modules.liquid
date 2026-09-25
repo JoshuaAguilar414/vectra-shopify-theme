@@ -78,8 +78,9 @@
 {% case module %}
   {% when 'hero' %}
 {% render 'vectra-seo', page_key: 'home' %}
+{% unless block.settings.hide_section %}
 {% assign nested_slides = nested_slides | strip %}
-<section class="vh-hero" data-vh-carousel aria-label="Featured" {{ block.shopify_attributes }}>
+<section class="vh-hero" data-vh-carousel aria-label="Featured" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vh-hero__track" data-vh-track>
       {% if nested_slides != blank %}
         {{ nested_slides }}
@@ -114,14 +115,16 @@
       <img class="vh-hero__arrow-icon" src="{{ img_arrow_white }}" alt="">
     </button>
   </section>
+{% endunless %}
 
   {% when 'trust' %}
+{% unless block.settings.hide_section %}
 {% liquid
   assign trust_heading = block.settings.heading | default: '20+ Years of Experience. 500+ Organizations Supported.'
   assign trust_btn = block.settings.button_label | default: 'Explore Case Studies'
   assign trust_link = block.settings.button_link | default: '#cases'
 %}
-<section class="vh-trust" {{ block.shopify_attributes }}>
+<section class="vh-trust" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vh-wrap">
       <div class="vh-trust__row">
         <div class="vh-seal" aria-hidden="true">
@@ -129,17 +132,30 @@
         </div>
         <div class="vh-trust__copy">
           <h2 data-vh-reveal="left">{{ trust_heading }}</h2>
-          <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ trust_link }}" data-vh-reveal="scale">
-            {{ trust_btn }}
-          </a>
+          <div class="vh-trust__actions">
+            <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ trust_link }}" data-vh-reveal="scale">
+              {{ trust_btn }}
+            </a>
+            {% if block.settings.button_2_label != blank %}
+              <a class="vh-btn vh-btn--outline" href="{{ block.settings.button_2_link | default: '#' }}" data-vh-reveal="scale">
+                {{ block.settings.button_2_label }}
+              </a>
+            {% endif %}
+          </div>
+          {% assign nested_extras = nested_extras | strip %}
+          {% if nested_extras != blank %}
+            <div class="vh-block-extras">{{ nested_extras }}</div>
+          {% endif %}
         </div>
       </div>
     </div>
   </section>
+{% endunless %}
 
   {% when 'logos' %}
+{% unless block.settings.hide_section %}
 {% assign nested_logos = nested_logos | strip %}
-<div class="vh-logos" aria-label="Trusted by" {{ block.shopify_attributes }}>
+<div class="vh-logos" aria-label="Trusted by" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vh-logos__track" data-vh-marquee>
       {% if nested_logos != blank %}
         {{ nested_logos }}
@@ -157,9 +173,11 @@
       {% endif %}
     </div>
   </div>
+{% endunless %}
 
   {% when 'impact' %}
-<section class="vh-impact" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+<section class="vh-impact" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vh-wrap">
       {% if block.settings.image != blank %}
         {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: 'Enabling Positive Business Impact' }}
@@ -172,8 +190,10 @@
       {% endif %}
     </div>
   </section>
+{% endunless %}
 
   {% when 'why' %}
+{% unless block.settings.hide_section %}
 {% liquid
   assign why_kicker = block.settings.kicker | default: 'WHY VECTRA'
   assign why_heading = block.settings.heading | default: 'Why Choose VECTRA as Your<br>Business Resilience Partner'
@@ -182,7 +202,7 @@
   assign why_link = block.settings.button_link | default: '#solutions'
   assign nested_cards = nested_cards | strip
 %}
-<section class="vh-why" id="why-vectra" {{ block.shopify_attributes }}>
+<section class="vh-why" id="why-vectra" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vh-wrap vh-why__grid">
       <div class="vh-why__media">
         {% render 'vectra-image', image: block.settings.image, fallback: img_why, alt: 'VECTRA International facility', width: 980, height: 720, image_width: 1600 %}
@@ -199,6 +219,11 @@
           {{ why_btn }}
           <img src="{{ img_arrow }}" alt="">
         </a>
+        {% if block.settings.button_2_label != blank %}
+          <a class="vh-btn vh-btn--outline" href="{{ block.settings.button_2_link | default: '#' }}" style="margin-top: 12px;">
+            {{ block.settings.button_2_label }}
+          </a>
+        {% endif %}
       </div>
     </div>
     <div class="vh-wrap vh-why__list">
@@ -228,8 +253,10 @@
       {% endif %}
     </div>
   </section>
+{% endunless %}
 
   {% when 'esg' %}
+{% unless block.settings.hide_section %}
 {% liquid
   assign esg_heading = block.settings.heading | default: 'Helping Organizations Build<br>Long-Term Business Resilience'
   assign esg_text = block.settings.text | default: 'Since 2005, VECTRA International has worked across responsible business, supply chains, and operational improvement. That experience now supports a broader role in business resilience and operational capability building.'
@@ -240,7 +267,7 @@
   assign esg_s3v = block.settings.stat_3_value | default: '500+'
   assign esg_s3l = block.settings.stat_3_label | default: 'Satisfied Clients'
 %}
-<section class="vh-esg" {{ block.shopify_attributes }}>
+<section class="vh-esg" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vh-esg__stage">
       <div class="vh-esg__glow" aria-hidden="true"></div>
       <div class="vh-esg__copy" data-vh-reveal>
@@ -252,15 +279,22 @@
       <div class="vh-stat vh-stat--500" data-vh-reveal="up"><b>{{ esg_s3v }}</b><span>{{ esg_s3l }}</span></div>
     </div>
   </section>
+{% endunless %}
 
   {% when 'solutions' %}
+{% unless block.settings.hide_section %}
 {% liquid
   assign sol_kicker = block.settings.kicker | default: 'VECTRA Solutions'
   assign sol_heading = block.settings.heading | default: 'Responsible Business Transformation That Creates Value'
   assign sol_btn = block.settings.button_label | default: 'Talk to an Expert →'
+  if block.settings.button_link != blank
+    assign sol_cta = block.settings.button_link
+  else
+    assign sol_cta = '#VectraContactModal'
+  endif
   assign nested_shots = nested_shots | strip
 %}
-<section class="vh-solutions" id="solutions" data-vh-solutions {{ block.shopify_attributes }}>
+<section class="vh-solutions" id="solutions" data-vh-solutions style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vh-solutions__canvas">
       <div class="vh-solutions__head" data-vh-reveal>
         <p class="vh-kicker">{{ sol_kicker }}</p>
@@ -340,14 +374,16 @@
         </div>
       </div>
       <div class="vh-solutions__cta">
-        <a class="vh-btn vh-btn--green vh-btn--rect" href="#VectraContactModal" data-vh-contact-open>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ sol_cta }}"{% if sol_cta == '#VectraContactModal' %} data-vh-contact-open{% endif %}>
           {{ sol_btn }}
         </a>
       </div>
     </div>
   </section>
+{% endunless %}
 
   {% when 'marketplace' %}
+{% unless block.settings.hide_section %}
 {% liquid
   assign market_heading = block.settings.heading | default: 'Learn What Matters. Build Capability That Lasts.'
   assign market_text = block.settings.text | default: 'Explore 100+ expert-led courses across ESG, sustainability, responsible business, compliance, due diligence, and supply chains'
@@ -376,7 +412,7 @@
     assign img_course_4 = block.settings.course_image_4 | image_url: width: 640
   endif
 %}
-<section class="vh-market" id="marketplace" {{ block.shopify_attributes }}>
+<section class="vh-market" id="marketplace" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vh-market__panel">
     <div class="vh-wrap">
       <div class="vh-market__head">
@@ -546,8 +582,10 @@
     </div>
     </div>
   </section>
+{% endunless %}
 
   {% when 'cases' %}
+{% unless block.settings.hide_section %}
 {% liquid
   assign cases_heading = block.settings.heading | default: 'Trusted by industry leaders.<br>Proven in practice.'
   assign cases_reviews = block.settings.reviews_label | default: '5/5 — Based on 500 reviews'
@@ -559,7 +597,7 @@
   endif
   assign nested_cases = nested_cases | strip
 %}
-<section class="vh-cases" id="cases" {{ block.shopify_attributes }}>
+<section class="vh-cases" id="cases" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <canvas class="vh-cases__grid" data-vh-cases-grid aria-hidden="true"></canvas>
     <div class="vh-wrap">
       <h2 data-vh-reveal>{{ cases_heading }}</h2>
@@ -645,9 +683,11 @@
       </a>
     </div>
   </section>
+{% endunless %}
 
   {% when 'blog' %}
-<section class="vh-blog" id="resources" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+<section class="vh-blog" id="resources" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vh-wrap">
       <p class="vh-kicker" data-vh-reveal="scale">{{ block.settings.kicker | default: 'Insights' }}</p>
       <h2 class="vh-h2" data-vh-reveal="scale">{{ block.settings.heading | default: 'Latest Insights' }}</h2>
@@ -714,8 +754,10 @@
       </div>
     </div>
   </section>
+{% endunless %}
 
   {% when 'faq' %}
+{% unless block.settings.hide_section %}
 {% liquid
   assign faq_card_title = block.settings.card_title | default: 'Bring Us the Problem That Keeps Coming Back'
   assign faq_card_text = block.settings.card_text | default: "Maybe actions keep stalling. Evidence is scattered. A supplier issue stays open. Or your systems produce information, but the next step is still unclear. Tell us where the work gets stuck. We'll help you identify the gap and the next step."
@@ -724,7 +766,7 @@
   assign faq_lead = block.settings.lead | default: 'Straight answers about where VECTRA fits, how we work, and what happens next.'
   assign nested_items = nested_items | strip
 %}
-<section class="vh-faq" id="faq" {{ block.shopify_attributes }}>
+<section class="vh-faq" id="faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vh-wrap vh-faq__grid">
       <aside class="vh-contact-card" data-vh-reveal="left">
         <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
@@ -781,8 +823,10 @@
       </div>
     </div>
   </section>
+{% endunless %}
 
   {% when 'portal' %}
+{% unless block.settings.hide_section %}
 {% unless template.suffix == 'resources' %}
 {% liquid
   assign is_solutions_portal = false
@@ -812,7 +856,7 @@
     assign portal_form_heading = 'Talk to a VECTRA Expert'
   endif
 %}
-<section class="vh-portal{% if is_solutions_portal %} vh-portal--sol{% endif %}" id="{{ block.settings.anchor_id | default: 'get-in-touch' }}" {{ block.shopify_attributes }}>
+<section class="vh-portal{% if is_solutions_portal %} vh-portal--sol{% endif %}" id="{{ block.settings.anchor_id | default: 'get-in-touch' }}" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     {% if is_solutions_portal %}
       <canvas class="vh-portal__cells" data-vs-join-grid aria-hidden="true"></canvas>
     {% endif %}
@@ -832,11 +876,17 @@
           {% render 'vectra-contact-fields', img_arrow: img_arrow %}
         {% endform %}
       {% endif %}
+      {% assign nested_extras = nested_extras | strip %}
+      {% if nested_extras != blank %}
+        <div class="vh-block-extras">{{ nested_extras }}</div>
+      {% endif %}
     </div>
   </section>
 {% endunless %}
+{% endunless %}
 
   {% when 'careers' %}
+{% unless block.settings.hide_section %}
 {% liquid
   assign careers_kicker = block.settings.kicker | default: 'Careers'
   assign careers_heading = block.settings.heading | default: 'Join Our Team'
@@ -848,16 +898,28 @@
     assign careers_cta = careers_url
   endif
 %}
-<section class="vh-careers" id="careers" {{ block.shopify_attributes }}>
+<section class="vh-careers" id="careers" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <canvas class="vh-careers__grid" data-vh-careers-grid aria-hidden="true"></canvas>
     <div class="vh-careers__inner">
       <p class="vh-kicker">{{ careers_kicker }}</p>
       <h2 class="vh-h2">{{ careers_heading }}</h2>
       <p class="vh-lead">{{ careers_text }}</p>
-      <a class="vh-btn vh-btn--green vh-careers__cta" href="{{ careers_cta }}">
-        {{ careers_btn }}
-      </a>
+      <div class="vh-careers__actions">
+        <a class="vh-btn vh-btn--green vh-careers__cta" href="{{ careers_cta }}">
+          {{ careers_btn }}
+        </a>
+        {% if block.settings.button_2_label != blank %}
+          <a class="vh-btn vh-btn--outline" href="{{ block.settings.button_2_link | default: '#' }}">
+            {{ block.settings.button_2_label }}
+          </a>
+        {% endif %}
+      </div>
+      {% assign nested_extras = nested_extras | strip %}
+      {% if nested_extras != blank %}
+        <div class="vh-block-extras">{{ nested_extras }}</div>
+      {% endif %}
     </div>
   </section>
+{% endunless %}
 
 {% endcase %}

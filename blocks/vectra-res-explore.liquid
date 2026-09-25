@@ -1,4 +1,25 @@
-{% render 'vectra-resources-modules', module: 'explore', block: block %}
+{% unless block.settings.hide_section %}
+<section
+  class="vres-panel vres-panel--explore"
+  style="{% render 'vectra-block-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
+  <div class="vh-wrap">
+    {% if block.settings.kicker != blank %}
+      <p class="vh-kicker">{{ block.settings.kicker }}</p>
+    {% endif %}
+    {% if block.settings.heading != blank %}
+      <h2 class="vh-h2">{{ block.settings.heading }}</h2>
+    {% endif %}
+    {% if block.settings.text != blank %}
+      <div class="vh-lead">{{ block.settings.text }}</div>
+    {% endif %}
+    {% if block.settings.button_label != blank %}
+      <a class="vh-btn vh-btn--green" href="{{ block.settings.button_link | default: '#' }}">{{ block.settings.button_label }}</a>
+    {% endif %}
+  </div>
+</section>
+{% endunless %}
 
 {% schema %}
 {
@@ -7,7 +28,34 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "Not used on the live Resources page. Keep this block out of templates."
+      "content": "Optional resources section. Add it to the Resources page if you want an extra callout band."
+    },
+    { "type": "checkbox", "id": "hide_section", "label": "Hide this section", "default": false },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Explore" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Find the material that matches the decision in front of you" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Use Insights, ebooks, events, and VCASTs to separate what is relevant from what is noise — then decide what to do next." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Browse resources" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "header", "content": "Padding" },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
     }
   ],
   "presets": [{ "name": "VECTRA: Res explore" }]

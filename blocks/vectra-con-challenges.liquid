@@ -7,20 +7,405 @@
 {
   "name": "VECTRA: Contact challenges",
   "tag": null,
-  "blocks": [{ "type": "_vectra-why-card" }],
+  "blocks": [
+    {
+      "type": "_vectra-why-card"
+    },
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Not sure where it fits?" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Start With What’s Happening" },
-    { "type": "textarea", "id": "text", "label": "Text" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Not sure where it fits?"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Start With What’s Happening"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_section",
+      "label": "Hide this section",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "Left",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "Right",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        },
+        {
+          "value": "2.5rem",
+          "label": "40px"
+        },
+        {
+          "value": "3rem",
+          "label": "48px"
+        },
+        {
+          "value": "4rem",
+          "label": "64px"
+        },
+        {
+          "value": "4.5rem",
+          "label": "72px"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "Body text size",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        },
+        {
+          "value": "2.5rem",
+          "label": "40px"
+        },
+        {
+          "value": "3rem",
+          "label": "48px"
+        },
+        {
+          "value": "4rem",
+          "label": "64px"
+        },
+        {
+          "value": "4.5rem",
+          "label": "72px"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Heading weight",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "line_height",
+      "label": "Line height",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "tight",
+          "label": "Tight"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "loose",
+          "label": "Loose"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "letter_spacing",
+      "label": "Letter spacing",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "tight",
+          "label": "Tight"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "loose",
+          "label": "Loose"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "text_case",
+      "label": "Text case",
+      "options": [
+        {
+          "value": "none",
+          "label": "Default"
+        },
+        {
+          "value": "uppercase",
+          "label": "Uppercase"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "header",
+      "content": "Borders"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "Border",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border thickness",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 1,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "label": "Border opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Item spacing",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0,
+      "info": "0 keeps the design default gap between cards/items."
+    }
   ],
   "presets": [
     {
       "name": "VECTRA: Contact challenges",
       "blocks": [
-        { "type": "_vectra-why-card", "settings": { "heading": "The same problem keeps coming back", "text": "It gets corrected. A few weeks or months later, the same finding, gap, or issue is back — a sign the root cause, not just the symptom, needs attention.", "fallback_asset": "vectra-be208e26a6843edcaa8fc4443996531be291a3b4.svg" } },
-        { "type": "_vectra-why-card", "settings": { "heading": "You have supplier findings, but no clear priority", "text": "You’re sitting on audit results, supplier risk data, or compliance evidence. The harder part is deciding what needs attention first and who owns the next action.", "fallback_asset": "vectra-0741b53e27e031962e5853d5e609fc42e3000a0a.svg" } },
-        { "type": "_vectra-why-card", "settings": { "heading": "The evidence exists, but using it takes too much work", "text": "ESG data, audit records, and compliance evidence are scattered across files, systems, emails, and teams — making it difficult to use, verify, or defend when it matters.", "fallback_asset": "vectra-7710da89715977538c6f4fe9c6dc34d7e755efbe.svg" } },
-        { "type": "_vectra-why-card", "settings": { "heading": "The change makes sense on paper, but it isn’t sticking", "text": "The requirement, process, or system is clear. The people who need to use it day to day are still struggling to make it part of normal work.", "fallback_asset": "vectra-2ff6aff392536da49f749783879fa1d814bae954.svg" } }
+        {
+          "type": "_vectra-why-card",
+          "settings": {
+            "heading": "The same problem keeps coming back",
+            "text": "It gets corrected. A few weeks or months later, the same finding, gap, or issue is back — a sign the root cause, not just the symptom, needs attention.",
+            "fallback_asset": "vectra-be208e26a6843edcaa8fc4443996531be291a3b4.svg"
+          }
+        },
+        {
+          "type": "_vectra-why-card",
+          "settings": {
+            "heading": "You have supplier findings, but no clear priority",
+            "text": "You’re sitting on audit results, supplier risk data, or compliance evidence. The harder part is deciding what needs attention first and who owns the next action.",
+            "fallback_asset": "vectra-0741b53e27e031962e5853d5e609fc42e3000a0a.svg"
+          }
+        },
+        {
+          "type": "_vectra-why-card",
+          "settings": {
+            "heading": "The evidence exists, but using it takes too much work",
+            "text": "ESG data, audit records, and compliance evidence are scattered across files, systems, emails, and teams — making it difficult to use, verify, or defend when it matters.",
+            "fallback_asset": "vectra-7710da89715977538c6f4fe9c6dc34d7e755efbe.svg"
+          }
+        },
+        {
+          "type": "_vectra-why-card",
+          "settings": {
+            "heading": "The change makes sense on paper, but it isn’t sticking",
+            "text": "The requirement, process, or system is clear. The people who need to use it day to day are still struggling to make it part of normal work.",
+            "fallback_asset": "vectra-2ff6aff392536da49f749783879fa1d814bae954.svg"
+          }
+        }
       ]
     }
   ]

@@ -14,7 +14,7 @@
         <span class="vh-price">{{ block.settings.price }}</span>
       {% endif %}
       {% if block.settings.cta_label != blank %}
-        <a class="vh-course__cta" href="{{ block.settings.cta_link | default: '#' }}">{{ block.settings.cta_label }}</a>
+        <a class="vh-course__cta" href="{{ block.settings.cta_link | default: '#' }}"{% if block.settings.open_in_new_tab and block.settings.cta_link != blank %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ block.settings.cta_label }}</a>
       {% endif %}
     </div>
   </div>
@@ -25,12 +25,92 @@
   "name": "Course card",
   "tag": null,
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "title", "label": "Title" },
-    { "type": "text", "id": "price", "label": "Price label", "default": "Coming to Marketplace" },
-    { "type": "text", "id": "cta_label", "label": "Link label", "default": "View landing page" },
-    { "type": "url", "id": "cta_link", "label": "Link" },
-    { "type": "text", "id": "fallback_asset", "label": "Theme fallback image" }
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "price",
+      "label": "Price label",
+      "default": "Coming to Marketplace"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Link label",
+      "default": "View landing page"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab",
+      "label": "Open link in a new tab",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "fallback_asset",
+      "label": "Theme fallback image"
+    },
+    {
+      "type": "header",
+      "content": "Borders"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "Border",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border thickness",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 1,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "label": "Border opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    }
   ]
 }
 {% endschema %}

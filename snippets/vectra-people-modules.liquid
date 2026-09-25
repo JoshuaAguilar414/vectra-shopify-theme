@@ -58,7 +58,8 @@
 %}
 {% case module %}
   {% when 'experts' %}
-<section class="vs-experts vh-people-page" id="experts" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+<section class="vs-experts vh-people-page" id="experts" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   {% render 'vectra-seo', page_key: 'about' %}
   <div class="vh-wrap">
     <p class="vh-kicker">{{ block.settings.kicker | default: 'Our people' }}</p>
@@ -109,9 +110,11 @@
     </a>
   </div>
 </section>
+{% endunless %}
 
   {% when 'associates' %}
-<section class="vs-experts vh-people-page" id="associates" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+<section class="vs-experts vh-people-page" id="associates" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap">
     <p class="vh-kicker">{{ block.settings.kicker | default: 'Our people' }}</p>
     <h1 class="vh-h2">{{ block.settings.heading | default: 'Our Associates' }}</h1>
@@ -167,9 +170,11 @@
     </a>
   </div>
 </section>
+{% endunless %}
 
   {% when 'interns' %}
-<section class="vs-experts vh-people-page" id="interns" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+<section class="vs-experts vh-people-page" id="interns" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap">
     <p class="vh-kicker">{{ block.settings.kicker | default: 'Our people' }}</p>
     <h1 class="vh-h2">{{ block.settings.heading | default: 'Our Interns' }}</h1>
@@ -225,9 +230,11 @@
     </a>
   </div>
 </section>
+{% endunless %}
 
   {% when 'careers' %}
-<section class="vh-people-page vh-page-copy" id="careers" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+<section class="vh-people-page vh-page-copy" id="careers" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap">
     <p class="vh-kicker">{{ block.settings.kicker | default: 'Join the team' }}</p>
     <h1 class="vh-h2">{{ block.settings.heading | default: 'Careers at VECTRA International' }}</h1>
@@ -256,9 +263,11 @@
     {% render 'vectra-contact-details' %}
   </div>
 </section>
+{% endunless %}
 
   {% when 'faq' %}
-<section class="vh-faq vh-people-page" id="faq" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+<section class="vh-faq vh-people-page" id="faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap vh-faq__grid">
     <aside class="vh-contact-card">
       <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
@@ -334,3 +343,4 @@
   </div>
 </section>
 {% endcase %}
+{% endunless %}

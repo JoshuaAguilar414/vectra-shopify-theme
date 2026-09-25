@@ -63,6 +63,7 @@
 {% case module %}
   {% when 'hero' %}
 {% render 'vectra-seo', page_key: 'about' %}
+{% unless block.settings.hide_section %}
 {% liquid
   assign story_kicker = block.settings.kicker | default: 'Inside VECTRA'
   assign story_heading = block.settings.heading | default: 'About VECTRA International – Our DNA, Values &amp; Global Expertise'
@@ -70,8 +71,14 @@
   if block.settings.poster != blank
     assign story_poster = block.settings.poster | image_url: width: 1920
   endif
+  assign story_align = block.settings.text_align | default: 'left'
 %}
-<section class="vs-hero" aria-label="Our VECTRA Story" {{ block.shopify_attributes }}>
+<section
+  class="vs-hero vs-hero--align-{{ story_align }}"
+  aria-label="Our VECTRA Story"
+  style="{% render 'vectra-block-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
     {% if block.settings.video != blank %}
       {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '1920x', class: 'vs-hero__video' }}
     {% else %}
@@ -80,7 +87,7 @@
     </video>
     {% endif %}
     <img class="vs-hero__glow" src="{{ img_glow }}" alt="">
-    <div class="vs-hero__shade"></div>
+    <div class="vs-hero__shade" style="opacity: calc(var(--vh-overlay, 35) / 100);"></div>
     <div class="vs-hero__copy">
       <p class="vs-hero__kicker" data-vh-reveal="up">{{ story_kicker }}</p>
       <h1 data-vh-reveal="up">{{ story_heading }}</h1>
@@ -96,16 +103,28 @@
         </p>
         {% endif %}
       </div>
+      {% if block.settings.button_label != blank or block.settings.button_2_label != blank %}
+        <div class="vs-hero__actions" data-vh-reveal="up">
+          {% if block.settings.button_label != blank %}
+            <a class="vh-btn vh-btn--green" href="{{ block.settings.button_link | default: '#VectraContactModal' }}" {% if block.settings.button_link == blank or block.settings.button_link == '#VectraContactModal' %}data-vh-contact-open{% endif %}>{{ block.settings.button_label }}</a>
+          {% endif %}
+          {% if block.settings.button_2_label != blank %}
+            <a class="vh-btn vh-btn--outline vh-btn--outline-light" href="{{ block.settings.button_2_link | default: '#' }}">{{ block.settings.button_2_label }}</a>
+          {% endif %}
+        </div>
+      {% endif %}
     </div>
   </section>
+{% endunless %}
 
   {% when 'ceo' %}
+{% unless block.settings.hide_section %}
 {% liquid
   assign ceo_name = block.settings.name | default: 'Patrick Neyts'
   assign ceo_kicker = block.settings.kicker | default: 'Meet the Founder'
   assign ceo_heading = block.settings.heading | default: 'A Message from Our CEO'
 %}
-<div class="vs-sheet" {{ block.shopify_attributes }}>
+<div class="vs-sheet" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <section class="vs-ceo" id="founder">
       <img class="vs-ceo__mark" src="{{ img_mark }}" alt="">
       <div class="vs-ceo__photo">
@@ -130,9 +149,11 @@
       </div>
     </section>
   </div>
+{% endunless %}
 
   {% when 'main' %}
-<div class="vs-main" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+<div class="vs-main" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vs-grid-bg">
       <canvas class="vs-grid-bg__canvas" data-vs-cell-grid aria-hidden="true"></canvas>
 
@@ -435,8 +456,10 @@
 
   </div>
 </div>
+{% endunless %}
 
   {% when 'faq' %}
+{% unless block.settings.hide_section %}
 {% liquid
   assign faq_card_title = block.settings.card_title | default: 'More questions?'
   assign faq_card_text = block.settings.card_text | default: 'Find more answers about VECTRA International, how we work, our capabilities, and getting started.'
@@ -448,7 +471,7 @@
   endif
   assign nested_items = nested_items | strip
 %}
-<section class="vh-faq" id="about-faq" {{ block.shopify_attributes }}>
+<section class="vh-faq" id="about-faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap vh-faq__grid">
     <aside class="vh-contact-card" data-vh-reveal="left">
       <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
@@ -494,8 +517,10 @@
     </div>
   </div>
 </section>
+{% endunless %}
 
   {% when 'join' %}
+{% unless block.settings.hide_section %}
 {% liquid
   assign join_kicker = block.settings.kicker | default: 'Be part of a global team'
   assign join_heading = block.settings.heading | default: 'Bring What Only You Can Contribute'
@@ -507,7 +532,7 @@
     assign join_cta = careers_url
   endif
 %}
-<section class="vs-join" id="careers" {{ block.shopify_attributes }}>
+<section class="vs-join" id="careers" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <canvas class="vs-join__grid" data-vs-join-grid aria-hidden="true"></canvas>
     <div class="vs-join__inner">
       <div>
@@ -519,7 +544,12 @@
         {{ join_btn }}
         <img src="{{ img_arrow_send }}" alt="">
       </a>
+      {% assign nested_extras = nested_extras | strip %}
+      {% if nested_extras != blank %}
+        <div class="vh-block-extras">{{ nested_extras }}</div>
+      {% endif %}
     </div>
   </section>
+{% endunless %}
 
 {% endcase %}

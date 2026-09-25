@@ -1,0 +1,97 @@
+{%- doc -%}
+  Outputs inline CSS variables for VECTRA appearance settings —
+  mirrors Horizon spacing / typography / border / overlay controls.
+
+  @param {object} settings - block.settings
+{%- enddoc -%}
+{%- liquid
+  if settings['padding-block-start'] != blank
+    echo '--vh-pad-top: ' | append: settings['padding-block-start'] | append: 'px;'
+  endif
+  if settings['padding-block-end'] != blank
+    echo '--vh-pad-bottom: ' | append: settings['padding-block-end'] | append: 'px;'
+  endif
+  if settings['padding-inline-start'] != blank
+    echo '--vh-pad-left: ' | append: settings['padding-inline-start'] | append: 'px;'
+  endif
+  if settings['padding-inline-end'] != blank
+    echo '--vh-pad-right: ' | append: settings['padding-inline-end'] | append: 'px;'
+  endif
+  if settings.background_color != blank
+    echo '--vh-bg: ' | append: settings.background_color | append: ';'
+  endif
+  if settings.text_color != blank
+    echo '--vh-fg: ' | append: settings.text_color | append: ';'
+  endif
+  if settings.overlay_opacity != blank
+    echo '--vh-overlay: ' | append: settings.overlay_opacity | append: '%;'
+  endif
+  if settings.overlay_color != blank
+    echo '--vh-overlay-color: ' | append: settings.overlay_color | append: ';'
+  endif
+  if settings.min_height != blank and settings.min_height > 0
+    echo '--vh-min-height: ' | append: settings.min_height | append: 'vh;'
+  endif
+  if settings.text_align != blank
+    echo '--vh-text-align: ' | append: settings.text_align | append: ';'
+  endif
+  if settings.image_position != blank
+    echo '--vh-object-position: ' | append: settings.image_position | append: ';'
+  endif
+  if settings.border_radius != blank
+    echo '--vh-radius: ' | append: settings.border_radius | append: 'px;'
+  endif
+  if settings.content_max_width != blank and settings.content_max_width > 0
+    echo '--vh-content-max: ' | append: settings.content_max_width | append: 'px;'
+  endif
+  if settings.button_color != blank
+    echo '--vh-btn-bg: ' | append: settings.button_color | append: ';'
+  endif
+  if settings.button_text_color != blank
+    echo '--vh-btn-fg: ' | append: settings.button_text_color | append: ';'
+  endif
+  if settings.heading_size != blank and settings.heading_size != 'default'
+    echo '--vh-heading-size: ' | append: settings.heading_size | append: ';'
+  endif
+  if settings.text_size != blank and settings.text_size != 'default'
+    echo '--vh-text-size: ' | append: settings.text_size | append: ';'
+  endif
+  if settings.font_weight != blank and settings.font_weight != 'default'
+    echo '--vh-font-weight: ' | append: settings.font_weight | append: ';'
+  endif
+  if settings.line_height == 'tight'
+    echo '--vh-line-height: 1.1;'
+  elsif settings.line_height == 'loose'
+    echo '--vh-line-height: 1.7;'
+  elsif settings.line_height == 'normal'
+    echo '--vh-line-height: 1.4;'
+  endif
+  if settings.letter_spacing == 'tight'
+    echo '--vh-letter-spacing: -0.04em;'
+  elsif settings.letter_spacing == 'loose'
+    echo '--vh-letter-spacing: 0.06em;'
+  elsif settings.letter_spacing == 'normal'
+    echo '--vh-letter-spacing: 0;'
+  endif
+  if settings.text_case == 'uppercase'
+    echo '--vh-text-case: uppercase;'
+  endif
+  if settings.gap != blank
+    echo '--vh-gap: ' | append: settings.gap | append: 'px;'
+  endif
+  if settings.border == 'solid'
+    echo '--vh-border-style: solid;'
+    if settings.border_width != blank
+      echo '--vh-border-width: ' | append: settings.border_width | append: 'px;'
+    endif
+    if settings.border_color != blank
+      echo '--vh-border-color: ' | append: settings.border_color | append: ';'
+    endif
+    if settings.border_opacity != blank
+      echo '--vh-border-opacity: ' | append: settings.border_opacity | append: '%;'
+    endif
+  endif
+  if settings.vertical_alignment != blank
+    echo '--vh-align-items: ' | append: settings.vertical_alignment | append: ';'
+  endif
+-%}

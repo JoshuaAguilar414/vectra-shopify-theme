@@ -9,7 +9,8 @@
   assign profile = block.settings.profile_url
 %}
 
-<section class="vh-ig" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+<section class="vh-ig" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   {% if heading != blank %}
     <h3>{{ heading }}</h3>
   {% endif %}
@@ -51,3 +52,4 @@
     {% endfor %}
   </div>
 </section>
+{% endunless %}

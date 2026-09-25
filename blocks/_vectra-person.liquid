@@ -1,12 +1,30 @@
 <article class="vs-expert" {{ block.shopify_attributes }}>
-  {% render 'vectra-image',
-    image: block.settings.image,
-    fallback: block.settings.fallback_asset,
-    alt: block.settings.name,
-    image_width: 480
-  %}
+  {% if block.settings.link != blank %}
+    <a
+      class="vs-expert__photo-link"
+      href="{{ block.settings.link }}"
+      {% if block.settings.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+    >
+      {% render 'vectra-image',
+        image: block.settings.image,
+        fallback: block.settings.fallback_asset,
+        alt: block.settings.name,
+        image_width: 480
+      %}
+    </a>
+  {% else %}
+    {% render 'vectra-image',
+      image: block.settings.image,
+      fallback: block.settings.fallback_asset,
+      alt: block.settings.name,
+      image_width: 480
+    %}
+  {% endif %}
   {% if block.settings.name != blank %}
     <h3>{{ block.settings.name }}</h3>
+  {% endif %}
+  {% if block.settings.role != blank %}
+    <p class="vs-expert__role">{{ block.settings.role }}</p>
   {% endif %}
   {% if block.settings.bio != blank %}
     <p>{{ block.settings.bio }}</p>
@@ -20,7 +38,10 @@
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Photo" },
     { "type": "text", "id": "name", "label": "Name" },
+    { "type": "text", "id": "role", "label": "Role / title" },
     { "type": "textarea", "id": "bio", "label": "Bio" },
+    { "type": "url", "id": "link", "label": "Profile link", "info": "Optional. LinkedIn or bio page." },
+    { "type": "checkbox", "id": "open_in_new_tab", "label": "Open link in a new tab", "default": true },
     {
       "type": "text",
       "id": "fallback_asset",

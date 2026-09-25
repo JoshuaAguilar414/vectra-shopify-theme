@@ -8,8 +8,12 @@
   "name": "VECTRA: People page",
   "tag": null,
   "blocks": [
-    { "type": "_vectra-person" },
-    { "type": "_vectra-faq-item" }
+    {
+      "type": "_vectra-person"
+    },
+    {
+      "type": "_vectra-faq-item"
+    }
   ],
   "settings": [
     {
@@ -17,57 +21,543 @@
       "id": "page_type",
       "label": "Page",
       "options": [
-        { "value": "experts", "label": "Experts" },
-        { "value": "associates", "label": "Associates" },
-        { "value": "interns", "label": "Interns" },
-        { "value": "careers", "label": "Careers" },
-        { "value": "faq", "label": "FAQ" }
+        {
+          "value": "experts",
+          "label": "Experts"
+        },
+        {
+          "value": "associates",
+          "label": "Associates"
+        },
+        {
+          "value": "interns",
+          "label": "Interns"
+        },
+        {
+          "value": "careers",
+          "label": "Careers"
+        },
+        {
+          "value": "faq",
+          "label": "FAQ"
+        }
       ],
       "default": "experts"
     },
-    { "type": "text", "id": "kicker", "label": "Kicker" },
-    { "type": "text", "id": "heading", "label": "Heading" },
-    { "type": "textarea", "id": "text", "label": "Lead" },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Lead"
+    },
     {
       "type": "url",
       "id": "jobs_url",
       "label": "External careers / jobs URL",
       "info": "Used on the Careers page until a Shopify jobs board is available."
     },
-    { "type": "header", "content": "Careers columns" },
-    { "type": "text", "id": "col_1_heading", "label": "Column 1 heading", "default": "How we work" },
-    { "type": "textarea", "id": "col_1_text", "label": "Column 1 text" },
-    { "type": "text", "id": "col_2_heading", "label": "Column 2 heading", "default": "Who we welcome" },
-    { "type": "textarea", "id": "col_2_text", "label": "Column 2 text" },
-    { "type": "text", "id": "col_3_heading", "label": "Column 3 heading", "default": "Become a consultant" },
-    { "type": "textarea", "id": "col_3_text", "label": "Column 3 text" },
-    { "type": "header", "content": "FAQ side card" },
-    { "type": "text", "id": "card_title", "label": "Side card title", "default": "Still need a person?" },
-    { "type": "textarea", "id": "card_text", "label": "Side card text" },
-    { "type": "header", "content": "Page CTAs" },
-    { "type": "text", "id": "cta_label", "label": "Primary button label" },
-    { "type": "url", "id": "cta_link", "label": "Primary button link", "info": "Leave blank to use the mailto / jobs defaults for this page type." },
-    { "type": "text", "id": "cta_secondary_label", "label": "Secondary button label", "default": "Explore internships" },
-    { "type": "url", "id": "cta_secondary_link", "label": "Secondary button link" },
-    { "type": "header", "content": "Experts face stack" },
-    { "type": "image_picker", "id": "face_1", "label": "Face 1" },
-    { "type": "image_picker", "id": "face_2", "label": "Face 2" },
-    { "type": "image_picker", "id": "face_3", "label": "Face 3" },
-    { "type": "image_picker", "id": "face_4", "label": "Face 4" },
-    { "type": "header", "content": "Fallback profiles (used if no Person blocks are added)" },
-    { "type": "text", "id": "name_1", "label": "Profile 1 name" },
-    { "type": "textarea", "id": "bio_1", "label": "Profile 1 bio" },
-    { "type": "image_picker", "id": "image_1", "label": "Profile 1 photo" },
-    { "type": "text", "id": "name_2", "label": "Profile 2 name" },
-    { "type": "textarea", "id": "bio_2", "label": "Profile 2 bio" },
-    { "type": "image_picker", "id": "image_2", "label": "Profile 2 photo" },
-    { "type": "text", "id": "name_3", "label": "Profile 3 name" },
-    { "type": "textarea", "id": "bio_3", "label": "Profile 3 bio" },
-    { "type": "image_picker", "id": "image_3", "label": "Profile 3 photo" },
-    { "type": "text", "id": "name_4", "label": "Profile 4 name" },
-    { "type": "textarea", "id": "bio_4", "label": "Profile 4 bio" },
-    { "type": "image_picker", "id": "image_4", "label": "Profile 4 photo" }
+    {
+      "type": "header",
+      "content": "Careers columns"
+    },
+    {
+      "type": "text",
+      "id": "col_1_heading",
+      "label": "Column 1 heading",
+      "default": "How we work"
+    },
+    {
+      "type": "textarea",
+      "id": "col_1_text",
+      "label": "Column 1 text"
+    },
+    {
+      "type": "text",
+      "id": "col_2_heading",
+      "label": "Column 2 heading",
+      "default": "Who we welcome"
+    },
+    {
+      "type": "textarea",
+      "id": "col_2_text",
+      "label": "Column 2 text"
+    },
+    {
+      "type": "text",
+      "id": "col_3_heading",
+      "label": "Column 3 heading",
+      "default": "Become a consultant"
+    },
+    {
+      "type": "textarea",
+      "id": "col_3_text",
+      "label": "Column 3 text"
+    },
+    {
+      "type": "header",
+      "content": "FAQ side card"
+    },
+    {
+      "type": "text",
+      "id": "card_title",
+      "label": "Side card title",
+      "default": "Still need a person?"
+    },
+    {
+      "type": "textarea",
+      "id": "card_text",
+      "label": "Side card text"
+    },
+    {
+      "type": "header",
+      "content": "Page CTAs"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Primary button label"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Primary button link",
+      "info": "Leave blank to use the mailto / jobs defaults for this page type."
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_label",
+      "label": "Secondary button label",
+      "default": "Explore internships"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "header",
+      "content": "Experts face stack"
+    },
+    {
+      "type": "image_picker",
+      "id": "face_1",
+      "label": "Face 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "face_2",
+      "label": "Face 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "face_3",
+      "label": "Face 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "face_4",
+      "label": "Face 4"
+    },
+    {
+      "type": "header",
+      "content": "Fallback profiles (used if no Person blocks are added)"
+    },
+    {
+      "type": "text",
+      "id": "name_1",
+      "label": "Profile 1 name"
+    },
+    {
+      "type": "textarea",
+      "id": "bio_1",
+      "label": "Profile 1 bio"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Profile 1 photo"
+    },
+    {
+      "type": "text",
+      "id": "name_2",
+      "label": "Profile 2 name"
+    },
+    {
+      "type": "textarea",
+      "id": "bio_2",
+      "label": "Profile 2 bio"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Profile 2 photo"
+    },
+    {
+      "type": "text",
+      "id": "name_3",
+      "label": "Profile 3 name"
+    },
+    {
+      "type": "textarea",
+      "id": "bio_3",
+      "label": "Profile 3 bio"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Profile 3 photo"
+    },
+    {
+      "type": "text",
+      "id": "name_4",
+      "label": "Profile 4 name"
+    },
+    {
+      "type": "textarea",
+      "id": "bio_4",
+      "label": "Profile 4 bio"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Profile 4 photo"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_section",
+      "label": "Hide this section",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "Left",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "Right",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        },
+        {
+          "value": "2.5rem",
+          "label": "40px"
+        },
+        {
+          "value": "3rem",
+          "label": "48px"
+        },
+        {
+          "value": "4rem",
+          "label": "64px"
+        },
+        {
+          "value": "4.5rem",
+          "label": "72px"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "Body text size",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        },
+        {
+          "value": "2.5rem",
+          "label": "40px"
+        },
+        {
+          "value": "3rem",
+          "label": "48px"
+        },
+        {
+          "value": "4rem",
+          "label": "64px"
+        },
+        {
+          "value": "4.5rem",
+          "label": "72px"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Heading weight",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "line_height",
+      "label": "Line height",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "tight",
+          "label": "Tight"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "loose",
+          "label": "Loose"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "letter_spacing",
+      "label": "Letter spacing",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "tight",
+          "label": "Tight"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "loose",
+          "label": "Loose"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "text_case",
+      "label": "Text case",
+      "options": [
+        {
+          "value": "none",
+          "label": "Default"
+        },
+        {
+          "value": "uppercase",
+          "label": "Uppercase"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "header",
+      "content": "Borders"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "Border",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border thickness",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 1,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "label": "Border opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    }
   ],
-  "presets": [{ "name": "VECTRA: People page" }]
+  "presets": [
+    {
+      "name": "VECTRA: People page"
+    }
+  ]
 }
 {% endschema %}

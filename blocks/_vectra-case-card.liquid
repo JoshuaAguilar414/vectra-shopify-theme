@@ -1,4 +1,4 @@
-<article class="vh-case" data-vh-reveal {{ block.shopify_attributes }}>
+<article class="vh-case" data-vh-reveal style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-case__main">
     <div class="vh-case__photo">
       {% render 'vectra-image',
@@ -28,6 +28,15 @@
     {% if block.settings.quote != blank %}
       <blockquote>{{ block.settings.quote }}</blockquote>
     {% endif %}
+    {% if block.settings.link_label != blank and block.settings.link != blank %}
+      <a
+        class="vh-case__link"
+        href="{{ block.settings.link }}"
+        {% if block.settings.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+      >
+        {{ block.settings.link_label }}
+      </a>
+    {% endif %}
   </div>
 </article>
 
@@ -36,15 +45,119 @@
   "name": "Case study",
   "tag": null,
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Logo / photo" },
-    { "type": "text", "id": "name", "label": "Name" },
-    { "type": "text", "id": "location", "label": "Location" },
-    { "type": "textarea", "id": "quote", "label": "Quote" },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Logo / photo"
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Name"
+    },
+    {
+      "type": "text",
+      "id": "location",
+      "label": "Location"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab",
+      "label": "Open link in a new tab",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
     {
       "type": "text",
       "id": "fallback_asset",
       "label": "Theme fallback image",
       "info": "Filename in the theme assets folder. Used until you upload an image."
+    },
+    {
+      "type": "header",
+      "content": "Borders"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "Border",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border thickness",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 1,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "label": "Border opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "visible_if": "{{ block.settings.border != 'none' }}"
     }
   ]
 }

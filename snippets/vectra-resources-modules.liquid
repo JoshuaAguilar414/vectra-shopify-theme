@@ -23,7 +23,13 @@
 {% case module %}
   {% when 'hero' %}
 {% render 'vectra-seo', page_key: 'resources' %}
-<section class="vres-hero" aria-label="Resources" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+<section
+  class="vres-hero vres-hero--align-{{ block.settings.text_align | default: 'left' }}"
+  aria-label="Resources"
+  style="{% render 'vectra-block-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
     {% render 'vectra-image', image: block.settings.watermark, fallback: img_mark, alt: '', class: 'vres-hero__mark', width: 901, height: 909, image_width: 900 %}
     <div class="vres-hero__copy" data-vh-reveal="up">
       <p class="vres-hero__kicker">{{ block.settings.kicker | default: 'VECTRA Resources' }}</p>
@@ -52,6 +58,7 @@
       </a>
     </nav>
   </section>
+{% endunless %}
 
   {% when 'feed' %}
         <header class="vres-label" id="insights">
@@ -119,7 +126,8 @@
         </article>
 
   {% when 'ebooks' %}
-<section class="vres-ebooks" id="ebooks" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+<section class="vres-ebooks" id="ebooks" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <header class="vres-label">
       <img class="vres-label__dot" src="{{ img_dot }}" alt="" width="6" height="6">
       <h2>{{ block.settings.heading | default: 'Ebooks &amp; playbooks' }}</h2>
@@ -171,10 +179,12 @@
     </div>
     <span id="podcasts"></span>
   </section>
+{% endunless %}
 
   {% when 'faq' %}
+{% unless block.settings.hide_section %}
 {% assign nested_items = nested_items | strip %}
-<section class="vh-faq" id="resources-faq" {{ block.shopify_attributes }}>
+<section class="vh-faq" id="resources-faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap vh-faq__grid">
     <aside class="vh-contact-card" data-vh-reveal="left">
       <img class="vh-contact-card__icon" src="{{ 'vectra-da137306dcbc6716d83295ef75678ab141a500e1.svg' | asset_url }}" alt="">
@@ -222,3 +232,4 @@
 </section>
 
 {% endcase %}
+{% endunless %}

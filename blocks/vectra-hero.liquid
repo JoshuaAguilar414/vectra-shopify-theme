@@ -7,11 +7,89 @@
 {
   "name": "VECTRA: Hero banner",
   "tag": null,
-  "blocks": [{ "type": "_vectra-hero-slide" }],
+  "blocks": [
+    {
+      "type": "_vectra-hero-slide"
+    }
+  ],
   "settings": [
     {
       "type": "paragraph",
-      "content": "Add, remove, or reorder slides. Upload a new image on each slide to replace the current photo."
+      "content": "Add, remove, or reorder slides. Each slide supports image/video, overlay, alignment, and buttons — similar to Horizon slides."
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_section",
+      "label": "Hide this section",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "Left",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "Right",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
     }
   ],
   "presets": [
@@ -26,7 +104,9 @@
             "heading": "Business Resilience Partner for Responsible Business & Operational Resilience",
             "subheading": "Turn Business Complexity Into Resilient Performance",
             "text": "Responsible business practices are the standards, controls, and decisions organizations use to manage supplier risk, environmental and social impact, and regulatory obligations across their operations. VECTRA International is a business resilience partner that turns those practices into clear ownership, practical action, and measurable performance, not just policy.",
-            "fallback_asset": "vectra-e5f2730422a9a0516df81d548f5c3f4383f99969.png"
+            "fallback_asset": "vectra-e5f2730422a9a0516df81d548f5c3f4383f99969.png",
+            "overlay_opacity": 20,
+            "text_align": "left"
           }
         },
         {
@@ -35,7 +115,9 @@
             "alt": "Responsible supply chains in motion",
             "subheading": "Business Resilience & Operational Capability Building",
             "text": "VECTRA helps organizations turn complex operational, supplier, and responsible business issues into clear ownership, practical action, and stronger control. From strategy through implementation, we stay accountable for moving the work forward.",
-            "fallback_asset": "vectra-6a69557ce365aa215c5c28bca6a6e51af0a2c987.png"
+            "fallback_asset": "vectra-6a69557ce365aa215c5c28bca6a6e51af0a2c987.png",
+            "overlay_opacity": 20,
+            "text_align": "left"
           }
         }
       ]

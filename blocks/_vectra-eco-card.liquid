@@ -1,4 +1,4 @@
-<article class="vsol-card" data-vsol-card {{ block.shopify_attributes }}>
+<article class="vsol-card" data-vsol-card style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <button class="vsol-card__hit" type="button" aria-expanded="false" onclick="window.vsolToggleCard && window.vsolToggleCard(this)">
     <span class="vsol-card__title">{{ block.settings.title }}</span>
     <span class="vsol-card__num">{{ block.settings.number }}</span>
@@ -15,7 +15,7 @@
         <p>{{ block.settings.text }}</p>
       {% endif %}
       {% if block.settings.cta_label != blank %}
-        <a class="vsol-card__cta" href="{{ block.settings.cta_link | default: '#VectraContactModal' }}" {% if block.settings.cta_link == blank or block.settings.cta_link == '#VectraContactModal' %}data-vh-contact-open{% endif %}>{{ block.settings.cta_label }}</a>
+        <a class="vsol-card__cta" href="{{ block.settings.cta_link | default: '#VectraContactModal' }}" {% if block.settings.cta_link == blank or block.settings.cta_link == '#VectraContactModal' %}data-vh-contact-open{% endif %}{% if block.settings.open_in_new_tab and block.settings.cta_link != blank %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ block.settings.cta_label }}</a>
       {% endif %}
     </div>
   </div>
@@ -26,16 +26,95 @@
   "name": "Ecosystem card",
   "tag": null,
   "settings": [
-    { "type": "text", "id": "number", "label": "Number", "default": "01" },
-    { "type": "inline_richtext", "id": "title", "label": "Title" },
-    { "type": "textarea", "id": "text", "label": "Text" },
-    { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "cta_label", "label": "Link label" },
-    { "type": "url", "id": "cta_link", "label": "Link" },
+    {
+      "type": "text",
+      "id": "number",
+      "label": "Number",
+      "default": "01"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Link label"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab",
+      "label": "Open link in a new tab",
+      "default": false
+    },
     {
       "type": "text",
       "id": "fallback_asset",
       "label": "Theme fallback image"
+    },
+    {
+      "type": "header",
+      "content": "Borders"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "Border",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border thickness",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 1,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "label": "Border opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "visible_if": "{{ block.settings.border != 'none' }}"
     }
   ]
 }

@@ -7,15 +7,33 @@
   if heading == blank
     assign heading = page.title | default: shop.name
   endif
+  assign align = block.settings.text_align | default: 'left'
+  assign btn_style = block.settings.button_style | default: 'green'
+  assign btn2_style = block.settings.button_2_style | default: 'outline'
 %}
 
-<section class="vh-page-hero{% if block.settings.image != blank %} has-image{% endif %}" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+{% capture nested_extras %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+<section
+  class="vh-page-hero{% if block.settings.image != blank %} has-image{% endif %}{% if block.settings.background_color != blank %} has-custom-bg{% endif %} vh-page-hero--align-{{ align }}"
+  id="{{ block.settings.anchor_id }}"
+  style="{% render 'vectra-block-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
   {% if block.settings.image != blank %}
     {{
       block.settings.image
       | image_url: width: 2400
-      | image_tag: class: 'vh-page-hero__bg', loading: 'eager', alt: ''
+      | image_tag: class: 'vh-page-hero__bg', loading: 'eager', alt: block.settings.image_alt | default: ''
     }}
+  {% endif %}
+  {% if block.settings.toggle_overlay or block.settings.overlay_opacity != blank %}
+    <span
+      class="vh-page-hero__overlay{% if block.settings.overlay_style == 'gradient' %} vh-page-hero__overlay--gradient vh-page-hero__overlay--{{ block.settings.gradient_direction | default: 'to-bottom' }}{% endif %}"
+      aria-hidden="true"
+    ></span>
   {% endif %}
   <div class="vh-wrap vh-page-hero__inner">
     {% if block.settings.kicker != blank %}
@@ -25,14 +43,53 @@
     {% if block.settings.text != blank %}
       <div class="vh-page-hero__text">{{ block.settings.text }}</div>
     {% endif %}
+    {% if block.settings.button_label != blank or block.settings.button_2_label != blank %}
+      <div class="vh-page-hero__actions">
+        {% if block.settings.button_label != blank %}
+          <a
+            class="vh-btn vh-btn--{{ btn_style }}"
+            href="{{ block.settings.button_link | default: '#VectraContactModal' }}"
+            {% if block.settings.button_link == blank or block.settings.button_link == '#VectraContactModal' %}data-vh-contact-open{% endif %}
+          >
+            {{ block.settings.button_label }}
+          </a>
+        {% endif %}
+        {% if block.settings.button_2_label != blank %}
+          <a class="vh-btn vh-btn--{{ btn2_style }}" href="{{ block.settings.button_2_link | default: '#' }}">
+            {{ block.settings.button_2_label }}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% assign nested_extras = nested_extras | strip %}
+    {% if nested_extras != blank %}
+      <div class="vh-page-hero__extras">{{ nested_extras }}</div>
+    {% endif %}
   </div>
 </section>
+{% endunless %}
 
 {% schema %}
 {
   "name": "VECTRA: Page hero",
   "tag": null,
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "hide_section",
+      "label": "Hide this section",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Optional. Lets other links jump here, e.g. about-hero"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
     {
       "type": "text",
       "id": "kicker",
@@ -50,12 +107,494 @@
       "label": "Text"
     },
     {
+      "type": "text_alignment",
+      "id": "text_align",
+      "label": "Text alignment",
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "min": 0,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "default": 0,
+      "info": "0 keeps the design default."
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Primary button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Primary button style",
+      "options": [
+        {
+          "value": "green",
+          "label": "Green"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        },
+        {
+          "value": "outline-light",
+          "label": "Outline light"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "green"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Custom button background",
+      "visible_if": "{{ block.settings.button_style == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Custom button text",
+      "visible_if": "{{ block.settings.button_style == 'custom' }}"
+    },
+    {
+      "type": "text",
+      "id": "button_2_label",
+      "label": "Secondary button label"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "select",
+      "id": "button_2_style",
+      "label": "Secondary button style",
+      "options": [
+        {
+          "value": "outline",
+          "label": "Outline"
+        },
+        {
+          "value": "outline-light",
+          "label": "Outline light"
+        },
+        {
+          "value": "green",
+          "label": "Green"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        }
+      ],
+      "default": "outline"
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
       "type": "image_picker",
       "id": "image",
       "label": "Background image",
       "info": "Optional. Sits over the green gradient."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "info": "Overrides the default green gradient when set."
+    },
+    {
+      "type": "checkbox",
+      "id": "toggle_overlay",
+      "label": "Show media overlay",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000",
+      "alpha": true,
+      "visible_if": "{{ block.settings.toggle_overlay }}"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 0,
+      "visible_if": "{{ block.settings.toggle_overlay }}"
+    },
+    {
+      "type": "select",
+      "id": "overlay_style",
+      "label": "Overlay style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.toggle_overlay }}"
+    },
+    {
+      "type": "select",
+      "id": "gradient_direction",
+      "label": "Gradient direction",
+      "options": [
+        {
+          "value": "to-top",
+          "label": "Up"
+        },
+        {
+          "value": "to-bottom",
+          "label": "Down"
+        }
+      ],
+      "default": "to-bottom",
+      "visible_if": "{{ block.settings.toggle_overlay and block.settings.overlay_style == 'gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Minimum height",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "vh",
+      "default": 0,
+      "info": "0 keeps the current design height."
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "Left",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "Right",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        },
+        {
+          "value": "2.5rem",
+          "label": "40px"
+        },
+        {
+          "value": "3rem",
+          "label": "48px"
+        },
+        {
+          "value": "4rem",
+          "label": "64px"
+        },
+        {
+          "value": "4.5rem",
+          "label": "72px"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "Body text size",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        },
+        {
+          "value": "2.5rem",
+          "label": "40px"
+        },
+        {
+          "value": "3rem",
+          "label": "48px"
+        },
+        {
+          "value": "4rem",
+          "label": "64px"
+        },
+        {
+          "value": "4.5rem",
+          "label": "72px"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Heading weight",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "line_height",
+      "label": "Line height",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "tight",
+          "label": "Tight"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "loose",
+          "label": "Loose"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "letter_spacing",
+      "label": "Letter spacing",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "tight",
+          "label": "Tight"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "loose",
+          "label": "Loose"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "text_case",
+      "label": "Text case",
+      "options": [
+        {
+          "value": "none",
+          "label": "Default"
+        },
+        {
+          "value": "uppercase",
+          "label": "Uppercase"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "flex-end"
     }
   ],
-  "presets": [{ "name": "VECTRA: Page hero" }]
+  "presets": [
+    {
+      "name": "VECTRA: Page hero"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ]
 }
 {% endschema %}

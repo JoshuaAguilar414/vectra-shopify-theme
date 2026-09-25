@@ -18,7 +18,13 @@
 {% case module %}
   {% when 'hero' %}
 {% render 'vectra-seo', page_key: 'contact' %}
-<section class="vres-hero" aria-label="Contact VECTRA International" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+<section
+  class="vres-hero vres-hero--align-{{ block.settings.text_align | default: 'left' }}"
+  aria-label="Contact VECTRA International"
+  style="{% render 'vectra-block-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
   {% render 'vectra-image', image: block.settings.watermark, fallback: img_mark, alt: '', class: 'vres-hero__mark', width: 901, height: 909, image_width: 900 %}
   <div class="vres-hero__copy" data-vh-reveal="up">
     <h1 class="vres-hero__kicker">{{ block.settings.kicker | default: 'Contact VECTRA International' }}</h1>
@@ -32,17 +38,29 @@
       </p>
       {% endif %}
     </div>
+    {% if block.settings.button_label != blank or block.settings.button_2_label != blank %}
+      <div class="vres-hero__actions">
+        {% if block.settings.button_label != blank %}
+          <a class="vh-btn vh-btn--green" href="{{ block.settings.button_link | default: '#VectraContactModal' }}" {% if block.settings.button_link == blank or block.settings.button_link == '#VectraContactModal' %}data-vh-contact-open{% endif %}>{{ block.settings.button_label }}</a>
+        {% endif %}
+        {% if block.settings.button_2_label != blank %}
+          <a class="vh-btn vh-btn--outline" href="{{ block.settings.button_2_link | default: '#' }}">{{ block.settings.button_2_label }}</a>
+        {% endif %}
+      </div>
+    {% endif %}
   </div>
 </section>
+{% endunless %}
 
   {% when 'challenges' %}
+{% unless block.settings.hide_section %}
 {% liquid
   assign ch_kicker = block.settings.kicker | default: 'Not sure where it fits?'
   assign ch_heading = block.settings.heading | default: 'Start With What’s Happening'
   assign ch_text = block.settings.text | default: 'You may already know exactly what support you need. Or you may simply know that something isn’t working as it should — either way, this is the right place to start.'
   assign nested_cards = nested_cards | strip
 %}
-<section class="vh-why" id="challenges" {{ block.shopify_attributes }}>
+<section class="vh-why" id="challenges" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap">
     <p class="vh-kicker">{{ ch_kicker }}</p>
     <h2 class="vh-h2">{{ ch_heading }}</h2>
@@ -75,10 +93,12 @@
     {% endif %}
   </div>
 </section>
+{% endunless %}
 
   {% when 'next' %}
+{% unless block.settings.hide_section %}
 {% assign nested_items = nested_items | strip %}
-<section class="vh-faq" id="what-happens-next" {{ block.shopify_attributes }}>
+<section class="vh-faq" id="what-happens-next" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap vh-faq__grid">
     <aside class="vh-contact-card" data-vh-reveal="left">
       <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
@@ -122,9 +142,11 @@
     </div>
   </div>
 </section>
+{% endunless %}
 
   {% when 'direct' %}
-<section class="vh-portal" id="get-in-touch" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+<section class="vh-portal" id="get-in-touch" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap vh-portal__grid">
     <div class="vh-portal__copy">
       <h2>{{ block.settings.heading | default: 'Contact VECTRA International' }}</h2>
@@ -148,3 +170,4 @@
 </section>
 
 {% endcase %}
+{% endunless %}

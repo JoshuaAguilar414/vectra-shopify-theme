@@ -6,7 +6,8 @@
 {% capture nested_sidebar %}
   {% content_for 'blocks' %}
 {% endcapture %}
-<section class="vres-feed" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+<section class="vres-feed" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vres-feed__layout">
     <div class="vres-feed__main">
       {% render 'vectra-resources-modules', module: 'feed', block: block %}
@@ -24,34 +25,161 @@
     </aside>
   </div>
 </section>
+{% endunless %}
 
 {% schema %}
 {
   "name": "VECTRA: Res feed",
   "tag": null,
   "blocks": [
-    { "type": "@theme" },
-    { "type": "@app" }
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
   ],
   "settings": [
-    { "type": "text", "id": "insights_heading", "label": "Insights heading", "default": "Insights" },
-    { "type": "text", "id": "feature_heading", "label": "Featured heading" },
-    { "type": "image_picker", "id": "feature_image", "label": "Featured image" },
-    { "type": "richtext", "id": "feature_text", "label": "Featured text" },
-    { "type": "text", "id": "events_heading", "label": "Events heading", "default": "Events & webinars" },
-    { "type": "text", "id": "events_title", "label": "Events title" },
-    { "type": "image_picker", "id": "events_image", "label": "Events image" },
-    { "type": "richtext", "id": "events_text", "label": "Events text" },
-    { "type": "text", "id": "follow_heading", "label": "Follow-on heading" },
-    { "type": "richtext", "id": "follow_text", "label": "Follow-on text" }
+    {
+      "type": "text",
+      "id": "insights_heading",
+      "label": "Insights heading",
+      "default": "Insights"
+    },
+    {
+      "type": "text",
+      "id": "feature_heading",
+      "label": "Featured heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_image",
+      "label": "Featured image"
+    },
+    {
+      "type": "richtext",
+      "id": "feature_text",
+      "label": "Featured text"
+    },
+    {
+      "type": "text",
+      "id": "events_heading",
+      "label": "Events heading",
+      "default": "Events & webinars"
+    },
+    {
+      "type": "text",
+      "id": "events_title",
+      "label": "Events title"
+    },
+    {
+      "type": "image_picker",
+      "id": "events_image",
+      "label": "Events image"
+    },
+    {
+      "type": "richtext",
+      "id": "events_text",
+      "label": "Events text"
+    },
+    {
+      "type": "text",
+      "id": "follow_heading",
+      "label": "Follow-on heading"
+    },
+    {
+      "type": "richtext",
+      "id": "follow_text",
+      "label": "Follow-on text"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_section",
+      "label": "Hide this section",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "Left",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "Right",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    }
   ],
   "presets": [
     {
       "name": "VECTRA: Res feed",
       "blocks": [
-        { "type": "vectra-recent-posts" },
-        { "type": "vectra-tags" },
-        { "type": "vectra-instagram" }
+        {
+          "type": "vectra-recent-posts"
+        },
+        {
+          "type": "vectra-tags"
+        },
+        {
+          "type": "vectra-instagram"
+        }
       ]
     }
   ]

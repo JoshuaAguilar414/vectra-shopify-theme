@@ -21,30 +21,114 @@
 {
   "name": "VECTRA: Course body",
   "tag": null,
-  "blocks": [{ "type": "_vectra-course-card" }],
+  "blocks": [
+    {
+      "type": "_vectra-course-card"
+    }
+  ],
   "settings": [
     {
       "type": "select",
       "id": "course_key",
       "label": "Page",
       "options": [
-        { "value": "auto", "label": "Use page handle" },
-        { "value": "marketplace", "label": "Marketplace catalog" },
-        { "value": "course-esg-acronyms", "label": "ESG acronyms" },
-        { "value": "course-preventative-measures", "label": "Preventative measures" },
-        { "value": "course-purchasing-practices", "label": "Purchasing practices" },
-        { "value": "course-disability-accommodation", "label": "Disability accommodation" }
+        {
+          "value": "auto",
+          "label": "Use page handle"
+        },
+        {
+          "value": "marketplace",
+          "label": "Marketplace catalog"
+        },
+        {
+          "value": "course-esg-acronyms",
+          "label": "ESG acronyms"
+        },
+        {
+          "value": "course-preventative-measures",
+          "label": "Preventative measures"
+        },
+        {
+          "value": "course-purchasing-practices",
+          "label": "Purchasing practices"
+        },
+        {
+          "value": "course-disability-accommodation",
+          "label": "Disability accommodation"
+        }
       ],
       "default": "auto"
     },
-    { "type": "text", "id": "kicker", "label": "Kicker" },
-    { "type": "text", "id": "heading", "label": "Heading" },
-    { "type": "textarea", "id": "text", "label": "Text" },
-    { "type": "image_picker", "id": "image", "label": "Detail page image" },
-    { "type": "textarea", "id": "summary", "label": "Summary" },
-    { "type": "textarea", "id": "audience", "label": "Who it is for" },
-    { "type": "textarea", "id": "outcome", "label": "What you take away" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Detail page image"
+    },
+    {
+      "type": "textarea",
+      "id": "summary",
+      "label": "Summary"
+    },
+    {
+      "type": "textarea",
+      "id": "audience",
+      "label": "Who it is for"
+    },
+    {
+      "type": "textarea",
+      "id": "outcome",
+      "label": "What you take away"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_section",
+      "label": "Hide this section",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
   ],
-  "presets": [{ "name": "VECTRA: Course body" }]
+  "presets": [
+    {
+      "name": "VECTRA: Course body"
+    }
+  ]
 }
 {% endschema %}

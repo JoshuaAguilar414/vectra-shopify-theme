@@ -45,8 +45,42 @@
       "type": "image_picker",
       "id": "image_6",
       "label": "Image 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_section",
+      "label": "Hide this section",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
     }
   ],
-  "presets": [{ "name": "VECTRA: Instagram" }]
+  "presets": [
+    {
+      "name": "VECTRA: Instagram"
+    }
+  ]
 }
 {% endschema %}

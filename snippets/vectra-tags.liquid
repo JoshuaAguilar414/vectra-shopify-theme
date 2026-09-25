@@ -8,7 +8,8 @@
   assign tags = tags_raw | replace: ', ', ',' | split: ','
 %}
 
-<section class="vh-tags" {{ block.shopify_attributes }}>
+{% unless block.settings.hide_section %}
+<section class="vh-tags" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   {% if heading != blank %}
     <h3>{{ heading }}</h3>
   {% endif %}
@@ -23,3 +24,4 @@
     {% endfor %}
   </ul>
 </section>
+{% endunless %}
