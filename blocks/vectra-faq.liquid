@@ -1,13 +1,25 @@
 {% liquid
-  assign faq_card_title = block.settings.card_title | default: 'Bring Us the Problem That Keeps Coming Back'
-  assign faq_card_text = block.settings.card_text | default: "Maybe actions keep stalling. Evidence is scattered. A supplier issue stays open. Or your systems produce information, but the next step is still unclear. Tell us where the work gets stuck. We'll help you identify the gap and the next step."
-  assign faq_kicker = block.settings.kicker | default: 'Our FAQ'
+  assign faq_card_kicker = block.settings.card_kicker | default: 'TALK TO US'
+  assign faq_card_title = block.settings.card_title | default: 'Tell Us What You Need Help With'
+  assign faq_card_text = block.settings.card_text
+  if faq_card_text == blank
+    assign faq_card_text = "You may already know exactly what needs to change. Or you may simply know that something needs to work better. A supplier issue may be slowing progress. A new requirement may be creating uncertainty. Your team may need stronger evidence, better controls, or more support. Tell us what is happening and what you are trying to improve. We'll listen, help make sense of the situation, and connect you with the right people."
+  endif
+  assign faq_kicker = block.settings.kicker | default: 'FAQ'
   assign faq_heading = block.settings.heading | default: 'Questions Business Leaders Ask Us'
-  assign faq_lead = block.settings.lead | default: 'Straight answers about where VECTRA fits, how we work, and what happens next.'
-  assign faq_btn = block.settings.button_label | default: 'More questions?'
+  assign faq_lead = block.settings.lead | default: 'Clear answers about what VECTRA does, how we work, and where to start.'
+  assign faq_btn = block.settings.button_label | default: 'Talk to a VECTRA Expert'
   assign faq_btn_href = block.settings.button_link
   if faq_btn_href == blank
-    assign faq_btn_href = pages['faq'].url | default: '/pages/faq'
+    assign faq_btn_href = '#VectraContactModal'
+  endif
+  assign faq_more_heading = block.settings.more_heading | default: 'Have another question?'
+  assign faq_more_text = block.settings.more_text | default: 'Find more answers about VECTRA International, how we work, our capabilities, and getting started.'
+  assign faq_more_btn = block.settings.more_button_label | default: 'View All FAQs'
+  if block.settings.more_button_link != blank
+    assign faq_more_href = block.settings.more_button_link
+  else
+    assign faq_more_href = pages['faq'].url | default: '/pages/faq'
   endif
   assign img_chat = 'vectra-da137306dcbc6716d83295ef75678ab141a500e1.svg' | asset_url
   assign img_arrow = 'vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg' | asset_url
@@ -19,10 +31,19 @@
 <section class="vh-faq" id="faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap vh-faq__grid">
     <aside class="vh-contact-card" data-vh-reveal="left">
+      <p class="vh-contact-card__kicker">{{ faq_card_kicker }}</p>
       <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
       <p class="vh-contact-card__title">{{ faq_card_title }}</p>
-      <p>{{ faq_card_text }}</p>
-      <a class="vh-btn vh-btn--white" href="{{ faq_btn_href }}">
+      {% if faq_card_text != blank %}
+        {% assign card_paras = faq_card_text | newline_to_br | split: '<br />' %}
+        {% for para in card_paras %}
+          {% assign para_text = para | strip_html | strip %}
+          {% if para_text != blank %}
+            <p>{{ para_text }}</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      <a class="vh-btn vh-btn--white" href="{{ faq_btn_href }}"{% if faq_btn_href == '#VectraContactModal' %} data-vh-contact-open{% endif %}>
         {{ faq_btn }}
         <img src="{{ img_arrow }}" alt="">
       </a>
@@ -35,6 +56,11 @@
         <h2 class="vh-h2">{{ faq_heading }}</h2>
         <p class="vh-lead">{{ faq_lead }}</p>
         {% content_for 'blocks' %}
+        <div class="vh-faq__more">
+          <h3>{{ faq_more_heading }}</h3>
+          <p>{{ faq_more_text }}</p>
+          <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ faq_more_href }}">{{ faq_more_btn }}</a>
+        </div>
       </div>
     </div>
   </div>
@@ -59,20 +85,27 @@
   "settings": [
     {
       "type": "text",
+      "id": "card_kicker",
+      "label": "Side card kicker",
+      "default": "TALK TO US"
+    },
+    {
+      "type": "text",
       "id": "card_title",
       "label": "Side card title",
-      "default": "Bring Us the Problem That Keeps Coming Back"
+      "default": "Tell Us What You Need Help With"
     },
     {
       "type": "textarea",
       "id": "card_text",
-      "label": "Side card text"
+      "label": "Side card text",
+      "default": "You may already know exactly what needs to change. Or you may simply know that something needs to work better. A supplier issue may be slowing progress. A new requirement may be creating uncertainty. Your team may need stronger evidence, better controls, or more support. Tell us what is happening and what you are trying to improve. We'll listen, help make sense of the situation, and connect you with the right people."
     },
     {
       "type": "text",
       "id": "kicker",
       "label": "Kicker",
-      "default": "Our FAQ"
+      "default": "FAQ"
     },
     {
       "type": "text",
@@ -83,18 +116,42 @@
     {
       "type": "textarea",
       "id": "lead",
-      "label": "Lead"
+      "label": "Lead",
+      "default": "Clear answers about what VECTRA does, how we work, and where to start."
     },
     {
       "type": "text",
       "id": "button_label",
       "label": "Side card button",
-      "default": "More questions?"
+      "default": "Talk to a VECTRA Expert"
     },
     {
       "type": "url",
       "id": "button_link",
       "label": "Side card button link"
+    },
+    {
+      "type": "text",
+      "id": "more_heading",
+      "label": "More questions heading",
+      "default": "Have another question?"
+    },
+    {
+      "type": "textarea",
+      "id": "more_text",
+      "label": "More questions text",
+      "default": "Find more answers about VECTRA International, how we work, our capabilities, and getting started."
+    },
+    {
+      "type": "text",
+      "id": "more_button_label",
+      "label": "More questions button",
+      "default": "View All FAQs"
+    },
+    {
+      "type": "url",
+      "id": "more_button_link",
+      "label": "More questions button link"
     },
     {
       "type": "checkbox",

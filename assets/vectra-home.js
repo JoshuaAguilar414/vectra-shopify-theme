@@ -353,6 +353,25 @@
       startSol();
     });
 
+    if (gallery) {
+      let hoverTimer = 0;
+      gallery.addEventListener('mousemove', (event) => {
+        window.clearTimeout(hoverTimer);
+        hoverTimer = window.setTimeout(() => {
+          const shots = qsa('[data-vh-sol-item]', gallery);
+          if (shots.length < 2) return;
+          const rect = gallery.getBoundingClientRect();
+          const x = Math.min(Math.max(event.clientX - rect.left, 0), rect.width);
+          const idx = Math.min(shots.length - 1, Math.floor((x / Math.max(rect.width, 1)) * shots.length));
+          const target = shots[idx];
+          if (target && !target.classList.contains('is-active')) {
+            activate(target);
+            startSol();
+          }
+        }, 40);
+      });
+    }
+
     let solTimer = 0;
     const startSol = () => {
       window.clearInterval(solTimer);

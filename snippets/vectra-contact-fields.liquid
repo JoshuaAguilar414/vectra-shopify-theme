@@ -8,6 +8,10 @@
   if variant == 'contact'
     assign is_contact_page = true
   endif
+  assign show_interest = false
+  if is_contact_page == false and solutions_form != true and home_form != true
+    assign show_interest = true
+  endif
 -%}
 
 <div class="vh-form__grid">
@@ -23,21 +27,22 @@
     >
   </label>
   <label class="vh-form__field">
-    <span class="visually-hidden">Last name</span>
+    <span class="visually-hidden">Last name (required)</span>
     <input
       type="text"
       name="contact[last_name]"
-      placeholder="Last name"
+      placeholder="Last name*"
       value="{{ customer.last_name }}"
+      required
       autocomplete="family-name"
     >
   </label>
   <label class="vh-form__field">
-    <span class="visually-hidden">Email (required)</span>
+    <span class="visually-hidden">Work email (required)</span>
     <input
       type="email"
       name="contact[email]"
-      placeholder="{% if is_contact_page %}Work email*{% else %}Email*{% endif %}"
+      placeholder="Work email*"
       value="{{ customer.email }}"
       required
       autocomplete="email"
@@ -58,8 +63,8 @@
     <input type="text" name="contact[company]" placeholder="Company*" autocomplete="organization" required>
   </label>
   <label class="vh-form__field">
-    <span class="visually-hidden">Role</span>
-    <input type="text" name="contact[role]" placeholder="Role" autocomplete="organization-title">
+    <span class="visually-hidden">Job title / role</span>
+    <input type="text" name="contact[role]" placeholder="Job Title / Role" autocomplete="organization-title">
   </label>
 </div>
 {% if is_contact_page %}
@@ -75,7 +80,7 @@
       <option value="Not sure yet">Not sure yet</option>
     </select>
   </label>
-{% elsif solutions_form == false or solutions_form == nil %}
+{% elsif show_interest %}
   <label class="vh-form__select vh-form__select--wide">
     <span class="visually-hidden">I am interested in</span>
     <select name="contact[interest]" aria-label="I am interested in">
@@ -90,7 +95,7 @@
 {% endif %}
 <label class="vh-form__field vh-form__field--wide">
   <span class="visually-hidden">Message</span>
-  <textarea name="contact[body]" placeholder="{% if is_contact_page %}Tell us what is happening, what is getting in the way, and what you would like to improve.{% else %}Message here...{% endif %}"></textarea>
+  <textarea name="contact[body]" placeholder="{% if is_contact_page %}Tell us what is happening, what is getting in the way, and what you would like to improve.{% else %}Tell us what you need help with and what you would like to improve.{% endif %}"></textarea>
 </label>
 <button class="vh-btn vh-btn--green" type="submit">
   {{ submit_label }}

@@ -54,14 +54,25 @@
       <p class="vh-hero__display" data-vh-hero-el>{{ block.settings.subheading }}</p>
     {% endif %}
     {% if block.settings.text != blank %}
-      <p data-vh-hero-el>{{ block.settings.text }}</p>
+      <div class="vh-hero__body" data-vh-hero-el>
+        {% assign hero_paras = block.settings.text | newline_to_br | split: '<br />' %}
+        {% for para in hero_paras %}
+          {% assign para_text = para | strip_html | strip %}
+          {% if para_text != blank %}
+            <p>{{ para_text }}</p>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if block.settings.aeo_text != blank %}
+      <p class="vh-hero__aeo" data-vh-hero-el>{{ block.settings.aeo_text }}</p>
     {% endif %}
     {% if block.settings.button_label != blank or block.settings.button_2_label != blank %}
       <div class="vh-hero__actions" data-vh-hero-el>
         {% if block.settings.button_label != blank %}
           <a
             class="vh-btn vh-btn--{{ block.settings.button_style | default: 'green' }}"
-            href="{{ block.settings.button_link | default: '#VectraContactModal' }}"
+            href="{{ block.settings.button_link | default: '#solutions' }}"
             {% if block.settings.button_link == blank or block.settings.button_link == '#VectraContactModal' %}
               data-vh-contact-open
             {% endif %}
@@ -75,7 +86,10 @@
         {% if block.settings.button_2_label != blank %}
           <a
             class="vh-btn vh-btn--{{ block.settings.button_2_style | default: 'outline-light' }}"
-            href="{{ block.settings.button_2_link | default: '#' }}"
+            href="{{ block.settings.button_2_link | default: '#VectraContactModal' }}"
+            {% if block.settings.button_2_link == blank or block.settings.button_2_link == '#VectraContactModal' %}
+              data-vh-contact-open
+            {% endif %}
             {% if block.settings.open_in_new_tab and block.settings.button_2_link != blank %}
               target="_blank" rel="noopener noreferrer"
             {% endif %}
@@ -228,7 +242,14 @@
     {
       "type": "textarea",
       "id": "text",
-      "label": "Text"
+      "label": "Text",
+      "info": "Use blank lines between paragraphs."
+    },
+    {
+      "type": "textarea",
+      "id": "aeo_text",
+      "label": "AEO supporting copy",
+      "info": "Secondary definitional text for search visibility."
     },
     {
       "type": "text_alignment",
