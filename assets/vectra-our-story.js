@@ -1,4 +1,31 @@
 (() => {
+  // Keep FAQ clicks working on About even if home.js init order changes
+  if (!window.__vectraFaqBound) {
+    window.__vectraFaqBound = true;
+    const setFaqOpen = (item, open) => {
+      item.classList.toggle('is-open', open);
+      const btn = item.querySelector('[data-vh-faq-btn]');
+      const body = item.querySelector('.vh-acc__body');
+      if (btn) btn.setAttribute('aria-expanded', String(open));
+      if (body) {
+        if (open) body.removeAttribute('hidden');
+        else body.setAttribute('hidden', '');
+      }
+    };
+    document.addEventListener('click', (event) => {
+      const btn = event.target.closest('[data-vh-faq-btn]');
+      if (!btn) return;
+      const item = btn.closest('[data-vh-faq-item]');
+      if (!item) return;
+      event.preventDefault();
+      event.stopPropagation();
+      const group = item.closest('[data-vh-faq-accordion], .vh-accordion') || item.parentElement || document;
+      const wasOpen = item.classList.contains('is-open');
+      group.querySelectorAll('[data-vh-faq-item]').forEach((other) => setFaqOpen(other, false));
+      if (!wasOpen) setFaqOpen(item, true);
+    });
+  }
+
   if (window.__vectraStoryInit) return;
   window.__vectraStoryInit = true;
 

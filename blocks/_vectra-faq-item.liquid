@@ -1,6 +1,14 @@
 <div class="vh-acc{% if block.settings.open %} is-open{% endif %}" data-vh-faq-item {{ block.shopify_attributes }}>
-  <button type="button" data-vh-faq-btn>{{ block.settings.question }}</button>
-  <div class="vh-acc__body">{{ block.settings.answer }}</div>
+  <button
+    type="button"
+    data-vh-faq-btn
+    aria-expanded="{% if block.settings.open %}true{% else %}false{% endif %}"
+  >
+    {{ block.settings.question | default: 'Question' }}
+  </button>
+  <div class="vh-acc__body" {% unless block.settings.open %}hidden{% endunless %}>
+    {{ block.settings.answer }}
+  </div>
 </div>
 
 {% schema %}

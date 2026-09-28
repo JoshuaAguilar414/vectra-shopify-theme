@@ -1371,20 +1371,27 @@
 }
 
 .vectra-story #about-faq.vh-faq {
+  position: relative;
+  z-index: 4;
   margin-top: 8px;
   border-radius: 32px 32px 0 0;
   overflow: visible;
+  isolation: isolate;
 }
 
 .vectra-story #about-faq .vh-faq__grid {
   overflow: visible;
+  position: relative;
+  z-index: 2;
 }
 
 .vectra-story #about-faq .vh-faq__right,
-.vectra-story #about-faq .vh-accordion {
+.vectra-story #about-faq .vh-accordion,
+.vectra-story #about-faq .vh-acc,
+.vectra-story #about-faq [data-vh-faq-btn] {
   position: relative;
-  z-index: 2;
-  pointer-events: auto;
+  z-index: 3;
+  pointer-events: auto !important;
 }
 
 .vectra-story #about-faq .vh-faq__glow {
@@ -1395,7 +1402,7 @@
 .vectra-story #about-faq .vh-contact-card {
   position: relative;
   top: auto;
-  z-index: 1;
+  z-index: 2;
 }
 
 .vectra-story #about-faq .vh-contact-card__title {

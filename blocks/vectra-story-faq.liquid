@@ -1,7 +1,42 @@
-{% capture nested_items %}
-  {% content_for 'blocks' %}
-{% endcapture %}
-{% render 'vectra-story-modules', module: 'faq', block: block, nested_items: nested_items %}
+{% liquid
+  assign faq_card_title = block.settings.card_title | default: 'More questions?'
+  assign faq_card_text = block.settings.card_text | default: 'Find more answers about VECTRA International, how we work, our capabilities, and getting started.'
+  assign faq_btn = block.settings.button_label | default: 'More questions?'
+  assign faq_btn_href = block.settings.button_link
+  if faq_btn_href == blank
+    assign faq_btn_href = pages['faq'].url | default: '/pages/faq'
+  endif
+  assign img_chat = 'vectra-da137306dcbc6716d83295ef75678ab141a500e1.svg' | asset_url
+  assign img_arrow = 'vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg' | asset_url
+  assign img_phone = 'vectra-7c0e54b37d57d95df328b0e4ee1f7b87844a7372.svg' | asset_url
+  assign img_mail = 'vectra-9a4f80a5b924a881fc96b20219bb1f7c8ca734ab.svg' | asset_url
+  assign img_pin = 'vectra-484bca36e3874bd30d1d6dd79807ed0314378e3d.svg' | asset_url
+%}
+{% unless block.settings.hide_section %}
+<section class="vh-faq" id="about-faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-wrap vh-faq__grid">
+    <aside class="vh-contact-card" data-vh-reveal="left">
+      <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
+      <p class="vh-contact-card__title">{{ faq_card_title }}</p>
+      <p>{{ faq_card_text }}</p>
+      <a class="vh-btn vh-btn--white" href="{{ faq_btn_href }}">
+        {{ faq_btn }}
+        <img src="{{ img_arrow }}" alt="">
+      </a>
+      {% render 'vectra-contact-details', variant: 'card', img_phone: img_phone, img_mail: img_mail, img_pin: img_pin %}
+    </aside>
+    <div class="vh-faq__right">
+      <div class="vh-faq__glow" aria-hidden="true"></div>
+      <div class="vh-accordion" data-vh-faq-accordion>
+        <p class="vh-kicker">{{ block.settings.kicker | default: 'FAQ' }}</p>
+        <h2 class="vh-h2">{{ block.settings.heading | default: 'Questions About VECTRA International' }}</h2>
+        <p class="vh-lead">{{ block.settings.lead | default: 'Answers about who we are, how we work, and where we operate.' }}</p>
+        {% content_for 'blocks' %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endunless %}
 
 {% schema %}
 {
@@ -83,6 +118,50 @@
       "step": 4,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "Left",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "Right",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
     }
   ],
   "presets": [
@@ -94,35 +173,42 @@
           "settings": {
             "open": true,
             "question": "Who is VECTRA International?",
-            "answer": "VECTRA International is a business resilience and operational capability-building partner that helps organizations manage ESG requirements, supplier risk, and operational complexity through expert teams and practical, technology-enabled delivery."
+            "answer": "VECTRA International is a business resilience and operational capability-building partner. We help organizations manage responsible business, supplier, and operational challenges by combining experienced people, practical implementation support, and technology where it adds value."
           }
         },
         {
           "type": "_vectra-faq-item",
           "settings": {
             "question": "When was VECTRA International founded?",
-            "answer": "VECTRA International was founded in 2005 and has since worked with organizations across industries to strengthen governance, supplier accountability, and operational resilience."
+            "answer": "VECTRA International was founded in 2005. Since then, our work has grown from responsible business and supply-chain challenges into a broader role supporting business resilience, operational capability, governance, and performance."
           }
         },
         {
           "type": "_vectra-faq-item",
           "settings": {
             "question": "What does VECTRA International do?",
-            "answer": "VECTRA International turns responsible business requirements — supplier issues, audit findings, weak controls, and changing regulations — into clear priorities, accountable action, and measurable performance improvement."
+            "answer": "We help organizations turn complex requirements and operational challenges into clear priorities and practical action. Depending on the issue, that may involve supplier risk, governance, evidence, technology, capability building, responsible business, or operational improvement."
+          }
+        },
+        {
+          "type": "_vectra-faq-item",
+          "settings": {
+            "question": "How is VECTRA different from a traditional consulting company?",
+            "answer": "VECTRA consulting support is built around partnership, implementation, and follow-through. Organizations may come to us while looking for an operational resilience consulting company, but our role is broader. We bring together specialist expertise, capability building, practical implementation, and technology where it adds value, then stay involved as decisions move into practice and progress is measured."
           }
         },
         {
           "type": "_vectra-faq-item",
           "settings": {
             "question": "Where does VECTRA International operate?",
-            "answer": "VECTRA International operates globally, with associates and specialist experts delivering local market context across regions including Africa, Europe, Asia, and beyond."
+            "answer": "VECTRA International works globally, supported by associates and specialist experts who bring local context and experience across regions, markets, and industries."
           }
         },
         {
           "type": "_vectra-faq-item",
           "settings": {
             "question": "Who leads VECTRA International?",
-            "answer": "VECTRA International is led by CEO Patrick Neyts, alongside a global leadership team spanning operations, sales and marketing, and applied AI."
+            "answer": "VECTRA International is led by CEO Patrick Neyts alongside a global leadership team spanning operations, sales and marketing, and applied AI."
           }
         }
       ]

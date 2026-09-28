@@ -1,7 +1,45 @@
-{% capture nested_items %}
-  {% content_for 'blocks' %}
-{% endcapture %}
-{% render 'vectra-home-modules', module: 'faq', block: block, nested_items: nested_items %}
+{% liquid
+  assign faq_card_title = block.settings.card_title | default: 'Bring Us the Problem That Keeps Coming Back'
+  assign faq_card_text = block.settings.card_text | default: "Maybe actions keep stalling. Evidence is scattered. A supplier issue stays open. Or your systems produce information, but the next step is still unclear. Tell us where the work gets stuck. We'll help you identify the gap and the next step."
+  assign faq_kicker = block.settings.kicker | default: 'Our FAQ'
+  assign faq_heading = block.settings.heading | default: 'Questions Business Leaders Ask Us'
+  assign faq_lead = block.settings.lead | default: 'Straight answers about where VECTRA fits, how we work, and what happens next.'
+  assign faq_btn = block.settings.button_label | default: 'More questions?'
+  assign faq_btn_href = block.settings.button_link
+  if faq_btn_href == blank
+    assign faq_btn_href = pages['faq'].url | default: '/pages/faq'
+  endif
+  assign img_chat = 'vectra-da137306dcbc6716d83295ef75678ab141a500e1.svg' | asset_url
+  assign img_arrow = 'vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg' | asset_url
+  assign img_phone = 'vectra-7c0e54b37d57d95df328b0e4ee1f7b87844a7372.svg' | asset_url
+  assign img_mail = 'vectra-9a4f80a5b924a881fc96b20219bb1f7c8ca734ab.svg' | asset_url
+  assign img_pin = 'vectra-484bca36e3874bd30d1d6dd79807ed0314378e3d.svg' | asset_url
+%}
+{% unless block.settings.hide_section %}
+<section class="vh-faq" id="faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-wrap vh-faq__grid">
+    <aside class="vh-contact-card" data-vh-reveal="left">
+      <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
+      <p class="vh-contact-card__title">{{ faq_card_title }}</p>
+      <p>{{ faq_card_text }}</p>
+      <a class="vh-btn vh-btn--white" href="{{ faq_btn_href }}">
+        {{ faq_btn }}
+        <img src="{{ img_arrow }}" alt="">
+      </a>
+      {% render 'vectra-contact-details', variant: 'card', img_phone: img_phone, img_mail: img_mail, img_pin: img_pin %}
+    </aside>
+    <div class="vh-faq__right">
+      <div class="vh-faq__glow" aria-hidden="true"></div>
+      <div class="vh-accordion" data-vh-faq-accordion>
+        <p class="vh-kicker">{{ faq_kicker }}</p>
+        <h2 class="vh-h2">{{ faq_heading }}</h2>
+        <p class="vh-lead">{{ faq_lead }}</p>
+        {% content_for 'blocks' %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endunless %}
 
 {% schema %}
 {
@@ -141,50 +179,17 @@
       "id": "heading_size",
       "label": "Heading size",
       "options": [
-        {
-          "value": "default",
-          "label": "Default"
-        },
-        {
-          "value": "0.875rem",
-          "label": "14px"
-        },
-        {
-          "value": "1rem",
-          "label": "16px"
-        },
-        {
-          "value": "1.125rem",
-          "label": "18px"
-        },
-        {
-          "value": "1.25rem",
-          "label": "20px"
-        },
-        {
-          "value": "1.5rem",
-          "label": "24px"
-        },
-        {
-          "value": "2rem",
-          "label": "32px"
-        },
-        {
-          "value": "2.5rem",
-          "label": "40px"
-        },
-        {
-          "value": "3rem",
-          "label": "48px"
-        },
-        {
-          "value": "4rem",
-          "label": "64px"
-        },
-        {
-          "value": "4.5rem",
-          "label": "72px"
-        }
+        { "value": "default", "label": "Default" },
+        { "value": "0.875rem", "label": "14px" },
+        { "value": "1rem", "label": "16px" },
+        { "value": "1.125rem", "label": "18px" },
+        { "value": "1.25rem", "label": "20px" },
+        { "value": "1.5rem", "label": "24px" },
+        { "value": "2rem", "label": "32px" },
+        { "value": "2.5rem", "label": "40px" },
+        { "value": "3rem", "label": "48px" },
+        { "value": "4rem", "label": "64px" },
+        { "value": "4.5rem", "label": "72px" }
       ],
       "default": "default"
     },
@@ -193,50 +198,17 @@
       "id": "text_size",
       "label": "Body text size",
       "options": [
-        {
-          "value": "default",
-          "label": "Default"
-        },
-        {
-          "value": "0.875rem",
-          "label": "14px"
-        },
-        {
-          "value": "1rem",
-          "label": "16px"
-        },
-        {
-          "value": "1.125rem",
-          "label": "18px"
-        },
-        {
-          "value": "1.25rem",
-          "label": "20px"
-        },
-        {
-          "value": "1.5rem",
-          "label": "24px"
-        },
-        {
-          "value": "2rem",
-          "label": "32px"
-        },
-        {
-          "value": "2.5rem",
-          "label": "40px"
-        },
-        {
-          "value": "3rem",
-          "label": "48px"
-        },
-        {
-          "value": "4rem",
-          "label": "64px"
-        },
-        {
-          "value": "4.5rem",
-          "label": "72px"
-        }
+        { "value": "default", "label": "Default" },
+        { "value": "0.875rem", "label": "14px" },
+        { "value": "1rem", "label": "16px" },
+        { "value": "1.125rem", "label": "18px" },
+        { "value": "1.25rem", "label": "20px" },
+        { "value": "1.5rem", "label": "24px" },
+        { "value": "2rem", "label": "32px" },
+        { "value": "2.5rem", "label": "40px" },
+        { "value": "3rem", "label": "48px" },
+        { "value": "4rem", "label": "64px" },
+        { "value": "4.5rem", "label": "72px" }
       ],
       "default": "default"
     },
@@ -245,26 +217,11 @@
       "id": "font_weight",
       "label": "Heading weight",
       "options": [
-        {
-          "value": "default",
-          "label": "Default"
-        },
-        {
-          "value": "400",
-          "label": "Regular"
-        },
-        {
-          "value": "500",
-          "label": "Medium"
-        },
-        {
-          "value": "600",
-          "label": "Semibold"
-        },
-        {
-          "value": "700",
-          "label": "Bold"
-        }
+        { "value": "default", "label": "Default" },
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" },
+        { "value": "700", "label": "Bold" }
       ],
       "default": "default"
     },
@@ -273,22 +230,10 @@
       "id": "line_height",
       "label": "Line height",
       "options": [
-        {
-          "value": "default",
-          "label": "Default"
-        },
-        {
-          "value": "tight",
-          "label": "Tight"
-        },
-        {
-          "value": "normal",
-          "label": "Normal"
-        },
-        {
-          "value": "loose",
-          "label": "Loose"
-        }
+        { "value": "default", "label": "Default" },
+        { "value": "tight", "label": "Tight" },
+        { "value": "normal", "label": "Normal" },
+        { "value": "loose", "label": "Loose" }
       ],
       "default": "default"
     },
@@ -297,22 +242,10 @@
       "id": "letter_spacing",
       "label": "Letter spacing",
       "options": [
-        {
-          "value": "default",
-          "label": "Default"
-        },
-        {
-          "value": "tight",
-          "label": "Tight"
-        },
-        {
-          "value": "normal",
-          "label": "Normal"
-        },
-        {
-          "value": "loose",
-          "label": "Loose"
-        }
+        { "value": "default", "label": "Default" },
+        { "value": "tight", "label": "Tight" },
+        { "value": "normal", "label": "Normal" },
+        { "value": "loose", "label": "Loose" }
       ],
       "default": "default"
     },
@@ -321,14 +254,8 @@
       "id": "text_case",
       "label": "Text case",
       "options": [
-        {
-          "value": "none",
-          "label": "Default"
-        },
-        {
-          "value": "uppercase",
-          "label": "Uppercase"
-        }
+        { "value": "none", "label": "Default" },
+        { "value": "uppercase", "label": "Uppercase" }
       ],
       "default": "none"
     },
@@ -341,14 +268,8 @@
       "id": "border",
       "label": "Border",
       "options": [
-        {
-          "value": "none",
-          "label": "None"
-        },
-        {
-          "value": "solid",
-          "label": "Solid"
-        }
+        { "value": "none", "label": "None" },
+        { "value": "solid", "label": "Solid" }
       ],
       "default": "none"
     },

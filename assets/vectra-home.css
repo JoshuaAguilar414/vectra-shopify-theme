@@ -2914,16 +2914,14 @@
   font-weight: 400;
   letter-spacing: -0.01em;
   line-height: 1.55;
-  visibility: hidden;
-  max-height: 0;
-  overflow: hidden;
+}
+
+.vh-acc__body[hidden] {
+  display: none !important;
 }
 
 .vh-acc.is-open .vh-acc__body {
   display: block;
-  visibility: visible;
-  max-height: none;
-  overflow: visible;
 }
 
 /* Portal / Get In Touch */
