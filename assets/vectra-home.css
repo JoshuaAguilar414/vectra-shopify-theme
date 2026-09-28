@@ -2736,6 +2736,8 @@
   max-width: 100%;
   height: auto;
   min-height: 0;
+  isolation: isolate;
+  z-index: 1;
 }
 
 .vh-faq__glow {
@@ -2748,18 +2750,19 @@
   border-radius: 50%;
   background: radial-gradient(circle, rgba(84, 189, 1, 0.38) 0%, rgba(214, 255, 173, 0.2) 42%, transparent 70%);
   filter: blur(80px);
-  pointer-events: none;
+  pointer-events: none !important;
   z-index: 0;
 }
 
 .vh-accordion {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
   max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  pointer-events: auto;
 }
 
 .vh-accordion .vh-kicker {
@@ -2815,6 +2818,9 @@
   -webkit-backdrop-filter: none;
   overflow: hidden;
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
   transition:
     transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     background-color 0.3s ease,
@@ -2866,6 +2872,10 @@
   align-items: center;
   gap: 16px;
   white-space: normal;
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .vh-acc button img {
@@ -2904,10 +2914,16 @@
   font-weight: 400;
   letter-spacing: -0.01em;
   line-height: 1.55;
+  visibility: hidden;
+  max-height: 0;
+  overflow: hidden;
 }
 
 .vh-acc.is-open .vh-acc__body {
   display: block;
+  visibility: visible;
+  max-height: none;
+  overflow: visible;
 }
 
 /* Portal / Get In Touch */

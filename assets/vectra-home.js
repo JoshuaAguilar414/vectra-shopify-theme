@@ -19,6 +19,24 @@
   const qs = (sel, el = root) => el.querySelector(sel);
   const qsa = (sel, el = root) => [...el.querySelectorAll(sel)];
 
+  // FAQ accordion — bind early via delegation (homepage + About share this)
+  if (!window.__vectraFaqBound) {
+    window.__vectraFaqBound = true;
+    document.addEventListener('click', (event) => {
+      const btn = event.target.closest('[data-vh-faq-btn]');
+      if (!btn) return;
+      const item = btn.closest('[data-vh-faq-item]');
+      if (!item) return;
+      event.preventDefault();
+      const group = item.closest('.vh-accordion') || item.parentElement || document;
+      const wasOpen = item.classList.contains('is-open');
+      group.querySelectorAll('[data-vh-faq-item]').forEach((other) => {
+        other.classList.remove('is-open');
+      });
+      if (!wasOpen) item.classList.add('is-open');
+    });
+  }
+
   const navToggle = qs('[data-vh-nav-toggle]');
   const navPanel = qs('[data-vh-nav-panel]');
   if (navToggle && navPanel) {
@@ -337,16 +355,6 @@
     };
     startSol();
   }
-
-  qsa('[data-vh-faq-item]').forEach((item) => {
-    const btn = qs('[data-vh-faq-btn]', item);
-    if (!btn) return;
-    btn.addEventListener('click', () => {
-      const open = item.classList.contains('is-open');
-      qsa('[data-vh-faq-item]').forEach((other) => other.classList.remove('is-open'));
-      if (!open) item.classList.add('is-open');
-    });
-  });
 
   qsa('.vh-case').forEach((card) => {
     card.setAttribute('tabindex', '0');
