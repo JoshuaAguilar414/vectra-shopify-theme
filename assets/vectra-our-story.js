@@ -92,7 +92,7 @@
             y: seededRandom(i * 789.012) * height,
             size: 20 + seededRandom(i * 345.678) * 60,
             colorMix: seededRandom(i * 567.89),
-            opacityBase: 0.2 + seededRandom(i * 901.234) * 0.4,
+            opacityBase: 0.08 + seededRandom(i * 901.234) * 0.16,
             speedFactor: 0.3 + seededRandom(i * 111.222) * 0.7,
           });
         }
