@@ -2538,6 +2538,7 @@
   align-items: start;
   width: min(var(--vh-wrap), calc(100% - 48px));
   margin-inline: auto;
+  overflow: visible;
 }
 
 .vh-contact-card {
@@ -2545,6 +2546,7 @@
   z-index: 2;
   width: 100%;
   max-width: 520px;
+  min-width: 0;
   height: auto;
   min-height: 0;
   box-sizing: border-box;
@@ -2558,6 +2560,7 @@
   align-items: center;
   text-align: center;
   pointer-events: auto;
+  overflow: hidden;
 }
 
 .vh-contact-card p {

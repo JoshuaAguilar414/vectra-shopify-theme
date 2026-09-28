@@ -532,7 +532,7 @@
     assign join_cta = careers_url
   endif
 %}
-<section class="vs-join" id="careers" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+<section class="vs-join{% if block.settings.background_color != blank %} has-custom-bg{% endif %}" id="careers" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <canvas class="vs-join__grid" data-vs-join-grid aria-hidden="true"></canvas>
     <div class="vs-join__inner">
       <div>

@@ -22,7 +22,6 @@
     echo '--vh-bg: ' | append: settings.background_color | append: ';'
   endif
   if settings.text_color != blank
-    echo 'color: ' | append: settings.text_color | append: ';'
     echo '--vh-fg: ' | append: settings.text_color | append: ';'
   endif
   if settings.overlay_opacity != blank and settings.overlay_opacity > 0

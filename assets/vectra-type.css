@@ -135,7 +135,6 @@
 .vectra-story .vs-ceo__copy h2,
 .vectra-story .vs-who h2,
 .vectra-story .vs-mv h2,
-.vectra-story .vs-join h2,
 .vectra-story .vs-people h2,
 .vectra-story .vs-values h2,
 .vectra-sol .vsol-intro__copy h2,
@@ -337,21 +336,34 @@
   line-height: 1 !important;
 }
 
-.vectra-story .vs-join h2 {
-  font-size: var(--vh-fs-title) !important;
-  line-height: 1.25 !important;
+.vectra-story .vs-join h2,
+.vs-join h2 {
+  font-size: clamp(28px, 3vw, 44px) !important;
+  line-height: 1.2 !important;
   letter-spacing: -0.03em !important;
+  color: #ffffff !important;
 }
 
-.vectra-story .vs-join p,
-.vectra-story .vs-join p.vs-join__kicker {
-  font-size: var(--vh-fs-lead) !important;
+.vectra-story .vs-join p.vs-join__kicker,
+.vs-join p.vs-join__kicker {
+  font-size: 12px !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0.06em !important;
+  color: #54bd01 !important;
+}
+
+.vectra-story .vs-join__inner > div > p:not(.vs-join__kicker),
+.vs-join__inner > div > p:not(.vs-join__kicker) {
+  font-size: 15px !important;
   line-height: 1.45 !important;
   letter-spacing: -0.02em !important;
+  color: #ffffff !important;
 }
 
-.vectra-story .vs-join .vs-cta-btn {
-  font-size: 18px !important;
+.vectra-story .vs-join .vs-cta-btn,
+.vs-join .vs-cta-btn {
+  font-size: 14px !important;
+  color: #ffffff !important;
 }
 
 .vectra-home .vh-searchbar input,
