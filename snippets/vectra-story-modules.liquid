@@ -51,6 +51,8 @@
   assign faq_url = pages['faq'].url | default: '/pages/faq'
   assign mv_mission = 'We enable positive business impact by partnering with organizations to transform end-to-end operational complexity into resilient, well-governed performance through expert teams, and human led state of the art technology—creating measurable value for people, operations, and sustainable growth.'
   assign mv_vision = 'To be the trusted partner in building operational control and resilience and achieving sustainable competitive advantage by transforming business complexity into strategic clarity, human-centered AI capability, and measurable value.'
+  assign mv_solutions = 'We bring together deep expertise, a trusted network of partners, and technology that actually earns its place, then put all of it to work helping you design what needs to change, govern how it runs, and execute it in the real world. The result is not just a plan. It is clarity you can act on, control you can trust, and capability that stays with your team long after we are done.'
+  assign jobs_url = pages['job-openings'].url | default: pages['careers'].url | default: careers_url
 %}
 {% capture faq_href %}{% render 'vectra-preview-href', url: faq_url, view: 'faq' %}{% endcapture %}
 {% capture experts_href %}{% render 'vectra-preview-href', url: experts_url, view: 'experts' %}{% endcapture %}
@@ -66,7 +68,10 @@
 {% unless block.settings.hide_section %}
 {% liquid
   assign story_kicker = block.settings.kicker | default: 'Inside VECTRA'
-  assign story_heading = block.settings.heading | default: 'About VECTRA International – Our DNA, Values &amp; Global Expertise'
+  assign story_heading = block.settings.heading | default: 'VECTRA International DNA, Values &amp; Global Leadership'
+  assign story_display = block.settings.display_text | default: 'We Believe Better Business Starts With People.'
+  assign story_btn = block.settings.button_label | default: 'Explore How We Help'
+  assign story_btn2 = block.settings.button_2_label | default: 'Talk to an Expert'
   assign story_poster = img_ceo
   if block.settings.poster != blank
     assign story_poster = block.settings.poster | image_url: width: 1920
@@ -75,7 +80,7 @@
 %}
 <section
   class="vs-hero vs-hero--align-{{ story_align }}"
-  aria-label="Our VECTRA Story"
+  aria-label="About VECTRA International"
   style="{% render 'vectra-block-style', settings: block.settings %}"
   {{ block.shopify_attributes }}
 >
@@ -91,28 +96,22 @@
     <div class="vs-hero__copy">
       <p class="vs-hero__kicker" data-vh-reveal="up">{{ story_kicker }}</p>
       <h1 data-vh-reveal="up">{{ story_heading }}</h1>
+      <p class="vs-hero__display" data-vh-reveal="up">{{ story_display }}</p>
       <div class="vs-hero__body" data-vh-reveal="up">
         {% if block.settings.text != blank %}
           {{ block.settings.text }}
         {% else %}
-        <p>
-          VECTRA International is a business resilience and operational capability-building partner that helps organizations turn ESG, supply chain, and operational requirements into accountable action. Since 2005, VECTRA International has partnered with global brands to strengthen governance, resolve supplier risk, and build operational resilience — combining expert teams with practical, technology-enabled delivery.
-        </p>
-        <p>
-          We help organizations turn requirements, supplier issues, weak controls, scattered evidence, and changing operations into clear priorities, accountable action, and stronger performance. VECTRA started with a simple belief: business can be a force for good, but commitments have to survive contact with real operations.
-        </p>
+        <p>For more than 20 years, VECTRA has worked with people who want their businesses to do better: for their teams, their customers, their partners, and the communities around them.</p>
+        <p>That belief has shaped who we are from the beginning.</p>
+        <p>We listen. We understand what matters. We bring the right people together. And we stay close as ideas become decisions, decisions become action, and progress begins to show.</p>
+        <p>Today, VECTRA International works alongside organizations around the world to strengthen responsible business, supply chains, operations, and the people responsible for keeping them moving.</p>
+        <p class="vs-hero__aeo">VECTRA International is a business resilience and operational capability building partner founded in 2005. We combine experienced people, practical support, specialist expertise, and technology to help organizations address responsible business, supply chain, and operational challenges, and turn them into clearer decisions, stronger performance, and lasting capability.</p>
         {% endif %}
       </div>
-      {% if block.settings.button_label != blank or block.settings.button_2_label != blank %}
-        <div class="vs-hero__actions" data-vh-reveal="up">
-          {% if block.settings.button_label != blank %}
-            <a class="vh-btn vh-btn--green" href="{{ block.settings.button_link | default: '#VectraContactModal' }}" {% if block.settings.button_link == blank or block.settings.button_link == '#VectraContactModal' %}data-vh-contact-open{% endif %}>{{ block.settings.button_label }}</a>
-          {% endif %}
-          {% if block.settings.button_2_label != blank %}
-            <a class="vh-btn vh-btn--outline vh-btn--outline-light" href="{{ block.settings.button_2_link | default: '#' }}">{{ block.settings.button_2_label }}</a>
-          {% endif %}
-        </div>
-      {% endif %}
+      <div class="vs-hero__actions" data-vh-reveal="up">
+        <a class="vh-btn vh-btn--green" href="{{ block.settings.button_link | default: '#who-we-are' }}">{{ story_btn }}</a>
+        <a class="vh-btn vh-btn--outline vh-btn--outline-light" href="{{ block.settings.button_2_link | default: '#VectraContactModal' }}"{% if block.settings.button_2_link == blank or block.settings.button_2_link == '#VectraContactModal' %} data-vh-contact-open{% endif %}>{{ story_btn2 }}</a>
+      </div>
     </div>
   </section>
 {% endunless %}
@@ -122,7 +121,7 @@
 {% liquid
   assign ceo_name = block.settings.name | default: 'Patrick Neyts'
   assign ceo_kicker = block.settings.kicker | default: 'Meet the Founder'
-  assign ceo_heading = block.settings.heading | default: 'A Message from Our CEO'
+  assign ceo_heading = block.settings.heading | default: 'A Message From Our CEO'
 %}
 <div class="vs-sheet" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <section class="vs-ceo" id="founder">
@@ -141,9 +140,11 @@
           {% if block.settings.text != blank %}
             {{ block.settings.text }}
           {% else %}
+          <p class="vs-ceo__lede">Complexity doesn't hold businesses back. Not knowing what to do about it does.</p>
           <p>Most organizations do not struggle because of a lack of ambition. They struggle because operational complexity outpaces their ability to act.</p>
           <p>At VECTRA International, we partner with organizations to transform that complexity into clarity, control, and competitive advantage. From small and mid-sized businesses to global enterprises, we deliver integrated solutions that strengthen operational capability, reduce risk, and drive measurable results.</p>
           <p>We believe business is a force for good when better performance creates better outcomes for your organization, your customers, people, and society.</p>
+          <p class="vs-ceo__signoff"><strong>Patrick Neyts</strong><br>Chief Executive Officer</p>
           {% endif %}
         </div>
       </div>
@@ -159,8 +160,24 @@
 
     <section class="vs-who" id="who-we-are">
       <div class="vs-who__copy">
-        <p class="vs-who__kicker">{{ block.settings.kicker | default: 'The VECTRA Story' }}</p>
-        <h2>{{ block.settings.heading | default: 'Enabling Positive Business Impact' }}</h2>
+        <p class="vs-who__kicker">{{ block.settings.kicker | default: 'Our Story' }}</p>
+        <h2>{{ block.settings.heading | default: 'The VECTRA International Story' }}</h2>
+        <h3>{{ block.settings.subheading | default: 'Enabling Positive Business Impact Since 2005' }}</h3>
+        <div class="vs-who__body">
+          {% if block.settings.story_text != blank %}
+            {{ block.settings.story_text }}
+          {% else %}
+          <p>VECTRA began with a belief that still guides us today: business has the power to make a positive difference in people's lives.</p>
+          <p>Our early years brought us close to workers, workplaces, brands, communities, and consumers. We saw how decisions made inside a business could reach far beyond it, shaping livelihoods, relationships, trust, and opportunity.</p>
+          <p>That experience taught us something important. Good intentions matter, but what matters even more is what happens after the promise is made.</p>
+          <p>So as the needs of our clients grew, VECTRA grew with them.</p>
+          <p>Our experience expanded across responsible business, supply chains, governance, operational improvement, technology, and capability building. But the way we approach our clients has remained deeply human.</p>
+          <p>We listen before we recommend. We bring together people who understand the challenge. We support teams as decisions move into practice. And we stay involved long enough to see whether the change is making the difference it was meant to make.</p>
+          <p>Today, VECTRA International brings that experience together as a business resilience and operational capability building partner serving organizations around the world.</p>
+          <p>The challenges have changed over the years. Our belief has not.</p>
+          <p><strong>Better business should create better outcomes for people.</strong></p>
+          {% endif %}
+        </div>
       </div>
       <figure class="vs-who__media">
         <iframe
@@ -195,9 +212,16 @@
       </article>
     </section>
 
+    <section class="vs-solutions" id="solutions">
+      <h2>{{ block.settings.solutions_heading | default: 'Our Solutions' }}</h2>
+      <p>{{ block.settings.solutions | default: mv_solutions }}</p>
+    </section>
+
     <section class="vs-values" id="values">
-      <h2>{{ block.settings.values_heading | default: 'VECTRA Values' }}</h2>
-      <p>{{ block.settings.values_text | default: 'These values guide the decisions we make, the relationships we build, and the way we turn our commitments into action.' }}</p>
+      <p class="vs-values__kicker">{{ block.settings.values_kicker | default: 'VECTRA Values' }}</p>
+      <h2>{{ block.settings.values_heading | default: 'The Values Behind How We Show Up' }}</h2>
+      <p>{{ block.settings.values_text | default: 'Values matter most when people can feel them in the way you treat them. At VECTRA, they shape how we listen, how we make decisions, how we support one another, and how we show up for our clients and the communities connected to them. They are not simply words we display. They are standards we expect ourselves to live by.' }}</p>
+      <p class="vs-values__sub">{{ block.settings.values_subtext | default: 'These values guide the decisions we make, the relationships we build, and the way we turn our commitments into action.' }}</p>
       <div class="vs-values__row">
         <img class="vs-values__line" src="{{ img_values_line }}" alt="">
         <article class="vs-value">
@@ -235,7 +259,9 @@
     </div>
 
     <section class="vs-leaders" id="leadership" data-vs-reveal-group>
-      <h2>{{ block.settings.leaders_heading | default: 'Our Leadership Team' }}</h2>
+      <p class="vs-leaders__kicker">{{ block.settings.leaders_kicker | default: 'Our Leadership' }}</p>
+      <h2>{{ block.settings.leaders_heading | default: 'Meet the People Who Guide VECTRA' }}</h2>
+      <p class="vs-leaders__intro">{{ block.settings.leaders_text | default: 'VECTRA is shaped by people with different experiences, perspectives, and areas of expertise, but a shared belief in what good partnership should feel like. Our leadership team sets the direction, supports our people, and helps create the conditions for strong ideas and good judgment to reach our clients. Across responsible business, operations, supply chains, sales, marketing, and applied AI, they bring the experience needed to keep VECTRA moving forward while staying true to the values we started with.' }}</p>
       <div class="vs-leaders__viewport">
         <div class="vs-leaders__track" data-vs-leaders-track>
           {% assign nested_leaders = nested_leaders | strip %}
@@ -327,7 +353,9 @@
     </section>
 
     <section class="vs-experts" id="experts">
+      <p class="vs-experts__kicker">{{ block.settings.experts_kicker | default: 'Our Experts' }}</p>
       <h2>{{ block.settings.experts_heading | default: 'Our Team of Experts' }}</h2>
+      <p class="vs-experts__intro">{{ block.settings.experts_text | default: 'The people our clients meet matter. That is why VECTRA brings together specialists who know their fields, understand different markets, and have spent years seeing how challenges play out in real businesses. They bring more than technical knowledge. They bring judgment, local understanding, practical experience, and the ability to listen before deciding what comes next. Together, they help us give clients support that feels relevant to their situation, not pulled from a standard playbook.' }}</p>
       <div class="vs-experts__grid">
         <article class="vs-expert">
           <img src="{{ img_exp_1 }}" alt="Beat Grüninger">
@@ -441,8 +469,10 @@
     </section>
 
     <section class="vs-people" data-vh-reveal="scale">
-      <h2>{{ block.settings.people_heading | default: 'The People Behind VECTRA, Across the World' }}</h2>
-      <p>{{ block.settings.people_text | default: 'A supplier issue in Eastern Africa and a reporting problem in Brussels do not need the same person. VECTRA International’s associates and experts bring local context and specialist experience across markets and industries so we build the right team around the work, instead of pushing every problem through the same generalist lens.' }}</p>
+      <p class="vs-people__kicker">{{ block.settings.people_kicker | default: 'Our Global Network' }}</p>
+      <h2>{{ block.settings.people_heading | default: 'Global Expertise. Local Understanding. One VECTRA Team.' }}</h2>
+      <p>{{ block.settings.people_text | default: 'The world may be connected, but every market still has its own people, culture, expectations, regulations, and realities. That is why being global means more to us than having people in different places. VECTRA’s associates and experts bring local understanding and specialist experience from the markets they know firsthand. A supplier challenge in Eastern Africa may call for a different perspective from a question in Brussels. Wherever our clients are, they have the strength of a global network with people who understand the local reality, connected by one VECTRA team and one commitment to their success.' }}</p>
+      <a class="vs-cta-btn" href="{{ block.settings.people_button_link | default: associates_href }}">{{ block.settings.people_button_label | default: 'Meet Our People' }}<img src="{{ img_arrow_btn }}" alt=""></a>
       <div class="vs-people__map">
         {% if block.settings.map_video != blank %}
           {{ block.settings.map_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '1600x' }}
@@ -486,31 +516,35 @@
     <div class="vh-faq__right">
       <div class="vh-faq__glow" aria-hidden="true"></div>
       <div class="vh-accordion">
-        <p class="vh-kicker">{{ block.settings.kicker | default: 'Our FAQ' }}</p>
-        <h2 class="vh-h2">{{ block.settings.heading | default: 'Frequently Asked Questions' }}</h2>
+        <p class="vh-kicker">{{ block.settings.kicker | default: 'FAQ' }}</p>
+        <h2 class="vh-h2">{{ block.settings.heading | default: 'Questions About VECTRA International' }}</h2>
         <p class="vh-lead">{{ block.settings.lead | default: 'Answers about who we are, how we work, and where we operate.' }}</p>
         {% if nested_items != blank %}
           {{ nested_items }}
         {% else %}
         <div class="vh-acc is-open" data-vh-faq-item>
           <button type="button" data-vh-faq-btn>Who is VECTRA International?</button>
-          <div class="vh-acc__body">VECTRA International is a business resilience and operational capability-building partner that helps organizations manage ESG requirements, supplier risk, and operational complexity through expert teams and practical, technology-enabled delivery.</div>
+          <div class="vh-acc__body">VECTRA International is a business resilience and operational capability-building partner. We help organizations manage responsible business, supplier, and operational challenges by combining experienced people, practical implementation support, and technology where it adds value.</div>
         </div>
         <div class="vh-acc" data-vh-faq-item>
           <button type="button" data-vh-faq-btn>When was VECTRA International founded?</button>
-          <div class="vh-acc__body">VECTRA International was founded in 2005 and has since worked with organizations across industries to strengthen governance, supplier accountability, and operational resilience.</div>
+          <div class="vh-acc__body">VECTRA International was founded in 2005. Since then, our work has grown from responsible business and supply-chain challenges into a broader role supporting business resilience, operational capability, governance, and performance.</div>
         </div>
         <div class="vh-acc" data-vh-faq-item>
           <button type="button" data-vh-faq-btn>What does VECTRA International do?</button>
-          <div class="vh-acc__body">VECTRA International turns responsible business requirements — supplier issues, audit findings, weak controls, and changing regulations — into clear priorities, accountable action, and measurable performance improvement.</div>
+          <div class="vh-acc__body">We help organizations turn complex requirements and operational challenges into clear priorities and practical action. Depending on the issue, that may involve supplier risk, governance, evidence, technology, capability building, responsible business, or operational improvement.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn>How is VECTRA different from a traditional consulting company?</button>
+          <div class="vh-acc__body">VECTRA consulting support is built around partnership, implementation, and follow-through. Organizations may come to us while looking for an operational resilience consulting company, but our role is broader. We bring together specialist expertise, capability building, practical implementation, and technology where it adds value, then stay involved as decisions move into practice and progress is measured.</div>
         </div>
         <div class="vh-acc" data-vh-faq-item>
           <button type="button" data-vh-faq-btn>Where does VECTRA International operate?</button>
-          <div class="vh-acc__body">VECTRA International operates globally, with associates and specialist experts delivering local market context across regions including Africa, Europe, Asia, and beyond.</div>
+          <div class="vh-acc__body">VECTRA International works globally, supported by associates and specialist experts who bring local context and experience across regions, markets, and industries.</div>
         </div>
         <div class="vh-acc" data-vh-faq-item>
           <button type="button" data-vh-faq-btn>Who leads VECTRA International?</button>
-          <div class="vh-acc__body">VECTRA International is led by CEO Patrick Neyts, alongside a global leadership team spanning operations, sales and marketing, and applied AI.</div>
+          <div class="vh-acc__body">VECTRA International is led by CEO Patrick Neyts alongside a global leadership team spanning operations, sales and marketing, and applied AI.</div>
         </div>
         {% endif %}
       </div>
@@ -523,13 +557,13 @@
 {% unless block.settings.hide_section %}
 {% liquid
   assign join_kicker = block.settings.kicker | default: 'Be part of a global team'
-  assign join_heading = block.settings.heading | default: 'Bring What Only You Can Contribute'
-  assign join_text = block.settings.text | default: 'We value people who take ownership, stay curious, challenge ideas respectfully, and care whether the work actually changes something. You will work with colleagues and specialists across markets, disciplines, and time zones.'
+  assign join_heading = block.settings.heading | default: 'Join a Team That Values What You Bring'
+  assign join_text = block.settings.text | default: 'We look for people who care about doing meaningful work well, who bring their own perspective, and who are willing to listen to someone else’s. You will work with colleagues and specialists across countries, cultures, disciplines, and time zones. We value people who take ownership, stay curious, speak up respectfully, and care whether what we do makes a positive difference. Bring your judgment, your experience, and the questions you think we should be asking.'
   assign join_btn = block.settings.button_label | default: 'View Open Positions'
   if block.settings.button_link != blank
     assign join_cta = block.settings.button_link
   else
-    assign join_cta = careers_url
+    assign join_cta = jobs_url
   endif
 %}
 <section class="vs-join{% if block.settings.background_color != blank %} has-custom-bg{% endif %}" id="careers" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>

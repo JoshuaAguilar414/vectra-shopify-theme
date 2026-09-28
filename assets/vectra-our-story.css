@@ -78,14 +78,26 @@
 }
 
 .vectra-story .vs-hero__copy h1 {
-  width: min(1221px, 92%);
-  margin: 0 0 32px;
+  width: min(960px, 92%);
+  margin: 0 0 16px;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
+  font-weight: 700;
+  font-size: clamp(22px, 2.2vw, 34px);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.vectra-story .vs-hero__display {
+  width: min(1100px, 94%);
+  margin: 0 0 28px;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
   font-weight: 800;
-  font-size: clamp(42px, 3.91vw, 75px);
-  line-height: 1.07;
+  font-size: clamp(36px, 4.2vw, 68px);
+  line-height: 1.08;
   letter-spacing: -0.03em;
   text-align: center;
 }
@@ -97,9 +109,9 @@
   font-family: 'Poppins', sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 20px;
-  line-height: 25px;
-  letter-spacing: -0.05em;
+  font-size: 18px;
+  line-height: 1.45;
+  letter-spacing: -0.03em;
   text-align: center;
 }
 
@@ -108,7 +120,24 @@
 }
 
 .vectra-story .vs-hero__body p + p {
-  margin-top: 20px;
+  margin-top: 16px;
+}
+
+.vectra-story .vs-hero__aeo {
+  margin-top: 24px !important;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 16px;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+.vectra-story .vs-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 28px;
 }
 
 /* Figma Rectangle 65 — Meet the Founder: top 956, height 1264.13 */
@@ -340,33 +369,57 @@
   width: calc(685px * var(--vs-s));
   max-width: 100%;
   padding: 0;
-  text-align: center;
+  text-align: left;
 }
 
 .vectra-story .vs-who__kicker {
   width: 100%;
-  margin: 0 0 calc(55px * var(--vs-s));
+  margin: 0 0 calc(24px * var(--vs-s));
   color: #54bd01;
   font-family: 'Poppins', sans-serif;
-  font-size: calc(36px * var(--vs-s));
+  font-size: calc(18px * var(--vs-s));
   font-weight: 700;
-  letter-spacing: -0.05em;
-  line-height: 101%;
-  text-align: center;
-  text-transform: none;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  text-align: left;
+  text-transform: uppercase;
 }
 
 .vectra-story .vs-who__copy h2 {
   width: 100%;
-  margin: 0;
+  margin: 0 0 12px;
   color: #092543;
   font-family: 'Poppins', sans-serif;
-  font-size: calc(64px * var(--vs-s));
+  font-size: calc(42px * var(--vs-s));
   font-weight: 700;
-  letter-spacing: -0.05em;
-  line-height: 101%;
-  text-align: center;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  text-align: left;
   text-transform: none;
+}
+
+.vectra-story .vs-who__copy h3 {
+  margin: 0 0 20px;
+  color: #54bd01;
+  font-family: 'Poppins', sans-serif;
+  font-size: calc(22px * var(--vs-s));
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.3;
+}
+
+.vectra-story .vs-who__body {
+  color: #092543;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.vectra-story .vs-who__body p {
+  margin: 0 0 14px;
+}
+
+.vectra-story .vs-who__body p:last-child {
+  margin-bottom: 0;
 }
 
 .vectra-story .vs-who__media {
@@ -431,7 +484,7 @@
   justify-content: center;
   width: min(calc(1648px * var(--vs-s)), calc(100% - 64px));
   margin: 0 auto;
-  padding: calc(20px * var(--vs-s)) 0 calc(90px * var(--vs-s));
+  padding: calc(20px * var(--vs-s)) 0 calc(40px * var(--vs-s));
 }
 
 .vectra-story .vs-card {
@@ -445,6 +498,29 @@
   border-radius: 15px;
   box-shadow: 0 0 25.7px rgba(0, 0, 0, 0.13);
   transition: background-color 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
+}
+
+.vectra-story .vs-solutions {
+  position: relative;
+  z-index: 1;
+  width: min(960px, calc(100% - 64px));
+  margin: 0 auto calc(80px * var(--vs-s));
+  text-align: center;
+}
+
+.vectra-story .vs-solutions h2 {
+  margin: 0 0 16px;
+  color: #092543;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.vectra-story .vs-solutions p {
+  margin: 0;
+  color: rgba(9, 37, 67, 0.78);
+  font-size: 17px;
+  line-height: 1.55;
 }
 
 .vectra-story .vs-card__watermark {
@@ -551,28 +627,79 @@
   text-align: center;
 }
 
+.vectra-story .vs-values__kicker {
+  margin: 0 0 12px;
+  color: #54bd01;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .vectra-story .vs-values h2 {
-  margin: 0;
+  margin: 0 auto;
+  max-width: 18em;
   color: #092543;
   font-family: 'Poppins', sans-serif;
-  font-size: calc(64px * var(--vs-s));
+  font-size: clamp(28px, 3.2vw, 48px);
   font-weight: 700;
-  letter-spacing: -0.05em;
-  line-height: 101%;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
   text-align: center;
   text-transform: none;
 }
 
 .vectra-story .vs-values > p {
-  width: min(calc(690px * var(--vs-s)), calc(100% - 48px));
-  margin: calc(24px * var(--vs-s)) auto calc(56px * var(--vs-s));
-  color: rgba(0, 0, 0, 0.6);
+  width: min(720px, calc(100% - 48px));
+  margin: 20px auto 16px;
+  color: rgba(0, 0, 0, 0.65);
   font-family: 'Poppins', sans-serif;
-  font-size: calc(26px * var(--vs-s));
+  font-size: clamp(15px, 1.3vw, 18px);
   font-weight: 500;
-  letter-spacing: -0.05em;
-  line-height: calc(30px * var(--vs-s));
+  letter-spacing: -0.02em;
+  line-height: 1.55;
   text-align: center;
+}
+
+.vectra-story .vs-values__sub {
+  margin-bottom: 48px !important;
+  font-weight: 600 !important;
+  color: #092543 !important;
+}
+
+.vectra-story .vs-leaders__kicker,
+.vectra-story .vs-experts__kicker,
+.vectra-story .vs-people__kicker {
+  margin: 0 0 12px;
+  color: #54bd01;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.vectra-story .vs-leaders__intro {
+  width: min(820px, calc(100% - 64px));
+  margin: 0 auto 36px;
+  text-align: center;
+  color: rgba(9, 37, 67, 0.78);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.vectra-story .vs-ceo__lede {
+  font-size: 1.15em;
+  font-weight: 700;
+  color: #092543;
+}
+
+.vectra-story .vs-ceo__signoff {
+  margin-top: 24px !important;
+}
+
+.vectra-story .vs-people .vs-cta-btn {
+  margin: 28px auto 0;
 }
 
 .vectra-story .vs-values__row {

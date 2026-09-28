@@ -11,11 +11,21 @@
         },
         "hero": {
           "type": "vectra-story-hero",
-          "settings": {}
+          "settings": {
+            "kicker": "Inside VECTRA",
+            "heading": "VECTRA International DNA, Values & Global Leadership",
+            "display_text": "We Believe Better Business Starts With People.",
+            "button_label": "Explore How We Help",
+            "button_2_label": "Talk to an Expert"
+          }
         },
         "ceo": {
           "type": "vectra-story-ceo",
-          "settings": {}
+          "settings": {
+            "name": "Patrick Neyts",
+            "kicker": "Meet the Founder",
+            "heading": "A Message From Our CEO"
+          }
         },
         "main": {
           "type": "vectra-story-main",
@@ -71,14 +81,32 @@
             "lead_1",
             "lead_2",
             "lead_3",
-            "lead_4",
-            "lead_5"
+            "lead_4"
           ],
-          "settings": {}
+          "settings": {
+            "kicker": "Our Story",
+            "heading": "The VECTRA International Story",
+            "subheading": "Enabling Positive Business Impact Since 2005",
+            "values_kicker": "VECTRA Values",
+            "values_heading": "The Values Behind How We Show Up",
+            "leaders_kicker": "Our Leadership",
+            "leaders_heading": "Meet the People Who Guide VECTRA",
+            "experts_kicker": "Our Experts",
+            "experts_heading": "Our Team of Experts",
+            "people_kicker": "Our Global Network",
+            "people_heading": "Global Expertise. Local Understanding. One VECTRA Team.",
+            "people_button_label": "Meet Our People",
+            "solutions_heading": "Our Solutions"
+          }
         },
         "join": {
           "type": "vectra-story-join",
-          "settings": {}
+          "settings": {
+            "kicker": "Be part of a global team",
+            "heading": "Join a Team That Values What You Bring",
+            "text": "We look for people who care about doing meaningful work well, who bring their own perspective, and who are willing to listen to someone else’s. You will work with colleagues and specialists across countries, cultures, disciplines, and time zones. We value people who take ownership, stay curious, speak up respectfully, and care whether what we do makes a positive difference. Bring your judgment, your experience, and the questions you think we should be asking.",
+            "button_label": "View Open Positions"
+          }
         },
         "footer": {
           "type": "vectra-footer",
@@ -92,35 +120,42 @@
               "settings": {
                 "open": true,
                 "question": "Who is VECTRA International?",
-                "answer": "VECTRA International is a business resilience and operational capability-building partner that helps organizations manage ESG requirements, supplier risk, and operational complexity through expert teams and practical, technology-enabled delivery."
+                "answer": "VECTRA International is a business resilience and operational capability-building partner. We help organizations manage responsible business, supplier, and operational challenges by combining experienced people, practical implementation support, and technology where it adds value."
               }
             },
             "faq_2": {
               "type": "_vectra-faq-item",
               "settings": {
                 "question": "When was VECTRA International founded?",
-                "answer": "VECTRA International was founded in 2005 and has since worked with organizations across industries to strengthen governance, supplier accountability, and operational resilience."
+                "answer": "VECTRA International was founded in 2005. Since then, our work has grown from responsible business and supply-chain challenges into a broader role supporting business resilience, operational capability, governance, and performance."
               }
             },
             "faq_3": {
               "type": "_vectra-faq-item",
               "settings": {
                 "question": "What does VECTRA International do?",
-                "answer": "VECTRA International turns responsible business requirements — supplier issues, audit findings, weak controls, and changing regulations — into clear priorities, accountable action, and measurable performance improvement."
+                "answer": "We help organizations turn complex requirements and operational challenges into clear priorities and practical action. Depending on the issue, that may involve supplier risk, governance, evidence, technology, capability building, responsible business, or operational improvement."
               }
             },
             "faq_4": {
               "type": "_vectra-faq-item",
               "settings": {
-                "question": "Where does VECTRA International operate?",
-                "answer": "VECTRA International operates globally, with associates and specialist experts delivering local market context across regions including Africa, Europe, Asia, and beyond."
+                "question": "How is VECTRA different from a traditional consulting company?",
+                "answer": "VECTRA consulting support is built around partnership, implementation, and follow-through. Organizations may come to us while looking for an operational resilience consulting company, but our role is broader. We bring together specialist expertise, capability building, practical implementation, and technology where it adds value, then stay involved as decisions move into practice and progress is measured."
               }
             },
             "faq_5": {
               "type": "_vectra-faq-item",
               "settings": {
+                "question": "Where does VECTRA International operate?",
+                "answer": "VECTRA International works globally, supported by associates and specialist experts who bring local context and experience across regions, markets, and industries."
+              }
+            },
+            "faq_6": {
+              "type": "_vectra-faq-item",
+              "settings": {
                 "question": "Who leads VECTRA International?",
-                "answer": "VECTRA International is led by CEO Patrick Neyts, alongside a global leadership team spanning operations, sales and marketing, and applied AI."
+                "answer": "VECTRA International is led by CEO Patrick Neyts alongside a global leadership team spanning operations, sales and marketing, and applied AI."
               }
             }
           },
@@ -129,9 +164,14 @@
             "faq_2",
             "faq_3",
             "faq_4",
-            "faq_5"
+            "faq_5",
+            "faq_6"
           ],
-          "settings": {}
+          "settings": {
+            "kicker": "FAQ",
+            "heading": "Questions About VECTRA International",
+            "lead": "Answers about who we are, how we work, and where we operate."
+          }
         }
       },
       "block_order": [
