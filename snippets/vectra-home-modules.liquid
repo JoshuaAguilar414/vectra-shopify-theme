@@ -294,7 +294,7 @@
   endif
   assign nested_shots = nested_shots | strip
 %}
-<section class="vh-solutions" id="solutions" data-vh-solutions style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+<section class="vh-solutions{% if block.settings.background_color != blank %} has-custom-bg{% endif %}" id="solutions" data-vh-solutions style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vh-solutions__canvas">
       <div class="vh-solutions__head" data-vh-reveal>
         <p class="vh-kicker">{{ sol_kicker }}</p>

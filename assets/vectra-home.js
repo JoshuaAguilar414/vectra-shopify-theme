@@ -213,18 +213,23 @@
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const setCopy = (item) => {
+      if (!item) return;
       const fade = (el, value) => {
-        if (!el || !value) return;
+        if (!el) return;
+        const next = value == null ? '' : String(value);
+        if (!next) return;
         el.style.transition = 'none';
         el.style.opacity = '0';
         el.style.transform = 'translateY(10px)';
-        el.textContent = value;
+        el.textContent = next;
         requestAnimationFrame(() => {
-          el.style.transition = reduceMotion
-            ? 'none'
-            : 'opacity 0.35s ease, transform 0.35s ease';
-          el.style.opacity = '1';
-          el.style.transform = 'none';
+          requestAnimationFrame(() => {
+            el.style.transition = reduceMotion
+              ? 'none'
+              : 'opacity 0.35s ease, transform 0.35s ease';
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+          });
         });
       };
       fade(title, item.dataset.title);
@@ -243,7 +248,10 @@
 
     const activate = (item) => {
       const shots = qsa('[data-vh-sol-item]', gallery || solutions);
-      if (!item || shots[0] === item) return;
+      if (!item || shots[0] === item) {
+        setCopy(item);
+        return;
+      }
 
       const firstRects = shots.map((el) => el.getBoundingClientRect());
       const wrapOf = (el) => {
@@ -302,7 +310,14 @@
     };
 
     const shotsInit = qsa('[data-vh-sol-item]', solutions);
-    shotsInit.forEach((item, i) => item.setAttribute('aria-pressed', String(i === 0)));
+    const activeInit =
+      shotsInit.find((item) => item.classList.contains('is-active')) || shotsInit[0];
+    shotsInit.forEach((item) => {
+      const on = item === activeInit;
+      item.classList.toggle('is-active', on);
+      item.setAttribute('aria-pressed', String(on));
+    });
+    if (activeInit) setCopy(activeInit);
     solutions.dataset.vhSolReady = String(shotsInit.length);
     solutions.addEventListener('click', (event) => {
       const item = event.target.closest('[data-vh-sol-item]');

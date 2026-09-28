@@ -128,7 +128,6 @@
 .vectra-home .vh-why__copy h2,
 .vectra-home .vh-esg__copy h2,
 .vectra-home .vh-cases h2,
-.vectra-home .vh-solutions__copy h3,
 .vectra-home .vh-portal h2,
 .vectra-home .vh-blog .vh-h2,
 .vectra-home .vh-careers .vh-h2,
@@ -159,7 +158,6 @@
 .vectra-home h3,
 .vectra-home .vh-case h3,
 .vectra-home .vh-course h3,
-.vectra-home .vh-why__item h3,
 .vectra-home .vh-footer h3,
 .vectra-home .vh-recent h3,
 .vectra-home .vh-tags h3,
@@ -173,6 +171,13 @@
   font-size: var(--vh-fs-section) !important;
   line-height: 1.3 !important;
   letter-spacing: -0.03em !important;
+}
+
+.vectra-home .vh-why__item h3 {
+  font-size: 28px !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.05em !important;
+  min-height: 2.6em;
 }
 
 .vectra-home .vh-kicker,
@@ -195,8 +200,7 @@
 .vectra-sol .vsol-eco__head > p:not(.vsol-kicker),
 .vectra-sol .vsol-svc__head p,
 .vectra-sol .vh-portal p,
-.vectra-home .vh-portal p,
-.vectra-home .vh-solutions__copy p {
+.vectra-home .vh-portal p {
   font-size: var(--vh-fs-lead) !important;
   line-height: 1.45 !important;
   letter-spacing: -0.02em !important;
@@ -244,11 +248,30 @@
 }
 
 .vectra-home .vh-contact-card__title,
-.vectra-home .vh-solutions__copy h3,
 .vectra-sol .vh-form h3 {
   font-size: var(--vh-fs-section) !important;
   line-height: 1.3 !important;
   letter-spacing: -0.03em !important;
+}
+
+.vectra-home .vh-solutions__head h2 {
+  font-size: clamp(32px, 3.2vw, 50px) !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.05em !important;
+  color: #ffffff !important;
+}
+
+.vectra-home .vh-solutions__copy h3 {
+  font-size: clamp(28px, 2.6vw, 45px) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.05em !important;
+  color: #ffffff !important;
+}
+
+.vectra-home .vh-solutions__copy p {
+  font-size: clamp(18px, 1.6vw, 28px) !important;
+  line-height: 1.35 !important;
+  color: #ffffff !important;
 }
 
 .vectra-home .vh-faq .vh-accordion .vh-h2 {

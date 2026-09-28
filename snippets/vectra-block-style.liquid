@@ -1,30 +1,32 @@
 {%- doc -%}
-  Outputs inline CSS variables for VECTRA appearance settings —
-  mirrors Horizon spacing / typography / border / overlay controls.
-
-  @param {object} settings - block.settings
+  Outputs inline appearance overrides for VECTRA blocks.
+  Emits CSS variables for additive design hooks (padding, overlay, object-position)
+  and direct property declarations for one-off merchant overrides so missing
+  custom props never invalidate cascaded design CSS (IACVT).
 {%- enddoc -%}
 {%- liquid
-  if settings['padding-block-start'] != blank
+  if settings['padding-block-start'] != blank and settings['padding-block-start'] > 0
     echo '--vh-pad-top: ' | append: settings['padding-block-start'] | append: 'px;'
   endif
-  if settings['padding-block-end'] != blank
+  if settings['padding-block-end'] != blank and settings['padding-block-end'] > 0
     echo '--vh-pad-bottom: ' | append: settings['padding-block-end'] | append: 'px;'
   endif
-  if settings['padding-inline-start'] != blank
-    echo '--vh-pad-left: ' | append: settings['padding-inline-start'] | append: 'px;'
+  if settings['padding-inline-start'] != blank and settings['padding-inline-start'] > 0
+    echo 'padding-inline-start: ' | append: settings['padding-inline-start'] | append: 'px;'
   endif
-  if settings['padding-inline-end'] != blank
-    echo '--vh-pad-right: ' | append: settings['padding-inline-end'] | append: 'px;'
+  if settings['padding-inline-end'] != blank and settings['padding-inline-end'] > 0
+    echo 'padding-inline-end: ' | append: settings['padding-inline-end'] | append: 'px;'
   endif
   if settings.background_color != blank
+    echo 'background-color: ' | append: settings.background_color | append: ';'
     echo '--vh-bg: ' | append: settings.background_color | append: ';'
   endif
   if settings.text_color != blank
+    echo 'color: ' | append: settings.text_color | append: ';'
     echo '--vh-fg: ' | append: settings.text_color | append: ';'
   endif
-  if settings.overlay_opacity != blank
-    echo '--vh-overlay: ' | append: settings.overlay_opacity | append: '%;'
+  if settings.overlay_opacity != blank and settings.overlay_opacity > 0
+    echo '--vh-overlay: ' | append: settings.overlay_opacity | append: ';'
   endif
   if settings.overlay_color != blank
     echo '--vh-overlay-color: ' | append: settings.overlay_color | append: ';'
@@ -38,8 +40,8 @@
   if settings.image_position != blank
     echo '--vh-object-position: ' | append: settings.image_position | append: ';'
   endif
-  if settings.border_radius != blank
-    echo '--vh-radius: ' | append: settings.border_radius | append: 'px;'
+  if settings.border_radius != blank and settings.border_radius > 0
+    echo 'border-radius: ' | append: settings.border_radius | append: 'px;'
   endif
   if settings.content_max_width != blank and settings.content_max_width > 0
     echo '--vh-content-max: ' | append: settings.content_max_width | append: 'px;'
@@ -76,19 +78,16 @@
   if settings.text_case == 'uppercase'
     echo '--vh-text-case: uppercase;'
   endif
-  if settings.gap != blank
+  if settings.gap != blank and settings.gap > 0
     echo '--vh-gap: ' | append: settings.gap | append: 'px;'
   endif
   if settings.border == 'solid'
-    echo '--vh-border-style: solid;'
+    echo 'border-style: solid;'
     if settings.border_width != blank
-      echo '--vh-border-width: ' | append: settings.border_width | append: 'px;'
+      echo 'border-width: ' | append: settings.border_width | append: 'px;'
     endif
     if settings.border_color != blank
-      echo '--vh-border-color: ' | append: settings.border_color | append: ';'
-    endif
-    if settings.border_opacity != blank
-      echo '--vh-border-opacity: ' | append: settings.border_opacity | append: '%;'
+      echo 'border-color: ' | append: settings.border_color | append: ';'
     endif
   endif
   if settings.vertical_alignment != blank

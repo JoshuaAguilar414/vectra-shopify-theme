@@ -765,12 +765,15 @@
   align-items: center;
   flex: none;
   height: 52px;
+  min-width: max-content;
 }
 
 .vh-logos__item {
   display: flex;
   align-items: center;
+  flex: none;
   height: 52px;
+  min-width: max-content;
 }
 
 .vh-why__list > *:not(.vh-why__item),
@@ -1000,7 +1003,7 @@
   background: #ffffff;
   height: auto;
   min-height: 88px;
-  padding: 16px 24px;
+  padding: calc(16px + var(--vh-pad-top, 0px)) 24px calc(16px + var(--vh-pad-bottom, 0px));
   overflow: hidden;
 }
 
@@ -1011,6 +1014,22 @@
   height: 56px;
   width: max-content;
   animation: vh-marquee 22s linear infinite;
+}
+
+.vh-logos__track > *:not(img) {
+  display: flex;
+  align-items: center;
+  flex: none;
+  height: 52px;
+  min-width: max-content;
+}
+
+.vh-logos__item {
+  display: flex;
+  align-items: center;
+  flex: none;
+  height: 52px;
+  min-width: max-content;
 }
 
 .vh-logos img {
@@ -1029,7 +1048,7 @@
 }
 
 .vh-impact {
-  padding: 81px 0 39px;
+  padding: calc(81px + var(--vh-pad-top, 0px)) 0 calc(39px + var(--vh-pad-bottom, 0px));
   text-align: center;
   height: auto;
   min-height: 0;
@@ -1231,12 +1250,13 @@
 }
 
 .vh-why__item h3 {
-  margin: 0 0 27px;
+  margin: 0 0 16px;
+  min-height: 2.6em;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
   font-size: 28px;
   font-weight: 700;
-  line-height: 101%;
+  line-height: 1.15;
   letter-spacing: -0.05em;
   text-transform: none;
   color: #54bd01;
@@ -1278,7 +1298,7 @@
   overflow: hidden;
   height: auto;
   min-height: 0;
-  padding: 0 0 24px;
+  padding: var(--vh-pad-top, 0px) 0 calc(24px + var(--vh-pad-bottom, 0px));
 }
 
 .vh-esg__stage {
@@ -1415,11 +1435,17 @@
 /* Solutions — Figma Case Studies / VECTRA Solutions 1920×1125 */
 .vh-solutions {
   background: #092543;
+  background-color: #092543;
   color: #ffffff;
   overflow: hidden;
   max-width: 100%;
   height: auto;
   min-height: 0;
+}
+
+.vh-solutions.has-custom-bg {
+  background: var(--vh-bg) !important;
+  background-color: var(--vh-bg) !important;
 }
 
 .vh-solutions__canvas {
@@ -1459,6 +1485,11 @@
   line-height: 1.2;
   letter-spacing: -0.05em;
   text-align: center;
+  color: #ffffff;
+}
+
+.vh-solutions__copy h3,
+.vh-solutions__copy p {
   color: #ffffff;
 }
 
@@ -1646,7 +1677,7 @@
 /* Marketplace — Figma Rectangle 45516 1806×2242 #F1F1F1 r14 */
 .vh-market {
   background: #ffffff;
-  padding: 72px 24px 64px;
+  padding: calc(72px + var(--vh-pad-top, 0px)) 24px calc(64px + var(--vh-pad-bottom, 0px));
   height: auto;
   min-height: 0;
 }
@@ -2030,8 +2061,27 @@
   color: #ffffff;
   height: auto;
   min-height: 0;
-  padding: 83px 0 72px;
+  padding: calc(83px + var(--vh-pad-top, 0px)) 0 calc(72px + var(--vh-pad-bottom, 0px));
   text-align: center;
+}
+
+.vh-cases__cta {
+  width: min(520px, 100%);
+  height: auto;
+  min-height: 52px;
+  margin: 48px auto 0;
+  padding: 16px 28px;
+  border-radius: 40px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.25;
+  text-transform: none;
+  box-shadow: 0 0 28px rgba(84, 189, 1, 0.5);
+  color: #ffffff;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 2;
 }
 
 .vh-cases__grid {
@@ -2318,23 +2368,6 @@
   background: linear-gradient(93.79deg, #79eb93 2.94%, #d6ffad 95.79%);
 }
 
-.vh-cases__cta {
-  width: min(520px, 100%);
-  height: auto;
-  min-height: 52px;
-  margin: 48px auto 0;
-  padding: 16px 28px;
-  border-radius: 40px;
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1.25;
-  text-transform: none;
-  box-shadow: 0 0 28px rgba(84, 189, 1, 0.5);
-  color: #ffffff;
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-}
-
 .vectra-home a.vh-cases__cta:hover,
 .vectra-home a.vh-cases__cta:focus-visible {
   color: #54bd01;
@@ -2344,7 +2377,7 @@
 
 /* Blog — Figma Latest Articles 1413×878 */
 .vh-blog {
-  padding: 80px 0 72px;
+  padding: calc(80px + var(--vh-pad-top, 0px)) 0 calc(72px + var(--vh-pad-bottom, 0px));
   text-align: center;
   background: #ffffff;
   height: auto;
@@ -2490,7 +2523,7 @@
   position: relative;
   height: auto;
   min-height: 0;
-  padding: 120px 0 90px;
+  padding: calc(120px + var(--vh-pad-top, 0px)) 0 calc(90px + var(--vh-pad-bottom, 0px));
   overflow: visible;
   background: rgba(255, 255, 255, 0.2);
 }
@@ -5109,43 +5142,6 @@ body.vh-contact-open .page-wrapper {
   text-align: right;
 }
 
-.vs-hero,
-.vres-hero,
-.vsol-hero {
-  padding-block-start: var(--vh-pad-top, 0px);
-  padding-block-end: var(--vh-pad-bottom, 0px);
-}
-
-.vh-logos {
-  padding-block-start: var(--vh-pad-top, 0px);
-  padding-block-end: var(--vh-pad-bottom, 0px);
-}
-
-.vh-cases {
-  padding-block-start: var(--vh-pad-top, 0px);
-  padding-block-end: var(--vh-pad-bottom, 0px);
-}
-
-.vh-hero {
-  padding-block-start: var(--vh-pad-top, 0px);
-  padding-block-end: var(--vh-pad-bottom, 0px);
-}
-
-.vh-esg {
-  padding-block-start: var(--vh-pad-top, 0px);
-  padding-block-end: var(--vh-pad-bottom, 0px);
-}
-
-.vh-impact {
-  padding-block-start: var(--vh-pad-top, 0px);
-  padding-block-end: var(--vh-pad-bottom, 0px);
-}
-
-.vh-solutions {
-  padding-block-start: var(--vh-pad-top, 0px);
-  padding-block-end: var(--vh-pad-bottom, 0px);
-}
-
 .vres-panel {
   padding: calc(80px + var(--vh-pad-top, 0px)) 0 calc(80px + var(--vh-pad-bottom, 0px));
 }
@@ -5158,69 +5154,21 @@ body.vh-contact-open .page-wrapper {
   border-radius: var(--vh-radius-lg);
 }
 
-/* Native-parity appearance (colors, overlay, radius, 4-side padding) */
-.vh-hero__slide,
-.vh-page-hero,
-.vh-trust,
-.vh-why,
-.vh-logos,
-.vh-cases,
-.vh-careers,
-.vh-esg,
-.vh-impact,
-.vh-solutions,
-.vh-market,
-.vh-blog,
-.vh-faq,
-.vh-portal,
-.vsol-hero,
-.vs-hero,
-.vres-hero,
-.vsol-intro,
-.vsol-eco,
-.vsol-out,
-.vsol-svc,
-.vsol-process,
-.vh-why__item,
-.vh-case,
-.vsol-svc-card,
-.vsol-glass {
-  padding-inline-start: var(--vh-pad-left, 0px);
-  padding-inline-end: var(--vh-pad-right, 0px);
-}
+/* Appearance helpers — color/radius/border applied inline via
+   vectra-block-style (avoids IACVT wiping design CSS). */
 
 .vh-page-hero.has-custom-bg {
   background: var(--vh-bg) !important;
 }
 
-.vh-hero__slide,
-.vh-page-hero,
-.vh-trust,
-.vh-why,
-.vh-cases,
-.vh-careers,
-.vh-esg,
-.vh-impact,
-.vh-solutions,
-.vh-market,
-.vh-blog,
-.vh-faq,
-.vh-portal,
-.vsol-hero,
-.vs-hero,
-.vres-hero {
-  color: var(--vh-fg, inherit);
+.vh-btn--custom {
+  background: var(--vh-btn-bg, var(--vh-green));
+  color: var(--vh-btn-fg, #fff);
+  border: 0;
 }
 
-.vh-hero__copy,
-.vh-page-hero__inner {
-  color: var(--vh-fg, inherit);
-  max-width: var(--vh-content-max, none);
-}
-
-.vh-hero__overlay,
-.vh-page-hero__overlay {
-  background: color-mix(in srgb, var(--vh-overlay-color, #000) calc(var(--vh-overlay, 20) * 1%), transparent);
+.vh-btn--custom:hover {
+  filter: brightness(0.95);
 }
 
 .vh-hero__overlay--gradient,
@@ -5242,138 +5190,72 @@ body.vh-contact-open .page-wrapper {
   --vh-grad-dir: to bottom;
 }
 
-.vh-page-hero,
-.vh-why__item,
-.vh-case,
-.vsol-svc-card,
-.vsol-glass {
-  border-radius: var(--vh-radius, inherit);
+/* Matches base overlay; allows --vh-overlay-color when set. */
+.vh-hero__overlay:not(.vh-hero__overlay--gradient),
+.vh-page-hero__overlay:not(.vh-page-hero__overlay--gradient) {
+  background: color-mix(
+    in srgb,
+    var(--vh-overlay-color, #000000) calc(var(--vh-overlay, 0) * 1%),
+    transparent
+  );
 }
 
-.vh-why__item,
-.vh-case,
-.vsol-svc-card,
-.vsol-glass {
-  background-color: var(--vh-bg, unset);
-  color: var(--vh-fg, inherit);
+/* Content width only when merchant sets --vh-content-max on the block. */
+[style*='--vh-content-max'] .vh-hero__copy,
+[style*='--vh-content-max'] .vh-page-hero__inner,
+[style*='--vh-content-max'].vh-page-hero .vh-page-hero__inner {
+  max-width: var(--vh-content-max);
 }
 
-.vh-btn--custom {
-  background: var(--vh-btn-bg, var(--vh-green));
-  color: var(--vh-btn-fg, #fff);
-  border: 0;
+/* Type / gap only when section inline style defines the custom prop. */
+[style*='--vh-heading-size'] h1,
+[style*='--vh-heading-size'] h2,
+[style*='--vh-heading-size'] .vh-h2 {
+  font-size: var(--vh-heading-size);
 }
 
-.vh-btn--custom:hover {
-  filter: brightness(0.95);
+[style*='--vh-font-weight'] h1,
+[style*='--vh-font-weight'] h2,
+[style*='--vh-font-weight'] .vh-h2 {
+  font-weight: var(--vh-font-weight);
 }
 
-.vh-hero__slide {
-  padding-block-start: var(--vh-pad-top, 0px);
-  padding-block-end: var(--vh-pad-bottom, 0px);
+[style*='--vh-line-height'] h1,
+[style*='--vh-line-height'] h2,
+[style*='--vh-line-height'] .vh-h2,
+[style*='--vh-line-height'] p,
+[style*='--vh-line-height'] .vh-lead,
+[style*='--vh-line-height'] .vh-page-hero__text {
+  line-height: var(--vh-line-height);
 }
 
-.vh-trust,
-.vh-why,
-.vh-logos,
-.vh-cases,
-.vh-careers,
-.vh-esg,
-.vh-impact,
-.vh-solutions,
-.vh-market,
-.vh-blog,
-.vh-faq,
-.vh-portal,
-.vsol-intro,
-.vsol-eco,
-.vsol-out,
-.vsol-svc,
-.vsol-process,
-.vs-main,
-.vres-ebooks,
-.vres-feed,
-.vres-panel {
-  background-color: var(--vh-bg, unset);
+[style*='--vh-letter-spacing'] h1,
+[style*='--vh-letter-spacing'] h2,
+[style*='--vh-letter-spacing'] .vh-h2,
+[style*='--vh-letter-spacing'] p,
+[style*='--vh-letter-spacing'] .vh-lead {
+  letter-spacing: var(--vh-letter-spacing);
 }
 
-/* Typography / borders / gap (native-parity) */
-.vh-hero__copy h1,
-.vh-page-hero h1,
-.vh-trust__copy h2,
-.vh-why__copy h2,
-.vh-cases h2,
-.vh-careers .vh-h2,
-.vh-esg__copy h2,
-.vh-solutions__head h2,
-.vh-market .vh-h2,
-.vh-blog .vh-h2,
-.vh-faq .vh-h2,
-.vh-portal__copy h2,
-.vsol-hero__inner h1,
-.vs-hero__copy h1,
-.vres-hero__copy h1,
-.vsol-intro__copy h2,
-.vsol-eco__head h2,
-.vsol-out__inner h2,
-.vsol-svc h2,
-.vsol-process h2 {
-  font-size: var(--vh-heading-size, unset);
-  font-weight: var(--vh-font-weight, unset);
-  line-height: var(--vh-line-height, unset);
-  letter-spacing: var(--vh-letter-spacing, unset);
-  text-transform: var(--vh-text-case, unset);
+[style*='--vh-text-case'] h1,
+[style*='--vh-text-case'] h2,
+[style*='--vh-text-case'] .vh-h2 {
+  text-transform: var(--vh-text-case);
 }
 
-.vh-hero__copy p,
-.vh-page-hero__text,
-.vh-why__copy > p:not(.vh-kicker),
-.vh-careers .vh-lead,
-.vh-esg__copy .vh-lead,
-.vh-market .vh-lead,
-.vh-portal__copy p,
-.vsol-hero__inner p,
-.vs-hero__body,
-.vres-hero__lead,
-.vsol-intro__copy p {
-  font-size: var(--vh-text-size, unset);
-  line-height: var(--vh-line-height, unset);
-  letter-spacing: var(--vh-letter-spacing, unset);
+[style*='--vh-text-size'] p,
+[style*='--vh-text-size'] .vh-lead,
+[style*='--vh-text-size'] .vh-page-hero__text,
+[style*='--vh-text-size'] .vs-hero__body,
+[style*='--vh-text-size'] .vres-hero__lead {
+  font-size: var(--vh-text-size);
 }
 
-.vh-hero__copy,
-.vh-page-hero__inner {
-  align-self: var(--vh-align-items, auto);
-}
-
-.vh-why__list,
-.vh-case-grid,
-.vsol-out__cards,
-.vsol-svc__grid,
-.vh-logos__track {
-  gap: var(--vh-gap, unset);
-}
-
-.vh-trust,
-.vh-why,
-.vh-cases,
-.vh-careers,
-.vh-esg,
-.vh-impact,
-.vh-solutions,
-.vh-market,
-.vh-blog,
-.vh-faq,
-.vh-portal,
-.vh-page-hero,
-.vh-why__item,
-.vh-case,
-.vsol-svc-card,
-.vsol-glass,
-.vsol-card {
-  border-style: var(--vh-border-style, none);
-  border-width: var(--vh-border-width, 0);
-  border-color: color-mix(in srgb, var(--vh-border-color, currentColor) calc(var(--vh-border-opacity, 100) * 1%), transparent);
+[style*='--vh-gap'] .vh-why__list,
+[style*='--vh-gap'] .vh-case-grid,
+[style*='--vh-gap'] .vsol-out__cards,
+[style*='--vh-gap'] .vh-logos__track {
+  gap: var(--vh-gap);
 }
 
 .vh-block-extras,
@@ -5382,10 +5264,4 @@ body.vh-contact-open .page-wrapper {
   gap: 16px;
   margin-top: 24px;
   width: 100%;
-}
-
-.vh-hero__slide {
-  display: flex;
-  flex-direction: column;
-  justify-content: var(--vh-align-items, flex-end);
 }

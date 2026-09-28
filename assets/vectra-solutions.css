@@ -37,7 +37,7 @@
   gap: clamp(24px, 4vw, 64px);
   height: auto;
   min-height: clamp(460px, 48vw, 620px);
-  padding: 150px 40px 72px;
+  padding: calc(150px + var(--vh-pad-top, 0px)) 40px calc(72px + var(--vh-pad-bottom, 0px));
   color: #fff;
   background: linear-gradient(106.42deg, #54bd01 -32.39%, #092543 72.71%);
   border-radius: 0 0 clamp(40px, 5vw, 101px) clamp(40px, 5vw, 101px);
@@ -173,7 +173,7 @@
   position: relative;
   z-index: 3;
   margin-top: 0;
-  padding: calc(179px * var(--vsol-s)) 0 calc(80px * var(--vsol-s));
+  padding: calc(179px * var(--vsol-s) + var(--vh-pad-top, 0px)) 0 calc(80px * var(--vsol-s) + var(--vh-pad-bottom, 0px));
   background: #fff;
 }
 
