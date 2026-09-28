@@ -1,53 +1,63 @@
 {%- doc -%}
-  VECTRA Contact Us page modules. Uses existing homepage/resources classes.
+  VECTRA Contact Us page modules.
 {%- enddoc -%}
 
 {% render 'vectra-assets' %}
+{{ 'vectra-contact.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'vectra-contact.css' | asset_url }}" media="all">
 {% liquid
   assign img_arrow = 'vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg' | asset_url
   assign img_mark = 'vectra-6fbd7c62e521082467b9d6192e09d91235f198a5.png' | asset_url
-  assign img_chat = 'vectra-da137306dcbc6716d83295ef75678ab141a500e1.svg' | asset_url
-  assign img_mail = 'vectra-9a4f80a5b924a881fc96b20219bb1f7c8ca734ab.svg' | asset_url
-  assign img_phone = 'vectra-7c0e54b37d57d95df328b0e4ee1f7b87844a7372.svg' | asset_url
-  assign img_pin = 'vectra-484bca36e3874bd30d1d6dd79807ed0314378e3d.svg' | asset_url
   assign img_icon_1 = 'vectra-2ff6aff392536da49f749783879fa1d814bae954.svg' | asset_url
   assign img_icon_2 = 'vectra-7710da89715977538c6f4fe9c6dc34d7e755efbe.svg' | asset_url
   assign img_icon_3 = 'vectra-0741b53e27e031962e5853d5e609fc42e3000a0a.svg' | asset_url
   assign img_icon_4 = 'vectra-be208e26a6843edcaa8fc4443996531be291a3b4.svg' | asset_url
+  assign contact_email = settings.vectra_email | default: 'info@vectra-intl.com'
+  assign contact_phone = settings.vectra_mobile_phone | default: '+32 495 239088'
+  assign contact_phone_tel = settings.vectra_mobile_phone_tel | default: '+32495239088'
 %}
 {% case module %}
   {% when 'hero' %}
 {% render 'vectra-seo', page_key: 'contact' %}
 {% unless block.settings.hide_section %}
+{% liquid
+  assign hero_h1 = block.settings.kicker | default: 'Contact VECTRA International'
+  assign hero_display = block.settings.heading | default: 'Bring Us the Problem.'
+  assign form_heading = block.settings.form_heading | default: "Tell Us What You're Working Through"
+%}
 <section
-  class="vres-hero vres-hero--align-{{ block.settings.text_align | default: 'left' }}"
+  class="vcon-hero"
   aria-label="Contact VECTRA International"
   style="{% render 'vectra-block-style', settings: block.settings %}"
   {{ block.shopify_attributes }}
 >
-  {% render 'vectra-image', image: block.settings.watermark, fallback: img_mark, alt: '', class: 'vres-hero__mark', width: 901, height: 909, image_width: 900 %}
-  <div class="vres-hero__copy" data-vh-reveal="up">
-    <h1 class="vres-hero__kicker">{{ block.settings.kicker | default: 'Contact VECTRA International' }}</h1>
-    <h2>{{ block.settings.heading | default: 'Bring Us the Problem.' }}</h2>
-    <div class="vres-hero__lead">
-      {% if block.settings.text != blank %}
-        {{ block.settings.text }}
-      {% else %}
-      <p>
-      You don’t need a finished scope before you talk to us. Tell us what’s happening, what keeps coming back, or where the work is getting stuck — whether that’s a supplier finding, an ESG reporting gap, an audit follow-up, or an operational resilience problem you haven’t fully named yet. You don’t need to decide which VECTRA service it belongs to first. We’ll review what you share, bring the relevant expertise into the conversation, and work out the most useful next step together. Use the form below, <a href="mailto:info@vectra-intl.com">info@vectra-intl.com</a>, or call <a href="tel:+32495239088">+32 495 239 088</a>.
-      </p>
-      {% endif %}
-    </div>
-    {% if block.settings.button_label != blank or block.settings.button_2_label != blank %}
-      <div class="vres-hero__actions">
-        {% if block.settings.button_label != blank %}
-          <a class="vh-btn vh-btn--green" href="{{ block.settings.button_link | default: '#VectraContactModal' }}" {% if block.settings.button_link == blank or block.settings.button_link == '#VectraContactModal' %}data-vh-contact-open{% endif %}>{{ block.settings.button_label }}</a>
-        {% endif %}
-        {% if block.settings.button_2_label != blank %}
-          <a class="vh-btn vh-btn--outline" href="{{ block.settings.button_2_link | default: '#' }}">{{ block.settings.button_2_label }}</a>
+  {% render 'vectra-image', image: block.settings.watermark, fallback: img_mark, alt: '', class: 'vcon-hero__mark', width: 901, height: 909, image_width: 900 %}
+  <div class="vcon-hero__grid">
+    <div class="vcon-hero__copy" data-vh-reveal="up">
+      <h1>{{ hero_h1 }}</h1>
+      <p class="vcon-hero__display">{{ hero_display }}</p>
+      <div class="vcon-hero__lead">
+        {% if block.settings.text != blank %}
+          {{ block.settings.text }}
+        {% else %}
+          <p>You don’t need a finished scope to talk to us. Tell us what’s happening — the thing that keeps coming back, the gap you can’t quite close, or a problem you haven’t fully named yet. It might be a supplier finding, an ESG reporting gap, an audit follow-up, or an operational resilience issue. You don’t need to know which VECTRA service it belongs to before you reach out.</p>
+          <p>We’ll review what you share, bring the relevant expertise into the conversation, and work out the most useful next step together.</p>
+          <p>Looking for VECTRA International’s contact details, or just want to get in touch with our team? Use the form below, email <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>, or call <a href="tel:{{ contact_phone_tel }}">{{ contact_phone }}</a> — whichever is easiest for you.</p>
         {% endif %}
       </div>
-    {% endif %}
+    </div>
+    <div id="contact-form">
+      {% form 'contact', class: 'vcon-form vh-form' %}
+        <h2>{{ form_heading }}</h2>
+        {% if form.posted_successfully? %}
+          <p class="vh-contact-modal__success">Thanks — we received your message and will be in touch shortly.</p>
+        {% endif %}
+        {% if form.errors %}
+          <p class="vh-contact-modal__error">{{ form.errors | default_errors }}</p>
+        {% endif %}
+        {% render 'vectra-contact-fields', img_arrow: img_arrow, variant: 'contact', submit_label: 'Start the Conversation' %}
+      {% endform %}
+    </div>
   </div>
 </section>
 {% endunless %}
@@ -55,41 +65,45 @@
   {% when 'challenges' %}
 {% unless block.settings.hide_section %}
 {% liquid
-  assign ch_kicker = block.settings.kicker | default: 'Not sure where it fits?'
-  assign ch_heading = block.settings.heading | default: 'Start With What’s Happening'
-  assign ch_text = block.settings.text | default: 'You may already know exactly what support you need. Or you may simply know that something isn’t working as it should — either way, this is the right place to start.'
+  assign ch_kicker = block.settings.kicker | default: 'NOT SURE WHERE IT FITS?'
+  assign ch_heading = block.settings.heading | default: "Start With What's Happening"
+  assign ch_text = block.settings.text | default: "You may already know exactly what support you need. Or you may simply know that something isn’t working as it should — either way, this is the right place to start."
+  assign ch_close = block.settings.close_text | default: "Start with what’s happening. We’ll work out the rest with you."
   assign nested_cards = nested_cards | strip
 %}
-<section class="vh-why" id="challenges" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-  <div class="vh-wrap">
-    <p class="vh-kicker">{{ ch_kicker }}</p>
-    <h2 class="vh-h2">{{ ch_heading }}</h2>
-    <p class="vh-lead">{{ ch_text }}</p>
-  </div>
-  <div class="vh-wrap vh-why__list">
-    {% if nested_cards != blank %}
-      {{ nested_cards }}
-    {% else %}
-    <article class="vh-why__item" data-vh-reveal>
-      <img src="{{ img_icon_4 }}" alt="">
-      <h3>The same problem keeps coming back</h3>
-      <p>It gets corrected. A few weeks or months later, the same finding, gap, or issue is back — a sign the root cause, not just the symptom, needs attention.</p>
-    </article>
-    <article class="vh-why__item" data-vh-reveal>
-      <img src="{{ img_icon_3 }}" alt="">
-      <h3>You have supplier findings, but no clear priority</h3>
-      <p>You’re sitting on audit results, supplier risk data, or compliance evidence. The harder part is deciding what needs attention first and who owns the next action.</p>
-    </article>
-    <article class="vh-why__item" data-vh-reveal>
-      <img src="{{ img_icon_2 }}" alt="">
-      <h3>The evidence exists, but using it takes too much work</h3>
-      <p>ESG data, audit records, and compliance evidence are scattered across files, systems, emails, and teams — making it difficult to use, verify, or defend when it matters.</p>
-    </article>
-    <article class="vh-why__item" data-vh-reveal>
-      <img src="{{ img_icon_1 }}" alt="">
-      <h3>The change makes sense on paper, but it isn’t sticking</h3>
-      <p>The requirement, process, or system is clear. The people who need to use it day to day are still struggling to make it part of normal work.</p>
-    </article>
+<section class="vcon-challenges" id="challenges" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vcon-wrap">
+    <p class="vcon-kicker">{{ ch_kicker }}</p>
+    <h2>{{ ch_heading }}</h2>
+    <p class="vcon-lead">{{ ch_text }}</p>
+    <div class="vcon-cards">
+      {% if nested_cards != blank %}
+        {{ nested_cards }}
+      {% else %}
+        <article data-vh-reveal>
+          <img src="{{ img_icon_4 }}" alt="" width="48" height="48">
+          <h3>The same problem keeps coming back</h3>
+          <p>It gets corrected. Then, a few weeks or months later, the same finding, gap, or issue is back — usually a sign that the root cause hasn’t been addressed, only the symptom.</p>
+        </article>
+        <article data-vh-reveal>
+          <img src="{{ img_icon_3 }}" alt="" width="48" height="48">
+          <h3>You have supplier findings, but no clear priority</h3>
+          <p>You’re sitting on audit results, supplier risk data, or compliance evidence. The harder part is deciding what needs attention first — and who owns the next action.</p>
+        </article>
+        <article data-vh-reveal>
+          <img src="{{ img_icon_2 }}" alt="" width="48" height="48">
+          <h3>The evidence exists, but using it takes too much work</h3>
+          <p>ESG data, audit records, and compliance evidence are scattered across files, systems, emails, and teams — making it difficult to use, verify, or defend when it matters.</p>
+        </article>
+        <article data-vh-reveal>
+          <img src="{{ img_icon_1 }}" alt="" width="48" height="48">
+          <h3>The change makes sense on paper, but it isn’t sticking</h3>
+          <p>The requirement, process, or system is clear. The people who need to use it day to day are still struggling to make it part of normal work.</p>
+        </article>
+      {% endif %}
+    </div>
+    {% if ch_close != blank %}
+      <p class="vcon-close">{{ ch_close }}</p>
     {% endif %}
   </div>
 </section>
@@ -97,48 +111,35 @@
 
   {% when 'next' %}
 {% unless block.settings.hide_section %}
-{% assign nested_items = nested_items | strip %}
-<section class="vh-faq" id="what-happens-next" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-  <div class="vh-wrap vh-faq__grid">
-    <aside class="vh-contact-card" data-vh-reveal="left">
-      <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
-      <p class="vh-contact-card__title">{{ block.settings.card_title | default: 'Prefer to reach us directly?' }}</p>
-      <p>{{ block.settings.card_text | default: "Already know who you need to speak with? Reach out directly. If you’re not sure which VECTRA specialist fits the issue, use the form and we’ll route the conversation." }}</p>
-        <a class="vh-btn vh-btn--white" href="#get-in-touch">
-        Start the Conversation
-        <img src="{{ img_arrow }}" alt="">
-      </a>
-      {% render 'vectra-contact-details', variant: 'card', img_phone: img_phone, img_mail: img_mail, img_pin: img_pin %}
-    </aside>
-    <div class="vh-faq__right">
-      <div class="vh-faq__glow" aria-hidden="true"></div>
-      <div class="vh-accordion">
-        <p class="vh-kicker">{{ block.settings.kicker | default: 'Next' }}</p>
-        <h2 class="vh-h2">{{ block.settings.heading | default: 'You Send the Context. We Work Out the Next Move Together.' }}</h2>
-        <p class="vh-lead">Three steps from first message to a useful next move.</p>
-        {% if nested_items != blank %}
-          {{ nested_items }}
-        {% else %}
-        <div class="vh-acc is-open" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn>01 — Tell Us What’s Happening</button>
-          <div class="vh-acc__body">
-            Share what you already know — a recurring issue, an audit finding, a customer or regulatory requirement, supplier data, an internal process, or something that simply isn’t working as expected. You don’t need to turn it into a formal brief first.
-          </div>
-        </div>
-        <div class="vh-acc" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn>02 — We Bring in the Relevant Expertise</button>
-          <div class="vh-acc__body">
-            We review what you’ve shared and bring in the VECTRA International specialists whose experience best fits the issue — in ESG, supply chain resilience, audit, or operational capability building. You won’t have to re-explain the problem through several layers before reaching someone who understands the work.
-          </div>
-        </div>
-        <div class="vh-acc" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn>03 — Agree on the Most Useful Next Step</button>
-          <div class="vh-acc__body">
-            The first useful step might be a focused assessment, specialist support, implementation work, capability building, or simply a clearer direction. We agree on that together, rather than assuming the answer before we understand the situation.
-          </div>
-        </div>
-        {% endif %}
-      </div>
+{% liquid
+  assign next_kicker = block.settings.kicker | default: 'WHAT HAPPENS NEXT'
+  assign next_heading = block.settings.heading | default: 'You Send the Context. We Work Out the Next Move Together.'
+  assign nested_cards = nested_cards | strip
+%}
+<section class="vcon-next" id="what-happens-next" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vcon-wrap">
+    <p class="vcon-kicker">{{ next_kicker }}</p>
+    <h2>{{ next_heading }}</h2>
+    <div class="vcon-steps">
+      {% if nested_cards != blank %}
+        {{ nested_cards }}
+      {% else %}
+        <article data-vh-reveal>
+          <span>01</span>
+          <h3>Tell Us What's Happening</h3>
+          <p>Share what you already know — a recurring issue, an audit finding, a customer or regulatory requirement, supplier data, an internal process, or something that simply isn’t working as expected. You don’t need to turn it into a formal brief first.</p>
+        </article>
+        <article data-vh-reveal>
+          <span>02</span>
+          <h3>We Bring in the Relevant Expertise</h3>
+          <p>We review what you’ve shared and bring in the VECTRA International specialists whose experience best fits the issue — in ESG, supply chain resilience, audit, or operational capability building. You won’t have to re-explain the problem through several layers before reaching someone who understands the work.</p>
+        </article>
+        <article data-vh-reveal>
+          <span>03</span>
+          <h3>Agree on the Most Useful Next Step</h3>
+          <p>The first useful step might be a focused assessment, specialist support, implementation work, capability building, or simply a clearer direction. We agree on that together, rather than assuming the answer before we understand the situation.</p>
+        </article>
+      {% endif %}
     </div>
   </div>
 </section>
@@ -146,28 +147,31 @@
 
   {% when 'direct' %}
 {% unless block.settings.hide_section %}
-<section class="vh-portal" id="get-in-touch" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-  <div class="vh-wrap vh-portal__grid">
-    <div class="vh-portal__copy">
-      <h2>{{ block.settings.heading | default: 'Contact VECTRA International' }}</h2>
-      {% if block.settings.text != blank %}
-        {{ block.settings.text }}
-      {% else %}
-      <p>Use the form, <a href="mailto:info@vectra-intl.com">info@vectra-intl.com</a>, or call <a href="tel:+32495239088">+32 495 239 088</a>. Tell us what’s happening — supplier risk, ESG compliance, audit follow-up, or a broader resilience program — and we’ll route the conversation to the right person.</p>
-      {% endif %}
+{% liquid
+  assign direct_kicker = block.settings.kicker | default: 'PREFER TO REACH US DIRECTLY?'
+  assign direct_heading = block.settings.heading | default: 'Contact VECTRA International'
+%}
+<section class="vcon-direct" id="get-in-touch" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vcon-wrap">
+    <p class="vcon-kicker">{{ direct_kicker }}</p>
+    <h2>{{ direct_heading }}</h2>
+    <div class="vcon-direct__grid">
+      <div>
+        <p class="vcon-direct__label">Email</p>
+        <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
+      </div>
+      <div>
+        <p class="vcon-direct__label">Phone</p>
+        <a href="tel:{{ contact_phone_tel }}">{{ contact_phone }}</a>
+      </div>
     </div>
-    {% form 'contact', class: 'vh-form' %}
-      <h3>{{ block.settings.form_heading | default: 'Tell Us What You’re Working Through' }}</h3>
-      {% if form.posted_successfully? %}
-        <p class="vh-contact-modal__success">Thanks — we received your message and will be in touch shortly.</p>
-      {% endif %}
-      {% if form.errors %}
-        <p class="vh-contact-modal__error">{{ form.errors | default_errors }}</p>
-      {% endif %}
-      {% render 'vectra-contact-fields', img_arrow: img_arrow, variant: 'contact', submit_label: 'Start the Conversation' %}
-    {% endform %}
+    {% if block.settings.text != blank %}
+      {{ block.settings.text }}
+    {% else %}
+      <p class="vcon-lead">Already know who you need to speak with? Reach out directly. If you’d like to contact our operational resilience consultants, or you’re not sure which VECTRA specialist fits the issue, use the <a href="#contact-form">form above</a> and tell us what’s happening — whether it’s supplier risk, ESG compliance, audit follow-up, or a broader resilience program. We’ll route the conversation to the right person from there.</p>
+    {% endif %}
   </div>
 </section>
+{% endunless %}
 
 {% endcase %}
-{% endunless %}

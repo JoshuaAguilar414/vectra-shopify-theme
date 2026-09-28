@@ -198,10 +198,14 @@
   assign why_heading = block.settings.heading | default: 'We Serve People With People.'
   assign why_text = block.settings.text | default: "Behind every supplier issue, every audit finding, every new requirement your team is trying to get ahead of, there's a person trying to make it work. Usually more than one. That's who we're really talking to. Not a department. Not a system. You. We start by listening, not presenting. We sit with the people closest to the problem, learn what's actually getting in the way, and bring in exactly the expertise that moment needs, without ever taking the wheel away from your team. Technology helps us move fast. It spots patterns, flags what needs attention, and keeps the evidence honest. But the judgment calls, the hard conversations, and the follow-through when things get complicated? That stays human. That stays with us, working alongside you. And when we hand over a recommendation, we don't disappear. We stay while it becomes real. While your team adapts. While the improvement actually sticks. Your success is our success. We mean that literally, not as a tagline."
   assign why_btn = block.settings.button_label | default: 'See Why VECTRA'
-  assign why_link = block.settings.button_link | default: '#solutions'
+  assign why_link = block.settings.button_link | default: '#why-cards'
+  assign why_bridge = block.settings.bridge_text | default: "Here's what that actually looks like:"
   assign ceo_note_kicker = block.settings.ceo_note_kicker | default: 'A Note From Our CEO'
   assign ceo_note_label = block.settings.ceo_note_label | default: 'A note from Patrick Neyts, CEO'
-  assign ceo_note_text = block.settings.ceo_note_text | default: "I started VECTRA because I watched too many good plans fall apart the moment they left the boardroom. Not because the thinking was wrong, but because nobody stayed close enough to see it through. That's still what drives us today. Whatever you're working through, I want you to feel like there's a real person on the other end of this. Because there is. Welcome to VECTRA."
+  assign ceo_note_text = block.settings.ceo_note_text
+  if ceo_note_text == blank
+    assign ceo_note_text = "I started VECTRA because I watched too many good plans fall apart the moment they left the boardroom. Not because the thinking was wrong, but because nobody stayed close enough to see it through. That's still what drives us today. Whatever you're working through, I want you to feel like there's a real person on the other end of this. Because there is. Welcome to VECTRA."
+  endif
   assign nested_cards = nested_cards | strip
 %}
 <section class="vh-why" id="why-vectra" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
@@ -240,10 +244,23 @@
     <div class="vh-wrap vh-why__ceo" data-vh-reveal>
       <p class="vh-why__ceo-kicker">{{ ceo_note_kicker }}</p>
       <p class="vh-why__ceo-label">{{ ceo_note_label }}</p>
-      <blockquote class="vh-why__ceo-quote">“{{ ceo_note_text }}”</blockquote>
+      <blockquote class="vh-why__ceo-quote">
+        {% assign ceo_paras = ceo_note_text | newline_to_br | split: '<br />' %}
+        {% for para in ceo_paras %}
+          {% assign para_text = para | strip_html | strip %}
+          {% if para_text != blank %}
+            <p>{{ para_text }}</p>
+          {% endif %}
+        {% endfor %}
+      </blockquote>
     </div>
     {% endunless %}
-    <div class="vh-wrap vh-why__list">
+    {% if why_bridge != blank %}
+      <div class="vh-wrap">
+        <p class="vh-why__bridge" data-vh-reveal>{{ why_bridge }}</p>
+      </div>
+    {% endif %}
+    <div class="vh-wrap vh-why__list" id="why-cards">
       {% if nested_cards != blank %}
         {{ nested_cards }}
       {% else %}
@@ -278,10 +295,10 @@
   assign esg_kicker = block.settings.kicker | default: 'OUR EXPERIENCE'
   assign esg_heading = block.settings.heading | default: '20+ Years of Experience You Can Rely On'
   assign esg_text = block.settings.text | default: "VECTRA International was founded in 2005. But the experience behind our work goes back further than that, because the people doing it had already spent years, in some cases decades, in these exact situations before they ever became a team. VECTRA International has worked with organizations across responsible business, supply chains, workplace standards, and operational improvement. That's not a number on a slide. It's why we already know where change tends to stall, what actually helps people move it forward, and why even a good plan still has to survive contact with a Monday morning. Today, we bring that experience to a broader role in business resilience and operational capability building, helping organizations make stronger decisions, build stronger teams, and create improvements they can sustain."
-  assign esg_s1v = block.settings.stat_1_value | default: '50+'
-  assign esg_s1l = block.settings.stat_1_label | default: 'Global Experts'
-  assign esg_s2v = block.settings.stat_2_value | default: '20+'
-  assign esg_s2l = block.settings.stat_2_label | default: 'Years of Experience'
+  assign esg_s1v = block.settings.stat_1_value | default: '20+'
+  assign esg_s1l = block.settings.stat_1_label | default: 'Years of Experience'
+  assign esg_s2v = block.settings.stat_2_value | default: '50+'
+  assign esg_s2l = block.settings.stat_2_label | default: 'Global Experts'
   assign esg_s3v = block.settings.stat_3_value | default: '500+'
   assign esg_s3l = block.settings.stat_3_label | default: 'Organizations Supported'
   assign esg_btn = block.settings.button_label | default: 'About VECTRA International'
@@ -462,7 +479,15 @@
       <div class="vh-market__head">
         <p class="vh-kicker">{{ market_kicker }}</p>
         <h2 class="vh-h2">{{ market_heading }}</h2>
-        <p class="vh-lead">{{ market_text }}</p>
+        <div class="vh-lead">
+          {% assign market_paras = market_text | newline_to_br | split: '<br />' %}
+          {% for para in market_paras %}
+            {% assign para_text = para | strip_html | strip %}
+            {% if para_text != blank %}
+              <p>{{ para_text }}</p>
+            {% endif %}
+          {% endfor %}
+        </div>
         <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ market_cta }}">{{ market_btn }}</a>
       </div>
       <form class="vh-searchbar" action="{{ routes.search_url }}" method="get" role="search">
@@ -560,6 +585,7 @@
         <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ explore_courses_href }}">{{ explore_courses_label }}</a>
       </div>
 
+      {% unless block.settings.hide_topics %}
       <div class="vh-topics">
         <h2 class="vh-h2">{{ topics_heading }}</h2>
         <div class="vh-pills">
@@ -633,6 +659,7 @@
           {% endif %}
         </div>
       </div>
+      {% endunless %}
     </div>
     </div>
   </section>

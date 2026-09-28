@@ -12,7 +12,7 @@
         "hero": {
           "type": "vectra-story-hero",
           "settings": {
-            "kicker": "Inside VECTRA",
+            "kicker": "INSIDE VECTRA",
             "heading": "VECTRA International DNA, Values & Global Leadership",
             "display_text": "We Believe Better Business Starts With People.",
             "button_label": "Explore How We Help",
@@ -23,7 +23,7 @@
           "type": "vectra-story-ceo",
           "settings": {
             "name": "Patrick Neyts",
-            "kicker": "Meet the Founder",
+            "kicker": "MEET THE FOUNDER",
             "heading": "A Message From Our CEO"
           }
         },
@@ -84,16 +84,25 @@
             "lead_4"
           ],
           "settings": {
-            "kicker": "Our Story",
+            "kicker": "OUR STORY",
             "heading": "The VECTRA International Story",
             "subheading": "Enabling Positive Business Impact Since 2005",
-            "values_kicker": "VECTRA Values",
+            "values_kicker": "VECTRA VALUES",
             "values_heading": "The Values Behind How We Show Up",
-            "leaders_kicker": "Our Leadership",
+            "values_list_heading": "VECTRA Values",
+            "value_1_heading": "V — VALUES",
+            "value_2_heading": "E — ETHICS",
+            "value_3_heading": "C — COMMUNITY",
+            "value_4_heading": "T — TRANSPARENCY",
+            "value_5_heading": "R — RIGHTS",
+            "value_6_heading": "A — ACTION",
+            "leaders_kicker": "OUR LEADERSHIP",
             "leaders_heading": "Meet the People Who Guide VECTRA",
-            "experts_kicker": "Our Experts",
+            "experts_kicker": "OUR EXPERTS",
             "experts_heading": "Our Team of Experts",
-            "people_kicker": "Our Global Network",
+            "show_associates": false,
+            "show_interns": false,
+            "people_kicker": "OUR GLOBAL NETWORK",
             "people_heading": "Global Expertise. Local Understanding. One VECTRA Team.",
             "people_button_label": "Meet Our People",
             "solutions_heading": "Our Solutions"
@@ -102,9 +111,8 @@
         "join": {
           "type": "vectra-story-join",
           "settings": {
-            "kicker": "Be part of a global team",
+            "kicker": "BE PART OF A GLOBAL TEAM",
             "heading": "Join a Team That Values What You Bring",
-            "text": "We look for people who care about doing meaningful work well, who bring their own perspective, and who are willing to listen to someone else’s. You will work with colleagues and specialists across countries, cultures, disciplines, and time zones. We value people who take ownership, stay curious, speak up respectfully, and care whether what we do makes a positive difference. Bring your judgment, your experience, and the questions you think we should be asking.",
             "button_label": "View Open Positions"
           }
         },
@@ -169,8 +177,7 @@
           ],
           "settings": {
             "kicker": "FAQ",
-            "heading": "Questions About VECTRA International",
-            "lead": "Answers about who we are, how we work, and where we operate."
+            "heading": "Questions About VECTRA International"
           }
         }
       },

@@ -1,14 +1,16 @@
-.vectra-con {
+.vectra-con,
+.vectra-con-section,
+.vectra-home:has(.vcon-hero) {
   --vcon-green: #54bd01;
   --vcon-navy: #092543;
   --vcon-s: min(1, 100vw / 1920px);
 }
 
-.vectra-con .vcon-hero {
+.vcon-hero {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  color: var(--vcon-navy);
+  color: var(--vcon-navy, #092543);
   background: linear-gradient(
     180deg,
     #54bd01 0%,
@@ -17,10 +19,10 @@
     #ffffff 100%
   );
   border-radius: 0 0 80px 80px;
-  padding: 72px 24px 80px;
+  padding: calc(120px + var(--vh-pad-top, 0px)) 24px calc(80px + var(--vh-pad-bottom, 0px));
 }
 
-.vectra-con .vcon-hero__mark {
+.vcon-hero__mark {
   position: absolute;
   left: 50%;
   top: 0;
@@ -30,145 +32,232 @@
   pointer-events: none;
 }
 
-.vectra-con .vcon-hero__grid,
-.vectra-con .vcon-wrap {
+.vcon-hero__grid,
+.vcon-wrap {
   position: relative;
   z-index: 1;
   width: min(1240px, calc(100% - 48px));
   margin: 0 auto;
 }
 
-.vectra-con .vcon-hero__grid {
+.vcon-hero__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
   gap: 40px;
   align-items: start;
 }
 
-.vectra-con .vcon-hero h1 {
+.vcon-hero h1 {
   margin: 0 0 12px;
-  font-size: clamp(32px, 3.4vw, 56px);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  text-transform: none;
-}
-
-.vectra-con .vcon-hero__display {
-  margin: 0 0 20px;
-  color: #fff;
-  font-size: clamp(26px, 2.6vw, 42px);
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(13px, 1.1vw, 16px);
   font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1.15;
+  letter-spacing: 0.1em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--vcon-navy, #092543);
 }
 
-.vectra-con .vcon-hero__copy p,
-.vectra-con .vcon-wrap p,
-.vectra-con .vcon-cards p,
-.vectra-con .vcon-steps p {
+.vcon-hero__display {
+  margin: 0 0 22px;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+}
+
+.vcon-hero__lead p,
+.vcon-wrap p,
+.vcon-cards p,
+.vcon-steps p {
   margin: 0 0 14px;
   font-size: 16px;
-  line-height: 1.5;
-  color: var(--vcon-navy);
+  line-height: 1.55;
+  color: var(--vcon-navy, #092543);
 }
 
-.vectra-con .vcon-form {
+.vcon-hero__lead a,
+.vcon-direct a,
+.vcon-lead a {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.vcon-form {
   background: #fff;
   border-radius: 18px;
   padding: 28px 24px 32px;
   box-shadow: 0 18px 40px rgba(9, 37, 67, 0.12);
 }
 
-.vectra-con .vcon-form h2 {
+.vcon-form h2 {
   margin: 0 0 18px;
-  font-size: 24px;
-  color: var(--vcon-navy);
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--vcon-navy, #092543);
 }
 
-.vectra-con .vcon-challenges,
-.vectra-con .vcon-next,
-.vectra-con .vcon-direct {
-  padding: 72px 0;
+.vcon-kicker {
+  margin: 0 0 10px;
+  color: var(--vcon-green, #54bd01);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-.vectra-con .vcon-challenges {
+.vcon-challenges,
+.vcon-next,
+.vcon-direct {
+  padding: calc(72px + var(--vh-pad-top, 0px)) 0 calc(72px + var(--vh-pad-bottom, 0px));
+}
+
+.vcon-challenges {
   background: #fff;
 }
 
-.vectra-con .vcon-next {
+.vcon-next {
   background: #f6f8f6;
 }
 
-.vectra-con .vcon-wrap h2 {
+.vcon-direct {
+  background: #fff;
+}
+
+.vcon-wrap h2 {
   margin: 0 0 18px;
   max-width: 18em;
-  color: var(--vcon-navy);
+  color: var(--vcon-navy, #092543);
   font-size: clamp(28px, 2.8vw, 44px);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.15;
 }
 
-.vectra-con .vcon-lead,
-.vectra-con .vcon-close {
+.vcon-lead,
+.vcon-close {
   max-width: 52em;
 }
 
-.vectra-con .vcon-cards,
-.vectra-con .vcon-steps {
+.vcon-close {
+  margin-top: 28px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.vcon-cards,
+.vcon-steps {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
   margin-top: 32px;
 }
 
-.vectra-con .vcon-cards article,
-.vectra-con .vcon-steps article {
+.vcon-steps {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.vcon-cards article,
+.vcon-steps article {
   background: #fff;
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 10px 28px rgba(9, 37, 67, 0.08);
 }
 
-.vectra-con .vcon-cards h3,
-.vectra-con .vcon-steps h3 {
+.vcon-cards img {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 14px;
+  object-fit: contain;
+}
+
+.vcon-cards h3,
+.vcon-steps h3 {
   margin: 0 0 10px;
-  color: var(--vcon-navy);
+  color: var(--vcon-navy, #092543);
   font-size: 20px;
   font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
 }
 
-.vectra-con .vcon-steps span {
+.vcon-steps span {
   display: block;
   margin-bottom: 10px;
-  color: var(--vcon-green);
+  color: var(--vcon-green, #54bd01);
   font-size: 28px;
   font-weight: 800;
+  letter-spacing: -0.03em;
 }
 
-.vectra-con .vcon-direct__grid {
+.vcon-direct__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
   margin: 24px 0;
 }
 
-.vectra-con .vcon-direct a {
-  color: var(--vcon-green);
+.vcon-direct__label {
+  margin: 0 0 6px;
+  font-size: 13px;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(9, 37, 67, 0.55);
 }
 
-@media (max-width: 900px) {
-  .vectra-con .vcon-hero__grid,
-  .vectra-con .vcon-cards,
-  .vectra-con .vcon-steps,
-  .vectra-con .vcon-direct__grid {
+.vcon-direct a {
+  color: var(--vcon-green, #54bd01);
+  font-size: 22px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.vcon-direct a:hover {
+  text-decoration: underline;
+}
+
+.vcon-cards .vh-why__item,
+.vcon-cards .vh-why__card,
+.vcon-steps .vh-why__item,
+.vcon-steps .vh-why__card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 28px rgba(9, 37, 67, 0.08);
+  border: none;
+  margin: 0;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.vcon-steps .vh-why__item h3,
+.vcon-steps .vh-why__card h3 {
+  margin-top: 0;
+}
+
+@media (max-width: 989px) {
+  .vcon-hero__grid,
+  .vcon-cards,
+  .vcon-steps,
+  .vcon-direct__grid {
     grid-template-columns: 1fr;
   }
 
-  .vectra-con .vcon-hero {
+  .vcon-hero {
     border-radius: 0 0 40px 40px;
-    padding: 48px 16px 56px;
+    padding: 96px 16px 56px;
+  }
+
+  .vcon-hero__grid,
+  .vcon-wrap {
+    width: min(100% - 32px, 720px);
   }
 }

@@ -354,21 +354,33 @@
     });
 
     if (gallery) {
-      let hoverTimer = 0;
+      let lastX = null;
+      let hoverLock = false;
       gallery.addEventListener('mousemove', (event) => {
-        window.clearTimeout(hoverTimer);
-        hoverTimer = window.setTimeout(() => {
-          const shots = qsa('[data-vh-sol-item]', gallery);
-          if (shots.length < 2) return;
-          const rect = gallery.getBoundingClientRect();
-          const x = Math.min(Math.max(event.clientX - rect.left, 0), rect.width);
-          const idx = Math.min(shots.length - 1, Math.floor((x / Math.max(rect.width, 1)) * shots.length));
-          const target = shots[idx];
-          if (target && !target.classList.contains('is-active')) {
-            activate(target);
-            startSol();
-          }
-        }, 40);
+        if (hoverLock || reduceMotion) return;
+        const x = event.clientX;
+        if (lastX == null) {
+          lastX = x;
+          return;
+        }
+        const dx = x - lastX;
+        if (Math.abs(dx) < 28) return;
+        lastX = x;
+        hoverLock = true;
+        window.setTimeout(() => {
+          hoverLock = false;
+        }, 420);
+        const shots = qsa('[data-vh-sol-item]', gallery);
+        if (shots.length < 2) return;
+        if (dx > 0) {
+          if (shots[1]) activate(shots[1]);
+        } else if (shots[shots.length - 1]) {
+          activate(shots[shots.length - 1]);
+        }
+        startSol();
+      });
+      gallery.addEventListener('mouseleave', () => {
+        lastX = null;
       });
     }
 

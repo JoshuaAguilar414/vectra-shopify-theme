@@ -548,6 +548,10 @@
   line-height: 1.6;
 }
 
+.vectra-story .vs-solutions p + p {
+  margin-top: 14px;
+}
+
 .vectra-story .vs-card__watermark {
   position: absolute;
   right: -6%;
@@ -586,6 +590,7 @@
   transition: filter 0.45s ease;
 }
 
+.vectra-story .vs-card__head h2,
 .vectra-story .vs-card__head h3 {
   margin: 0;
   color: #54bd01;
@@ -636,6 +641,7 @@
   filter: brightness(0) invert(1);
 }
 
+.vectra-story .vs-card:hover .vs-card__head h2,
 .vectra-story .vs-card:hover .vs-card__head h3,
 .vectra-story .vs-card:hover p {
   color: #ffffff;
@@ -680,6 +686,17 @@
   text-transform: none;
 }
 
+.vectra-story .vs-values__list-heading {
+  width: min(720px, calc(100% - 48px));
+  margin: 36px auto 12px;
+  color: #092543;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(24px, 2.4vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
 .vectra-story .vs-values > p {
   width: min(640px, calc(100% - 48px));
   margin: 18px auto 14px;
@@ -690,6 +707,10 @@
   letter-spacing: -0.015em;
   line-height: 1.6;
   text-align: center;
+}
+
+.vectra-story .vs-values > p + p {
+  margin-top: 10px;
 }
 
 .vectra-story .vs-values__sub {
@@ -717,6 +738,14 @@
   color: rgba(9, 37, 67, 0.72);
   font-size: 16px;
   line-height: 1.6;
+}
+
+.vectra-story .vs-leaders__intro p {
+  margin: 0;
+}
+
+.vectra-story .vs-leaders__intro p + p {
+  margin-top: 12px;
 }
 
 .vectra-story .vs-ceo__lede {
@@ -836,6 +865,7 @@
   margin-bottom: 16px;
 }
 
+.vectra-story .vs-people__body,
 .vectra-story .vs-people > p {
   width: min(760px, calc(100% - 48px));
   margin: 0 auto 28px;
@@ -847,6 +877,14 @@
   line-height: 1.6;
   letter-spacing: -0.015em;
   text-align: center;
+}
+
+.vectra-story .vs-people__body p {
+  margin: 0;
+}
+
+.vectra-story .vs-people__body p + p {
+  margin-top: 12px;
 }
 
 .vectra-story .vs-leaders {
@@ -866,6 +904,14 @@
   color: rgba(9, 37, 67, 0.72);
   font-size: 16px;
   line-height: 1.6;
+}
+
+.vectra-story .vs-experts__intro p {
+  margin: 0;
+}
+
+.vectra-story .vs-experts__intro p + p {
+  margin-top: 12px;
 }
 
 .vectra-story .vs-people {
@@ -1325,6 +1371,11 @@
   line-height: 1.55;
 }
 
+.vectra-story .vs-join__inner > div > p:not(.vs-join__kicker) + p,
+.vs-join__inner > div > p:not(.vs-join__kicker) + p {
+  margin-top: 12px;
+}
+
 .vectra-story .vs-join .vs-cta-btn,
 .vs-join .vs-cta-btn {
   display: inline-flex;
@@ -1694,6 +1745,7 @@
     padding: 24px;
   }
 
+  .vectra-story .vs-card__head h2,
   .vectra-story .vs-card__head h3 {
     font-size: 28px;
   }

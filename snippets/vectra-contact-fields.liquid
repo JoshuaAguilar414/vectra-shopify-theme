@@ -1,6 +1,5 @@
 {%- doc -%}
   Shared Get In Touch fields used by the page form and the header modal.
-  Role is free-form. Company is required. Job Title dropdowns are not used.
 {%- enddoc -%}
 {%- liquid
   assign submit_label = submit_label | default: 'Send message'
@@ -12,66 +11,58 @@
   if is_contact_page == false and solutions_form != true and home_form != true
     assign show_interest = true
   endif
+  assign phone_before_company = false
+  if home_form
+    assign phone_before_company = true
+  endif
 -%}
 
 <div class="vh-form__grid">
   <label class="vh-form__field">
     <span class="visually-hidden">First name (required)</span>
-    <input
-      type="text"
-      name="contact[first_name]"
-      placeholder="First name*"
-      value="{{ customer.first_name }}"
-      required
-      autocomplete="given-name"
-    >
+    <input type="text" name="contact[first_name]" placeholder="First name*" value="{{ customer.first_name }}" required autocomplete="given-name">
   </label>
   <label class="vh-form__field">
     <span class="visually-hidden">Last name (required)</span>
-    <input
-      type="text"
-      name="contact[last_name]"
-      placeholder="Last name*"
-      value="{{ customer.last_name }}"
-      required
-      autocomplete="family-name"
-    >
+    <input type="text" name="contact[last_name]" placeholder="Last name*" value="{{ customer.last_name }}" required autocomplete="family-name">
   </label>
   <label class="vh-form__field">
     <span class="visually-hidden">Work email (required)</span>
-    <input
-      type="email"
-      name="contact[email]"
-      placeholder="Work email*"
-      value="{{ customer.email }}"
-      required
-      autocomplete="email"
-    >
+    <input type="email" name="contact[email]" placeholder="Work email*" value="{{ customer.email }}" required autocomplete="email">
   </label>
-  <label class="vh-form__field">
-    <span class="visually-hidden">Phone number</span>
-    <input
-      type="tel"
-      name="contact[phone]"
-      placeholder="Phone number"
-      value="{{ customer.phone }}"
-      autocomplete="tel"
-    >
-  </label>
-  <label class="vh-form__field">
-    <span class="visually-hidden">Company (required)</span>
-    <input type="text" name="contact[company]" placeholder="Company*" autocomplete="organization" required>
-  </label>
-  <label class="vh-form__field">
-    <span class="visually-hidden">Job title / role</span>
-    <input type="text" name="contact[role]" placeholder="Job Title / Role" autocomplete="organization-title">
-  </label>
+  {% if phone_before_company %}
+    <label class="vh-form__field">
+      <span class="visually-hidden">Phone number</span>
+      <input type="tel" name="contact[phone]" placeholder="Phone number" value="{{ customer.phone }}" autocomplete="tel">
+    </label>
+    <label class="vh-form__field">
+      <span class="visually-hidden">Company (required)</span>
+      <input type="text" name="contact[company]" placeholder="Company*" autocomplete="organization" required>
+    </label>
+    <label class="vh-form__field">
+      <span class="visually-hidden">Job title / role</span>
+      <input type="text" name="contact[role]" placeholder="Job Title / Role" autocomplete="organization-title">
+    </label>
+  {% else %}
+    <label class="vh-form__field">
+      <span class="visually-hidden">Company (required)</span>
+      <input type="text" name="contact[company]" placeholder="Company*" autocomplete="organization" required>
+    </label>
+    <label class="vh-form__field">
+      <span class="visually-hidden">{% if is_contact_page %}Role{% else %}Job title / role{% endif %}</span>
+      <input type="text" name="contact[role]" placeholder="{% if is_contact_page %}Role{% else %}Job Title / Role{% endif %}" autocomplete="organization-title">
+    </label>
+    <label class="vh-form__field">
+      <span class="visually-hidden">Phone number</span>
+      <input type="tel" name="contact[phone]" placeholder="Phone number" value="{{ customer.phone }}" autocomplete="tel">
+    </label>
+  {% endif %}
 </div>
 {% if is_contact_page %}
   <label class="vh-form__select vh-form__select--wide">
-    <span class="visually-hidden">What would you like to discuss?</span>
-    <select name="contact[interest]" aria-label="What would you like to discuss?">
-      <option value="" selected>What would you like to discuss?</option>
+    <span class="visually-hidden">What would you like to discuss? (required)</span>
+    <select name="contact[interest]" aria-label="What would you like to discuss?" required>
+      <option value="" selected disabled>What would you like to discuss?*</option>
       <option value="Supplier finding or follow-up">Supplier finding or follow-up</option>
       <option value="ESG reporting gap">ESG reporting gap</option>
       <option value="Audit follow-up">Audit follow-up</option>
@@ -95,7 +86,7 @@
 {% endif %}
 <label class="vh-form__field vh-form__field--wide">
   <span class="visually-hidden">Message</span>
-  <textarea name="contact[body]" placeholder="{% if is_contact_page %}Tell us what is happening, what is getting in the way, and what you would like to improve.{% else %}Tell us what you need help with and what you would like to improve.{% endif %}"></textarea>
+  <textarea name="contact[body]" placeholder="{% if message_placeholder != blank %}{{ message_placeholder }}{% elsif is_contact_page %}Tell us what is happening, what is getting in the way, and what you would like to improve.{% else %}Tell us what you need help with and what you would like to improve.{% endif %}"></textarea>
 </label>
 <button class="vh-btn vh-btn--green" type="submit">
   {{ submit_label }}

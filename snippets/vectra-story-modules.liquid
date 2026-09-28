@@ -51,8 +51,10 @@
   assign faq_url = pages['faq'].url | default: '/pages/faq'
   assign mv_mission = 'We enable positive business impact by partnering with organizations to transform end-to-end operational complexity into resilient, well-governed performance through expert teams, and human led state of the art technology—creating measurable value for people, operations, and sustainable growth.'
   assign mv_vision = 'To be the trusted partner in building operational control and resilience and achieving sustainable competitive advantage by transforming business complexity into strategic clarity, human-centered AI capability, and measurable value.'
-  assign mv_solutions = 'We bring together deep expertise, a trusted network of partners, and technology that actually earns its place, then put all of it to work helping you design what needs to change, govern how it runs, and execute it in the real world. The result is not just a plan. It is clarity you can act on, control you can trust, and capability that stays with your team long after we are done.'
+  assign mv_solutions = 'We bring together deep expertise, a trusted network of partners, and technology that actually earns its place, then put all of it to work helping you design what needs to change, govern how it runs, and execute it in the real world.'
+  assign mv_solutions_2 = "The result isn't just a plan. It's clarity you can act on, control you can trust, and capability that stays with your team long after we're done."
   assign jobs_url = pages['job-openings'].url | default: pages['careers'].url | default: careers_url
+  assign solutions_page = pages['solutions'].url | default: '/pages/solutions'
 %}
 {% capture faq_href %}{% render 'vectra-preview-href', url: faq_url, view: 'faq' %}{% endcapture %}
 {% capture experts_href %}{% render 'vectra-preview-href', url: experts_url, view: 'experts' %}{% endcapture %}
@@ -67,7 +69,7 @@
 {% render 'vectra-seo', page_key: 'about' %}
 {% unless block.settings.hide_section %}
 {% liquid
-  assign story_kicker = block.settings.kicker | default: 'Inside VECTRA'
+  assign story_kicker = block.settings.kicker | default: 'INSIDE VECTRA'
   assign story_heading = block.settings.heading | default: 'VECTRA International DNA, Values &amp; Global Leadership'
   assign story_display = block.settings.display_text | default: 'We Believe Better Business Starts With People.'
   assign story_btn = block.settings.button_label | default: 'Explore How We Help'
@@ -109,7 +111,7 @@
         {% endif %}
       </div>
       <div class="vs-hero__actions" data-vh-reveal="up">
-        <a class="vh-btn vh-btn--green" href="{{ block.settings.button_link | default: '#who-we-are' }}">{{ story_btn }}</a>
+        <a class="vh-btn vh-btn--green" href="{{ block.settings.button_link | default: solutions_page }}">{{ story_btn }}</a>
         <a class="vh-btn vh-btn--outline vh-btn--outline-light" href="{{ block.settings.button_2_link | default: '#VectraContactModal' }}"{% if block.settings.button_2_link == blank or block.settings.button_2_link == '#VectraContactModal' %} data-vh-contact-open{% endif %}>{{ story_btn2 }}</a>
       </div>
     </div>
@@ -120,7 +122,7 @@
 {% unless block.settings.hide_section %}
 {% liquid
   assign ceo_name = block.settings.name | default: 'Patrick Neyts'
-  assign ceo_kicker = block.settings.kicker | default: 'Meet the Founder'
+  assign ceo_kicker = block.settings.kicker | default: 'MEET THE FOUNDER'
   assign ceo_heading = block.settings.heading | default: 'A Message From Our CEO'
 %}
 <div class="vs-sheet" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
@@ -160,7 +162,7 @@
 
     <section class="vs-who" id="who-we-are">
       <div class="vs-who__copy">
-        <p class="vs-who__kicker">{{ block.settings.kicker | default: 'Our Story' }}</p>
+        <p class="vs-who__kicker">{{ block.settings.kicker | default: 'OUR STORY' }}</p>
         <h2>{{ block.settings.heading | default: 'The VECTRA International Story' }}</h2>
         <h3>{{ block.settings.subheading | default: 'Enabling Positive Business Impact Since 2005' }}</h3>
         <div class="vs-who__body">
@@ -196,7 +198,7 @@
         <img class="vs-card__watermark" src="{{ img_mission }}" alt="">
         <div class="vs-card__head">
           <img src="{{ img_mission }}" alt="" width="69" height="69">
-          <h3>{{ block.settings.mission_heading | default: 'Our Mission' }}</h3>
+          <h2>{{ block.settings.mission_heading | default: 'Our Mission' }}</h2>
         </div>
         <img class="vs-card__rule" src="{{ img_rule }}" alt="">
         <p>{{ block.settings.mission | default: mv_mission }}</p>
@@ -205,7 +207,7 @@
         <img class="vs-card__watermark" src="{{ img_vision }}" alt="">
         <div class="vs-card__head">
           <img src="{{ img_vision }}" alt="" width="79" height="79">
-          <h3>{{ block.settings.vision_heading | default: 'Our Vision' }}</h3>
+          <h2>{{ block.settings.vision_heading | default: 'Our Vision' }}</h2>
         </div>
         <img class="vs-card__rule" src="{{ img_rule }}" alt="">
         <p>{{ block.settings.vision | default: mv_vision }}</p>
@@ -214,44 +216,56 @@
 
     <section class="vs-solutions" id="solutions">
       <h2>{{ block.settings.solutions_heading | default: 'Our Solutions' }}</h2>
-      <p>{{ block.settings.solutions | default: mv_solutions }}</p>
+      {% if block.settings.solutions != blank %}
+        <p>{{ block.settings.solutions }}</p>
+      {% else %}
+        <p>{{ mv_solutions }}</p>
+        <p>{{ mv_solutions_2 }}</p>
+      {% endif %}
     </section>
 
     <section class="vs-values" id="values">
-      <p class="vs-values__kicker">{{ block.settings.values_kicker | default: 'VECTRA Values' }}</p>
+      <p class="vs-values__kicker">{{ block.settings.values_kicker | default: 'VECTRA VALUES' }}</p>
       <h2>{{ block.settings.values_heading | default: 'The Values Behind How We Show Up' }}</h2>
-      <p>{{ block.settings.values_text | default: 'Values matter most when people can feel them in the way you treat them. At VECTRA, they shape how we listen, how we make decisions, how we support one another, and how we show up for our clients and the communities connected to them. They are not simply words we display. They are standards we expect ourselves to live by.' }}</p>
+      {% if block.settings.values_text != blank %}
+        <p>{{ block.settings.values_text }}</p>
+      {% else %}
+        <p>Values matter most when people can feel them in the way you treat them.</p>
+        <p>At VECTRA, they shape how we listen, how we make decisions, how we support one another, and how we show up for our clients and the communities connected to them.</p>
+        <p>They are not simply words we display. They are standards we expect ourselves to live by.</p>
+      {% endif %}
+      <h2 class="vs-values__list-heading">{{ block.settings.values_list_heading | default: 'VECTRA Values' }}</h2>
       <p class="vs-values__sub">{{ block.settings.values_subtext | default: 'These values guide the decisions we make, the relationships we build, and the way we turn our commitments into action.' }}</p>
       <div class="vs-values__row">
         <img class="vs-values__line" src="{{ img_values_line }}" alt="">
         <article class="vs-value">
           <div class="vs-value__letter">{{ block.settings.value_1_letter | default: 'v' }}</div>
-          <h3>{{ block.settings.value_1_heading | default: 'Values' }}</h3>
+          <h3>{{ block.settings.value_1_heading | default: 'V — VALUES' }}</h3>
           <p>{{ block.settings.value_1_text | default: 'We are guided by respect, innovation, integrity, and accountability.' }}</p>
         </article>
         <article class="vs-value">
           <div class="vs-value__letter">{{ block.settings.value_2_letter | default: 'e' }}</div>
-          <h3>{{ block.settings.value_2_heading | default: 'Ethics' }}</h3>
+          <h3>{{ block.settings.value_2_heading | default: 'E — ETHICS' }}</h3>
           <p>{{ block.settings.value_2_text | default: 'We prioritize ethically sourcing goods, empowering others, and creating positive impact.' }}</p>
         </article>
         <article class="vs-value">
           <div class="vs-value__letter">{{ block.settings.value_3_letter | default: 'c' }}</div>
-          <h3>{{ block.settings.value_3_heading | default: 'Community' }}</h3>
+          <h3>{{ block.settings.value_3_heading | default: 'C — COMMUNITY' }}</h3>
           <p>{{ block.settings.value_3_text | default: 'We actively build strong, supportive communities, fostering connections that uplift.' }}</p>
         </article>
         <article class="vs-value">
           <div class="vs-value__letter">{{ block.settings.value_4_letter | default: 't' }}</div>
-          <h3>{{ block.settings.value_4_heading | default: 'Transparency' }}</h3>
+          <h3>{{ block.settings.value_4_heading | default: 'T — TRANSPARENCY' }}</h3>
           <p>{{ block.settings.value_4_text | default: 'We are honest, clear, and open, so you can trust us and know where you stand.' }}</p>
         </article>
         <article class="vs-value">
           <div class="vs-value__letter">{{ block.settings.value_5_letter | default: 'r' }}</div>
-          <h3>{{ block.settings.value_5_heading | default: 'Rights' }}</h3>
+          <h3>{{ block.settings.value_5_heading | default: 'R — RIGHTS' }}</h3>
           <p>{{ block.settings.value_5_text | default: 'We defend human rights and champion fair treatment for all.' }}</p>
         </article>
         <article class="vs-value">
           <div class="vs-value__letter">{{ block.settings.value_6_letter | default: 'a' }}</div>
-          <h3>{{ block.settings.value_6_heading | default: 'Action' }}</h3>
+          <h3>{{ block.settings.value_6_heading | default: 'A — ACTION' }}</h3>
           <p>{{ block.settings.value_6_text | default: 'We turn words into real actions that drive meaningful change.' }}</p>
         </article>
       </div>
@@ -259,9 +273,17 @@
     </div>
 
     <section class="vs-leaders" id="leadership" data-vs-reveal-group>
-      <p class="vs-leaders__kicker">{{ block.settings.leaders_kicker | default: 'Our Leadership' }}</p>
+      <p class="vs-leaders__kicker">{{ block.settings.leaders_kicker | default: 'OUR LEADERSHIP' }}</p>
       <h2>{{ block.settings.leaders_heading | default: 'Meet the People Who Guide VECTRA' }}</h2>
-      <p class="vs-leaders__intro">{{ block.settings.leaders_text | default: 'VECTRA is shaped by people with different experiences, perspectives, and areas of expertise, but a shared belief in what good partnership should feel like. Our leadership team sets the direction, supports our people, and helps create the conditions for strong ideas and good judgment to reach our clients. Across responsible business, operations, supply chains, sales, marketing, and applied AI, they bring the experience needed to keep VECTRA moving forward while staying true to the values we started with.' }}</p>
+      <div class="vs-leaders__intro">
+        {% if block.settings.leaders_text != blank %}
+          <p>{{ block.settings.leaders_text }}</p>
+        {% else %}
+          <p>VECTRA is shaped by people with different experiences, perspectives, and areas of expertise, but a shared belief in what good partnership should feel like.</p>
+          <p>Our leadership team sets the direction, supports our people, and helps create the conditions for strong ideas and good judgment to reach our clients.</p>
+          <p>Across responsible business, operations, supply chains, sales, marketing, and applied AI, they bring the experience needed to keep VECTRA moving forward while staying true to the values we started with.</p>
+        {% endif %}
+      </div>
       <div class="vs-leaders__viewport">
         <div class="vs-leaders__track" data-vs-leaders-track>
           {% assign nested_leaders = nested_leaders | strip %}
@@ -353,9 +375,18 @@
     </section>
 
     <section class="vs-experts" id="experts">
-      <p class="vs-experts__kicker">{{ block.settings.experts_kicker | default: 'Our Experts' }}</p>
+      <p class="vs-experts__kicker">{{ block.settings.experts_kicker | default: 'OUR EXPERTS' }}</p>
       <h2>{{ block.settings.experts_heading | default: 'Our Team of Experts' }}</h2>
-      <p class="vs-experts__intro">{{ block.settings.experts_text | default: 'The people our clients meet matter. That is why VECTRA brings together specialists who know their fields, understand different markets, and have spent years seeing how challenges play out in real businesses. They bring more than technical knowledge. They bring judgment, local understanding, practical experience, and the ability to listen before deciding what comes next. Together, they help us give clients support that feels relevant to their situation, not pulled from a standard playbook.' }}</p>
+      <div class="vs-experts__intro">
+        {% if block.settings.experts_text != blank %}
+          <p>{{ block.settings.experts_text }}</p>
+        {% else %}
+          <p>The people our clients meet matter.</p>
+          <p>That is why VECTRA brings together specialists who know their fields, understand different markets, and have spent years seeing how challenges play out in real businesses.</p>
+          <p>They bring more than technical knowledge. They bring judgment, local understanding, practical experience, and the ability to listen before deciding what comes next.</p>
+          <p>Together, they help us give clients support that feels relevant to their situation, not pulled from a standard playbook.</p>
+        {% endif %}
+      </div>
       <div class="vs-experts__grid">
         <article class="vs-expert">
           <img src="{{ img_exp_1 }}" alt="Beat Grüninger">
@@ -392,6 +423,7 @@
       </div>
     </section>
 
+    {% if block.settings.show_associates %}
     <section class="vs-experts" id="associates">
       <h2>{{ block.settings.associates_heading | default: 'Our Associates' }}</h2>
       <div class="vs-experts__grid">
@@ -429,7 +461,9 @@
         </a>
       </div>
     </section>
+    {% endif %}
 
+    {% if block.settings.show_interns %}
     <section class="vs-experts" id="interns">
       <h2>{{ block.settings.interns_heading | default: 'Our Interns' }}</h2>
       <div class="vs-experts__grid">
@@ -467,11 +501,22 @@
         </a>
       </div>
     </section>
+    {% endif %}
 
     <section class="vs-people" data-vh-reveal="scale">
-      <p class="vs-people__kicker">{{ block.settings.people_kicker | default: 'Our Global Network' }}</p>
+      <p class="vs-people__kicker">{{ block.settings.people_kicker | default: 'OUR GLOBAL NETWORK' }}</p>
       <h2>{{ block.settings.people_heading | default: 'Global Expertise. Local Understanding. One VECTRA Team.' }}</h2>
-      <p>{{ block.settings.people_text | default: 'The world may be connected, but every market still has its own people, culture, expectations, regulations, and realities. That is why being global means more to us than having people in different places. VECTRA’s associates and experts bring local understanding and specialist experience from the markets they know firsthand. A supplier challenge in Eastern Africa may call for a different perspective from a question in Brussels. Wherever our clients are, they have the strength of a global network with people who understand the local reality, connected by one VECTRA team and one commitment to their success.' }}</p>
+      <div class="vs-people__body">
+        {% if block.settings.people_text != blank %}
+          <p>{{ block.settings.people_text }}</p>
+        {% else %}
+          <p>The world may be connected, but every market still has its own people, culture, expectations, regulations, and realities.</p>
+          <p>That is why being global means more to us than having people in different places.</p>
+          <p>VECTRA’s associates and experts bring local understanding and specialist experience from the markets they know firsthand. They understand the details that may never show up in a report but can make all the difference in what succeeds.</p>
+          <p>A supplier challenge in Eastern Africa may call for a different perspective from a question in Brussels. We bring together the people who understand both the challenge and the context around it.</p>
+          <p>Wherever our clients are, they have the strength of a global network with people who understand the local reality, connected by one VECTRA team and one commitment to their success.</p>
+        {% endif %}
+      </div>
       <a class="vs-cta-btn" href="{{ block.settings.people_button_link | default: associates_href }}">{{ block.settings.people_button_label | default: 'Meet Our People' }}<img src="{{ img_arrow_btn }}" alt=""></a>
       <div class="vs-people__map">
         {% if block.settings.map_video != blank %}
@@ -518,7 +563,9 @@
       <div class="vh-accordion">
         <p class="vh-kicker">{{ block.settings.kicker | default: 'FAQ' }}</p>
         <h2 class="vh-h2">{{ block.settings.heading | default: 'Questions About VECTRA International' }}</h2>
-        <p class="vh-lead">{{ block.settings.lead | default: 'Answers about who we are, how we work, and where we operate.' }}</p>
+        {% if block.settings.lead != blank %}
+          <p class="vh-lead">{{ block.settings.lead }}</p>
+        {% endif %}
         {% if nested_items != blank %}
           {{ nested_items }}
         {% else %}
@@ -556,9 +603,8 @@
   {% when 'join' %}
 {% unless block.settings.hide_section %}
 {% liquid
-  assign join_kicker = block.settings.kicker | default: 'Be part of a global team'
+  assign join_kicker = block.settings.kicker | default: 'BE PART OF A GLOBAL TEAM'
   assign join_heading = block.settings.heading | default: 'Join a Team That Values What You Bring'
-  assign join_text = block.settings.text | default: 'We look for people who care about doing meaningful work well, who bring their own perspective, and who are willing to listen to someone else’s. You will work with colleagues and specialists across countries, cultures, disciplines, and time zones. We value people who take ownership, stay curious, speak up respectfully, and care whether what we do makes a positive difference. Bring your judgment, your experience, and the questions you think we should be asking.'
   assign join_btn = block.settings.button_label | default: 'View Open Positions'
   if block.settings.button_link != blank
     assign join_cta = block.settings.button_link
@@ -572,7 +618,14 @@
       <div>
         <p class="vs-join__kicker">{{ join_kicker }}</p>
         <h2>{{ join_heading }}</h2>
-        <p>{{ join_text }}</p>
+        {% if block.settings.text != blank %}
+          <p>{{ block.settings.text }}</p>
+        {% else %}
+          <p>We look for people who care about doing meaningful work well, who bring their own perspective, and who are willing to listen to someone else’s.</p>
+          <p>You will work with colleagues and specialists across countries, cultures, disciplines, and time zones. You will learn from them, challenge them, and bring something of your own to the team.</p>
+          <p>We value people who take ownership, stay curious, speak up respectfully, and care whether what we do makes a positive difference.</p>
+          <p>Bring your judgment, your experience, and the questions you think we should be asking.</p>
+        {% endif %}
       </div>
       <a class="vs-cta-btn" href="{{ join_cta }}">
         {{ join_btn }}

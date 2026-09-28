@@ -68,7 +68,12 @@
             "kicker": "WHY VECTRA",
             "heading": "We Serve People With People.",
             "text": "Behind every supplier issue, every audit finding, every new requirement your team is trying to get ahead of, there's a person trying to make it work. Usually more than one.\n\nThat's who we're really talking to. Not a department. Not a system. You.\n\nWe start by listening, not presenting. We sit with the people closest to the problem, learn what's actually getting in the way, and bring in exactly the expertise that moment needs, without ever taking the wheel away from your team.\n\nTechnology helps us move fast. It spots patterns, flags what needs attention, and keeps the evidence honest. But the judgment calls, the hard conversations, and the follow-through when things get complicated? That stays human. That stays with us, working alongside you.\n\nAnd when we hand over a recommendation, we don't disappear. We stay while it becomes real. While your team adapts. While the improvement actually sticks.\n\nYour success is our success. We mean that literally, not as a tagline.",
-            "button_label": "See Why VECTRA"
+            "button_label": "See Why VECTRA",
+            "button_link": "#why-cards",
+            "bridge_text": "Here's what that actually looks like:",
+            "ceo_note_kicker": "A Note From Our CEO",
+            "ceo_note_label": "A note from Patrick Neyts, CEO",
+            "ceo_note_text": "I started VECTRA because I watched too many good plans fall apart the moment they left the boardroom. Not because the thinking was wrong, but because nobody stayed close enough to see it through.\n\nThat's still what drives us today. Whatever you're working through, I want you to feel like there's a real person on the other end of this. Because there is.\n\nWelcome to VECTRA."
           }
         },
         "esg": {
@@ -77,10 +82,10 @@
             "kicker": "OUR EXPERIENCE",
             "heading": "20+ Years of Experience You Can Rely On",
             "text": "VECTRA International was founded in 2005. But the experience behind our work goes back further than that, because the people doing it had already spent years, in some cases decades, in these exact situations before they ever became a team.\n\nVECTRA International has worked with organizations across responsible business, supply chains, workplace standards, and operational improvement. That's not a number on a slide. It's why we already know where change tends to stall, what actually helps people move it forward, and why even a good plan still has to survive contact with a Monday morning.\n\nToday, we bring that experience to a broader role in business resilience and operational capability building, helping organizations make stronger decisions, build stronger teams, and create improvements they can sustain.",
-            "stat_1_value": "50+",
-            "stat_1_label": "Global Experts",
-            "stat_2_value": "20+",
-            "stat_2_label": "Years of Experience",
+            "stat_1_value": "20+",
+            "stat_1_label": "Years of Experience",
+            "stat_2_value": "50+",
+            "stat_2_label": "Global Experts",
             "stat_3_value": "500+",
             "stat_3_label": "Organizations Supported",
             "button_label": "About VECTRA International"
@@ -111,8 +116,9 @@
           "settings": {
             "kicker": "VECTRA MARKETPLACE",
             "heading": "Learn What You Need. Apply It With Confidence.",
-            "text": "Explore 100+ expert-led courses across ESG, sustainability, responsible business, compliance, due diligence, and supply chains. Whether it's one person trying to get their head around a new requirement, or a whole team that needs to be speaking the same language, Marketplace gives people somewhere real to start.",
-            "button_label": "Find the Right Course"
+            "text": "Explore 100+ expert-led courses across ESG, sustainability, responsible business, compliance, due diligence, and supply chains.\n\nWhether it's one person trying to get their head around a new requirement, or a whole team that needs to be speaking the same language, Marketplace gives people somewhere real to start.",
+            "button_label": "Find the Right Course",
+            "hide_topics": true
           }
         },
         "cases": {

@@ -1,96 +1,38 @@
-{% render 'vectra-assets' %}
-{% liquid
-  assign img_side = 'vectra-8ee652fcc300949bf9c1387dbcc9e04238d48321.svg' | asset_url
-  assign img_search = 'vectra-ddefc620c4f82140acfa9b8253e156e88360289b.svg' | asset_url
-%}
-{% capture nested_sidebar %}
-  {% content_for 'blocks' %}
-{% endcapture %}
-{% unless block.settings.hide_section %}
-<section class="vres-feed" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-  <div class="vres-feed__layout">
-    <div class="vres-feed__main">
-      {% render 'vectra-resources-modules', module: 'feed', block: block %}
-    </div>
-    <aside class="vres-side" aria-label="Resource filters">
-      <img class="vres-side__panel" src="{{ img_side }}" alt="" width="420" height="1228">
-      <div class="vres-side__inner">
-        <label class="vres-search">
-          <span class="visually-hidden">Search resources</span>
-          <input type="search" placeholder="Search Keyword" data-vres-search autocomplete="off">
-          <img src="{{ img_search }}" alt="" width="20" height="20">
-        </label>
-        {{ nested_sidebar }}
-      </div>
-    </aside>
-  </div>
-</section>
-{% endunless %}
+{% render 'vectra-resources-modules', module: 'feed', block: block %}
 
 {% schema %}
 {
-  "name": "VECTRA: Res feed",
+  "name": "VECTRA: Res insights",
   "tag": null,
-  "blocks": [
-    {
-      "type": "@theme"
-    },
-    {
-      "type": "@app"
-    }
-  ],
   "settings": [
     {
       "type": "text",
       "id": "insights_heading",
-      "label": "Insights heading",
-      "default": "Insights"
+      "label": "Section heading",
+      "default": "INSIGHTS"
     },
     {
       "type": "text",
       "id": "feature_heading",
-      "label": "Featured heading"
-    },
-    {
-      "type": "image_picker",
-      "id": "feature_image",
-      "label": "Featured image"
-    },
-    {
-      "type": "richtext",
-      "id": "feature_text",
-      "label": "Featured text"
+      "label": "Featured heading",
+      "default": "Featured Insights"
     },
     {
       "type": "text",
-      "id": "events_heading",
-      "label": "Events heading",
-      "default": "Events & webinars"
+      "id": "search_placeholder",
+      "label": "Search placeholder",
+      "default": "Search by topic, regulation, risk, or keyword"
     },
     {
       "type": "text",
-      "id": "events_title",
-      "label": "Events title"
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "View All Insights"
     },
     {
-      "type": "image_picker",
-      "id": "events_image",
-      "label": "Events image"
-    },
-    {
-      "type": "richtext",
-      "id": "events_text",
-      "label": "Events text"
-    },
-    {
-      "type": "text",
-      "id": "follow_heading",
-      "label": "Follow-on heading"
-    },
-    {
-      "type": "richtext",
-      "id": "follow_text",
-      "label": "Follow-on text"
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View all link"
     },
     {
       "type": "checkbox",
@@ -121,66 +63,11 @@
       "step": 4,
       "unit": "px",
       "default": 0
-    },
-    {
-      "type": "range",
-      "id": "padding-inline-start",
-      "label": "Left",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "padding-inline-end",
-      "label": "Right",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "header",
-      "content": "Appearance"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color"
-    },
-    {
-      "type": "range",
-      "id": "border_radius",
-      "label": "Corner radius",
-      "min": 0,
-      "max": 80,
-      "step": 2,
-      "unit": "px",
-      "default": 0
     }
   ],
   "presets": [
     {
-      "name": "VECTRA: Res feed",
-      "blocks": [
-        {
-          "type": "vectra-recent-posts"
-        },
-        {
-          "type": "vectra-tags"
-        },
-        {
-          "type": "vectra-instagram"
-        }
-      ]
+      "name": "VECTRA: Res insights"
     }
   ]
 }

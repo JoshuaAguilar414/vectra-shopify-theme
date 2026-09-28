@@ -1,0 +1,52 @@
+{% render 'vectra-resources-modules', module: 'closing', block: block %}
+
+{% schema %}
+{
+  "name": "VECTRA: Res closing",
+  "tag": null,
+  "settings": [
+    { "type": "checkbox", "id": "hide_section", "label": "Hide this section", "default": false },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "WHAT COMES NEXT" },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Better insight should lead somewhere."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "If what you have learned needs to become a decision, a plan, or a change to how your team works, VECTRA International can help you move it forward."
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form heading",
+      "default": "Talk to a VECTRA Expert"
+    },
+    { "type": "header", "content": "Padding" },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [{ "name": "VECTRA: Res closing" }]
+}
+{% endschema %}

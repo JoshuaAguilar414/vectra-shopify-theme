@@ -9,33 +9,136 @@
             "menu": "vectra-website-mega-menu"
           }
         },
-        "hero": { "type": "vectra-res-hero", "settings": {} },
+        "hero": {
+          "type": "vectra-res-hero",
+          "settings": {
+            "kicker": "VECTRA RESOURCES",
+            "heading": "Responsible Business Resources & Insights",
+            "subheading": "Better Insight. Clearer Decisions.",
+            "aeo_text": "Responsible business resources help organizations understand ESG, supply chain, sustainability, compliance, risk, and operational resilience issues and decide what to do about them. VECTRA International brings together ESG resources, supply chain resources, Insights, Ebooks and Playbooks, Events and Webinars, VCASTs, Case Studies, and Press Releases, organized by the kind of answer you need."
+          }
+        },
+        "explore": {
+          "type": "vectra-res-explore",
+          "settings": {
+            "kicker": "EXPLORE VECTRA RESOURCES",
+            "heading": "Find the Right Resource for What You Need",
+            "text": "Not every question needs the same kind of answer. Sometimes you need a clear expert’s take on a changing requirement. Sometimes you need a deeper guide, evidence from a real case, or a conversation that adds context to a decision you are already making.",
+            "close_text": "Choose the format that fits the question in front of you.",
+            "card_1_title": "Insights",
+            "card_1_text": "Expert analysis that helps you make sense of changing regulations, supply chain risk, business resilience, and operational resilience issues as they develop.",
+            "card_1_cta": "Explore Insights",
+            "card_2_title": "Ebooks & Playbooks",
+            "card_2_text": "Structured guides and frameworks that help you organize a complex issue and plan the work required to address it.",
+            "card_2_cta": "Browse Ebooks & Playbooks",
+            "card_3_title": "Events & Webinars",
+            "card_3_text": "Live and on-demand conversations with experts working through the issues shaping responsible business, supply chain resilience, risk management, and operational performance.",
+            "card_3_cta": "Explore Events & Webinars",
+            "card_4_title": "VCASTs",
+            "card_4_text": "Hear the experience, thinking, and perspective behind the issues VECTRA experts, partners, and practitioners work on every day.",
+            "card_4_cta": "Listen to VCASTs",
+            "card_5_title": "Case Studies",
+            "card_5_text": "See how VECTRA works through operational resilience, supply chain, compliance, and responsible-business challenges, from the starting problem to the work that followed and what changed.",
+            "card_5_cta": "Explore Case Studies",
+            "card_6_title": "Press Releases",
+            "card_6_text": "Official VECTRA announcements, partnerships, leadership news, and company developments.",
+            "card_6_cta": "View Press Releases"
+          }
+        },
         "feed": {
           "type": "vectra-res-feed",
-          "blocks": {
-            "recent": { "type": "vectra-recent-posts", "settings": {} },
-            "tags": { "type": "vectra-tags", "settings": {} },
-            "instagram": { "type": "vectra-instagram", "settings": {} }
-          },
-          "block_order": ["recent", "tags", "instagram"],
-          "settings": {}
+          "settings": {
+            "insights_heading": "INSIGHTS",
+            "feature_heading": "Featured Insights",
+            "search_placeholder": "Search by topic, regulation, risk, or keyword",
+            "view_all_label": "View All Insights"
+          }
         },
-        "ebooks": { "type": "vectra-res-ebooks", "settings": {} },
+        "ebooks": {
+          "type": "vectra-res-ebooks",
+          "settings": {
+            "heading": "EBOOKS & PLAYBOOKS",
+            "button_label": "Explore All Ebooks & Playbooks"
+          }
+        },
+        "why": {
+          "type": "vectra-res-why",
+          "settings": {
+            "kicker": "WHY CHOOSE VECTRA INTERNATIONAL",
+            "heading": "Why Choose VECTRA International"
+          }
+        },
         "faq": {
           "type": "vectra-res-faq",
           "blocks": {
-            "faq_1": { "type": "_vectra-faq-item", "settings": { "open": true, "question": "What are responsible business resources?", "answer": "Responsible business resources are insights, guides, evidence, and expert analysis that help organizations understand ESG, supply chain, compliance, risk management, business resilience, and operational resilience issues and decide what action to take." } },
-            "faq_2": { "type": "_vectra-faq-item", "settings": { "question": "Who are VECTRA Resources written for?", "answer": "VECTRA Resources are written for procurement, operations, supply chain, risk, compliance, sustainability, and transformation leaders who need to understand an issue before making or defending a decision." } },
-            "faq_3": { "type": "_vectra-faq-item", "settings": { "question": "What types of resources does VECTRA International offer?", "answer": "VECTRA International offers Insights, Ebooks and Playbooks, Events and Webinars, VCASTs, Case Studies, and Press Releases. Across these formats, you can explore ESG resources, supply chain resources, business resilience resources, risk management resources, and operational resilience resources." } },
-            "faq_4": { "type": "_vectra-faq-item", "settings": { "question": "Are VECTRA Resources free to access?", "answer": "Yes. VECTRA Resources are free to explore. Some Ebooks, Playbooks, and Events may require registration." } },
-            "faq_5": { "type": "_vectra-faq-item", "settings": { "question": "How do I find the right resource for my question?", "answer": "Use the search bar to find resources by topic, regulation, risk, or keyword. You can also browse by format if you already know whether you need a quick Insight, a deeper guide, an expert conversation, or a real-world Case Study." } }
+            "faq_1": {
+              "type": "_vectra-faq-item",
+              "settings": {
+                "open": true,
+                "question": "What are responsible business resources?",
+                "answer": "Responsible business resources are insights, guides, evidence, and expert analysis that help organizations understand ESG, supply chain, compliance, risk management, business resilience, and operational resilience issues and decide what action to take."
+              }
+            },
+            "faq_2": {
+              "type": "_vectra-faq-item",
+              "settings": {
+                "question": "Who are VECTRA Resources written for?",
+                "answer": "VECTRA Resources are written for procurement, operations, supply chain, risk, compliance, sustainability, and transformation leaders who need to understand an issue before making or defending a decision."
+              }
+            },
+            "faq_3": {
+              "type": "_vectra-faq-item",
+              "settings": {
+                "question": "What types of resources does VECTRA International offer?",
+                "answer": "VECTRA International offers Insights, Ebooks and Playbooks, Events and Webinars, VCASTs, Case Studies, and Press Releases.\n\nAcross these formats, you can explore ESG resources, supply chain resources, business resilience resources, risk management resources, and operational resilience resources."
+              }
+            },
+            "faq_4": {
+              "type": "_vectra-faq-item",
+              "settings": {
+                "question": "Are VECTRA Resources free to access?",
+                "answer": "Yes. VECTRA Resources are free to explore. Some Ebooks, Playbooks, and Events may require registration."
+              }
+            },
+            "faq_5": {
+              "type": "_vectra-faq-item",
+              "settings": {
+                "question": "How do I find the right resource for my question?",
+                "answer": "Use the search bar to find resources by topic, regulation, risk, or keyword. You can also browse by format if you already know whether you need a quick Insight, a deeper guide, an expert conversation, or a real-world Case Study."
+              }
+            }
           },
           "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"],
-          "settings": {}
+          "settings": {
+            "heading": "Frequently Asked Questions",
+            "card_title": "Still looking for clarity?",
+            "card_text": "If what you have learned needs to become a decision, a plan, or a change to how your team works, talk to a VECTRA expert.",
+            "button_label": "Talk to a VECTRA Expert",
+            "button_link": "#what-comes-next"
+          }
+        },
+        "closing": {
+          "type": "vectra-res-closing",
+          "settings": {
+            "kicker": "WHAT COMES NEXT",
+            "heading": "Better insight should lead somewhere.",
+            "text": "If what you have learned needs to become a decision, a plan, or a change to how your team works, VECTRA International can help you move it forward.",
+            "form_heading": "Talk to a VECTRA Expert"
+          }
         },
         "footer": { "type": "vectra-footer", "settings": {} }
       },
-      "block_order": ["header", "hero", "feed", "ebooks", "faq", "footer"],
+      "block_order": [
+        "header",
+        "hero",
+        "explore",
+        "feed",
+        "ebooks",
+        "why",
+        "faq",
+        "closing",
+        "footer"
+      ],
       "settings": {
         "menu": "vectra-website-mega-menu"
       }

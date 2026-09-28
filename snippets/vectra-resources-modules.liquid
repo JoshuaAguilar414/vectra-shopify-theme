@@ -16,169 +16,427 @@
   assign img_mail = 'vectra-9a4f80a5b924a881fc96b20219bb1f7c8ca734ab.svg' | asset_url
   assign img_phone = 'vectra-7c0e54b37d57d95df328b0e4ee1f7b87844a7372.svg' | asset_url
   assign img_pin = 'vectra-484bca36e3874bd30d1d6dd79807ed0314378e3d.svg' | asset_url
+  assign img_chat = 'vectra-da137306dcbc6716d83295ef75678ab141a500e1.svg' | asset_url
   assign faq_base = pages['faq'].url | default: '/pages/faq'
+  assign resources_url = pages['resources'].url | default: '/pages/resources'
 %}
 {% capture faq_href %}{% render 'vectra-preview-href', url: faq_base, view: 'faq' %}{% endcapture %}
 {% assign faq_href = faq_href | strip %}
+
+{% liquid
+  assign blog_insights = blogs['insights']
+  if blog_insights == blank or blog_insights.articles_count == 0
+    assign blog_insights = blogs['news']
+  endif
+  assign blog_ebooks = blogs['ebooks']
+  if blog_ebooks == blank or blog_ebooks.articles_count == 0
+    assign blog_ebooks = blogs['playbooks']
+  endif
+  assign blog_events = blogs['events']
+  if blog_events == blank or blog_events.articles_count == 0
+    assign blog_events = blogs['webinars']
+  endif
+  assign blog_vcasts = blogs['vcasts']
+  if blog_vcasts == blank or blog_vcasts.articles_count == 0
+    assign blog_vcasts = blogs['podcasts']
+  endif
+  assign blog_cases = blogs['case-studies']
+  if blog_cases == blank or blog_cases.articles_count == 0
+    assign blog_cases = blogs['cases']
+  endif
+  assign blog_press = blogs['press-releases']
+  if blog_press == blank or blog_press.articles_count == 0
+    assign blog_press = blogs['press']
+  endif
+%}
+
 {% case module %}
   {% when 'hero' %}
 {% render 'vectra-seo', page_key: 'resources' %}
 {% unless block.settings.hide_section %}
+{% liquid
+  assign hero_kicker = block.settings.kicker | default: 'VECTRA RESOURCES'
+  assign hero_h1 = block.settings.heading | default: 'Responsible Business Resources & Insights'
+  assign hero_display = block.settings.subheading | default: 'Better Insight. Clearer Decisions.'
+  assign hero_aeo = block.settings.aeo_text | default: 'Responsible business resources help organizations understand ESG, supply chain, sustainability, compliance, risk, and operational resilience issues and decide what to do about them. VECTRA International brings together ESG resources, supply chain resources, Insights, Ebooks and Playbooks, Events and Webinars, VCASTs, Case Studies, and Press Releases, organized by the kind of answer you need.'
+%}
 <section
   class="vres-hero vres-hero--align-{{ block.settings.text_align | default: 'left' }}"
   aria-label="Resources"
   style="{% render 'vectra-block-style', settings: block.settings %}"
   {{ block.shopify_attributes }}
 >
-    {% render 'vectra-image', image: block.settings.watermark, fallback: img_mark, alt: '', class: 'vres-hero__mark', width: 901, height: 909, image_width: 900 %}
-    <div class="vres-hero__copy" data-vh-reveal="up">
-      <p class="vres-hero__kicker">{{ block.settings.kicker | default: 'VECTRA Resources' }}</p>
-      <h1>{{ block.settings.heading | default: 'Responsible Business Resources &amp; Insights' }}</h1>
-      <h2>{{ block.settings.subheading | default: 'Better Insight. Clearer Decisions.' }}</h2>
-      <p class="vres-hero__lead">
-        {{ block.settings.text | default: 'VECTRA Resources helps you work out what matters, what it means for your organization, and what to do next. There is already enough information available. The harder part is separating what is relevant from what is not, understanding what it means for your operations, and knowing where your attention needs to go.' }}
-      </p>
+  {% render 'vectra-image', image: block.settings.watermark, fallback: img_mark, alt: '', class: 'vres-hero__mark', width: 901, height: 909, image_width: 900 %}
+  <div class="vres-hero__copy" data-vh-reveal="up">
+    <p class="vres-hero__kicker">{{ hero_kicker }}</p>
+    <h1>{{ hero_h1 }}</h1>
+    <h2 class="vres-hero__display">{{ hero_display }}</h2>
+    <div class="vres-hero__lead">
+      {% if block.settings.text != blank %}
+        {{ block.settings.text }}
+      {% else %}
+        <p>VECTRA Resources helps you work out what matters, what it means for your organization, and what to do next.</p>
+        <p>There is already enough information available. The harder part is separating what is relevant from what is not, understanding what it means for your operations, and knowing where your attention needs to go.</p>
+      {% endif %}
     </div>
-    <nav class="vres-cats" aria-label="Resource types" data-vh-reveal="up">
-      <a class="vres-cat" href="{{ block.settings.cat_1_link | default: '#insights' }}">
-        {{ block.settings.cat_1_label | default: 'Insights' }}
-        <img src="{{ img_arrow }}" alt="" width="16" height="10">
-      </a>
-      <a class="vres-cat" href="{{ block.settings.cat_2_link | default: '#ebooks' }}">
-        {{ block.settings.cat_2_label | default: 'Ebooks &amp; Playbooks' }}
-        <img src="{{ img_arrow }}" alt="" width="16" height="10">
-      </a>
-      <a class="vres-cat" href="{{ block.settings.cat_3_link | default: '#events' }}">
-        {{ block.settings.cat_3_label | default: 'Events &amp; Webinars' }}
-        <img src="{{ img_arrow }}" alt="" width="16" height="10">
-      </a>
-      <a class="vres-cat" href="{{ block.settings.cat_4_link | default: '#podcasts' }}">
-        {{ block.settings.cat_4_label | default: 'VCASTs' }}
-        <img src="{{ img_arrow }}" alt="" width="16" height="10">
-      </a>
-    </nav>
-  </section>
+    {% if hero_aeo != blank %}
+      <p class="vres-hero__aeo">{{ hero_aeo }}</p>
+    {% endif %}
+  </div>
+</section>
+{% endunless %}
+
+  {% when 'explore' %}
+{% unless block.settings.hide_section %}
+{% liquid
+  assign ex_kicker = block.settings.kicker | default: 'EXPLORE VECTRA RESOURCES'
+  assign ex_heading = block.settings.heading | default: 'Find the Right Resource for What You Need'
+  assign ex_text = block.settings.text | default: 'Not every question needs the same kind of answer. Sometimes you need a clear expert’s take on a changing requirement. Sometimes you need a deeper guide, evidence from a real case, or a conversation that adds context to a decision you are already making.'
+  assign ex_close = block.settings.close_text | default: 'Choose the format that fits the question in front of you.'
+%}
+<section class="vres-explore" id="explore" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-wrap">
+    <p class="vh-kicker">{{ ex_kicker }}</p>
+    <h2 class="vh-h2">{{ ex_heading }}</h2>
+    <p class="vh-lead">{{ ex_text }}</p>
+    <p class="vres-explore__close">{{ ex_close }}</p>
+    <div class="vres-explore__grid">
+      <article class="vres-explore__card" data-vh-reveal>
+        <h3>{{ block.settings.card_1_title | default: 'Insights' }}</h3>
+        <p>{{ block.settings.card_1_text | default: 'Expert analysis that helps you make sense of changing regulations, supply chain risk, business resilience, and operational resilience issues as they develop.' }}</p>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ block.settings.card_1_link | default: '#insights' }}">{{ block.settings.card_1_cta | default: 'Explore Insights' }}</a>
+      </article>
+      <article class="vres-explore__card" data-vh-reveal>
+        <h3>{{ block.settings.card_2_title | default: 'Ebooks & Playbooks' }}</h3>
+        <p>{{ block.settings.card_2_text | default: 'Structured guides and frameworks that help you organize a complex issue and plan the work required to address it.' }}</p>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ block.settings.card_2_link | default: '#ebooks' }}">{{ block.settings.card_2_cta | default: 'Browse Ebooks & Playbooks' }}</a>
+      </article>
+      <article class="vres-explore__card" data-vh-reveal>
+        <h3>{{ block.settings.card_3_title | default: 'Events & Webinars' }}</h3>
+        <p>{{ block.settings.card_3_text | default: 'Live and on-demand conversations with experts working through the issues shaping responsible business, supply chain resilience, risk management, and operational performance.' }}</p>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ block.settings.card_3_link | default: '#events' }}">{{ block.settings.card_3_cta | default: 'Explore Events & Webinars' }}</a>
+      </article>
+      <article class="vres-explore__card" data-vh-reveal>
+        <h3>{{ block.settings.card_4_title | default: 'VCASTs' }}</h3>
+        <p>{{ block.settings.card_4_text | default: 'Hear the experience, thinking, and perspective behind the issues VECTRA experts, partners, and practitioners work on every day.' }}</p>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ block.settings.card_4_link | default: '#vcasts' }}">{{ block.settings.card_4_cta | default: 'Listen to VCASTs' }}</a>
+      </article>
+      <article class="vres-explore__card" data-vh-reveal>
+        <h3>{{ block.settings.card_5_title | default: 'Case Studies' }}</h3>
+        <p>{{ block.settings.card_5_text | default: 'See how VECTRA works through operational resilience, supply chain, compliance, and responsible-business challenges, from the starting problem to the work that followed and what changed.' }}</p>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ block.settings.card_5_link | default: '#case-studies' }}">{{ block.settings.card_5_cta | default: 'Explore Case Studies' }}</a>
+      </article>
+      <article class="vres-explore__card" data-vh-reveal>
+        <h3>{{ block.settings.card_6_title | default: 'Press Releases' }}</h3>
+        <p>{{ block.settings.card_6_text | default: 'Official VECTRA announcements, partnerships, leadership news, and company developments.' }}</p>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ block.settings.card_6_link | default: '#press' }}">{{ block.settings.card_6_cta | default: 'View Press Releases' }}</a>
+      </article>
+    </div>
+  </div>
+</section>
 {% endunless %}
 
   {% when 'feed' %}
-        <header class="vres-label" id="insights">
-          <img class="vres-label__dot" src="{{ img_dot }}" alt="" width="6" height="6">
-          <h2>{{ block.settings.insights_heading | default: 'Insights' }}</h2>
-          <img class="vres-label__rule" src="{{ img_rule }}" alt="" width="693" height="2">
-        </header>
-
-        <article class="vres-feature" data-vres-item data-vres-tags="performance management solutions">
-          <h3>{{ block.settings.feature_heading | default: 'From insight to the decision that has to follow' }}</h3>
-          {% render 'vectra-image', image: block.settings.feature_image, fallback: img_feature, alt: 'Teams reviewing operational performance', width: 932, height: 301, image_width: 1400 %}
-          <div class="vres-prose">
-            {% if block.settings.feature_text != blank %}
-              {{ block.settings.feature_text }}
+{% unless block.settings.hide_section %}
+{% liquid
+  assign insights_heading = block.settings.insights_heading | default: 'INSIGHTS'
+  assign featured_heading = block.settings.feature_heading | default: 'Featured Insights'
+  assign search_placeholder = block.settings.search_placeholder | default: 'Search by topic, regulation, risk, or keyword'
+  assign view_all_label = block.settings.view_all_label | default: 'View All Insights'
+  if block.settings.view_all_link != blank
+    assign view_all_href = block.settings.view_all_link
+  elsif blog_insights != blank
+    assign view_all_href = blog_insights.url
+  else
+    assign view_all_href = resources_url
+  endif
+%}
+<section class="vres-library" id="insights" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-wrap">
+    <header class="vres-label">
+      <img class="vres-label__dot" src="{{ img_dot }}" alt="" width="6" height="6">
+      <h2>{{ insights_heading }}</h2>
+      <img class="vres-label__rule" src="{{ img_rule }}" alt="" width="693" height="2">
+    </header>
+    <form class="vres-searchbar" action="{{ routes.search_url }}" method="get" role="search">
+      <label class="vres-searchbar__field">
+        <span class="visually-hidden">Search insights</span>
+        <input type="search" name="q" placeholder="{{ search_placeholder }}" autocomplete="off">
+      </label>
+      <input type="hidden" name="type" value="article">
+      <button class="vh-btn vh-btn--green vh-btn--rect" type="submit">Search</button>
+    </form>
+    <h2 class="vres-library__subhead">{{ featured_heading }}</h2>
+    <div class="vres-library__grid">
+      {% if blog_insights != blank and blog_insights.articles_count > 0 %}
+        {% for article in blog_insights.articles limit: 3 %}
+          <article class="vres-library__card" data-vh-reveal>
+            {% if article.image %}
+              {{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: article.title }}
             {% else %}
-            <p>
-              There is already enough information available. The harder part is separating what is relevant from what is not, understanding what it means for your operations, and knowing where your attention needs to go.
-            </p>
-            <p>
-              VECTRA Insights help procurement, operations, risk, and sustainability leaders make sense of changing requirements before they become a stalled action or an evidence gap.
-            </p>
+              <img src="{{ img_feature }}" alt="" width="800" height="450">
             {% endif %}
-          </div>
+            <h4>{{ article.title }}</h4>
+            <p>{{ article.excerpt | default: article.content | strip_html | truncate: 140 }}</p>
+            <a class="vres-library__cta" href="{{ article.url }}">Read Insight</a>
+          </article>
+        {% endfor %}
+      {% else %}
+        <article class="vres-library__card" data-vh-reveal>
+          <img src="{{ img_feature }}" alt="" width="800" height="450">
+          <h4>From insight to the decision that has to follow</h4>
+          <p>Make sense of changing requirements before they become a stalled action or an evidence gap.</p>
+          <a class="vres-library__cta" href="{{ view_all_href }}">Read Insight</a>
         </article>
-
-        <header class="vres-label" id="events">
-          <img class="vres-label__dot" src="{{ img_dot }}" alt="" width="6" height="6">
-          <h2>{{ block.settings.events_heading | default: 'Events &amp; webinars' }}</h2>
-          <img class="vres-label__rule" src="{{ img_rule }}" alt="" width="693" height="2">
-        </header>
-
-        <article class="vres-split" data-vres-item data-vres-tags="experience development">
-          <div class="vres-split__copy">
-            <h3>{{ block.settings.events_title | default: 'Events that add context to a decision you are already making' }}</h3>
-            <div class="vres-prose vres-prose--muted">
-              {% if block.settings.events_text != blank %}
-                {{ block.settings.events_text }}
-              {% else %}
-              <p>
-                Live and on-demand conversations with experts working through the issues shaping responsible business, supply chain resilience, and operational performance.
-              </p>
-              <p>
-                Join to hear how teams are turning requirements, supplier findings, and operational gaps into a practical next step.
-              </p>
-              {% endif %}
-            </div>
-          </div>
-          {% render 'vectra-image', image: block.settings.events_image, fallback: img_events, alt: 'Teams mapping sustainability actions', width: 460, height: 301, image_width: 920 %}
+        <article class="vres-library__card" data-vh-reveal>
+          <img src="{{ img_events }}" alt="" width="800" height="450">
+          <h4>What changed after the finding</h4>
+          <p>See how teams turn supplier findings and operational gaps into a practical next step.</p>
+          <a class="vres-library__cta" href="{{ view_all_href }}">Read Insight</a>
         </article>
-
-        <article class="vres-follow" data-vres-item data-vres-tags="support recruitment">
-          <h3>{{ block.settings.follow_heading | default: 'What changed after the finding — and what still needs a team around it' }}</h3>
-          <div class="vres-prose vres-prose--muted">
-            {% if block.settings.follow_text != blank %}
-              {{ block.settings.follow_text }}
-            {% else %}
-            <p>
-              Case studies show how VECTRA works through operational resilience, supply chain, and responsible-business challenges, from the starting problem to the work that followed.
-            </p>
-            <p>
-              Press and VCASTs add the company context behind partnerships, leadership news, and the issues practitioners work on every day.
-            </p>
-            {% endif %}
-          </div>
+        <article class="vres-library__card" data-vh-reveal>
+          <img src="{{ img_feature }}" alt="" width="800" height="450">
+          <h4>Separating signal from noise</h4>
+          <p>Work out what is relevant for your operations, and where your attention needs to go next.</p>
+          <a class="vres-library__cta" href="{{ view_all_href }}">Read Insight</a>
         </article>
+      {% endif %}
+    </div>
+    <div class="vres-library__more">
+      <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ view_all_href }}">{{ view_all_label }}</a>
+    </div>
+  </div>
+</section>
+{% endunless %}
 
   {% when 'ebooks' %}
 {% unless block.settings.hide_section %}
-<section class="vres-ebooks" id="ebooks" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+{% liquid
+  assign ebooks_heading = block.settings.heading | default: 'EBOOKS & PLAYBOOKS'
+  assign ebooks_cta = block.settings.button_label | default: 'Explore All Ebooks & Playbooks'
+  if block.settings.button_link != blank
+    assign ebooks_href = block.settings.button_link
+  elsif blog_ebooks != blank
+    assign ebooks_href = blog_ebooks.url
+  else
+    assign ebooks_href = '#ebooks'
+  endif
+%}
+<section class="vres-library vres-library--ebooks" id="ebooks" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-wrap">
     <header class="vres-label">
       <img class="vres-label__dot" src="{{ img_dot }}" alt="" width="6" height="6">
-      <h2>{{ block.settings.heading | default: 'Ebooks &amp; playbooks' }}</h2>
+      <h2>{{ ebooks_heading }}</h2>
       <img class="vres-label__rule" src="{{ img_rule }}" alt="" width="693" height="2">
     </header>
-    {% liquid
-      assign ebook_1 = block.settings.image_1
-      assign ebook_2 = block.settings.image_2
-      assign ebook_3 = block.settings.image_3
-      assign ebook_4 = block.settings.image_4
-      assign ebook_5 = block.settings.image_5
-    %}
-    <div class="vres-ebooks__grid">
-      <a class="vres-ebooks__card" href="{{ block.settings.link_1 | default: '#' }}">
-        {% if ebook_1 != blank %}
-          {{ ebook_1 | image_url: width: 960 | image_tag: loading: 'lazy', alt: 'Risk Management & Supply Chain Due Diligence in a Complex Legal Landscape', width: 480, height: 472 }}
-        {% else %}
-          <img src="{{ img_ebook_1 }}" alt="Risk Management &amp; Supply Chain Due Diligence in a Complex Legal Landscape" width="480" height="472">
-        {% endif %}
-      </a>
-      <a class="vres-ebooks__card" href="{{ block.settings.link_2 | default: '#' }}">
-        {% if ebook_2 != blank %}
-          {{ ebook_2 | image_url: width: 960 | image_tag: loading: 'lazy', alt: "A Guide to EU's Corporate Sustainability Due Diligence Directive", width: 450, height: 472 }}
-        {% else %}
-          <img src="{{ img_ebook_2 }}" alt="A Guide to EU's Corporate Sustainability Due Diligence Directive" width="450" height="472">
-        {% endif %}
-      </a>
-      <a class="vres-ebooks__card" href="{{ block.settings.link_3 | default: '#' }}">
-        {% if ebook_3 != blank %}
-          {{ ebook_3 | image_url: width: 960 | image_tag: loading: 'lazy', alt: 'ESG Due Diligence Insights and Actionable Steps for Businesses', width: 451, height: 472 }}
-        {% else %}
-          <img src="{{ img_ebook_3 }}" alt="ESG Due Diligence Insights and Actionable Steps for Businesses" width="451" height="472">
-        {% endif %}
-      </a>
-      <a class="vres-ebooks__card" href="{{ block.settings.link_4 | default: '#' }}">
-        {% if ebook_4 != blank %}
-          {{ ebook_4 | image_url: width: 960 | image_tag: loading: 'lazy', alt: "A Guide to EU's Corporate Sustainability Due Diligence Directive", width: 450, height: 472 }}
-        {% else %}
-          <img src="{{ img_ebook_2 }}" alt="A Guide to EU's Corporate Sustainability Due Diligence Directive" width="450" height="472">
-        {% endif %}
-      </a>
-      <a class="vres-ebooks__card" href="{{ block.settings.link_5 | default: '#' }}">
-        {% if ebook_5 != blank %}
-          {{ ebook_5 | image_url: width: 960 | image_tag: loading: 'lazy', alt: 'Risk Management & Supply Chain Due Diligence in a Complex Legal Landscape', width: 480, height: 472 }}
-        {% else %}
-          <img src="{{ img_ebook_1 }}" alt="Risk Management &amp; Supply Chain Due Diligence in a Complex Legal Landscape" width="480" height="472">
-        {% endif %}
-      </a>
+    <div class="vres-library__grid vres-library__grid--ebooks">
+      {% if blog_ebooks != blank and blog_ebooks.articles_count > 0 %}
+        {% for article in blog_ebooks.articles limit: 4 %}
+          <article class="vres-library__card" data-vh-reveal>
+            {% if article.image %}
+              {{ article.image | image_url: width: 640 | image_tag: loading: 'lazy', alt: article.title }}
+            {% endif %}
+            <h4>{{ article.title }}</h4>
+            <p>{{ article.excerpt | default: article.content | strip_html | truncate: 120 }}</p>
+            <a class="vres-library__cta" href="{{ article.url }}">Download / Read</a>
+          </article>
+        {% endfor %}
+      {% else %}
+        <article class="vres-library__card" data-vh-reveal>
+          <img src="{{ img_ebook_1 }}" alt="" width="480" height="472">
+          <h4>Risk Management & Supply Chain Due Diligence</h4>
+          <p>A structured guide to organizing due diligence work across complex supply chains.</p>
+          <a class="vres-library__cta" href="{{ block.settings.link_1 | default: '#' }}">Download / Read</a>
+        </article>
+        <article class="vres-library__card" data-vh-reveal>
+          <img src="{{ img_ebook_2 }}" alt="" width="450" height="472">
+          <h4>A Guide to EU Corporate Sustainability Due Diligence</h4>
+          <p>Frameworks that help you plan the work required to address CSDDD requirements.</p>
+          <a class="vres-library__cta" href="{{ block.settings.link_2 | default: '#' }}">Download / Read</a>
+        </article>
+        <article class="vres-library__card" data-vh-reveal>
+          <img src="{{ img_ebook_3 }}" alt="" width="451" height="472">
+          <h4>ESG Due Diligence Insights and Actionable Steps</h4>
+          <p>Practical steps for turning ESG requirements into clearer ownership and action.</p>
+          <a class="vres-library__cta" href="{{ block.settings.link_3 | default: '#' }}">Download / Read</a>
+        </article>
+      {% endif %}
     </div>
-    <span id="podcasts"></span>
-  </section>
+    <div class="vres-library__more">
+      <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ ebooks_href }}">{{ ebooks_cta }}</a>
+    </div>
+  </div>
+</section>
+
+{% comment %} Events & Webinars {% endcomment %}
+<section class="vres-library" id="events">
+  <div class="vh-wrap">
+    <header class="vres-label">
+      <img class="vres-label__dot" src="{{ img_dot }}" alt="" width="6" height="6">
+      <h2>EVENTS & WEBINARS</h2>
+      <img class="vres-label__rule" src="{{ img_rule }}" alt="" width="693" height="2">
+    </header>
+    <h3 class="vres-library__subhead">Upcoming</h3>
+    <div class="vres-library__grid">
+      {% if blog_events != blank and blog_events.articles_count > 0 %}
+        {% for article in blog_events.articles limit: 2 %}
+          <article class="vres-library__card" data-vh-reveal>
+            <h4>{{ article.title }}</h4>
+            <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time>
+            <p>{{ article.excerpt | default: article.content | strip_html | truncate: 140 }}</p>
+            <a class="vres-library__cta" href="{{ article.url }}">Register</a>
+          </article>
+        {% endfor %}
+      {% else %}
+        <article class="vres-library__card" data-vh-reveal>
+          <h4>Events that add context to a decision you are already making</h4>
+          <time>Upcoming</time>
+          <p>Live conversations with experts working through responsible business, supply chain resilience, and operational performance.</p>
+          <a class="vres-library__cta" href="#events">Register</a>
+        </article>
+      {% endif %}
+    </div>
+    <h3 class="vres-library__subhead">On Demand</h3>
+    <div class="vres-library__grid">
+      {% if blog_events != blank and blog_events.articles_count > 2 %}
+        {% for article in blog_events.articles offset: 2 limit: 2 %}
+          <article class="vres-library__card" data-vh-reveal>
+            <h4>{{ article.title }}</h4>
+            <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time>
+            <a class="vres-library__cta" href="{{ article.url }}">Watch Now</a>
+          </article>
+        {% endfor %}
+      {% else %}
+        <article class="vres-library__card" data-vh-reveal>
+          <h4>Recorded sessions on operational resilience and supplier risk</h4>
+          <time>On demand</time>
+          <a class="vres-library__cta" href="#events">Watch Now</a>
+        </article>
+      {% endif %}
+    </div>
+    <div class="vres-library__more">
+      <a class="vh-btn vh-btn--green vh-btn--rect" href="{% if blog_events != blank %}{{ blog_events.url }}{% else %}#events{% endif %}">Explore All Events & Webinars</a>
+    </div>
+  </div>
+</section>
+
+{% comment %} VCAST {% endcomment %}
+<section class="vres-library" id="vcasts">
+  <div class="vh-wrap">
+    <header class="vres-label">
+      <img class="vres-label__dot" src="{{ img_dot }}" alt="" width="6" height="6">
+      <h2>VCAST</h2>
+      <img class="vres-label__rule" src="{{ img_rule }}" alt="" width="693" height="2">
+    </header>
+    <div class="vres-library__grid">
+      {% if blog_vcasts != blank and blog_vcasts.articles_count > 0 %}
+        {% for article in blog_vcasts.articles limit: 3 %}
+          <article class="vres-library__card" data-vh-reveal>
+            <h4>{{ article.title }}</h4>
+            <p>{{ article.excerpt | default: article.content | strip_html | truncate: 120 }}</p>
+            <a class="vres-library__cta" href="{{ article.url }}">Listen Now</a>
+          </article>
+        {% endfor %}
+      {% else %}
+        <article class="vres-library__card" data-vh-reveal>
+          <h4>Hear the thinking behind the issues practitioners work on every day</h4>
+          <p>Perspectives from VECTRA experts, partners, and practitioners.</p>
+          <a class="vres-library__cta" href="#vcasts">Listen Now</a>
+        </article>
+      {% endif %}
+    </div>
+    <div class="vres-library__more">
+      <a class="vh-btn vh-btn--green vh-btn--rect" href="{% if blog_vcasts != blank %}{{ blog_vcasts.url }}{% else %}#vcasts{% endif %}">Explore All VCASTs</a>
+    </div>
+  </div>
+</section>
+
+{% comment %} Case Studies {% endcomment %}
+<section class="vres-library" id="case-studies">
+  <div class="vh-wrap">
+    <header class="vres-label">
+      <img class="vres-label__dot" src="{{ img_dot }}" alt="" width="6" height="6">
+      <h2>CASE STUDIES</h2>
+      <img class="vres-label__rule" src="{{ img_rule }}" alt="" width="693" height="2">
+    </header>
+    <div class="vres-library__grid">
+      {% if blog_cases != blank and blog_cases.articles_count > 0 %}
+        {% for article in blog_cases.articles limit: 3 %}
+          <article class="vres-library__card" data-vh-reveal>
+            {% if article.image %}
+              {{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: article.title }}
+            {% endif %}
+            <h4>{{ article.title }}</h4>
+            <p>{{ article.excerpt | default: article.content | strip_html | truncate: 120 }}</p>
+            <a class="vres-library__cta" href="{{ article.url }}">Read Case Study</a>
+          </article>
+        {% endfor %}
+      {% else %}
+        <article class="vres-library__card" data-vh-reveal>
+          <h4>From the starting problem to what changed</h4>
+          <p>See how VECTRA works through operational resilience, supply chain, and responsible-business challenges.</p>
+          <a class="vres-library__cta" href="#case-studies">Read Case Study</a>
+        </article>
+      {% endif %}
+    </div>
+    <div class="vres-library__more">
+      <a class="vh-btn vh-btn--green vh-btn--rect" href="{% if blog_cases != blank %}{{ blog_cases.url }}{% else %}#case-studies{% endif %}">Explore All Case Studies</a>
+    </div>
+  </div>
+</section>
+
+{% comment %} Press Releases {% endcomment %}
+<section class="vres-library" id="press">
+  <div class="vh-wrap">
+    <header class="vres-label">
+      <img class="vres-label__dot" src="{{ img_dot }}" alt="" width="6" height="6">
+      <h2>PRESS RELEASES</h2>
+      <img class="vres-label__rule" src="{{ img_rule }}" alt="" width="693" height="2">
+    </header>
+    <div class="vres-library__grid">
+      {% if blog_press != blank and blog_press.articles_count > 0 %}
+        {% for article in blog_press.articles limit: 3 %}
+          <article class="vres-library__card" data-vh-reveal>
+            <h4>{{ article.title }}</h4>
+            <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time>
+            <a class="vres-library__cta" href="{{ article.url }}">Read Release</a>
+          </article>
+        {% endfor %}
+      {% else %}
+        <article class="vres-library__card" data-vh-reveal>
+          <h4>Official VECTRA announcements and company developments</h4>
+          <a class="vres-library__cta" href="#press">Read Release</a>
+        </article>
+      {% endif %}
+    </div>
+    <div class="vres-library__more">
+      <a class="vh-btn vh-btn--green vh-btn--rect" href="{% if blog_press != blank %}{{ blog_press.url }}{% else %}#press{% endif %}">View All Press Releases</a>
+    </div>
+  </div>
+</section>
+{% endunless %}
+
+  {% when 'why' %}
+{% unless block.settings.hide_section %}
+{% liquid
+  assign why_kicker = block.settings.kicker | default: 'WHY CHOOSE VECTRA INTERNATIONAL'
+  assign why_heading = block.settings.heading | default: 'Why Choose VECTRA International'
+%}
+<section class="vres-why" id="why-vectra" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-wrap">
+    <p class="vh-kicker">{{ why_kicker }}</p>
+    <h2 class="vh-h2">{{ why_heading }}</h2>
+    <div class="vres-why__copy">
+      {% if block.settings.text != blank %}
+        {{ block.settings.text }}
+      {% else %}
+        <p>VECTRA International brings more than 20 years of work across responsible business, supply chains, risk, and operational improvement to the resources published here.</p>
+        <p>Our responsible business resources draw on the same specialist expertise behind VECTRA’s client work, connecting ESG, supply chain, audit, risk management, and operational resilience topics with the decisions and practical work behind them.</p>
+        <p class="vres-why__close">What you read here reflects what we work on in practice.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
 {% endunless %}
 
   {% when 'faq' %}
@@ -187,49 +445,82 @@
 <section class="vh-faq" id="resources-faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap vh-faq__grid">
     <aside class="vh-contact-card" data-vh-reveal="left">
-      <img class="vh-contact-card__icon" src="{{ 'vectra-da137306dcbc6716d83295ef75678ab141a500e1.svg' | asset_url }}" alt="">
-      <p class="vh-contact-card__title">{{ block.settings.card_title | default: 'More questions?' }}</p>
-      <p>{{ block.settings.card_text | default: 'Find more answers about VECTRA International, how we work, our capabilities, and getting started.' }}</p>
-      <a class="vh-btn vh-btn--white" href="{{ block.settings.button_link | default: faq_href }}">
-        {{ block.settings.button_label | default: 'More questions?' }}
+      <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
+      <p class="vh-contact-card__title">{{ block.settings.card_title | default: 'Still looking for clarity?' }}</p>
+      <p>{{ block.settings.card_text | default: 'If what you have learned needs to become a decision, a plan, or a change to how your team works, talk to a VECTRA expert.' }}</p>
+      <a class="vh-btn vh-btn--white" href="{{ block.settings.button_link | default: '#what-comes-next' }}">
+        {{ block.settings.button_label | default: 'Talk to a VECTRA Expert' }}
         <img src="{{ 'vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg' | asset_url }}" alt="">
       </a>
       {% render 'vectra-contact-details', variant: 'card', img_phone: img_phone, img_mail: img_mail, img_pin: img_pin %}
     </aside>
     <div class="vh-faq__right">
       <div class="vh-faq__glow" aria-hidden="true"></div>
-      <div class="vh-accordion">
-        <p class="vh-kicker">{{ block.settings.kicker | default: 'Our FAQ' }}</p>
+      <div class="vh-accordion" data-vh-faq-accordion>
+        {% if block.settings.kicker != blank %}
+          <p class="vh-kicker">{{ block.settings.kicker }}</p>
+        {% endif %}
         <h2 class="vh-h2">{{ block.settings.heading | default: 'Frequently Asked Questions' }}</h2>
-        <p class="vh-lead">{{ block.settings.lead | default: 'Answers about VECTRA Resources and how to find the right material.' }}</p>
         {% if nested_items != blank %}
           {{ nested_items }}
         {% else %}
-        <div class="vh-acc is-open" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn>What are responsible business resources?</button>
-          <div class="vh-acc__body">Responsible business resources are insights, guides, evidence, and expert analysis that help organizations understand ESG, supply chain, compliance, risk management, business resilience, and operational resilience issues and decide what action to take.</div>
-        </div>
-        <div class="vh-acc" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn>Who are VECTRA Resources written for?</button>
-          <div class="vh-acc__body">VECTRA Resources are written for procurement, operations, supply chain, risk, compliance, sustainability, and transformation leaders who need to understand an issue before making or defending a decision.</div>
-        </div>
-        <div class="vh-acc" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn>What types of resources does VECTRA International offer?</button>
-          <div class="vh-acc__body">VECTRA International offers Insights, Ebooks and Playbooks, Events and Webinars, VCASTs, Case Studies, and Press Releases. Across these formats, you can explore ESG resources, supply chain resources, business resilience resources, risk management resources, and operational resilience resources.</div>
-        </div>
-        <div class="vh-acc" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn>Are VECTRA Resources free to access?</button>
-          <div class="vh-acc__body">Yes. VECTRA Resources are free to explore. Some Ebooks, Playbooks, and Events may require registration.</div>
-        </div>
-        <div class="vh-acc" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn>How do I find the right resource for my question?</button>
-          <div class="vh-acc__body">Use the search bar to find resources by topic, regulation, risk, or keyword. You can also browse by format if you already know whether you need a quick Insight, a deeper guide, an expert conversation, or a real-world Case Study.</div>
-        </div>
+          <div class="vh-acc is-open" data-vh-faq-item>
+            <button type="button" data-vh-faq-btn aria-expanded="true">What are responsible business resources?</button>
+            <div class="vh-acc__body">Responsible business resources are insights, guides, evidence, and expert analysis that help organizations understand ESG, supply chain, compliance, risk management, business resilience, and operational resilience issues and decide what action to take.</div>
+          </div>
+          <div class="vh-acc" data-vh-faq-item>
+            <button type="button" data-vh-faq-btn aria-expanded="false">Who are VECTRA Resources written for?</button>
+            <div class="vh-acc__body" hidden>VECTRA Resources are written for procurement, operations, supply chain, risk, compliance, sustainability, and transformation leaders who need to understand an issue before making or defending a decision.</div>
+          </div>
+          <div class="vh-acc" data-vh-faq-item>
+            <button type="button" data-vh-faq-btn aria-expanded="false">What types of resources does VECTRA International offer?</button>
+            <div class="vh-acc__body" hidden>
+              <p>VECTRA International offers Insights, Ebooks and Playbooks, Events and Webinars, VCASTs, Case Studies, and Press Releases.</p>
+              <p>Across these formats, you can explore ESG resources, supply chain resources, business resilience resources, risk management resources, and operational resilience resources.</p>
+            </div>
+          </div>
+          <div class="vh-acc" data-vh-faq-item>
+            <button type="button" data-vh-faq-btn aria-expanded="false">Are VECTRA Resources free to access?</button>
+            <div class="vh-acc__body" hidden>Yes. VECTRA Resources are free to explore. Some Ebooks, Playbooks, and Events may require registration.</div>
+          </div>
+          <div class="vh-acc" data-vh-faq-item>
+            <button type="button" data-vh-faq-btn aria-expanded="false">How do I find the right resource for my question?</button>
+            <div class="vh-acc__body" hidden>Use the search bar to find resources by topic, regulation, risk, or keyword. You can also browse by format if you already know whether you need a quick Insight, a deeper guide, an expert conversation, or a real-world Case Study.</div>
+          </div>
         {% endif %}
       </div>
     </div>
   </div>
 </section>
+{% endunless %}
+
+  {% when 'closing' %}
+{% unless block.settings.hide_section %}
+{% liquid
+  assign close_kicker = block.settings.kicker | default: 'WHAT COMES NEXT'
+  assign close_heading = block.settings.heading | default: 'Better insight should lead somewhere.'
+  assign close_text = block.settings.text | default: 'If what you have learned needs to become a decision, a plan, or a change to how your team works, VECTRA International can help you move it forward.'
+  assign form_heading = block.settings.form_heading | default: 'Talk to a VECTRA Expert'
+%}
+<section class="vres-closing vh-portal" id="what-comes-next" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-wrap vh-portal__grid">
+    <div class="vh-portal__copy">
+      <p class="vh-kicker">{{ close_kicker }}</p>
+      <h2>{{ close_heading }}</h2>
+      <p>{{ close_text }}</p>
+    </div>
+    {% form 'contact', class: 'vh-form' %}
+      <h2 class="vres-closing__form-title">{{ form_heading }}</h2>
+      {% if form.posted_successfully? %}
+        <p class="vh-contact-modal__success">Thanks — we received your message and will be in touch shortly.</p>
+      {% endif %}
+      {% if form.errors %}
+        <p class="vh-contact-modal__error">{{ form.errors | default_errors }}</p>
+      {% endif %}
+      {% render 'vectra-contact-fields', img_arrow: img_arrow, home_form: true, submit_label: 'Start the Conversation', message_placeholder: 'Tell us what you are working through and where you need clarity or support.' %}
+    {% endform %}
+  </div>
+</section>
+{% endunless %}
 
 {% endcase %}
-{% endunless %}

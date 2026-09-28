@@ -31,7 +31,7 @@
         "type": "text",
         "id": "vectra_mobile_phone",
         "label": "Mobile phone",
-        "default": "+32 495 239 088"
+        "default": "+32 495 239088"
       },
       {
         "type": "text",

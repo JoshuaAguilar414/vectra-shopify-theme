@@ -1,41 +1,50 @@
-{% unless block.settings.hide_section %}
-<section
-  class="vres-panel vres-panel--explore"
-  style="{% render 'vectra-block-style', settings: block.settings %}"
-  {{ block.shopify_attributes }}
->
-  <div class="vh-wrap">
-    {% if block.settings.kicker != blank %}
-      <p class="vh-kicker">{{ block.settings.kicker }}</p>
-    {% endif %}
-    {% if block.settings.heading != blank %}
-      <h2 class="vh-h2">{{ block.settings.heading }}</h2>
-    {% endif %}
-    {% if block.settings.text != blank %}
-      <div class="vh-lead">{{ block.settings.text }}</div>
-    {% endif %}
-    {% if block.settings.button_label != blank %}
-      <a class="vh-btn vh-btn--green" href="{{ block.settings.button_link | default: '#' }}">{{ block.settings.button_label }}</a>
-    {% endif %}
-  </div>
-</section>
-{% endunless %}
+{% render 'vectra-resources-modules', module: 'explore', block: block %}
 
 {% schema %}
 {
   "name": "VECTRA: Res explore",
   "tag": null,
   "settings": [
-    {
-      "type": "paragraph",
-      "content": "Optional resources section. Add it to the Resources page if you want an extra callout band."
-    },
     { "type": "checkbox", "id": "hide_section", "label": "Hide this section", "default": false },
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Explore" },
-    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Find the material that matches the decision in front of you" },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Use Insights, ebooks, events, and VCASTs to separate what is relevant from what is noise — then decide what to do next." },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Browse resources" },
-    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "EXPLORE VECTRA RESOURCES" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Find the Right Resource for What You Need" },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Not every question needs the same kind of answer. Sometimes you need a clear expert’s take on a changing requirement. Sometimes you need a deeper guide, evidence from a real case, or a conversation that adds context to a decision you are already making."
+    },
+    {
+      "type": "text",
+      "id": "close_text",
+      "label": "Bridge line",
+      "default": "Choose the format that fits the question in front of you."
+    },
+    { "type": "header", "content": "Format cards" },
+    { "type": "text", "id": "card_1_title", "label": "Card 1 title", "default": "Insights" },
+    { "type": "textarea", "id": "card_1_text", "label": "Card 1 text" },
+    { "type": "text", "id": "card_1_cta", "label": "Card 1 CTA", "default": "Explore Insights" },
+    { "type": "text", "id": "card_1_link", "label": "Card 1 link", "default": "#insights" },
+    { "type": "text", "id": "card_2_title", "label": "Card 2 title", "default": "Ebooks & Playbooks" },
+    { "type": "textarea", "id": "card_2_text", "label": "Card 2 text" },
+    { "type": "text", "id": "card_2_cta", "label": "Card 2 CTA", "default": "Browse Ebooks & Playbooks" },
+    { "type": "text", "id": "card_2_link", "label": "Card 2 link", "default": "#ebooks" },
+    { "type": "text", "id": "card_3_title", "label": "Card 3 title", "default": "Events & Webinars" },
+    { "type": "textarea", "id": "card_3_text", "label": "Card 3 text" },
+    { "type": "text", "id": "card_3_cta", "label": "Card 3 CTA", "default": "Explore Events & Webinars" },
+    { "type": "text", "id": "card_3_link", "label": "Card 3 link", "default": "#events" },
+    { "type": "text", "id": "card_4_title", "label": "Card 4 title", "default": "VCASTs" },
+    { "type": "textarea", "id": "card_4_text", "label": "Card 4 text" },
+    { "type": "text", "id": "card_4_cta", "label": "Card 4 CTA", "default": "Listen to VCASTs" },
+    { "type": "text", "id": "card_4_link", "label": "Card 4 link", "default": "#vcasts" },
+    { "type": "text", "id": "card_5_title", "label": "Card 5 title", "default": "Case Studies" },
+    { "type": "textarea", "id": "card_5_text", "label": "Card 5 text" },
+    { "type": "text", "id": "card_5_cta", "label": "Card 5 CTA", "default": "Explore Case Studies" },
+    { "type": "text", "id": "card_5_link", "label": "Card 5 link", "default": "#case-studies" },
+    { "type": "text", "id": "card_6_title", "label": "Card 6 title", "default": "Press Releases" },
+    { "type": "textarea", "id": "card_6_text", "label": "Card 6 text" },
+    { "type": "text", "id": "card_6_cta", "label": "Card 6 CTA", "default": "View Press Releases" },
+    { "type": "text", "id": "card_6_link", "label": "Card 6 link", "default": "#press" },
     { "type": "header", "content": "Padding" },
     {
       "type": "range",
