@@ -68,10 +68,14 @@ We're not here to hand you a deliverable and disappear. We're here because your 
         class: 'vh-hero__media vh-hero__media--desktop'
     }}
   {% else %}
+    {% liquid
+      assign hero_img_fallback = block.settings.fallback_asset | default: 'vectra-e5f2730422a9a0516df81d548f5c3f4383f99969.png'
+      assign hero_img_alt = block.settings.alt | default: 'VECTRA team collaborating'
+    %}
     {% render 'vectra-image',
       image: block.settings.image,
-      fallback: block.settings.fallback_asset | default: 'vectra-e5f2730422a9a0516df81d548f5c3f4383f99969.png',
-      alt: block.settings.alt | default: 'VECTRA team collaborating',
+      fallback: hero_img_fallback,
+      alt: hero_img_alt,
       class: 'vh-hero__media vh-hero__media--desktop',
       width: 1920,
       height: 1080,
