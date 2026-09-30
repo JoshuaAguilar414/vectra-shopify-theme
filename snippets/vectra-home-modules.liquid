@@ -20,6 +20,9 @@
   assign img_check = 'vectra-impact-check.png' | asset_url
   assign img_seal = 'vectra-trust-badge.png' | asset_url
   assign img_why = 'vectra-98b18fd88fbc107def3e73f0c7affa6539c876eb.png' | asset_url
+  assign img_ceo = 'vectra-1323aaa74cde58ad7343be0a5de5bcef13017f6c.png' | asset_url
+  assign img_ceo_line = 'vectra-9608a3bf5c3df62aacde306f0a5bc0f23cd6cda4.svg' | asset_url
+  assign img_ceo_mark = 'vectra-6fbd7c62e521082467b9d6192e09d91235f198a5.png' | asset_url
   assign img_icon_1 = 'vectra-why-icon-progress.png' | asset_url
   assign img_icon_2 = 'vectra-why-icon-expertise.png' | asset_url
   assign img_icon_3 = 'vectra-why-icon-ai.png' | asset_url
@@ -237,14 +240,25 @@
     </div>
   </div>
 
-  <div class="vh-wrap vh-why__ceo" data-vh-reveal>
-    <p class="vh-why__ceo-kicker">A Note From Our CEO</p>
-    <p class="vh-why__ceo-label">A note from Patrick Neyts, CEO</p>
-    <blockquote class="vh-why__ceo-quote">
-      <p>I started VECTRA because I watched too many good plans fall apart the moment they left the boardroom. Not because the thinking was wrong, but because nobody stayed close enough to see it through.</p>
-      <p>That's still what drives us today. Whatever you're working through, I want you to feel like there's a real person on the other end of this. Because there is.</p>
-      <p>Welcome to VECTRA.</p>
-    </blockquote>
+  <div class="vh-ceo" id="ceo-note">
+    <img class="vh-ceo__mark" src="{{ img_ceo_mark }}" alt="" aria-hidden="true">
+    <div class="vh-ceo__photo">
+      {% render 'vectra-image', image: block.settings.ceo_image, fallback: img_ceo, alt: 'Patrick Neyts', class: 'vh-ceo__arch', width: 620, height: 574, image_width: 1240 %}
+      <div class="vh-ceo__tag" data-vh-reveal="left">
+        <span>Patrick Neyts</span>
+      </div>
+      <img class="vh-ceo__line" src="{{ img_ceo_line }}" alt="" aria-hidden="true" data-vh-reveal="left">
+    </div>
+    <div class="vh-ceo__copy" data-vh-reveal="pop">
+      <p class="vh-ceo__kicker">A NOTE FROM OUR CEO</p>
+      <h2>A Note From Our CEO</h2>
+      <div class="vh-ceo__body">
+        <p class="vh-ceo__lede">I started VECTRA because I watched too many good plans fall apart the moment they left the boardroom. Not because the thinking was wrong, but because nobody stayed close enough to see it through.</p>
+        <p>That's still what drives us today. Whatever you're working through, I want you to feel like there's a real person on the other end of this. Because there is.</p>
+        <p>Welcome to VECTRA.</p>
+        <p class="vh-ceo__signoff"><strong>Patrick Neyts</strong><br>Chief Executive Officer</p>
+      </div>
+    </div>
   </div>
 
   <div class="vh-wrap">
