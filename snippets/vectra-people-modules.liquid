@@ -1,5 +1,5 @@
 {%- doc -%}
-  Experts, Associates, Interns, Careers, and FAQ page modules.
+  Experts, Associates, Interns, Careers, Leadership, and FAQ page modules.
 {%- enddoc -%}
 
 {% render 'vectra-assets' %}
@@ -265,6 +265,176 @@
 </section>
 {% endunless %}
 
+{% when 'leadership' %}
+{% unless block.settings.hide_section %}
+{% liquid
+  assign contact_url = pages['contact-us'].url | default: pages['contact'].url | default: '/pages/contact-us'
+  assign about_url = pages['about-us'].url | default: pages['our-story'].url | default: '/pages/about-us'
+  assign solutions_url = pages['solutions'].url | default: '/pages/solutions'
+  assign experts_href = experts_url
+  assign careers_href = careers_url
+  assign img_patrick = 'vectra-4a782677c9907a899d2e84025df9fda627b7fbf8.png' | asset_url
+  assign img_shelly = 'vectra-5a45cef3c985f7964fd6f04020f73a021850f52c.png' | asset_url
+  assign img_lorenz = 'vectra-dc0daa0599cf1e7890ac477b6fd8c91f8bc1743a.png' | asset_url
+  assign img_alana = 'vectra-dd46b740bdec4d3fe0852fbab0c2855306beb4e4.png' | asset_url
+  assign img_elizabeth = 'vectra-8606670d35448bf9a7c0b601a64c49b9be7e86de.png' | asset_url
+%}
+<section class="vl-page vh-people-page" id="leadership" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  {% render 'vectra-seo', page_key: 'leadership' %}
+
+  <section class="vl-hero">
+    <div class="vh-wrap vl-hero__inner">
+      <p class="vl-kicker">{{ block.settings.kicker | default: 'OUR LEADERSHIP' }}</p>
+      <h1 class="vl-seo-title">{{ block.settings.heading | default: 'VECTRA International Leadership Team | Our Leaders & Management' }}</h1>
+      <p class="vl-display">Leading With Purpose. Accountable for What Gets Done.</p>
+      <div class="vl-hero__body">
+        <p>VECTRA has grown because people kept believing there is a better way to solve business problems, support clients, and create positive impact.</p>
+        <p>Our leaders carry that belief forward.</p>
+        <p>They come from different backgrounds across responsible business, operations, sales, communications, and AI. They share one responsibility: making sure good ideas turn into work that actually helps our clients.</p>
+      </div>
+      <p class="vl-aeo">VECTRA International leadership team brings together five leaders across executive management, sales and communications, operations, applied AI, and organizational enablement, with more than 100 years of combined experience. Together, VECTRA International leaders set the company’s direction, guide client work, and stay accountable for turning decisions into practical, measurable improvement.</p>
+    </div>
+  </section>
+
+  <section class="vl-intro" id="meet-our-leaders">
+    <div class="vh-wrap vl-intro__inner">
+      <p class="vl-kicker">MEET OUR LEADERS</p>
+      <h2>Meet the VECTRA International Leadership Team</h2>
+      <div class="vl-intro__body">
+        <p>Every leader here brings something different: experience, judgment, and their own view of what is possible.</p>
+        <p>Together, the VECTRA International management team sets the direction, backs the people doing the work, and stays connected to what has always mattered: our clients, our people, and the belief that better business should create better outcomes.</p>
+        <p>Leadership at VECTRA is not about having every answer in one room. It is about setting a clear direction, listening to the people closest to the work, making thoughtful decisions, and giving expertise room to move.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="vl-profiles" id="leadership-profiles" aria-label="Leadership profiles">
+    <div class="vh-wrap">
+      <div class="vl-profiles__grid">
+        <article class="vl-profile" itemscope itemtype="https://schema.org/Person">
+          <div class="vl-profile__media">
+            <img src="{{ img_patrick }}" alt="Patrick Neyts, Chief Executive Officer, VECTRA International" width="640" height="800" loading="lazy" itemprop="image">
+          </div>
+          <div class="vl-profile__copy">
+            <h3 itemprop="name">Patrick Neyts</h3>
+            <p class="vl-profile__role" itemprop="jobTitle">Chief Executive Officer</p>
+            <p itemprop="description">Patrick has more than 30 years of experience in responsible business, ESG programs, and corporate codes, across 11 industry sectors and 40 countries.</p>
+            <p class="vl-profile__focus"><span>Focus:</span> Company direction and growth</p>
+            <a class="vl-profile__link" href="https://www.linkedin.com/in/patrick-neyts-enabling-positive-responsible-business-change/" target="_blank" rel="noopener noreferrer" itemprop="sameAs">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5A2.48 2.48 0 1 1 2.5 6a2.48 2.48 0 0 1 2.48-2.5ZM3 8.75h3.96V21H3V8.75Zm6.22 0H13v1.67h.06c.54-1.02 1.86-2.1 3.83-2.1 4.1 0 4.86 2.7 4.86 6.21V21h-3.96v-5.54c0-1.32-.02-3.02-1.84-3.02-1.84 0-2.12 1.44-2.12 2.92V21H9.22V8.75Z"/></svg>
+              <span>LinkedIn</span>
+            </a>
+            <meta itemprop="worksFor" content="VECTRA International">
+          </div>
+        </article>
+
+        <article class="vl-profile" itemscope itemtype="https://schema.org/Person">
+          <div class="vl-profile__media">
+            <img src="{{ img_shelly }}" alt="Shelly Sanders, SVP, Global Sales, Marketing &amp; Communications, VECTRA International" width="640" height="800" loading="lazy" itemprop="image">
+          </div>
+          <div class="vl-profile__copy">
+            <h3 itemprop="name">Shelly Sanders</h3>
+            <p class="vl-profile__role" itemprop="jobTitle">SVP, Global Sales, Marketing &amp; Communications</p>
+            <p itemprop="description">Shelly has more than 30 years of leadership experience in consultative, solution-based sales and operations. She has worked across healthcare, finance, and IT, driving global growth, strategic partnerships, and ESG-aligned outcomes.</p>
+            <p class="vl-profile__focus"><span>Focus:</span> Global sales, marketing, and communications</p>
+            <a class="vl-profile__link" href="https://www.linkedin.com/in/michelesanders/" target="_blank" rel="noopener noreferrer" itemprop="sameAs">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5A2.48 2.48 0 1 1 2.5 6a2.48 2.48 0 0 1 2.48-2.5ZM3 8.75h3.96V21H3V8.75Zm6.22 0H13v1.67h.06c.54-1.02 1.86-2.1 3.83-2.1 4.1 0 4.86 2.7 4.86 6.21V21h-3.96v-5.54c0-1.32-.02-3.02-1.84-3.02-1.84 0-2.12 1.44-2.12 2.92V21H9.22V8.75Z"/></svg>
+              <span>LinkedIn</span>
+            </a>
+            <meta itemprop="worksFor" content="VECTRA International">
+          </div>
+        </article>
+
+        <article class="vl-profile" itemscope itemtype="https://schema.org/Person">
+          <div class="vl-profile__media">
+            <img src="{{ img_lorenz }}" alt="Lorenz Berzau, VP Operations, VECTRA International" width="640" height="800" loading="lazy" itemprop="image">
+          </div>
+          <div class="vl-profile__copy">
+            <h3 itemprop="name">Lorenz Berzau</h3>
+            <p class="vl-profile__role" itemprop="jobTitle">VP Operations</p>
+            <p itemprop="description">Lorenz brings 20 years of consultancy experience and a background in law, with a focus on sustainability strategy, human rights, and social compliance.</p>
+            <p class="vl-profile__focus"><span>Focus:</span> Operations</p>
+            <a class="vl-profile__link" href="https://www.linkedin.com/in/lorenz-berzau-futurefitsme/" target="_blank" rel="noopener noreferrer" itemprop="sameAs">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5A2.48 2.48 0 1 1 2.5 6a2.48 2.48 0 0 1 2.48-2.5ZM3 8.75h3.96V21H3V8.75Zm6.22 0H13v1.67h.06c.54-1.02 1.86-2.1 3.83-2.1 4.1 0 4.86 2.7 4.86 6.21V21h-3.96v-5.54c0-1.32-.02-3.02-1.84-3.02-1.84 0-2.12 1.44-2.12 2.92V21H9.22V8.75Z"/></svg>
+              <span>LinkedIn</span>
+            </a>
+            <meta itemprop="worksFor" content="VECTRA International">
+          </div>
+        </article>
+
+        <article class="vl-profile" itemscope itemtype="https://schema.org/Person">
+          <div class="vl-profile__media">
+            <img src="{{ img_alana }}" alt="Alana van Wouw, AI Architect, VECTRA International" width="640" height="800" loading="lazy" itemprop="image">
+          </div>
+          <div class="vl-profile__copy">
+            <h3 itemprop="name">Alana van Wouw</h3>
+            <p class="vl-profile__role" itemprop="jobTitle">AI Architect</p>
+            <p itemprop="description">Alana has more than 20 years of experience in project management, ESG, financial modeling, and AI, leading high-impact initiatives across emerging markets with strong sustainability and data-driven expertise.</p>
+            <p class="vl-profile__focus"><span>Focus:</span> Applied AI</p>
+            <a class="vl-profile__link" href="https://www.linkedin.com/in/alana-van-wouw-717511233/" target="_blank" rel="noopener noreferrer" itemprop="sameAs">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5A2.48 2.48 0 1 1 2.5 6a2.48 2.48 0 0 1 2.48-2.5ZM3 8.75h3.96V21H3V8.75Zm6.22 0H13v1.67h.06c.54-1.02 1.86-2.1 3.83-2.1 4.1 0 4.86 2.7 4.86 6.21V21h-3.96v-5.54c0-1.32-.02-3.02-1.84-3.02-1.84 0-2.12 1.44-2.12 2.92V21H9.22V8.75Z"/></svg>
+              <span>LinkedIn</span>
+            </a>
+            <meta itemprop="worksFor" content="VECTRA International">
+          </div>
+        </article>
+
+        <article class="vl-profile" itemscope itemtype="https://schema.org/Person">
+          <div class="vl-profile__media">
+            <img src="{{ img_elizabeth }}" alt="Elizabeth Korban, Director of Organizational Enablement, VECTRA International" width="640" height="800" loading="lazy" itemprop="image">
+          </div>
+          <div class="vl-profile__copy">
+            <h3 itemprop="name">Elizabeth Korban</h3>
+            <p class="vl-profile__role" itemprop="jobTitle">Director of Organizational Enablement</p>
+            <p itemprop="description">Elizabeth has 15+ years of experience leading work to embed ESG principles into organizational culture, governance, and operations.</p>
+            <p class="vl-profile__focus"><span>Focus:</span> Organizational enablement</p>
+            <a class="vl-profile__link" href="https://www.linkedin.com/in/elizabeth-korban-0690625/" target="_blank" rel="noopener noreferrer" itemprop="sameAs">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5A2.48 2.48 0 1 1 2.5 6a2.48 2.48 0 0 1 2.48-2.5ZM3 8.75h3.96V21H3V8.75Zm6.22 0H13v1.67h.06c.54-1.02 1.86-2.1 3.83-2.1 4.1 0 4.86 2.7 4.86 6.21V21h-3.96v-5.54c0-1.32-.02-3.02-1.84-3.02-1.84 0-2.12 1.44-2.12 2.92V21H9.22V8.75Z"/></svg>
+              <span>LinkedIn</span>
+            </a>
+            <meta itemprop="worksFor" content="VECTRA International">
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="vl-close" id="one-vectra">
+    <div class="vh-wrap vl-close__inner">
+      <p class="vl-kicker">ONE VECTRA</p>
+      <h2>What We Build, We Build Together</h2>
+      <div class="vl-close__body">
+        <p>VECTRA’s future will not be shaped by leadership alone.</p>
+        <p>It will be shaped by the people who bring their expertise, the clients who trust us with important challenges, the ideas we are willing to test, and the relationships we build across markets and disciplines.</p>
+        <p>Our leaders set the direction. Our people bring it to life.</p>
+        <p>As VECTRA grows, the goal stays simple: become a company that creates more value for the people who work here, the organizations we support, and the communities our work touches. To see how our experts and leaders work with clients day to day, explore <a href="{{ solutions_url }}">How We Help</a> and <a href="{{ experts_href }}">Our Experts</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="vl-cta" id="leadership-cta">
+    <div class="vh-wrap vl-cta__inner">
+      <h2>Where Could We Go From Here?</h2>
+      <p>Whether you are exploring a partnership, bringing us a business challenge, or simply want to understand VECTRA better, we would be glad to hear from you. You do not need a finished brief. Tell us what you are working on.</p>
+      <div class="vl-cta__actions">
+        <a class="vs-cta-btn" href="{{ contact_url }}">
+          Start the Conversation
+          <img src="{{ img_arrow_send }}" alt="">
+        </a>
+        <p class="vl-cta__aside">Interested in joining the team? <a href="{{ careers_href }}">Explore careers at VECTRA</a>.</p>
+      </div>
+      <p class="vl-cta__nav">
+        <a href="{{ about_url }}">About Us</a>
+        <span aria-hidden="true">·</span>
+        <a href="{{ solutions_url }}">How We Help</a>
+        <span aria-hidden="true">·</span>
+        <a href="{{ experts_href }}">Our Experts</a>
+      </p>
+    </div>
+  </section>
+</section>
+{% endunless %}
+
   {% when 'faq' %}
 {% unless block.settings.hide_section %}
 <section class="vh-faq vh-people-page" id="faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
@@ -342,5 +512,6 @@
     </div>
   </div>
 </section>
-{% endcase %}
 {% endunless %}
+
+{% endcase %}

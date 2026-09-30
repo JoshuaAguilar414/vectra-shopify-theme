@@ -1,5 +1,5 @@
 {%- doc -%}
-  JSON-LD for VECTRA pages. page_key: home | about | resources | contact
+  JSON-LD for VECTRA pages. page_key: home | about | resources | contact | leadership
 {%- enddoc -%}
 {%- liquid
   assign key = page_key | default: 'home'
@@ -106,6 +106,65 @@
         "contactType": "customer support",
         "areaServed": "Worldwide"
       }
+    }
+  ]
+}
+</script>
+{%- elsif key == 'leadership' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["AboutPage", "WebPage"],
+      "name": "VECTRA International Leadership Team | Our Leaders",
+      "headline": "VECTRA International Leadership Team | Our Leaders & Management",
+      "description": "Meet the VECTRA International leadership team, including our leaders and management team driving responsible, resilient and transparent supply chains.",
+      "url": "{{ request.origin }}{{ page.url }}",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "VECTRA International",
+        "url": "{{ shop.url }}"
+      },
+      "about": {
+        "@type": "Organization",
+        "name": "VECTRA International"
+      }
+    },
+    {
+      "@type": "Person",
+      "name": "Patrick Neyts",
+      "jobTitle": "Chief Executive Officer",
+      "worksFor": { "@type": "Organization", "name": "VECTRA International" },
+      "sameAs": ["https://www.linkedin.com/in/patrick-neyts-enabling-positive-responsible-business-change/"]
+    },
+    {
+      "@type": "Person",
+      "name": "Shelly Sanders",
+      "jobTitle": "SVP, Global Sales, Marketing & Communications",
+      "worksFor": { "@type": "Organization", "name": "VECTRA International" },
+      "sameAs": ["https://www.linkedin.com/in/michelesanders/"]
+    },
+    {
+      "@type": "Person",
+      "name": "Lorenz Berzau",
+      "jobTitle": "VP Operations",
+      "worksFor": { "@type": "Organization", "name": "VECTRA International" },
+      "sameAs": ["https://www.linkedin.com/in/lorenz-berzau-futurefitsme/"]
+    },
+    {
+      "@type": "Person",
+      "name": "Alana van Wouw",
+      "jobTitle": "AI Architect",
+      "worksFor": { "@type": "Organization", "name": "VECTRA International" },
+      "sameAs": ["https://www.linkedin.com/in/alana-van-wouw-717511233/"]
+    },
+    {
+      "@type": "Person",
+      "name": "Elizabeth Korban",
+      "jobTitle": "Director of Organizational Enablement",
+      "worksFor": { "@type": "Organization", "name": "VECTRA International" },
+      "sameAs": ["https://www.linkedin.com/in/elizabeth-korban-0690625/"]
     }
   ]
 }
