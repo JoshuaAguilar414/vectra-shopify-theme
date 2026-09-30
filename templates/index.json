@@ -178,7 +178,7 @@
             "more_button_label": "View All FAQs"
           }
         },
-        "blog": {
+        "insights": {
           "type": "vectra-blog",
           "settings": {
             "kicker": "INSIGHTS",
@@ -209,7 +209,7 @@
         "marketplace",
         "cases",
         "faq",
-        "blog",
+        "insights",
         "portal",
         "careers",
         "footer"

@@ -268,9 +268,9 @@
 }
 
 .vectra-home .vh-solutions__copy p {
-  font-size: clamp(18px, 1.6vw, 28px) !important;
-  line-height: 1.35 !important;
-  color: #ffffff !important;
+  font-size: clamp(14px, 1vw, 16px) !important;
+  line-height: 1.5 !important;
+  color: rgba(255, 255, 255, 0.92) !important;
 }
 
 .vectra-home .vh-faq .vh-accordion .vh-h2 {

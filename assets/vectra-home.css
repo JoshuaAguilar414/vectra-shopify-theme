@@ -33,6 +33,29 @@
   text-transform: none;
   font-variant: normal;
   font-feature-settings: normal;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Keep FAQ above Latest Insights even if theme-editor block order is swapped. */
+.vectra-home > .vh-faq {
+  order: 1;
+}
+
+.vectra-home > .vh-blog {
+  order: 2;
+}
+
+.vectra-home > .vh-portal {
+  order: 3;
+}
+
+.vectra-home > .vh-careers {
+  order: 4;
+}
+
+.vectra-home > .vh-footer {
+  order: 5;
 }
 
 .vectra-home > .shopify-block,
@@ -1780,23 +1803,23 @@
 
 .vh-esg__stage {
   position: relative;
-  width: min(920px, 92%);
-  min-height: 860px;
+  width: min(980px, 94%);
+  min-height: 900px;
   height: auto;
   aspect-ratio: auto;
   margin: 0 auto;
   margin-top: 24px;
-  padding: 168px 0 120px;
+  padding: 132px 0 110px;
   container-type: inline-size;
   container-name: esg;
 }
 
 .vh-esg__glow {
   position: absolute;
-  width: min(680px, 82%);
+  width: min(860px, 92%);
   aspect-ratio: 1;
   left: 50%;
-  top: 12%;
+  top: 4%;
   transform: translateX(-50%);
   border-radius: 50%;
   background: radial-gradient(83.74% 83.74% at 48.34% 88.99%, #ffffff 0%, #ffffff 60.93%, #99e45f 100%);
@@ -1808,7 +1831,7 @@
   position: relative;
   left: auto;
   top: auto;
-  width: min(520px, 72%);
+  width: min(480px, 54%);
   margin: 0 auto;
   z-index: 2;
   text-align: center;
@@ -1842,29 +1865,32 @@
 
 .vh-stat {
   position: absolute;
-  width: min(168px, 22.92cqi);
-  height: min(168px, 22.92cqi);
+  width: 22.5cqi;
+  height: 22.5cqi;
+  max-width: 190px;
+  max-height: 190px;
   border-radius: 500px;
   z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  padding-top: min(48px, 6.565cqi);
+  padding-top: 6.2cqi;
   text-align: center;
 }
 
 .vh-stat--100 {
-  left: auto;
-  right: 4%;
+  left: 56.2%;
+  right: auto;
   top: 0;
   background: #ffffff;
   box-shadow: 0 0 39.5px -21px #000000;
 }
 
 .vh-stat--30 {
-  left: 2%;
-  top: 18%;
+  left: 0;
+  right: auto;
+  top: 17cqi;
   background: rgba(255, 255, 255, 0.64);
   backdrop-filter: blur(18.7px);
   -webkit-backdrop-filter: blur(18.7px);
@@ -1872,9 +1898,9 @@
 }
 
 .vh-stat--500 {
-  left: auto;
-  right: 0;
-  top: 42%;
+  left: 77%;
+  right: auto;
+  top: 38cqi;
   background: rgba(255, 255, 255, 0.44);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
@@ -2014,9 +2040,9 @@
   margin: 0 0 24px;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
-  font-size: clamp(15px, 1.2vw, 18px);
+  font-size: clamp(14px, 1vw, 16px);
   font-weight: 400;
-  line-height: 1.55;
+  line-height: 1.5;
   letter-spacing: -0.01em;
   color: rgba(255, 255, 255, 0.92);
 }
@@ -4964,18 +4990,18 @@ body:has(.vectra-home) #MainContent {
     aspect-ratio: auto;
     display: block;
     margin: 12px auto 0;
-    padding: 140px 12px 80px;
+    padding: 120px 12px 80px;
     overflow: visible;
   }
 
   .vh-esg__glow {
-    width: min(520px, 88%);
-    top: 8%;
+    width: min(640px, 94%);
+    top: 6%;
   }
 
   .vh-esg__copy {
     position: relative;
-    width: min(520px, 86%);
+    width: min(420px, 78%);
     left: auto;
     top: auto;
     margin: 0 auto;
@@ -4993,26 +5019,29 @@ body:has(.vectra-home) #MainContent {
   }
 
   .vh-stat {
-    width: min(132px, 28vw);
-    height: min(132px, 28vw);
-    padding-top: 34px;
+    width: min(140px, 30cqi);
+    height: min(140px, 30cqi);
+    max-width: 140px;
+    max-height: 140px;
+    padding-top: 36px;
   }
 
   .vh-stat--100 {
-    right: 2%;
-    left: auto;
+    left: 58%;
+    right: auto;
     top: 0;
   }
 
   .vh-stat--30 {
-    left: 2%;
-    top: 12%;
+    left: 0;
+    right: auto;
+    top: 18cqi;
   }
 
   .vh-stat--500 {
-    right: 0;
-    left: auto;
-    top: 34%;
+    left: 72%;
+    right: auto;
+    top: 42cqi;
   }
 
   .vh-stat b {
