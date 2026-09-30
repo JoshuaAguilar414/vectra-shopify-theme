@@ -27,6 +27,10 @@
   assign img_mail = 'vectra-9a4f80a5b924a881fc96b20219bb1f7c8ca734ab.svg' | asset_url
   assign img_pin = 'vectra-484bca36e3874bd30d1d6dd79807ed0314378e3d.svg' | asset_url
 %}
+{% capture nested_faq_items %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% assign nested_faq_items = nested_faq_items | strip %}
 {% unless block.settings.hide_section %}
 <section class="vh-faq" id="faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap vh-faq__grid">
@@ -55,7 +59,30 @@
         <p class="vh-kicker">{{ faq_kicker }}</p>
         <h2 class="vh-h2">{{ faq_heading }}</h2>
         <p class="vh-lead">{{ faq_lead }}</p>
-        {% content_for 'blocks' %}
+        {% if nested_faq_items != blank %}
+          {{ nested_faq_items }}
+        {% else %}
+          <div class="vh-acc is-open" data-vh-faq-item>
+            <button type="button" data-vh-faq-btn aria-expanded="true">What does VECTRA help organizations improve?</button>
+            <div class="vh-acc__body">VECTRA helps organizations strengthen responsible business, operational resilience, supply chain resilience, and day to day business performance. Depending on the challenge, our support may include responsible business transformation, ESG consulting, sustainability consulting, supply chain consulting, technology, capability building, or implementation support. We start with the result that needs to improve, then bring the relevant expertise and support around it. Not the other way around.</div>
+          </div>
+          <div class="vh-acc" data-vh-faq-item>
+            <button type="button" data-vh-faq-btn aria-expanded="false">We already have consultants, platforms, and dashboards. Where does VECTRA fit?</button>
+            <div class="vh-acc__body" hidden>We work with what you already have. When the information, expertise, or system is already there, we focus on what's stopping it from producing the result you need. That may be ownership, process, supplier engagement, evidence, capability, or follow-through.</div>
+          </div>
+          <div class="vh-acc" data-vh-faq-item>
+            <button type="button" data-vh-faq-btn aria-expanded="false">Can VECTRA work with the systems we already use?</button>
+            <div class="vh-acc__body" hidden>Yes. VECTRA is platform-agnostic. We work with your existing systems, data, teams, consultants, and partners, then introduce additional technology only where it solves a clear problem.</div>
+          </div>
+          <div class="vh-acc" data-vh-faq-item>
+            <button type="button" data-vh-faq-btn aria-expanded="false">Where do we start if we know the problem but not the solution?</button>
+            <div class="vh-acc__body" hidden>Start by telling us what's happening and what you want to improve. We'll help clarify the issue, identify what needs attention first, and figure out the most practical next step, together.</div>
+          </div>
+          <div class="vh-acc" data-vh-faq-item>
+            <button type="button" data-vh-faq-btn aria-expanded="false">How does VECTRA measure progress?</button>
+            <div class="vh-acc__body" hidden>We agree at the start on what success should look like. Depending on the challenge, that may include clearer ownership, closed actions, stronger evidence, improved capability, fewer recurring problems, or better supplier performance.</div>
+          </div>
+        {% endif %}
         <div class="vh-faq__more">
           <h3>{{ faq_more_heading }}</h3>
           <p>{{ faq_more_text }}</p>
@@ -377,26 +404,48 @@
         {
           "type": "_vectra-faq-item",
           "settings": {
+            "open": true,
             "question": "What does VECTRA help organizations improve?",
-            "answer": "VECTRA helps organizations reduce business risk, strengthen operational and supply chain resilience, improve ESG and sustainability performance, and build the evidence and capability needed to drive measurable results across operations and value chains. We start with the outcome that needs to improve, then bring the relevant expertise and implementation support around it."
+            "answer": "VECTRA helps organizations strengthen responsible business, operational resilience, supply chain resilience, and day to day business performance. Depending on the challenge, our support may include responsible business transformation, ESG consulting, sustainability consulting, supply chain consulting, technology, capability building, or implementation support. We start with the result that needs to improve, then bring the relevant expertise and support around it. Not the other way around."
           }
         },
         {
           "type": "_vectra-faq-item",
           "settings": {
             "question": "We already have consultants, platforms, and dashboards. Where does VECTRA fit?",
-            "answer": "Often, the gap appears after the information already exists. VECTRA works with the systems, expertise, and partners you already have, then focuses on ownership, workflows, evidence, supplier engagement, and follow-through where the work is getting stuck."
+            "answer": "We work with what you already have. When the information, expertise, or system is already there, we focus on what's stopping it from producing the result you need. That may be ownership, process, supplier engagement, evidence, capability, or follow-through."
           }
         },
         {
           "type": "_vectra-faq-item",
           "settings": {
-            "open": true,
             "question": "Can VECTRA work with the systems we already use?",
-            "answer": "Yes. VECTRA is platform-agnostic. We work with existing systems, data, teams, and partners, then introduce additional technology only where it solves a clear problem."
+            "answer": "Yes. VECTRA is platform-agnostic. We work with your existing systems, data, teams, consultants, and partners, then introduce additional technology only where it solves a clear problem."
+          }
+        },
+        {
+          "type": "_vectra-faq-item",
+          "settings": {
+            "question": "Where do we start if we know the problem but not the solution?",
+            "answer": "Start by telling us what's happening and what you want to improve. We'll help clarify the issue, identify what needs attention first, and figure out the most practical next step, together."
+          }
+        },
+        {
+          "type": "_vectra-faq-item",
+          "settings": {
+            "question": "How does VECTRA measure progress?",
+            "answer": "We agree at the start on what success should look like. Depending on the challenge, that may include clearer ownership, closed actions, stronger evidence, improved capability, fewer recurring problems, or better supplier performance."
           }
         }
-      ]
+      ],
+      "settings": {
+        "kicker": "FAQ",
+        "heading": "Questions Business Leaders Ask Us",
+        "lead": "Clear answers about what VECTRA does, how we work, and where to start.",
+        "more_heading": "Have another question?",
+        "more_text": "Find more answers about VECTRA International, how we work, our capabilities, and getting started.",
+        "more_button_label": "View All FAQs"
+      }
     }
   ]
 }
