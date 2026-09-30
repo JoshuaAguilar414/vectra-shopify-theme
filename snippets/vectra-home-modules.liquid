@@ -84,16 +84,15 @@
   {% when 'hero' %}
 {% render 'vectra-seo', page_key: 'home' %}
 {% unless block.settings.hide_section %}
-<section class="vh-hero vh-hero--home" data-vh-carousel aria-label="Featured" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-  <div class="vh-hero__track" data-vh-track>
-    <article class="vh-hero__slide is-active" data-vh-slide>
+<section class="vh-hero vh-hero--home" aria-label="Featured" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-hero__track">
+    <article class="vh-hero__slide is-active">
       <video class="vh-hero__bg vh-hero__bg--video" muted loop playsinline autoplay poster="{{ img_hero }}" data-vh-video>
         <source src="{{ vid_hero }}" type="video/mp4">
       </video>
       <img class="vh-hero__glow" src="{{ img_hero_glow }}" alt="" aria-hidden="true">
       <div class="vh-hero__shade" aria-hidden="true"></div>
       <div class="vh-hero__copy">
-        <p class="vh-hero__kicker">Responsible Business</p>
         <h1 class="vh-hero__h1">Business Resilience Partner for Responsible Business &amp; Operational Resilience</h1>
         <p class="vh-hero__display">Your Success Is Our Success.</p>
         <div class="vh-hero__body">
@@ -109,35 +108,7 @@
         </div>
       </div>
     </article>
-
-    <article class="vh-hero__slide" data-vh-slide>
-      <img class="vh-hero__bg" src="{{ img_hero_2 }}" alt="Business resilience and operational capability building" width="1920" height="1080" loading="lazy">
-      <img class="vh-hero__glow" src="{{ img_hero_glow }}" alt="" aria-hidden="true">
-      <div class="vh-hero__shade" aria-hidden="true"></div>
-      <div class="vh-hero__copy">
-        <p class="vh-hero__kicker">Operational Capability</p>
-        <p class="vh-hero__h1">Turn Business Complexity Into Resilient Performance</p>
-        <p class="vh-hero__display">Business Resilience &amp; Operational Capability Building</p>
-        <div class="vh-hero__body">
-          <p>Responsible business practices are the standards, controls, and decisions organizations use to manage supplier risk, environmental and social impact, and regulatory obligations across their operations. VECTRA International is a business resilience partner that turns those practices into clear ownership, practical action, and measurable performance, not just policy.</p>
-          <p>VECTRA helps organizations turn complex operational, supplier, and responsible business issues into clear ownership, practical action, and stronger control. From strategy through implementation, we stay accountable for moving the work forward.</p>
-        </div>
-        <div class="vh-hero__actions">
-          <a class="vh-btn vh-btn--green" href="#solutions">Explore How We Help</a>
-          <a class="vh-btn vh-btn--outline-light" href="#VectraContactModal" data-vh-contact-open>Talk to an Expert</a>
-        </div>
-      </div>
-    </article>
   </div>
-
-  <button class="vh-hero__arrow vh-hero__arrow--prev" type="button" data-vh-prev aria-label="Previous slide">
-    <img class="vh-hero__arrow-bg" src="{{ img_arrow_circle }}" alt="">
-    <img class="vh-hero__arrow-icon" src="{{ img_arrow_white }}" alt="">
-  </button>
-  <button class="vh-hero__arrow vh-hero__arrow--next" type="button" data-vh-next aria-label="Next slide">
-    <img class="vh-hero__arrow-bg" src="{{ img_arrow_circle }}" alt="">
-    <img class="vh-hero__arrow-icon" src="{{ img_arrow_white }}" alt="">
-  </button>
 </section>
 {% endunless %}
 

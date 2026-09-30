@@ -219,114 +219,115 @@
     }
   }
 
-  const gridCanvas = qs('[data-vs-join-grid]');
-  if (gridCanvas && gridCanvas.dataset.vhGlowBound !== 'true') {
+  qsa('[data-vs-join-grid]').forEach((gridCanvas) => {
+    if (gridCanvas.dataset.vhGlowBound === 'true') return;
     const ctx = gridCanvas.getContext('2d', { alpha: false });
-    if (ctx) {
-      const animationSpeed = 2;
-      const gridSize = 50;
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      let width = 0;
-      let height = 0;
-      let offset = 0;
-      let raf = 0;
-      let running = false;
+    if (!ctx) return;
+    gridCanvas.dataset.vhGlowBound = 'true';
 
-      const resize = () => {
-        const rect = gridCanvas.getBoundingClientRect();
-        if (rect.width < 2 || rect.height < 2) return;
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        width = rect.width;
-        height = rect.height;
-        gridCanvas.width = Math.round(width * dpr);
-        gridCanvas.height = Math.round(height * dpr);
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      };
+    const animationSpeed = 2;
+    const gridSize = 50;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let width = 0;
+    let height = 0;
+    let offset = 0;
+    let raf = 0;
+    let running = false;
 
-      const draw = () => {
-        ctx.fillStyle = '#092543';
-        ctx.fillRect(0, 0, width, height);
+    const resize = () => {
+      const rect = gridCanvas.getBoundingClientRect();
+      if (rect.width < 2 || rect.height < 2) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = rect.width;
+      height = rect.height;
+      gridCanvas.width = Math.round(width * dpr);
+      gridCanvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
 
-        ctx.strokeStyle = '#54bd01';
-        ctx.lineWidth = 1;
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = '#54bd01';
+    const draw = () => {
+      ctx.fillStyle = '#092543';
+      ctx.fillRect(0, 0, width, height);
 
-        let index = 0;
-        for (let x = offset % gridSize; x < width + gridSize; x += gridSize) {
-          const opacity =
-            0.15 +
-            Math.sin(index * 0.5 + offset * 0.02) * 0.2 +
-            Math.cos(index * 0.3) * 0.15;
-          ctx.globalAlpha = Math.max(0.05, Math.min(0.5, opacity));
-          ctx.beginPath();
-          ctx.moveTo(x, 0);
-          ctx.lineTo(x, height);
-          ctx.stroke();
-          index += 1;
-        }
+      ctx.strokeStyle = '#54bd01';
+      ctx.lineWidth = 1;
+      ctx.shadowBlur = 15;
+      ctx.shadowColor = '#54bd01';
 
-        index = 0;
-        for (let y = offset % gridSize; y < height + gridSize; y += gridSize) {
-          const opacity =
-            0.15 +
-            Math.sin(index * 0.7 + offset * 0.02) * 0.2 +
-            Math.cos(index * 0.4) * 0.15;
-          ctx.globalAlpha = Math.max(0.05, Math.min(0.5, opacity));
-          ctx.beginPath();
-          ctx.moveTo(0, y);
-          ctx.lineTo(width, y);
-          ctx.stroke();
-          index += 1;
-        }
+      let index = 0;
+      for (let x = offset % gridSize; x < width + gridSize; x += gridSize) {
+        const opacity =
+          0.15 +
+          Math.sin(index * 0.5 + offset * 0.02) * 0.2 +
+          Math.cos(index * 0.3) * 0.15;
+        ctx.globalAlpha = Math.max(0.05, Math.min(0.5, opacity));
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+        index += 1;
+      }
 
-        ctx.shadowBlur = 0;
-        ctx.globalAlpha = 1;
-      };
+      index = 0;
+      for (let y = offset % gridSize; y < height + gridSize; y += gridSize) {
+        const opacity =
+          0.15 +
+          Math.sin(index * 0.7 + offset * 0.02) * 0.2 +
+          Math.cos(index * 0.4) * 0.15;
+        ctx.globalAlpha = Math.max(0.05, Math.min(0.5, opacity));
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+        index += 1;
+      }
 
-      const loop = () => {
-        if (!running) return;
-        draw();
-        offset += animationSpeed * 0.5;
-        if (offset > gridSize) offset = 0;
-        raf = requestAnimationFrame(loop);
-      };
+      ctx.shadowBlur = 0;
+      ctx.globalAlpha = 1;
+    };
 
-      const start = () => {
-        if (running || reduceMotion) return;
-        running = true;
-        raf = requestAnimationFrame(loop);
-      };
-
-      const stop = () => {
-        running = false;
-        cancelAnimationFrame(raf);
-      };
-
-      resize();
+    const loop = () => {
+      if (!running) return;
       draw();
+      offset += animationSpeed * 0.5;
+      if (offset > gridSize) offset = 0;
+      raf = requestAnimationFrame(loop);
+    };
 
-      if (!reduceMotion && 'IntersectionObserver' in window) {
-        const io = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              resize();
-              start();
-            } else {
-              stop();
-            }
-          });
-        }, { threshold: 0.05 });
-        io.observe(gridCanvas);
-      } else if (!reduceMotion) {
-        start();
-      }
+    const start = () => {
+      if (running || reduceMotion) return;
+      running = true;
+      raf = requestAnimationFrame(loop);
+    };
 
-      if ('ResizeObserver' in window) {
-        new ResizeObserver(resize).observe(gridCanvas);
-      } else {
-        window.addEventListener('resize', resize);
-      }
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(raf);
+    };
+
+    resize();
+    draw();
+
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            resize();
+            start();
+          } else {
+            stop();
+          }
+        });
+      }, { threshold: 0.05 });
+      io.observe(gridCanvas);
+    } else if (!reduceMotion) {
+      start();
     }
-  }
+
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(resize).observe(gridCanvas);
+    } else {
+      window.addEventListener('resize', resize);
+    }
+  });
 })();

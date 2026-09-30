@@ -467,16 +467,17 @@
   }
 
   .vectra-home .vh-hero--home .vh-hero__copy {
-    left: auto;
-    right: auto;
-    top: auto;
-    bottom: auto;
-    width: 100%;
-    max-width: none;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    max-width: none !important;
     min-height: inherit;
     padding: 180px 20px 100px;
     transform: none !important;
-    text-align: center;
+    text-align: center !important;
+    align-items: center !important;
   }
 
   .vectra-home .vh-wrap,
