@@ -3,7 +3,7 @@
   assign faq_card_title = block.settings.card_title | default: 'Tell Us What You Need Help With'
   assign faq_card_text = block.settings.card_text
   if faq_card_text == blank
-    assign faq_card_text = "You may already know exactly what needs to change. Or you may simply know that something needs to work better. A supplier issue may be slowing progress. A new requirement may be creating uncertainty. Your team may need stronger evidence, better controls, or more support. Tell us what is happening and what you are trying to improve. We'll listen, help make sense of the situation, and connect you with the right people."
+    assign faq_card_text = "You may already know exactly what needs to change. Or you may simply know that something needs to work better.\n\nA supplier issue may be slowing progress. A new requirement may be creating uncertainty. Your team may need stronger evidence, better controls, or more support.\n\nTell us what is happening and what you are trying to improve. We'll listen, help make sense of the situation, and connect you with the right people."
   endif
   assign faq_kicker = block.settings.kicker | default: 'FAQ'
   assign faq_heading = block.settings.heading | default: 'Questions Business Leaders Ask Us'
@@ -47,7 +47,7 @@
         {{ faq_btn }}
         <img src="{{ img_arrow }}" alt="">
       </a>
-      {% render 'vectra-contact-details', variant: 'card', img_phone: img_phone, img_mail: img_mail, img_pin: img_pin %}
+      {% render 'vectra-contact-details', variant: 'card', office_only: true, img_phone: img_phone, img_mail: img_mail, img_pin: img_pin %}
     </aside>
     <div class="vh-faq__right">
       <div class="vh-faq__glow" aria-hidden="true"></div>
@@ -99,7 +99,7 @@
       "type": "textarea",
       "id": "card_text",
       "label": "Side card text",
-      "default": "You may already know exactly what needs to change. Or you may simply know that something needs to work better. A supplier issue may be slowing progress. A new requirement may be creating uncertainty. Your team may need stronger evidence, better controls, or more support. Tell us what is happening and what you are trying to improve. We'll listen, help make sense of the situation, and connect you with the right people."
+      "default": "You may already know exactly what needs to change. Or you may simply know that something needs to work better.\n\nA supplier issue may be slowing progress. A new requirement may be creating uncertainty. Your team may need stronger evidence, better controls, or more support.\n\nTell us what is happening and what you are trying to improve. We'll listen, help make sense of the situation, and connect you with the right people."
     },
     {
       "type": "text",

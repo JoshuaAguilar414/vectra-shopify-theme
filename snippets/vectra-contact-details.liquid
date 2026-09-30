@@ -32,10 +32,12 @@
         <img src="{{ img_phone }}" alt="">
         <strong>{{ office_label }}</strong>
       </a>
+      {% unless office_only %}
       <a class="vh-contact-list__link" href="tel:{{ mobile_tel }}">
         <img src="{{ img_phone }}" alt="">
         <strong>{{ mobile_label }}</strong>
       </a>
+      {% endunless %}
     </div>
     <div>
       <p class="vh-contact-list__label">{{ email_label }}</p>

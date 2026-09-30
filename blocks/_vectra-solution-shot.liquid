@@ -1,3 +1,12 @@
+{% liquid
+  assign shot_href = block.settings.cta_link
+  if shot_href == blank
+    assign cta_down = block.settings.cta_label | downcase
+    if block.settings.plus_overlay or cta_down contains 'talk'
+      assign shot_href = '#VectraContactModal'
+    endif
+  endif
+%}
 <button
   class="vh-sol-shot{% if block.settings.plus_overlay %} vh-sol-shot--plus{% endif %}{% if block.settings.is_active %} is-active{% endif %}"
   type="button"
@@ -5,7 +14,7 @@
   data-title="{{ block.settings.title | escape }}"
   data-text="{{ block.settings.text | escape }}"
   data-cta="{{ block.settings.cta_label | escape }}"
-  data-href="{{ block.settings.cta_link | default: '#VectraContactModal' | escape }}"
+  {% if shot_href != blank %}data-href="{{ shot_href | escape }}"{% endif %}
   {{ block.shopify_attributes }}
 >
   {% render 'vectra-image',

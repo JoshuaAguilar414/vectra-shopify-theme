@@ -635,14 +635,38 @@
 
 .vh-hero__copy h1,
 .vh-hero__copy .vh-hero__display,
-.vh-hero__copy p {
+.vh-hero__copy .vh-hero__body,
+.vh-hero__copy .vh-hero__actions,
+.vh-hero__copy .vh-hero__aeo {
   opacity: 0;
-  transform: translateY(28px);
-  animation: vh-hero-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: translateY(18px);
+  animation: vh-hero-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.vh-hero__copy p:not(.vh-hero__display) {
-  animation-delay: 0.12s;
+.vh-hero__copy h1 {
+  animation-delay: 0s;
+}
+
+.vh-hero__copy .vh-hero__display {
+  animation-delay: 0.08s;
+}
+
+.vh-hero__copy .vh-hero__body {
+  animation-delay: 0.16s;
+}
+
+.vh-hero__copy .vh-hero__actions {
+  animation-delay: 0.28s;
+}
+
+.vh-hero__copy .vh-hero__aeo {
+  animation-delay: 0.4s;
+}
+
+.vh-hero__copy .vh-hero__body p {
+  opacity: 1;
+  transform: none;
+  animation: none;
 }
 
 @keyframes vh-hero-in {
@@ -731,7 +755,7 @@
   display: none;
 }
 
-.vh-hero__copy p:not(.vh-hero__display):not(.vh-hero__aeo) {
+.vh-hero__copy > p:not(.vh-hero__display):not(.vh-hero__aeo) {
   margin: 0;
   width: min(1075px, 100%);
   font-family: 'Poppins', sans-serif;
@@ -1617,10 +1641,10 @@
   margin: 0 0 14px;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
-  font-size: clamp(24px, 2.4vw, 34px);
+  font-size: clamp(26px, 2.8vw, 40px);
   font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.03em;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
   color: #ffffff;
 }
 
@@ -1630,10 +1654,10 @@
   margin: 0 0 22px;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
-  font-size: clamp(15px, 1.15vw, 18px);
+  font-size: clamp(16px, 1.25vw, 19px);
   font-weight: 400;
-  line-height: 1.45;
-  letter-spacing: -0.02em;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
   color: rgba(255, 255, 255, 0.92);
 }
 
@@ -2669,10 +2693,10 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.35fr);
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
   gap: clamp(28px, 3.5vw, 48px);
   justify-content: stretch;
-  align-items: stretch;
+  align-items: start;
   width: min(var(--vh-wrap), calc(100% - 48px));
   margin-inline: auto;
   overflow: visible;
@@ -2755,6 +2779,14 @@
   font-size: 16px;
   line-height: 1.55;
   text-align: center;
+}
+
+.vh-cases__lead p {
+  margin: 0;
+}
+
+.vh-cases__lead p + p {
+  margin-top: 12px;
 }
 
 .vh-portal__tagline {
@@ -2923,12 +2955,24 @@
 
 .vh-faq__right {
   position: relative;
-  width: auto;
+  width: 100%;
   max-width: 100%;
+  min-width: 0;
   height: auto;
   min-height: 0;
   isolation: isolate;
   z-index: 1;
+}
+
+.vh-accordion {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  pointer-events: auto;
 }
 
 .vh-faq__glow {
@@ -2943,17 +2987,6 @@
   filter: blur(80px);
   pointer-events: none !important;
   z-index: 0;
-}
-
-.vh-accordion {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  pointer-events: auto;
 }
 
 .vh-accordion .vh-kicker {
@@ -2986,7 +3019,7 @@
 
 .vh-accordion .vh-lead {
   width: 100%;
-  max-width: 34em;
+  max-width: none;
   font-size: 16px;
   font-weight: 500;
   letter-spacing: -0.015em;

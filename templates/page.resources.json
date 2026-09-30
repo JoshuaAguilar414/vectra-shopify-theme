@@ -15,6 +15,7 @@
             "kicker": "VECTRA RESOURCES",
             "heading": "Responsible Business Resources & Insights",
             "subheading": "Better Insight. Clearer Decisions.",
+            "text": "VECTRA Resources helps you work out what matters, what it means for your organization, and what to do next.\n\nThere is already enough information available. The harder part is separating what is relevant from what is not, understanding what it means for your operations, and knowing where your attention needs to go.",
             "aeo_text": "Responsible business resources help organizations understand ESG, supply chain, sustainability, compliance, risk, and operational resilience issues and decide what to do about them. VECTRA International brings together ESG resources, supply chain resources, Insights, Ebooks and Playbooks, Events and Webinars, VCASTs, Case Studies, and Press Releases, organized by the kind of answer you need."
           }
         },
@@ -65,7 +66,8 @@
           "type": "vectra-res-why",
           "settings": {
             "kicker": "WHY CHOOSE VECTRA INTERNATIONAL",
-            "heading": "Why Choose VECTRA International"
+            "heading": "Why Choose VECTRA International",
+            "text": "VECTRA International brings more than 20 years of work across responsible business, supply chains, risk, and operational improvement to the resources published here.\n\nOur responsible business resources draw on the same specialist expertise behind VECTRA’s client work, connecting ESG, supply chain, audit, risk management, and operational resilience topics with the decisions and practical work behind them.\n\nWhat you read here reflects what we work on in practice."
           }
         },
         "faq": {

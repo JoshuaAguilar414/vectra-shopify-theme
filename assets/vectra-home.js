@@ -191,7 +191,12 @@
 
   const initCarousel = (carousel) => {
     const slides = qsa('[data-vh-slide]', carousel);
-    if (slides.length < 2) return;
+    if (slides.length < 2) {
+      qsa('[data-vh-prev], [data-vh-next], [data-vh-dot]', carousel).forEach((el) => {
+        el.hidden = true;
+      });
+      return;
+    }
     let index = Math.max(0, slides.findIndex((slide) => slide.classList.contains('is-active')));
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const HERO_INTERVAL_MS = 7000;
@@ -262,12 +267,17 @@
       fade(title, item.dataset.title);
       fade(text, item.dataset.text);
       fade(cta, item.dataset.cta);
-      if (cta && item.dataset.href) {
+      if (cta) {
         const href = item.dataset.href;
-        cta.setAttribute('href', href);
-        if (href === '#VectraContactModal') {
-          cta.setAttribute('data-vh-contact-open', '');
+        if (href) {
+          cta.setAttribute('href', href);
+          if (href === '#VectraContactModal') {
+            cta.setAttribute('data-vh-contact-open', '');
+          } else {
+            cta.removeAttribute('data-vh-contact-open');
+          }
         } else {
+          cta.setAttribute('href', '#solutions');
           cta.removeAttribute('data-vh-contact-open');
         }
       }
@@ -364,12 +374,12 @@
           return;
         }
         const dx = x - lastX;
-        if (Math.abs(dx) < 28) return;
+        if (Math.abs(dx) < 16) return;
         lastX = x;
         hoverLock = true;
         window.setTimeout(() => {
           hoverLock = false;
-        }, 420);
+        }, 280);
         const shots = qsa('[data-vh-sol-item]', gallery);
         if (shots.length < 2) return;
         if (dx > 0) {
@@ -391,7 +401,7 @@
       solTimer = window.setInterval(() => {
         const shots = qsa('[data-vh-sol-item]', gallery || solutions);
         if (shots[1]) activate(shots[1]);
-      }, 7000);
+      }, 5500);
     };
     startSol();
   }

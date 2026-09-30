@@ -96,20 +96,20 @@
             <p>Whatever brought you here today, you don't have to carry it alone. Our people sit down with your people, learn what's really going on, bring in exactly the expertise the moment calls for, and stay until the next step is something you can actually see happening, not just something written in a report.</p>
             <p>We're not here to hand you a deliverable and disappear. We're here because your success is genuinely, personally, ours too.</p>
           </div>
-          <p class="vh-hero__aeo" data-vh-hero-el>Responsible business means managing supplier risk, environmental and social impact, and regulatory responsibility in ways that protect people, performance, and long-term value. VECTRA helps organizations turn those responsibilities into clear ownership, practical action, stronger operational resilience, and measurable improvement across teams, suppliers, and systems.</p>
           <div class="vh-hero__actions" data-vh-hero-el>
             <a class="vh-btn vh-btn--green" href="#solutions">Explore How We Help</a>
             <a class="vh-btn vh-btn--outline-light" href="#VectraContactModal" data-vh-contact-open>Talk to an Expert</a>
           </div>
+          <p class="vh-hero__aeo" data-vh-hero-el>Responsible business means managing supplier risk, environmental and social impact, and regulatory responsibility in ways that protect people, performance, and long-term value. VECTRA helps organizations turn those responsibilities into clear ownership, practical action, stronger operational resilience, and measurable improvement across teams, suppliers, and systems.</p>
         </div>
       </article>
       {% endif %}
     </div>
-    <button class="vh-hero__arrow vh-hero__arrow--prev" type="button" data-vh-prev aria-label="Previous slide">
+    <button class="vh-hero__arrow vh-hero__arrow--prev" type="button" data-vh-prev aria-label="Previous slide"{% if nested_slides == blank %} hidden{% endif %}>
       <img class="vh-hero__arrow-bg" src="{{ img_arrow_circle }}" alt="">
       <img class="vh-hero__arrow-icon" src="{{ img_arrow_white }}" alt="">
     </button>
-    <button class="vh-hero__arrow vh-hero__arrow--next" type="button" data-vh-next aria-label="Next slide">
+    <button class="vh-hero__arrow vh-hero__arrow--next" type="button" data-vh-next aria-label="Next slide"{% if nested_slides == blank %} hidden{% endif %}>
       <img class="vh-hero__arrow-bg" src="{{ img_arrow_circle }}" alt="">
       <img class="vh-hero__arrow-icon" src="{{ img_arrow_white }}" alt="">
     </button>
@@ -361,7 +361,7 @@
         <div class="vh-solutions__copy" data-vh-sol-copy>
           <h3 data-vh-sol-title>Operational Resilience</h3>
           <p data-vh-sol-text>Keep the work moving even when conditions change, with clear ownership, a faster response, and decisions your team can make with confidence.</p>
-              <a class="vh-btn vh-btn--green vh-btn--rect" href="#VectraContactModal" data-vh-contact-open data-vh-sol-cta>Explore Operational Resilience</a>
+          <a class="vh-btn vh-btn--green vh-btn--rect" href="#solutions" data-vh-sol-cta>Explore Operational Resilience</a>
         </div>
         <div class="vh-solutions__gallery">
           {% if nested_shots != blank %}
@@ -670,7 +670,7 @@
 {% liquid
   assign cases_kicker = block.settings.kicker | default: 'SELECTED CLIENT EXPERIENCE'
   assign cases_heading = block.settings.heading | default: "The Proof Isn't What We Say. It's What Changed For Them."
-  assign cases_lead = block.settings.lead | default: "The best evidence of how we work isn't a claim on this page. It's what's different for the people who worked with us: what stopped happening, what got easier, what their team stopped worrying about. Explore how VECTRA has supported organizations across responsible business, supply chains, operational improvement, and capability building, from the challenge they faced to the support provided and the progress that followed."
+  assign cases_lead = block.settings.lead | default: "The best evidence of how we work isn't a claim on this page. It's what's different for the people who worked with us: what stopped happening, what got easier, what their team stopped worrying about.\n\nExplore how VECTRA has supported organizations across responsible business, supply chains, operational improvement, and capability building, from the challenge they faced to the support provided and the progress that followed."
   assign cases_reviews = block.settings.reviews_label | default: '5/5 — Based on 500 reviews'
   assign cases_btn = block.settings.button_label | default: 'Explore Case Studies'
   if block.settings.button_link != blank
@@ -686,7 +686,15 @@
       <p class="vh-kicker" data-vh-reveal>{{ cases_kicker }}</p>
       <h2 data-vh-reveal>{{ cases_heading }}</h2>
       {% if cases_lead != blank %}
-        <p class="vh-cases__lead" data-vh-reveal>{{ cases_lead }}</p>
+        <div class="vh-cases__lead" data-vh-reveal>
+          {% assign cases_paras = cases_lead | newline_to_br | split: '<br />' %}
+          {% for para in cases_paras %}
+            {% assign para_text = para | strip_html | strip %}
+            {% if para_text != blank %}
+              <p>{{ para_text }}</p>
+            {% endif %}
+          {% endfor %}
+        </div>
       {% endif %}
       <span class="vh-reviews">{{ cases_reviews }}</span>
       <div class="vh-case-grid">
@@ -846,66 +854,86 @@
   {% when 'faq' %}
 {% unless block.settings.hide_section %}
 {% liquid
-  assign faq_card_title = block.settings.card_title | default: 'Bring Us the Problem That Keeps Coming Back'
-  assign faq_card_text = block.settings.card_text | default: "Maybe actions keep stalling. Evidence is scattered. A supplier issue stays open. Or your systems produce information, but the next step is still unclear. Tell us where the work gets stuck. We'll help you identify the gap and the next step."
-  assign faq_kicker = block.settings.kicker | default: 'Our FAQ'
+  assign faq_card_kicker = block.settings.card_kicker | default: 'TALK TO US'
+  assign faq_card_title = block.settings.card_title | default: 'Tell Us What You Need Help With'
+  assign faq_card_text = block.settings.card_text
+  if faq_card_text == blank
+    assign faq_card_text = "You may already know exactly what needs to change. Or you may simply know that something needs to work better.\n\nA supplier issue may be slowing progress. A new requirement may be creating uncertainty. Your team may need stronger evidence, better controls, or more support.\n\nTell us what is happening and what you are trying to improve. We'll listen, help make sense of the situation, and connect you with the right people."
+  endif
+  assign faq_kicker = block.settings.kicker | default: 'FAQ'
   assign faq_heading = block.settings.heading | default: 'Questions Business Leaders Ask Us'
-  assign faq_lead = block.settings.lead | default: 'Straight answers about where VECTRA fits, how we work, and what happens next.'
+  assign faq_lead = block.settings.lead | default: 'Clear answers about what VECTRA does, how we work, and where to start.'
+  assign faq_btn = block.settings.button_label | default: 'Talk to a VECTRA Expert'
+  if block.settings.button_link != blank
+    assign faq_btn_href = block.settings.button_link
+  else
+    assign faq_btn_href = '#VectraContactModal'
+  endif
+  assign faq_more_heading = block.settings.more_heading | default: 'Have another question?'
+  assign faq_more_text = block.settings.more_text | default: 'Find more answers about VECTRA International, how we work, our capabilities, and getting started.'
+  assign faq_more_btn = block.settings.more_button_label | default: 'View All FAQs'
+  if block.settings.more_button_link != blank
+    assign faq_more_href = block.settings.more_button_link
+  else
+    assign faq_more_href = faq_href
+  endif
   assign nested_items = nested_items | strip
 %}
 <section class="vh-faq" id="faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vh-wrap vh-faq__grid">
       <aside class="vh-contact-card" data-vh-reveal="left">
+        <p class="vh-contact-card__kicker">{{ faq_card_kicker }}</p>
         <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
         <p class="vh-contact-card__title">{{ faq_card_title }}</p>
-        <p>{{ faq_card_text }}</p>
-        <a class="vh-btn vh-btn--white" href="{{ block.settings.button_link | default: faq_href }}">
-          {{ block.settings.button_label | default: 'More questions?' }}
+        {% assign card_paras = faq_card_text | newline_to_br | split: '<br />' %}
+        {% for para in card_paras %}
+          {% assign para_text = para | strip_html | strip %}
+          {% if para_text != blank %}
+            <p>{{ para_text }}</p>
+          {% endif %}
+        {% endfor %}
+        <a class="vh-btn vh-btn--white" href="{{ faq_btn_href }}"{% if faq_btn_href == '#VectraContactModal' %} data-vh-contact-open{% endif %}>
+          {{ faq_btn }}
           <img src="{{ img_arrow }}" alt="">
         </a>
-        {% render 'vectra-contact-details', variant: 'card', img_phone: img_phone, img_mail: img_mail, img_pin: img_pin %}
+        {% render 'vectra-contact-details', variant: 'card', office_only: true, img_phone: img_phone, img_mail: img_mail, img_pin: img_pin %}
       </aside>
 
       <div class="vh-faq__right">
         <div class="vh-faq__glow" aria-hidden="true"></div>
-        <div class="vh-accordion">
+        <div class="vh-accordion" data-vh-faq-accordion>
           <p class="vh-kicker">{{ faq_kicker }}</p>
           <h2 class="vh-h2">{{ faq_heading }}</h2>
           <p class="vh-lead">{{ faq_lead }}</p>
           {% if nested_items != blank %}
             {{ nested_items }}
           {% else %}
-          <div class="vh-acc" data-vh-faq-item>
-            <button type="button" data-vh-faq-btn>What does VECTRA help organizations improve?</button>
-            <div class="vh-acc__body">
-              VECTRA helps organizations reduce business risk, strengthen operational and supply chain resilience, improve ESG and sustainability performance, and build the evidence and capability needed to drive measurable results across operations and value chains. We start with the outcome that needs to improve, then bring the relevant expertise and implementation support around it.
-            </div>
-          </div>
-          <div class="vh-acc" data-vh-faq-item>
-            <button type="button" data-vh-faq-btn>We already have consultants, platforms, and dashboards. Where does VECTRA fit?</button>
-            <div class="vh-acc__body">
-              Often, the gap appears after the information already exists. VECTRA works with the systems, expertise, and partners you already have, then focuses on ownership, workflows, evidence, supplier engagement, and follow-through where the work is getting stuck.
-            </div>
-          </div>
           <div class="vh-acc is-open" data-vh-faq-item>
-            <button type="button" data-vh-faq-btn>Can VECTRA work with the systems we already use?</button>
-            <div class="vh-acc__body">
-              Yes. VECTRA is platform-agnostic. We work with existing systems, data, teams, and partners, then introduce additional technology only where it solves a clear problem.
-            </div>
+            <button type="button" data-vh-faq-btn aria-expanded="true">What does VECTRA help organizations improve?</button>
+            <div class="vh-acc__body">VECTRA helps organizations strengthen responsible business, operational resilience, supply chain resilience, and day to day business performance. Depending on the challenge, our support may include responsible business transformation, ESG consulting, sustainability consulting, supply chain consulting, technology, capability building, or implementation support. We start with the result that needs to improve, then bring the relevant expertise and support around it. Not the other way around.</div>
           </div>
           <div class="vh-acc" data-vh-faq-item>
-            <button type="button" data-vh-faq-btn>Where do we start if we know the problem but not the solution?</button>
-            <div class="vh-acc__body">
-              Start with the problem. Tell us what keeps recurring, stalling, or becoming difficult to prove. We’ll help clarify what needs attention and the most practical way forward.
-            </div>
+            <button type="button" data-vh-faq-btn aria-expanded="false">We already have consultants, platforms, and dashboards. Where does VECTRA fit?</button>
+            <div class="vh-acc__body" hidden>We work with what you already have. When the information, expertise, or system is already there, we focus on what's stopping it from producing the result you need. That may be ownership, process, supplier engagement, evidence, capability, or follow-through.</div>
           </div>
           <div class="vh-acc" data-vh-faq-item>
-            <button type="button" data-vh-faq-btn>How does VECTRA measure progress?</button>
-            <div class="vh-acc__body">
-              We agree what improvement should look like at the start. Depending on the issue, that may include clearer ownership, closed actions, stronger evidence, improved capability, fewer recurring problems, or better supplier performance.
-            </div>
+            <button type="button" data-vh-faq-btn aria-expanded="false">Can VECTRA work with the systems we already use?</button>
+            <div class="vh-acc__body" hidden>Yes. VECTRA is platform-agnostic. We work with your existing systems, data, teams, consultants, and partners, then introduce additional technology only where it solves a clear problem.</div>
+          </div>
+          <div class="vh-acc" data-vh-faq-item>
+            <button type="button" data-vh-faq-btn aria-expanded="false">Where do we start if we know the problem but not the solution?</button>
+            <div class="vh-acc__body" hidden>Start by telling us what's happening and what you want to improve. We'll help clarify the issue, identify what needs attention first, and figure out the most practical next step, together.</div>
+          </div>
+          <div class="vh-acc" data-vh-faq-item>
+            <button type="button" data-vh-faq-btn aria-expanded="false">How does VECTRA measure progress?</button>
+            <div class="vh-acc__body" hidden>We agree at the start on what success should look like. Depending on the challenge, that may include clearer ownership, closed actions, stronger evidence, improved capability, fewer recurring problems, or better supplier performance.</div>
           </div>
           {% endif %}
+          <div class="vh-faq__more">
+            <h3>{{ faq_more_heading }}</h3>
+            <p>{{ faq_more_text }}</p>
+            <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ faq_more_href }}">{{ faq_more_btn }}</a>
+          </div>
         </div>
       </div>
     </div>
@@ -966,8 +994,7 @@
         {% endform %}
       {% else %}
         {% form 'contact', class: 'vh-form' %}
-          <h3>{{ portal_form_heading }}</h3>
-          {% render 'vectra-contact-fields', img_arrow: img_arrow, home_form: true, submit_label: portal_submit %}
+          {% render 'vectra-contact-fields', img_arrow: img_arrow, home_form: true, submit_label: portal_submit, message_placeholder: 'Tell us what you need help with and what you would like to improve.' %}
         {% endform %}
       {% endif %}
       {% assign nested_extras = nested_extras | strip %}

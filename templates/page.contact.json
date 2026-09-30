@@ -14,6 +14,7 @@
           "settings": {
             "kicker": "Contact VECTRA International",
             "heading": "Bring Us the Problem.",
+            "text": "<p>You don’t need a finished scope to talk to us. Tell us what’s happening — the thing that keeps coming back, the gap you can’t quite close, or a problem you haven’t fully named yet. It might be a supplier finding, an ESG reporting gap, an audit follow-up, or an operational resilience issue. You don’t need to know which VECTRA service it belongs to before you reach out.</p><p>We’ll review what you share, bring the relevant expertise into the conversation, and work out the most useful next step together.</p><p>Looking for VECTRA International’s contact details, or just want to get in touch with our team? Use the form below, email info@vectra-intl.com, or call +32 495 239088 — whichever is easiest for you.</p>",
             "form_heading": "Tell Us What You're Working Through"
           }
         },
@@ -96,7 +97,8 @@
           "type": "vectra-con-direct",
           "settings": {
             "kicker": "PREFER TO REACH US DIRECTLY?",
-            "heading": "Contact VECTRA International"
+            "heading": "Contact VECTRA International",
+            "text": "<p>Already know who you need to speak with? Reach out directly. If you’d like to contact our operational resilience consultants, or you’re not sure which VECTRA specialist fits the issue, use the form above and tell us what’s happening — whether it’s supplier risk, ESG compliance, audit follow-up, or a broader resilience program. We’ll route the conversation to the right person from there.</p>"
           }
         },
         "footer": { "type": "vectra-footer", "settings": {} }

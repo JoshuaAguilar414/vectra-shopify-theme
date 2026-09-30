@@ -217,7 +217,13 @@
     <section class="vs-solutions" id="solutions">
       <h2>{{ block.settings.solutions_heading | default: 'Our Solutions' }}</h2>
       {% if block.settings.solutions != blank %}
-        <p>{{ block.settings.solutions }}</p>
+        {% assign sol_paras = block.settings.solutions | newline_to_br | split: '<br />' %}
+        {% for para in sol_paras %}
+          {% assign para_text = para | strip_html | strip %}
+          {% if para_text != blank %}
+            <p>{{ para_text }}</p>
+          {% endif %}
+        {% endfor %}
       {% else %}
         <p>{{ mv_solutions }}</p>
         <p>{{ mv_solutions_2 }}</p>
@@ -228,7 +234,13 @@
       <p class="vs-values__kicker">{{ block.settings.values_kicker | default: 'VECTRA VALUES' }}</p>
       <h2>{{ block.settings.values_heading | default: 'The Values Behind How We Show Up' }}</h2>
       {% if block.settings.values_text != blank %}
-        <p>{{ block.settings.values_text }}</p>
+        {% assign val_paras = block.settings.values_text | newline_to_br | split: '<br />' %}
+        {% for para in val_paras %}
+          {% assign para_text = para | strip_html | strip %}
+          {% if para_text != blank %}
+            <p>{{ para_text }}</p>
+          {% endif %}
+        {% endfor %}
       {% else %}
         <p>Values matter most when people can feel them in the way you treat them.</p>
         <p>At VECTRA, they shape how we listen, how we make decisions, how we support one another, and how we show up for our clients and the communities connected to them.</p>
@@ -277,7 +289,13 @@
       <h2>{{ block.settings.leaders_heading | default: 'Meet the People Who Guide VECTRA' }}</h2>
       <div class="vs-leaders__intro">
         {% if block.settings.leaders_text != blank %}
-          <p>{{ block.settings.leaders_text }}</p>
+          {% assign lead_paras = block.settings.leaders_text | newline_to_br | split: '<br />' %}
+          {% for para in lead_paras %}
+            {% assign para_text = para | strip_html | strip %}
+            {% if para_text != blank %}
+              <p>{{ para_text }}</p>
+            {% endif %}
+          {% endfor %}
         {% else %}
           <p>VECTRA is shaped by people with different experiences, perspectives, and areas of expertise, but a shared belief in what good partnership should feel like.</p>
           <p>Our leadership team sets the direction, supports our people, and helps create the conditions for strong ideas and good judgment to reach our clients.</p>
@@ -379,7 +397,13 @@
       <h2>{{ block.settings.experts_heading | default: 'Our Team of Experts' }}</h2>
       <div class="vs-experts__intro">
         {% if block.settings.experts_text != blank %}
-          <p>{{ block.settings.experts_text }}</p>
+          {% assign exp_paras = block.settings.experts_text | newline_to_br | split: '<br />' %}
+          {% for para in exp_paras %}
+            {% assign para_text = para | strip_html | strip %}
+            {% if para_text != blank %}
+              <p>{{ para_text }}</p>
+            {% endif %}
+          {% endfor %}
         {% else %}
           <p>The people our clients meet matter.</p>
           <p>That is why VECTRA brings together specialists who know their fields, understand different markets, and have spent years seeing how challenges play out in real businesses.</p>
@@ -508,7 +532,13 @@
       <h2>{{ block.settings.people_heading | default: 'Global Expertise. Local Understanding. One VECTRA Team.' }}</h2>
       <div class="vs-people__body">
         {% if block.settings.people_text != blank %}
-          <p>{{ block.settings.people_text }}</p>
+          {% assign peo_paras = block.settings.people_text | newline_to_br | split: '<br />' %}
+          {% for para in peo_paras %}
+            {% assign para_text = para | strip_html | strip %}
+            {% if para_text != blank %}
+              <p>{{ para_text }}</p>
+            {% endif %}
+          {% endfor %}
         {% else %}
           <p>The world may be connected, but every market still has its own people, culture, expectations, regulations, and realities.</p>
           <p>That is why being global means more to us than having people in different places.</p>
@@ -619,7 +649,13 @@
         <p class="vs-join__kicker">{{ join_kicker }}</p>
         <h2>{{ join_heading }}</h2>
         {% if block.settings.text != blank %}
-          <p>{{ block.settings.text }}</p>
+          {% assign join_paras = block.settings.text | newline_to_br | split: '<br />' %}
+          {% for para in join_paras %}
+            {% assign para_text = para | strip_html | strip %}
+            {% if para_text != blank %}
+              <p>{{ para_text }}</p>
+            {% endif %}
+          {% endfor %}
         {% else %}
           <p>We look for people who care about doing meaningful work well, who bring their own perspective, and who are willing to listen to someone else’s.</p>
           <p>You will work with colleagues and specialists across countries, cultures, disciplines, and time zones. You will learn from them, challenge them, and bring something of your own to the team.</p>

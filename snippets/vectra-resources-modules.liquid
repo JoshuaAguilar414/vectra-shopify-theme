@@ -73,7 +73,13 @@
     <h2 class="vres-hero__display">{{ hero_display }}</h2>
     <div class="vres-hero__lead">
       {% if block.settings.text != blank %}
-        {{ block.settings.text }}
+        {% assign hero_paras = block.settings.text | newline_to_br | split: '<br />' %}
+        {% for para in hero_paras %}
+          {% assign para_text = para | strip_html | strip %}
+          {% if para_text != blank %}
+            <p>{{ para_text }}</p>
+          {% endif %}
+        {% endfor %}
       {% else %}
         <p>VECTRA Resources helps you work out what matters, what it means for your organization, and what to do next.</p>
         <p>There is already enough information available. The harder part is separating what is relevant from what is not, understanding what it means for your operations, and knowing where your attention needs to go.</p>
@@ -428,7 +434,13 @@
     <h2 class="vh-h2">{{ why_heading }}</h2>
     <div class="vres-why__copy">
       {% if block.settings.text != blank %}
-        {{ block.settings.text }}
+        {% assign why_paras = block.settings.text | newline_to_br | split: '<br />' %}
+        {% for para in why_paras %}
+          {% assign para_text = para | strip_html | strip %}
+          {% if para_text != blank %}
+            <p{% if forloop.last %} class="vres-why__close"{% endif %}>{{ para_text }}</p>
+          {% endif %}
+        {% endfor %}
       {% else %}
         <p>VECTRA International brings more than 20 years of work across responsible business, supply chains, risk, and operational improvement to the resources published here.</p>
         <p>Our responsible business resources draw on the same specialist expertise behind VECTRA’s client work, connecting ESG, supply chain, audit, risk management, and operational resilience topics with the decisions and practical work behind them.</p>

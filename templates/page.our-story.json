@@ -15,8 +15,10 @@
             "kicker": "INSIDE VECTRA",
             "heading": "VECTRA International DNA, Values & Global Leadership",
             "display_text": "We Believe Better Business Starts With People.",
+            "text": "<p>For more than 20 years, VECTRA has worked with people who want their businesses to do better: for their teams, their customers, their partners, and the communities around them.</p><p>That belief has shaped who we are from the beginning.</p><p>We listen. We understand what matters. We bring the right people together. And we stay close as ideas become decisions, decisions become action, and progress begins to show.</p><p>Today, VECTRA International works alongside organizations around the world to strengthen responsible business, supply chains, operations, and the people responsible for keeping them moving.</p><p>VECTRA International is a business resilience and operational capability building partner founded in 2005. We combine experienced people, practical support, specialist expertise, and technology to help organizations address responsible business, supply chain, and operational challenges, and turn them into clearer decisions, stronger performance, and lasting capability.</p>",
             "button_label": "Explore How We Help",
-            "button_2_label": "Talk to an Expert"
+            "button_2_label": "Talk to an Expert",
+            "button_2_link": "#VectraContactModal"
           }
         },
         "ceo": {
@@ -24,7 +26,8 @@
           "settings": {
             "name": "Patrick Neyts",
             "kicker": "MEET THE FOUNDER",
-            "heading": "A Message From Our CEO"
+            "heading": "A Message From Our CEO",
+            "text": "<p class=\"vs-ceo__lede\">Complexity doesn't hold businesses back. Not knowing what to do about it does.</p><p>Most organizations do not struggle because of a lack of ambition. They struggle because operational complexity outpaces their ability to act.</p><p>At VECTRA International, we partner with organizations to transform that complexity into clarity, control, and competitive advantage. From small and mid-sized businesses to global enterprises, we deliver integrated solutions that strengthen operational capability, reduce risk, and drive measurable results.</p><p>We believe business is a force for good when better performance creates better outcomes for your organization, your customers, people, and society.</p><p class=\"vs-ceo__signoff\"><strong>Patrick Neyts</strong><br>Chief Executive Officer</p>"
           }
         },
         "main": {
@@ -87,25 +90,42 @@
             "kicker": "OUR STORY",
             "heading": "The VECTRA International Story",
             "subheading": "Enabling Positive Business Impact Since 2005",
+            "story_text": "<p>VECTRA began with a belief that still guides us today: business has the power to make a positive difference in people's lives.</p><p>Our early years brought us close to workers, workplaces, brands, communities, and consumers. We saw how decisions made inside a business could reach far beyond it, shaping livelihoods, relationships, trust, and opportunity.</p><p>That experience taught us something important. Good intentions matter, but what matters even more is what happens after the promise is made.</p><p>So as the needs of our clients grew, VECTRA grew with them.</p><p>Our experience expanded across responsible business, supply chains, governance, operational improvement, technology, and capability building. But the way we approach our clients has remained deeply human.</p><p>We listen before we recommend. We bring together people who understand the challenge. We support teams as decisions move into practice. And we stay involved long enough to see whether the change is making the difference it was meant to make.</p><p>Today, VECTRA International brings that experience together as a business resilience and operational capability building partner serving organizations around the world.</p><p>The challenges have changed over the years. Our belief has not.</p><p><strong>Better business should create better outcomes for people.</strong></p>",
+            "mission": "We enable positive business impact by partnering with organizations to transform end-to-end operational complexity into resilient, well-governed performance through expert teams, and human led state of the art technology—creating measurable value for people, operations, and sustainable growth.",
+            "vision": "To be the trusted partner in building operational control and resilience and achieving sustainable competitive advantage by transforming business complexity into strategic clarity, human-centered AI capability, and measurable value.",
+            "solutions_heading": "Our Solutions",
+            "solutions": "We bring together deep expertise, a trusted network of partners, and technology that actually earns its place, then put all of it to work helping you design what needs to change, govern how it runs, and execute it in the real world.\n\nThe result isn't just a plan. It's clarity you can act on, control you can trust, and capability that stays with your team long after we're done.",
             "values_kicker": "VECTRA VALUES",
             "values_heading": "The Values Behind How We Show Up",
+            "values_text": "Values matter most when people can feel them in the way you treat them.\n\nAt VECTRA, they shape how we listen, how we make decisions, how we support one another, and how we show up for our clients and the communities connected to them.\n\nThey are not simply words we display. They are standards we expect ourselves to live by.",
             "values_list_heading": "VECTRA Values",
+            "values_subtext": "These values guide the decisions we make, the relationships we build, and the way we turn our commitments into action.",
             "value_1_heading": "V — VALUES",
+            "value_1_text": "We are guided by respect, innovation, integrity, and accountability.",
             "value_2_heading": "E — ETHICS",
+            "value_2_text": "We prioritize ethically sourcing goods, empowering others, and creating positive impact.",
             "value_3_heading": "C — COMMUNITY",
+            "value_3_text": "We actively build strong, supportive communities, fostering connections that uplift.",
             "value_4_heading": "T — TRANSPARENCY",
+            "value_4_text": "We are honest, clear, and open, so you can trust us and know where you stand.",
             "value_5_heading": "R — RIGHTS",
+            "value_5_text": "We defend human rights and champion fair treatment for all.",
             "value_6_heading": "A — ACTION",
+            "value_6_text": "We turn words into real actions that drive meaningful change.",
             "leaders_kicker": "OUR LEADERSHIP",
             "leaders_heading": "Meet the People Who Guide VECTRA",
+            "leaders_text": "VECTRA is shaped by people with different experiences, perspectives, and areas of expertise, but a shared belief in what good partnership should feel like.\n\nOur leadership team sets the direction, supports our people, and helps create the conditions for strong ideas and good judgment to reach our clients.\n\nAcross responsible business, operations, supply chains, sales, marketing, and applied AI, they bring the experience needed to keep VECTRA moving forward while staying true to the values we started with.",
+            "leaders_button_label": "Meet Our Leadership",
             "experts_kicker": "OUR EXPERTS",
             "experts_heading": "Our Team of Experts",
+            "experts_text": "The people our clients meet matter.\n\nThat is why VECTRA brings together specialists who know their fields, understand different markets, and have spent years seeing how challenges play out in real businesses.\n\nThey bring more than technical knowledge. They bring judgment, local understanding, practical experience, and the ability to listen before deciding what comes next.\n\nTogether, they help us give clients support that feels relevant to their situation, not pulled from a standard playbook.",
+            "experts_button_label": "Meet All Experts",
             "show_associates": false,
             "show_interns": false,
             "people_kicker": "OUR GLOBAL NETWORK",
             "people_heading": "Global Expertise. Local Understanding. One VECTRA Team.",
-            "people_button_label": "Meet Our People",
-            "solutions_heading": "Our Solutions"
+            "people_text": "The world may be connected, but every market still has its own people, culture, expectations, regulations, and realities.\n\nThat is why being global means more to us than having people in different places.\n\nVECTRA’s associates and experts bring local understanding and specialist experience from the markets they know firsthand. They understand the details that may never show up in a report but can make all the difference in what succeeds.\n\nA supplier challenge in Eastern Africa may call for a different perspective from a question in Brussels. We bring together the people who understand both the challenge and the context around it.\n\nWherever our clients are, they have the strength of a global network with people who understand the local reality, connected by one VECTRA team and one commitment to their success.",
+            "people_button_label": "Meet Our People"
           }
         },
         "join": {
@@ -113,6 +133,7 @@
           "settings": {
             "kicker": "BE PART OF A GLOBAL TEAM",
             "heading": "Join a Team That Values What You Bring",
+            "text": "We look for people who care about doing meaningful work well, who bring their own perspective, and who are willing to listen to someone else’s.\n\nYou will work with colleagues and specialists across countries, cultures, disciplines, and time zones. You will learn from them, challenge them, and bring something of your own to the team.\n\nWe value people who take ownership, stay curious, speak up respectfully, and care whether what we do makes a positive difference.\n\nBring your judgment, your experience, and the questions you think we should be asking.",
             "button_label": "View Open Positions"
           }
         },

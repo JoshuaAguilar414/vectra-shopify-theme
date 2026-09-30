@@ -64,16 +64,13 @@
         {% endfor %}
       </div>
     {% endif %}
-    {% if block.settings.aeo_text != blank %}
-      <p class="vh-hero__aeo" data-vh-hero-el>{{ block.settings.aeo_text }}</p>
-    {% endif %}
     {% if block.settings.button_label != blank or block.settings.button_2_label != blank %}
       <div class="vh-hero__actions" data-vh-hero-el>
         {% if block.settings.button_label != blank %}
           <a
             class="vh-btn vh-btn--{{ block.settings.button_style | default: 'green' }}"
             href="{{ block.settings.button_link | default: '#solutions' }}"
-            {% if block.settings.button_link == blank or block.settings.button_link == '#VectraContactModal' %}
+            {% if block.settings.button_link == '#VectraContactModal' %}
               data-vh-contact-open
             {% endif %}
             {% if block.settings.open_in_new_tab and block.settings.button_link != blank %}
@@ -98,6 +95,9 @@
           </a>
         {% endif %}
       </div>
+    {% endif %}
+    {% if block.settings.aeo_text != blank %}
+      <p class="vh-hero__aeo" data-vh-hero-el>{{ block.settings.aeo_text }}</p>
     {% endif %}
   </div>
 </article>
