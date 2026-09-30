@@ -1,3 +1,63 @@
+{%- doc -%}
+  Homepage hero slide — Section 2 final copy.
+  Order is fixed (never reorders on scroll/animation):
+  1) Small visible H1
+  2) Large display text
+  3) Body paragraphs
+  4) CTAs
+  5) AEO supporting copy
+{%- enddoc -%}
+
+{% capture hero_h1_v2 %}Business Resilience Partner for Responsible Business & Operational Resilience{% endcapture %}
+{% capture hero_display_v2 %}Your Success Is Our Success.{% endcapture %}
+{% capture hero_body_v2 %}There's a version of your week that doesn't include the same problem showing up again. Where a supplier issue gets fixed and actually stays fixed. Where the requirement everyone's been worried about becomes something your team can just handle. Where you're not the only person holding it all together.
+
+That's the work we do together.
+
+Whatever brought you here today, you don't have to carry it alone. Our people sit down with your people, learn what's really going on, bring in exactly the expertise the moment calls for, and stay until the next step is something you can actually see happening, not just something written in a report.
+
+We're not here to hand you a deliverable and disappear. We're here because your success is genuinely, personally, ours too.{% endcapture %}
+{% capture hero_aeo_v2 %}Responsible business means managing supplier risk, environmental and social impact, and regulatory responsibility in ways that protect people, performance, and long-term value. VECTRA helps organizations turn those responsibilities into clear ownership, practical action, stronger operational resilience, and measurable improvement across teams, suppliers, and systems.{% endcapture %}
+
+{% liquid
+  assign hero_h1 = block.settings.heading | strip_html | strip
+  assign hero_display = block.settings.subheading | strip_html | strip
+  assign hero_body = block.settings.text | strip
+  assign hero_aeo = block.settings.aeo_text | strip
+  assign hero_btn = block.settings.button_label | strip
+  assign hero_btn2 = block.settings.button_2_label | strip
+
+  if hero_h1 == blank or hero_h1 contains 'Turn Business Complexity' or hero_display contains 'Turn Business Complexity'
+    assign hero_h1 = hero_h1_v2
+  endif
+  if hero_display == blank or hero_display contains 'Turn Business Complexity' or hero_display contains 'Operational Capability Building'
+    assign hero_display = hero_display_v2
+  endif
+  if hero_body == blank or hero_body contains 'Turn Business Complexity' or hero_body contains 'clear ownership, practical action, and measurable performance' or hero_body contains 'From strategy through implementation'
+    assign hero_body = hero_body_v2
+  endif
+  if hero_aeo == blank
+    assign hero_aeo = hero_aeo_v2
+  endif
+  if hero_btn == blank
+    assign hero_btn = 'Explore How We Help'
+  endif
+  if hero_btn2 == blank
+    assign hero_btn2 = 'Talk to an Expert'
+  endif
+
+  if block.settings.button_link != blank
+    assign hero_btn_href = block.settings.button_link
+  else
+    assign hero_btn_href = '#solutions'
+  endif
+  if block.settings.button_2_link != blank
+    assign hero_btn2_href = block.settings.button_2_link
+  else
+    assign hero_btn2_href = '#VectraContactModal'
+  endif
+%}
+
 <article
   class="vh-hero__slide{% if block.settings.is_active %} is-active{% endif %} vh-hero__slide--align-{{ block.settings.text_align | default: 'left' }}"
   data-vh-slide
@@ -24,8 +84,8 @@
   {% else %}
     {% render 'vectra-image',
       image: block.settings.image,
-      fallback: block.settings.fallback_asset,
-      alt: block.settings.alt,
+      fallback: block.settings.fallback_asset | default: 'vectra-e5f2730422a9a0516df81d548f5c3f4383f99969.png',
+      alt: block.settings.alt | default: 'VECTRA team collaborating',
       class: 'vh-hero__media vh-hero__media--desktop',
       width: 1920,
       height: 1080,
@@ -47,58 +107,34 @@
     }}
   {% endif %}
   <div class="vh-hero__copy" {% if block.settings.content_max_width != blank and block.settings.content_max_width > 0 %}style="max-width: {{ block.settings.content_max_width }}px;"{% endif %}>
-    {% if block.settings.heading != blank %}
-      <h1 data-vh-hero-el>{{ block.settings.heading }}</h1>
-    {% endif %}
-    {% if block.settings.subheading != blank %}
-      <p class="vh-hero__display" data-vh-hero-el>{{ block.settings.subheading }}</p>
-    {% endif %}
-    {% if block.settings.text != blank %}
-      <div class="vh-hero__body" data-vh-hero-el>
-        {% assign hero_paras = block.settings.text | newline_to_br | split: '<br />' %}
-        {% for para in hero_paras %}
-          {% assign para_text = para | strip_html | strip %}
-          {% if para_text != blank %}
-            <p>{{ para_text }}</p>
-          {% endif %}
-        {% endfor %}
-      </div>
-    {% endif %}
-    {% if block.settings.button_label != blank or block.settings.button_2_label != blank %}
-      <div class="vh-hero__actions" data-vh-hero-el>
-        {% if block.settings.button_label != blank %}
-          <a
-            class="vh-btn vh-btn--{{ block.settings.button_style | default: 'green' }}"
-            href="{{ block.settings.button_link | default: '#solutions' }}"
-            {% if block.settings.button_link == '#VectraContactModal' %}
-              data-vh-contact-open
-            {% endif %}
-            {% if block.settings.open_in_new_tab and block.settings.button_link != blank %}
-              target="_blank" rel="noopener noreferrer"
-            {% endif %}
-          >
-            {{ block.settings.button_label }}
-          </a>
+    <h1 class="vh-hero__h1">{{ hero_h1 }}</h1>
+    <p class="vh-hero__display">{{ hero_display }}</p>
+    <div class="vh-hero__body">
+      {% assign hero_paras = hero_body | newline_to_br | split: '<br />' %}
+      {% for para in hero_paras %}
+        {% assign para_text = para | strip_html | strip %}
+        {% if para_text != blank %}
+          <p>{{ para_text }}</p>
         {% endif %}
-        {% if block.settings.button_2_label != blank %}
-          <a
-            class="vh-btn vh-btn--{{ block.settings.button_2_style | default: 'outline-light' }}"
-            href="{{ block.settings.button_2_link | default: '#VectraContactModal' }}"
-            {% if block.settings.button_2_link == blank or block.settings.button_2_link == '#VectraContactModal' %}
-              data-vh-contact-open
-            {% endif %}
-            {% if block.settings.open_in_new_tab and block.settings.button_2_link != blank %}
-              target="_blank" rel="noopener noreferrer"
-            {% endif %}
-          >
-            {{ block.settings.button_2_label }}
-          </a>
-        {% endif %}
-      </div>
-    {% endif %}
-    {% if block.settings.aeo_text != blank %}
-      <p class="vh-hero__aeo" data-vh-hero-el>{{ block.settings.aeo_text }}</p>
-    {% endif %}
+      {% endfor %}
+    </div>
+    <div class="vh-hero__actions">
+      <a
+        class="vh-btn vh-btn--{{ block.settings.button_style | default: 'green' }}"
+        href="{{ hero_btn_href }}"
+        {% if hero_btn_href == '#VectraContactModal' %}data-vh-contact-open{% endif %}
+      >
+        {{ hero_btn }}
+      </a>
+      <a
+        class="vh-btn vh-btn--{{ block.settings.button_2_style | default: 'outline-light' }}"
+        href="{{ hero_btn2_href }}"
+        {% if hero_btn2_href == blank or hero_btn2_href == '#VectraContactModal' %}data-vh-contact-open{% endif %}
+      >
+        {{ hero_btn2 }}
+      </a>
+    </div>
+    <p class="vh-hero__aeo">{{ hero_aeo }}</p>
   </div>
 </article>
 
@@ -131,33 +167,19 @@
     {
       "type": "text",
       "id": "alt",
-      "label": "Image alt text"
+      "label": "Image alt text",
+      "default": "VECTRA team collaborating"
     },
     {
       "type": "select",
       "id": "image_position",
       "label": "Image focal point",
       "options": [
-        {
-          "value": "center center",
-          "label": "Center"
-        },
-        {
-          "value": "top center",
-          "label": "Top"
-        },
-        {
-          "value": "bottom center",
-          "label": "Bottom"
-        },
-        {
-          "value": "center left",
-          "label": "Left"
-        },
-        {
-          "value": "center right",
-          "label": "Right"
-        }
+        { "value": "center center", "label": "Center" },
+        { "value": "top center", "label": "Top" },
+        { "value": "bottom center", "label": "Bottom" },
+        { "value": "center left", "label": "Left" },
+        { "value": "center right", "label": "Right" }
       ],
       "default": "center center"
     },
@@ -195,14 +217,8 @@
       "id": "overlay_style",
       "label": "Overlay style",
       "options": [
-        {
-          "value": "solid",
-          "label": "Solid"
-        },
-        {
-          "value": "gradient",
-          "label": "Gradient"
-        }
+        { "value": "solid", "label": "Solid" },
+        { "value": "gradient", "label": "Gradient" }
       ],
       "default": "solid",
       "visible_if": "{{ block.settings.toggle_overlay }}"
@@ -212,48 +228,41 @@
       "id": "gradient_direction",
       "label": "Gradient direction",
       "options": [
-        {
-          "value": "to-top",
-          "label": "Up"
-        },
-        {
-          "value": "to-bottom",
-          "label": "Down"
-        }
+        { "value": "to-top", "label": "Up" },
+        { "value": "to-bottom", "label": "Down" }
       ],
       "default": "to-bottom",
       "visible_if": "{{ block.settings.toggle_overlay and block.settings.overlay_style == 'gradient' }}"
     },
     {
       "type": "header",
-      "content": "Content"
+      "content": "Content (Section 2 final copy defaults)"
     },
     {
       "type": "inline_richtext",
       "id": "heading",
-      "label": "Heading",
-      "info": "Visible H1, styled smaller. Rendered as the page H1. Use on one slide only.",
+      "label": "H1 (visually small)",
+      "info": "Visible H1. Leave blank to use final copy.",
       "default": "Business Resilience Partner for Responsible Business & Operational Resilience"
     },
     {
       "type": "inline_richtext",
       "id": "subheading",
-      "label": "Subheading",
-      "info": "Large hero display text.",
+      "label": "Large display text",
       "default": "Your Success Is Our Success."
     },
     {
       "type": "textarea",
       "id": "text",
-      "label": "Text",
-      "info": "Use blank lines between paragraphs.",
+      "label": "Body text",
+      "info": "Blank lines between paragraphs.",
       "default": "There's a version of your week that doesn't include the same problem showing up again. Where a supplier issue gets fixed and actually stays fixed. Where the requirement everyone's been worried about becomes something your team can just handle. Where you're not the only person holding it all together.\n\nThat's the work we do together.\n\nWhatever brought you here today, you don't have to carry it alone. Our people sit down with your people, learn what's really going on, bring in exactly the expertise the moment calls for, and stay until the next step is something you can actually see happening, not just something written in a report.\n\nWe're not here to hand you a deliverable and disappear. We're here because your success is genuinely, personally, ours too."
     },
     {
       "type": "textarea",
       "id": "aeo_text",
       "label": "AEO supporting copy",
-      "info": "Secondary definitional text for search visibility. Shown after CTAs.",
+      "info": "Shown after CTAs. Search visibility, not the emotional hook.",
       "default": "Responsible business means managing supplier risk, environmental and social impact, and regulatory responsibility in ways that protect people, performance, and long-term value. VECTRA helps organizations turn those responsibilities into clear ownership, practical action, stronger operational resilience, and measurable improvement across teams, suppliers, and systems."
     },
     {
@@ -299,26 +308,11 @@
       "id": "button_style",
       "label": "Primary button style",
       "options": [
-        {
-          "value": "green",
-          "label": "Green"
-        },
-        {
-          "value": "white",
-          "label": "White"
-        },
-        {
-          "value": "outline",
-          "label": "Outline"
-        },
-        {
-          "value": "outline-light",
-          "label": "Outline light"
-        },
-        {
-          "value": "custom",
-          "label": "Custom"
-        }
+        { "value": "green", "label": "Green" },
+        { "value": "white", "label": "White" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "outline-light", "label": "Outline light" },
+        { "value": "custom", "label": "Custom" }
       ],
       "default": "green"
     },
@@ -350,22 +344,10 @@
       "id": "button_2_style",
       "label": "Secondary button style",
       "options": [
-        {
-          "value": "outline-light",
-          "label": "Outline light"
-        },
-        {
-          "value": "outline",
-          "label": "Outline"
-        },
-        {
-          "value": "green",
-          "label": "Green"
-        },
-        {
-          "value": "white",
-          "label": "White"
-        }
+        { "value": "outline-light", "label": "Outline light" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "green", "label": "Green" },
+        { "value": "white", "label": "White" }
       ],
       "default": "outline-light"
     },
@@ -433,7 +415,8 @@
       "type": "text",
       "id": "fallback_asset",
       "label": "Theme fallback image",
-      "info": "Filename in the theme assets folder. Used until you upload an image."
+      "info": "Filename in the theme assets folder. Used until you upload an image.",
+      "default": "vectra-e5f2730422a9a0516df81d548f5c3f4383f99969.png"
     },
     {
       "type": "header",
@@ -444,50 +427,17 @@
       "id": "heading_size",
       "label": "Heading size",
       "options": [
-        {
-          "value": "default",
-          "label": "Default"
-        },
-        {
-          "value": "0.875rem",
-          "label": "14px"
-        },
-        {
-          "value": "1rem",
-          "label": "16px"
-        },
-        {
-          "value": "1.125rem",
-          "label": "18px"
-        },
-        {
-          "value": "1.25rem",
-          "label": "20px"
-        },
-        {
-          "value": "1.5rem",
-          "label": "24px"
-        },
-        {
-          "value": "2rem",
-          "label": "32px"
-        },
-        {
-          "value": "2.5rem",
-          "label": "40px"
-        },
-        {
-          "value": "3rem",
-          "label": "48px"
-        },
-        {
-          "value": "4rem",
-          "label": "64px"
-        },
-        {
-          "value": "4.5rem",
-          "label": "72px"
-        }
+        { "value": "default", "label": "Default" },
+        { "value": "0.875rem", "label": "14px" },
+        { "value": "1rem", "label": "16px" },
+        { "value": "1.125rem", "label": "18px" },
+        { "value": "1.25rem", "label": "20px" },
+        { "value": "1.5rem", "label": "24px" },
+        { "value": "2rem", "label": "32px" },
+        { "value": "2.5rem", "label": "40px" },
+        { "value": "3rem", "label": "48px" },
+        { "value": "4rem", "label": "64px" },
+        { "value": "4.5rem", "label": "72px" }
       ],
       "default": "default"
     },
@@ -496,50 +446,17 @@
       "id": "text_size",
       "label": "Body text size",
       "options": [
-        {
-          "value": "default",
-          "label": "Default"
-        },
-        {
-          "value": "0.875rem",
-          "label": "14px"
-        },
-        {
-          "value": "1rem",
-          "label": "16px"
-        },
-        {
-          "value": "1.125rem",
-          "label": "18px"
-        },
-        {
-          "value": "1.25rem",
-          "label": "20px"
-        },
-        {
-          "value": "1.5rem",
-          "label": "24px"
-        },
-        {
-          "value": "2rem",
-          "label": "32px"
-        },
-        {
-          "value": "2.5rem",
-          "label": "40px"
-        },
-        {
-          "value": "3rem",
-          "label": "48px"
-        },
-        {
-          "value": "4rem",
-          "label": "64px"
-        },
-        {
-          "value": "4.5rem",
-          "label": "72px"
-        }
+        { "value": "default", "label": "Default" },
+        { "value": "0.875rem", "label": "14px" },
+        { "value": "1rem", "label": "16px" },
+        { "value": "1.125rem", "label": "18px" },
+        { "value": "1.25rem", "label": "20px" },
+        { "value": "1.5rem", "label": "24px" },
+        { "value": "2rem", "label": "32px" },
+        { "value": "2.5rem", "label": "40px" },
+        { "value": "3rem", "label": "48px" },
+        { "value": "4rem", "label": "64px" },
+        { "value": "4.5rem", "label": "72px" }
       ],
       "default": "default"
     },
@@ -548,26 +465,11 @@
       "id": "font_weight",
       "label": "Heading weight",
       "options": [
-        {
-          "value": "default",
-          "label": "Default"
-        },
-        {
-          "value": "400",
-          "label": "Regular"
-        },
-        {
-          "value": "500",
-          "label": "Medium"
-        },
-        {
-          "value": "600",
-          "label": "Semibold"
-        },
-        {
-          "value": "700",
-          "label": "Bold"
-        }
+        { "value": "default", "label": "Default" },
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" },
+        { "value": "700", "label": "Bold" }
       ],
       "default": "default"
     },
@@ -576,22 +478,10 @@
       "id": "line_height",
       "label": "Line height",
       "options": [
-        {
-          "value": "default",
-          "label": "Default"
-        },
-        {
-          "value": "tight",
-          "label": "Tight"
-        },
-        {
-          "value": "normal",
-          "label": "Normal"
-        },
-        {
-          "value": "loose",
-          "label": "Loose"
-        }
+        { "value": "default", "label": "Default" },
+        { "value": "tight", "label": "Tight" },
+        { "value": "normal", "label": "Normal" },
+        { "value": "loose", "label": "Loose" }
       ],
       "default": "default"
     },
@@ -600,22 +490,10 @@
       "id": "letter_spacing",
       "label": "Letter spacing",
       "options": [
-        {
-          "value": "default",
-          "label": "Default"
-        },
-        {
-          "value": "tight",
-          "label": "Tight"
-        },
-        {
-          "value": "normal",
-          "label": "Normal"
-        },
-        {
-          "value": "loose",
-          "label": "Loose"
-        }
+        { "value": "default", "label": "Default" },
+        { "value": "tight", "label": "Tight" },
+        { "value": "normal", "label": "Normal" },
+        { "value": "loose", "label": "Loose" }
       ],
       "default": "default"
     },
@@ -624,14 +502,8 @@
       "id": "text_case",
       "label": "Text case",
       "options": [
-        {
-          "value": "none",
-          "label": "Default"
-        },
-        {
-          "value": "uppercase",
-          "label": "Uppercase"
-        }
+        { "value": "none", "label": "Default" },
+        { "value": "uppercase", "label": "Uppercase" }
       ],
       "default": "none"
     },
@@ -640,18 +512,9 @@
       "id": "vertical_alignment",
       "label": "Vertical alignment",
       "options": [
-        {
-          "value": "flex-start",
-          "label": "Top"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "flex-end",
-          "label": "Bottom"
-        }
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" }
       ],
       "default": "flex-end"
     }

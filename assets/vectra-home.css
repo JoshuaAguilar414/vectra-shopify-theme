@@ -634,13 +634,14 @@
 }
 
 .vh-hero__copy h1,
+.vh-hero__copy .vh-hero__h1,
 .vh-hero__copy .vh-hero__display,
 .vh-hero__copy .vh-hero__body,
 .vh-hero__copy .vh-hero__actions,
 .vh-hero__copy .vh-hero__aeo {
   opacity: 1;
-  transform: none;
-  animation: none;
+  transform: none !important;
+  animation: none !important;
 }
 
 .vh-hero__copy h1 {
@@ -676,7 +677,8 @@
   }
 }
 
-.vh-hero__copy h1 {
+.vh-hero__copy h1,
+.vh-hero__copy .vh-hero__h1 {
   margin: 0 0 12px;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
@@ -687,9 +689,13 @@
   text-align: left;
   text-transform: none;
   color: #ffffff;
+  opacity: 1;
+  transform: none;
+  animation: none;
 }
 
-.vh-hero__copy h1::after {
+.vh-hero__copy h1::after,
+.vh-hero__copy .vh-hero__h1::after {
   display: none;
 }
 
