@@ -203,7 +203,19 @@
     let timer = 0;
     const go = (next) => {
       index = (next + slides.length) % slides.length;
-      slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
+      slides.forEach((slide, i) => {
+        const active = i === index;
+        slide.classList.toggle('is-active', active);
+        const video = slide.querySelector('video');
+        if (!video) return;
+        if (active) {
+          video.muted = true;
+          video.playsInline = true;
+          video.play?.().catch(() => {});
+        } else {
+          video.pause?.();
+        }
+      });
       qsa('[data-vh-dot]', carousel).forEach((dot, i) => {
         dot.classList.toggle('is-active', i === index);
       });
@@ -235,6 +247,11 @@
   };
 
   qsa('[data-vh-carousel]').forEach(initCarousel);
+  qsa('.vh-hero--home .vh-hero__slide.is-active video').forEach((video) => {
+    video.muted = true;
+    video.playsInline = true;
+    video.play?.().catch(() => {});
+  });
 
   const solutions = qs('[data-vh-solutions]');
   if (solutions) {

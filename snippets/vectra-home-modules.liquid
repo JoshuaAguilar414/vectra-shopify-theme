@@ -16,6 +16,8 @@
   assign img_kicker_r = 'vectra-59d55f26f31ee92b3fed74cf7b852de115d005dc.svg' | asset_url
   assign img_hero = 'vectra-e5f2730422a9a0516df81d548f5c3f4383f99969.png' | asset_url
   assign img_hero_2 = 'vectra-6a69557ce365aa215c5c28bca6a6e51af0a2c987.png' | asset_url
+  assign img_hero_glow = 'vectra-81e405ef1e5763ccbc49a2e23ee2f5ec21868308.svg' | asset_url
+  assign vid_hero = 'vectra-story-hero.mp4' | asset_url
   assign img_mark = 'vectra-impact-icon.png' | asset_url
   assign img_check = 'vectra-impact-check.png' | asset_url
   assign img_seal = 'vectra-trust-badge.png' | asset_url
@@ -85,9 +87,13 @@
 <section class="vh-hero vh-hero--home" data-vh-carousel aria-label="Featured" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-hero__track" data-vh-track>
     <article class="vh-hero__slide is-active" data-vh-slide>
-      <img class="vh-hero__bg" src="{{ img_hero }}" alt="VECTRA team collaborating" width="1920" height="1080" loading="eager" fetchpriority="high">
+      <video class="vh-hero__bg vh-hero__bg--video" muted loop playsinline autoplay poster="{{ img_hero }}" data-vh-video>
+        <source src="{{ vid_hero }}" type="video/mp4">
+      </video>
+      <img class="vh-hero__glow" src="{{ img_hero_glow }}" alt="" aria-hidden="true">
       <div class="vh-hero__shade" aria-hidden="true"></div>
       <div class="vh-hero__copy">
+        <p class="vh-hero__kicker">Responsible Business</p>
         <h1 class="vh-hero__h1">Business Resilience Partner for Responsible Business &amp; Operational Resilience</h1>
         <p class="vh-hero__display">Your Success Is Our Success.</p>
         <div class="vh-hero__body">
@@ -95,19 +101,21 @@
           <p>That's the work we do together.</p>
           <p>Whatever brought you here today, you don't have to carry it alone. Our people sit down with your people, learn what's really going on, bring in exactly the expertise the moment calls for, and stay until the next step is something you can actually see happening, not just something written in a report.</p>
           <p>We're not here to hand you a deliverable and disappear. We're here because your success is genuinely, personally, ours too.</p>
+          <p class="vh-hero__aeo">Responsible business means managing supplier risk, environmental and social impact, and regulatory responsibility in ways that protect people, performance, and long-term value. VECTRA helps organizations turn those responsibilities into clear ownership, practical action, stronger operational resilience, and measurable improvement across teams, suppliers, and systems.</p>
         </div>
         <div class="vh-hero__actions">
           <a class="vh-btn vh-btn--green" href="#solutions">Explore How We Help</a>
           <a class="vh-btn vh-btn--outline-light" href="#VectraContactModal" data-vh-contact-open>Talk to an Expert</a>
         </div>
-        <p class="vh-hero__aeo">Responsible business means managing supplier risk, environmental and social impact, and regulatory responsibility in ways that protect people, performance, and long-term value. VECTRA helps organizations turn those responsibilities into clear ownership, practical action, stronger operational resilience, and measurable improvement across teams, suppliers, and systems.</p>
       </div>
     </article>
 
     <article class="vh-hero__slide" data-vh-slide>
       <img class="vh-hero__bg" src="{{ img_hero_2 }}" alt="Business resilience and operational capability building" width="1920" height="1080" loading="lazy">
+      <img class="vh-hero__glow" src="{{ img_hero_glow }}" alt="" aria-hidden="true">
       <div class="vh-hero__shade" aria-hidden="true"></div>
       <div class="vh-hero__copy">
+        <p class="vh-hero__kicker">Operational Capability</p>
         <p class="vh-hero__h1">Turn Business Complexity Into Resilient Performance</p>
         <p class="vh-hero__display">Business Resilience &amp; Operational Capability Building</p>
         <div class="vh-hero__body">
