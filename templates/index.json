@@ -27,9 +27,24 @@
                 "button_2_link": "#VectraContactModal",
                 "fallback_asset": "vectra-e5f2730422a9a0516df81d548f5c3f4383f99969.png"
               }
+            },
+            "slide_2": {
+              "type": "_vectra-hero-slide",
+              "settings": {
+                "is_active": false,
+                "alt": "Business resilience and operational capability building",
+                "heading": "Turn Business Complexity Into Resilient Performance",
+                "subheading": "Business Resilience & Operational Capability Building",
+                "text": "Responsible business practices are the standards, controls, and decisions organizations use to manage supplier risk, environmental and social impact, and regulatory obligations across their operations. VECTRA International is a business resilience partner that turns those practices into clear ownership, practical action, and measurable performance, not just policy.\n\nVECTRA helps organizations turn complex operational, supplier, and responsible business issues into clear ownership, practical action, and stronger control. From strategy through implementation, we stay accountable for moving the work forward.",
+                "button_label": "Explore How We Help",
+                "button_link": "#solutions",
+                "button_2_label": "Talk to an Expert",
+                "button_2_link": "#VectraContactModal",
+                "fallback_asset": "vectra-6a69557ce365aa215c5c28bca6a6e51af0a2c987.png"
+              }
             }
           },
-          "block_order": ["slide_1"],
+          "block_order": ["slide_1", "slide_2"],
           "settings": {}
         },
         "trust": {
