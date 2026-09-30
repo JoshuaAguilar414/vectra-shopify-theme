@@ -20,32 +20,18 @@ We're not here to hand you a deliverable and disappear. We're here because your 
 {% capture hero_aeo_v2 %}Responsible business means managing supplier risk, environmental and social impact, and regulatory responsibility in ways that protect people, performance, and long-term value. VECTRA helps organizations turn those responsibilities into clear ownership, practical action, stronger operational resilience, and measurable improvement across teams, suppliers, and systems.{% endcapture %}
 
 {% liquid
-  assign hero_h1 = block.settings.heading | strip_html | strip
-  assign hero_display = block.settings.subheading | strip_html | strip
-  assign hero_body = block.settings.text | strip
-  assign hero_aeo = block.settings.aeo_text | strip
-  assign hero_btn = block.settings.button_label | strip
-  assign hero_btn2 = block.settings.button_2_label | strip
-
-  if hero_h1 == blank or hero_h1 contains 'Turn Business Complexity' or hero_display contains 'Turn Business Complexity'
-    assign hero_h1 = hero_h1_v2
+  assign hero_h1 = hero_h1_v2
+  assign hero_display = hero_display_v2
+  assign hero_body = hero_body_v2
+  assign hero_aeo = hero_aeo_v2
+  assign hero_btn = 'Explore How We Help'
+  assign hero_btn2 = 'Talk to an Expert'
+  if block.settings.button_label != blank and block.settings.button_label != 'Explore How We Help'
+    assign hero_btn = block.settings.button_label
   endif
-  if hero_display == blank or hero_display contains 'Turn Business Complexity' or hero_display contains 'Operational Capability Building'
-    assign hero_display = hero_display_v2
+  if block.settings.button_2_label != blank and block.settings.button_2_label != 'Talk to an Expert'
+    assign hero_btn2 = block.settings.button_2_label
   endif
-  if hero_body == blank or hero_body contains 'Turn Business Complexity' or hero_body contains 'clear ownership, practical action, and measurable performance' or hero_body contains 'From strategy through implementation'
-    assign hero_body = hero_body_v2
-  endif
-  if hero_aeo == blank
-    assign hero_aeo = hero_aeo_v2
-  endif
-  if hero_btn == blank
-    assign hero_btn = 'Explore How We Help'
-  endif
-  if hero_btn2 == blank
-    assign hero_btn2 = 'Talk to an Expert'
-  endif
-
   if block.settings.button_link != blank
     assign hero_btn_href = block.settings.button_link
   else

@@ -79,41 +79,32 @@
   {% when 'hero' %}
 {% render 'vectra-seo', page_key: 'home' %}
 {% unless block.settings.hide_section %}
-{% assign nested_slides = nested_slides | strip %}
-<section class="vh-hero" data-vh-carousel aria-label="Featured" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-    <div class="vh-hero__track" data-vh-track>
-      {% if nested_slides != blank %}
-        {{ nested_slides }}
-      {% else %}
-      <article class="vh-hero__slide is-active" data-vh-slide>
-        <img src="{{ img_hero }}" alt="VECTRA team collaborating" width="1920" height="1080">
-        <div class="vh-hero__copy">
-          <h1 data-vh-hero-el>Business Resilience Partner for Responsible Business &amp; Operational Resilience</h1>
-          <p class="vh-hero__display" data-vh-hero-el>Your Success Is Our Success.</p>
-          <div class="vh-hero__body" data-vh-hero-el>
-            <p>There's a version of your week that doesn't include the same problem showing up again. Where a supplier issue gets fixed and actually stays fixed. Where the requirement everyone's been worried about becomes something your team can just handle. Where you're not the only person holding it all together.</p>
-            <p>That's the work we do together.</p>
-            <p>Whatever brought you here today, you don't have to carry it alone. Our people sit down with your people, learn what's really going on, bring in exactly the expertise the moment calls for, and stay until the next step is something you can actually see happening, not just something written in a report.</p>
-            <p>We're not here to hand you a deliverable and disappear. We're here because your success is genuinely, personally, ours too.</p>
-          </div>
-          <div class="vh-hero__actions" data-vh-hero-el>
-            <a class="vh-btn vh-btn--green" href="#solutions">Explore How We Help</a>
-            <a class="vh-btn vh-btn--outline-light" href="#VectraContactModal" data-vh-contact-open>Talk to an Expert</a>
-          </div>
-          <p class="vh-hero__aeo" data-vh-hero-el>Responsible business means managing supplier risk, environmental and social impact, and regulatory responsibility in ways that protect people, performance, and long-term value. VECTRA helps organizations turn those responsibilities into clear ownership, practical action, stronger operational resilience, and measurable improvement across teams, suppliers, and systems.</p>
+{% comment %}
+  Section 2 final copy is hardcoded on the homepage so old theme-editor carousel slides
+  cannot override it. No auto-sliding headers.
+{% endcomment %}
+<section class="vh-hero vh-hero--home" aria-label="Featured" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-hero__track">
+    <article class="vh-hero__slide is-active">
+      <img class="vh-hero__media vh-hero__media--desktop" src="{{ img_hero }}" alt="VECTRA team collaborating" width="1920" height="1080">
+      <div class="vh-hero__copy">
+        <h1 class="vh-hero__h1">Business Resilience Partner for Responsible Business &amp; Operational Resilience</h1>
+        <p class="vh-hero__display">Your Success Is Our Success.</p>
+        <div class="vh-hero__body">
+          <p>There's a version of your week that doesn't include the same problem showing up again. Where a supplier issue gets fixed and actually stays fixed. Where the requirement everyone's been worried about becomes something your team can just handle. Where you're not the only person holding it all together.</p>
+          <p>That's the work we do together.</p>
+          <p>Whatever brought you here today, you don't have to carry it alone. Our people sit down with your people, learn what's really going on, bring in exactly the expertise the moment calls for, and stay until the next step is something you can actually see happening, not just something written in a report.</p>
+          <p>We're not here to hand you a deliverable and disappear. We're here because your success is genuinely, personally, ours too.</p>
         </div>
-      </article>
-      {% endif %}
-    </div>
-    <button class="vh-hero__arrow vh-hero__arrow--prev" type="button" data-vh-prev aria-label="Previous slide"{% if nested_slides == blank %} hidden{% endif %}>
-      <img class="vh-hero__arrow-bg" src="{{ img_arrow_circle }}" alt="">
-      <img class="vh-hero__arrow-icon" src="{{ img_arrow_white }}" alt="">
-    </button>
-    <button class="vh-hero__arrow vh-hero__arrow--next" type="button" data-vh-next aria-label="Next slide"{% if nested_slides == blank %} hidden{% endif %}>
-      <img class="vh-hero__arrow-bg" src="{{ img_arrow_circle }}" alt="">
-      <img class="vh-hero__arrow-icon" src="{{ img_arrow_white }}" alt="">
-    </button>
-  </section>
+        <div class="vh-hero__actions">
+          <a class="vh-btn vh-btn--green" href="#solutions">Explore How We Help</a>
+          <a class="vh-btn vh-btn--outline-light" href="#VectraContactModal" data-vh-contact-open>Talk to an Expert</a>
+        </div>
+        <p class="vh-hero__aeo">Responsible business means managing supplier risk, environmental and social impact, and regulatory responsibility in ways that protect people, performance, and long-term value. VECTRA helps organizations turn those responsibilities into clear ownership, practical action, stronger operational resilience, and measurable improvement across teams, suppliers, and systems.</p>
+      </div>
+    </article>
+  </div>
+</section>
 {% endunless %}
 
   {% when 'trust' %}

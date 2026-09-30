@@ -522,6 +522,112 @@
   --vh-s: min(1, 100vw / 1920);
 }
 
+.vh-hero--home {
+  min-height: min(100vh, 920px);
+  aspect-ratio: auto;
+}
+
+.vh-hero--home .vh-hero__arrow,
+.vh-hero--home [data-vh-prev],
+.vh-hero--home [data-vh-next] {
+  display: none !important;
+}
+
+/* Nested theme-editor slides: keep media only, hide their old copy/carousel chrome */
+.vh-hero__media-from-blocks {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.vh-hero__media-from-blocks .vh-hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.vh-hero__media-from-blocks .vh-hero__slide.is-active,
+.vh-hero__media-from-blocks .vh-hero__slide:first-child {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.vh-hero__media-from-blocks .vh-hero__copy,
+.vh-hero__media-from-blocks .vh-hero__arrow,
+.vh-hero__media-from-blocks [data-vh-prev],
+.vh-hero__media-from-blocks [data-vh-next],
+.vh-hero__media-from-blocks .vh-hero__actions,
+.vh-hero__media-from-blocks .vh-hero__aeo,
+.vh-hero__media-from-blocks .vh-hero__body,
+.vh-hero__media-from-blocks .vh-hero__display,
+.vh-hero__media-from-blocks h1,
+.vh-hero__media-from-blocks .vh-hero__h1 {
+  display: none !important;
+}
+
+.vh-hero--home > .vh-hero__track > .vh-hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.vh-hero--home > .vh-hero__track > .vh-hero__slide > .vh-hero__copy {
+  position: absolute;
+  left: clamp(24px, 8.6458%, 166px);
+  right: auto;
+  top: auto;
+  bottom: clamp(28px, 6%, 72px);
+  z-index: 3;
+  width: min(720px, calc(100% - 48px));
+  max-width: 720px;
+  max-height: calc(100% - 140px);
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0;
+  pointer-events: auto;
+}
+
+.vh-hero--home .vh-hero__display {
+  font-size: clamp(32px, 4.2vw, 52px);
+  line-height: 1.08;
+}
+
+.vh-hero--home .vh-hero__body {
+  width: 100%;
+  margin-top: 14px;
+}
+
+.vh-hero--home .vh-hero__body p {
+  font-size: clamp(14px, 1.05vw, 17px);
+  line-height: 1.45;
+}
+
+.vh-hero--home .vh-hero__body p + p {
+  margin-top: 8px;
+}
+
+.vh-hero--home .vh-hero__actions {
+  margin-top: 18px;
+  position: relative;
+  z-index: 4;
+}
+
+.vh-hero--home .vh-hero__aeo {
+  margin-top: 14px !important;
+  padding-top: 12px;
+  font-size: 13px !important;
+  line-height: 1.45 !important;
+  max-width: 100%;
+}
+
+
 .vh-hero__track {
   position: relative;
   height: 100%;
@@ -3951,6 +4057,47 @@ body:has(.vectra-home) #MainContent {
     height: auto;
     min-height: 100svh;
   }
+
+  .vh-hero--home {
+    aspect-ratio: auto;
+    min-height: 100svh;
+  }
+
+  .vh-hero--home > .vh-hero__track > .vh-hero__slide > .vh-hero__copy {
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: 16px;
+    width: min(100% - 32px, 640px);
+    max-width: min(100% - 32px, 640px);
+    max-height: calc(100% - 110px);
+    transform: translateX(-50%);
+    text-align: center;
+  }
+
+  .vh-hero--home .vh-hero__h1,
+  .vh-hero--home .vh-hero__display,
+  .vh-hero--home .vh-hero__body p,
+  .vh-hero--home .vh-hero__aeo {
+    text-align: center;
+  }
+
+  .vh-hero--home .vh-hero__display::after {
+    margin-inline: auto;
+  }
+
+  .vh-hero--home .vh-hero__actions {
+    justify-content: center;
+  }
+
+  .vh-hero--home .vh-hero__display {
+    font-size: clamp(28px, 7vw, 40px);
+  }
+
+  .vh-hero--home .vh-hero__body p:nth-child(n + 3) {
+    display: none;
+  }
+
 
   .vh-hero__track,
   .vh-hero__slide {
