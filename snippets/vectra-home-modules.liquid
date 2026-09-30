@@ -207,113 +207,73 @@
 
   {% when 'why' %}
 {% unless block.settings.hide_section %}
-{% capture why_text_fallback %}Behind every supplier issue, every audit finding, every new requirement your team is trying to get ahead of, there's a person trying to make it work. Usually more than one.
-
-That's who we're really talking to. Not a department. Not a system. You.
-
-We start by listening, not presenting. We sit with the people closest to the problem, learn what's actually getting in the way, and bring in exactly the expertise that moment needs, without ever taking the wheel away from your team.
-
-Technology helps us move fast. It spots patterns, flags what needs attention, and keeps the evidence honest. But the judgment calls, the hard conversations, and the follow-through when things get complicated? That stays human. That stays with us, working alongside you.
-
-And when we hand over a recommendation, we don't disappear. We stay while it becomes real. While your team adapts. While the improvement actually sticks.
-
-Your success is our success. We mean that literally, not as a tagline.{% endcapture %}
-{% capture ceo_note_fallback %}I started VECTRA because I watched too many good plans fall apart the moment they left the boardroom. Not because the thinking was wrong, but because nobody stayed close enough to see it through.
-
-That's still what drives us today. Whatever you're working through, I want you to feel like there's a real person on the other end of this. Because there is.
-
-Welcome to VECTRA.{% endcapture %}
-{% liquid
-  assign why_kicker = block.settings.kicker | default: 'WHY VECTRA'
-  assign why_heading = block.settings.heading | default: 'We Serve People With People.'
-  assign why_text = block.settings.text | default: why_text_fallback
-  assign why_btn = block.settings.button_label | default: 'See Why VECTRA'
-  assign why_link = block.settings.button_link | default: '#why-cards'
-  assign why_bridge = block.settings.bridge_text | default: "Here's what that actually looks like:"
-  assign ceo_note_kicker = block.settings.ceo_note_kicker | default: 'A Note From Our CEO'
-  assign ceo_note_label = block.settings.ceo_note_label | default: 'A note from Patrick Neyts, CEO'
-  assign ceo_note_text = block.settings.ceo_note_text | default: ceo_note_fallback
-  assign nested_cards = nested_cards | strip
-%}
+{% comment %}
+  Sections 5 / 5A / 6 final copy is hardcoded so stale theme-editor settings cannot hide or replace it.
+{% endcomment %}
 <section class="vh-why" id="why-vectra" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-    <div class="vh-wrap vh-why__grid">
-      <div class="vh-why__media">
-        {% render 'vectra-image', image: block.settings.image, fallback: img_why, alt: 'VECTRA International facility', width: 980, height: 720, image_width: 1600 %}
-      </div>
-      <div class="vh-why__copy" data-vh-reveal>
-        <p class="vh-kicker vh-kicker--arrows">
-          <img src="{{ img_kicker_l }}" alt="" class="vh-kicker__arrow vh-kicker__arrow--l">
-          {{ why_kicker }}
-          <img src="{{ img_kicker_r }}" alt="" class="vh-kicker__arrow">
-        </p>
-        <h2>{{ why_heading }}</h2>
-        <div class="vh-why__body">
-          {% assign why_paras = why_text | newline_to_br | split: '<br />' %}
-          {% for para in why_paras %}
-            {% assign para_text = para | strip_html | strip %}
-            {% if para_text != blank %}
-              <p>{{ para_text }}</p>
-            {% endif %}
-          {% endfor %}
-        </div>
-        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ why_link }}">
-          {{ why_btn }}
-          <img src="{{ img_arrow }}" alt="">
-        </a>
-        {% if block.settings.button_2_label != blank %}
-          <a class="vh-btn vh-btn--outline" href="{{ block.settings.button_2_link | default: '#' }}" style="margin-top: 12px;">
-            {{ block.settings.button_2_label }}
-          </a>
-        {% endif %}
-      </div>
+  <div class="vh-wrap vh-why__grid">
+    <div class="vh-why__media">
+      {% render 'vectra-image', image: block.settings.image, fallback: img_why, alt: 'VECTRA International facility', width: 980, height: 720, image_width: 1600 %}
     </div>
-    {% unless block.settings.hide_ceo_note %}
-    <div class="vh-wrap vh-why__ceo" data-vh-reveal>
-      <p class="vh-why__ceo-kicker">{{ ceo_note_kicker }}</p>
-      <p class="vh-why__ceo-label">{{ ceo_note_label }}</p>
-      <blockquote class="vh-why__ceo-quote">
-        {% assign ceo_paras = ceo_note_text | newline_to_br | split: '<br />' %}
-        {% for para in ceo_paras %}
-          {% assign para_text = para | strip_html | strip %}
-          {% if para_text != blank %}
-            <p>{{ para_text }}</p>
-          {% endif %}
-        {% endfor %}
-      </blockquote>
-    </div>
-    {% endunless %}
-    {% if why_bridge != blank %}
-      <div class="vh-wrap">
-        <p class="vh-why__bridge" data-vh-reveal>{{ why_bridge }}</p>
+    <div class="vh-why__copy" data-vh-reveal>
+      <p class="vh-kicker vh-kicker--arrows">
+        <img src="{{ img_kicker_l }}" alt="" class="vh-kicker__arrow vh-kicker__arrow--l">
+        WHY VECTRA
+        <img src="{{ img_kicker_r }}" alt="" class="vh-kicker__arrow">
+      </p>
+      <h2>We Serve People With People.</h2>
+      <div class="vh-why__body">
+        <p>Behind every supplier issue, every audit finding, every new requirement your team is trying to get ahead of, there's a person trying to make it work. Usually more than one.</p>
+        <p>That's who we're really talking to. Not a department. Not a system. You.</p>
+        <p>We start by listening, not presenting. We sit with the people closest to the problem, learn what's actually getting in the way, and bring in exactly the expertise that moment needs, without ever taking the wheel away from your team.</p>
+        <p>Technology helps us move fast. It spots patterns, flags what needs attention, and keeps the evidence honest. But the judgment calls, the hard conversations, and the follow-through when things get complicated? That stays human. That stays with us, working alongside you.</p>
+        <p>And when we hand over a recommendation, we don't disappear. We stay while it becomes real. While your team adapts. While the improvement actually sticks.</p>
+        <p>Your success is our success. We mean that literally, not as a tagline.</p>
       </div>
-    {% endif %}
-    <div class="vh-wrap vh-why__list" id="why-cards">
-      {% if nested_cards != blank %}
-        {{ nested_cards }}
-      {% else %}
-      <article class="vh-why__item" data-vh-reveal>
-        <img src="{{ img_icon_4 }}" alt="">
-        <h3>We Sit on Your Side of the Table</h3>
-        <p>We work alongside your people, learn how your business actually runs, and bring in support without taking ownership away from your team.</p>
-      </article>
-      <article class="vh-why__item" data-vh-reveal>
-        <img src="{{ img_icon_3 }}" alt="">
-        <h3>A Person Is Always Accountable</h3>
-        <p>Technology helps us move faster. A person is still the one who owns the judgment call, the decision, and the follow-through.</p>
-      </article>
-      <article class="vh-why__item" data-vh-reveal>
-        <img src="{{ img_icon_2 }}" alt="">
-        <h3>The Right Expert, Not a Fixed Package</h3>
-        <p>Your challenge doesn't come with a pre-built solution. We bring in whoever the problem actually needs, exactly when you need them.</p>
-      </article>
-      <article class="vh-why__item" data-vh-reveal>
-        <img src="{{ img_icon_1 }}" alt="">
-        <h3>You'll See What Changed</h3>
-        <p>We agree on what success looks like before we start. Then we show you what moved, what's still in motion, and what's next.</p>
-      </article>
-      {% endif %}
+      <a class="vh-btn vh-btn--green vh-btn--rect" href="#why-cards">
+        See Why VECTRA
+        <img src="{{ img_arrow }}" alt="">
+      </a>
     </div>
-  </section>
+  </div>
+
+  <div class="vh-wrap vh-why__ceo" data-vh-reveal>
+    <p class="vh-why__ceo-kicker">A Note From Our CEO</p>
+    <p class="vh-why__ceo-label">A note from Patrick Neyts, CEO</p>
+    <blockquote class="vh-why__ceo-quote">
+      <p>I started VECTRA because I watched too many good plans fall apart the moment they left the boardroom. Not because the thinking was wrong, but because nobody stayed close enough to see it through.</p>
+      <p>That's still what drives us today. Whatever you're working through, I want you to feel like there's a real person on the other end of this. Because there is.</p>
+      <p>Welcome to VECTRA.</p>
+    </blockquote>
+  </div>
+
+  <div class="vh-wrap">
+    <p class="vh-why__bridge" data-vh-reveal>Here's what that actually looks like:</p>
+  </div>
+
+  <div class="vh-wrap vh-why__list" id="why-cards">
+    <article class="vh-why__item" data-vh-reveal>
+      <img src="{{ img_icon_4 }}" alt="">
+      <h3>We Sit on Your Side of the Table</h3>
+      <p>We work alongside your people, learn how your business actually runs, and bring in support without taking ownership away from your team.</p>
+    </article>
+    <article class="vh-why__item" data-vh-reveal>
+      <img src="{{ img_icon_3 }}" alt="">
+      <h3>A Person Is Always Accountable</h3>
+      <p>Technology helps us move faster. A person is still the one who owns the judgment call, the decision, and the follow-through.</p>
+    </article>
+    <article class="vh-why__item" data-vh-reveal>
+      <img src="{{ img_icon_2 }}" alt="">
+      <h3>The Right Expert, Not a Fixed Package</h3>
+      <p>Your challenge doesn't come with a pre-built solution. We bring in whoever the problem actually needs, exactly when you need them.</p>
+    </article>
+    <article class="vh-why__item" data-vh-reveal>
+      <img src="{{ img_icon_1 }}" alt="">
+      <h3>You'll See What Changed</h3>
+      <p>We agree on what success looks like before we start. Then we show you what moved, what's still in motion, and what's next.</p>
+    </article>
+  </div>
+</section>
 {% endunless %}
 
   {% when 'esg' %}

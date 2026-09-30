@@ -1547,8 +1547,22 @@
   letter-spacing: -0.02em;
 }
 
+.vh-why__body {
+  width: 478px;
+  max-width: 100%;
+  margin: 0 0 8px;
+}
+
 .vh-why__body p {
-  margin: 0 0 12px;
+  margin: 0 0 14px;
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 130%;
+  letter-spacing: -0.05em;
+  text-transform: none;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .vh-why__body p:last-child {
@@ -4100,6 +4114,8 @@ body:has(.vectra-home) #MainContent {
 
   .vh-why__copy h2,
   .vh-why__copy > p:not(.vh-kicker),
+  .vh-why__body,
+  .vh-why__body p,
   .vh-accordion .vh-h2,
   .vh-accordion .vh-lead,
   .vh-acc button,
@@ -4116,9 +4132,15 @@ body:has(.vectra-home) #MainContent {
     line-height: 1.2;
   }
 
-  .vh-why__copy > p:not(.vh-kicker) {
+  .vh-why__copy > p:not(.vh-kicker),
+  .vh-why__body p {
     font-size: clamp(15px, 4vw, 18px);
     line-height: 1.4;
+  }
+
+  .vh-why__ceo {
+    padding: 24px 20px;
+    max-width: 100%;
   }
 
   .vh-why__media {
