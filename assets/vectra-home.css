@@ -1548,15 +1548,17 @@
 
 .vh-ceo__mark {
   position: absolute;
-  left: calc(860px * var(--vh-ceo-s));
-  top: 24px;
+  left: 50%;
+  top: 50%;
   width: calc(420px * var(--vh-ceo-s));
+  max-width: 92%;
   height: auto;
-  max-height: calc(420px * var(--vh-ceo-s));
+  max-height: 90%;
   object-fit: contain;
   opacity: 0.12;
   pointer-events: none;
   z-index: 0;
+  transform: translate(-50%, -50%);
 }
 
 .vh-ceo__photo {
@@ -1628,8 +1630,17 @@
   left: calc(844px * var(--vh-ceo-s));
   top: calc(136px * var(--vh-ceo-s));
   width: calc(645px * var(--vh-ceo-s));
+  min-height: calc(525px * var(--vh-ceo-s));
+  height: auto;
   z-index: 2;
   text-align: center;
+  overflow: visible;
+}
+
+.vh-ceo__kicker,
+.vh-ceo__copy h2,
+.vh-ceo__body {
+  z-index: 1;
 }
 
 .vh-ceo__kicker {
@@ -4337,13 +4348,13 @@ body:has(.vectra-home) #MainContent {
   }
 
   .vh-ceo__mark {
-    position: absolute;
-    left: auto;
-    right: 0;
-    top: 80px;
-    width: min(420px, 70%);
-    height: auto;
+    left: 50%;
+    top: 50%;
+    right: auto;
+    width: min(360px, 78%);
+    max-height: 80%;
     opacity: 0.1;
+    transform: translate(-50%, -50%);
   }
 
   .vh-ceo__photo {

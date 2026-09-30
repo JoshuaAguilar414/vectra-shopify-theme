@@ -220,7 +220,6 @@
   </div>
 
   <div class="vh-ceo" id="ceo-note">
-    <img class="vh-ceo__mark" src="{{ img_ceo_mark }}" alt="" aria-hidden="true">
     <div class="vh-ceo__photo">
       {% render 'vectra-image', image: block.settings.ceo_image, fallback: img_ceo, alt: 'Patrick Neyts', class: 'vh-ceo__arch', width: 620, height: 574, image_width: 1240 %}
       <div class="vh-ceo__tag" data-vh-reveal="left">
@@ -229,6 +228,7 @@
       <img class="vh-ceo__line" src="{{ img_ceo_line }}" alt="" aria-hidden="true" data-vh-reveal="left">
     </div>
     <div class="vh-ceo__copy" data-vh-reveal="pop">
+      <img class="vh-ceo__mark" src="{{ img_ceo_mark }}" alt="" aria-hidden="true">
       <p class="vh-ceo__kicker">A NOTE FROM OUR CEO</p>
       <h2>A Note From Our CEO</h2>
       <div class="vh-ceo__body">

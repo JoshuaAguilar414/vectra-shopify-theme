@@ -127,7 +127,6 @@
 %}
 <div class="vs-sheet" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <section class="vs-ceo" id="founder">
-      <img class="vs-ceo__mark" src="{{ img_mark }}" alt="">
       <div class="vs-ceo__photo">
         {% render 'vectra-image', image: block.settings.image, fallback: img_ceo, alt: ceo_name, class: 'vs-ceo__arch', width: 620, height: 574, image_width: 1240 %}
         <div class="vs-ceo__tag" data-vh-reveal="left">
@@ -136,6 +135,7 @@
         <img class="vs-ceo__line" src="{{ img_ceo_line }}" alt="" data-vh-reveal="left">
       </div>
       <div class="vs-ceo__copy" data-vh-reveal="pop">
+        <img class="vs-ceo__mark" src="{{ img_mark }}" alt="" aria-hidden="true">
         <p class="vs-ceo__kicker">{{ ceo_kicker }}</p>
         <h2>{{ ceo_heading }}</h2>
         <div class="vs-ceo__body">
@@ -582,7 +582,7 @@
 %}
 <section class="vh-faq vh-faq--story" id="about-faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap vh-faq__grid">
-    <aside class="vs-join-card" id="careers" data-vh-reveal="left">
+    <aside class="vs-join-card" id="careers">
       <canvas class="vs-join-card__grid" data-vs-join-grid aria-hidden="true"></canvas>
       <div class="vs-join-card__inner">
         <p class="vs-join-card__kicker">{{ join_kicker }}</p>
