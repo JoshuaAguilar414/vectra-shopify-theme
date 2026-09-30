@@ -638,29 +638,29 @@
 .vh-hero__copy .vh-hero__body,
 .vh-hero__copy .vh-hero__actions,
 .vh-hero__copy .vh-hero__aeo {
-  opacity: 0;
-  transform: translateY(18px);
-  animation: vh-hero-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 1;
+  transform: none;
+  animation: none;
 }
 
 .vh-hero__copy h1 {
-  animation-delay: 0s;
+  animation: none;
 }
 
 .vh-hero__copy .vh-hero__display {
-  animation-delay: 0.08s;
+  animation: none;
 }
 
 .vh-hero__copy .vh-hero__body {
-  animation-delay: 0.16s;
+  animation: none;
 }
 
 .vh-hero__copy .vh-hero__actions {
-  animation-delay: 0.28s;
+  animation: none;
 }
 
 .vh-hero__copy .vh-hero__aeo {
-  animation-delay: 0.4s;
+  animation: none;
 }
 
 .vh-hero__copy .vh-hero__body p {
@@ -1638,26 +1638,26 @@
 .vh-solutions__copy h3 {
   width: auto;
   max-width: 100%;
-  margin: 0 0 14px;
+  margin: 0 0 16px;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
-  font-size: clamp(26px, 2.8vw, 40px);
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.035em;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
   color: #ffffff;
 }
 
 .vh-solutions__copy p {
   width: auto;
   max-width: 100%;
-  margin: 0 0 22px;
+  margin: 0 0 24px;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
-  font-size: clamp(16px, 1.25vw, 19px);
+  font-size: clamp(15px, 1.2vw, 18px);
   font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: -0.015em;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
   color: rgba(255, 255, 255, 0.92);
 }
 
@@ -1767,10 +1767,13 @@
 
 .vh-solutions__intro {
   margin: 16px auto 0;
-  max-width: 48em;
-  color: rgba(255, 255, 255, 0.86);
-  font-size: 16px;
+  max-width: 52em;
+  color: rgba(255, 255, 255, 0.88);
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(15px, 1.15vw, 18px);
+  font-weight: 400;
   line-height: 1.55;
+  letter-spacing: -0.01em;
 }
 
 .vh-solutions__cta h2 {
@@ -2693,11 +2696,12 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
-  gap: clamp(28px, 3.5vw, 48px);
+  grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
+  gap: clamp(32px, 4vw, 64px);
   justify-content: stretch;
   align-items: start;
-  width: min(var(--vh-wrap), calc(100% - 48px));
+  width: var(--vh-wrap);
+  max-width: 100%;
   margin-inline: auto;
   overflow: visible;
 }

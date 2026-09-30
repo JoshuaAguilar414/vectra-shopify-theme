@@ -366,20 +366,25 @@
     if (gallery) {
       let lastX = null;
       let hoverLock = false;
+      gallery.style.cursor = 'ew-resize';
       gallery.addEventListener('mousemove', (event) => {
-        if (hoverLock || reduceMotion) return;
+        if (reduceMotion) return;
         const x = event.clientX;
         if (lastX == null) {
           lastX = x;
           return;
         }
         const dx = x - lastX;
-        if (Math.abs(dx) < 16) return;
+        if (Math.abs(dx) < 10) return;
+        if (hoverLock) {
+          lastX = x;
+          return;
+        }
         lastX = x;
         hoverLock = true;
         window.setTimeout(() => {
           hoverLock = false;
-        }, 280);
+        }, 180);
         const shots = qsa('[data-vh-sol-item]', gallery);
         if (shots.length < 2) return;
         if (dx > 0) {
@@ -391,6 +396,7 @@
       });
       gallery.addEventListener('mouseleave', () => {
         lastX = null;
+        hoverLock = false;
       });
     }
 
@@ -401,7 +407,7 @@
       solTimer = window.setInterval(() => {
         const shots = qsa('[data-vh-sol-item]', gallery || solutions);
         if (shots[1]) activate(shots[1]);
-      }, 5500);
+      }, 4500);
     };
     startSol();
   }

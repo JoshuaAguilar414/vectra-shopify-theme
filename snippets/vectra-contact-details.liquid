@@ -3,6 +3,8 @@
   Reads Theme settings (VECTRA contact) so merchants can update once for the whole site.
 {%- enddoc -%}
 
+{% capture address_fallback %}Chaussée de Wavre 1517B
+1160 Brussels, Belgium{% endcapture %}
 {% liquid
   assign office_label = settings.vectra_office_phone | default: '+32 2 620 61 18'
   assign office_tel = settings.vectra_office_phone_tel | default: '+3226206118'
@@ -16,10 +18,7 @@
   assign call_label = settings.vectra_call_label | default: 'Give us a call'
   assign email_label = settings.vectra_email_label | default: 'Email'
   assign address_label = settings.vectra_address_label | default: 'Our address'
-  assign address_raw = settings.vectra_address
-  if address_raw == blank
-    assign address_raw = 'Chaussée de Wavre 1517B, 1160 Brussels, Belgium'
-  endif
+  assign address_raw = settings.vectra_address | default: address_fallback
   assign address_html = address_raw | newline_to_br
   assign address_inline = address_raw | strip_newlines | replace: '  ', ' '
 %}
