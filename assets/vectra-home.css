@@ -1772,28 +1772,32 @@
 /* ESG — Figma Section3 1355.72×1232 */
 .vh-esg {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   height: auto;
   min-height: 0;
-  padding: var(--vh-pad-top, 0px) 0 calc(24px + var(--vh-pad-bottom, 0px));
+  padding: var(--vh-pad-top, 0px) 0 calc(48px + var(--vh-pad-bottom, 0px));
 }
 
 .vh-esg__stage {
   position: relative;
-  width: min(720px, 88%);
-  aspect-ratio: 1.15 / 1;
+  width: min(920px, 92%);
+  min-height: 860px;
+  height: auto;
+  aspect-ratio: auto;
   margin: 0 auto;
   margin-top: 24px;
+  padding: 168px 0 120px;
   container-type: inline-size;
   container-name: esg;
 }
 
 .vh-esg__glow {
   position: absolute;
-  width: 76.86%;
+  width: min(680px, 82%);
   aspect-ratio: 1;
-  left: 9.07%;
-  top: 15.42%;
+  left: 50%;
+  top: 12%;
+  transform: translateX(-50%);
   border-radius: 50%;
   background: radial-gradient(83.74% 83.74% at 48.34% 88.99%, #ffffff 0%, #ffffff 60.93%, #99e45f 100%);
   pointer-events: none;
@@ -1801,64 +1805,66 @@
 }
 
 .vh-esg__copy {
-  position: absolute;
-  left: 21.61%;
-  top: 33.36%;
-  width: 51.78%;
+  position: relative;
+  left: auto;
+  top: auto;
+  width: min(520px, 72%);
+  margin: 0 auto;
   z-index: 2;
   text-align: center;
 }
 
 .vh-esg__copy h2 {
-  margin: 0 0 2.29cqi;
+  margin: 0 0 20px;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
   font-weight: 800;
-  font-size: 4.721cqi;
-  line-height: 4.426cqi;
+  font-size: clamp(28px, 4.8cqi, 44px);
+  line-height: 1.15;
   letter-spacing: -0.05em;
   text-align: center;
   color: #092543;
 }
 
 .vh-esg__copy .vh-lead {
-  width: 88.18%;
+  width: 100%;
   max-width: none;
   margin: 0 auto;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 1.77cqi;
-  line-height: 2.434cqi;
-  letter-spacing: -0.05em;
+  font-size: clamp(15px, 1.9cqi, 18px);
+  line-height: 1.45;
+  letter-spacing: -0.04em;
   text-align: center;
   color: #092543;
 }
 
 .vh-stat {
   position: absolute;
-  width: 22.92cqi;
-  height: 22.92cqi;
+  width: min(168px, 22.92cqi);
+  height: min(168px, 22.92cqi);
   border-radius: 500px;
   z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  padding-top: 6.565cqi;
+  padding-top: min(48px, 6.565cqi);
   text-align: center;
 }
 
 .vh-stat--100 {
-  left: 56.21%;
+  left: auto;
+  right: 4%;
   top: 0;
   background: #ffffff;
   box-shadow: 0 0 39.5px -21px #000000;
 }
 
 .vh-stat--30 {
-  left: 0;
-  top: 19.16%;
+  left: 2%;
+  top: 18%;
   background: rgba(255, 255, 255, 0.64);
   backdrop-filter: blur(18.7px);
   -webkit-backdrop-filter: blur(18.7px);
@@ -1866,8 +1872,9 @@
 }
 
 .vh-stat--500 {
-  left: 77.08%;
-  top: 40.91%;
+  left: auto;
+  right: 0;
+  top: 42%;
   background: rgba(255, 255, 255, 0.44);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
@@ -1879,12 +1886,12 @@
   font-family: 'Poppins', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 7.376cqi;
-  line-height: 5.753cqi;
+  font-size: clamp(36px, 7.376cqi, 68px);
+  line-height: 0.9;
   letter-spacing: -0.05em;
   text-align: center;
   color: #54bd01;
-  height: 4.868cqi;
+  height: auto;
 }
 
 .vh-stat--500 b {
@@ -1893,20 +1900,20 @@
 
 .vh-stat span {
   display: block;
-  margin-top: 1.77cqi;
+  margin-top: 10px;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
   font-weight: 300;
-  font-size: 1.77cqi;
-  line-height: 1.99cqi;
+  font-size: clamp(12px, 1.77cqi, 16px);
+  line-height: 1.2;
   letter-spacing: -0.05em;
   text-align: center;
   color: #54bd01;
-  max-width: 17.2cqi;
+  max-width: 120px;
 }
 
 .vh-stat--100 span {
-  max-width: 13.87cqi;
+  max-width: 110px;
 }
 
 /* Solutions — Figma Case Studies / VECTRA Solutions 1920×1125 */
@@ -4952,41 +4959,73 @@ body:has(.vectra-home) #MainContent {
 
   .vh-esg__stage {
     width: min(100%, 980px);
-    aspect-ratio: 3 / 4;
+    min-height: 0;
     height: auto;
+    aspect-ratio: auto;
     display: block;
     margin: 12px auto 0;
-    padding: 0;
+    padding: 140px 12px 80px;
     overflow: visible;
   }
 
+  .vh-esg__glow {
+    width: min(520px, 88%);
+    top: 8%;
+  }
+
   .vh-esg__copy {
-    width: 56%;
-    left: 22%;
-    top: 30%;
+    position: relative;
+    width: min(520px, 86%);
+    left: auto;
+    top: auto;
+    margin: 0 auto;
   }
 
   .vh-esg__copy h2 {
-    font-size: clamp(16px, 4.8cqi, 46px);
-    line-height: 1.12;
+    font-size: clamp(22px, 6vw, 36px);
+    line-height: 1.15;
   }
 
   .vh-esg__copy .vh-lead {
-    font-size: clamp(13px, 2.8cqi, 18px);
-    line-height: 1.4;
+    font-size: clamp(14px, 3.6vw, 17px);
+    line-height: 1.45;
     width: 100%;
   }
 
+  .vh-stat {
+    width: min(132px, 28vw);
+    height: min(132px, 28vw);
+    padding-top: 34px;
+  }
+
+  .vh-stat--100 {
+    right: 2%;
+    left: auto;
+    top: 0;
+  }
+
+  .vh-stat--30 {
+    left: 2%;
+    top: 12%;
+  }
+
+  .vh-stat--500 {
+    right: 0;
+    left: auto;
+    top: 34%;
+  }
+
   .vh-stat b {
-    font-size: clamp(22px, 7.2cqi, 72px);
+    font-size: clamp(28px, 8vw, 48px);
     line-height: 0.85;
     height: auto;
   }
 
   .vh-stat span,
   .vh-stat--100 span {
-    font-size: clamp(9px, 1.9cqi, 16px);
+    font-size: clamp(10px, 2.6vw, 14px);
     line-height: 1.2;
+    max-width: 90px;
   }
 
   .vh-hero__arrow {
