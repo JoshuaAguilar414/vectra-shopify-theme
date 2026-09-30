@@ -522,27 +522,31 @@
   --vh-s: min(1, 100vw / 1920);
 }
 
-/* Homepage Section 2: 2-slide carousel. Keep copy clear of header + arrows. */
+/* Homepage Section 2: height grows with long slide content (min one viewport). */
 .vh-hero--home {
   --vh-hero-header-clear: clamp(156px, 18vh, 210px);
   --vh-hero-side-clear: clamp(72px, 7vw, 110px);
+  position: relative;
   aspect-ratio: auto;
-  height: 100vh;
-  min-height: 720px;
+  height: auto;
+  min-height: 100vh;
   max-height: none;
   overflow: hidden;
 }
 
 .vh-hero--home .vh-hero__track {
-  position: absolute;
-  inset: 0;
-  height: 100%;
+  position: relative;
+  inset: auto;
   width: 100%;
+  height: auto;
+  min-height: 100vh;
 }
 
 .vh-hero--home .vh-hero__slide {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -551,20 +555,26 @@
   padding:
     var(--vh-hero-header-clear)
     var(--vh-hero-side-clear)
-    clamp(28px, 4.5vh, 56px);
+    clamp(36px, 5vh, 64px);
   opacity: 0;
   visibility: hidden;
   transform: none;
   transition: opacity 0.6s ease, visibility 0.6s ease;
   z-index: 0;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .vh-hero--home .vh-hero__slide.is-active {
+  position: relative;
+  inset: auto;
+  height: auto;
+  min-height: 100vh;
   opacity: 1;
   visibility: visible;
   z-index: 1;
   transform: none;
+  pointer-events: auto;
 }
 
 .vh-hero--home .vh-hero__bg {
@@ -594,9 +604,9 @@
   top: auto;
   bottom: auto;
   right: auto;
-  width: min(680px, 100%);
-  max-width: 680px;
-  max-height: 100%;
+  width: min(720px, 100%);
+  max-width: 720px;
+  max-height: none;
   min-height: 0;
   margin: 0;
   transform: none !important;
@@ -605,12 +615,9 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-end;
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior: contain;
+  justify-content: flex-start;
+  overflow: visible;
   pointer-events: auto;
-  scrollbar-width: thin;
 }
 
 .vh-hero--home .vh-hero__h1 {
@@ -630,7 +637,7 @@
 .vh-hero--home .vh-hero__display {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  font-size: clamp(30px, 3.8vw, 48px);
+  font-size: clamp(32px, 4vw, 52px);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.04em;
@@ -643,7 +650,7 @@
 .vh-hero--home .vh-hero__display::after {
   content: '';
   display: block;
-  width: min(420px, 85%);
+  width: min(480px, 90%);
   height: 2px;
   margin-top: 14px;
   background: rgba(255, 255, 255, 0.55);
@@ -651,15 +658,15 @@
 
 .vh-hero--home .vh-hero__body {
   width: 100%;
-  margin: 12px 0 0;
+  margin: 14px 0 0;
 }
 
 .vh-hero--home .vh-hero__body p {
   margin: 0;
   color: rgba(255, 255, 255, 0.94);
-  font-size: clamp(14px, 1.05vw, 17px);
+  font-size: clamp(15px, 1.1vw, 18px);
   font-weight: 400;
-  line-height: 1.45;
+  line-height: 1.5;
   letter-spacing: -0.015em;
   opacity: 1;
   transform: none;
@@ -667,14 +674,14 @@
 }
 
 .vh-hero--home .vh-hero__body p + p {
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .vh-hero--home .vh-hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 18px;
+  margin-top: 20px;
   position: relative;
   z-index: 4;
   opacity: 1;
@@ -684,19 +691,18 @@
 
 .vh-hero--home .vh-hero__aeo {
   width: 100%;
-  margin: 14px 0 0 !important;
-  padding-top: 12px;
+  margin: 16px 0 0 !important;
+  padding-top: 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.22);
   color: rgba(255, 255, 255, 0.88) !important;
-  font-size: 13px !important;
-  line-height: 1.45 !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
   font-weight: 400 !important;
   opacity: 1 !important;
   transform: none !important;
   animation: none !important;
 }
 
-/* Keep arrows outside the copy column */
 .vh-hero--home .vh-hero__arrow {
   display: grid;
   z-index: 6;
@@ -4146,17 +4152,25 @@ body:has(.vectra-home) #MainContent {
 
   .vh-hero--home {
     aspect-ratio: auto;
-    height: 100svh;
+    height: auto;
     min-height: 100svh;
     --vh-hero-header-clear: clamp(120px, 16vh, 160px);
     --vh-hero-side-clear: 16px;
+  }
+
+  .vh-hero--home .vh-hero__track {
+    min-height: 100svh;
+  }
+
+  .vh-hero--home .vh-hero__slide.is-active {
+    min-height: 100svh;
   }
 
   .vh-hero--home .vh-hero__slide {
     padding:
       var(--vh-hero-header-clear)
       var(--vh-hero-side-clear)
-      20px;
+      24px;
     align-items: center;
   }
 
@@ -4170,6 +4184,8 @@ body:has(.vectra-home) #MainContent {
     transform: none !important;
     text-align: center;
     align-items: center;
+    overflow: visible;
+    max-height: none;
   }
 
   .vh-hero--home .vh-hero__h1,
@@ -4189,10 +4205,6 @@ body:has(.vectra-home) #MainContent {
 
   .vh-hero--home .vh-hero__display {
     font-size: clamp(26px, 6.5vw, 36px);
-  }
-
-  .vh-hero--home .vh-hero__slide.is-active .vh-hero__body p:nth-child(n + 3) {
-    display: none;
   }
 
   .vh-hero--home .vh-hero__arrow {
