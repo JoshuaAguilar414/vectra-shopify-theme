@@ -26,7 +26,7 @@
   assign faq_base = pages['faq'].url | default: '/pages/faq'
   assign marketplace_base = pages['marketplace'].url | default: '/pages/marketplace'
   assign experts_base = pages['experts'].url | default: '/pages/experts'
-  assign leadership_base = pages['our-leadership-team'].url | default: pages['leadership'].url | default: '/pages/our-leadership-team'
+  assign leadership_base = pages['our-leadership-team'].url | default: pages['leadership'].url | default: pages['about-us'].url | default: pages['our-story'].url | default: '/pages/about-us'
   assign associates_base = pages['associates'].url | default: '/pages/associates'
   assign interns_base = pages['interns'].url | default: '/pages/interns'
   assign careers_base = pages['careers'].url | default: '/pages/careers'

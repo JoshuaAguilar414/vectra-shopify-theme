@@ -20,9 +20,10 @@
       '/experts': '/pages/experts',
       '/associates': '/pages/associates',
       '/our-associates': '/pages/associates',
-      '/our-leadership-team': '/pages/our-leadership-team',
-      '/leadership': '/pages/our-leadership-team',
-      '/our-leadership': '/pages/our-leadership-team',
+      '/our-leadership-team': '/pages/about-us?view=leadership',
+      '/leadership': '/pages/about-us?view=leadership',
+      '/our-leadership': '/pages/about-us?view=leadership',
+      '/pages/our-leadership-team': '/pages/about-us?view=leadership',
       '/our-story': '/pages/our-story',
       '/about': '/pages/our-story',
       '/about-us': '/pages/our-story',
@@ -48,7 +49,11 @@
       if (blog) dest = '/blogs/news/' + blog[1].toLowerCase();
     }
     if (dest && dest !== path && dest !== path + '/') {
-      location.replace(dest + location.search + location.hash);
+      if (dest.indexOf('?') !== -1) {
+        location.replace(dest + (location.hash || ''));
+      } else {
+        location.replace(dest + location.search + location.hash);
+      }
     }
   })();
 </script>

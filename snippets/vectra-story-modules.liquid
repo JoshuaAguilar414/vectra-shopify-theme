@@ -45,7 +45,7 @@
   assign home = routes.root_url
   assign story = pages['about-us'].url | default: pages['our-story'].url | default: '/pages/about-us'
   assign experts_url = pages['experts'].url | default: '/pages/experts'
-  assign leadership_url = pages['our-leadership-team'].url | default: pages['leadership'].url | default: '/pages/our-leadership-team'
+  assign leadership_url = pages['our-leadership-team'].url | default: pages['leadership'].url | default: pages['about-us'].url | default: pages['our-story'].url | default: '/pages/about-us'
   assign associates_url = pages['associates'].url | default: '/pages/associates'
   assign interns_url = pages['interns'].url | default: '/pages/interns'
   assign careers_url = pages['careers'].url | default: '/pages/careers'

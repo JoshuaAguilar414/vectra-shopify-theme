@@ -8,6 +8,7 @@
   @param {string} [title] - Link label; used to infer view when the nav item points at Home
 {%- enddoc -%}
 {%- liquid
+  assign force_view = false
   assign href = url | default: ''
   assign view_name = view
   assign title_key = title | downcase | strip
@@ -58,7 +59,15 @@
   elsif view_name == 'experts'
     assign href = pages['experts'].url | default: '/pages/experts'
   elsif view_name == 'leadership'
-    assign href = pages['our-leadership-team'].url | default: pages['leadership'].url | default: '/pages/our-leadership-team'
+    assign force_view = false
+    if pages['our-leadership-team'].url != blank
+      assign href = pages['our-leadership-team'].url
+    elsif pages['leadership'].url != blank
+      assign href = pages['leadership'].url
+    else
+      assign href = pages['about-us'].url | default: pages['our-story'].url | default: pages['experts'].url | default: '/pages/about-us'
+      assign force_view = true
+    endif
   elsif view_name == 'associates'
     assign href = pages['associates'].url | default: '/pages/associates'
   elsif view_name == 'interns'
@@ -80,14 +89,16 @@
     assign href = url | default: '/'
   endif
 
-  if theme.role != 'published' and view_name != blank
-    unless href contains 'view='
-      if href contains '?'
-        assign href = href | append: '&view=' | append: view_name
-      else
-        assign href = href | append: '?view=' | append: view_name
-      endif
-    endunless
+  if view_name != blank
+    if force_view or theme.role != 'published'
+      unless href contains 'view='
+        if href contains '?'
+          assign href = href | append: '&view=' | append: view_name
+        else
+          assign href = href | append: '?view=' | append: view_name
+        endif
+      endunless
+    endif
   endif
 -%}
 {{- href -}}
