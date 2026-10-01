@@ -2229,3 +2229,16 @@
   }
 }
 
+/* Scroll reveal stagger — people pages */
+.vectra-home .vh-people-page .vp-hero[data-vh-reveal] { transition-delay: 0.04s; }
+.vectra-home .vh-people-page .vp-intro[data-vh-reveal] { transition-delay: 0.1s; }
+.vectra-home .vh-people-page .vp-cta[data-vh-reveal] { transition-delay: 0.12s; }
+.vectra-home .vh-people-page .vs-expert[data-vh-reveal]:nth-child(1) { transition-delay: 0.06s; }
+.vectra-home .vh-people-page .vs-expert[data-vh-reveal]:nth-child(2) { transition-delay: 0.12s; }
+.vectra-home .vh-people-page .vs-expert[data-vh-reveal]:nth-child(3) { transition-delay: 0.18s; }
+.vectra-home .vh-people-page .vs-expert[data-vh-reveal]:nth-child(4) { transition-delay: 0.24s; }
+.vectra-home .vh-people-page .vs-expert[data-vh-reveal]:nth-child(5) { transition-delay: 0.3s; }
+.vectra-home .vh-people-page .vs-expert[data-vh-reveal]:nth-child(6) { transition-delay: 0.36s; }
+.vectra-home .vh-people-page .vs-expert[data-vh-reveal]:nth-child(n + 7) { transition-delay: 0.4s; }
+
+

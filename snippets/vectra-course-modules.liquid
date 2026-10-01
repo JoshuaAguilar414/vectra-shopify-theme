@@ -34,7 +34,7 @@
 
 {% if view == 'catalog' %}
 <section class="vh-course-land" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-  <div class="vh-wrap">
+  <div class="vh-wrap" data-vh-reveal="up">
     <p class="vh-kicker">{{ block.settings.kicker | default: 'Marketplace' }}</p>
     <h1 class="vh-h2">{{ block.settings.heading | default: 'Courses and capability paths' }}</h1>
     <p class="vh-lead">{{ block.settings.text | default: 'Checkout and enrolment are not live on this first release. These landing pages are the real course experience until Shopify commerce is connected. Enquire and we will place you on the right path.' }}</p>
@@ -44,7 +44,7 @@
     {% if nested_courses != blank %}
       {{ nested_courses }}
     {% else %}
-    <article class="vh-course">
+    <article class="vh-course" data-vh-reveal="up">
       <img src="{{ img_1 }}" alt="">
       <div class="vh-course__body">
         <h2>Acronyms Used in ESG Area</h2>
@@ -54,7 +54,7 @@
         </div>
       </div>
     </article>
-    <article class="vh-course">
+    <article class="vh-course" data-vh-reveal="up">
       <img src="{{ img_2 }}" alt="">
       <div class="vh-course__body">
         <h2>Preventative and Corrective Measures</h2>
@@ -64,7 +64,7 @@
         </div>
       </div>
     </article>
-    <article class="vh-course">
+    <article class="vh-course" data-vh-reveal="up">
       <img src="{{ img_3 }}" alt="">
       <div class="vh-course__body">
         <h2>Optimizing Purchasing Practices</h2>
@@ -74,7 +74,7 @@
         </div>
       </div>
     </article>
-    <article class="vh-course">
+    <article class="vh-course" data-vh-reveal="up">
       <img src="{{ img_4 }}" alt="">
       <div class="vh-course__body">
         <h2>Disability Accommodation Training</h2>
@@ -137,7 +137,7 @@
   endif
 %}
 <section class="vh-course-land" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-  <div class="vh-wrap vh-course-land__hero">
+  <div class="vh-wrap vh-course-land__hero" data-vh-reveal="up">
     <p class="vh-kicker">{{ block.settings.kicker | default: 'Course landing page' }}</p>
     <h1 class="vh-h2">{{ title }}</h1>
     <p class="vh-lead">{{ summary }}</p>
@@ -145,16 +145,16 @@
     <img src="{{ img }}" alt="{{ title }}">
   </div>
   <div class="vh-wrap vh-course-land__grid-copy">
-    <article>
+    <article data-vh-reveal="up">
       <h2>Who it is for</h2>
       <p>{{ audience }}</p>
     </article>
-    <article>
+    <article data-vh-reveal="up">
       <h2>What you take away</h2>
       <p>{{ outcome }}</p>
     </article>
   </div>
-  <div class="vh-wrap vh-course-land__actions">
+  <div class="vh-wrap vh-course-land__actions" data-vh-reveal="up">
     <a class="vh-btn vh-btn--green" href="#VectraContactModal" data-vh-contact-open>
       Enquire about this course
       <img src="{{ img_arrow }}" alt="">

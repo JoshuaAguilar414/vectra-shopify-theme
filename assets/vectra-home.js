@@ -470,9 +470,14 @@
           io.unobserve(entry.target);
         });
       },
-      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
+      { threshold: 0.08, rootMargin: '0px 0px -4% 0px' }
     );
-    reveals.forEach((el) => io.observe(el));
+    reveals.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      const alreadyVisible = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+      if (alreadyVisible) runReveal(el);
+      else io.observe(el);
+    });
   } else {
     reveals.forEach(runReveal);
   }

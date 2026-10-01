@@ -65,7 +65,7 @@
 %}
 <section class="vs-experts vh-people-page" id="experts" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   {% render 'vectra-seo', page_key: 'experts' %}
-  <div class="vh-wrap vp-hero">
+  <div class="vh-wrap vp-hero" data-vh-reveal="up">
     <p class="vh-kicker">{{ block.settings.kicker | default: 'OUR PEOPLE' }}</p>
     <h1 class="vp-seo-title">{{ block.settings.heading | default: 'VECTRA International Experts | Subject Matter Experts & Associates' }}</h1>
     <p class="vp-display">The Right Expertise for Your Business Challenge</p>
@@ -75,7 +75,7 @@
     </div>
     <p class="vp-aeo">VECTRA International experts are subject matter specialists in sustainability standards, social compliance, environmental impact, carbon accounting, and supply chain due diligence, with hands-on experience in industries such as textiles, agriculture, and industrial operations. They work alongside VECTRA's teams and Associates to help clients understand complex issues, make informed decisions, and turn specialist insight into practical action.</p>
   </div>
-  <div class="vh-wrap vp-intro">
+  <div class="vh-wrap vp-intro" data-vh-reveal="up">
     <p class="vh-kicker">OUR EXPERTS</p>
     <h2>Meet Our VECTRA International Experts</h2>
     <div class="vp-intro__body">
@@ -88,18 +88,18 @@
     {% if people_cards != blank %}
       {{ people_cards }}
     {% else %}
-      <article class="vs-expert"><img src="{{ img_exp_1 }}" alt="Beat Grüninger, Senior Technical Advisor and Lecturer, VECTRA International expert."><h3>Beat Grüninger</h3><p class="vs-expert__role">Senior Technical Advisor and Lecturer</p><p>Sustainability management and standards</p></article>
-      <article class="vs-expert"><img src="{{ img_exp_2 }}" alt="Berçin Doğan Öztürk, Sustainability, Social Compliance &amp; Responsible Business, VECTRA International expert."><h3>Berçin Doğan Öztürk</h3><p class="vs-expert__role">Sustainability, Social Compliance &amp; Responsible Business</p><p>13+ years of experience</p></article>
-      <article class="vs-expert"><img src="{{ img_exp_3 }}" alt="Daniel Ndiwa, Sustainability Standards Consultant, VECTRA International expert."><h3>Daniel Ndiwa</h3><p class="vs-expert__role">Sustainability Standards Consultant</p><p>5 years auditing voluntary sustainability standards in coffee, tea, avocado, and horticulture across Eastern Africa</p></article>
-      <article class="vs-expert"><img src="{{ img_exp_4 }}" alt="Iddah Ooko, Environmental and Social Impact Consultant, VECTRA International expert."><h3>Iddah Ooko</h3><p class="vs-expert__role">Environmental and Social Impact Consultant</p><p>15+ years leading environmental impact assessments, audits, ESG, and multidisciplinary development projects</p></article>
-      <article class="vs-expert"><img src="{{ img_face_1 }}" alt="Mary Shamla, GHG Accounting, Carbon Disclosure &amp; Life Cycle Assessment, VECTRA International expert."><h3>Mary Shamla</h3><p class="vs-expert__role">GHG Accounting, Carbon Disclosure &amp; Life Cycle Assessment</p><p>Expert</p></article>
-      <article class="vs-expert"><img src="{{ img_face_2 }}" alt="Marcel Hatlapa, Textile Quality &amp; Social Compliance Specialist, VECTRA International expert."><h3>Marcel Hatlapa</h3><p class="vs-expert__role">Textile Quality &amp; Social Compliance Specialist</p><p>15+ years in the textile industry</p></article>
-      <article class="vs-expert"><img src="{{ img_face_3 }}" alt="Mei Zhou, EHS, Supply Chain, Due Diligence &amp; Risk Assessment, VECTRA International expert."><h3>Mei Zhou</h3><p class="vs-expert__role">EHS, Supply Chain, Due Diligence &amp; Risk Assessment</p><p>20+ years of industrial and supply chain experience</p></article>
-      <article class="vs-expert"><img src="{{ img_face_4 }}" alt="Najmeen Akther, CSR Management &amp; Social Compliance Auditing, VECTRA International expert."><h3>Najmeen Akther</h3><p class="vs-expert__role">CSR Management &amp; Social Compliance Auditing</p><p>20+ years, including supply chain improvement</p></article>
-      <article class="vs-expert"><img src="{{ img_face_1 }}" alt="Wei Chen, Responsible Business &amp; Corporate Sustainability, VECTRA International expert."><h3>Wei Chen</h3><p class="vs-expert__role">Responsible Business &amp; Corporate Sustainability</p><p>20+ years of experience</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_exp_1 }}" alt="Beat Grüninger, Senior Technical Advisor and Lecturer, VECTRA International expert."><h3>Beat Grüninger</h3><p class="vs-expert__role">Senior Technical Advisor and Lecturer</p><p>Sustainability management and standards</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_exp_2 }}" alt="Berçin Doğan Öztürk, Sustainability, Social Compliance &amp; Responsible Business, VECTRA International expert."><h3>Berçin Doğan Öztürk</h3><p class="vs-expert__role">Sustainability, Social Compliance &amp; Responsible Business</p><p>13+ years of experience</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_exp_3 }}" alt="Daniel Ndiwa, Sustainability Standards Consultant, VECTRA International expert."><h3>Daniel Ndiwa</h3><p class="vs-expert__role">Sustainability Standards Consultant</p><p>5 years auditing voluntary sustainability standards in coffee, tea, avocado, and horticulture across Eastern Africa</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_exp_4 }}" alt="Iddah Ooko, Environmental and Social Impact Consultant, VECTRA International expert."><h3>Iddah Ooko</h3><p class="vs-expert__role">Environmental and Social Impact Consultant</p><p>15+ years leading environmental impact assessments, audits, ESG, and multidisciplinary development projects</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_1 }}" alt="Mary Shamla, GHG Accounting, Carbon Disclosure &amp; Life Cycle Assessment, VECTRA International expert."><h3>Mary Shamla</h3><p class="vs-expert__role">GHG Accounting, Carbon Disclosure &amp; Life Cycle Assessment</p><p>Expert</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_2 }}" alt="Marcel Hatlapa, Textile Quality &amp; Social Compliance Specialist, VECTRA International expert."><h3>Marcel Hatlapa</h3><p class="vs-expert__role">Textile Quality &amp; Social Compliance Specialist</p><p>15+ years in the textile industry</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_3 }}" alt="Mei Zhou, EHS, Supply Chain, Due Diligence &amp; Risk Assessment, VECTRA International expert."><h3>Mei Zhou</h3><p class="vs-expert__role">EHS, Supply Chain, Due Diligence &amp; Risk Assessment</p><p>20+ years of industrial and supply chain experience</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_4 }}" alt="Najmeen Akther, CSR Management &amp; Social Compliance Auditing, VECTRA International expert."><h3>Najmeen Akther</h3><p class="vs-expert__role">CSR Management &amp; Social Compliance Auditing</p><p>20+ years, including supply chain improvement</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_1 }}" alt="Wei Chen, Responsible Business &amp; Corporate Sustainability, VECTRA International expert."><h3>Wei Chen</h3><p class="vs-expert__role">Responsible Business &amp; Corporate Sustainability</p><p>20+ years of experience</p></article>
     {% endif %}
   </div>
-  <div class="vh-wrap vp-cta">
+  <div class="vh-wrap vp-cta" data-vh-reveal="up">
     <h2>Not Sure Which Expert You Need?</h2>
     <p>You do not need to know which specialist you need before getting in touch. Tell us what you are dealing with, and VECTRA will help connect the challenge with the expertise needed to move it forward.</p>
     <div class="vs-experts__more">
@@ -120,7 +120,7 @@
 %}
 <section class="vs-experts vh-people-page" id="associates" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   {% render 'vectra-seo', page_key: 'associates' %}
-  <div class="vh-wrap vp-hero">
+  <div class="vh-wrap vp-hero" data-vh-reveal="up">
     <p class="vh-kicker">{{ block.settings.kicker | default: 'OUR PEOPLE' }}</p>
     <h1 class="vp-seo-title">{{ block.settings.heading | default: 'VECTRA International Associates | Specialist Expertise & Network' }}</h1>
     <p class="vp-display">Different Expertise. One VECTRA Team.</p>
@@ -129,7 +129,7 @@
     </div>
     <p class="vp-aeo">VECTRA International Associates are a global group of specialists in analytics and automation, instructional design, marketing, digital systems, business development, and operations who work alongside VECTRA's leaders and experts. They design training, build tools, reach new clients, and keep delivery running, so client solutions move from idea to practical action.</p>
   </div>
-  <div class="vh-wrap vp-intro">
+  <div class="vh-wrap vp-intro" data-vh-reveal="up">
     <p class="vh-kicker">OUR ASSOCIATES</p>
     <h2>Meet the VECTRA International Associates</h2>
     <div class="vp-intro__body">
@@ -139,43 +139,43 @@
   {% if people_cards != blank %}
     <div class="vs-experts__grid">{{ people_cards }}</div>
   {% else %}
-    <div class="vh-wrap vp-group"><h3>Solutions, Analytics &amp; People</h3></div>
+    <div class="vh-wrap vp-group" data-vh-reveal="up"><h3>Solutions, Analytics &amp; People</h3></div>
     <div class="vs-experts__grid">
-      <article class="vs-expert"><img src="{{ img_face_1 }}" alt="Aeshwarya Das, Automation and Analytics Manager, VECTRA International Associate."><h3>Aeshwarya Das</h3><p class="vs-expert__role">Automation and Analytics Manager</p></article>
-      <article class="vs-expert"><img src="{{ img_face_2 }}" alt="Bhupender Singh, Business Solutions Consultant, VECTRA International Associate."><h3>Bhupender Singh</h3><p class="vs-expert__role">Business Solutions Consultant</p></article>
-      <article class="vs-expert"><img src="{{ img_face_3 }}" alt="Sheila Akpaso, Chief HR Officer Consultant, VECTRA International Associate."><h3>Sheila Akpaso</h3><p class="vs-expert__role">Chief HR Officer Consultant</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_1 }}" alt="Aeshwarya Das, Automation and Analytics Manager, VECTRA International Associate."><h3>Aeshwarya Das</h3><p class="vs-expert__role">Automation and Analytics Manager</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_2 }}" alt="Bhupender Singh, Business Solutions Consultant, VECTRA International Associate."><h3>Bhupender Singh</h3><p class="vs-expert__role">Business Solutions Consultant</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_3 }}" alt="Sheila Akpaso, Chief HR Officer Consultant, VECTRA International Associate."><h3>Sheila Akpaso</h3><p class="vs-expert__role">Chief HR Officer Consultant</p></article>
     </div>
-    <div class="vh-wrap vp-group"><h3>Learning &amp; Training</h3></div>
+    <div class="vh-wrap vp-group" data-vh-reveal="up"><h3>Learning &amp; Training</h3></div>
     <div class="vs-experts__grid">
-      <article class="vs-expert"><img src="{{ img_face_1 }}" alt="Leona Hitosis, Instructional Designer, VECTRA International Associate."><h3>Leona Hitosis</h3><p class="vs-expert__role">Instructional Designer</p></article>
-      <article class="vs-expert"><img src="{{ img_face_2 }}" alt="Pamela Ramos, Instructional Designer, VECTRA International Associate."><h3>Pamela Ramos</h3><p class="vs-expert__role">Instructional Designer</p></article>
-      <article class="vs-expert"><img src="{{ img_face_3 }}" alt="Pol Benliro, Instructional Designer, VECTRA International Associate."><h3>Pol Benliro</h3><p class="vs-expert__role">Instructional Designer</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_1 }}" alt="Leona Hitosis, Instructional Designer, VECTRA International Associate."><h3>Leona Hitosis</h3><p class="vs-expert__role">Instructional Designer</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_2 }}" alt="Pamela Ramos, Instructional Designer, VECTRA International Associate."><h3>Pamela Ramos</h3><p class="vs-expert__role">Instructional Designer</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_3 }}" alt="Pol Benliro, Instructional Designer, VECTRA International Associate."><h3>Pol Benliro</h3><p class="vs-expert__role">Instructional Designer</p></article>
     </div>
-    <div class="vh-wrap vp-group"><h3>Sales &amp; Business Development</h3></div>
+    <div class="vh-wrap vp-group" data-vh-reveal="up"><h3>Sales &amp; Business Development</h3></div>
     <div class="vs-experts__grid">
-      <article class="vs-expert"><img src="{{ img_face_1 }}" alt="Eloá Testoni, Territory Business Manager, VECTRA International Associate."><h3>Eloá Testoni</h3><p class="vs-expert__role">Territory Business Manager</p></article>
-      <article class="vs-expert"><img src="{{ img_face_2 }}" alt="Long Phi, Territory Business Manager, VECTRA International Associate."><h3>Long Phi</h3><p class="vs-expert__role">Territory Business Manager</p></article>
-      <article class="vs-expert"><img src="{{ img_face_3 }}" alt="Prateek Kadambande, Business Development Associate, VECTRA International Associate."><h3>Prateek Kadambande</h3><p class="vs-expert__role">Business Development Associate</p></article>
-      <article class="vs-expert"><img src="{{ img_face_4 }}" alt="Danna Fadul, RFP Coordinator, VECTRA International Associate."><h3>Danna Fadul</h3><p class="vs-expert__role">RFP Coordinator</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_1 }}" alt="Eloá Testoni, Territory Business Manager, VECTRA International Associate."><h3>Eloá Testoni</h3><p class="vs-expert__role">Territory Business Manager</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_2 }}" alt="Long Phi, Territory Business Manager, VECTRA International Associate."><h3>Long Phi</h3><p class="vs-expert__role">Territory Business Manager</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_3 }}" alt="Prateek Kadambande, Business Development Associate, VECTRA International Associate."><h3>Prateek Kadambande</h3><p class="vs-expert__role">Business Development Associate</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_4 }}" alt="Danna Fadul, RFP Coordinator, VECTRA International Associate."><h3>Danna Fadul</h3><p class="vs-expert__role">RFP Coordinator</p></article>
     </div>
-    <div class="vh-wrap vp-group"><h3>Marketing, Web &amp; Marketplace</h3></div>
+    <div class="vh-wrap vp-group" data-vh-reveal="up"><h3>Marketing, Web &amp; Marketplace</h3></div>
     <div class="vs-experts__grid">
-      <article class="vs-expert"><img src="{{ img_face_1 }}" alt="Eerab Akhlaq, Senior Marketing Manager, VECTRA International Associate."><h3>Eerab Akhlaq</h3><p class="vs-expert__role">Senior Marketing Manager</p></article>
-      <article class="vs-expert"><img src="{{ img_face_2 }}" alt="Am Bintang, Social Media Specialist, VECTRA International Associate."><h3>Am Bintang</h3><p class="vs-expert__role">Social Media Specialist</p></article>
-      <article class="vs-expert"><img src="{{ img_face_3 }}" alt="Lara Lorca, Graphic Designer, VECTRA International Associate."><h3>Lara Lorca</h3><p class="vs-expert__role">Graphic Designer</p></article>
-      <article class="vs-expert"><img src="{{ img_face_4 }}" alt="Vinay S, SEO Strategist, VECTRA International Associate."><h3>Vinay S</h3><p class="vs-expert__role">SEO Strategist</p></article>
-      <article class="vs-expert"><img src="{{ img_face_1 }}" alt="Gustian Lee, Web Developer, VECTRA International Associate."><h3>Gustian Lee</h3><p class="vs-expert__role">Web Developer</p></article>
-      <article class="vs-expert"><img src="{{ img_face_2 }}" alt="Israel Malit, Global Ecommerce Manager, VECTRA International Associate."><h3>Israel Malit</h3><p class="vs-expert__role">Global Ecommerce Manager</p></article>
-      <article class="vs-expert"><img src="{{ img_face_3 }}" alt="San Thida, Marketplace Growth &amp; Merchandising Associate, VECTRA International Associate."><h3>San Thida</h3><p class="vs-expert__role">Marketplace Growth &amp; Merchandising Associate</p></article>
-      <article class="vs-expert"><img src="{{ img_face_4 }}" alt="William Nwokoji, Content Strategist, VECTRA International Associate."><h3>William Nwokoji</h3><p class="vs-expert__role">Content Strategist</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_1 }}" alt="Eerab Akhlaq, Senior Marketing Manager, VECTRA International Associate."><h3>Eerab Akhlaq</h3><p class="vs-expert__role">Senior Marketing Manager</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_2 }}" alt="Am Bintang, Social Media Specialist, VECTRA International Associate."><h3>Am Bintang</h3><p class="vs-expert__role">Social Media Specialist</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_3 }}" alt="Lara Lorca, Graphic Designer, VECTRA International Associate."><h3>Lara Lorca</h3><p class="vs-expert__role">Graphic Designer</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_4 }}" alt="Vinay S, SEO Strategist, VECTRA International Associate."><h3>Vinay S</h3><p class="vs-expert__role">SEO Strategist</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_1 }}" alt="Gustian Lee, Web Developer, VECTRA International Associate."><h3>Gustian Lee</h3><p class="vs-expert__role">Web Developer</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_2 }}" alt="Israel Malit, Global Ecommerce Manager, VECTRA International Associate."><h3>Israel Malit</h3><p class="vs-expert__role">Global Ecommerce Manager</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_3 }}" alt="San Thida, Marketplace Growth &amp; Merchandising Associate, VECTRA International Associate."><h3>San Thida</h3><p class="vs-expert__role">Marketplace Growth &amp; Merchandising Associate</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_4 }}" alt="William Nwokoji, Content Strategist, VECTRA International Associate."><h3>William Nwokoji</h3><p class="vs-expert__role">Content Strategist</p></article>
     </div>
-    <div class="vh-wrap vp-group"><h3>Operations &amp; Systems</h3></div>
+    <div class="vh-wrap vp-group" data-vh-reveal="up"><h3>Operations &amp; Systems</h3></div>
     <div class="vs-experts__grid">
-      <article class="vs-expert"><img src="{{ img_face_1 }}" alt="Julie Hill, Digital Systems Support Coordinator, VECTRA International Associate."><h3>Julie Hill</h3><p class="vs-expert__role">Digital Systems Support Coordinator</p></article>
-      <article class="vs-expert"><img src="{{ img_face_2 }}" alt="Cecilia Francis, Executive Assistant &amp; Admin Operations Support, VECTRA International Associate."><h3>Cecilia Francis</h3><p class="vs-expert__role">Executive Assistant &amp; Admin Operations Support</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_1 }}" alt="Julie Hill, Digital Systems Support Coordinator, VECTRA International Associate."><h3>Julie Hill</h3><p class="vs-expert__role">Digital Systems Support Coordinator</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_2 }}" alt="Cecilia Francis, Executive Assistant &amp; Admin Operations Support, VECTRA International Associate."><h3>Cecilia Francis</h3><p class="vs-expert__role">Executive Assistant &amp; Admin Operations Support</p></article>
     </div>
   {% endif %}
-  <div class="vh-wrap vp-cta">
+  <div class="vh-wrap vp-cta" data-vh-reveal="up">
     <h2>Bring Your Expertise to VECTRA</h2>
     <p>Have expertise, experience, or ideas that could add value? At VECTRA, Associates are valued for what they bring. We want people to apply what they know, contribute their perspective, connect with others, and see how their work makes a difference.</p>
     <div class="vs-experts__more">
@@ -195,7 +195,7 @@
 %}
 <section class="vs-experts vh-people-page" id="interns" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   {% render 'vectra-seo', page_key: 'interns' %}
-  <div class="vh-wrap vp-hero">
+  <div class="vh-wrap vp-hero" data-vh-reveal="up">
     <p class="vh-kicker">{{ block.settings.kicker | default: 'OUR PEOPLE' }}</p>
     <h1 class="vp-seo-title">{{ block.settings.heading | default: 'VECTRA International Interns | Internship & Learning Opportunities' }}</h1>
     <p class="vp-display">Learn. Contribute. Grow.</p>
@@ -205,7 +205,7 @@
     </div>
     <p class="vp-aeo">VECTRA International Interns are students and recent graduates who join VECTRA to learn from experienced professionals, contribute to real business needs, and build practical skills. From projects and research to marketing, systems, and operations, interns work alongside VECTRA's teams while developing confidence, judgment, and workplace capability.</p>
   </div>
-  <div class="vh-wrap vp-intro">
+  <div class="vh-wrap vp-intro" data-vh-reveal="up">
     <p class="vh-kicker">OUR INTERNS</p>
     <h2>Meet the VECTRA International Interns</h2>
     <div class="vp-intro__body">
@@ -218,27 +218,27 @@
     {% if people_cards != blank %}
       {{ people_cards }}
     {% else %}
-      <article class="vs-expert"><img src="{{ img_face_1 }}" alt="Systems Intern, VECTRA International Intern."><p class="vs-expert__name">Systems Intern</p><p class="vs-expert__role">Internship</p><p>Supports Zoho, process documentation, and operational work across VECTRA teams.</p></article>
-      <article class="vs-expert"><img src="{{ img_face_2 }}" alt="Sales Operations Intern, VECTRA International Intern."><p class="vs-expert__name">Sales Operations Intern</p><p class="vs-expert__role">Internship</p><p>Helps with pipeline hygiene, enquiry follow-through, and the admin that keeps client work moving.</p></article>
-      <article class="vs-expert"><img src="{{ img_face_3 }}" alt="Business Intelligence Intern, VECTRA International Intern."><p class="vs-expert__name">Business Intelligence Intern</p><p class="vs-expert__role">Internship</p><p>Works on research, evidence packing, and turning scattered information into something a team can use.</p></article>
-      <article class="vs-expert"><img src="{{ img_face_4 }}" alt="Marketing Intern, VECTRA International Intern."><p class="vs-expert__name">Marketing Intern</p><p class="vs-expert__role">Internship</p><p>Supports stories, events, and resources that help the right people find VECTRA without the noise.</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_1 }}" alt="Systems Intern, VECTRA International Intern."><p class="vs-expert__name">Systems Intern</p><p class="vs-expert__role">Internship</p><p>Supports Zoho, process documentation, and operational work across VECTRA teams.</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_2 }}" alt="Sales Operations Intern, VECTRA International Intern."><p class="vs-expert__name">Sales Operations Intern</p><p class="vs-expert__role">Internship</p><p>Helps with pipeline hygiene, enquiry follow-through, and the admin that keeps client work moving.</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_3 }}" alt="Business Intelligence Intern, VECTRA International Intern."><p class="vs-expert__name">Business Intelligence Intern</p><p class="vs-expert__role">Internship</p><p>Works on research, evidence packing, and turning scattered information into something a team can use.</p></article>
+      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_4 }}" alt="Marketing Intern, VECTRA International Intern."><p class="vs-expert__name">Marketing Intern</p><p class="vs-expert__role">Internship</p><p>Supports stories, events, and resources that help the right people find VECTRA without the noise.</p></article>
     {% endif %}
   </div>
-  <div class="vh-wrap vp-intro">
+  <div class="vh-wrap vp-intro" data-vh-reveal="up">
     <p class="vh-kicker">WHERE OUR INTERNS STUDY</p>
     <h2>Universities Our Interns Come From</h2>
     <div class="vp-intro__body">
       <p>Our interns join VECTRA from universities around the world, studying fields that connect to business, sustainability, technology, and communications. Each one brings a different perspective to the work.</p>
     </div>
   </div>
-  <div class="vh-wrap vp-intro">
+  <div class="vh-wrap vp-intro" data-vh-reveal="up">
     <h2>In Their Words</h2>
-    <blockquote class="vp-quote">
+    <blockquote class="vp-quote" data-vh-reveal="up">
       <p>“At VECTRA I contributed to real work, learned from experienced people, and left with practical skills I still use every day.”</p>
       <cite>VECTRA Intern</cite>
     </blockquote>
   </div>
-  <div class="vh-wrap vp-cta">
+  <div class="vh-wrap vp-cta" data-vh-reveal="up">
     <h2>Start Building Your Experience at VECTRA</h2>
     <p>You are still learning, and that is the point. We do not expect you to arrive with every answer. Bring your curiosity, ideas, willingness to learn, and readiness to contribute. We will show you where your skills can be applied and where there is more to discover.</p>
     <div class="vs-experts__more">
@@ -266,7 +266,7 @@
 %}
 <section class="vs-experts vh-people-page" id="leadership" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   {% render 'vectra-seo', page_key: 'leadership' %}
-  <div class="vh-wrap vp-hero">
+  <div class="vh-wrap vp-hero" data-vh-reveal="up">
     <p class="vh-kicker">{{ block.settings.kicker | default: 'OUR LEADERSHIP' }}</p>
     <h1 class="vp-seo-title">{{ block.settings.heading | default: 'VECTRA International Leadership Team | Our Leaders & Management' }}</h1>
     <p class="vp-display">Leading With Purpose. Accountable for What Gets Done.</p>
@@ -277,7 +277,7 @@
     </div>
     <p class="vp-aeo">VECTRA International leadership team brings together five leaders across executive management, sales and communications, operations, applied AI, and organizational enablement, with more than 100 years of combined experience. Together, VECTRA International leaders set the company’s direction, guide client work, and stay accountable for turning decisions into practical, measurable improvement.</p>
   </div>
-  <div class="vh-wrap vp-intro">
+  <div class="vh-wrap vp-intro" data-vh-reveal="up">
     <p class="vh-kicker">MEET OUR LEADERS</p>
     <h2>Meet the VECTRA International Leadership Team</h2>
     <div class="vp-intro__body">
@@ -290,7 +290,7 @@
     {% if people_cards != blank %}
       {{ people_cards }}
     {% else %}
-      <article class="vs-expert">
+      <article class="vs-expert" data-vh-reveal="up">
         <a class="vs-expert__photo-link" href="https://www.linkedin.com/in/patrick-neyts-enabling-positive-responsible-business-change/" target="_blank" rel="noopener noreferrer">
           <img src="{{ img_patrick }}" alt="Patrick Neyts, Chief Executive Officer, VECTRA International">
         </a>
@@ -298,7 +298,7 @@
         <p class="vs-expert__role">Chief Executive Officer</p>
         <p>Patrick has more than 30 years of experience in responsible business, ESG programs, and corporate codes, across 11 industry sectors and 40 countries. Focus: Company direction and growth.</p>
       </article>
-      <article class="vs-expert">
+      <article class="vs-expert" data-vh-reveal="up">
         <a class="vs-expert__photo-link" href="https://www.linkedin.com/in/michelesanders/" target="_blank" rel="noopener noreferrer">
           <img src="{{ img_shelly }}" alt="Shelly Sanders, SVP, Global Sales, Marketing &amp; Communications, VECTRA International">
         </a>
@@ -306,7 +306,7 @@
         <p class="vs-expert__role">SVP, Global Sales, Marketing &amp; Communications</p>
         <p>Shelly has more than 30 years of leadership experience in consultative, solution-based sales and operations across healthcare, finance, and IT. Focus: Global sales, marketing, and communications.</p>
       </article>
-      <article class="vs-expert">
+      <article class="vs-expert" data-vh-reveal="up">
         <a class="vs-expert__photo-link" href="https://www.linkedin.com/in/lorenz-berzau-futurefitsme/" target="_blank" rel="noopener noreferrer">
           <img src="{{ img_lorenz }}" alt="Lorenz Berzau, VP Operations, VECTRA International">
         </a>
@@ -314,7 +314,7 @@
         <p class="vs-expert__role">VP Operations</p>
         <p>Lorenz brings 20 years of consultancy experience and a background in law, with a focus on sustainability strategy, human rights, and social compliance. Focus: Operations.</p>
       </article>
-      <article class="vs-expert">
+      <article class="vs-expert" data-vh-reveal="up">
         <a class="vs-expert__photo-link" href="https://www.linkedin.com/in/alana-van-wouw-717511233/" target="_blank" rel="noopener noreferrer">
           <img src="{{ img_alana }}" alt="Alana van Wouw, AI Architect, VECTRA International">
         </a>
@@ -322,7 +322,7 @@
         <p class="vs-expert__role">AI Architect</p>
         <p>Alana has more than 20 years of experience in project management, ESG, financial modeling, and AI across emerging markets. Focus: Applied AI.</p>
       </article>
-      <article class="vs-expert">
+      <article class="vs-expert" data-vh-reveal="up">
         <a class="vs-expert__photo-link" href="https://www.linkedin.com/in/elizabeth-korban-0690625/" target="_blank" rel="noopener noreferrer">
           <img src="{{ img_elizabeth }}" alt="Elizabeth Korban, Director of Organizational Enablement, VECTRA International">
         </a>
@@ -332,7 +332,7 @@
       </article>
     {% endif %}
   </div>
-  <div class="vh-wrap vp-intro">
+  <div class="vh-wrap vp-intro" data-vh-reveal="up">
     <p class="vh-kicker">ONE VECTRA</p>
     <h2>What We Build, We Build Together</h2>
     <div class="vp-intro__body">
@@ -342,7 +342,7 @@
       <p>As VECTRA grows, the goal stays simple: become a company that creates more value for the people who work here, the organizations we support, and the communities our work touches. To see how our experts and leaders work with clients day to day, explore <a href="{{ solutions_url }}">How We Help</a> and <a href="{{ experts_url }}">Our Experts</a>.</p>
     </div>
   </div>
-  <div class="vh-wrap vp-cta">
+  <div class="vh-wrap vp-cta" data-vh-reveal="up">
     <h2>Where Could We Go From Here?</h2>
     <p>Whether you are exploring a partnership, bringing us a business challenge, or simply want to understand VECTRA better, we would be glad to hear from you. You do not need a finished brief. Tell us what you are working on.</p>
     <div class="vs-experts__more">
@@ -358,26 +358,26 @@
 
   {% when 'careers' %}
 {% unless block.settings.hide_section %}
-<section class="vh-people-page vh-page-copy" id="careers" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+<section class="vh-people-page vh-page-copy" id="careers" data-vh-reveal="up" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap">
     <p class="vh-kicker">{{ block.settings.kicker | default: 'Join the team' }}</p>
     <h1 class="vh-h2">{{ block.settings.heading | default: 'Careers at VECTRA International' }}</h1>
     <p class="vh-lead">{{ block.settings.text | default: 'Responsible business begins with responsible people. VECTRA is a family of experts — thinkers, listeners, practitioners, and problem-solvers who care deeply about the impact businesses leave behind.' }}</p>
     <div class="vh-page-copy__grid">
-      <article>
+      <article data-vh-reveal="up">
         <h2>{{ block.settings.col_1_heading | default: 'How we work' }}</h2>
         <p>{{ block.settings.col_1_text | default: 'We listen first, learn together, and act with clarity. You will be trusted with space to work with integrity, supported by a team that spans countries and disciplines, and measured on mastery rather than hustle.' }}</p>
       </article>
-      <article>
+      <article data-vh-reveal="up">
         <h2>{{ block.settings.col_2_heading | default: 'Who we welcome' }}</h2>
         <p>{{ block.settings.col_2_text | default: 'People who see complexity as an invitation to learn, choose empathy over ego, treat clients as partners, and feel at ease in multicultural teams. If that sounds like you, you will find belonging here.' }}</p>
       </article>
-      <article>
+      <article data-vh-reveal="up">
         <h2>{{ block.settings.col_3_heading | default: 'Become a consultant' }}</h2>
         <p>{{ block.settings.col_3_text | default: 'If you feel aligned with the mission, write to info@vectra-intl.com with the subject Become a Consultant and a brief on your past work.' }}</p>
       </article>
     </div>
-    <div class="vh-people-cta-row">
+    <div class="vh-people-cta-row" data-vh-reveal="up">
       <a class="vs-cta-btn" href="{{ jobs_url }}" rel="noopener noreferrer" target="_blank">
         {{ block.settings.cta_label | default: 'View open positions' }}
         <img src="{{ img_arrow_send }}" alt="">
@@ -393,7 +393,7 @@
 {% unless block.settings.hide_section %}
 <section class="vh-faq vh-people-page" id="faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap vh-faq__grid">
-    <aside class="vh-contact-card">
+    <aside class="vh-contact-card" data-vh-reveal="up">
       <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
       <p class="vh-contact-card__title">{{ block.settings.card_title | default: 'Still need a person?' }}</p>
       <p>{{ block.settings.card_text | default: 'If these answers do not cover what you need, talk with the team. We will help you name the gap and the next step.' }}</p>
@@ -403,7 +403,7 @@
       </a>
       {% render 'vectra-contact-details', variant: 'card', img_phone: img_phone, img_mail: img_mail, img_pin: img_pin %}
     </aside>
-    <div class="vh-faq__right">
+    <div class="vh-faq__right" data-vh-reveal="up">
       <div class="vh-faq__glow" aria-hidden="true"></div>
       <div class="vh-accordion">
         <p class="vh-kicker">{{ block.settings.kicker | default: 'FAQ' }}</p>

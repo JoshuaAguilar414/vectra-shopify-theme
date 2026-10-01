@@ -5941,6 +5941,15 @@ body.vh-contact-open .page-wrapper {
   font-weight: 700;
 }
 
+.vh-course[data-vh-reveal]:nth-child(1) { transition-delay: 0.06s; }
+.vh-course[data-vh-reveal]:nth-child(2) { transition-delay: 0.12s; }
+.vh-course[data-vh-reveal]:nth-child(3) { transition-delay: 0.18s; }
+.vh-course[data-vh-reveal]:nth-child(4) { transition-delay: 0.24s; }
+.vh-course-land__hero[data-vh-reveal] { transition-delay: 0.06s; }
+.vh-course-land__grid-copy article[data-vh-reveal]:nth-child(1) { transition-delay: 0.1s; }
+.vh-course-land__grid-copy article[data-vh-reveal]:nth-child(2) { transition-delay: 0.18s; }
+.vh-course-land__actions[data-vh-reveal] { transition-delay: 0.22s; }
+
 @media (max-width: 749px) {
   .vh-form--modal {
     padding: 56px 20px 28px;
