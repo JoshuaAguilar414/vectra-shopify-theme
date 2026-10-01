@@ -801,7 +801,10 @@ body:has(.vectra-res) {
 
 .vectra-res .vres-closing,
 .vectra-res .vres-closing.vh-portal {
-  background: #092543 !important;
+  background:
+    radial-gradient(ellipse 55% 80% at 88% 50%, rgba(84, 189, 1, 0.22) 0%, transparent 58%),
+    radial-gradient(ellipse 40% 60% at 8% 80%, rgba(84, 189, 1, 0.12) 0%, transparent 55%),
+    linear-gradient(135deg, #071a31 0%, #092543 48%, #0c3056 100%) !important;
   background-color: #092543 !important;
 }
 
@@ -820,7 +823,7 @@ body:has(.vectra-res) {
 }
 
 .vectra-res .vres-closing--copy-only .vh-kicker {
-  margin: 0 0 14px;
+  margin: 14px auto;
   color: #54bd01;
   font-size: 14px;
   font-weight: 700;
