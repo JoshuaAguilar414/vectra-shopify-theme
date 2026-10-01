@@ -1960,6 +1960,7 @@
 .vectra-home.vectra-story .vh-people-page.vs-experts h2,
 .vectra-home.vectra-story .vh-people-page.vs-experts .vp-intro h2,
 .vectra-home.vectra-story .vh-people-page.vs-experts .vp-cta h2 {
+  margin: auto;
   display: block !important;
   width: 100% !important;
   max-width: none !important;

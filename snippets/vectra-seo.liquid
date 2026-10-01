@@ -61,8 +61,16 @@
     {
       "@type": "Article",
       "headline": "Responsible Business Resources & Insights",
+      "name": "Responsible Business Resources | VECTRA International",
       "description": "Explore VECTRA International's resources and insights on responsible business, supply chain, ESG, operational resilience, and risk management.",
-      "author": { "@type": "Organization", "name": "VECTRA International" }
+      "keywords": "Responsible business resources, Supply chain resources, ESG resources, Business resilience resources, Risk management resources, Operational resilience resources",
+      "url": "{{ request.origin }}{{ page.url | default: '/pages/resources' }}",
+      "author": { "@type": "Organization", "name": "VECTRA International" },
+      "publisher": { "@type": "Organization", "name": "VECTRA International", "url": "{{ shop.url }}" },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ request.origin }}{{ page.url | default: '/pages/resources' }}"
+      }
     },
     {
       "@type": "FAQPage",
