@@ -124,8 +124,7 @@
           "settings": {
             "kicker": "WHAT COMES NEXT",
             "heading": "Better insight should lead somewhere.",
-            "text": "If what you have learned needs to become a decision, a plan, or a change to how your team works, VECTRA International can help you move it forward.",
-            "form_heading": "Talk to a VECTRA Expert"
+            "text": "If what you have learned needs to become a decision, a plan, or a change to how your team works, VECTRA International can help you move it forward."
           }
         },
         "footer": { "type": "vectra-footer", "settings": {} }

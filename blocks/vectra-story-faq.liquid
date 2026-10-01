@@ -1,6 +1,4 @@
 {% liquid
-  assign join_eyebrow = 'Join a Team That Values What You Bring'
-  assign join_title = 'Be part of a global team'
   assign join_btn = block.settings.join_button_label | default: 'View Open Positions'
   if block.settings.join_button_link != blank
     assign join_cta = block.settings.join_button_link
@@ -13,10 +11,10 @@
 {% unless block.settings.hide_section %}
 <section class="vh-faq vh-faq--story" id="about-faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap vh-faq__grid">
-    <aside class="vh-contact-card vh-contact-card--join" id="careers">
-      <p class="vh-contact-card__kicker">{{ join_eyebrow }}</p>
-      <img class="vh-contact-card__icon" src="{{ img_team }}" alt="" width="64" height="64">
-      <p class="vh-contact-card__title vh-contact-card__title--accent">{{ join_title }}</p>
+    <aside class="vh-contact-card vh-contact-card--join" id="careers" data-vh-reveal="left">
+      <p class="vh-contact-card__kicker">Join a Team That Values What You Bring</p>
+      <img class="vh-contact-card__icon" src="{{ img_team }}" alt="" width="72" height="72">
+      <p class="vh-contact-card__title">Be part of a global team</p>
       <p>We look for people who care about doing meaningful work well, who bring their own perspective, and who are willing to listen to someone else’s.</p>
       <p>You will work with colleagues and specialists across countries, cultures, disciplines, and time zones. You will learn from them, challenge them, and bring something of your own to the team.</p>
       <p>We value people who take ownership, stay curious, speak up respectfully, and care whether what we do makes a positive difference.</p>
