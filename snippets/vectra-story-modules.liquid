@@ -519,12 +519,6 @@
   {% when 'faq' %}
 {% unless block.settings.hide_section %}
 {% liquid
-  assign join_kicker = block.settings.join_kicker | default: 'BE PART OF A GLOBAL TEAM'
-  assign join_heading = block.settings.join_heading | default: 'Join a Team That Values What You Bring'
-  assign join_text = block.settings.join_text
-  if join_text == blank
-    assign join_text = "We look for people who care about doing meaningful work well, who bring their own perspective, and who are willing to listen to someone else’s.\n\nYou will work with colleagues and specialists across countries, cultures, disciplines, and time zones. You will learn from them, challenge them, and bring something of your own to the team.\n\nWe value people who take ownership, stay curious, speak up respectfully, and care whether what we do makes a positive difference.\n\nBring your judgment, your experience, and the questions you think we should be asking."
-  endif
   assign join_btn = block.settings.join_button_label | default: 'View Open Positions'
   if block.settings.join_button_link != blank
     assign join_cta = block.settings.join_button_link
@@ -532,20 +526,18 @@
     assign join_cta = jobs_url
   endif
   assign nested_items = nested_items | strip
+  assign img_team = 'vectra-team-icon.svg' | asset_url
 %}
 <section class="vh-faq vh-faq--story" id="about-faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap vh-faq__grid">
-    <aside class="vh-contact-card" id="careers">
-      <p class="vh-contact-card__kicker">{{ join_kicker }}</p>
-      <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
-      <p class="vh-contact-card__title">{{ join_heading }}</p>
-      {% assign join_paras = join_text | newline_to_br | split: '<br />' %}
-      {% for para in join_paras %}
-        {% assign para_text = para | strip_html | strip %}
-        {% if para_text != blank %}
-          <p>{{ para_text }}</p>
-        {% endif %}
-      {% endfor %}
+    <aside class="vh-contact-card vh-contact-card--join" id="careers">
+      <p class="vh-contact-card__kicker">Join a Team That Values What You Bring</p>
+      <img class="vh-contact-card__icon" src="{{ img_team }}" alt="" width="64" height="64">
+      <p class="vh-contact-card__title vh-contact-card__title--accent">Be part of a global team</p>
+      <p>We look for people who care about doing meaningful work well, who bring their own perspective, and who are willing to listen to someone else’s.</p>
+      <p>You will work with colleagues and specialists across countries, cultures, disciplines, and time zones. You will learn from them, challenge them, and bring something of your own to the team.</p>
+      <p>We value people who take ownership, stay curious, speak up respectfully, and care whether what we do makes a positive difference.</p>
+      <p>Bring your judgment, your experience, and the questions you think we should be asking.</p>
       <a class="vh-btn vh-btn--white" href="{{ join_cta }}">
         {{ join_btn }}
         <img src="{{ img_arrow }}" alt="">

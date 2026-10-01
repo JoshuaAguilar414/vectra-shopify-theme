@@ -1336,8 +1336,8 @@
 .vectra-story .vh-faq--story .vh-faq__grid,
 .vectra-story #about-faq .vh-faq__grid {
   display: grid;
-  grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
-  gap: clamp(32px, 4vw, 64px);
+  grid-template-columns: minmax(340px, 460px) minmax(0, 1fr);
+  gap: clamp(28px, 3.5vw, 52px);
   align-items: start;
 }
 
@@ -1376,17 +1376,58 @@
   z-index: 0;
 }
 
-.vectra-story #about-faq .vh-contact-card {
+.vectra-story #about-faq .vh-contact-card,
+.vectra-story #about-faq .vh-contact-card--join {
   position: relative;
   top: auto;
   z-index: 2;
   opacity: 1;
   transform: none;
+  padding: 40px 32px 36px 44px;
+  align-items: flex-start;
+  text-align: left;
 }
 
-.vectra-story #about-faq .vh-contact-card__title {
-  font-size: 20px;
+.vectra-story #about-faq .vh-contact-card__kicker {
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  line-height: 1.35;
+}
+
+.vectra-story #about-faq .vh-contact-card__icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 0 18px;
+  object-fit: contain;
+}
+
+.vectra-story #about-faq .vh-contact-card__title,
+.vectra-story #about-faq .vh-contact-card__title--accent {
+  margin: 0 0 16px;
+  color: #54bd01;
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 700;
   letter-spacing: -0.03em;
+  line-height: 1.2;
+  text-transform: none;
+}
+
+.vectra-story #about-faq .vh-contact-card--join > p:not(.vh-contact-card__kicker):not(.vh-contact-card__title) {
+  margin: 0 0 10px;
+  max-width: 34em;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: -0.015em;
+}
+
+.vectra-story #about-faq .vh-contact-card--join > p:not(.vh-contact-card__kicker):not(.vh-contact-card__title):last-of-type {
+  margin-bottom: 22px;
 }
 
 .vectra-story #about-faq .vh-btn--white {
@@ -1406,9 +1447,11 @@
     grid-template-columns: 1fr;
   }
 
-  .vectra-story #about-faq .vh-contact-card {
+  .vectra-story #about-faq .vh-contact-card,
+  .vectra-story #about-faq .vh-contact-card--join {
     position: relative;
     top: auto;
+    padding: 36px 28px 32px 32px;
   }
 }
 
