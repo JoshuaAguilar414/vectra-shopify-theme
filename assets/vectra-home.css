@@ -3110,9 +3110,8 @@
 .vh-faq__grid {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
-  gap: clamp(32px, 4vw, 64px);
+  display: flex;
+  padding: 60px;
   justify-content: stretch;
   align-items: start;
   width: var(--vh-wrap);

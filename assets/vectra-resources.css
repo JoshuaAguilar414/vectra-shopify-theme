@@ -753,7 +753,8 @@ body:has(.vectra-res) {
 }
 
 .vectra-res .vres-why {
-  background: linear-gradient(180deg, #f7faf4 0%, #ffffff 100%);
+  background: #092543;
+  background-color: #092543;
   text-align: center;
 }
 
@@ -764,8 +765,15 @@ body:has(.vectra-res) {
   text-align: center;
 }
 
-.vectra-res .vres-why .vh-kicker,
+.vectra-res .vres-why .vh-kicker {
+  color: #54bd01;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .vectra-res .vres-why .vh-h2 {
+  color: #ffffff;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -780,7 +788,7 @@ body:has(.vectra-res) {
 
 .vectra-res .vres-why__copy p {
   margin: 0 0 14px;
-  color: rgba(9, 37, 67, 0.78);
+  color: rgba(255, 255, 255, 0.86);
   font-size: 17px;
   line-height: 1.55;
   text-align: center;
@@ -788,11 +796,17 @@ body:has(.vectra-res) {
 
 .vectra-res .vres-why__close {
   font-weight: 700;
-  color: var(--vres-navy) !important;
+  color: #ffffff !important;
 }
 
-.vectra-res .vres-closing {
-  background: transparent;
+.vectra-res .vres-closing,
+.vectra-res .vres-closing.vh-portal {
+  background: #092543 !important;
+  background-color: #092543 !important;
+}
+
+.vectra-res .vres-closing.vh-portal::before {
+  display: none !important;
 }
 
 .vectra-res .vres-closing--copy-only .vres-closing__inner {
