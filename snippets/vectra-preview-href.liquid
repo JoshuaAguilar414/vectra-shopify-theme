@@ -31,7 +31,7 @@
       assign view_name = 'podcasts'
     elsif title_key == 'events & webinars' or title_key == 'events and webinars' or title_key == 'events' or title_key == 'webinars' or title_key == 'event webinars' or title_key == 'events and webinar'
       assign view_name = 'event-webinars'
-    elsif title_key == 'contact us' or title_key == 'contact' or title_key == 'talk to an expert'
+    elsif title_key == 'contact us' or title_key == 'contact' or title_key == 'talk to an expert' or title_key == 'get in touch'
       assign view_name = 'contact-us'
     elsif title_key == 'our experts' or title_key == 'experts'
       assign view_name = 'experts'
@@ -134,6 +134,7 @@
       assign href = '/pages/events-and-webinars'
     endif
   elsif view_name == 'contact-us'
+    assign force_view = true
     assign href = pages['contact-us'].url | default: pages['contact'].url | default: '/pages/contact-us'
   elsif view_name == 'experts'
     assign href = pages['experts'].url | default: '/pages/experts'

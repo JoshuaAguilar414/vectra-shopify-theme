@@ -21,9 +21,9 @@
 {% render 'vectra-seo', page_key: 'contact' %}
 {% unless block.settings.hide_section %}
 {% liquid
-  assign hero_h1 = block.settings.kicker | default: 'Contact VECTRA International'
-  assign hero_display = block.settings.heading | default: 'Bring Us the Problem.'
-  assign form_heading = block.settings.form_heading | default: "Tell Us What You're Working Through"
+  assign hero_h1 = 'Contact VECTRA International'
+  assign hero_display = 'Bring Us the Problem.'
+  assign form_heading = "Tell Us What You're Working Through"
 %}
 <section
   class="vcon-hero"
@@ -37,13 +37,9 @@
       <h1>{{ hero_h1 }}</h1>
       <p class="vcon-hero__display">{{ hero_display }}</p>
       <div class="vcon-hero__lead">
-        {% if block.settings.text != blank %}
-          {{ block.settings.text }}
-        {% else %}
-          <p>You don’t need a finished scope to talk to us. Tell us what’s happening — the thing that keeps coming back, the gap you can’t quite close, or a problem you haven’t fully named yet. It might be a supplier finding, an ESG reporting gap, an audit follow-up, or an operational resilience issue. You don’t need to know which VECTRA service it belongs to before you reach out.</p>
-          <p>We’ll review what you share, bring the relevant expertise into the conversation, and work out the most useful next step together.</p>
-          <p>Looking for VECTRA International’s contact details, or just want to get in touch with our team? Use the form below, email <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>, or call <a href="tel:{{ contact_phone_tel }}">{{ contact_phone }}</a> — whichever is easiest for you.</p>
-        {% endif %}
+        <p>You don’t need a finished scope to talk to us. Tell us what’s happening — the thing that keeps coming back, the gap you can’t quite close, or a problem you haven’t fully named yet. It might be a supplier finding, an ESG reporting gap, an audit follow-up, or an operational resilience issue. You don’t need to know which VECTRA service it belongs to before you reach out.</p>
+        <p>We’ll review what you share, bring the relevant expertise into the conversation, and work out the most useful next step together.</p>
+        <p>Looking for VECTRA International’s contact details, or just want to get in touch with our team? Use the form below, email <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>, or call <a href="tel:{{ contact_phone_tel }}">{{ contact_phone }}</a> — whichever is easiest for you.</p>
       </div>
     </div>
     <div id="contact-form">
@@ -65,10 +61,10 @@
   {% when 'challenges' %}
 {% unless block.settings.hide_section %}
 {% liquid
-  assign ch_kicker = block.settings.kicker | default: 'NOT SURE WHERE IT FITS?'
-  assign ch_heading = block.settings.heading | default: "Start With What's Happening"
-  assign ch_text = block.settings.text | default: "You may already know exactly what support you need. Or you may simply know that something isn’t working as it should — either way, this is the right place to start."
-  assign ch_close = block.settings.close_text | default: "Start with what’s happening. We’ll work out the rest with you."
+  assign ch_kicker = 'NOT SURE WHERE IT FITS?'
+  assign ch_heading = "Start With What's Happening"
+  assign ch_text = "You may already know exactly what support you need. Or you may simply know that something isn’t working as it should — either way, this is the right place to start."
+  assign ch_close = "Start with what’s happening. We’ll work out the rest with you."
   assign nested_cards = nested_cards | strip
 %}
 <section class="vcon-challenges" id="challenges" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
@@ -112,8 +108,8 @@
   {% when 'next' %}
 {% unless block.settings.hide_section %}
 {% liquid
-  assign next_kicker = block.settings.kicker | default: 'WHAT HAPPENS NEXT'
-  assign next_heading = block.settings.heading | default: 'You Send the Context. We Work Out the Next Move Together.'
+  assign next_kicker = 'WHAT HAPPENS NEXT'
+  assign next_heading = 'You Send the Context. We Work Out the Next Move Together.'
   assign nested_cards = nested_cards | strip
 %}
 <section class="vcon-next" id="what-happens-next" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
@@ -148,8 +144,8 @@
   {% when 'direct' %}
 {% unless block.settings.hide_section %}
 {% liquid
-  assign direct_kicker = block.settings.kicker | default: 'PREFER TO REACH US DIRECTLY?'
-  assign direct_heading = block.settings.heading | default: 'Contact VECTRA International'
+  assign direct_kicker = 'PREFER TO REACH US DIRECTLY?'
+  assign direct_heading = 'Contact VECTRA International'
 %}
 <section class="vcon-direct" id="get-in-touch" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vcon-wrap">
@@ -165,11 +161,7 @@
         <a href="tel:{{ contact_phone_tel }}">{{ contact_phone }}</a>
       </div>
     </div>
-    {% if block.settings.text != blank %}
-      {{ block.settings.text }}
-    {% else %}
-      <p class="vcon-lead">Already know who you need to speak with? Reach out directly. If you’d like to contact our operational resilience consultants, or you’re not sure which VECTRA specialist fits the issue, use the <a href="#contact-form">form above</a> and tell us what’s happening — whether it’s supplier risk, ESG compliance, audit follow-up, or a broader resilience program. We’ll route the conversation to the right person from there.</p>
-    {% endif %}
+    <p class="vcon-lead">Already know who you need to speak with? Reach out directly. If you’d like to contact our operational resilience consultants, or you’re not sure which VECTRA specialist fits the issue, use the <a href="#contact-form">form above</a> and tell us what’s happening — whether it’s supplier risk, ESG compliance, audit follow-up, or a broader resilience program. We’ll route the conversation to the right person from there.</p>
   </div>
 </section>
 {% endunless %}

@@ -87,6 +87,8 @@
 {% capture experts %}{% render 'vectra-preview-href', url: experts_base, view: 'experts' %}{% endcapture %}
 {% capture associates %}{% render 'vectra-preview-href', url: associates_base, view: 'associates' %}{% endcapture %}
 {% capture interns %}{% render 'vectra-preview-href', url: interns_base, view: 'interns' %}{% endcapture %}
+{% assign contact_base = pages['contact-us'].url | default: pages['contact'].url | default: '/pages/contact-us' %}
+{% capture contact %}{% render 'vectra-preview-href', url: contact_base, view: 'contact-us' %}{% endcapture %}
 {% assign story = story | strip %}
 {% assign solutions = solutions | strip %}
 {% assign resources = resources | strip %}
@@ -96,6 +98,7 @@
 {% assign experts = experts | strip %}
 {% assign associates = associates | strip %}
 {% assign interns = interns | strip %}
+{% assign contact = contact | strip %}
 
 <footer class="vh-footer" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
   <div class="vh-wrap">
@@ -111,7 +114,7 @@
           <div class="vh-footer__links">
             {% if explore_menu != blank and explore_menu.links.size > 0 %}
               {% for link in explore_menu.links %}
-                <a href="{{ link.url }}">{{ link.title }}</a>
+                <a href="{% render 'vectra-preview-href', url: link.url, title: link.title %}">{{ link.title }}</a>
               {% endfor %}
             {% else %}
               <a href="{{ solutions }}">Solutions</a>
@@ -127,13 +130,13 @@
           <div class="vh-footer__links">
             {% if start_menu != blank and start_menu.links.size > 0 %}
               {% for link in start_menu.links %}
-                <a href="{{ link.url }}">{{ link.title }}</a>
+                <a href="{% render 'vectra-preview-href', url: link.url, title: link.title %}">{{ link.title }}</a>
               {% endfor %}
             {% else %}
-              <a href="#VectraContactModal" data-vh-contact-open>Talk to an expert</a>
-              <a href="#VectraContactModal" data-vh-contact-open>Request a demo</a>
-              <a href="#VectraContactModal" data-vh-contact-open>Readiness assessment</a>
-              <a href="#VectraContactModal" data-vh-contact-open>Build a capability path</a>
+              <a href="{{ contact }}">Talk to an expert</a>
+              <a href="{{ contact }}">Request a demo</a>
+              <a href="{{ contact }}">Readiness assessment</a>
+              <a href="{{ contact }}">Build a capability path</a>
               <a href="{{ routes.account_url }}">Client portal</a>
             {% endif %}
           </div>
@@ -143,7 +146,7 @@
           <div class="vh-footer__links">
             {% if company_menu != blank and company_menu.links.size > 0 %}
               {% for link in company_menu.links %}
-                <a href="{{ link.url }}">{{ link.title }}</a>
+                <a href="{% render 'vectra-preview-href', url: link.url, title: link.title %}">{{ link.title }}</a>
               {% endfor %}
             {% else %}
               <a href="{{ story }}">About VECTRA</a>
@@ -152,7 +155,7 @@
               <a href="{{ interns }}">Interns</a>
               <a href="{{ careers }}">Careers</a>
               <a href="{{ story }}#values">Our values and pledges</a>
-              <a href="#VectraContactModal" data-vh-contact-open>Contact us</a>
+              <a href="{{ contact }}">Contact us</a>
             {% endif %}
           </div>
         </nav>

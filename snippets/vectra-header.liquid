@@ -80,6 +80,8 @@
 {% capture associates %}{% render 'vectra-preview-href', url: associates_base, view: 'associates' %}{% endcapture %}
 {% capture interns %}{% render 'vectra-preview-href', url: interns_base, view: 'interns' %}{% endcapture %}
 {% capture careers %}{% render 'vectra-preview-href', url: careers_base, view: 'careers' %}{% endcapture %}
+{% assign contact_base = pages['contact-us'].url | default: pages['contact'].url | default: '/pages/contact-us' %}
+{% capture contact %}{% render 'vectra-preview-href', url: contact_base, view: 'contact-us' %}{% endcapture %}
 {% assign story = story | strip %}
 {% assign solutions = solutions | strip %}
 {% assign resources = resources | strip %}
@@ -90,6 +92,7 @@
 {% assign associates = associates | strip %}
 {% assign interns = interns | strip %}
 {% assign careers = careers | strip %}
+{% assign contact = contact | strip %}
 
 <header class="vh-header" data-vh-header>
   <div class="vh-util">
@@ -207,10 +210,10 @@
       >
         <span class="vh-search__icon" aria-hidden="true"></span>
       </button>
-      <button class="vh-contact-link" type="button" data-vh-contact-open>
+      <a class="vh-contact-link" href="{{ contact }}">
         Talk to an Expert
         <img src="{{ img_arrow_white }}" alt="" width="16" height="9">
-      </button>
+      </a>
       <button class="vh-nav-toggle" type="button" data-vh-nav-toggle aria-expanded="false" aria-label="Menu">
         {{ 'icon-menu.svg' | inline_asset_content }}
       </button>
@@ -232,7 +235,7 @@
         interns: interns,
         careers: careers
       %}
-      <button type="button" data-vh-contact-open>Talk to an Expert</button>
+      <a class="vh-contact-link" href="{{ contact }}">Talk to an Expert</a>
     </div>
   </nav>
 </header>
