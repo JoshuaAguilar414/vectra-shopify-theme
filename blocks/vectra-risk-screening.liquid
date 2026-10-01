@@ -1,0 +1,17 @@
+{% render 'vectra-risk-modules', module: 'screening', block: block %}
+
+{% schema %}
+{
+  "name": "VECTRA: Risk screening",
+  "tag": null,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "hide_section",
+      "label": "Hide this section",
+      "default": false
+    }
+  ],
+  "presets": [{ "name": "VECTRA: Risk screening" }]
+}
+{% endschema %}

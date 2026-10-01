@@ -1,5 +1,5 @@
 {%- doc -%}
-  Renders Experts / Associates / Interns / Careers / FAQ / Contact when a Shopify page
+  Renders Experts / Associates / Interns / Careers / FAQ / Contact / Risk Assessment when a Shopify page
   uses the Default template instead of the dedicated VECTRA template.
 {%- enddoc -%}
 {%- liquid
@@ -7,6 +7,7 @@
   assign people = false
   assign course = false
   assign contact = false
+  assign risk = false
   case handle
     when 'experts', 'associates', 'interns', 'careers', 'faq'
       assign people = true
@@ -14,6 +15,8 @@
       assign course = true
     when 'contact', 'contact-us'
       assign contact = true
+    when 'risk-assessment', 'services-risk-assessment'
+      assign risk = true
   endcase
 -%}
 {%- if people -%}
@@ -39,6 +42,16 @@
     {% render 'vectra-contact-modules', module: 'challenges' %}
     {% render 'vectra-contact-modules', module: 'next' %}
     {% render 'vectra-contact-modules', module: 'direct' %}
+  {% endcapture %}
+  {% render 'vectra-page-shell', children: children, include_resources: true %}
+{%- elsif risk -%}
+  {% capture children %}
+    {% render 'vectra-header' %}
+    {% render 'vectra-risk-modules', module: 'hero' %}
+    {% render 'vectra-risk-modules', module: 'why' %}
+    {% render 'vectra-risk-modules', module: 'screening' %}
+    {% render 'vectra-risk-modules', module: 'expect' %}
+    {% render 'vectra-risk-modules', module: 'faq' %}
   {% endcapture %}
   {% render 'vectra-page-shell', children: children, include_resources: true %}
 {%- endif -%}

@@ -61,6 +61,10 @@
     assign og_title = 'Contact VECTRA International | Get in Touch'
     assign og_description = 'Contact VECTRA International for ESG, supply chain, and operational resilience expertise. Reach our consultants by form, email, or phone.'
     assign vectra_meta_locked = true
+  elsif template.suffix == 'risk-assessment' or page.handle == 'risk-assessment' or page.handle == 'services-risk-assessment'
+    assign og_title = 'Supplier Risk Assessment Solutions | VECTRA International'
+    assign og_description = 'Strengthen supply chains with supply chain due diligence risk assessment, supplier risk assessment, and SCDD maturity solutions from VECTRA.'
+    assign vectra_meta_locked = true
   endif
 
   if request.page_type == 'product'

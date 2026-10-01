@@ -1,0 +1,40 @@
+{% capture children %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-page-shell', children: children, include_resources: true, skip_footer: true %}
+
+{% schema %}
+{
+  "name": "VECTRA Risk Assessment",
+  "class": "vectra-risk-section",
+  "enabled_on": {
+    "templates": ["page"]
+  },
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "MEGA Navigation",
+      "info": "Uses VECTRA Website Mega Menu (handle: vectra-website-mega-menu)."
+    }
+  ],
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA Risk Assessment",
+      "blocks": [
+        { "type": "vectra-header" },
+        { "type": "vectra-risk-hero" },
+        { "type": "vectra-risk-why" },
+        { "type": "vectra-risk-screening" },
+        { "type": "vectra-risk-expect" },
+        { "type": "vectra-risk-faq" },
+        { "type": "vectra-footer" }
+      ]
+    }
+  ]
+}
+{% endschema %}

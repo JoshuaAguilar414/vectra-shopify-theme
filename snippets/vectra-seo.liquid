@@ -1,5 +1,5 @@
 {%- doc -%}
-  JSON-LD for VECTRA pages. page_key: home | about | resources | blogs | e-books-playbooks | press-releases | podcasts | event-webinars | contact | leadership
+  JSON-LD for VECTRA pages. page_key: home | about | resources | blogs | e-books-playbooks | press-releases | podcasts | event-webinars | contact | leadership | risk-assessment
 {%- enddoc -%}
 {%- liquid
   assign key = page_key | default: 'home'
@@ -334,6 +334,81 @@
       "@type": "WebPage",
       "name": "VECTRA International Interns | Internship Opportunities",
       "description": "Meet VECTRA International Interns and explore internships where you learn from experts, contribute to real work, and build practical skills."
+    }
+  ]
+}
+</script>
+{%- elsif key == 'risk-assessment' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["WebPage", "Service"],
+      "name": "Supply Chain Due Diligence Risk Assessment",
+      "headline": "Supplier Risk Assessment Solutions | VECTRA International",
+      "description": "Strengthen supply chains with supply chain due diligence risk assessment, supplier risk assessment, and SCDD maturity solutions from VECTRA.",
+      "url": "{{ request.origin }}{{ page.url }}",
+      "provider": {
+        "@type": "Organization",
+        "name": "VECTRA International",
+        "url": "{{ shop.url }}"
+      },
+      "serviceType": "Supply chain due diligence risk assessment",
+      "areaServed": "Worldwide"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How long does the pre-assessment take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "About two minutes. It contains 10 focused questions designed to identify the most appropriate next step, not reproduce the full assessment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who should complete it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The pre-assessment is intended for people responsible for areas such as supply chain due diligence, procurement, compliance, sustainability, supplier management, risk, or operational oversight. You do not need to be a risk specialist to complete it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will I receive a detailed maturity score?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The pre-assessment recommends the most appropriate Level 1, Level 2, or Level 3 assessment pathway. Detailed maturity scoring, findings, and recommendations come from the full SCDD Maturity Risk Assessment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens after I submit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your responses are used to recommend the assessment level that best matches your organization’s current position and needs. If Level 1 is recommended, you can proceed directly to payment. If Level 2 or Level 3 is recommended, you’ll be directed to schedule a scoping conversation with VECTRA."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is pricing shown immediately?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Level 2 and Level 3 are scoped individually and route to a consultation with VECTRA, since pricing and required agreements vary by engagement. The final Level 1 pricing and display approach remain subject to approval."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How will my information be used?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The information you provide is used to process your responses, recommend an assessment pathway, and support any follow-up you request."
+          }
+        }
+      ]
     }
   ]
 }

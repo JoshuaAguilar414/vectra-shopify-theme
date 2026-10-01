@@ -1,0 +1,44 @@
+{
+  "sections": {
+    "vectra_risk": {
+      "type": "vectra-risk-page",
+      "blocks": {
+        "header": {
+          "type": "vectra-header",
+          "settings": {
+            "menu": "vectra-website-mega-menu"
+          }
+        },
+        "hero": {
+          "type": "vectra-risk-hero",
+          "settings": {}
+        },
+        "why": {
+          "type": "vectra-risk-why",
+          "settings": {}
+        },
+        "screening": {
+          "type": "vectra-risk-screening",
+          "settings": {}
+        },
+        "expect": {
+          "type": "vectra-risk-expect",
+          "settings": {}
+        },
+        "faq": {
+          "type": "vectra-risk-faq",
+          "settings": {}
+        },
+        "footer": {
+          "type": "vectra-footer",
+          "settings": {}
+        }
+      },
+      "block_order": ["header", "hero", "why", "screening", "expect", "faq", "footer"],
+      "settings": {
+        "menu": "vectra-website-mega-menu"
+      }
+    }
+  },
+  "order": ["vectra_risk"]
+}

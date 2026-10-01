@@ -1,0 +1,323 @@
+{%- doc -%}
+  VECTRA Risk Assessment / SCDD Maturity page modules — final SEO copy.
+{%- enddoc -%}
+
+{% render 'vectra-assets' %}
+{{ 'vectra-risk.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'vectra-risk.css' | asset_url }}" media="all">
+<script src="{{ 'vectra-risk.js' | asset_url }}" defer></script>
+
+{% liquid
+  assign hide_section = false
+  if block != blank and block.settings.hide_section
+    assign hide_section = true
+  endif
+  assign contact_base = pages['contact'].url | default: pages['contact-us'].url | default: '/pages/contact'
+  assign privacy_url = 'https://vectra-intl.com/privacy-policy/'
+%}
+{% capture contact_href %}{% render 'vectra-preview-href', url: contact_base, view: 'contact-us' %}{% endcapture %}
+{% assign contact_href = contact_href | strip %}
+
+{% case module %}
+  {% when 'hero' %}
+{% render 'vectra-seo', page_key: 'risk-assessment' %}
+{% unless hide_section %}
+<section
+  class="vrisk-hero"
+  aria-label="Supply Chain Due Diligence Risk Assessment"
+  {% if block != blank %}{{ block.shopify_attributes }}{% endif %}
+>
+  <div class="vrisk-hero__glow" aria-hidden="true"></div>
+  <div class="vrisk-hero__rings" aria-hidden="true"></div>
+  <div class="vrisk-hero__inner">
+    <p class="vrisk-hero__badge" data-vh-reveal="up">SCDD MATURITY RISK ASSESSMENT</p>
+    <h1 data-vh-reveal="up">Supply Chain Due Diligence Risk Assessment</h1>
+    <p class="vrisk-hero__display" data-vh-reveal="up">Find the Right Assessment Level for Your Organization</p>
+    <div class="vrisk-hero__lead" data-vh-reveal="up">
+      <p>Answer 10 focused questions to help determine whether your organization needs an initial diagnostic, deeper evidence review, or implementation support.</p>
+      <p>The pre-assessment considers your scope, current controls, and supply chain due diligence position to recommend the most appropriate VECTRA assessment pathway.</p>
+    </div>
+    <div class="vrisk-hero__actions" data-vh-reveal="up">
+      <a class="vrisk-btn vrisk-btn--primary" href="#pre-assessment">Start Your Pre-Assessment <span aria-hidden="true">→</span></a>
+      <a class="vrisk-btn vrisk-btn--ghost" href="{{ contact_href }}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6"/><path d="M14 3v5h5M9 13h6M9 17h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Preview Sample Report
+      </a>
+    </div>
+    <div class="vrisk-hero__meta" data-vh-reveal="up">
+      <span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        About 2 minutes
+      </span>
+      <span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="m8.5 12.5 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        No detailed diagnosis from screening alone
+      </span>
+    </div>
+  </div>
+  <div class="vrisk-facts" data-vh-reveal="up">
+    <div>
+      <strong>10</strong>
+      <span>Focused Questions</span>
+    </div>
+    <div>
+      <strong>2</strong>
+      <span>Minutes to Complete</span>
+    </div>
+    <div>
+      <strong>Level 1, 2, or 3</strong>
+      <span>Recommended Assessment Pathway</span>
+    </div>
+    <div>
+      <strong>1</strong>
+      <span>Recommended Next Step</span>
+    </div>
+  </div>
+</section>
+{% endunless %}
+
+  {% when 'why' %}
+{% unless hide_section %}
+<section class="vrisk-why" id="why-risk-assessment" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
+  <div class="vrisk-wrap">
+    <div class="vrisk-why__intro" data-vh-reveal="up">
+      <p class="vrisk-kicker">WHAT THE ASSESSMENT REVEALS</p>
+      <h2>See Where Risk Is Exposed and Where Controls Fall Short</h2>
+      <p class="vrisk-lead">Knowing where an organization operates and what sector it works in tells you something about its inherent risk. It does not show how effectively that risk is being managed.</p>
+      <p class="vrisk-lead">VECTRA’s SCDD Maturity Risk Assessment looks at three things:</p>
+      <p class="vrisk-flow"><span>Inherent Risk</span><span aria-hidden="true">→</span><span>Control System Maturity</span><span aria-hidden="true">→</span><span>Residual Risk</span></p>
+      <p class="vrisk-lead">This maturity assessment helps show how strong the current controls are, where gaps remain, and whether deeper assessment or implementation support is needed.</p>
+    </div>
+
+    <article class="vrisk-aeo" data-vh-reveal="up" aria-labelledby="supplier-risk-assessment-heading">
+      <h3 id="supplier-risk-assessment-heading">What Is a Supplier Risk Assessment?</h3>
+      <p>What is supplier risk assessment? It is a due diligence process used to identify risks linked to suppliers, assess the controls used to manage those risks, and determine the residual risk that remains.</p>
+      <p>It helps organizations identify where stronger evidence, corrective action, or further assessment may be needed across the supply chain.</p>
+      <p>VECTRA’s supplier risk assessment services apply this through an SCDD maturity model that considers both the risk an organization faces and the maturity of the controls used to manage it. This provides a structured supply chain risk assessment that can support wider supplier risk management and the organization’s supply chain risk management framework.</p>
+    </article>
+
+    <div class="vrisk-improve" data-vh-reveal="up">
+      <p class="vrisk-kicker">WHAT THE FULL ASSESSMENT HELPS YOU IMPROVE</p>
+      <h2>Turn Assessment Findings Into Clear Supply Chain Priorities</h2>
+      <p class="vrisk-lead">The full SCDD Maturity Risk Assessment goes beyond identifying risk. It shows how due diligence is working across your supply chain, where controls or evidence are falling short, and what needs to be improved to strengthen supplier and supply chain risk management.</p>
+      <div class="vrisk-improve__grid">
+        <article data-vh-reveal="up">
+          <h3>Identify Where Supplier Risk Needs More Attention</h3>
+          <p>See where inherent and residual risk indicate that suppliers, activities, or parts of the supply chain may need closer review, stronger controls, or further assessment.</p>
+        </article>
+        <article data-vh-reveal="up">
+          <h3>Strengthen Due Diligence Controls</h3>
+          <p>Understand where governance, responsibilities, supplier controls, and due diligence processes are working well and where they need to be strengthened.</p>
+        </article>
+        <article data-vh-reveal="up">
+          <h3>Close Gaps in Supply Chain Visibility and Evidence</h3>
+          <p>Identify gaps in the information and evidence used to support due diligence decisions, including areas where supplier visibility or documentation is incomplete or inconsistent.</p>
+        </article>
+        <article data-vh-reveal="up">
+          <h3>Strengthen Monitoring and Corrective Action</h3>
+          <p>See where existing monitoring is sufficient and where closer oversight, corrective action, or additional evidence may be needed.</p>
+        </article>
+        <article data-vh-reveal="up">
+          <h3>Understand and Address Residual Risk</h3>
+          <p>Understand the residual risk left after current controls are considered, with findings and recommendations that help clarify what should receive attention next.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+{% endunless %}
+
+  {% when 'screening' %}
+{% unless hide_section %}
+<section class="vrisk-screen" id="pre-assessment" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
+  <div class="vrisk-wrap vrisk-screen__intro" data-vh-reveal="up">
+    <p class="vrisk-kicker">SCDD READINESS SCREENING</p>
+    <h2>Know Which Assessment Level You Need</h2>
+    <p class="vrisk-lead">Complete 10 focused questions about your organization, assessment scope, current controls, and due diligence position.</p>
+    <p class="vrisk-lead">Your responses help indicate whether Level 1, Level 2, or Level 3 is the most appropriate SCDD risk assessment pathway.</p>
+    <p class="vrisk-lead">The pre-assessment recommends a pathway. It does not provide the detailed maturity findings of the full assessment.</p>
+    <div class="vrisk-screen__meta">
+      <span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        About 2 minutes
+      </span>
+      <span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="m8.5 12.5 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        No detailed diagnosis from screening alone
+      </span>
+    </div>
+    <a class="vrisk-btn vrisk-btn--primary" href="#assessment-form">Start Your Pre-Assessment <span aria-hidden="true">→</span></a>
+  </div>
+
+  <div class="vrisk-wrap" id="assessment-form" data-vh-reveal="up">
+    <div class="vrisk-form-card">
+      <p class="vrisk-kicker">YOUR DETAILS</p>
+      <h3>Before We Begin</h3>
+      <p class="vrisk-form-card__sub">Tell Us About Your Organization and Assessment Scope</p>
+      <p class="vrisk-form-card__note">We use this information to make the assessment pathway relevant to your organization.</p>
+
+      {% form 'contact', class: 'vrisk-form' %}
+        <input type="hidden" name="contact[subject]" value="SCDD Pre-Assessment — Start Assessment">
+        <input type="hidden" name="contact[interest]" value="SCDD Maturity Risk Assessment">
+        {% if form.posted_successfully? %}
+          <p class="vrisk-form__success">Thanks — we received your details and will follow up with the next step for your assessment pathway.</p>
+        {% endif %}
+        {% if form.errors %}
+          <p class="vrisk-form__error">{{ form.errors | default_errors }}</p>
+        {% endif %}
+
+        <div class="vrisk-form__step">
+          <span class="vrisk-form__num" aria-hidden="true">01</span>
+          <div>
+            <h4>Tell us a little about your scope.</h4>
+            <p>We use this information to make the pathway relevant to your organization.</p>
+          </div>
+        </div>
+
+        <div class="vrisk-form__grid">
+          <label>
+            <span>Full Name</span>
+            <input type="text" name="contact[name]" value="{{ customer.name }}" required autocomplete="name">
+          </label>
+          <label>
+            <span>Work Email</span>
+            <input type="email" name="contact[email]" value="{{ customer.email }}" required autocomplete="email">
+          </label>
+          <label>
+            <span>Organization</span>
+            <input type="text" name="contact[company]" required autocomplete="organization">
+          </label>
+          <label>
+            <span>Role</span>
+            <input type="text" name="contact[role]" autocomplete="organization-title">
+          </label>
+        </div>
+
+        <label class="vrisk-form__full">
+          <span>Assessment Scope</span>
+          <select name="contact[assessment_scope]" required>
+            <option value="" selected disabled>Select the scope that fits best</option>
+            <option value="Own organization">Own organization</option>
+            <option value="On behalf of another company">On behalf of another company (supplier or portfolio company)</option>
+          </select>
+        </label>
+        <p class="vrisk-form__hint">Are you completing this for your own organization, or on behalf of another company (for example, a supplier or portfolio company)?</p>
+
+        <div class="vrisk-form__footer">
+          <label class="vrisk-form__consent">
+            <input type="checkbox" name="contact[consent]" value="yes" required>
+            <span>I agree that VECTRA may use these details to provide my result and follow up about the most relevant assessment pathway.</span>
+          </label>
+          <button type="submit" class="vrisk-btn vrisk-btn--primary">Start Assessment <span aria-hidden="true">→</span></button>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+</section>
+{% endunless %}
+
+  {% when 'expect' %}
+{% unless hide_section %}
+<section class="vrisk-expect" id="what-to-expect" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
+  <div class="vrisk-wrap">
+    <div class="vrisk-expect__intro" data-vh-reveal="up">
+      <p class="vrisk-kicker">WHAT TO EXPECT</p>
+      <h2>What Happens During the Pre-Assessment</h2>
+      <p class="vrisk-lead">The pre-assessment helps identify the level of SCDD assessment your organization may need, without requiring you to complete the full assessment first.</p>
+    </div>
+    <div class="vrisk-expect__grid">
+      <article data-vh-reveal="up">
+        <span class="vrisk-expect__num">01</span>
+        <div class="vrisk-expect__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M8 4h8v3H8V4Z" stroke="currentColor" stroke-width="1.6"/><path d="M7 7h10v13H7V7Z" stroke="currentColor" stroke-width="1.6"/><path d="m9.5 13 1.8 1.8 3.4-3.6" stroke="#54bd01" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Answer 10 Focused Questions</h3>
+        <p>Provide information about areas such as governance, supply-chain visibility, supplier controls, monitoring, and the reason for the assessment.</p>
+      </article>
+      <article data-vh-reveal="up">
+        <span class="vrisk-expect__num">02</span>
+        <div class="vrisk-expect__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="7" cy="12" r="2.2" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="7" r="2.2" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="17" r="2.2" stroke="currentColor" stroke-width="1.6"/><path d="M9 11.2 15 8.2M9 12.8l6 3" stroke="#54bd01" stroke-width="1.6"/></svg>
+        </div>
+        <h3>See Your Recommended Assessment Level</h3>
+        <p>Your responses indicate whether Level 1, Level 2, or Level 3 is the most appropriate starting point.</p>
+        <p>The result is a recommendation, not a detailed maturity score. Most organizations start at Level 1 — Level 2 or Level 3 needs are often identified once Level 1 results are in and specific gaps are clear.</p>
+      </article>
+      <article data-vh-reveal="up">
+        <span class="vrisk-expect__num">03</span>
+        <div class="vrisk-expect__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 12h11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="m12 7 5 5-5 5" stroke="#54bd01" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Continue to the Recommended Assessment</h3>
+        <p>If Level 1 is recommended, you can proceed straight to purchase. Once payment is confirmed, VECTRA sends an enrollment key by email so you can begin the assessment.</p>
+        <p>If Level 2 or Level 3 is recommended, you’ll speak with VECTRA about the scope, evidence, and support required — these engagements are scoped individually.</p>
+      </article>
+    </div>
+  </div>
+</section>
+{% endunless %}
+
+  {% when 'faq' %}
+{% unless hide_section %}
+<section class="vrisk-faq" id="faq" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
+  <div class="vrisk-wrap vrisk-faq__grid">
+    <div class="vrisk-faq__intro" data-vh-reveal="up">
+      <p class="vrisk-kicker">FREQUENTLY ASKED QUESTIONS</p>
+      <h2>Questions About the SCDD Pre-Assessment</h2>
+      <p class="vrisk-lead">What to expect from the screening experience and what happens next.</p>
+      <div class="vrisk-faq__callout">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 4.5 6.5v5.2c0 4.4 3.1 7.7 7.5 9.3 4.4-1.6 7.5-4.9 7.5-9.3V6.5L12 3Z" stroke="#54bd01" stroke-width="1.6"/><path d="m9 12 2 2 4-4" stroke="#54bd01" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <strong>Screening, not diagnosis</strong>
+          <span>Your detailed findings come from the full assessment.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="vh-accordion vrisk-faq__list" data-vh-faq-accordion data-vh-reveal="up">
+      <div class="vh-acc is-open" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="true">How long does the pre-assessment take?</button>
+        <div class="vh-acc__panel"><p>About two minutes. It contains 10 focused questions designed to identify the most appropriate next step, not reproduce the full assessment.</p></div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Who should complete it?</button>
+        <div class="vh-acc__panel"><p>The pre-assessment is intended for people responsible for areas such as supply chain due diligence, procurement, compliance, sustainability, supplier management, risk, or operational oversight.</p><p>You do not need to be a risk specialist to complete it.</p></div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Will I receive a detailed maturity score?</button>
+        <div class="vh-acc__panel"><p>No.</p><p>The pre-assessment recommends the most appropriate Level 1, Level 2, or Level 3 assessment pathway.</p><p>Detailed maturity scoring, findings, and recommendations come from the full SCDD Maturity Risk Assessment.</p></div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">What happens after I submit?</button>
+        <div class="vh-acc__panel"><p>Your responses are used to recommend the assessment level that best matches your organization’s current position and needs.</p><p>If Level 1 is recommended, you can proceed directly to payment. Once payment is confirmed, our team sends an enrollment key by email so you can start the assessment.</p><p>If Level 2 or Level 3 is recommended, you’ll be directed to schedule a scoping conversation with VECTRA, since these engagements are defined individually.</p></div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Can colleagues help me complete the full assessment?</button>
+        <div class="vh-acc__panel"><p>Yes. Once you begin the full assessment, the main respondent can invite colleagues as co-respondents to help answer questions. Only the main respondent can finalize and submit it — once submitted, the assessment is locked and your reports are generated automatically.</p></div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Can I complete this on behalf of another company, such as a supplier or portfolio company?</button>
+        <div class="vh-acc__panel"><p>Yes. Buyers, investors, and private equity firms often purchase the assessment on behalf of the companies they want assessed — for example, a supplier or a portfolio company. In these cases, the paying company and the responding company can be different, and VECTRA coordinates enrollment directly with the company completing the assessment.</p></div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Is pricing shown immediately?</button>
+        <div class="vh-acc__panel"><p>Level 2 and Level 3 are scoped individually and route to a consultation with VECTRA, since pricing and required agreements vary by engagement. The final Level 1 pricing and display approach remain subject to approval.</p></div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">How will my information be used?</button>
+        <div class="vh-acc__panel"><p>The information you provide is used to process your responses, recommend an assessment pathway, and support any follow-up you request.</p><p><a href="{{ privacy_url }}" target="_blank" rel="noopener">Read the VECTRA International Privacy Policy</a>.</p></div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Is a supplier risk assessment the same as a vendor risk assessment?</button>
+        <div class="vh-acc__panel"><p>The terms are sometimes used interchangeably, but their scope can differ. A vendor risk assessment may cover areas such as technology, cybersecurity, financial exposure, or service continuity. VECTRA’s assessment focuses on supplier and supply chain due diligence, including inherent risk, control maturity, and the residual risk that remains.</p></div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Do I need a supplier risk assessment checklist before starting?</button>
+        <div class="vh-acc__panel"><p>No. You do not need to prepare a supplier risk assessment checklist before completing the pre-assessment. The 10 questions are designed to identify your current position and recommend the appropriate assessment level. Any deeper information or evidence needed will depend on the assessment pathway that follows.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endunless %}
+
+{% endcase %}
