@@ -49,16 +49,16 @@
   %}
   {% render 'vectra-image', image: watermark, fallback: img_mark, alt: '', class: 'vcon-hero__mark', width: 901, height: 909, image_width: 900 %}
   <div class="vcon-hero__grid">
-    <div class="vcon-hero__copy" data-vh-reveal="up">
-      <h1>{{ hero_h1 }}</h1>
-      <p class="vcon-hero__display">{{ hero_display }}</p>
-      <div class="vcon-hero__lead">
+    <div class="vcon-hero__copy">
+      <h1 data-vh-reveal="up">{{ hero_h1 }}</h1>
+      <p class="vcon-hero__display" data-vh-reveal="up">{{ hero_display }}</p>
+      <div class="vcon-hero__lead" data-vh-reveal="up">
         <p>You don’t need a finished scope to talk to us. Tell us what’s happening — the thing that keeps coming back, the gap you can’t quite close, or a problem you haven’t fully named yet. It might be a supplier finding, an ESG reporting gap, an audit follow-up, or an operational resilience issue. You don’t need to know which VECTRA service it belongs to before you reach out.</p>
         <p>We’ll review what you share, bring the relevant expertise into the conversation, and work out the most useful next step together.</p>
         <p>Looking for VECTRA International’s contact details, or just want to get in touch with our team? Use the form below, email <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>, or call <a href="tel:{{ contact_phone_tel }}">{{ contact_phone }}</a> — whichever is easiest for you.</p>
       </div>
     </div>
-    <div id="contact-form">
+    <div id="contact-form" data-vh-reveal="up">
       {% form 'contact', class: 'vcon-form vh-form' %}
         <h2>{{ form_heading }}</h2>
         {% if form.posted_successfully? %}
@@ -78,32 +78,32 @@
 {% unless hide_section %}
 <section class="vcon-challenges" id="challenges" style="{% if block_settings != blank %}{% render 'vectra-block-style', settings: block_settings %}{% endif %}" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
   <div class="vcon-wrap">
-    <p class="vcon-kicker">NOT SURE WHERE IT FITS?</p>
-    <h2>Start With What's Happening</h2>
-    <p class="vcon-lead">You may already know exactly what support you need. Or you may simply know that something isn’t working as it should — either way, this is the right place to start.</p>
+    <p class="vcon-kicker" data-vh-reveal="up">NOT SURE WHERE IT FITS?</p>
+    <h2 data-vh-reveal="up">Start With What's Happening</h2>
+    <p class="vcon-lead" data-vh-reveal="up">You may already know exactly what support you need. Or you may simply know that something isn’t working as it should — either way, this is the right place to start.</p>
     <div class="vcon-cards">
-      <article data-vh-reveal>
+      <article data-vh-reveal="up">
         <img src="{{ img_icon_4 }}" alt="" width="48" height="48">
         <h3>The same problem keeps coming back</h3>
         <p>It gets corrected. Then, a few weeks or months later, the same finding, gap, or issue is back — usually a sign that the root cause hasn’t been addressed, only the symptom.</p>
       </article>
-      <article data-vh-reveal>
+      <article data-vh-reveal="up">
         <img src="{{ img_icon_3 }}" alt="" width="48" height="48">
         <h3>You have supplier findings, but no clear priority</h3>
         <p>You’re sitting on audit results, supplier risk data, or compliance evidence. The harder part is deciding what needs attention first — and who owns the next action.</p>
       </article>
-      <article data-vh-reveal>
+      <article data-vh-reveal="up">
         <img src="{{ img_icon_2 }}" alt="" width="48" height="48">
         <h3>The evidence exists, but using it takes too much work</h3>
         <p>ESG data, audit records, and compliance evidence are scattered across files, systems, emails, and teams — making it difficult to use, verify, or defend when it matters.</p>
       </article>
-      <article data-vh-reveal>
+      <article data-vh-reveal="up">
         <img src="{{ img_icon_1 }}" alt="" width="48" height="48">
         <h3>The change makes sense on paper, but it isn’t sticking</h3>
         <p>The requirement, process, or system is clear. The people who need to use it day to day are still struggling to make it part of normal work.</p>
       </article>
     </div>
-    <p class="vcon-close">Start with what’s happening. We’ll work out the rest with you.</p>
+    <p class="vcon-close" data-vh-reveal="up">Start with what’s happening. We’ll work out the rest with you.</p>
   </div>
 </section>
 {% endunless %}
@@ -112,20 +112,20 @@
 {% unless hide_section %}
 <section class="vcon-next" id="what-happens-next" style="{% if block_settings != blank %}{% render 'vectra-block-style', settings: block_settings %}{% endif %}" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
   <div class="vcon-wrap">
-    <p class="vcon-kicker">WHAT HAPPENS NEXT</p>
-    <h2>You Send the Context. We Work Out the Next Move Together.</h2>
+    <p class="vcon-kicker" data-vh-reveal="up">WHAT HAPPENS NEXT</p>
+    <h2 data-vh-reveal="up">You Send the Context. We Work Out the Next Move Together.</h2>
     <div class="vcon-steps">
-      <article data-vh-reveal>
+      <article data-vh-reveal="up">
         <span>01</span>
         <h3>Tell Us What's Happening</h3>
         <p>Share what you already know — a recurring issue, an audit finding, a customer or regulatory requirement, supplier data, an internal process, or something that simply isn’t working as expected. You don’t need to turn it into a formal brief first.</p>
       </article>
-      <article data-vh-reveal>
+      <article data-vh-reveal="up">
         <span>02</span>
         <h3>We Bring in the Relevant Expertise</h3>
         <p>We review what you’ve shared and bring in the VECTRA International specialists whose experience best fits the issue — in ESG, supply chain resilience, audit, or operational capability building. You won’t have to re-explain the problem through several layers before reaching someone who understands the work.</p>
       </article>
-      <article data-vh-reveal>
+      <article data-vh-reveal="up">
         <span>03</span>
         <h3>Agree on the Most Useful Next Step</h3>
         <p>The first useful step might be a focused assessment, specialist support, implementation work, capability building, or simply a clearer direction. We agree on that together, rather than assuming the answer before we understand the situation.</p>
@@ -139,9 +139,9 @@
 {% unless hide_section %}
 <section class="vcon-direct" id="get-in-touch" style="{% if block_settings != blank %}{% render 'vectra-block-style', settings: block_settings %}{% endif %}" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
   <div class="vcon-wrap">
-    <p class="vcon-kicker">PREFER TO REACH US DIRECTLY?</p>
-    <h2>Contact VECTRA International</h2>
-    <div class="vcon-direct__grid">
+    <p class="vcon-kicker" data-vh-reveal="up">PREFER TO REACH US DIRECTLY?</p>
+    <h2 data-vh-reveal="up">Contact VECTRA International</h2>
+    <div class="vcon-direct__grid" data-vh-reveal="up">
       <div>
         <p class="vcon-direct__label">Email</p>
         <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
@@ -151,7 +151,7 @@
         <a href="tel:{{ contact_phone_tel }}">{{ contact_phone }}</a>
       </div>
     </div>
-    <p class="vcon-lead">Already know who you need to speak with? Reach out directly. If you’d like to contact our operational resilience consultants, or you’re not sure which VECTRA specialist fits the issue, use the <a href="#contact-form">form above</a> and tell us what’s happening — whether it’s supplier risk, ESG compliance, audit follow-up, or a broader resilience program. We’ll route the conversation to the right person from there.</p>
+    <p class="vcon-lead" data-vh-reveal="up">Already know who you need to speak with? Reach out directly. If you’d like to contact our operational resilience consultants, or you’re not sure which VECTRA specialist fits the issue, use the <a href="#contact-form">form above</a> and tell us what’s happening — whether it’s supplier risk, ESG compliance, audit follow-up, or a broader resilience program. We’ll route the conversation to the right person from there.</p>
   </div>
 </section>
 {% endunless %}
