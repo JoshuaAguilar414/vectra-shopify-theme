@@ -80,7 +80,7 @@
 {% capture associates %}{% render 'vectra-preview-href', url: associates_base, view: 'associates' %}{% endcapture %}
 {% capture interns %}{% render 'vectra-preview-href', url: interns_base, view: 'interns' %}{% endcapture %}
 {% capture careers %}{% render 'vectra-preview-href', url: careers_base, view: 'careers' %}{% endcapture %}
-{% assign contact_base = pages['contact-us'].url | default: pages['contact'].url | default: '/pages/contact-us' %}
+{% assign contact_base = pages['contact'].url | default: pages['contact-us'].url | default: '/pages/contact' %}
 {% capture contact %}{% render 'vectra-preview-href', url: contact_base, view: 'contact-us' %}{% endcapture %}
 {% assign story = story | strip %}
 {% assign solutions = solutions | strip %}

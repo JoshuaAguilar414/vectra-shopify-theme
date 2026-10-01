@@ -1,16 +1,19 @@
 {%- doc -%}
-  Renders Experts / Associates / Interns / Careers / FAQ when a Shopify page
+  Renders Experts / Associates / Interns / Careers / FAQ / Contact when a Shopify page
   uses the Default template instead of the dedicated VECTRA template.
 {%- enddoc -%}
 {%- liquid
   assign handle = page.handle
   assign people = false
   assign course = false
+  assign contact = false
   case handle
     when 'experts', 'associates', 'interns', 'careers', 'faq'
       assign people = true
     when 'marketplace', 'course-esg-acronyms', 'course-preventative-measures', 'course-purchasing-practices', 'course-disability-accommodation'
       assign course = true
+    when 'contact', 'contact-us'
+      assign contact = true
   endcase
 -%}
 {%- if people -%}
@@ -29,4 +32,13 @@
     {% endif %}
   {% endcapture %}
   {% render 'vectra-page-shell', children: children %}
+{%- elsif contact -%}
+  {% capture children %}
+    {% render 'vectra-header' %}
+    {% render 'vectra-contact-modules', module: 'hero' %}
+    {% render 'vectra-contact-modules', module: 'challenges' %}
+    {% render 'vectra-contact-modules', module: 'next' %}
+    {% render 'vectra-contact-modules', module: 'direct' %}
+  {% endcapture %}
+  {% render 'vectra-page-shell', children: children, include_resources: true %}
 {%- endif -%}

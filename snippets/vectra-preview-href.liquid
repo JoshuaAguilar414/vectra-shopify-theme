@@ -135,7 +135,7 @@
     endif
   elsif view_name == 'contact-us'
     assign force_view = true
-    assign href = pages['contact-us'].url | default: pages['contact'].url | default: '/pages/contact-us'
+    assign href = pages['contact'].url | default: pages['contact-us'].url | default: '/pages/contact'
   elsif view_name == 'experts'
     assign href = pages['experts'].url | default: '/pages/experts'
   elsif view_name == 'leadership'
