@@ -169,4 +169,57 @@
   ]
 }
 </script>
+{%- elsif key == 'experts' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "VECTRA International Experts | Subject Matter Experts",
+      "description": "Meet VECTRA International experts bringing specialist ESG, supply chain due diligence, sustainability, and responsible business expertise."
+    },
+    {
+      "@type": "ItemList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"item":{"@type":"Person","name":"Beat Grüninger","jobTitle":"Senior Technical Advisor and Lecturer","worksFor":{"@type":"Organization","name":"VECTRA International"}}},
+        {"@type":"ListItem","position":2,"item":{"@type":"Person","name":"Berçin Doğan Öztürk","jobTitle":"Sustainability, Social Compliance & Responsible Business","worksFor":{"@type":"Organization","name":"VECTRA International"}}},
+        {"@type":"ListItem","position":3,"item":{"@type":"Person","name":"Daniel Ndiwa","jobTitle":"Sustainability Standards Consultant","worksFor":{"@type":"Organization","name":"VECTRA International"}}},
+        {"@type":"ListItem","position":4,"item":{"@type":"Person","name":"Iddah Ooko","jobTitle":"Environmental and Social Impact Consultant","worksFor":{"@type":"Organization","name":"VECTRA International"}}},
+        {"@type":"ListItem","position":5,"item":{"@type":"Person","name":"Mary Shamla","jobTitle":"GHG Accounting, Carbon Disclosure & Life Cycle Assessment","worksFor":{"@type":"Organization","name":"VECTRA International"}}},
+        {"@type":"ListItem","position":6,"item":{"@type":"Person","name":"Marcel Hatlapa","jobTitle":"Textile Quality & Social Compliance Specialist","worksFor":{"@type":"Organization","name":"VECTRA International"}}},
+        {"@type":"ListItem","position":7,"item":{"@type":"Person","name":"Mei Zhou","jobTitle":"EHS, Supply Chain, Due Diligence & Risk Assessment","worksFor":{"@type":"Organization","name":"VECTRA International"}}},
+        {"@type":"ListItem","position":8,"item":{"@type":"Person","name":"Najmeen Akther","jobTitle":"CSR Management & Social Compliance Auditing","worksFor":{"@type":"Organization","name":"VECTRA International"}}},
+        {"@type":"ListItem","position":9,"item":{"@type":"Person","name":"Wei Chen","jobTitle":"Responsible Business & Corporate Sustainability","worksFor":{"@type":"Organization","name":"VECTRA International"}}}
+      ]
+    }
+  ]
+}
+</script>
+{%- elsif key == 'associates' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "name": "VECTRA International Associates | Specialist Expertise",
+      "description": "Meet VECTRA International Associates, the specialists in analytics, training, marketing, technology and operations who support our client solutions."
+    }
+  ]
+}
+</script>
+{%- elsif key == 'interns' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "VECTRA International Interns | Internship Opportunities",
+      "description": "Meet VECTRA International Interns and explore internships where you learn from experts, contribute to real work, and build practical skills."
+    }
+  ]
+}
+</script>
 {%- endif -%}

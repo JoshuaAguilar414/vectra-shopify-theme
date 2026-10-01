@@ -10,13 +10,23 @@
         "body": {
           "type": "vectra-people-body",
           "blocks": {
-            "p1": { "type": "_vectra-person", "settings": { "name": "Beat Grüninger", "bio": "Senior Technical Advisor and Lecturer in Sustainability Management and Standards", "fallback_asset": "vectra-14b9e6914bc9f1111966be55232cfa8990739462.png" } },
-            "p2": { "type": "_vectra-person", "settings": { "name": "Berçin Doğan Öztürk", "bio": "13+ years of experience in sustainability, social compliance, and responsible business", "fallback_asset": "vectra-bb37886d23428b36d5a6703f3aa1e71fd1d15929.png" } },
-            "p3": { "type": "_vectra-person", "settings": { "name": "Daniel Ndiwa", "bio": "Sustainability Standards Consultant with 5 years of experience auditing voluntary sustainability standards in coffee, tea, avocado, and horticulture across Eastern Africa", "fallback_asset": "vectra-70734a58f670e934fa9e18fa958676614dedc858.png" } },
-            "p4": { "type": "_vectra-person", "settings": { "name": "Iddah Ooko", "bio": "Environmental and Social Impact Consultant with 15+ years leading environmental impact assessments, audits, ESG, and multidisciplinary development projects", "fallback_asset": "vectra-a7fddb20a7074e9dc372d79b62756ec3622de6d2.png" } }
+            "p1": { "type": "_vectra-person", "settings": { "name": "Beat Grüninger", "role": "Senior Technical Advisor and Lecturer", "bio": "Sustainability management and standards", "fallback_asset": "vectra-14b9e6914bc9f1111966be55232cfa8990739462.png" } },
+            "p2": { "type": "_vectra-person", "settings": { "name": "Berçin Doğan Öztürk", "role": "Sustainability, Social Compliance & Responsible Business", "bio": "13+ years of experience", "fallback_asset": "vectra-bb37886d23428b36d5a6703f3aa1e71fd1d15929.png" } },
+            "p3": { "type": "_vectra-person", "settings": { "name": "Daniel Ndiwa", "role": "Sustainability Standards Consultant", "bio": "5 years auditing voluntary sustainability standards in coffee, tea, avocado, and horticulture across Eastern Africa", "fallback_asset": "vectra-70734a58f670e934fa9e18fa958676614dedc858.png" } },
+            "p4": { "type": "_vectra-person", "settings": { "name": "Iddah Ooko", "role": "Environmental and Social Impact Consultant", "bio": "15+ years leading environmental impact assessments, audits, ESG, and multidisciplinary development projects", "fallback_asset": "vectra-a7fddb20a7074e9dc372d79b62756ec3622de6d2.png" } },
+            "p5": { "type": "_vectra-person", "settings": { "name": "Mary Shamla", "role": "GHG Accounting, Carbon Disclosure & Life Cycle Assessment", "bio": "Expert", "fallback_asset": "vectra-3d90b6de863f4a0f6cfb9e8f77617b9ea7caeff1.png" } },
+            "p6": { "type": "_vectra-person", "settings": { "name": "Marcel Hatlapa", "role": "Textile Quality & Social Compliance Specialist", "bio": "15+ years in the textile industry", "fallback_asset": "vectra-c543bcdfc727d87f2710b5345cea3b7eb76daab1.png" } },
+            "p7": { "type": "_vectra-person", "settings": { "name": "Mei Zhou", "role": "EHS, Supply Chain, Due Diligence & Risk Assessment", "bio": "20+ years of industrial and supply chain experience", "fallback_asset": "vectra-26b8a07235b9d48b395528564d6124a59d29f6e3.png" } },
+            "p8": { "type": "_vectra-person", "settings": { "name": "Najmeen Akther", "role": "CSR Management & Social Compliance Auditing", "bio": "20+ years, including supply chain improvement", "fallback_asset": "vectra-portrait-placeholder.png" } },
+            "p9": { "type": "_vectra-person", "settings": { "name": "Wei Chen", "role": "Responsible Business & Corporate Sustainability", "bio": "20+ years of experience", "fallback_asset": "vectra-3d90b6de863f4a0f6cfb9e8f77617b9ea7caeff1.png" } }
           },
-          "block_order": ["p1", "p2", "p3", "p4"],
-          "settings": { "page_type": "experts" }
+          "block_order": ["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9"],
+          "settings": {
+            "page_type": "experts",
+            "kicker": "OUR PEOPLE",
+            "heading": "VECTRA International Experts | Subject Matter Experts & Associates",
+            "cta_label": "Talk to an Expert"
+          }
         },
         "footer": { "type": "vectra-footer", "settings": {} }
       },
