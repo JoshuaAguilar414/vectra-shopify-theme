@@ -4,7 +4,7 @@
   even when the Shopify admin still has the page on Default.
 
   @param {string} url - Original href
-  @param {string} [view] - Template suffix: our-story, solutions, resources, contact-us, experts, leadership, associates, interns, careers, faq
+  @param {string} [view] - Template suffix: our-story, solutions, resources, contact-us, experts, leadership, associates, interns, careers, faq, blogs, e-books-playbooks, press-releases, podcasts, event-webinars
   @param {string} [title] - Link label; used to infer view when the nav item points at Home
 {%- enddoc -%}
 {%- liquid
@@ -20,6 +20,16 @@
       assign view_name = 'solutions'
     elsif title_key == 'resources'
       assign view_name = 'resources'
+    elsif title_key == 'insights' or title_key == 'blogs' or title_key == 'vectra international blogs' or title_key == 'industry insights'
+      assign view_name = 'blogs'
+    elsif title_key == 'ebooks & playbooks' or title_key == 'ebooks and playbooks' or title_key == 'e-books & playbooks' or title_key == 'ebooks' or title_key == 'playbooks'
+      assign view_name = 'e-books-playbooks'
+    elsif title_key == 'press releases' or title_key == 'press'
+      assign view_name = 'press-releases'
+    elsif title_key == 'podcasts' or title_key == 'podcast' or title_key == 'vcasts' or title_key == 'vcast'
+      assign view_name = 'podcasts'
+    elsif title_key == 'events & webinars' or title_key == 'events and webinars' or title_key == 'events' or title_key == 'webinars' or title_key == 'event webinars'
+      assign view_name = 'event-webinars'
     elsif title_key == 'contact us' or title_key == 'contact' or title_key == 'talk to an expert'
       assign view_name = 'contact-us'
     elsif title_key == 'our experts' or title_key == 'experts'
@@ -54,6 +64,43 @@
     assign href = pages['solutions'].url | default: '/pages/solutions'
   elsif view_name == 'resources'
     assign href = pages['resources'].url | default: '/pages/resources'
+  elsif view_name == 'blogs'
+    assign force_view = true
+    if pages['blogs'].url != blank
+      assign href = pages['blogs'].url
+    elsif pages['resources-blogs'].url != blank
+      assign href = pages['resources-blogs'].url
+    else
+      assign href = pages['resources'].url | default: '/pages/resources'
+    endif
+  elsif view_name == 'e-books-playbooks'
+    assign force_view = true
+    if pages['e-books-playbooks'].url != blank
+      assign href = pages['e-books-playbooks'].url
+    else
+      assign href = pages['resources'].url | default: '/pages/resources'
+    endif
+  elsif view_name == 'press-releases'
+    assign force_view = true
+    if pages['press-releases'].url != blank
+      assign href = pages['press-releases'].url
+    else
+      assign href = pages['resources'].url | default: '/pages/resources'
+    endif
+  elsif view_name == 'podcasts'
+    assign force_view = true
+    if pages['podcasts'].url != blank
+      assign href = pages['podcasts'].url
+    else
+      assign href = pages['resources'].url | default: '/pages/resources'
+    endif
+  elsif view_name == 'event-webinars'
+    assign force_view = true
+    if pages['event-webinars'].url != blank
+      assign href = pages['event-webinars'].url
+    else
+      assign href = pages['resources'].url | default: '/pages/resources'
+    endif
   elsif view_name == 'contact-us'
     assign href = pages['contact-us'].url | default: pages['contact'].url | default: '/pages/contact-us'
   elsif view_name == 'experts'

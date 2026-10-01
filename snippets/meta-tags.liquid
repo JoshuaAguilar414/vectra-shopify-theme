@@ -37,6 +37,26 @@
     assign og_title = 'Responsible Business Resources | VECTRA International'
     assign og_description = "Explore VECTRA International's resources and insights on responsible business, supply chain, ESG, operational resilience, and risk management."
     assign vectra_meta_locked = true
+  elsif template.suffix == 'blogs'
+    assign og_title = 'VECTRA International Blogs | Industry Insights & Reports'
+    assign og_description = 'Explore VECTRA International blogs & Insights, including industry insights, expert perspectives and reports'
+    assign vectra_meta_locked = true
+  elsif template.suffix == 'e-books-playbooks'
+    assign og_title = 'VECTRA International Ebooks & Playbooks | Guides'
+    assign og_description = 'Explore VECTRA International ebooks and playbooks on business resilience, supply chain risk, and responsible business. Find practical guides to plan your next steps.'
+    assign vectra_meta_locked = true
+  elsif template.suffix == 'press-releases'
+    assign og_title = 'VECTRA International Press Releases | News'
+    assign og_description = 'Read VECTRA International press releases, news and announcements covering company updates, partnerships, industry developments and key milestones.'
+    assign vectra_meta_locked = true
+  elsif template.suffix == 'podcasts'
+    assign og_title = 'VECTRA International Podcast | Expert Insights'
+    assign og_description = 'Explore the VECTRA International podcast featuring expert discussions and insights.'
+    assign vectra_meta_locked = true
+  elsif template.suffix == 'event-webinars'
+    assign og_title = 'VECTRA International Events | Webinars & Events'
+    assign og_description = 'Explore VECTRA International events, webinars and expert sessions covering business resilience, supply chain risk, and responsible business.'
+    assign vectra_meta_locked = true
   elsif template.suffix == 'contact-us' or template.suffix == 'contact'
     assign og_title = 'Contact VECTRA International | Get in Touch'
     assign og_description = 'Contact VECTRA International for ESG, supply chain, and operational resilience expertise. Reach our consultants by form, email, or phone.'

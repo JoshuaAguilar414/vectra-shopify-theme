@@ -1,0 +1,285 @@
+{%- doc -%}
+  Events & Webinars page body: upcoming, past, and replay sections.
+
+  @param {object} block - Theme block that renders this snippet
+  @param {object} blog_events - Events/webinars blog (optional)
+{%- enddoc -%}
+
+{% liquid
+  assign now_ts = 'now' | date: '%s' | plus: 0
+  assign featured_end_ts = '2026-11-05 16:00:00 +0000' | date: '%s' | plus: 0
+  assign show_featured_event = false
+  if now_ts < featured_end_ts
+    assign show_featured_event = true
+  endif
+
+  assign cms_upcoming = 0
+  assign cms_replays = 0
+  if blog_events != blank
+    for article in blog_events.articles limit: 50
+      if article.tags contains 'replay'
+        assign cms_replays = cms_replays | plus: 1
+      else
+        assign cms_upcoming = cms_upcoming | plus: 1
+      endif
+    endfor
+  endif
+%}
+<div class="vres-events" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+
+  {% comment %} UPCOMING {% endcomment %}
+  <section class="vres-library vres-events__section" id="upcoming-events">
+    <div class="vh-wrap">
+      <header class="vres-listing__head" data-vh-reveal="up">
+        <p class="vh-kicker">WHAT’S COMING UP</p>
+        <h2 class="vh-h2">Upcoming VECTRA Webinars &amp; Events</h2>
+        <p class="vh-lead">Find a webinar to join or an industry event where VECTRA is taking part. Each listing gives you the topic, date, and details you need to decide whether it is relevant to your work.</p>
+      </header>
+
+      <div class="vres-library__grid vres-events__grid">
+        {% if show_featured_event %}
+          <article class="vres-library__card vres-event-card vres-event-card--featured" data-vh-reveal>
+            <p class="vres-event-card__tag">Upcoming Webinar</p>
+            <h3 class="vres-event-card__title">Market Access by Design</h3>
+            <dl class="vres-event-card__meta">
+              <div><dt>Date</dt><dd><time datetime="2026-11-05">5 November 2026</time></dd></div>
+              <div><dt>Time</dt><dd>10:00–11:00 a.m. EST / 4:00–5:00 p.m. CET</dd></div>
+              <div><dt>Format</dt><dd>LinkedIn Live</dd></div>
+              <div><dt>Speakers</dt><dd>Our CEO, Patrick Neyts, and Ethisphere’s Executive Vice President of Measurement, Craig Moss</dd></div>
+              <div><dt>Moderator</dt><dd>Ethisphere’s Chief Strategy Officer and Executive Chair, Erica Salmon Byrne</dd></div>
+            </dl>
+            <p>Supply chain laws are changing, but your team still needs one workable way to assess risk and act on what it finds. Join VECTRA and Ethisphere for a discussion on building a due diligence system that connects supply chain mapping, supplier engagement, evidence, corrective action, and remediation.</p>
+            <a class="vh-btn vh-btn--green vh-btn--rect" href="https://www.linkedin.com/company/vectra-international/events/" target="_blank" rel="noopener">Register for Webinar</a>
+          </article>
+        {% endif %}
+
+        {% if blog_events != blank %}
+          {% for article in blog_events.articles limit: 50 %}
+            {% unless article.tags contains 'replay' %}
+              {% liquid
+                assign ev_date = article.metafields.custom.event_date.value
+                assign ev_speakers = article.metafields.custom.speakers.value
+                assign ev_location = article.metafields.custom.location.value
+                assign ev_cta = 'View Event Details'
+                for tag in article.tags
+                  assign tag_slug = tag | handleize
+                  if tag_slug == 'webinar'
+                    assign ev_cta = 'Register for Webinar'
+                  endif
+                endfor
+              %}
+              <article class="vres-library__card vres-event-card" data-vh-reveal>
+                <p class="vres-event-card__tag">Upcoming</p>
+                <h3 class="vres-event-card__title">{{ article.title | escape }}</h3>
+                <dl class="vres-event-card__meta">
+                  <div>
+                    <dt>Date</dt>
+                    <dd>
+                      {% if ev_date != blank %}
+                        {{ ev_date | escape }}
+                      {% else %}
+                        <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%-d %B %Y' }}</time>
+                      {% endif %}
+                    </dd>
+                  </div>
+                  {% if ev_location != blank %}
+                    <div><dt>Location</dt><dd>{{ ev_location | escape }}</dd></div>
+                  {% endif %}
+                  {% if ev_speakers != blank %}
+                    <div><dt>Speakers</dt><dd>{{ ev_speakers | escape }}</dd></div>
+                  {% endif %}
+                </dl>
+                <p>{{ article.excerpt_or_content | strip_html | strip_newlines | truncate: 200 }}</p>
+                <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ article.url }}">{{ ev_cta }}</a>
+              </article>
+            {% endunless %}
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      {% if show_featured_event == false and cms_upcoming == 0 %}
+        <p class="vres-listing__empty vres-events__empty">No upcoming events are listed right now. You can explore past events and watch an available webinar replay below.</p>
+      {% endif %}
+    </div>
+  </section>
+
+  {% comment %} PAST {% endcomment %}
+  <section class="vres-library vres-events__section" id="past-events">
+    <div class="vh-wrap">
+      <header class="vres-listing__head" data-vh-reveal="up">
+        <p class="vh-kicker">WHERE WE’VE BEEN</p>
+        <h2 class="vh-h2">Past VECTRA Events &amp; Webinars</h2>
+        <p class="vh-lead">Explore the conferences, workshops, trade fairs, and online sessions where VECTRA has joined the discussion.</p>
+      </header>
+
+      <div class="vres-library__grid vres-events__grid">
+        <article class="vres-library__card vres-event-card" data-vh-reveal>
+          <p class="vres-event-card__tag">Past Event</p>
+          <h3 class="vres-event-card__title">IFA 2026 Berlin</h3>
+          <dl class="vres-event-card__meta">
+            <div><dt>Date</dt><dd><time datetime="2026-09-04">4–8 September 2026</time></dd></div>
+            <div><dt>Location</dt><dd>Berlin, Germany</dd></div>
+            <div><dt>VECTRA participant</dt><dd>Our Business Development Associate, Prateek Kadambande</dd></div>
+          </dl>
+          <p>Prateek represented VECTRA at IFA Berlin, bringing our perspective to conversations across the consumer technology industry.</p>
+          <a class="vres-library__cta" href="#">View Event Details</a>
+        </article>
+
+        <article class="vres-library__card vres-event-card" data-vh-reveal>
+          <p class="vres-event-card__tag">Past Event</p>
+          <h3 class="vres-event-card__title">Texworld Apparel Sourcing Paris</h3>
+          <dl class="vres-event-card__meta">
+            <div><dt>Date</dt><dd><time datetime="2026-08-31">31 August–2 September 2026</time></dd></div>
+            <div><dt>Location</dt><dd>Paris, France</dd></div>
+            <div><dt>VECTRA participants</dt><dd>Our CEO, Patrick Neyts, and our Business Development Associate, Prateek Kadambande</dd></div>
+          </dl>
+          <p>At Texworld, Patrick and Prateek connected with textile and apparel professionals to discuss traceability, supplier practices, working conditions, and more responsible supply chains.</p>
+          <a class="vres-library__cta" href="#">View Event Details</a>
+        </article>
+
+        <article class="vres-library__card vres-event-card" data-vh-reveal>
+          <p class="vres-event-card__tag">Past Event</p>
+          <h3 class="vres-event-card__title">MAGIC Conference Las Vegas</h3>
+          <dl class="vres-event-card__meta">
+            <div><dt>Date</dt><dd><time datetime="2026-08-10">10–12 August 2026</time></dd></div>
+            <div><dt>Location</dt><dd>Las Vegas, United States</dd></div>
+            <div><dt>VECTRA participants</dt><dd>Our CEO, Patrick Neyts, and our Senior Vice President of Global Sales, Marketing and Communications, Shelly M. Sanders</dd></div>
+          </dl>
+          <p>Patrick and Shelly met with fashion industry leaders and shared VECTRA’s perspective on responsible supply chains.</p>
+          <a class="vres-library__cta" href="#">View Event Details</a>
+        </article>
+
+        <article class="vres-library__card vres-event-card" data-vh-reveal>
+          <p class="vres-event-card__tag">Past Webinar</p>
+          <h3 class="vres-event-card__title">A New Supply Chain Risk: The Implications of Forced Labor and Section 301 Investigations</h3>
+          <dl class="vres-event-card__meta">
+            <div><dt>Date</dt><dd><time datetime="2026-06-22">22 June 2026</time></dd></div>
+            <div><dt>Format</dt><dd>Online webinar</dd></div>
+            <div><dt>VECTRA speaker</dt><dd>Our CEO, Patrick Neyts</dd></div>
+            <div><dt>Host</dt><dd>Ethisphere</dd></div>
+          </dl>
+          <p>Patrick joined Ethisphere’s Erica Salmon Byrne and Craig Moss to discuss forced labor due diligence, trade investigations, and what these developments mean for the teams managing supply chain risk.</p>
+          <a class="vres-library__cta" href="https://youtube.com" target="_blank" rel="noopener">Watch Replay</a>
+        </article>
+
+        <article class="vres-library__card vres-event-card" data-vh-reveal>
+          <p class="vres-event-card__tag">Past Event</p>
+          <h3 class="vres-event-card__title">Third EU–India Sustainable Business Dialogue</h3>
+          <dl class="vres-event-card__meta">
+            <div><dt>Date</dt><dd><time datetime="2026-06-16">16 June 2026</time></dd></div>
+            <div><dt>Location</dt><dd>Brussels, Belgium</dd></div>
+            <div><dt>VECTRA participant</dt><dd>Our Vice President of Operations, Lorenz Berzau</dd></div>
+          </dl>
+          <p>Lorenz represented VECTRA in a discussion on EU–India collaboration, sustainable business, resilient supply chains, and climate action.</p>
+          <a class="vres-library__cta" href="#">View Event Details</a>
+        </article>
+
+        <article class="vres-library__card vres-event-card" data-vh-reveal>
+          <p class="vres-event-card__tag">Past Session</p>
+          <h3 class="vres-event-card__title">AI-Powered Digital Product Passport Initiative</h3>
+          <dl class="vres-event-card__meta">
+            <div><dt>Date</dt><dd><time datetime="2026-05-07">7 May 2026</time></dd></div>
+            <div><dt>Format</dt><dd>Online session</dd></div>
+            <div><dt>VECTRA expert</dt><dd>Our consultant, Berçin Doğan Öztürk</dd></div>
+            <div><dt>In collaboration with</dt><dd>TMMOB Textile Engineers’ Chamber, Türkiye</dd></div>
+          </dl>
+          <p>Berçin led the session on digital product passports and the role of AI in textile traceability, transparency, and sustainability.</p>
+          <a class="vres-library__cta" href="#">View Session Details</a>
+        </article>
+
+        <article class="vres-library__card vres-event-card" data-vh-reveal>
+          <p class="vres-event-card__tag">Past Event</p>
+          <h3 class="vres-event-card__title">Global Sourcing Fair Vietnam 2026</h3>
+          <dl class="vres-event-card__meta">
+            <div><dt>Date</dt><dd><time datetime="2026-04-22">22–24 April 2026</time></dd></div>
+            <div><dt>Location</dt><dd>Ho Chi Minh City, Vietnam</dd></div>
+            <div><dt>VECTRA participant</dt><dd>Our Territory Business Manager, Van Nguyen</dd></div>
+          </dl>
+          <p>Van represented VECTRA at the fair and connected with industry professionals on sourcing, ESG, and supply chain operations across the region.</p>
+          <a class="vres-library__cta" href="#">View Event Details</a>
+        </article>
+
+        <article class="vres-library__card vres-event-card" data-vh-reveal>
+          <p class="vres-event-card__tag">Past Workshop</p>
+          <h3 class="vres-event-card__title">Competencies Workshop for Fair, Green and Digital Transformation in the Textile Sector</h3>
+          <dl class="vres-event-card__meta">
+            <div><dt>Date</dt><dd><time datetime="2026-04-21">21 April 2026</time></dd></div>
+            <div><dt>Location</dt><dd>ASKON Headquarters, Türkiye</dd></div>
+            <div><dt>VECTRA participant</dt><dd>Our consultant, Berçin Doğan Öztürk</dd></div>
+          </dl>
+          <p>Berçin joined textile manufacturers, industry associations, universities, and service providers to discuss the skills needed as the sector changes.</p>
+          <a class="vres-library__cta" href="#">View Event Details</a>
+        </article>
+
+        <article class="vres-library__card vres-event-card" data-vh-reveal>
+          <p class="vres-event-card__tag">Past Event</p>
+          <h3 class="vres-event-card__title">Second EU–India Sustainable Business Roundtable</h3>
+          <dl class="vres-event-card__meta">
+            <div><dt>Date</dt><dd><time datetime="2026-01-16">16 January 2026</time></dd></div>
+            <div><dt>Location</dt><dd>Brussels, Belgium</dd></div>
+            <div><dt>VECTRA participant</dt><dd>Our Vice President of Operations, Lorenz Berzau</dd></div>
+          </dl>
+          <p>Lorenz represented VECTRA at the roundtable, which brought European and Indian organizations together to discuss sustainable business collaboration.</p>
+          <a class="vres-library__cta" href="#">View Event Details</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {% comment %} REPLAYS {% endcomment %}
+  <section class="vres-library vres-events__section" id="webinar-replays">
+    <div class="vh-wrap">
+      <header class="vres-listing__head" data-vh-reveal="up">
+        <p class="vh-kicker">WATCH REPLAYS</p>
+        <h2 class="vh-h2">Watch VECTRA Webinar Replays</h2>
+        <p class="vh-lead">Missed a session, or want to return to a useful point? Browse available recordings and hear the discussion at a time that works for you.</p>
+      </header>
+
+      <div class="vres-library__grid vres-events__grid">
+        <article class="vres-library__card vres-event-card" data-vh-reveal>
+          <p class="vres-event-card__tag">Webinar Replay</p>
+          <h3 class="vres-event-card__title">A New Supply Chain Risk: The Implications of Forced Labor and Section 301 Investigations</h3>
+          <dl class="vres-event-card__meta">
+            <div><dt>Session date</dt><dd><time datetime="2026-06-22">22 June 2026</time></dd></div>
+            <div><dt>Speakers</dt><dd>Our CEO, Patrick Neyts; Ethisphere’s Chief Strategy Officer and Executive Chair, Erica Salmon Byrne; and Ethisphere’s Executive Vice President of Measurement, Craig Moss</dd></div>
+          </dl>
+          <p>What happens when forced labor risk becomes a trade and business continuity issue? Watch the discussion on due diligence, Section 301 investigations, and the decisions facing procurement, sustainability, legal, compliance, and finance teams.</p>
+          <a class="vh-btn vh-btn--green vh-btn--rect" href="https://youtube.com" target="_blank" rel="noopener">Watch Replay</a>
+        </article>
+
+        {% if blog_events != blank %}
+          {% for article in blog_events.articles limit: 50 %}
+            {% if article.tags contains 'replay' %}
+              {% liquid
+                assign rp_speakers = article.metafields.custom.speakers.value
+                assign rp_date = article.metafields.custom.event_date.value
+              %}
+              <article class="vres-library__card vres-event-card" data-vh-reveal>
+                <p class="vres-event-card__tag">Webinar Replay</p>
+                <h3 class="vres-event-card__title">{{ article.title | escape }}</h3>
+                <dl class="vres-event-card__meta">
+                  <div>
+                    <dt>Session date</dt>
+                    <dd>
+                      {% if rp_date != blank %}
+                        {{ rp_date | escape }}
+                      {% else %}
+                        <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%-d %B %Y' }}</time>
+                      {% endif %}
+                    </dd>
+                  </div>
+                  {% if rp_speakers != blank %}
+                    <div><dt>Speakers</dt><dd>{{ rp_speakers | escape }}</dd></div>
+                  {% endif %}
+                </dl>
+                <p>{{ article.excerpt_or_content | strip_html | strip_newlines | truncate: 200 }}</p>
+                <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ article.url }}">Watch Replay</a>
+              </article>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+</div>

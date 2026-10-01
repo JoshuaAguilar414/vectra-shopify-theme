@@ -1,5 +1,5 @@
 {%- doc -%}
-  JSON-LD for VECTRA pages. page_key: home | about | resources | contact | leadership
+  JSON-LD for VECTRA pages. page_key: home | about | resources | blogs | e-books-playbooks | press-releases | podcasts | event-webinars | contact | leadership
 {%- enddoc -%}
 {%- liquid
   assign key = page_key | default: 'home'
@@ -81,6 +81,114 @@
         {"@type":"Question","name":"Are VECTRA Resources free to access?","acceptedAnswer":{"@type":"Answer","text":"Yes. VECTRA Resources are free to explore. Some Ebooks, Playbooks, and Events may require registration."}},
         {"@type":"Question","name":"How do I find the right resource for my question?","acceptedAnswer":{"@type":"Answer","text":"Use the search bar to find resources by topic, regulation, risk, or keyword. You can also browse by format if you already know whether you need a quick Insight, a deeper guide, an expert conversation, or a real-world Case Study."}}
       ]
+    }
+  ]
+}
+</script>
+{%- elsif key == 'blogs' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "name": "VECTRA International Blogs | Industry Insights & Reports",
+      "description": "Explore VECTRA International blogs & Insights, including industry insights, expert perspectives and reports",
+      "url": "{{ request.origin }}{{ page.url | default: '/pages/blogs' }}",
+      "keywords": "VECTRA International Blog, VECTRA industry insights, VECTRA expert insights, VECTRA reports"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"What kind of content is published here?","acceptedAnswer":{"@type":"Answer","text":"Industry insights, expert perspectives, and reports on business resilience, supply chain risk, responsible business, ESG compliance, and operational performance, written by VECTRA's leaders, experts, and specialists."}},
+        {"@type":"Question","name":"How often is new content published?","acceptedAnswer":{"@type":"Answer","text":"Every week two blogs are posted on relevant industry updates."}},
+        {"@type":"Question","name":"Can I get new Insights by email?","acceptedAnswer":{"@type":"Answer","text":"Subscribe to our monthly newsletter to get our latest industry insights, expert perspectives, and reports delivered directly to your inbox."}},
+        {"@type":"Question","name":"Can I suggest a topic for VECTRA to cover?","acceptedAnswer":{"@type":"Answer","text":"Yes. Email us at info@vectra-intl.com with the topic title, a brief summary of why it's relevant to your business or industry, and any specific questions you would like our experts to address."}}
+      ]
+    }
+  ]
+}
+</script>
+{%- elsif key == 'e-books-playbooks' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "name": "VECTRA International Ebooks & Playbooks | Practical Guides",
+      "description": "Explore VECTRA International ebooks and playbooks on business resilience, supply chain risk, and responsible business. Find practical guides to plan your next steps.",
+      "url": "{{ request.origin }}{{ page.url | default: '/pages/e-books-playbooks' }}",
+      "keywords": "VECTRA International Ebooks & Playbooks, VECTRA ebooks, VECTRA playbooks, responsible business guides, supply chain guides"
+    },
+    {
+      "@type": "ItemList",
+      "name": "VECTRA International Ebooks & Playbooks",
+      "itemListOrder": "https://schema.org/ItemListOrderDescending"
+    }
+  ]
+}
+</script>
+{%- elsif key == 'press-releases' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "name": "VECTRA International Press Releases | News & Announcements",
+      "description": "Read VECTRA International press releases, news and announcements covering company updates, partnerships, industry developments and key milestones.",
+      "url": "{{ request.origin }}{{ page.url | default: '/pages/press-releases' }}",
+      "keywords": "VECTRA International press releases, VECTRA International news, VECTRA International announcements"
+    }
+  ]
+}
+</script>
+{%- elsif key == 'podcasts' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "name": "VECTRA International Podcast | Expert Insights & Discussions",
+      "description": "Explore the VECTRA International podcast featuring expert discussions and insights.",
+      "url": "{{ request.origin }}{{ page.url | default: '/pages/podcasts' }}",
+      "keywords": "VECTRA International podcast, VECTRA expert podcasts"
+    },
+    {
+      "@type": "PodcastSeries",
+      "name": "VECTRA International Podcast",
+      "description": "Expert discussions on business resilience, supply chain risk, responsible business, and industry developments."
+    }
+  ]
+}
+</script>
+{%- elsif key == 'event-webinars' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "name": "VECTRA International Events | Webinars & Industry Events",
+      "description": "Explore VECTRA International events, webinars and expert sessions covering business resilience, supply chain risk, and responsible business.",
+      "url": "{{ request.origin }}{{ page.url | default: '/pages/event-webinars' }}",
+      "keywords": "VECTRA International events, VECTRA webinars, VECTRA International industry events, VECTRA International expert webinars"
+    },
+    {
+      "@type": "Event",
+      "name": "Market Access by Design",
+      "startDate": "2026-11-05T10:00:00-05:00",
+      "endDate": "2026-11-05T11:00:00-05:00",
+      "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "VirtualLocation",
+        "url": "https://www.linkedin.com/company/vectra-international/events/"
+      },
+      "description": "Join VECTRA and Ethisphere for a discussion on building a due diligence system that connects supply chain mapping, supplier engagement, evidence, corrective action, and remediation.",
+      "organizer": { "@type": "Organization", "name": "VECTRA International", "url": "{{ shop.url }}" }
     }
   ]
 }

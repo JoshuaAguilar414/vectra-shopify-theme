@@ -1,0 +1,621 @@
+{%- doc -%}
+  VECTRA Resource listing page modules (Blogs/Insights, Ebooks & Playbooks, Press Releases, Podcasts, Events & Webinars).
+  Which page is rendered comes from the page template suffix, so one set of blocks serves all five pages.
+
+  @param {string} module - hero | featured | about | listing | faq | closing | events
+  @param {object} block - Theme block that renders this module
+  @param {string} [listing_type] - Optional override: blogs | e-books-playbooks | press-releases | podcasts | event-webinars
+{%- enddoc -%}
+
+{% render 'vectra-assets' %}
+{% liquid
+  assign img_mark = 'vectra-6fbd7c62e521082467b9d6192e09d91235f198a5.png' | asset_url
+  assign img_feature = 'vectra-add817f67c59297c528c5d57486a2794644fb47c.png' | asset_url
+  assign img_ebook_1 = 'vectra-ebook-1.png' | asset_url
+  assign img_ebook_2 = 'vectra-ebook-2.png' | asset_url
+  assign img_ebook_3 = 'vectra-ebook-3.png' | asset_url
+  assign resources_url = pages['resources'].url | default: '/pages/resources'
+%}
+{% assign contact_url = pages['contact-us'].url | default: '/pages/contact-us' %}
+{% capture contact_href %}{% render 'vectra-preview-href', url: contact_url, view: 'contact-us' %}{% endcapture %}
+{% assign contact_href = contact_href | strip %}
+{% capture resources_href %}{% render 'vectra-preview-href', url: resources_url, view: 'resources' %}{% endcapture %}
+{% assign resources_href = resources_href | strip %}
+
+{% liquid
+  assign blog_insights = blogs['insights']
+  if blog_insights == blank or blog_insights.articles_count == 0
+    assign blog_insights = blogs['news']
+  endif
+  assign blog_ebooks = blogs['ebooks']
+  if blog_ebooks == blank or blog_ebooks.articles_count == 0
+    assign blog_ebooks = blogs['playbooks']
+  endif
+  assign blog_events = blogs['events']
+  if blog_events == blank or blog_events.articles_count == 0
+    assign blog_events = blogs['webinars']
+  endif
+  assign blog_vcasts = blogs['vcasts']
+  if blog_vcasts == blank or blog_vcasts.articles_count == 0
+    assign blog_vcasts = blogs['podcasts']
+  endif
+  assign blog_press = blogs['press-releases']
+  if blog_press == blank or blog_press.articles_count == 0
+    assign blog_press = blogs['press']
+  endif
+
+  assign listing = listing_type | default: template.suffix | default: 'blogs'
+  unless listing == 'blogs' or listing == 'e-books-playbooks' or listing == 'press-releases' or listing == 'podcasts' or listing == 'event-webinars'
+    assign listing = 'blogs'
+  endunless
+
+  assign topic_names = 'Operational Resilience|Value Chain Resilience|ESG Compliance|Responsible Business|Governance & Regulatory|Capability Building' | split: '|'
+%}
+
+{% case module %}
+
+  {% comment %} ───────────────────────── HERO ───────────────────────── {% endcomment %}
+  {% when 'hero' %}
+{% render 'vectra-seo', page_key: listing %}
+{% liquid
+  case listing
+    when 'e-books-playbooks'
+      assign hero_label = 'Ebooks and Playbooks'
+      assign hero_kicker = 'EBOOKS &amp; PLAYBOOKS'
+      assign hero_h1 = 'VECTRA International Ebooks &amp; Playbooks | Practical Guides'
+      assign hero_display = 'Practical Guides for the Decisions Your Team Needs to Make.'
+      assign hero_lead = 'Trying to turn a complex issue into a workable plan? Start here. These ebooks and playbooks help you sort through the details, ask better questions, and work out the next steps with your team.'
+      assign hero_aeo = 'VECTRA International Ebooks &amp; Playbooks offer structured guides and practical frameworks on business resilience, supply chain risk, responsible business, and operational challenges. They help business, procurement, and operations teams understand a complex issue, organize the work involved, and plan practical next steps for their organization.'
+    when 'press-releases'
+      assign hero_label = 'Press Releases'
+      assign hero_kicker = 'PRESS RELEASES'
+      assign hero_h1 = 'VECTRA International Press Releases | News &amp; Announcements'
+      assign hero_display = 'What’s New at VECTRA, and Why It Matters.'
+      assign hero_lead = 'Seen an update about VECTRA and want the full details? Here you can find our official announcements about partnerships, company developments, and milestones, with the original release to read for yourself.'
+      assign hero_aeo = 'VECTRA International press releases are the official source for company news, announcements, partnerships, and key updates. This page brings the latest releases together in one place so clients, partners, media professionals, and other readers can see what VECTRA has announced and find the details in the original release.'
+    when 'podcasts'
+      assign hero_label = 'Podcast'
+      assign hero_kicker = ''
+      assign hero_h1 = 'VECTRA International Podcast | Expert Insights &amp; Discussions'
+      assign hero_display = 'What Does Responsible Business Look Like in Practice?'
+      assign hero_lead = 'VECTRA experts take time to discuss the questions behind responsible business and supply chain decisions. Hear how they weigh evidence, work through practical challenges, and connect industry developments to the work your team does every day.'
+      assign hero_aeo = 'VECTRA International podcast shares expert discussions on business resilience, supply chain risk, responsible business, and industry developments. VECTRA experts examine the questions behind day-to-day decisions, explain how they approach practical challenges, and offer perspectives that business leaders and supply chain teams can apply to their own work.'
+    when 'event-webinars'
+      assign hero_label = 'Events and Webinars'
+      assign hero_kicker = 'EVENTS &amp; WEBINARS'
+      assign hero_h1 = 'VECTRA International Events | Webinars &amp; Industry Events'
+      assign hero_display = 'Hear How Experts Approach the Questions Your Team Is Facing.'
+      assign hero_lead = 'Some questions make more sense when you hear people talk them through. Join VECTRA at an upcoming webinar or industry event, or watch an available replay when you have time. Find a conversation that speaks to what your team is working on.'
+      assign hero_aeo = 'VECTRA International events include webinars, industry events, and expert-led sessions on business resilience, supply chain risk, and responsible business. This page lists upcoming opportunities to hear from VECTRA experts and join relevant conversations. It also brings together available webinar replays so you can revisit a session or watch one you missed.'
+    else
+      assign hero_label = 'Insights'
+      assign hero_kicker = 'INSIGHTS'
+      assign hero_h1 = 'VECTRA International Blogs | Industry Insights &amp; Reports'
+      assign hero_display = 'Understand What’s Changing. Decide What Comes Next.'
+      assign hero_lead = 'Trying to make sense of a new rule or a supplier issue? Start here. VECTRA’s experts explain what matters in plain language and share practical ideas you can use in your next team discussion.'
+      assign hero_aeo = 'VECTRA International Insights brings together industry perspectives, expert analysis, research, and reports on business resilience, supply chain risk, responsible business, and operational performance. It helps business leaders, procurement, and supply chain teams make sense of changing requirements, examine practical challenges, and find ideas they can use to make better decisions.'
+  endcase
+%}
+{% unless block.settings.hide_section %}
+<section
+  class="vres-hero vres-listing-hero vres-listing-hero--{{ listing }}"
+  aria-label="{{ hero_label }}"
+  style="{% render 'vectra-block-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
+  {% render 'vectra-image', image: block.settings.watermark, fallback: img_mark, alt: '', class: 'vres-hero__mark', width: 901, height: 909, image_width: 900 %}
+  <div class="vres-hero__copy" data-vh-reveal="up">
+    {% if hero_kicker != blank %}
+      <p class="vres-hero__kicker">{{ hero_kicker }}</p>
+    {% endif %}
+    <h1 class="vres-hero__seo-title">{{ hero_h1 }}</h1>
+    <h2 class="vres-hero__display">{{ hero_display }}</h2>
+    <div class="vres-hero__lead">
+      <p>{{ hero_lead }}</p>
+    </div>
+    <p class="vres-hero__aeo">{{ hero_aeo }}</p>
+  </div>
+</section>
+{% endunless %}
+
+
+  {% comment %} ───────────────────────── FEATURED (blogs) ───────────────────────── {% endcomment %}
+  {% when 'featured' %}
+{% if listing == 'blogs' %}
+{% unless block.settings.hide_section %}
+{% liquid
+  assign featured = nil
+  if blog_insights != blank
+    for article in blog_insights.articles limit: 24
+      if featured == blank and article.tags contains 'featured'
+        assign featured = article
+      endif
+    endfor
+    if featured == blank
+      assign featured = blog_insights.articles.first
+    endif
+  endif
+
+  assign featured_tag = ''
+  assign featured_words = 0
+  if featured != blank
+    for tag in featured.tags
+      assign tag_slug = tag | handleize
+      if featured_tag == blank and tag_slug != 'featured'
+        assign featured_tag = tag
+      endif
+    endfor
+    assign featured_words = featured.content | strip_html | split: ' ' | size
+  endif
+  assign featured_minutes = featured_words | divided_by: 200 | plus: 1
+%}
+<section class="vres-featured" id="featured-insights" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-wrap">
+    <p class="vh-kicker">FEATURED INSIGHTS</p>
+    {% if featured != blank %}
+      <article class="vres-featured__card" data-vh-reveal>
+        <div class="vres-featured__media">
+          {% if featured.image %}
+            {{ featured.image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: featured.title }}
+          {% else %}
+            <img src="{{ img_feature }}" alt="" width="1200" height="675" loading="lazy">
+          {% endif %}
+        </div>
+        <div class="vres-featured__body">
+          {% if featured_tag != blank %}
+            <p class="vres-featured__tag">{{ featured_tag | escape }}</p>
+          {% endif %}
+          <h3 class="vres-featured__title">{{ featured.title | escape }}</h3>
+          <p class="vres-featured__excerpt">{{ featured.excerpt_or_content | strip_html | strip_newlines | truncate: 220 }}</p>
+          <p class="vres-featured__meta">
+            <time datetime="{{ featured.published_at | date: '%Y-%m-%d' }}">{{ featured.published_at | date: '%B %-d, %Y' }}</time>
+            <span aria-hidden="true">&middot;</span>
+            <span>{{ featured_minutes }} min read</span>
+          </p>
+          <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ featured.url }}">Read Insight</a>
+        </div>
+      </article>
+    {% else %}
+      <article class="vres-featured__card" data-vh-reveal>
+        <div class="vres-featured__media">
+          <img src="{{ img_feature }}" alt="" width="1200" height="675" loading="lazy">
+        </div>
+        <div class="vres-featured__body">
+          <p class="vres-featured__tag">Operational Resilience</p>
+          <h3 class="vres-featured__title">From insight to the decision that has to follow</h3>
+          <p class="vres-featured__excerpt">Make sense of changing requirements before they become a stalled action or an evidence gap.</p>
+          <p class="vres-featured__meta">
+            <time datetime="{{ 'now' | date: '%Y-%m-%d' }}">{{ 'now' | date: '%B %-d, %Y' }}</time>
+          </p>
+          <a class="vh-btn vh-btn--green vh-btn--rect" href="#insights-listing">Read Insight</a>
+        </div>
+      </article>
+    {% endif %}
+  </div>
+</section>
+{% endunless %}
+{% endif %}
+
+
+  {% comment %} ───────────────────────── ABOUT (press, podcasts) ───────────────────────── {% endcomment %}
+  {% when 'about' %}
+{% if listing == 'press-releases' or listing == 'podcasts' %}
+{% unless block.settings.hide_section %}
+<section class="vres-about vres-about--{{ listing }}" id="resource-about" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-wrap">
+    {% if listing == 'press-releases' %}
+      <div class="vres-about__copy" data-vh-reveal="up">
+        <p class="vh-kicker">THE DETAILS BEHIND THE NEWS</p>
+        <h2 class="vh-h2">VECTRA International Press Releases</h2>
+        <p class="vh-lead">Each release records what VECTRA announced and when. You can check the names, dates, and details directly, whether you are following our work or reporting on it.</p>
+      </div>
+    {% else %}
+      <div class="vres-about__copy" data-vh-reveal="up">
+        <p class="vh-kicker">THE CONVERSATION</p>
+        <h2 class="vh-h2">VECTRA International Podcast</h2>
+        <p class="vh-lead">A supplier issue may look different to someone in procurement, risk, or operations. VECTRA Podcasts give our experts room to explore those perspectives and explain how they shape a decision.</p>
+        <p class="vh-lead">The conversations cover the evidence teams need, the challenges they meet in practice, and the choices involved in building more responsible and resilient businesses.</p>
+        <div class="vres-platforms" data-vh-reveal="up">
+          <p class="vres-platforms__label">Listen or watch on</p>
+          <ul class="vres-platforms__list">
+            <li><a class="vres-platforms__link" href="https://open.spotify.com" target="_blank" rel="noopener">Spotify</a></li>
+            <li><a class="vres-platforms__link" href="https://podcasts.apple.com" target="_blank" rel="noopener">Apple Podcasts</a></li>
+            <li><a class="vres-platforms__link" href="https://youtube.com" target="_blank" rel="noopener">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endunless %}
+{% endif %}
+
+
+  {% comment %} ───────────────────────── LISTING ───────────────────────── {% endcomment %}
+  {% when 'listing' %}
+{% unless block.settings.hide_section %}
+
+{% if listing == 'blogs' or listing == 'e-books-playbooks' %}
+{% liquid
+  if listing == 'blogs'
+    assign source_blog = blog_insights
+    assign type_names = 'Insight|Report|Guides' | split: '|'
+    assign default_type = 'Insight'
+    assign list_id = 'insights-listing'
+    assign list_eyebrow = 'EXPLORE INSIGHTS'
+    assign list_heading = 'VECTRA International Insights'
+    assign cta_label = 'Read The Full blog'
+    assign ph_titles = 'From insight to the decision that has to follow|What changed after the finding|Separating signal from noise' | split: '|'
+    assign ph_topics = 'Operational Resilience|Value Chain Resilience|ESG Compliance' | split: '|'
+    assign ph_types = 'Insight|Report|Guides' | split: '|'
+    assign ph_excerpts = 'Make sense of changing requirements before they become a stalled action or an evidence gap.|See how teams turn supplier findings and operational gaps into a practical next step.|Work out what is relevant for your operations, and where your attention needs to go next.' | split: '|'
+  else
+    assign source_blog = blog_ebooks
+    assign type_names = 'Ebook|Playbook' | split: '|'
+    assign default_type = 'Ebook'
+    assign list_id = 'ebooks-listing'
+    assign list_eyebrow = 'EXPLORE E-BOOKS &amp; PLAYBOOKS'
+    assign list_heading = 'VECTRA International E-books &amp; Playbooks'
+    assign cta_label = 'Read'
+    assign ph_titles = 'Risk Management &amp; Supply Chain Due Diligence|A Guide to EU Corporate Sustainability Due Diligence|ESG Due Diligence Insights and Actionable Steps' | split: '|'
+    assign ph_topics = 'Value Chain Resilience|Governance & Regulatory|ESG Compliance' | split: '|'
+    assign ph_types = 'Ebook|Playbook|Ebook' | split: '|'
+    assign ph_excerpts = 'A structured guide to organizing due diligence work across complex supply chains.|Frameworks that help you plan the work required to address CSDDD requirements.|Practical steps for turning ESG requirements into clearer ownership and action.' | split: '|'
+  endif
+%}
+<section class="vres-library vres-listing vres-listing--{{ listing }}" id="{{ list_id }}" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-wrap">
+    <header class="vres-listing__head" data-vh-reveal="up">
+      <p class="vh-kicker">{{ list_eyebrow }}</p>
+      <h2 class="vh-h2">{{ list_heading }}</h2>
+    </header>
+
+    {% if listing == 'blogs' %}
+      <div class="vres-searchbar vres-listing__search" role="search" data-vh-reveal="up">
+        <label class="vres-searchbar__field">
+          <span class="visually-hidden">Search insights</span>
+          <input type="search" placeholder="Search by topic, regulation, risk, or keyword" autocomplete="off" data-vres-search>
+        </label>
+      </div>
+    {% endif %}
+
+    <div class="vres-filters" data-vh-reveal="up">
+      <div class="vres-filters__group" role="group" aria-label="Filter by topic">
+        <p class="vres-filters__label">Filter by topic</p>
+        <div class="vres-filters__list">
+          {% for name in topic_names %}
+            <button type="button" class="vres-filter" data-vres-topic="{{ name | handleize }}" aria-pressed="false">{{ name | escape }}</button>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="vres-filters__group" role="group" aria-label="Filter by type">
+        <p class="vres-filters__label">Filter by type</p>
+        <div class="vres-filters__list">
+          {% for name in type_names %}
+            <button type="button" class="vres-filter" data-vres-type="{{ name | handleize }}" aria-pressed="false">{{ name | escape }}</button>
+          {% endfor %}
+        </div>
+      </div>
+      <button type="button" class="vres-filters__clear" data-vres-clear hidden>Clear filters</button>
+    </div>
+
+    <div class="vres-library__grid vres-listing__grid">
+      {% if source_blog != blank and source_blog.articles_count > 0 %}
+        {% for article in source_blog.articles limit: 24 %}
+          {% liquid
+            assign card_topic = ''
+            assign card_topics = ''
+            assign card_type = default_type
+            assign card_tags = ''
+            assign card_download = false
+            for tag in article.tags
+              assign tag_slug = tag | handleize
+              assign card_tags = card_tags | append: tag_slug | append: ' '
+              if tag_slug == 'download'
+                assign card_download = true
+              endif
+              for name in topic_names
+                assign name_slug = name | handleize
+                if name_slug == tag_slug
+                  if card_topic == blank
+                    assign card_topic = name
+                  endif
+                  assign card_topics = card_topics | append: name_slug | append: ' '
+                endif
+              endfor
+              for name in type_names
+                assign name_slug = name | handleize
+                if name_slug == tag_slug
+                  assign card_type = name
+                endif
+              endfor
+            endfor
+            assign card_type_slug = card_type | handleize
+            if listing == 'e-books-playbooks' and card_download
+              assign card_cta = 'Download'
+            else
+              assign card_cta = cta_label
+            endif
+          %}
+          <article
+            class="vres-library__card vres-listing__card"
+            data-vres-item
+            data-vres-topics="{{ card_topics | strip }}"
+            data-vres-types="{{ card_type_slug }}"
+            data-vres-tags="{{ card_tags | strip }}"
+            data-vh-reveal
+          >
+            {% if article.image %}
+              {{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: article.title }}
+            {% endif %}
+            <p class="vres-listing__meta">
+              {% if card_topic != blank %}
+                <span class="vres-listing__tag">{{ card_topic | escape }}</span>
+              {% endif %}
+              <span class="vres-listing__type">{{ card_type | escape }}</span>
+            </p>
+            <h4>{{ article.title | escape }}</h4>
+            <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %-d, %Y' }}</time>
+            <p>{{ article.excerpt_or_content | strip_html | strip_newlines | truncate: 140 }}</p>
+            <a class="vres-library__cta" href="{{ article.url }}">{{ card_cta }}</a>
+          </article>
+        {% endfor %}
+      {% else %}
+        {% for ph_title in ph_titles %}
+          {% liquid
+            assign ph_i = forloop.index0
+            assign ph_topic = ph_topics[ph_i]
+            assign ph_type = ph_types[ph_i]
+            assign ph_img = ''
+            if listing == 'e-books-playbooks'
+              case forloop.index
+                when 1
+                  assign ph_img = img_ebook_1
+                when 2
+                  assign ph_img = img_ebook_2
+                else
+                  assign ph_img = img_ebook_3
+              endcase
+            endif
+          %}
+          <article
+            class="vres-library__card vres-listing__card"
+            data-vres-item
+            data-vres-topics="{{ ph_topic | handleize }}"
+            data-vres-types="{{ ph_type | handleize }}"
+            data-vres-tags="{{ ph_topic | handleize }} {{ ph_type | handleize }}"
+            data-vh-reveal
+          >
+            {% if ph_img != blank %}
+              <img src="{{ ph_img }}" alt="" width="480" height="472" loading="lazy">
+            {% endif %}
+            <p class="vres-listing__meta">
+              <span class="vres-listing__tag">{{ ph_topic | escape }}</span>
+              <span class="vres-listing__type">{{ ph_type }}</span>
+            </p>
+            <h4>{{ ph_title }}</h4>
+            <time datetime="{{ 'now' | date: '%Y-%m-%d' }}">{{ 'now' | date: '%B %-d, %Y' }}</time>
+            <p>{{ ph_excerpts[ph_i] }}</p>
+            <a class="vres-library__cta" href="#{{ list_id }}">{{ cta_label }}</a>
+          </article>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <p class="vres-listing__empty" data-vres-empty hidden>No results match your search or filters. Try a different topic or keyword.</p>
+  </div>
+</section>
+
+{% elsif listing == 'press-releases' %}
+{% liquid
+  assign years_csv = ''
+  if blog_press != blank and blog_press.articles_count > 0
+    for article in blog_press.articles limit: 50
+      assign article_year = article.published_at | date: '%Y'
+      unless years_csv contains article_year
+        assign years_csv = years_csv | append: article_year | append: ','
+      endunless
+    endfor
+  endif
+  if years_csv == blank
+    assign this_year = 'now' | date: '%Y' | plus: 0
+    assign last_year = this_year | minus: 1
+    assign years_csv = this_year | append: ',' | append: last_year | append: ','
+  endif
+  assign press_years = years_csv | split: ','
+%}
+<section class="vres-library vres-listing vres-listing--press-releases" id="press-listing" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-wrap">
+    <header class="vres-listing__head" data-vh-reveal="up">
+      <p class="vh-kicker">LATEST ANNOUNCEMENTS</p>
+      <h2 class="vh-h2">Latest VECTRA International News</h2>
+      <p class="vh-lead">Browse the announcements below and open any release to read it in full.</p>
+    </header>
+
+    <div class="vres-filters" data-vh-reveal="up">
+      <div class="vres-filters__group" role="group" aria-label="Filter by year">
+        <p class="vres-filters__label">Filter by year</p>
+        <div class="vres-filters__list">
+          {% for press_year in press_years %}
+            <button type="button" class="vres-filter" data-vres-year="{{ press_year }}" aria-pressed="false">{{ press_year }}</button>
+          {% endfor %}
+        </div>
+      </div>
+      <button type="button" class="vres-filters__clear" data-vres-clear hidden>Clear filters</button>
+    </div>
+
+    <div class="vres-library__grid vres-listing__grid">
+      {% if blog_press != blank and blog_press.articles_count > 0 %}
+        {% for article in blog_press.articles limit: 50 %}
+          <article class="vres-library__card vres-listing__card" data-vres-item data-vres-year="{{ article.published_at | date: '%Y' }}" data-vh-reveal>
+            <h4>{{ article.title | escape }}</h4>
+            <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %-d, %Y' }}</time>
+            <p>{{ article.excerpt_or_content | strip_html | strip_newlines | truncate: 160 }}</p>
+            <a class="vres-library__cta" href="{{ article.url }}">Read Press Release</a>
+          </article>
+        {% endfor %}
+      {% else %}
+        <article class="vres-library__card vres-listing__card" data-vres-item data-vres-year="{{ press_years.first }}" data-vh-reveal>
+          <h4>Official VECTRA announcements and company developments</h4>
+          <time datetime="{{ 'now' | date: '%Y-%m-%d' }}">{{ 'now' | date: '%B %-d, %Y' }}</time>
+          <p>Partnerships, milestones, and company news will be listed here as releases are published.</p>
+          <a class="vres-library__cta" href="#press-listing">Read Press Release</a>
+        </article>
+      {% endif %}
+    </div>
+    <p class="vres-listing__empty" data-vres-empty hidden>No press releases match this year. Try a different year.</p>
+  </div>
+</section>
+
+{% elsif listing == 'podcasts' %}
+<section class="vres-library vres-listing vres-listing--podcasts" id="podcast-listing" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-wrap">
+    <header class="vres-listing__head" data-vh-reveal="up">
+      <h2 class="vh-h2">Explore VECTRA Expert Podcasts</h2>
+      <p class="vh-lead">Choose a topic that matters to your work and hear the full conversation.</p>
+    </header>
+
+    <div class="vres-library__grid vres-listing__grid">
+      {% if blog_vcasts != blank and blog_vcasts.articles_count > 0 %}
+        {% for article in blog_vcasts.articles limit: 24 %}
+          {% liquid
+            assign ep_speakers = article.metafields.custom.speakers.value
+            assign ep_length = article.metafields.custom.episode_length.value
+            assign ep_cta = 'Listen to Episode'
+            assign ep_tags = ''
+            for tag in article.tags
+              assign tag_down = tag | downcase
+              assign tag_slug = tag | handleize
+              assign ep_tags = ep_tags | append: tag_slug | append: ' '
+              if tag_down contains 'speaker:'
+                assign ep_speakers = tag | remove: 'speaker:' | remove: 'Speaker:' | strip
+              elsif tag_down contains 'speakers:'
+                assign ep_speakers = tag | remove: 'speakers:' | remove: 'Speakers:' | strip
+              elsif tag_down contains 'length:'
+                assign ep_length = tag | remove: 'length:' | remove: 'Length:' | strip
+              elsif tag_slug == 'video' or tag_slug == 'watch'
+                assign ep_cta = 'Watch Episode'
+              endif
+            endfor
+          %}
+          <article class="vres-library__card vres-listing__card vres-episode-card" data-vres-item data-vres-tags="{{ ep_tags | strip }}" data-vh-reveal>
+            {% if article.image %}
+              {{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: article.title }}
+            {% endif %}
+            <h4>{{ article.title | escape }}</h4>
+            <p>{{ article.excerpt_or_content | strip_html | strip_newlines | truncate: 160 }}</p>
+            <dl class="vres-episode-card__meta">
+              {% if ep_speakers != blank %}
+                <div><dt>Speakers</dt><dd>{{ ep_speakers | escape }}</dd></div>
+              {% endif %}
+              <div><dt>Published</dt><dd><time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %-d, %Y' }}</time></dd></div>
+              {% if ep_length != blank %}
+                <div><dt>Length</dt><dd>{{ ep_length | escape }}</dd></div>
+              {% endif %}
+            </dl>
+            <a class="vres-library__cta" href="{{ article.url }}">{{ ep_cta }}</a>
+          </article>
+        {% endfor %}
+      {% else %}
+        <article class="vres-library__card vres-listing__card vres-episode-card" data-vres-item data-vh-reveal>
+          <h4>Hear the thinking behind the issues practitioners work on every day</h4>
+          <p>Perspectives from VECTRA experts on responsible business, supply chain risk, and the decisions behind them.</p>
+          <dl class="vres-episode-card__meta">
+            <div><dt>Speakers</dt><dd>VECTRA experts</dd></div>
+            <div><dt>Published</dt><dd><time datetime="{{ 'now' | date: '%Y-%m-%d' }}">{{ 'now' | date: '%B %-d, %Y' }}</time></dd></div>
+          </dl>
+          <a class="vres-library__cta" href="#podcast-listing">Listen to Episode</a>
+        </article>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% endunless %}
+
+
+  {% comment %} ───────────────────────── FAQ (blogs) ───────────────────────── {% endcomment %}
+  {% when 'faq' %}
+{% if listing == 'blogs' %}
+{% unless block.settings.hide_section %}
+<section class="vh-faq vres-listing-faq" id="insights-faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-wrap vh-faq__grid">
+    <div class="vh-faq__right">
+      <div class="vh-faq__glow" aria-hidden="true"></div>
+      <div class="vh-accordion" data-vh-faq-accordion>
+        <p class="vh-kicker">FREQUENTLY ASKED QUESTIONS</p>
+        <h2 class="vh-h2">Questions About VECTRA Insights</h2>
+        <div class="vh-acc is-open" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn aria-expanded="true">What kind of content is published here?</button>
+          <div class="vh-acc__body">Industry insights, expert perspectives, and reports on business resilience, supply chain risk, responsible business, ESG compliance, and operational performance, written by VECTRA’s leaders, experts, and specialists.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn aria-expanded="false">How often is new content published?</button>
+          <div class="vh-acc__body" hidden>Every week two blogs are posted on relevant industry updates.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn aria-expanded="false">Can I get new Insights by email?</button>
+          <div class="vh-acc__body" hidden>Subscribe to our monthly newsletter to get our latest industry insights, expert perspectives, and reports delivered directly to your inbox.</div>
+        </div>
+        <div class="vh-acc" data-vh-faq-item>
+          <button type="button" data-vh-faq-btn aria-expanded="false">Can I suggest a topic for VECTRA to cover?</button>
+          <div class="vh-acc__body" hidden>Yes. Email us at <a href="mailto:info@vectra-intl.com">info@vectra-intl.com</a> with the topic title, a brief summary of why it’s relevant to your business or industry, and any specific questions you would like our experts to address.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endunless %}
+{% endif %}
+
+
+  {% comment %} ───────────────────────── CLOSING (blogs, ebooks, podcasts) ───────────────────────── {% endcomment %}
+  {% when 'closing' %}
+{% if listing == 'blogs' or listing == 'e-books-playbooks' or listing == 'podcasts' %}
+{% unless block.settings.hide_section %}
+{% liquid
+  case listing
+    when 'e-books-playbooks'
+      assign closing_heading = 'Working Through One of These Right Now?'
+      assign closing_text = 'A guide can get you most of the way. If the issue also needs specialist support, evidence review, or implementation help, tell us what’s happening and we’ll help you find the right next step.'
+    when 'podcasts'
+      assign closing_heading = 'Have a Challenge These Conversations Touched On?'
+      assign closing_text = 'Listening is a good start. If the issue also needs specialist support, an assessment, or implementation help, tell us what’s happening and we’ll help you find the right next step.'
+    else
+      assign closing_heading = 'Have a Challenge These Insights Touched On?'
+      assign closing_text = 'Reading about it is one thing. Working through it is another. Tell us what’s happening, and we’ll help you find the right next step.'
+  endcase
+
+  assign closing_heading = block.settings.heading | default: closing_heading
+  if block.settings.text != blank
+    assign closing_text = block.settings.text | escape
+  endif
+  assign closing_button_label = block.settings.button_label | default: 'Talk to an Expert'
+  assign closing_button_href = block.settings.button_link | default: contact_href
+%}
+<section class="vres-closing vh-portal vres-closing--copy-only vres-listing-closing" id="resource-closing" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-wrap vres-closing__inner">
+    {% if block.settings.kicker != blank %}
+      <p class="vh-kicker">{{ block.settings.kicker | escape }}</p>
+    {% endif %}
+    <h2 data-vh-reveal="up">{{ closing_heading }}</h2>
+    <p data-vh-reveal="up">{{ closing_text }}</p>
+    <div class="vres-closing__actions" data-vh-reveal="up">
+      <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ closing_button_href }}">{{ closing_button_label | escape }}</a>
+    </div>
+  </div>
+</section>
+{% endunless %}
+{% endif %}
+
+
+  {% comment %} ───────────────────────── EVENTS (event-webinars) ───────────────────────── {% endcomment %}
+  {% when 'events' %}
+{% if listing == 'event-webinars' %}
+{% unless block.settings.hide_section %}
+{% render 'vectra-resource-events', block: block, blog_events: blog_events %}
+
+{% endunless %}
+{% endif %}
+
+{% endcase %}

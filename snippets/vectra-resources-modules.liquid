@@ -22,6 +22,16 @@
 %}
 {% capture faq_href %}{% render 'vectra-preview-href', url: faq_base, view: 'faq' %}{% endcapture %}
 {% assign faq_href = faq_href | strip %}
+{% capture blogs_href %}{% render 'vectra-preview-href', url: '/pages/blogs', view: 'blogs' %}{% endcapture %}
+{% assign blogs_href = blogs_href | strip %}
+{% capture ebooks_page_href %}{% render 'vectra-preview-href', url: '/pages/e-books-playbooks', view: 'e-books-playbooks' %}{% endcapture %}
+{% assign ebooks_page_href = ebooks_page_href | strip %}
+{% capture events_page_href %}{% render 'vectra-preview-href', url: '/pages/event-webinars', view: 'event-webinars' %}{% endcapture %}
+{% assign events_page_href = events_page_href | strip %}
+{% capture podcasts_href %}{% render 'vectra-preview-href', url: '/pages/podcasts', view: 'podcasts' %}{% endcapture %}
+{% assign podcasts_href = podcasts_href | strip %}
+{% capture press_href %}{% render 'vectra-preview-href', url: '/pages/press-releases', view: 'press-releases' %}{% endcapture %}
+{% assign press_href = press_href | strip %}
 
 {% liquid
   assign blog_insights = blogs['insights']
@@ -86,22 +96,22 @@
       <article class="vres-explore__card" data-vh-reveal>
         <h3>Insights</h3>
         <p>Expert analysis that helps you make sense of changing regulations, supply chain risk, business resilience, and operational resilience issues as they develop.</p>
-        <a class="vh-btn vh-btn--green vh-btn--rect" href="#insights">Explore Insights</a>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ blogs_href }}">Explore Insights</a>
       </article>
       <article class="vres-explore__card" data-vh-reveal>
         <h3>Ebooks &amp; Playbooks</h3>
         <p>Structured guides and frameworks that help you organize a complex issue and plan the work required to address it.</p>
-        <a class="vh-btn vh-btn--green vh-btn--rect" href="#ebooks">Browse Ebooks &amp; Playbooks</a>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ ebooks_page_href }}">Browse Ebooks &amp; Playbooks</a>
       </article>
       <article class="vres-explore__card" data-vh-reveal>
         <h3>Events &amp; Webinars</h3>
         <p>Live and on-demand conversations with experts working through the issues shaping responsible business, supply chain resilience, risk management, and operational performance.</p>
-        <a class="vh-btn vh-btn--green vh-btn--rect" href="#events">Explore Events &amp; Webinars</a>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ events_page_href }}">Explore Events &amp; Webinars</a>
       </article>
       <article class="vres-explore__card" data-vh-reveal>
         <h3>VCASTs</h3>
         <p>Hear the experience, thinking, and perspective behind the issues VECTRA experts, partners, and practitioners work on every day.</p>
-        <a class="vh-btn vh-btn--green vh-btn--rect" href="#vcasts">Listen to VCASTs</a>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ podcasts_href }}">Listen to VCASTs</a>
       </article>
       <article class="vres-explore__card" data-vh-reveal>
         <h3>Case Studies</h3>
@@ -111,7 +121,7 @@
       <article class="vres-explore__card" data-vh-reveal>
         <h3>Press Releases</h3>
         <p>Official VECTRA announcements, partnerships, leadership news, and company developments.</p>
-        <a class="vh-btn vh-btn--green vh-btn--rect" href="#press">View Press Releases</a>
+        <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ press_href }}">View Press Releases</a>
       </article>
     </div>
   </div>
@@ -123,10 +133,8 @@
 {% liquid
   if block.settings.view_all_link != blank
     assign view_all_href = block.settings.view_all_link
-  elsif blog_insights != blank
-    assign view_all_href = blog_insights.url
   else
-    assign view_all_href = resources_url
+    assign view_all_href = blogs_href
   endif
 %}
 <section class="vres-library" id="insights" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
@@ -192,10 +200,8 @@
 {% liquid
   if block.settings.button_link != blank
     assign ebooks_href = block.settings.button_link
-  elsif blog_ebooks != blank
-    assign ebooks_href = blog_ebooks.url
   else
-    assign ebooks_href = '#ebooks'
+    assign ebooks_href = ebooks_page_href
   endif
 %}
 <section class="vres-library vres-library--ebooks" id="ebooks" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
@@ -291,7 +297,7 @@
       {% endif %}
     </div>
     <div class="vres-library__more">
-      <a class="vh-btn vh-btn--green vh-btn--rect" href="{% if blog_events != blank %}{{ blog_events.url }}{% else %}#events{% endif %}">Explore All Events &amp; Webinars</a>
+      <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ events_page_href }}">Explore All Events &amp; Webinars</a>
     </div>
   </div>
 </section>
@@ -322,7 +328,7 @@
       {% endif %}
     </div>
     <div class="vres-library__more">
-      <a class="vh-btn vh-btn--green vh-btn--rect" href="{% if blog_vcasts != blank %}{{ blog_vcasts.url }}{% else %}#vcasts{% endif %}">Explore All VCASTs</a>
+      <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ podcasts_href }}">Explore All VCASTs</a>
     </div>
   </div>
 </section>
@@ -386,7 +392,7 @@
       {% endif %}
     </div>
     <div class="vres-library__more">
-      <a class="vh-btn vh-btn--green vh-btn--rect" href="{% if blog_press != blank %}{{ blog_press.url }}{% else %}#press{% endif %}">View All Press Releases</a>
+      <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ press_href }}">View All Press Releases</a>
     </div>
   </div>
 </section>

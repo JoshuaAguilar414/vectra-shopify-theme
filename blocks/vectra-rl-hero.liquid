@@ -1,0 +1,18 @@
+{% render 'vectra-resource-listing-modules', module: 'hero', block: block %}
+
+{% schema %}
+{
+  "name": "VECTRA: RL hero",
+  "tag": null,
+  "settings": [
+    { "type": "checkbox", "id": "hide_section", "label": "Hide this section", "default": false },
+    { "type": "image_picker", "id": "watermark", "label": "Watermark" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding-block-start", "label": "Top", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-block-end", "label": "Bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-inline-start", "label": "Left", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-inline-end", "label": "Right", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "VECTRA: RL hero" }]
+}
+{% endschema %}

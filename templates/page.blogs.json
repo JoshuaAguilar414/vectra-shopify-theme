@@ -1,0 +1,52 @@
+{
+  "sections": {
+    "vectra_listing": {
+      "type": "vectra-resource-listing-page",
+      "blocks": {
+        "header": {
+          "type": "vectra-header",
+          "settings": {
+            "menu": "vectra-website-mega-menu"
+          }
+        },
+        "hero": {
+          "type": "vectra-rl-hero",
+          "settings": {}
+        },
+        "featured": {
+          "type": "vectra-rl-featured",
+          "settings": {}
+        },
+        "listing": {
+          "type": "vectra-rl-listing",
+          "settings": {}
+        },
+        "faq": {
+          "type": "vectra-rl-faq",
+          "settings": {}
+        },
+        "closing": {
+          "type": "vectra-rl-closing",
+          "settings": {}
+        },
+        "footer": {
+          "type": "vectra-footer",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "header",
+        "hero",
+        "featured",
+        "listing",
+        "faq",
+        "closing",
+        "footer"
+      ],
+      "settings": {
+        "menu": "vectra-website-mega-menu"
+      }
+    }
+  },
+  "order": ["vectra_listing"]
+}

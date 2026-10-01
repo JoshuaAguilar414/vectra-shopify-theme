@@ -1,0 +1,21 @@
+{% render 'vectra-resource-listing-modules', module: 'closing', block: block %}
+
+{% schema %}
+{
+  "name": "VECTRA: RL closing",
+  "tag": null,
+  "settings": [
+    { "type": "checkbox", "id": "hide_section", "label": "Hide this section", "default": false },
+    { "type": "header", "content": "Optional overrides" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "info": "Leave blank to hide." },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "info": "Leave blank to use the default copy for this page." },
+    { "type": "textarea", "id": "text", "label": "Text", "info": "Leave blank to use the default copy for this page." },
+    { "type": "text", "id": "button_label", "label": "Button label", "info": "Defaults to Talk to an Expert." },
+    { "type": "url", "id": "button_link", "label": "Button link", "info": "Defaults to the Contact Us page." },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding-block-start", "label": "Top", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-block-end", "label": "Bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "VECTRA: RL closing" }]
+}
+{% endschema %}

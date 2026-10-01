@@ -1,0 +1,42 @@
+{% capture children %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-page-shell', children: children, include_resources: true, include_solutions: true, skip_footer: true %}
+
+{% schema %}
+{
+  "name": "VECTRA Resource Listing",
+  "class": "vectra-res-section",
+  "enabled_on": {
+    "templates": ["page"]
+  },
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "MEGA Navigation",
+      "info": "Uses VECTRA Website Mega Menu (handle: vectra-website-mega-menu). Nested items render as header dropdowns."
+    }
+  ],
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA Resource Listing",
+      "blocks": [
+        { "type": "vectra-header" },
+        { "type": "vectra-rl-hero" },
+        { "type": "vectra-rl-featured" },
+        { "type": "vectra-rl-about" },
+        { "type": "vectra-rl-listing" },
+        { "type": "vectra-rl-events" },
+        { "type": "vectra-rl-faq" },
+        { "type": "vectra-rl-closing" },
+        { "type": "vectra-footer" }
+      ]
+    }
+  ]
+}
+{% endschema %}
