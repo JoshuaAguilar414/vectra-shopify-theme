@@ -4,7 +4,7 @@
   even when the Shopify admin still has the page on Default.
 
   @param {string} url - Original href
-  @param {string} [view] - Template suffix: our-story, solutions, resources, contact-us, experts, associates, interns, careers, faq
+  @param {string} [view] - Template suffix: our-story, solutions, resources, contact-us, experts, leadership, associates, interns, careers, faq
   @param {string} [title] - Link label; used to infer view when the nav item points at Home
 {%- enddoc -%}
 {%- liquid
@@ -23,6 +23,8 @@
       assign view_name = 'contact-us'
     elsif title_key == 'our experts' or title_key == 'experts'
       assign view_name = 'experts'
+    elsif title_key == 'our leadership' or title_key == 'leadership' or title_key == 'leadership team' or title_key == 'our leadership team'
+      assign view_name = 'leadership'
     elsif title_key == 'associates' or title_key == 'our associates'
       assign view_name = 'associates'
     elsif title_key == 'our interns' or title_key == 'interns' or title_key == 'internships'
@@ -55,6 +57,8 @@
     assign href = pages['contact-us'].url | default: pages['contact'].url | default: '/pages/contact-us'
   elsif view_name == 'experts'
     assign href = pages['experts'].url | default: '/pages/experts'
+  elsif view_name == 'leadership'
+    assign href = pages['our-leadership-team'].url | default: pages['leadership'].url | default: '/pages/our-leadership-team'
   elsif view_name == 'associates'
     assign href = pages['associates'].url | default: '/pages/associates'
   elsif view_name == 'interns'

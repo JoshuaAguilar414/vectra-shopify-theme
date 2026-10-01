@@ -1326,13 +1326,19 @@
   background-color: var(--vh-bg) !important;
 }
 
-/* Join card sits in the FAQ left column on About Us */
+/* About Us FAQ matches homepage FAQ layout */
+.vectra-story .vh-faq--story {
+  background:
+    radial-gradient(ellipse 55% 70% at 78% 42%, rgba(214, 255, 173, 0.45) 0%, transparent 68%),
+    linear-gradient(180deg, #ffffff 0%, #f8fcf4 52%, #ffffff 100%);
+}
+
 .vectra-story .vh-faq--story .vh-faq__grid,
 .vectra-story #about-faq .vh-faq__grid {
   display: grid;
-  grid-template-columns: minmax(340px, 0.92fr) minmax(0, 1.08fr);
-  gap: clamp(28px, 3.5vw, 56px);
-  align-items: stretch;
+  grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
+  gap: clamp(32px, 4vw, 64px);
+  align-items: start;
 }
 
 /* Standalone full-width join is replaced by the FAQ left card */
@@ -1341,142 +1347,68 @@
   display: none !important;
 }
 
-.vectra-story .vs-join-card {
+.vectra-story #about-faq.vh-faq {
   position: relative;
-  overflow: hidden;
-  width: 100%;
-  max-width: none;
-  min-width: 0;
-  height: auto;
-  min-height: 100%;
-  box-sizing: border-box;
-  border-radius: 28px;
-  color: #ffffff !important;
+  z-index: 4;
+  margin-top: 8px;
+  border-radius: 32px 32px 0 0;
+  overflow: visible;
+  isolation: isolate;
+}
+
+.vectra-story #about-faq .vh-faq__grid {
+  overflow: visible;
+  position: relative;
+  z-index: 2;
+}
+
+.vectra-story #about-faq .vh-faq__right,
+.vectra-story #about-faq .vh-accordion,
+.vectra-story #about-faq .vh-acc,
+.vectra-story #about-faq [data-vh-faq-btn] {
+  position: relative;
+  z-index: 3;
+  pointer-events: auto !important;
+}
+
+.vectra-story #about-faq .vh-faq__glow {
+  pointer-events: none !important;
+  z-index: 0;
+}
+
+.vectra-story #about-faq .vh-contact-card {
+  position: relative;
+  top: auto;
+  z-index: 2;
   opacity: 1;
   transform: none;
-  background:
-    radial-gradient(ellipse 80% 70% at 100% 50%, rgba(84, 189, 1, 0.32) 0%, transparent 58%),
-    radial-gradient(ellipse 45% 55% at 0% 100%, rgba(84, 189, 1, 0.12) 0%, transparent 50%),
-    linear-gradient(135deg, #071a31 0%, #092543 48%, #0a2d4d 100%);
-  background-color: #092543;
-  box-shadow: 0 22px 52px rgba(9, 37, 67, 0.22);
 }
 
-.vectra-story .vs-join-card__grid {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.55;
+.vectra-story #about-faq .vh-contact-card__title {
+  font-size: 20px;
+  letter-spacing: -0.03em;
 }
 
-.vectra-story .vs-join-card__inner {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 0;
-  height: 100%;
-  padding: clamp(36px, 3.5vw, 48px) clamp(28px, 3vw, 40px);
-  box-sizing: border-box;
+.vectra-story #about-faq .vh-btn--white {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 }
 
-.vectra-story .vs-join-card__kicker {
-  margin: 0 0 14px;
-  color: #54bd01 !important;
-  font-family: 'Poppins', sans-serif;
-  font-size: 12px !important;
-  font-weight: 700;
-  letter-spacing: 0.12em !important;
-  line-height: 1.3 !important;
-  text-transform: uppercase;
-}
-
-.vectra-story .vs-join-card__heading,
-.vectra-story .vs-join-card h2.vs-join-card__heading {
-  margin: 0 0 18px;
-  color: #ffffff !important;
-  font-family: 'Poppins', sans-serif;
-  font-size: clamp(26px, 2.6vw, 36px) !important;
-  font-weight: 800 !important;
-  letter-spacing: -0.03em !important;
-  line-height: 1.15 !important;
-  text-transform: none !important;
-}
-
-.vectra-story .vs-join-card__body {
-  flex: 1 1 auto;
-}
-
-.vectra-story .vs-join-card__body p {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.92) !important;
-  font-family: 'Poppins', sans-serif;
-  font-size: 15px !important;
-  font-weight: 400 !important;
-  letter-spacing: -0.01em !important;
-  line-height: 1.55 !important;
-}
-
-.vectra-story .vs-join-card__body p + p {
-  margin-top: 12px;
-}
-
-.vectra-story .vs-join-card .vs-cta-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 28px;
-  width: auto;
-  max-width: 100%;
-  min-width: 0;
-  height: 52px;
-  padding: 0 28px;
-  background: #54bd01 !important;
-  color: #ffffff !important;
-  border-radius: 999px;
-  font-size: 15px !important;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  text-decoration: none;
-  white-space: nowrap;
-  box-shadow: 0 12px 32px rgba(84, 189, 1, 0.45);
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
-}
-
-.vectra-story .vs-join-card .vs-cta-btn img {
-  width: 16px;
-  height: 10px;
-  filter: brightness(0) invert(1);
-}
-
-.vectra-story .vs-join-card .vs-cta-btn:hover,
-.vectra-story .vs-join-card .vs-cta-btn:focus-visible {
-  transform: translateY(-4px);
-  background: #54bd01 !important;
-  color: #ffffff !important;
-  box-shadow: 0 16px 36px rgba(84, 189, 1, 0.55);
+.vectra-story #about-faq .vh-btn--white:hover,
+.vectra-story #about-faq .vh-btn--white:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
 }
 
 @media (max-width: 989px) {
-  .vectra-story .vs-join-card__inner {
-    padding: 32px 24px 28px;
-  }
-
-  .vectra-story .vs-join-card .vs-cta-btn {
-    width: 100%;
-    min-width: 0;
-  }
-
   .vectra-story .vh-faq--story .vh-faq__grid,
   .vectra-story #about-faq .vh-faq__grid {
     grid-template-columns: 1fr;
+  }
+
+  .vectra-story #about-faq .vh-contact-card {
+    position: relative;
+    top: auto;
   }
 }
 
@@ -1585,66 +1517,6 @@
 .vs-join .vs-cta-btn:hover img,
 .vs-join .vs-cta-btn:focus-visible img {
   filter: brightness(0) invert(1);
-}
-
-.vectra-story #about-faq.vh-faq {
-  position: relative;
-  z-index: 4;
-  margin-top: 8px;
-  border-radius: 32px 32px 0 0;
-  overflow: visible;
-  isolation: isolate;
-}
-
-.vectra-story #about-faq .vh-faq__grid {
-  overflow: visible;
-  position: relative;
-  z-index: 2;
-}
-
-.vectra-story #about-faq .vh-faq__right,
-.vectra-story #about-faq .vh-accordion,
-.vectra-story #about-faq .vh-acc,
-.vectra-story #about-faq [data-vh-faq-btn] {
-  position: relative;
-  z-index: 3;
-  pointer-events: auto !important;
-}
-
-.vectra-story #about-faq .vh-faq__glow {
-  pointer-events: none !important;
-  z-index: 0;
-}
-
-.vectra-story #about-faq .vh-contact-card,
-.vectra-story #about-faq .vs-join-card {
-  position: relative;
-  top: auto;
-  z-index: 2;
-}
-
-.vectra-story #about-faq .vh-contact-card__title {
-  font-size: 22px;
-  letter-spacing: -0.025em;
-}
-
-.vectra-story #about-faq .vh-btn--white {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
-}
-
-.vectra-story #about-faq .vh-btn--white:hover,
-.vectra-story #about-faq .vh-btn--white:focus-visible {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
-}
-
-@media (max-width: 989px) {
-  .vectra-story #about-faq .vh-contact-card,
-  .vectra-story #about-faq .vs-join-card {
-    position: relative;
-    top: auto;
-  }
 }
 
 @media (max-width: 989px) {
@@ -2041,10 +1913,17 @@
 
 .vectra-home .vh-people-page {
   padding: 48px 0 88px;
+  text-align: center;
 }
 
-.vectra-home .vh-people-page > .vh-wrap {
+.vectra-home .vh-people-page > .vh-wrap,
+.vectra-home .vh-people-page .vp-hero,
+.vectra-home .vh-people-page .vp-intro,
+.vectra-home .vh-people-page .vp-cta,
+.vectra-home .vh-people-page .vp-group {
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .vectra-home .vh-people-page .vh-lead {
@@ -2057,9 +1936,6 @@
 .vectra-home .vh-people-page .vp-intro,
 .vectra-home .vh-people-page .vp-cta {
   max-width: 920px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
 }
 
 .vectra-home .vh-people-page .vp-hero {
@@ -2074,6 +1950,7 @@
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.4;
+  text-align: center;
 }
 
 .vectra-home .vh-people-page .vp-display {
@@ -2084,6 +1961,7 @@
   font-weight: 800;
   letter-spacing: -0.035em;
   line-height: 1.12;
+  text-align: center;
 }
 
 .vectra-home .vh-people-page .vp-hero__body,
@@ -2093,6 +1971,7 @@
   color: rgba(9, 37, 67, 0.78);
   font-size: clamp(15px, 1.25vw, 17px);
   line-height: 1.65;
+  text-align: center;
 }
 
 .vectra-home .vh-people-page .vp-hero__body p,
@@ -2109,11 +1988,12 @@
   max-width: 820px;
   margin: 0 auto;
   padding: 20px 22px;
-  text-align: left;
+  text-align: center;
   color: #092543;
   background: rgba(84, 189, 1, 0.08);
-  border-left: 3px solid #54bd01;
-  border-radius: 0 14px 14px 0;
+  border: 0;
+  border-top: 3px solid #54bd01;
+  border-radius: 0 0 14px 14px;
   font-size: 15px;
   font-weight: 500;
   line-height: 1.6;
@@ -2132,12 +2012,12 @@
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.15;
+  text-align: center;
 }
 
 .vectra-home .vh-people-page .vp-group {
   max-width: 1600px;
   margin: 28px auto 12px;
-  text-align: center;
 }
 
 .vectra-home .vh-people-page .vp-group h3 {
@@ -2147,6 +2027,31 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.vectra-home .vh-people-page .vs-experts__grid,
+.vectra-home .vh-people-page .vs-expert,
+.vectra-home .vh-people-page .vs-expert h3,
+.vectra-home .vh-people-page .vs-expert p,
+.vectra-home .vh-people-page .vs-expert__role,
+.vectra-home .vh-people-page .vs-expert__name {
+  text-align: center;
+}
+
+.vectra-home .vh-people-page .vs-experts__grid {
+  justify-content: center;
+  justify-items: center;
+}
+
+.vectra-home .vh-people-page#leadership .vs-experts__grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 280px));
+  max-width: 1480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vectra-home .vh-people-page .vh-kicker {
+  text-align: center;
 }
 
 .vectra-home .vh-people-page .vs-expert__role,
@@ -2175,12 +2080,14 @@
   color: rgba(9, 37, 67, 0.78);
   font-size: 16px;
   line-height: 1.6;
+  text-align: center;
 }
 
 .vectra-home .vh-people-page .vp-cta__aside {
   margin: 18px 0 0;
   color: rgba(9, 37, 67, 0.7);
   font-size: 14px;
+  text-align: center;
 }
 
 .vectra-home .vh-people-page .vp-cta__aside a,
@@ -2196,6 +2103,7 @@
   margin: 0 auto;
   padding: 0;
   border: 0;
+  text-align: center;
 }
 
 .vectra-home .vh-people-page .vp-quote p {
@@ -2212,6 +2120,20 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
+}
+
+.vectra-home .vh-people-page .vs-experts__more {
+  justify-content: center;
+}
+
+.vectra-story .vs-expert__role {
+  margin: 0 0 8px;
+  color: #54bd01;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  text-align: center;
 }
 
 .vectra-home .vh-page-copy .vh-lead {

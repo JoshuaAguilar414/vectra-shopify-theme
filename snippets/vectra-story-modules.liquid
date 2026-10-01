@@ -58,10 +58,12 @@
   assign solutions_page = pages['solutions'].url | default: '/pages/solutions'
 %}
 {% capture faq_href %}{% render 'vectra-preview-href', url: faq_url, view: 'faq' %}{% endcapture %}
+{% capture leadership_href %}{% render 'vectra-preview-href', url: leadership_url, view: 'leadership' %}{% endcapture %}
 {% capture experts_href %}{% render 'vectra-preview-href', url: experts_url, view: 'experts' %}{% endcapture %}
 {% capture associates_href %}{% render 'vectra-preview-href', url: associates_url, view: 'associates' %}{% endcapture %}
 {% capture interns_href %}{% render 'vectra-preview-href', url: interns_url, view: 'interns' %}{% endcapture %}
 {% assign faq_href = faq_href | strip %}
+{% assign leadership_href = leadership_href | strip %}
 {% assign experts_href = experts_href | strip %}
 {% assign associates_href = associates_href | strip %}
 {% assign interns_href = interns_href | strip %}
@@ -285,10 +287,10 @@
     </section>
     </div>
 
-    <section class="vs-leaders" id="leadership" data-vs-reveal-group>
-      <p class="vs-leaders__kicker">{{ block.settings.leaders_kicker | default: 'OUR LEADERSHIP' }}</p>
+    <section class="vs-experts vs-experts--teaser" id="leadership">
+      <p class="vs-experts__kicker">{{ block.settings.leaders_kicker | default: 'OUR LEADERSHIP' }}</p>
       <h2>{{ block.settings.leaders_heading | default: 'Meet the People Who Guide VECTRA' }}</h2>
-      <div class="vs-leaders__intro">
+      <div class="vs-experts__intro">
         {% if block.settings.leaders_text != blank %}
           {% assign lead_paras = block.settings.leaders_text | newline_to_br | split: '<br />' %}
           {% for para in lead_paras %}
@@ -303,97 +305,47 @@
           <p>Across responsible business, operations, supply chains, sales, marketing, and applied AI, they bring the experience needed to keep VECTRA moving forward while staying true to the values we started with.</p>
         {% endif %}
       </div>
-      <div class="vs-leaders__viewport">
-        <div class="vs-leaders__track" data-vs-leaders-track>
-          {% assign nested_leaders = nested_leaders | strip %}
-          {% if nested_leaders != blank %}
-            {{ nested_leaders }}
-          {% else %}
-          <article class="vs-leader" data-vs-leader data-vh-reveal="right">
-            <div class="vs-leader__frame">
-              <div class="vs-leader__media">
-                <img src="{{ img_lead_1 }}" alt="Patrick Neyts">
-                <div class="vs-leader__shade"></div>
-              </div>
-              <div class="vs-leader__id">
-                <h3>Patrick Neyts</h3>
-                <p class="vs-leader__role vs-leader__role--lg">CEO</p>
-                <p class="vs-leader__bio">With over 30 years of experience in ESG programs, Corporate Codes, and Responsible Business practices across 11 industry sectors and 40 countries.</p>
-              </div>
-            </div>
-          </article>
-          <article class="vs-leader" data-vs-leader data-vh-reveal="right">
-            <div class="vs-leader__frame">
-              <div class="vs-leader__media">
-                <img src="{{ img_lead_2 }}" alt="Shelly Sanders">
-                <div class="vs-leader__shade"></div>
-              </div>
-              <div class="vs-leader__id">
-                <h3>Shelly Sanders</h3>
-                <p class="vs-leader__role">SVP, Global Sales, Marketing &amp; Communications</p>
-                <p class="vs-leader__bio">With over 30 years of leadership experience in consultative and solution-based sales &amp; operations. She has worked across healthcare, finance, and IT, driving global growth, strategic partnerships, and ESG-aligned outcome.</p>
-              </div>
-            </div>
-          </article>
-          <article class="vs-leader" data-vs-leader data-vh-reveal="right">
-            <div class="vs-leader__frame">
-              <div class="vs-leader__media">
-                <img src="{{ img_lead_3 }}" alt="Lorenz Berzau">
-                <div class="vs-leader__shade"></div>
-              </div>
-              <div class="vs-leader__id">
-                <h3>Lorenz Berzau</h3>
-                <p class="vs-leader__role">VP Operations</p>
-                <p class="vs-leader__bio">With a focus on sustainability strategy, human rights, and social compliance, backed by 20 years of consultancy experience and a background in law.</p>
-              </div>
-            </div>
-          </article>
-          <article class="vs-leader" data-vs-leader data-vh-reveal="right">
-            <div class="vs-leader__frame">
-              <div class="vs-leader__media">
-                <img src="{{ img_lead_4 }}" alt="Alana van Wouw">
-                <div class="vs-leader__shade"></div>
-              </div>
-              <div class="vs-leader__id">
-                <h3>Alana van Wouw</h3>
-                <p class="vs-leader__role">AI Architect</p>
-                <p class="vs-leader__bio">With over 20 years of experience in project management, ESG, financial modeling, and AI, leading high-impact initiatives across emerging markets with strong sustainability and data-driven expertise.</p>
-              </div>
-            </div>
-          </article>
-          <article class="vs-leader" data-vs-leader data-vh-reveal="right">
-            <div class="vs-leader__frame">
-              <div class="vs-leader__media">
-                <img src="{{ img_lead_5 }}" alt="Elizabeth Korban">
-                <div class="vs-leader__shade"></div>
-              </div>
-              <div class="vs-leader__id">
-                <h3>Elizabeth Korban</h3>
-                <p class="vs-leader__role">Director of Organizational Enablement</p>
-                <p class="vs-leader__bio">Elizabeth has 15+ years of experience as a leader responsible for embedding ESG principles into organisational culture, governance and operations.</p>
-              </div>
-            </div>
-          </article>
-          {% endif %}
+      <div class="vs-experts__grid">
+        <article class="vs-expert">
+          <img src="{{ img_lead_1 }}" alt="Patrick Neyts, Chief Executive Officer, VECTRA International">
+          <h3>Patrick Neyts</h3>
+          <p class="vs-expert__role">Chief Executive Officer</p>
+          <p>With over 30 years of experience in ESG programs, Corporate Codes, and Responsible Business practices across 11 industry sectors and 40 countries.</p>
+        </article>
+        <article class="vs-expert">
+          <img src="{{ img_lead_2 }}" alt="Shelly Sanders, SVP, Global Sales, Marketing &amp; Communications, VECTRA International">
+          <h3>Shelly Sanders</h3>
+          <p class="vs-expert__role">SVP, Global Sales, Marketing &amp; Communications</p>
+          <p>With over 30 years of leadership experience in consultative and solution-based sales &amp; operations.</p>
+        </article>
+        <article class="vs-expert">
+          <img src="{{ img_lead_3 }}" alt="Lorenz Berzau, VP Operations, VECTRA International">
+          <h3>Lorenz Berzau</h3>
+          <p class="vs-expert__role">VP Operations</p>
+          <p>With a focus on sustainability strategy, human rights, and social compliance, backed by 20 years of consultancy experience and a background in law.</p>
+        </article>
+        <article class="vs-expert">
+          <img src="{{ img_lead_4 }}" alt="Alana van Wouw, AI Architect, VECTRA International">
+          <h3>Alana van Wouw</h3>
+          <p class="vs-expert__role">AI Architect</p>
+          <p>With over 20 years of experience in project management, ESG, financial modeling, and AI.</p>
+        </article>
+      </div>
+      <div class="vs-experts__more">
+        <div class="vs-faces" data-vh-reveal="fade">
+          <img src="{{ img_lead_1 }}" alt="">
+          <img src="{{ img_lead_2 }}" alt="">
+          <img src="{{ img_lead_3 }}" alt="">
+          <img src="{{ img_lead_5 }}" alt="">
         </div>
+        <a class="vs-cta-btn" href="{{ block.settings.leaders_button_link | default: leadership_href }}" data-vh-reveal="scale">
+          {{ block.settings.leaders_button_label | default: 'Meet Our Leadership' }}
+          <img src="{{ img_arrow_btn }}" alt="">
+        </a>
       </div>
-      <div class="vs-arrows" data-vh-reveal="right">
-        <button type="button" data-vs-prev aria-label="Previous">
-          <img class="vs-arrows__bg" src="{{ img_arrow_circle }}" alt="">
-          <img class="vs-arrows__icon" src="{{ img_arrow_white }}" alt="">
-        </button>
-        <button type="button" data-vs-next aria-label="Next">
-          <img class="vs-arrows__bg" src="{{ img_arrow_circle }}" alt="">
-          <img class="vs-arrows__icon" src="{{ img_arrow_white }}" alt="">
-        </button>
-      </div>
-      <a class="vs-cta-btn" href="{{ block.settings.leaders_button_link | default: leadership_url }}" data-vh-reveal="scale">
-        {{ block.settings.leaders_button_label | default: 'Meet Our Leadership' }}
-        <img src="{{ img_arrow_btn }}" alt="">
-      </a>
     </section>
 
-    <section class="vs-experts" id="experts">
+    <section class="vs-experts vs-experts--teaser" id="experts">
       <p class="vs-experts__kicker">{{ block.settings.experts_kicker | default: 'OUR EXPERTS' }}</p>
       <h2>{{ block.settings.experts_heading | default: 'Our Team of Experts' }}</h2>
       <div class="vs-experts__intro">
@@ -583,60 +535,54 @@
 %}
 <section class="vh-faq vh-faq--story" id="about-faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
   <div class="vh-wrap vh-faq__grid">
-    <aside class="vs-join-card" id="careers">
-      <canvas class="vs-join-card__grid" data-vs-join-grid aria-hidden="true"></canvas>
-      <div class="vs-join-card__inner">
-        <p class="vs-join-card__kicker">{{ join_kicker }}</p>
-        <h2 class="vs-join-card__heading">{{ join_heading }}</h2>
-        <div class="vs-join-card__body">
-          {% assign join_paras = join_text | newline_to_br | split: '<br />' %}
-          {% for para in join_paras %}
-            {% assign para_text = para | strip_html | strip %}
-            {% if para_text != blank %}
-              <p>{{ para_text }}</p>
-            {% endif %}
-          {% endfor %}
-        </div>
-        <a class="vs-cta-btn" href="{{ join_cta }}">
-          {{ join_btn }}
-          <img src="{{ img_arrow_send }}" alt="">
-        </a>
-      </div>
+    <aside class="vh-contact-card" id="careers">
+      <p class="vh-contact-card__kicker">{{ join_kicker }}</p>
+      <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
+      <p class="vh-contact-card__title">{{ join_heading }}</p>
+      {% assign join_paras = join_text | newline_to_br | split: '<br />' %}
+      {% for para in join_paras %}
+        {% assign para_text = para | strip_html | strip %}
+        {% if para_text != blank %}
+          <p>{{ para_text }}</p>
+        {% endif %}
+      {% endfor %}
+      <a class="vh-btn vh-btn--white" href="{{ join_cta }}">
+        {{ join_btn }}
+        <img src="{{ img_arrow }}" alt="">
+      </a>
     </aside>
     <div class="vh-faq__right">
       <div class="vh-faq__glow" aria-hidden="true"></div>
-      <div class="vh-accordion">
+      <div class="vh-accordion" data-vh-faq-accordion>
         <p class="vh-kicker">{{ block.settings.kicker | default: 'FAQ' }}</p>
         <h2 class="vh-h2">{{ block.settings.heading | default: 'Questions About VECTRA International' }}</h2>
-        {% if block.settings.lead != blank %}
-          <p class="vh-lead">{{ block.settings.lead }}</p>
-        {% endif %}
+        <p class="vh-lead">{{ block.settings.lead | default: 'Answers about who we are, how we work, and where we operate.' }}</p>
         {% if nested_items != blank %}
           {{ nested_items }}
         {% else %}
         <div class="vh-acc is-open" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn>Who is VECTRA International?</button>
+          <button type="button" data-vh-faq-btn aria-expanded="true">Who is VECTRA International?</button>
           <div class="vh-acc__body">VECTRA International is a business resilience and operational capability-building partner. We help organizations manage responsible business, supplier, and operational challenges by combining experienced people, practical implementation support, and technology where it adds value.</div>
         </div>
         <div class="vh-acc" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn>When was VECTRA International founded?</button>
-          <div class="vh-acc__body">VECTRA International was founded in 2005. Since then, our work has grown from responsible business and supply-chain challenges into a broader role supporting business resilience, operational capability, governance, and performance.</div>
+          <button type="button" data-vh-faq-btn aria-expanded="false">When was VECTRA International founded?</button>
+          <div class="vh-acc__body" hidden>VECTRA International was founded in 2005. Since then, our work has grown from responsible business and supply-chain challenges into a broader role supporting business resilience, operational capability, governance, and performance.</div>
         </div>
         <div class="vh-acc" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn>What does VECTRA International do?</button>
-          <div class="vh-acc__body">We help organizations turn complex requirements and operational challenges into clear priorities and practical action. Depending on the issue, that may involve supplier risk, governance, evidence, technology, capability building, responsible business, or operational improvement.</div>
+          <button type="button" data-vh-faq-btn aria-expanded="false">What does VECTRA International do?</button>
+          <div class="vh-acc__body" hidden>We help organizations turn complex requirements and operational challenges into clear priorities and practical action. Depending on the issue, that may involve supplier risk, governance, evidence, technology, capability building, responsible business, or operational improvement.</div>
         </div>
         <div class="vh-acc" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn>How is VECTRA different from a traditional consulting company?</button>
-          <div class="vh-acc__body">VECTRA consulting support is built around partnership, implementation, and follow-through. Organizations may come to us while looking for an operational resilience consulting company, but our role is broader. We bring together specialist expertise, capability building, practical implementation, and technology where it adds value, then stay involved as decisions move into practice and progress is measured.</div>
+          <button type="button" data-vh-faq-btn aria-expanded="false">How is VECTRA different from a traditional consulting company?</button>
+          <div class="vh-acc__body" hidden>VECTRA consulting support is built around partnership, implementation, and follow-through. Organizations may come to us while looking for an operational resilience consulting company, but our role is broader. We bring together specialist expertise, capability building, practical implementation, and technology where it adds value, then stay involved as decisions move into practice and progress is measured.</div>
         </div>
         <div class="vh-acc" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn>Where does VECTRA International operate?</button>
-          <div class="vh-acc__body">VECTRA International works globally, supported by associates and specialist experts who bring local context and experience across regions, markets, and industries.</div>
+          <button type="button" data-vh-faq-btn aria-expanded="false">Where does VECTRA International operate?</button>
+          <div class="vh-acc__body" hidden>VECTRA International works globally, supported by associates and specialist experts who bring local context and experience across regions, markets, and industries.</div>
         </div>
         <div class="vh-acc" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn>Who leads VECTRA International?</button>
-          <div class="vh-acc__body">VECTRA International is led by CEO Patrick Neyts alongside a global leadership team spanning operations, sales and marketing, and applied AI.</div>
+          <button type="button" data-vh-faq-btn aria-expanded="false">Who leads VECTRA International?</button>
+          <div class="vh-acc__body" hidden>VECTRA International is led by CEO Patrick Neyts alongside a global leadership team spanning operations, sales and marketing, and applied AI.</div>
         </div>
         {% endif %}
       </div>
