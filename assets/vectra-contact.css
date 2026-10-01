@@ -129,6 +129,22 @@
   text-align: center;
 }
 
+.vcon-form .vh-form__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.vcon-form .vh-form__field,
+.vcon-form .vh-form__field--wide,
+.vcon-form .vh-form__select,
+.vcon-form .vh-form__select--wide,
+.vcon-form textarea,
+.vcon-form .vh-btn {
+  width: 100%;
+  grid-column: 1 / -1;
+}
+
 .vcon-kicker {
   margin: 0 auto 10px;
   color: var(--vcon-green, #54bd01);
