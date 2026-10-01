@@ -415,7 +415,7 @@
       <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
       <p class="vh-contact-card__title">Still looking for clarity?</p>
       <p>If what you have learned needs to become a decision, a plan, or a change to how your team works, talk to a VECTRA expert.</p>
-      <a class="vh-btn vh-btn--white" href="#what-comes-next">
+      <a class="vh-btn vh-btn--white" href="#VectraContactModal" data-vh-contact-open>
         Start the Conversation
         <img src="{{ 'vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg' | asset_url }}" alt="">
       </a>
@@ -456,22 +456,11 @@
 
   {% when 'closing' %}
 {% unless block.settings.hide_section %}
-<section class="vres-closing vh-portal" id="what-comes-next" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-  <div class="vh-wrap vh-portal__grid">
-    <div class="vh-portal__copy">
-      <p class="vh-kicker">WHAT COMES NEXT</p>
-      <h2>Better insight should lead somewhere.</h2>
-      <p>If what you have learned needs to become a decision, a plan, or a change to how your team works, VECTRA International can help you move it forward.</p>
-    </div>
-    {% form 'contact', class: 'vh-form' %}
-      {% if form.posted_successfully? %}
-        <p class="vh-contact-modal__success">Thanks — we received your message and will be in touch shortly.</p>
-      {% endif %}
-      {% if form.errors %}
-        <p class="vh-contact-modal__error">{{ form.errors | default_errors }}</p>
-      {% endif %}
-      {% render 'vectra-contact-fields', img_arrow: img_arrow, home_form: true, submit_label: 'Start the Conversation', message_placeholder: 'Tell us what you are working through and where you need clarity or support.' %}
-    {% endform %}
+<section class="vres-closing vh-portal vres-closing--copy-only" id="what-comes-next" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-wrap vres-closing__inner">
+    <p class="vh-kicker">WHAT COMES NEXT</p>
+    <h2>Better insight should lead somewhere.</h2>
+    <p>If what you have learned needs to become a decision, a plan, or a change to how your team works, VECTRA International can help you move it forward.</p>
   </div>
 </section>
 {% endunless %}

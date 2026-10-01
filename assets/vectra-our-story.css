@@ -1335,23 +1335,33 @@
 
 .vectra-story .vh-faq--story .vh-faq__grid,
 .vectra-story #about-faq .vh-faq__grid,
-.vectra-story .vh-faq--story-full .vh-faq__grid {
-  display: block;
-  width: var(--vh-wrap);
-  max-width: 100%;
+.vectra-story .vh-faq--story-full .vh-faq__grid,
+.vectra-home.vectra-story #about-faq .vh-faq__grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 0 !important;
+  width: var(--vh-wrap) !important;
+  max-width: 100% !important;
   margin-inline: auto;
+  justify-content: stretch;
+  align-items: stretch;
 }
 
 .vectra-story #about-faq .vh-faq__right,
-.vectra-story .vh-faq--story-full .vh-faq__right {
-  width: 100%;
-  max-width: none;
+.vectra-story .vh-faq--story-full .vh-faq__right,
+.vectra-story #about-faq .vh-accordion,
+.vectra-story .vh-faq--story-full .vh-accordion,
+.vectra-story #about-faq .vh-acc,
+.vectra-story #about-faq [data-vh-faq-btn] {
+  width: 100% !important;
+  max-width: none !important;
 }
 
-.vectra-story #about-faq .vh-accordion,
-.vectra-story .vh-faq--story-full .vh-accordion {
-  width: 100%;
+.vectra-story #about-faq .vh-accordion .vh-h2,
+.vectra-story #about-faq .vh-accordion .vh-lead,
+.vectra-story #about-faq .vh-accordion .vh-kicker {
   max-width: none;
+  width: 100%;
 }
 
 /* Standalone join stays hidden while unused on About Us */
@@ -1387,8 +1397,17 @@
 .vectra-story #about-faq .vh-faq__glow {
   pointer-events: none !important;
   z-index: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  transform: none;
+}
+
+@media (max-width: 989px) {
+  .vectra-home.vectra-story #about-faq .vh-faq__grid,
+  .vectra-story #about-faq .vh-faq__grid {
+    width: min(100% - 32px, var(--vh-wrap)) !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
 }
 
 .vectra-story .vs-join__grid,

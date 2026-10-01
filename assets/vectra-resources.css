@@ -795,41 +795,46 @@ body:has(.vectra-res) {
   background: transparent;
 }
 
-.vectra-res .vres-closing .vh-portal__copy {
-  color: #ffffff;
+.vectra-res .vres-closing--copy-only .vres-closing__inner {
+  position: relative;
+  z-index: 1;
+  width: var(--vh-wrap);
+  max-width: 100%;
+  margin-inline: auto;
+  padding: clamp(72px, 8vw, 120px) 0;
+  text-align: center;
 }
 
-.vectra-res .vres-closing .vh-portal__copy .vh-kicker {
+.vectra-res .vres-closing--copy-only .vh-kicker {
   margin: 0 0 14px;
   color: #54bd01;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  text-align: center;
 }
 
-.vectra-res .vres-closing .vh-portal__copy h2 {
-  margin: 0 0 16px;
+.vectra-res .vres-closing--copy-only h2 {
+  margin: 0 auto 16px;
+  max-width: 18em;
   color: #ffffff;
-  font-size: clamp(32px, 4vw, 52px);
+  font-size: clamp(32px, 4vw, 56px);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.15;
+  text-align: center;
 }
 
-.vectra-res .vres-closing .vh-portal__copy > p:not(.vh-kicker) {
-  margin: 0;
-  max-width: 34em;
+.vectra-res .vres-closing--copy-only .vres-closing__inner > p:not(.vh-kicker) {
+  margin: 0 auto;
+  max-width: 40em;
   color: rgba(255, 255, 255, 0.92);
   font-size: clamp(16px, 1.5vw, 20px);
   font-weight: 400;
   line-height: 1.55;
   letter-spacing: -0.02em;
-}
-
-.vectra-res .vres-closing__form-title,
-.vectra-res .vh-form h2.vres-closing__form-title {
-  display: none;
+  text-align: center;
 }
 
 @media (max-width: 989px) {
