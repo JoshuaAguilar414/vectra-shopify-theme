@@ -24,10 +24,7 @@
   if nav_title == 'Our DNA' or nav_title == 'OUR DNA' or nav_title contains 'Our DNA'
     assign nav_title = 'About Us'
   endif
-  comment
-    Always expose a Resources submenu so the five listing pages are reachable
-    even before they are added to the Shopify navigation menu.
-  endcomment
+  # Always expose a Resources submenu for the five listing pages.
   if nav_title == 'Resources'
     assign has_kids = true
     assign has_grand = false
@@ -46,14 +43,16 @@
         {% unless link.url == blank or link.url == '#' %}
           <a href="{{ href }}">{{ nav_title }}</a>
         {% endunless %}
-        {% for child in link.links %}
-          <a href="{% render 'vectra-preview-href', url: child.url, title: child.title %}">{{ child.title }}</a>
-          {% if child.links.size > 0 %}
-            {% for grandchild in child.links %}
-              <a class="vh-nav-panel__grand" href="{% render 'vectra-preview-href', url: grandchild.url, title: grandchild.title %}">{{ grandchild.title }}</a>
-            {% endfor %}
-          {% endif %}
-        {% endfor %}
+        {% unless nav_title == 'Resources' %}
+          {% for child in link.links %}
+            <a href="{% render 'vectra-preview-href', url: child.url, title: child.title %}">{{ child.title }}</a>
+            {% if child.links.size > 0 %}
+              {% for grandchild in child.links %}
+                <a class="vh-nav-panel__grand" href="{% render 'vectra-preview-href', url: grandchild.url, title: grandchild.title %}">{{ grandchild.title }}</a>
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+        {% endunless %}
         {% if nav_title == 'About Us' %}
           {% liquid
             assign child_blob = ''
@@ -85,37 +84,33 @@
         {% endif %}
         {% if nav_title == 'Resources' %}
           {% liquid
-            assign child_blob = ''
-            for child in link.links
-              assign child_blob = child_blob | append: child.title | append: '|'
-            endfor
-            assign child_blob = child_blob | downcase
-            assign insights_url = pages['insights-page'].url | default: pages['insights'].url | default: pages['blogs'].url | default: '/pages/insights-page'
-            assign ebooks_url = pages['ebooks-and-playbooks'].url | default: pages['e-books-playbooks'].url | default: '/pages/ebooks-and-playbooks'
-            assign events_url = pages['events-and-webinars'].url | default: pages['event-webinars'].url | default: '/pages/events-and-webinars'
-            assign podcasts_url = pages['podcasts'].url | default: '/pages/podcasts'
-            assign press_url = pages['press-releases'].url | default: '/pages/press-releases'
+            assign resources_fallback = pages['resources'].url | default: '/pages/resources'
+            assign insights_url = pages['insights-page'].url | default: pages['insights'].url | default: pages['blogs'].url | default: resources_fallback
+            assign ebooks_url = pages['ebooks-and-playbooks'].url | default: pages['e-books-playbooks'].url | default: resources_fallback
+            assign events_url = pages['events-and-webinars'].url | default: pages['event-webinars'].url | default: pages['events'].url | default: resources_fallback
+            assign podcasts_url = pages['podcasts'].url | default: resources_fallback
+            assign press_url = pages['press-releases'].url | default: resources_fallback
+            unless insights_url contains 'view='
+              assign insights_url = insights_url | append: '?view=blogs'
+            endunless
+            unless ebooks_url contains 'view='
+              assign ebooks_url = ebooks_url | append: '?view=e-books-playbooks'
+            endunless
+            unless events_url contains 'view='
+              assign events_url = events_url | append: '?view=event-webinars'
+            endunless
+            unless podcasts_url contains 'view='
+              assign podcasts_url = podcasts_url | append: '?view=podcasts'
+            endunless
+            unless press_url contains 'view='
+              assign press_url = press_url | append: '?view=press-releases'
+            endunless
           %}
-          {% if child_blob contains 'insight' or child_blob contains 'blog' %}
-          {% else %}
-            <a href="{% render 'vectra-preview-href', url: insights_url, view: 'blogs' %}">Insights</a>
-          {% endif %}
-          {% if child_blob contains 'ebook' or child_blob contains 'playbook' %}
-          {% else %}
-            <a href="{% render 'vectra-preview-href', url: ebooks_url, view: 'e-books-playbooks' %}">Ebooks &amp; Playbooks</a>
-          {% endif %}
-          {% if child_blob contains 'event' or child_blob contains 'webinar' %}
-          {% else %}
-            <a href="{% render 'vectra-preview-href', url: events_url, view: 'event-webinars' %}">Events &amp; Webinars</a>
-          {% endif %}
-          {% if child_blob contains 'podcast' or child_blob contains 'vcast' %}
-          {% else %}
-            <a href="{% render 'vectra-preview-href', url: podcasts_url, view: 'podcasts' %}">Podcasts</a>
-          {% endif %}
-          {% if child_blob contains 'press' %}
-          {% else %}
-            <a href="{% render 'vectra-preview-href', url: press_url, view: 'press-releases' %}">Press Releases</a>
-          {% endif %}
+          <a href="{{ insights_url }}">Insights</a>
+          <a href="{{ ebooks_url }}">Ebooks &amp; Playbooks</a>
+          <a href="{{ events_url }}">Events &amp; Webinars</a>
+          <a href="{{ podcasts_url }}">Podcasts</a>
+          <a href="{{ press_url }}">Press Releases</a>
         {% endif %}
       </div>
     {% else %}
@@ -156,11 +151,13 @@
             {% endfor %}
           {% else %}
             <ul class="vh-mega__list">
-              {% for child in link.links %}
-                <li>
-                  <a href="{% render 'vectra-preview-href', url: child.url, title: child.title %}" role="menuitem">{{ child.title }}</a>
-                </li>
-              {% endfor %}
+              {% unless nav_title == 'Resources' %}
+                {% for child in link.links %}
+                  <li>
+                    <a href="{% render 'vectra-preview-href', url: child.url, title: child.title %}" role="menuitem">{{ child.title }}</a>
+                  </li>
+                {% endfor %}
+              {% endunless %}
               {% if nav_title == 'About Us' %}
                 {% liquid
                   assign child_blob = ''
@@ -192,37 +189,33 @@
               {% endif %}
               {% if nav_title == 'Resources' %}
                 {% liquid
-                  assign child_blob = ''
-                  for child in link.links
-                    assign child_blob = child_blob | append: child.title | append: '|'
-                  endfor
-                  assign child_blob = child_blob | downcase
-                  assign insights_url = pages['insights-page'].url | default: pages['insights'].url | default: pages['blogs'].url | default: '/pages/insights-page'
-                  assign ebooks_url = pages['ebooks-and-playbooks'].url | default: pages['e-books-playbooks'].url | default: '/pages/ebooks-and-playbooks'
-                  assign events_url = pages['events-and-webinars'].url | default: pages['event-webinars'].url | default: '/pages/events-and-webinars'
-                  assign podcasts_url = pages['podcasts'].url | default: '/pages/podcasts'
-                  assign press_url = pages['press-releases'].url | default: '/pages/press-releases'
+                  assign resources_fallback = pages['resources'].url | default: '/pages/resources'
+                  assign insights_url = pages['insights-page'].url | default: pages['insights'].url | default: pages['blogs'].url | default: resources_fallback
+                  assign ebooks_url = pages['ebooks-and-playbooks'].url | default: pages['e-books-playbooks'].url | default: resources_fallback
+                  assign events_url = pages['events-and-webinars'].url | default: pages['event-webinars'].url | default: pages['events'].url | default: resources_fallback
+                  assign podcasts_url = pages['podcasts'].url | default: resources_fallback
+                  assign press_url = pages['press-releases'].url | default: resources_fallback
+                  unless insights_url contains 'view='
+                    assign insights_url = insights_url | append: '?view=blogs'
+                  endunless
+                  unless ebooks_url contains 'view='
+                    assign ebooks_url = ebooks_url | append: '?view=e-books-playbooks'
+                  endunless
+                  unless events_url contains 'view='
+                    assign events_url = events_url | append: '?view=event-webinars'
+                  endunless
+                  unless podcasts_url contains 'view='
+                    assign podcasts_url = podcasts_url | append: '?view=podcasts'
+                  endunless
+                  unless press_url contains 'view='
+                    assign press_url = press_url | append: '?view=press-releases'
+                  endunless
                 %}
-                {% if child_blob contains 'insight' or child_blob contains 'blog' %}
-                {% else %}
-                  <li><a href="{% render 'vectra-preview-href', url: insights_url, view: 'blogs' %}" role="menuitem">Insights</a></li>
-                {% endif %}
-                {% if child_blob contains 'ebook' or child_blob contains 'playbook' %}
-                {% else %}
-                  <li><a href="{% render 'vectra-preview-href', url: ebooks_url, view: 'e-books-playbooks' %}" role="menuitem">Ebooks &amp; Playbooks</a></li>
-                {% endif %}
-                {% if child_blob contains 'event' or child_blob contains 'webinar' %}
-                {% else %}
-                  <li><a href="{% render 'vectra-preview-href', url: events_url, view: 'event-webinars' %}" role="menuitem">Events &amp; Webinars</a></li>
-                {% endif %}
-                {% if child_blob contains 'podcast' or child_blob contains 'vcast' %}
-                {% else %}
-                  <li><a href="{% render 'vectra-preview-href', url: podcasts_url, view: 'podcasts' %}" role="menuitem">Podcasts</a></li>
-                {% endif %}
-                {% if child_blob contains 'press' %}
-                {% else %}
-                  <li><a href="{% render 'vectra-preview-href', url: press_url, view: 'press-releases' %}" role="menuitem">Press Releases</a></li>
-                {% endif %}
+                <li><a href="{{ insights_url }}" role="menuitem">Insights</a></li>
+                <li><a href="{{ ebooks_url }}" role="menuitem">Ebooks &amp; Playbooks</a></li>
+                <li><a href="{{ events_url }}" role="menuitem">Events &amp; Webinars</a></li>
+                <li><a href="{{ podcasts_url }}" role="menuitem">Podcasts</a></li>
+                <li><a href="{{ press_url }}" role="menuitem">Press Releases</a></li>
               {% endif %}
             </ul>
           {% endif %}

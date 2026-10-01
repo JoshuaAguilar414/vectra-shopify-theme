@@ -50,10 +50,7 @@
     endif
   endif
 
-  comment
-    Infer listing view from the destination URL when the nav already points
-    at one of the five resource listing pages.
-  endcomment
+  # Infer listing view from URL when nav already points at a resource listing page.
   if view_name == blank
     if href_key contains '/pages/insights-page' or href_key contains '/pages/blogs' or href_key contains '/pages/insights' or href_key contains '/resources/blogs'
       assign view_name = 'blogs'
