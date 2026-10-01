@@ -22,15 +22,22 @@
 %}
 {% capture faq_href %}{% render 'vectra-preview-href', url: faq_base, view: 'faq' %}{% endcapture %}
 {% assign faq_href = faq_href | strip %}
-{% capture blogs_href %}{% render 'vectra-preview-href', url: '/pages/blogs', view: 'blogs' %}{% endcapture %}
+{% liquid
+  assign blogs_page_url = pages['insights-page'].url | default: pages['insights'].url | default: pages['blogs'].url | default: '/pages/insights-page'
+  assign ebooks_page_url = pages['ebooks-and-playbooks'].url | default: pages['e-books-playbooks'].url | default: '/pages/ebooks-and-playbooks'
+  assign events_page_url = pages['events-and-webinars'].url | default: pages['event-webinars'].url | default: '/pages/events-and-webinars'
+  assign podcasts_page_url = pages['podcasts'].url | default: '/pages/podcasts'
+  assign press_page_url = pages['press-releases'].url | default: '/pages/press-releases'
+%}
+{% capture blogs_href %}{% render 'vectra-preview-href', url: blogs_page_url, view: 'blogs' %}{% endcapture %}
 {% assign blogs_href = blogs_href | strip %}
-{% capture ebooks_page_href %}{% render 'vectra-preview-href', url: '/pages/e-books-playbooks', view: 'e-books-playbooks' %}{% endcapture %}
+{% capture ebooks_page_href %}{% render 'vectra-preview-href', url: ebooks_page_url, view: 'e-books-playbooks' %}{% endcapture %}
 {% assign ebooks_page_href = ebooks_page_href | strip %}
-{% capture events_page_href %}{% render 'vectra-preview-href', url: '/pages/event-webinars', view: 'event-webinars' %}{% endcapture %}
+{% capture events_page_href %}{% render 'vectra-preview-href', url: events_page_url, view: 'event-webinars' %}{% endcapture %}
 {% assign events_page_href = events_page_href | strip %}
-{% capture podcasts_href %}{% render 'vectra-preview-href', url: '/pages/podcasts', view: 'podcasts' %}{% endcapture %}
+{% capture podcasts_href %}{% render 'vectra-preview-href', url: podcasts_page_url, view: 'podcasts' %}{% endcapture %}
 {% assign podcasts_href = podcasts_href | strip %}
-{% capture press_href %}{% render 'vectra-preview-href', url: '/pages/press-releases', view: 'press-releases' %}{% endcapture %}
+{% capture press_href %}{% render 'vectra-preview-href', url: press_page_url, view: 'press-releases' %}{% endcapture %}
 {% assign press_href = press_href | strip %}
 
 {% liquid

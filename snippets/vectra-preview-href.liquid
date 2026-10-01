@@ -12,6 +12,7 @@
   assign href = url | default: ''
   assign view_name = view
   assign title_key = title | downcase | strip
+  assign href_key = href | downcase
 
   if view_name == blank
     if title_key == 'our story' or title_key == 'our dna' or title_key == 'about vectra' or title_key == 'about us'
@@ -20,15 +21,15 @@
       assign view_name = 'solutions'
     elsif title_key == 'resources'
       assign view_name = 'resources'
-    elsif title_key == 'insights' or title_key == 'blogs' or title_key == 'vectra international blogs' or title_key == 'industry insights'
+    elsif title_key == 'insights' or title_key == 'insights page' or title_key == 'blogs' or title_key == 'vectra international blogs' or title_key == 'industry insights'
       assign view_name = 'blogs'
-    elsif title_key == 'ebooks & playbooks' or title_key == 'ebooks and playbooks' or title_key == 'e-books & playbooks' or title_key == 'ebooks' or title_key == 'playbooks'
+    elsif title_key == 'ebooks & playbooks' or title_key == 'ebooks and playbooks' or title_key == 'e-books & playbooks' or title_key == 'e-books and playbooks' or title_key == 'ebooks' or title_key == 'playbooks'
       assign view_name = 'e-books-playbooks'
     elsif title_key == 'press releases' or title_key == 'press'
       assign view_name = 'press-releases'
     elsif title_key == 'podcasts' or title_key == 'podcast' or title_key == 'vcasts' or title_key == 'vcast'
       assign view_name = 'podcasts'
-    elsif title_key == 'events & webinars' or title_key == 'events and webinars' or title_key == 'events' or title_key == 'webinars' or title_key == 'event webinars'
+    elsif title_key == 'events & webinars' or title_key == 'events and webinars' or title_key == 'events' or title_key == 'webinars' or title_key == 'event webinars' or title_key == 'events and webinar'
       assign view_name = 'event-webinars'
     elsif title_key == 'contact us' or title_key == 'contact' or title_key == 'talk to an expert'
       assign view_name = 'contact-us'
@@ -49,6 +50,24 @@
     endif
   endif
 
+  comment
+    Infer listing view from the destination URL when the nav already points
+    at one of the five resource listing pages.
+  endcomment
+  if view_name == blank
+    if href_key contains '/pages/insights-page' or href_key contains '/pages/blogs' or href_key contains '/pages/insights' or href_key contains '/resources/blogs'
+      assign view_name = 'blogs'
+    elsif href_key contains '/pages/ebooks-and-playbooks' or href_key contains '/pages/e-books-playbooks' or href_key contains '/pages/ebooks' or href_key contains '/resources/e-books'
+      assign view_name = 'e-books-playbooks'
+    elsif href_key contains '/pages/press-releases' or href_key contains '/pages/press' or href_key contains '/resources/press'
+      assign view_name = 'press-releases'
+    elsif href_key contains '/pages/podcasts' or href_key contains '/pages/vcasts' or href_key contains '/resources/podcasts'
+      assign view_name = 'podcasts'
+    elsif href_key contains '/pages/events-and-webinars' or href_key contains '/pages/event-webinars' or href_key contains '/pages/events' or href_key contains '/resources/event'
+      assign view_name = 'event-webinars'
+    endif
+  endif
+
   if view_name == 'our-story' or view_name == 'about-us'
     if pages['about-us'].url != blank
       assign href = pages['about-us'].url
@@ -66,40 +85,56 @@
     assign href = pages['resources'].url | default: '/pages/resources'
   elsif view_name == 'blogs'
     assign force_view = true
-    if pages['blogs'].url != blank
+    if pages['insights-page'].url != blank
+      assign href = pages['insights-page'].url
+    elsif pages['insights'].url != blank
+      assign href = pages['insights'].url
+    elsif pages['blogs'].url != blank
       assign href = pages['blogs'].url
     elsif pages['resources-blogs'].url != blank
       assign href = pages['resources-blogs'].url
     else
-      assign href = pages['resources'].url | default: '/pages/resources'
+      assign href = '/pages/insights-page'
     endif
   elsif view_name == 'e-books-playbooks'
     assign force_view = true
-    if pages['e-books-playbooks'].url != blank
+    if pages['ebooks-and-playbooks'].url != blank
+      assign href = pages['ebooks-and-playbooks'].url
+    elsif pages['e-books-playbooks'].url != blank
       assign href = pages['e-books-playbooks'].url
+    elsif pages['ebooks'].url != blank
+      assign href = pages['ebooks'].url
     else
-      assign href = pages['resources'].url | default: '/pages/resources'
+      assign href = '/pages/ebooks-and-playbooks'
     endif
   elsif view_name == 'press-releases'
     assign force_view = true
     if pages['press-releases'].url != blank
       assign href = pages['press-releases'].url
+    elsif pages['press'].url != blank
+      assign href = pages['press'].url
     else
-      assign href = pages['resources'].url | default: '/pages/resources'
+      assign href = '/pages/press-releases'
     endif
   elsif view_name == 'podcasts'
     assign force_view = true
     if pages['podcasts'].url != blank
       assign href = pages['podcasts'].url
+    elsif pages['vcasts'].url != blank
+      assign href = pages['vcasts'].url
     else
-      assign href = pages['resources'].url | default: '/pages/resources'
+      assign href = '/pages/podcasts'
     endif
   elsif view_name == 'event-webinars'
     assign force_view = true
-    if pages['event-webinars'].url != blank
+    if pages['events-and-webinars'].url != blank
+      assign href = pages['events-and-webinars'].url
+    elsif pages['event-webinars'].url != blank
       assign href = pages['event-webinars'].url
+    elsif pages['events'].url != blank
+      assign href = pages['events'].url
     else
-      assign href = pages['resources'].url | default: '/pages/resources'
+      assign href = '/pages/events-and-webinars'
     endif
   elsif view_name == 'contact-us'
     assign href = pages['contact-us'].url | default: pages['contact'].url | default: '/pages/contact-us'

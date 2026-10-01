@@ -24,6 +24,14 @@
   if nav_title == 'Our DNA' or nav_title == 'OUR DNA' or nav_title contains 'Our DNA'
     assign nav_title = 'About Us'
   endif
+  comment
+    Always expose a Resources submenu so the five listing pages are reachable
+    even before they are added to the Shopify navigation menu.
+  endcomment
+  if nav_title == 'Resources'
+    assign has_kids = true
+    assign has_grand = false
+  endif
 %}
 {% capture href %}{% render 'vectra-preview-href', url: link.url, title: link.title %}{% endcapture %}
 {% assign href = href | strip %}
@@ -53,22 +61,61 @@
               assign child_blob = child_blob | append: child.title | append: '|'
             endfor
             assign child_blob = child_blob | downcase
+            assign leadership_url = pages['our-leadership-team'].url | default: pages['leadership'].url
+            assign experts_url = pages['experts'].url
+            assign associates_url = pages['associates'].url
+            assign interns_url = pages['interns'].url
+            assign careers_url = pages['careers'].url
           %}
           {% unless child_blob contains 'leader' %}
-            <a href="{% render 'vectra-preview-href', url: pages['our-leadership-team'].url | default: pages['leadership'].url, view: 'leadership' %}">Our Leadership Team</a>
+            <a href="{% render 'vectra-preview-href', url: leadership_url, view: 'leadership' %}">Our Leadership Team</a>
           {% endunless %}
           {% unless child_blob contains 'expert' %}
-            <a href="{% render 'vectra-preview-href', url: pages['experts'].url, view: 'experts' %}">Our Experts</a>
+            <a href="{% render 'vectra-preview-href', url: experts_url, view: 'experts' %}">Our Experts</a>
           {% endunless %}
           {% unless child_blob contains 'associate' %}
-            <a href="{% render 'vectra-preview-href', url: pages['associates'].url, view: 'associates' %}">Associates</a>
+            <a href="{% render 'vectra-preview-href', url: associates_url, view: 'associates' %}">Associates</a>
           {% endunless %}
           {% unless child_blob contains 'intern' %}
-            <a href="{% render 'vectra-preview-href', url: pages['interns'].url, view: 'interns' %}">Our Interns</a>
+            <a href="{% render 'vectra-preview-href', url: interns_url, view: 'interns' %}">Our Interns</a>
           {% endunless %}
           {% unless child_blob contains 'career' %}
-            <a href="{% render 'vectra-preview-href', url: pages['careers'].url, view: 'careers' %}">Careers</a>
+            <a href="{% render 'vectra-preview-href', url: careers_url, view: 'careers' %}">Careers</a>
           {% endunless %}
+        {% endif %}
+        {% if nav_title == 'Resources' %}
+          {% liquid
+            assign child_blob = ''
+            for child in link.links
+              assign child_blob = child_blob | append: child.title | append: '|'
+            endfor
+            assign child_blob = child_blob | downcase
+            assign insights_url = pages['insights-page'].url | default: pages['insights'].url | default: pages['blogs'].url | default: '/pages/insights-page'
+            assign ebooks_url = pages['ebooks-and-playbooks'].url | default: pages['e-books-playbooks'].url | default: '/pages/ebooks-and-playbooks'
+            assign events_url = pages['events-and-webinars'].url | default: pages['event-webinars'].url | default: '/pages/events-and-webinars'
+            assign podcasts_url = pages['podcasts'].url | default: '/pages/podcasts'
+            assign press_url = pages['press-releases'].url | default: '/pages/press-releases'
+          %}
+          {% if child_blob contains 'insight' or child_blob contains 'blog' %}
+          {% else %}
+            <a href="{% render 'vectra-preview-href', url: insights_url, view: 'blogs' %}">Insights</a>
+          {% endif %}
+          {% if child_blob contains 'ebook' or child_blob contains 'playbook' %}
+          {% else %}
+            <a href="{% render 'vectra-preview-href', url: ebooks_url, view: 'e-books-playbooks' %}">Ebooks &amp; Playbooks</a>
+          {% endif %}
+          {% if child_blob contains 'event' or child_blob contains 'webinar' %}
+          {% else %}
+            <a href="{% render 'vectra-preview-href', url: events_url, view: 'event-webinars' %}">Events &amp; Webinars</a>
+          {% endif %}
+          {% if child_blob contains 'podcast' or child_blob contains 'vcast' %}
+          {% else %}
+            <a href="{% render 'vectra-preview-href', url: podcasts_url, view: 'podcasts' %}">Podcasts</a>
+          {% endif %}
+          {% if child_blob contains 'press' %}
+          {% else %}
+            <a href="{% render 'vectra-preview-href', url: press_url, view: 'press-releases' %}">Press Releases</a>
+          {% endif %}
         {% endif %}
       </div>
     {% else %}
@@ -121,22 +168,61 @@
                     assign child_blob = child_blob | append: child.title | append: '|'
                   endfor
                   assign child_blob = child_blob | downcase
+                  assign leadership_url = pages['our-leadership-team'].url | default: pages['leadership'].url
+                  assign experts_url = pages['experts'].url
+                  assign associates_url = pages['associates'].url
+                  assign interns_url = pages['interns'].url
+                  assign careers_url = pages['careers'].url
                 %}
                 {% unless child_blob contains 'leader' %}
-                  <li><a href="{% render 'vectra-preview-href', url: pages['our-leadership-team'].url | default: pages['leadership'].url, view: 'leadership' %}" role="menuitem">Our Leadership Team</a></li>
+                  <li><a href="{% render 'vectra-preview-href', url: leadership_url, view: 'leadership' %}" role="menuitem">Our Leadership Team</a></li>
                 {% endunless %}
                 {% unless child_blob contains 'expert' %}
-                  <li><a href="{% render 'vectra-preview-href', url: pages['experts'].url, view: 'experts' %}" role="menuitem">Our Experts</a></li>
+                  <li><a href="{% render 'vectra-preview-href', url: experts_url, view: 'experts' %}" role="menuitem">Our Experts</a></li>
                 {% endunless %}
                 {% unless child_blob contains 'associate' %}
-                  <li><a href="{% render 'vectra-preview-href', url: pages['associates'].url, view: 'associates' %}" role="menuitem">Associates</a></li>
+                  <li><a href="{% render 'vectra-preview-href', url: associates_url, view: 'associates' %}" role="menuitem">Associates</a></li>
                 {% endunless %}
                 {% unless child_blob contains 'intern' %}
-                  <li><a href="{% render 'vectra-preview-href', url: pages['interns'].url, view: 'interns' %}" role="menuitem">Our Interns</a></li>
+                  <li><a href="{% render 'vectra-preview-href', url: interns_url, view: 'interns' %}" role="menuitem">Our Interns</a></li>
                 {% endunless %}
                 {% unless child_blob contains 'career' %}
-                  <li><a href="{% render 'vectra-preview-href', url: pages['careers'].url, view: 'careers' %}" role="menuitem">Careers</a></li>
+                  <li><a href="{% render 'vectra-preview-href', url: careers_url, view: 'careers' %}" role="menuitem">Careers</a></li>
                 {% endunless %}
+              {% endif %}
+              {% if nav_title == 'Resources' %}
+                {% liquid
+                  assign child_blob = ''
+                  for child in link.links
+                    assign child_blob = child_blob | append: child.title | append: '|'
+                  endfor
+                  assign child_blob = child_blob | downcase
+                  assign insights_url = pages['insights-page'].url | default: pages['insights'].url | default: pages['blogs'].url | default: '/pages/insights-page'
+                  assign ebooks_url = pages['ebooks-and-playbooks'].url | default: pages['e-books-playbooks'].url | default: '/pages/ebooks-and-playbooks'
+                  assign events_url = pages['events-and-webinars'].url | default: pages['event-webinars'].url | default: '/pages/events-and-webinars'
+                  assign podcasts_url = pages['podcasts'].url | default: '/pages/podcasts'
+                  assign press_url = pages['press-releases'].url | default: '/pages/press-releases'
+                %}
+                {% if child_blob contains 'insight' or child_blob contains 'blog' %}
+                {% else %}
+                  <li><a href="{% render 'vectra-preview-href', url: insights_url, view: 'blogs' %}" role="menuitem">Insights</a></li>
+                {% endif %}
+                {% if child_blob contains 'ebook' or child_blob contains 'playbook' %}
+                {% else %}
+                  <li><a href="{% render 'vectra-preview-href', url: ebooks_url, view: 'e-books-playbooks' %}" role="menuitem">Ebooks &amp; Playbooks</a></li>
+                {% endif %}
+                {% if child_blob contains 'event' or child_blob contains 'webinar' %}
+                {% else %}
+                  <li><a href="{% render 'vectra-preview-href', url: events_url, view: 'event-webinars' %}" role="menuitem">Events &amp; Webinars</a></li>
+                {% endif %}
+                {% if child_blob contains 'podcast' or child_blob contains 'vcast' %}
+                {% else %}
+                  <li><a href="{% render 'vectra-preview-href', url: podcasts_url, view: 'podcasts' %}" role="menuitem">Podcasts</a></li>
+                {% endif %}
+                {% if child_blob contains 'press' %}
+                {% else %}
+                  <li><a href="{% render 'vectra-preview-href', url: press_url, view: 'press-releases' %}" role="menuitem">Press Releases</a></li>
+                {% endif %}
               {% endif %}
             </ul>
           {% endif %}
