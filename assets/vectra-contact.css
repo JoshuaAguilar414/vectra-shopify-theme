@@ -88,7 +88,13 @@
   max-width: 38em;
 }
 
-.vcon-hero__lead p,
+.vcon-hero__lead p {
+  margin: 0 0 14px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--vcon-navy, #092543);
+}
+
 .vcon-wrap p,
 .vcon-cards p,
 .vcon-steps p {
@@ -146,15 +152,6 @@
   grid-column: 1 / -1;
 }
 
-.vcon-kicker {
-  margin: 0 auto 10px;
-  color: var(--vcon-green, #54bd01);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
 .vcon-challenges,
 .vcon-next,
 .vcon-direct {
@@ -174,25 +171,52 @@
   background: #fff;
 }
 
-.vcon-wrap h2 {
-  margin: 0 auto 18px;
+.vcon-challenges .vcon-wrap,
+.vcon-next .vcon-wrap,
+.vcon-direct .vcon-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.vcon-kicker {
+  display: block;
+  width: 100%;
+  margin: 0 0 10px;
+  color: var(--vcon-green, #54bd01);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.vcon-wrap > h2 {
+  display: block;
+  width: 100%;
+  margin: 0 0 18px;
   max-width: 18em;
   color: var(--vcon-navy, #092543);
   font-size: clamp(28px, 2.8vw, 44px);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.15;
+  text-align: center;
 }
 
 .vcon-lead,
 .vcon-close {
+  display: block;
+  width: 100%;
   max-width: 46em;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto 14px;
+  text-align: center;
 }
 
 .vcon-close {
   margin-top: 28px;
+  margin-bottom: 0;
   font-size: 18px;
   font-weight: 600;
 }
@@ -202,7 +226,8 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
-  margin-top: 32px;
+  width: 100%;
+  margin: 32px 0 0;
   text-align: center;
 }
 
@@ -219,6 +244,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .vcon-cards img {
@@ -236,6 +262,13 @@
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.25;
+  text-align: center;
+}
+
+.vcon-cards p,
+.vcon-steps p {
+  margin: 0;
+  text-align: center;
 }
 
 .vcon-steps span {
@@ -245,14 +278,17 @@
   font-size: 28px;
   font-weight: 800;
   letter-spacing: -0.03em;
+  text-align: center;
 }
 
 .vcon-direct__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
-  margin: 24px auto;
+  width: 100%;
   max-width: 640px;
+  margin: 24px auto;
+  text-align: center;
 }
 
 .vcon-direct__label {
@@ -262,6 +298,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(9, 37, 67, 0.55);
+  text-align: center;
 }
 
 .vcon-direct a {
@@ -273,6 +310,10 @@
 
 .vcon-direct a:hover {
   text-decoration: underline;
+}
+
+.vcon-direct .vcon-lead a {
+  color: var(--vcon-green, #54bd01);
 }
 
 .vcon-cards .vh-why__item,
