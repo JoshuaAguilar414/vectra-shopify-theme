@@ -1326,22 +1326,35 @@
   background-color: var(--vh-bg) !important;
 }
 
-/* About Us FAQ matches homepage FAQ layout */
+/* About Us FAQ — full-width accordion (no join card) */
 .vectra-story .vh-faq--story {
   background:
-    radial-gradient(ellipse 55% 70% at 78% 42%, rgba(214, 255, 173, 0.45) 0%, transparent 68%),
+    radial-gradient(ellipse 55% 70% at 50% 42%, rgba(214, 255, 173, 0.45) 0%, transparent 68%),
     linear-gradient(180deg, #ffffff 0%, #f8fcf4 52%, #ffffff 100%);
 }
 
 .vectra-story .vh-faq--story .vh-faq__grid,
-.vectra-story #about-faq .vh-faq__grid {
-  display: grid;
-  grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
-  gap: clamp(32px, 4vw, 64px);
-  align-items: start;
+.vectra-story #about-faq .vh-faq__grid,
+.vectra-story .vh-faq--story-full .vh-faq__grid {
+  display: block;
+  width: var(--vh-wrap);
+  max-width: 100%;
+  margin-inline: auto;
 }
 
-/* Standalone full-width join is replaced by the FAQ left card */
+.vectra-story #about-faq .vh-faq__right,
+.vectra-story .vh-faq--story-full .vh-faq__right {
+  width: 100%;
+  max-width: none;
+}
+
+.vectra-story #about-faq .vh-accordion,
+.vectra-story .vh-faq--story-full .vh-accordion {
+  width: 100%;
+  max-width: none;
+}
+
+/* Standalone join stays hidden while unused on About Us */
 .vectra-story section.vs-join,
 .vectra-story .vs-join {
   display: none !important;
@@ -1374,78 +1387,8 @@
 .vectra-story #about-faq .vh-faq__glow {
   pointer-events: none !important;
   z-index: 0;
-}
-
-.vectra-story #about-faq .vh-contact-card,
-.vectra-story #about-faq .vh-contact-card--join {
-  position: relative;
-  top: auto;
-  z-index: 2;
-  opacity: 1;
-  transform: none;
-}
-
-.vectra-story #about-faq .vh-contact-card__kicker {
-  color: #d6ffad;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.vectra-story #about-faq .vh-contact-card__icon {
-  width: 72px;
-  height: 72px;
-  margin: 0 0 22px;
-  object-fit: contain;
-}
-
-.vectra-story #about-faq .vh-contact-card__title {
-  max-width: 14em;
-  margin: 0 0 18px;
-  color: #ffffff;
-  font-size: 22px;
-  font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.03em;
-  text-transform: none;
-}
-
-.vectra-story #about-faq .vh-contact-card--join > p:not(.vh-contact-card__kicker):not(.vh-contact-card__title) {
-  margin: 0 0 10px;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: -0.02em;
-}
-
-.vectra-story #about-faq .vh-contact-card--join > p:not(.vh-contact-card__kicker):not(.vh-contact-card__title):last-of-type {
-  margin-bottom: 22px;
-}
-
-.vectra-story #about-faq .vh-btn--white {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
-}
-
-.vectra-story #about-faq .vh-btn--white:hover,
-.vectra-story #about-faq .vh-btn--white:focus-visible {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
-}
-
-@media (max-width: 989px) {
-  .vectra-story .vh-faq--story .vh-faq__grid,
-  .vectra-story #about-faq .vh-faq__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .vectra-story #about-faq .vh-contact-card,
-  .vectra-story #about-faq .vh-contact-card--join {
-    position: relative;
-    top: auto;
-  }
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .vectra-story .vs-join__grid,

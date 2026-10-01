@@ -198,12 +198,9 @@
             "faq_6"
           ],
           "settings": {
-            "join_kicker": "BE PART OF A GLOBAL TEAM",
-            "join_heading": "Join a Team That Values What You Bring",
-            "join_text": "We look for people who care about doing meaningful work well, who bring their own perspective, and who are willing to listen to someone else’s.\n\nYou will work with colleagues and specialists across countries, cultures, disciplines, and time zones. You will learn from them, challenge them, and bring something of your own to the team.\n\nWe value people who take ownership, stay curious, speak up respectfully, and care whether what we do makes a positive difference.\n\nBring your judgment, your experience, and the questions you think we should be asking.",
-            "join_button_label": "View Open Positions",
             "kicker": "FAQ",
-            "heading": "Questions About VECTRA International"
+            "heading": "Questions About VECTRA International",
+            "lead": "Answers about who we are, how we work, and where we operate."
           }
         }
       },

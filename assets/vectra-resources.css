@@ -754,10 +754,28 @@ body:has(.vectra-res) {
 
 .vectra-res .vres-why {
   background: linear-gradient(180deg, #f7faf4 0%, #ffffff 100%);
+  text-align: center;
+}
+
+.vectra-res .vres-why > .vh-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.vectra-res .vres-why .vh-kicker,
+.vectra-res .vres-why .vh-h2 {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .vectra-res .vres-why__copy {
   max-width: 48em;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .vectra-res .vres-why__copy p {
@@ -765,6 +783,7 @@ body:has(.vectra-res) {
   color: rgba(9, 37, 67, 0.78);
   font-size: 17px;
   line-height: 1.55;
+  text-align: center;
 }
 
 .vectra-res .vres-why__close {
