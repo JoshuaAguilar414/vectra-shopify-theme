@@ -40,28 +40,29 @@
 .vcon-wrap {
   position: relative;
   z-index: 1;
-  width: min(920px, calc(100% - 48px));
+  width: min(1240px, calc(100% - 48px));
   margin: 0 auto;
   text-align: center;
 }
 
 .vcon-hero__grid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+  align-items: start;
   gap: 40px;
   padding-top: clamp(168px, 16vw, 220px);
+  text-align: left;
 }
 
 .vcon-hero__copy {
   width: 100%;
-  max-width: 46em;
-  margin: 0 auto;
-  text-align: center;
+  max-width: none;
+  margin: 0;
+  text-align: left;
 }
 
 .vcon-hero h1 {
-  margin: 0 auto 12px;
+  margin: 0 0 12px;
   font-family: 'Poppins', sans-serif;
   font-size: clamp(13px, 1.1vw, 16px);
   font-weight: 700;
@@ -72,8 +73,8 @@
 }
 
 .vcon-hero__display {
-  margin: 0 auto 22px;
-  max-width: 14em;
+  margin: 0 0 22px;
+  max-width: 12em;
   color: var(--vcon-navy, #092543);
   font-family: 'Poppins', sans-serif;
   font-size: clamp(36px, 4.4vw, 64px);
@@ -83,15 +84,15 @@
 }
 
 .vcon-hero__lead {
-  margin: 0 auto;
-  max-width: 42em;
+  margin: 0;
+  max-width: 38em;
 }
 
 .vcon-hero__lead p,
 .vcon-wrap p,
 .vcon-cards p,
 .vcon-steps p {
-  margin: 0 auto 14px;
+  margin: 0 0 14px;
   font-size: 16px;
   line-height: 1.55;
   color: var(--vcon-navy, #092543);
@@ -108,8 +109,8 @@
 
 #contact-form {
   width: 100%;
-  max-width: 640px;
-  margin: 0 auto;
+  max-width: none;
+  margin: 0;
 }
 
 .vcon-form {
@@ -126,7 +127,7 @@
   font-weight: 700;
   letter-spacing: -0.03em;
   color: var(--vcon-navy, #092543);
-  text-align: center;
+  text-align: left;
 }
 
 .vcon-form .vh-form__grid {
@@ -351,6 +352,7 @@
 }
 
 @media (max-width: 989px) {
+  .vcon-hero__grid,
   .vcon-cards,
   .vcon-steps,
   .vcon-direct__grid {
@@ -365,14 +367,30 @@
   .vcon-hero__grid {
     padding-top: 156px;
     gap: 28px;
+    text-align: center;
+  }
+
+  .vcon-hero__copy {
+    text-align: center;
+  }
+
+  .vcon-hero__display {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: clamp(32px, 9vw, 48px);
+  }
+
+  .vcon-hero__lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .vcon-form h2 {
+    text-align: center;
   }
 
   .vcon-hero__grid,
   .vcon-wrap {
     width: min(100% - 32px, 720px);
-  }
-
-  .vcon-hero__display {
-    font-size: clamp(32px, 9vw, 48px);
   }
 }
