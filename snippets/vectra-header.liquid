@@ -26,6 +26,7 @@
   assign faq_base = pages['faq'].url | default: '/pages/faq'
   assign marketplace_base = pages['marketplace'].url | default: '/pages/marketplace'
   assign experts_base = pages['experts'].url | default: '/pages/experts'
+  assign leadership_base = pages['our-leadership-team'].url | default: pages['leadership'].url | default: '/pages/our-leadership-team'
   assign associates_base = pages['associates'].url | default: '/pages/associates'
   assign interns_base = pages['interns'].url | default: '/pages/interns'
   assign careers_base = pages['careers'].url | default: '/pages/careers'
@@ -75,6 +76,7 @@
 {% capture faq %}{% render 'vectra-preview-href', url: faq_base, view: 'faq' %}{% endcapture %}
 {% capture marketplace %}{% render 'vectra-preview-href', url: marketplace_base, view: 'marketplace' %}{% endcapture %}
 {% capture experts %}{% render 'vectra-preview-href', url: experts_base, view: 'experts' %}{% endcapture %}
+{% capture leadership %}{% render 'vectra-preview-href', url: leadership_base, view: 'leadership' %}{% endcapture %}
 {% capture associates %}{% render 'vectra-preview-href', url: associates_base, view: 'associates' %}{% endcapture %}
 {% capture interns %}{% render 'vectra-preview-href', url: interns_base, view: 'interns' %}{% endcapture %}
 {% capture careers %}{% render 'vectra-preview-href', url: careers_base, view: 'careers' %}{% endcapture %}
@@ -84,6 +86,7 @@
 {% assign faq = faq | strip %}
 {% assign marketplace = marketplace | strip %}
 {% assign experts = experts | strip %}
+{% assign leadership = leadership | strip %}
 {% assign associates = associates | strip %}
 {% assign interns = interns | strip %}
 {% assign careers = careers | strip %}
@@ -188,6 +191,7 @@
         resources: resources,
         faq: faq,
         experts: experts,
+        leadership: leadership,
         associates: associates,
         interns: interns,
         careers: careers
@@ -223,6 +227,7 @@
         resources: resources,
         faq: faq,
         experts: experts,
+        leadership: leadership,
         associates: associates,
         interns: interns,
         careers: careers

@@ -54,6 +54,9 @@
             endfor
             assign child_blob = child_blob | downcase
           %}
+          {% unless child_blob contains 'leader' %}
+            <a href="{% render 'vectra-preview-href', url: pages['our-leadership-team'].url | default: pages['leadership'].url, view: 'leadership' %}">Our Leadership Team</a>
+          {% endunless %}
           {% unless child_blob contains 'expert' %}
             <a href="{% render 'vectra-preview-href', url: pages['experts'].url, view: 'experts' %}">Our Experts</a>
           {% endunless %}
@@ -119,6 +122,9 @@
                   endfor
                   assign child_blob = child_blob | downcase
                 %}
+                {% unless child_blob contains 'leader' %}
+                  <li><a href="{% render 'vectra-preview-href', url: pages['our-leadership-team'].url | default: pages['leadership'].url, view: 'leadership' %}" role="menuitem">Our Leadership Team</a></li>
+                {% endunless %}
                 {% unless child_blob contains 'expert' %}
                   <li><a href="{% render 'vectra-preview-href', url: pages['experts'].url, view: 'experts' %}" role="menuitem">Our Experts</a></li>
                 {% endunless %}
