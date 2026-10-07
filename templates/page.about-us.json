@@ -120,7 +120,7 @@
             "experts_heading": "Our Team of Experts",
             "experts_text": "The people our clients meet matter.\n\nThat is why VECTRA brings together specialists who know their fields, understand different markets, and have spent years seeing how challenges play out in real businesses.\n\nThey bring more than technical knowledge. They bring judgment, local understanding, practical experience, and the ability to listen before deciding what comes next.\n\nTogether, they help us give clients support that feels relevant to their situation, not pulled from a standard playbook.",
             "experts_button_label": "Meet All Experts",
-            "show_associates": false,
+            "show_associates": true,
             "show_interns": false,
             "people_kicker": "OUR GLOBAL NETWORK",
             "people_heading": "Global Expertise. Local Understanding. One VECTRA Team.",

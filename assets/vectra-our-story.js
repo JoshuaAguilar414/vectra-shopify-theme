@@ -35,7 +35,7 @@
   const qs = (sel, el = root) => el.querySelector(sel);
   const qsa = (sel, el = root) => [...el.querySelectorAll(sel)];
 
-  qsa('[data-vh-video], video').forEach((video) => {
+  qsa('[data-vh-video], video:not([data-vs-map-video])').forEach((video) => {
     video.muted = true;
     video.playsInline = true;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -44,6 +44,145 @@
       return;
     }
     video.play().catch(() => {});
+  });
+
+  const shuffle = (items) => {
+    const next = [...items];
+    for (let i = next.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [next[i], next[j]] = [next[j], next[i]];
+    }
+    return next;
+  };
+
+  const escapeHtml = (value) =>
+    String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+
+  qsa('[data-vs-associates-listing]').forEach((grid) => {
+    const cards = qsa('.vs-expert', grid);
+    if (cards.length < 2) return;
+    cards
+      .sort((a, b) => {
+        const nameA = (a.dataset.name || a.querySelector('h3')?.textContent || '').trim();
+        const nameB = (b.dataset.name || b.querySelector('h3')?.textContent || '').trim();
+        return nameA.localeCompare(nameB, undefined, { sensitivity: 'base' });
+      })
+      .forEach((card) => grid.appendChild(card));
+  });
+
+  qsa('[data-vs-featured-associates]').forEach((section) => {
+    const grid = qs('[data-vs-featured-grid]', section);
+    const poolEl = qs('[data-vs-associate-pool]', section);
+    if (!grid || !poolEl) return;
+    let pool = [];
+    try {
+      pool = JSON.parse(poolEl.textContent || '[]');
+    } catch (_err) {
+      pool = [];
+    }
+    if (!Array.isArray(pool) || !pool.length) return;
+    const count = Math.min(Number(section.dataset.featuredCount) || 5, pool.length);
+    const featured = shuffle(pool).slice(0, count);
+    const associatesHref = qs('.vs-experts__more .vs-cta-btn', section)?.getAttribute('href') || '/pages/associates';
+    grid.innerHTML = featured
+      .map((person) => {
+        const name = escapeHtml(person.name);
+        const role = escapeHtml(person.role);
+        const img = escapeHtml(person.img);
+        const slug = escapeHtml(person.slug || '');
+        const href = slug ? `${associatesHref}#${slug}` : associatesHref;
+        return `<article class="vs-expert" data-vs-associate>
+          <a class="vs-expert__photo-link" href="${href}">
+            <img src="${img}" alt="${name}, ${role}, VECTRA International Associate." width="480" height="480" loading="lazy">
+          </a>
+          <h3><a href="${href}">${name}</a></h3>
+          <p class="vs-expert__role">${role}</p>
+        </article>`;
+      })
+      .join('');
+  });
+
+  const renderMapPins = (list, pinUrl, locations) => {
+    if (!list || !Array.isArray(locations)) return;
+    list.innerHTML = locations
+      .map((loc) => {
+        const label = escapeHtml(loc.label);
+        const x = Number(loc.x);
+        const y = Number(loc.y);
+        if (!Number.isFinite(x) || !Number.isFinite(y)) return '';
+        return `<li class="vs-people__pin" style="left:${x}%;top:${y}%;" title="${label}">
+          <img src="${escapeHtml(pinUrl)}" alt="" width="18" height="18" decoding="async">
+          <span>${label}</span>
+        </li>`;
+      })
+      .join('');
+  };
+
+  qsa('[data-vs-map]').forEach((map) => {
+    const video = qs('[data-vs-map-video]', map);
+    const pins = qs('[data-vs-map-pins]', map);
+    const src = map.dataset.mapSrc;
+    const pinUrl = map.dataset.mapPin || '';
+    const locationsUrl = map.dataset.mapLocations || '';
+    let loaded = false;
+
+    const loadLocations = () => {
+      if (!locationsUrl || !pins) return;
+      fetch(locationsUrl)
+        .then((res) => (res.ok ? res.json() : []))
+        .then((locations) => renderMapPins(pins, pinUrl, locations))
+        .catch(() => {});
+    };
+
+    const activateVideo = () => {
+      if (loaded || !video || !src) return;
+      loaded = true;
+      video.hidden = false;
+      video.muted = true;
+      video.playsInline = true;
+      video.setAttribute('playsinline', '');
+      if (!video.querySelector('source')) {
+        const source = document.createElement('source');
+        source.src = src;
+        source.type = 'video/mp4';
+        video.appendChild(source);
+      }
+      video.load();
+      video.addEventListener(
+        'loadeddata',
+        () => {
+          video.dataset.vsMapReady = 'true';
+          map.classList.add('is-video-ready');
+        },
+        { once: true }
+      );
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        video.play().catch(() => {});
+      }
+    };
+
+    loadLocations();
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            activateVideo();
+            io.disconnect();
+          });
+        },
+        { rootMargin: '200px 0px', threshold: 0.01 }
+      );
+      io.observe(map);
+    } else {
+      activateVideo();
+    }
   });
 
   const track = qs('[data-vs-leaders-track]');

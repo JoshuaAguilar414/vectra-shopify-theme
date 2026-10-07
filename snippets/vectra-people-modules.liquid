@@ -137,42 +137,17 @@
     </div>
   </div>
   {% if people_cards != blank %}
-    <div class="vs-experts__grid">{{ people_cards }}</div>
+    <div class="vs-experts__grid" data-vs-associates-listing>{{ people_cards }}</div>
   {% else %}
-    <div class="vh-wrap vp-group" data-vh-reveal="up"><h3>Solutions, Analytics &amp; People</h3></div>
-    <div class="vs-experts__grid">
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_1 }}" alt="Aeshwarya Das, Automation and Analytics Manager, VECTRA International Associate."><h3>Aeshwarya Das</h3><p class="vs-expert__role">Automation and Analytics Manager</p></article>
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_2 }}" alt="Bhupender Singh, Business Solutions Consultant, VECTRA International Associate."><h3>Bhupender Singh</h3><p class="vs-expert__role">Business Solutions Consultant</p></article>
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_3 }}" alt="Sheila Akpaso, Chief HR Officer Consultant, VECTRA International Associate."><h3>Sheila Akpaso</h3><p class="vs-expert__role">Chief HR Officer Consultant</p></article>
-    </div>
-    <div class="vh-wrap vp-group" data-vh-reveal="up"><h3>Learning &amp; Training</h3></div>
-    <div class="vs-experts__grid">
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_1 }}" alt="Leona Hitosis, Instructional Designer, VECTRA International Associate."><h3>Leona Hitosis</h3><p class="vs-expert__role">Instructional Designer</p></article>
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_2 }}" alt="Pamela Ramos, Instructional Designer, VECTRA International Associate."><h3>Pamela Ramos</h3><p class="vs-expert__role">Instructional Designer</p></article>
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_3 }}" alt="Pol Benliro, Instructional Designer, VECTRA International Associate."><h3>Pol Benliro</h3><p class="vs-expert__role">Instructional Designer</p></article>
-    </div>
-    <div class="vh-wrap vp-group" data-vh-reveal="up"><h3>Sales &amp; Business Development</h3></div>
-    <div class="vs-experts__grid">
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_1 }}" alt="Eloá Testoni, Territory Business Manager, VECTRA International Associate."><h3>Eloá Testoni</h3><p class="vs-expert__role">Territory Business Manager</p></article>
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_2 }}" alt="Long Phi, Territory Business Manager, VECTRA International Associate."><h3>Long Phi</h3><p class="vs-expert__role">Territory Business Manager</p></article>
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_3 }}" alt="Prateek Kadambande, Business Development Associate, VECTRA International Associate."><h3>Prateek Kadambande</h3><p class="vs-expert__role">Business Development Associate</p></article>
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_4 }}" alt="Danna Fadul, RFP Coordinator, VECTRA International Associate."><h3>Danna Fadul</h3><p class="vs-expert__role">RFP Coordinator</p></article>
-    </div>
-    <div class="vh-wrap vp-group" data-vh-reveal="up"><h3>Marketing, Web &amp; Marketplace</h3></div>
-    <div class="vs-experts__grid">
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_1 }}" alt="Eerab Akhlaq, Senior Marketing Manager, VECTRA International Associate."><h3>Eerab Akhlaq</h3><p class="vs-expert__role">Senior Marketing Manager</p></article>
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_2 }}" alt="Am Bintang, Social Media Specialist, VECTRA International Associate."><h3>Am Bintang</h3><p class="vs-expert__role">Social Media Specialist</p></article>
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_3 }}" alt="Lara Lorca, Graphic Designer, VECTRA International Associate."><h3>Lara Lorca</h3><p class="vs-expert__role">Graphic Designer</p></article>
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_4 }}" alt="Vinay S, SEO Strategist, VECTRA International Associate."><h3>Vinay S</h3><p class="vs-expert__role">SEO Strategist</p></article>
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_1 }}" alt="Gustian Lee, Web Developer, VECTRA International Associate."><h3>Gustian Lee</h3><p class="vs-expert__role">Web Developer</p></article>
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_2 }}" alt="Israel Malit, Global Ecommerce Manager, VECTRA International Associate."><h3>Israel Malit</h3><p class="vs-expert__role">Global Ecommerce Manager</p></article>
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_3 }}" alt="San Thida, Marketplace Growth &amp; Merchandising Associate, VECTRA International Associate."><h3>San Thida</h3><p class="vs-expert__role">Marketplace Growth &amp; Merchandising Associate</p></article>
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_4 }}" alt="William Nwokoji, Content Strategist, VECTRA International Associate."><h3>William Nwokoji</h3><p class="vs-expert__role">Content Strategist</p></article>
-    </div>
-    <div class="vh-wrap vp-group" data-vh-reveal="up"><h3>Operations &amp; Systems</h3></div>
-    <div class="vs-experts__grid">
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_1 }}" alt="Julie Hill, Digital Systems Support Coordinator, VECTRA International Associate."><h3>Julie Hill</h3><p class="vs-expert__role">Digital Systems Support Coordinator</p></article>
-      <article class="vs-expert" data-vh-reveal="up"><img src="{{ img_face_2 }}" alt="Cecilia Francis, Executive Assistant &amp; Admin Operations Support, VECTRA International Associate."><h3>Cecilia Francis</h3><p class="vs-expert__role">Executive Assistant &amp; Admin Operations Support</p></article>
+    <div class="vs-experts__grid" data-vs-associates-listing>
+      {% render 'vectra-associates-roster',
+        mode: 'cards',
+        img_face_1: img_face_1,
+        img_face_2: img_face_2,
+        img_face_3: img_face_3,
+        img_face_4: img_face_4,
+        profile_base: associates_url
+      %}
     </div>
   {% endif %}
   <div class="vh-wrap vp-cta" data-vh-reveal="up">

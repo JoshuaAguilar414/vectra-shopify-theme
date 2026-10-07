@@ -6,13 +6,14 @@
   @param {boolean} [include_story] - Also load Our Story CSS/JS
   @param {boolean} [include_solutions] - Also load Solutions CSS/JS
   @param {boolean} [include_resources] - Also load Resources CSS/JS
+  @param {boolean} [include_lms] - Also load VECTRA Academy LMS CSS/JS
   @param {boolean} [skip_footer] - Footer is rendered by the VECTRA footer block instead
 {%- enddoc -%}
 
-{% render 'vectra-assets', include_css: true, include_js: true, include_story: include_story, include_solutions: include_solutions, include_resources: include_resources %}
+{% render 'vectra-assets', include_css: true, include_js: true, include_story: include_story, include_solutions: include_solutions, include_resources: include_resources, include_lms: include_lms %}
 
 <div
-  class="vectra-home{% if include_story %} vectra-story{% endif %}{% if include_solutions %} vectra-sol{% endif %}{% if include_resources %} vectra-res{% endif %}"
+  class="vectra-home{% if include_story %} vectra-story{% endif %}{% if include_solutions %} vectra-sol{% endif %}{% if include_resources %} vectra-res{% endif %}{% if include_lms %} vectra-lms-page{% endif %}"
   data-vectra-home
   {% if include_story %}
     data-vectra-story
@@ -22,6 +23,9 @@
   {% endif %}
   {% if include_resources %}
     data-vectra-res
+  {% endif %}
+  {% if include_lms %}
+    data-vectra-lms
   {% endif %}
 >
   {{ children }}

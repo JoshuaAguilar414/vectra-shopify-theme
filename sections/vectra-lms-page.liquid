@@ -1,0 +1,39 @@
+{% capture children %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-page-shell', children: children, skip_footer: true, include_lms: true %}
+
+{% schema %}
+{
+  "name": "VECTRA LMS",
+  "class": "vectra-lms-section",
+  "enabled_on": {
+    "templates": ["page"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "VECTRA Academy LMS pages. Add header, LMS body, and footer blocks. Staff pages require customer tags lms-admin or lms-coordinator."
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "MEGA Navigation"
+    }
+  ],
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA LMS",
+      "blocks": [
+        { "type": "vectra-header" },
+        { "type": "vectra-lms-body" },
+        { "type": "vectra-footer" }
+      ]
+    }
+  ]
+}
+{% endschema %}

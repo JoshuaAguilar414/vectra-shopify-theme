@@ -1,0 +1,82 @@
+{%- doc -%}
+  Shared VECTRA associates roster in A–Z order by first name.
+  @param {string} [mode] - "cards" (default) or "json"
+  @param {string} img_face_1
+  @param {string} img_face_2
+  @param {string} img_face_3
+  @param {string} img_face_4
+  @param {string} [profile_base] - Optional associates page URL for in-page profile anchors
+{%- enddoc -%}
+{% liquid
+  assign mode = mode | default: 'cards'
+  assign base = profile_base | default: '' | strip
+%}
+{% if mode == 'json' %}
+[
+  {"name":"Aeshwarya Das","role":"Automation and Analytics Manager","img":{{ img_face_1 | json }},"slug":"aeshwarya-das"},
+  {"name":"Am Bintang","role":"Social Media Specialist","img":{{ img_face_2 | json }},"slug":"am-bintang"},
+  {"name":"Bhupender Singh","role":"Business Solutions Consultant","img":{{ img_face_3 | json }},"slug":"bhupender-singh"},
+  {"name":"Cecilia Francis","role":"Executive Assistant & Admin Operations Support","img":{{ img_face_4 | json }},"slug":"cecilia-francis"},
+  {"name":"Danna Fadul","role":"RFP Coordinator","img":{{ img_face_1 | json }},"slug":"danna-fadul"},
+  {"name":"Eerab Akhlaq","role":"Senior Marketing Manager","img":{{ img_face_2 | json }},"slug":"eerab-akhlaq"},
+  {"name":"Eloá Testoni","role":"Territory Business Manager","img":{{ img_face_3 | json }},"slug":"eloa-testoni"},
+  {"name":"Gustian Lee","role":"Web Developer","img":{{ img_face_4 | json }},"slug":"gustian-lee"},
+  {"name":"Israel Malit","role":"Global Ecommerce Manager","img":{{ img_face_1 | json }},"slug":"israel-malit"},
+  {"name":"Julie Hill","role":"Digital Systems Support Coordinator","img":{{ img_face_2 | json }},"slug":"julie-hill"},
+  {"name":"Lara Lorca","role":"Graphic Designer","img":{{ img_face_3 | json }},"slug":"lara-lorca"},
+  {"name":"Leona Hitosis","role":"Instructional Designer","img":{{ img_face_4 | json }},"slug":"leona-hitosis"},
+  {"name":"Long Phi","role":"Territory Business Manager","img":{{ img_face_1 | json }},"slug":"long-phi"},
+  {"name":"Pamela Ramos","role":"Instructional Designer","img":{{ img_face_2 | json }},"slug":"pamela-ramos"},
+  {"name":"Pol Benliro","role":"Instructional Designer","img":{{ img_face_3 | json }},"slug":"pol-benliro"},
+  {"name":"Prateek Kadambande","role":"Business Development Associate","img":{{ img_face_4 | json }},"slug":"prateek-kadambande"},
+  {"name":"San Thida","role":"Marketplace Growth & Merchandising Associate","img":{{ img_face_1 | json }},"slug":"san-thida"},
+  {"name":"Sheila Akpaso","role":"Chief HR Officer Consultant","img":{{ img_face_2 | json }},"slug":"sheila-akpaso"},
+  {"name":"Vinay S","role":"SEO Strategist","img":{{ img_face_3 | json }},"slug":"vinay-s"},
+  {"name":"William Nwokoji","role":"Content Strategist","img":{{ img_face_4 | json }},"slug":"william-nwokoji"}
+]
+{% else %}
+  {% liquid
+    assign names = 'Aeshwarya Das|Am Bintang|Bhupender Singh|Cecilia Francis|Danna Fadul|Eerab Akhlaq|Eloá Testoni|Gustian Lee|Israel Malit|Julie Hill|Lara Lorca|Leona Hitosis|Long Phi|Pamela Ramos|Pol Benliro|Prateek Kadambande|San Thida|Sheila Akpaso|Vinay S|William Nwokoji' | split: '|'
+    assign roles = 'Automation and Analytics Manager|Social Media Specialist|Business Solutions Consultant|Executive Assistant & Admin Operations Support|RFP Coordinator|Senior Marketing Manager|Territory Business Manager|Web Developer|Global Ecommerce Manager|Digital Systems Support Coordinator|Graphic Designer|Instructional Designer|Territory Business Manager|Instructional Designer|Instructional Designer|Business Development Associate|Marketplace Growth & Merchandising Associate|Chief HR Officer Consultant|SEO Strategist|Content Strategist' | split: '|'
+    assign slugs = 'aeshwarya-das|am-bintang|bhupender-singh|cecilia-francis|danna-fadul|eerab-akhlaq|eloa-testoni|gustian-lee|israel-malit|julie-hill|lara-lorca|leona-hitosis|long-phi|pamela-ramos|pol-benliro|prateek-kadambande|san-thida|sheila-akpaso|vinay-s|william-nwokoji' | split: '|'
+  %}
+  {% for name in names %}
+    {% liquid
+      assign idx = forloop.index0
+      assign role = roles[idx]
+      assign slug = slugs[idx]
+      assign mod = idx | modulo: 4
+      case mod
+        when 0
+          assign photo = img_face_1
+        when 1
+          assign photo = img_face_2
+        when 2
+          assign photo = img_face_3
+        else
+          assign photo = img_face_4
+      endcase
+      assign href = ''
+      if base != blank
+        assign href = base | append: '#' | append: slug
+      endif
+    %}
+    <article class="vs-expert" data-vs-associate data-name="{{ name | escape }}" id="{{ slug }}" data-vh-reveal="up">
+      {% if href != blank %}
+        <a class="vs-expert__photo-link" href="{{ href }}">
+          <img src="{{ photo }}" alt="{{ name | escape }}, {{ role | escape }}, VECTRA International Associate." width="480" height="480" loading="lazy">
+        </a>
+      {% else %}
+        <img src="{{ photo }}" alt="{{ name | escape }}, {{ role | escape }}, VECTRA International Associate." width="480" height="480" loading="lazy">
+      {% endif %}
+      <h3>
+        {% if href != blank %}
+          <a href="{{ href }}">{{ name }}</a>
+        {% else %}
+          {{ name }}
+        {% endif %}
+      </h3>
+      <p class="vs-expert__role">{{ role }}</p>
+    </article>
+  {% endfor %}
+{% endif %}

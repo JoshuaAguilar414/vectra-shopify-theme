@@ -1,0 +1,17 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+
+# Theme tooling
+node_modules/
+tmp-blog-export/
+*.zip
+
+# LMS app
+apps/lms/node_modules/
+apps/lms/.env
+apps/lms/storage/
+apps/lms/dist/

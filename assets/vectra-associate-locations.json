@@ -1,0 +1,15 @@
+[
+  { "label": "Brussels, Belgium", "x": 49.2, "y": 31.5 },
+  { "label": "Germany", "x": 50.6, "y": 29.8 },
+  { "label": "United Kingdom", "x": 46.8, "y": 29.5 },
+  { "label": "Kenya", "x": 56.4, "y": 52.8 },
+  { "label": "Nigeria", "x": 50.2, "y": 50.5 },
+  { "label": "India", "x": 67.8, "y": 43.2 },
+  { "label": "Philippines", "x": 78.4, "y": 48.6 },
+  { "label": "Indonesia", "x": 78.0, "y": 55.2 },
+  { "label": "Vietnam", "x": 75.6, "y": 46.8 },
+  { "label": "Brazil", "x": 32.4, "y": 58.5 },
+  { "label": "Colombia", "x": 27.8, "y": 50.2 },
+  { "label": "United States", "x": 22.5, "y": 36.8 },
+  { "label": "Canada", "x": 23.8, "y": 28.4 }
+]

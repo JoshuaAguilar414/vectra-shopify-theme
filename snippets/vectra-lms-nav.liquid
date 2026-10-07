@@ -1,0 +1,49 @@
+{%- doc -%}
+  LMS sub-nav under VECTRA header.
+  Pretty paths under /marketplace/lms/* redirect to /pages/lms-* (see vectra-redirects).
+  @param {string} active - overview | participants | users | courses | reports | settings | dashboard | my-courses | profile
+  @param {boolean} staff - show staff links
+{%- enddoc -%}
+
+{% liquid
+  assign overview_url = '/marketplace/lms/admin'
+  assign participants_url = '/marketplace/lms/participants'
+  assign users_url = '/marketplace/lms/users'
+  assign courses_url = '/marketplace/lms/courses'
+  assign reports_url = '/marketplace/lms/reports'
+  assign settings_url = '/marketplace/lms/settings'
+  assign dashboard_url = '/marketplace/lms/dashboard'
+  assign my_courses_url = '/marketplace/lms/my-courses'
+  assign profile_url = '/marketplace/lms/profile'
+%}
+
+<div class="vlms-bar">
+  <div class="vlms-wrap vlms-bar__inner">
+    <a class="vlms-bar__brand" href="{% if staff %}{{ overview_url }}{% else %}{{ dashboard_url }}{% endif %}">
+      <span class="vlms-bar__badge">Academy</span>
+    </a>
+
+    <nav class="vlms-bar__nav" aria-label="VECTRA Academy">
+      {% if staff %}
+        <a class="vlms-bar__link{% if active == 'overview' %} is-active{% endif %}" href="{{ overview_url }}">Overview</a>
+        <a class="vlms-bar__link{% if active == 'participants' %} is-active{% endif %}" href="{{ participants_url }}">Participants</a>
+        <a class="vlms-bar__link{% if active == 'users' %} is-active{% endif %}" href="{{ users_url }}">Users</a>
+        <a class="vlms-bar__link{% if active == 'courses' %} is-active{% endif %}" href="{{ courses_url }}">Courses</a>
+        <a class="vlms-bar__link{% if active == 'reports' %} is-active{% endif %}" href="{{ reports_url }}">Reports</a>
+        <a class="vlms-bar__link{% if active == 'settings' %} is-active{% endif %}" href="{{ settings_url }}">Settings</a>
+      {% else %}
+        <a class="vlms-bar__link{% if active == 'dashboard' %} is-active{% endif %}" href="{{ dashboard_url }}">Dashboard</a>
+        <a class="vlms-bar__link{% if active == 'my-courses' %} is-active{% endif %}" href="{{ my_courses_url }}">My courses</a>
+        <a class="vlms-bar__link{% if active == 'profile' %} is-active{% endif %}" href="{{ profile_url }}">Profile</a>
+      {% endif %}
+    </nav>
+
+    <div class="vlms-bar__user">
+      {% if customer %}
+        {{ customer.first_name | default: customer.email }}
+      {% else %}
+        <a href="{{ routes.account_login_url }}">Log in</a>
+      {% endif %}
+    </div>
+  </div>
+</div>

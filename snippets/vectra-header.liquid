@@ -66,7 +66,8 @@
     assign profile_url = routes.account_url
     assign orders_url = routes.account_url
   endif
-  assign courses_url = pages['my-courses'].url | default: pages['courses'].url | default: routes.account_url
+  assign courses_url = '/marketplace/lms/my-courses'
+  assign academy_url = '/marketplace/lms'
   assign customer_initial = customer.first_name | default: customer.email | slice: 0 | upcase
   assign customer_hello = customer.first_name | default: 'there'
 %}
@@ -82,6 +83,7 @@
 {% capture careers %}{% render 'vectra-preview-href', url: careers_base, view: 'careers' %}{% endcapture %}
 {% assign contact_base = pages['contact'].url | default: pages['contact-us'].url | default: '/pages/contact' %}
 {% capture contact %}{% render 'vectra-preview-href', url: contact_base, view: 'contact-us' %}{% endcapture %}
+{% assign academy = academy_url %}
 {% assign story = story | strip %}
 {% assign solutions = solutions | strip %}
 {% assign resources = resources | strip %}
@@ -93,6 +95,7 @@
 {% assign interns = interns | strip %}
 {% assign careers = careers | strip %}
 {% assign contact = contact | strip %}
+{% assign academy = academy | strip %}
 
 <header class="vh-header" data-vh-header>
   <div class="vh-util">
@@ -191,6 +194,7 @@
         story: story,
         solutions: solutions,
         marketplace: marketplace,
+        academy: academy,
         resources: resources,
         faq: faq,
         experts: experts,
@@ -227,6 +231,7 @@
         story: story,
         solutions: solutions,
         marketplace: marketplace,
+        academy: academy,
         resources: resources,
         faq: faq,
         experts: experts,

@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "vectra_lms": {
+      "type": "vectra-lms-page",
+      "blocks": {
+        "header": {
+          "type": "vectra-header",
+          "settings": { "menu": "vectra-website-mega-menu" }
+        },
+        "body": {
+          "type": "vectra-lms-body",
+          "settings": {
+            "screen": "courses",
+            "preview_without_gate": false
+          }
+        },
+        "footer": { "type": "vectra-footer", "settings": {} }
+      },
+      "block_order": ["header", "body", "footer"],
+      "settings": { "menu": "vectra-website-mega-menu" }
+    }
+  },
+  "order": ["vectra_lms"]
+}

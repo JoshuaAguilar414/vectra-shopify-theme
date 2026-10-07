@@ -400,31 +400,20 @@
       </div>
     </section>
 
-    {% if block.settings.show_associates %}
-    <section class="vs-experts" id="associates">
+    {% if block.settings.show_associates != false %}
+    <section class="vs-experts vs-experts--teaser" id="associates" data-vs-featured-associates data-featured-count="5">
+      <p class="vs-experts__kicker">{{ block.settings.associates_kicker | default: 'OUR ASSOCIATES' }}</p>
       <h2>{{ block.settings.associates_heading | default: 'Our Associates' }}</h2>
-      <div class="vs-experts__grid">
-        <article class="vs-expert">
-          <img src="{{ img_face_1 }}" alt="Regional associate, Africa">
-          <h3>Regional Associate — Africa</h3>
-          <p>Local market context for supplier engagement, social compliance, and operational follow-through across African supply chains.</p>
-        </article>
-        <article class="vs-expert">
-          <img src="{{ img_face_2 }}" alt="Regional associate, Europe">
-          <h3>Regional Associate — Europe</h3>
-          <p>Hands-on support for ESG reporting, due diligence, and capability building with European brands and their supplier networks.</p>
-        </article>
-        <article class="vs-expert">
-          <img src="{{ img_face_3 }}" alt="Regional associate, Asia">
-          <h3>Regional Associate — Asia</h3>
-          <p>Factory, farm, and mill experience that helps teams turn audit findings into practical, locally workable action.</p>
-        </article>
-        <article class="vs-expert">
-          <img src="{{ img_face_4 }}" alt="Regional associate, Americas">
-          <h3>Regional Associate — Americas</h3>
-          <p>Specialist support for responsible sourcing, labour standards, and operational resilience programmes across the Americas.</p>
-        </article>
-      </div>
+      <div class="vs-experts__grid" data-vs-featured-grid aria-live="polite"></div>
+      <script type="application/json" data-vs-associate-pool>
+        {% render 'vectra-associates-roster',
+          mode: 'json',
+          img_face_1: img_face_1,
+          img_face_2: img_face_2,
+          img_face_3: img_face_3,
+          img_face_4: img_face_4
+        %}
+      </script>
       <div class="vs-experts__more">
         <div class="vs-faces" data-vh-reveal="fade">
           <img src="{{ img_face_1 }}" alt="">
@@ -501,14 +490,32 @@
         {% endif %}
       </div>
       <a class="vs-cta-btn" href="{{ block.settings.people_button_link | default: associates_href }}">{{ block.settings.people_button_label | default: 'Meet Our People' }}<img src="{{ img_arrow_btn }}" alt=""></a>
-      <div class="vs-people__map">
-        {% if block.settings.map_video != blank %}
-          {{ block.settings.map_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '1600x' }}
-        {% else %}
-        <video muted loop playsinline poster="{% if block.settings.map_poster != blank %}{{ block.settings.map_poster | image_url: width: 1600 }}{% else %}{{ img_ceo }}{% endif %}" data-vh-video>
-          <source src="{{ vid_map }}" type="video/mp4">
-        </video>
-        {% endif %}
+      {% liquid
+        assign map_src = vid_map
+        if block.settings.map_video != blank
+          assign map_video_src = block.settings.map_video.sources.first.url
+          if map_video_src != blank
+            assign map_src = map_video_src
+          endif
+        endif
+        if block.settings.map_poster != blank
+          assign map_poster = block.settings.map_poster | image_url: width: 1600
+        else
+          assign map_poster = img_globe
+        endif
+        assign map_locations_url = 'vectra-associate-locations.json' | asset_url
+      %}
+      <div
+        class="vs-people__map"
+        data-vs-map
+        data-map-src="{{ map_src }}"
+        data-map-poster="{{ map_poster }}"
+        data-map-locations="{{ map_locations_url }}"
+        data-map-pin="{{ img_pin }}"
+      >
+        <img class="vs-people__map-poster" src="{{ map_poster }}" alt="VECTRA International global associate network map" width="1600" height="900" loading="lazy" decoding="async">
+        <video muted loop playsinline preload="none" poster="{{ map_poster }}" data-vs-map-video hidden></video>
+        <ul class="vs-people__pins" data-vs-map-pins aria-label="Associate locations"></ul>
       </div>
     </section>
 

@@ -1,0 +1,23 @@
+# Learn more: https://shopify.dev/docs/apps/tools/cli/configuration
+
+name = "VECTRA Academy LMS"
+client_id = "YOUR_CLIENT_ID"
+application_url = "https://YOUR_APP_HOST"
+embedded = true
+
+[access_scopes]
+scopes = "read_customers,write_customers,read_products"
+
+[auth]
+redirect_urls = [ "https://YOUR_APP_HOST/auth/callback" ]
+
+[app_proxy]
+url = "https://YOUR_APP_HOST/proxy"
+subpath = "lms"
+prefix = "apps"
+
+[webhooks]
+api_version = "2025-01"
+
+[pos]
+embedded = false

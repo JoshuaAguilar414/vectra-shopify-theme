@@ -1,6 +1,7 @@
 {%- doc -%}
-  Client-side fallback for WordPress to Shopify URL migration.
+  Client-side fallback for WordPress → Shopify and Marketplace LMS pretty paths.
   Import the same map in Shopify Admin > Navigation > URL redirects for 301s.
+  LMS: /marketplace/lms/* → /pages/lms-* (query string preserved when dest has no ?).
 {%- enddoc -%}
 
 <script>
@@ -47,6 +48,17 @@
       '/faq': '/pages/faq',
       '/faqs': '/pages/faq',
       '/marketplace': '/pages/marketplace',
+      '/marketplace/lms': '/pages/lms-dashboard',
+      '/marketplace/lms/dashboard': '/pages/lms-dashboard',
+      '/marketplace/lms/my-courses': '/pages/lms-my-courses',
+      '/marketplace/lms/profile': '/pages/lms-profile',
+      '/marketplace/lms/learn': '/pages/lms-learn',
+      '/marketplace/lms/admin': '/pages/lms-admin',
+      '/marketplace/lms/participants': '/pages/lms-participants',
+      '/marketplace/lms/users': '/pages/lms-users',
+      '/marketplace/lms/courses': '/pages/lms-courses',
+      '/marketplace/lms/reports': '/pages/lms-reports',
+      '/marketplace/lms/settings': '/pages/lms-settings',
       '/courses': '/pages/marketplace',
       '/course': '/pages/marketplace',
       '/vsuites': '/pages/marketplace',

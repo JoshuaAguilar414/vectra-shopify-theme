@@ -1,0 +1,28 @@
+{%- doc -%}
+  LMS access helpers for theme pages.
+  Staff: customer tags lms-admin or lms-coordinator
+  Learner: any logged-in customer (or tag lms-learner)
+{%- enddoc -%}
+
+{% liquid
+  assign vlms_logged_in = false
+  assign vlms_is_staff = false
+  assign vlms_is_admin = false
+  assign vlms_is_coordinator = false
+  assign vlms_is_learner = false
+
+  if customer
+    assign vlms_logged_in = true
+    if customer.tags contains 'lms-admin'
+      assign vlms_is_admin = true
+      assign vlms_is_staff = true
+    endif
+    if customer.tags contains 'lms-coordinator'
+      assign vlms_is_coordinator = true
+      assign vlms_is_staff = true
+    endif
+    if customer.tags contains 'lms-learner' or vlms_is_staff == false
+      assign vlms_is_learner = true
+    endif
+  endif
+%}

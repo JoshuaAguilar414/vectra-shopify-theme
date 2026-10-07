@@ -1,0 +1,46 @@
+{% render 'vectra-lms-modules', module: block.settings.screen, block: block %}
+
+{% schema %}
+{
+  "name": "VECTRA: LMS body",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "screen",
+      "label": "Screen",
+      "options": [
+        { "value": "overview", "label": "Admin · Overview" },
+        { "value": "participants", "label": "Admin · Participants" },
+        { "value": "users", "label": "Admin · Users" },
+        { "value": "courses", "label": "Admin · Courses" },
+        { "value": "reports", "label": "Admin · Reports" },
+        { "value": "settings", "label": "Admin · Settings" },
+        { "value": "dashboard", "label": "Learner · Dashboard" },
+        { "value": "my-courses", "label": "Learner · My courses" },
+        { "value": "profile", "label": "Learner · Profile" },
+        { "value": "learn", "label": "Learner · SCORM player" }
+      ],
+      "default": "overview"
+    },
+    {
+      "type": "checkbox",
+      "id": "preview_without_gate",
+      "label": "Preview without login gate",
+      "default": false,
+      "info": "Enable only in the theme editor while designing. Production should stay off so staff tags / login are enforced."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading override"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Intro text override"
+    }
+  ],
+  "presets": [{ "name": "VECTRA: LMS body" }]
+}
+{% endschema %}

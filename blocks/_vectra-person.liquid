@@ -1,4 +1,4 @@
-<article class="vs-expert" {{ block.shopify_attributes }}>
+<article class="vs-expert" data-name="{{ block.settings.name | escape }}" {{ block.shopify_attributes }}>
   {% if block.settings.link != blank %}
     <a
       class="vs-expert__photo-link"

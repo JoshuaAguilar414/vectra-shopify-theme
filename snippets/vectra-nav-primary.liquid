@@ -19,6 +19,7 @@
   </div>
   <a href="{{ solutions }}">How We Help</a>
   <a href="{{ marketplace }}">Marketplace</a>
+  <a href="{{ academy | default: '/marketplace/lms' }}">Academy</a>
   <div class="vh-nav-panel__item has-children">
     <button type="button" data-vh-mobile-sub aria-expanded="false">Resources</button>
     <div class="vh-nav-panel__sub">
@@ -51,6 +52,9 @@
   </div>
   <div class="vh-menu__item">
     <a href="{{ marketplace }}">Marketplace</a>
+  </div>
+  <div class="vh-menu__item">
+    <a href="{{ academy | default: '/marketplace/lms' }}">Academy</a>
   </div>
   <div class="vh-menu__item has-children" data-vh-mega-item>
     <div class="vh-menu__anchor">

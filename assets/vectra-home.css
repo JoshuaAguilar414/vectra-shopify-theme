@@ -3790,13 +3790,16 @@
 }
 
 .vh-careers .vh-h2 {
-  font-size: 48px;
+  font-size: clamp(32px, 4vw, 48px);
   font-weight: 700;
   letter-spacing: -0.05em;
   text-transform: none;
   color: #092543;
-  line-height: 1.1;
-  margin: 0;
+  line-height: 1.15;
+  margin: 0 auto;
+  max-width: min(18em, 100%);
+  text-wrap: balance;
+  overflow-wrap: anywhere;
 }
 
 .vh-careers .vh-lead {
