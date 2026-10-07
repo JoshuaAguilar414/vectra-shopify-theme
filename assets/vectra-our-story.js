@@ -126,21 +126,25 @@
   qsa('[data-vs-map]').forEach((map) => {
     const video = qs('[data-vs-map-video]', map);
     const pins = qs('[data-vs-map-pins]', map);
+    const locationsEl = qs('[data-vs-map-locations]', map);
     const src = map.dataset.mapSrc;
     const pinUrl = map.dataset.mapPin || '';
-    const locationsUrl = map.dataset.mapLocations || '';
     let loaded = false;
+    let locations = [];
 
-    const loadLocations = () => {
-      if (!locationsUrl || !pins) return;
-      fetch(locationsUrl)
-        .then((res) => (res.ok ? res.json() : []))
-        .then((locations) => renderMapPins(pins, pinUrl, locations))
-        .catch(() => {});
-    };
+    try {
+      locations = JSON.parse(locationsEl?.textContent || '[]');
+    } catch (_err) {
+      locations = [];
+    }
+    // Prefer server-rendered pins; only rebuild if the list is empty.
+    if (pins && !pins.children.length && locations.length) {
+      renderMapPins(pins, pinUrl, locations);
+    }
 
     const activateVideo = () => {
       if (loaded || !video || !src) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       loaded = true;
       video.hidden = false;
       video.muted = true;
@@ -161,27 +165,32 @@
         },
         { once: true }
       );
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        video.play().catch(() => {});
-      }
+      video.play().catch(() => {});
     };
 
-    loadLocations();
+    const scheduleVideo = () => {
+      const start = () => activateVideo();
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(start, { timeout: 1800 });
+      } else {
+        window.setTimeout(start, 400);
+      }
+    };
 
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (!entry.isIntersecting) return;
-            activateVideo();
+            scheduleVideo();
             io.disconnect();
           });
         },
-        { rootMargin: '200px 0px', threshold: 0.01 }
+        { rootMargin: '120px 0px', threshold: 0.05 }
       );
       io.observe(map);
     } else {
-      activateVideo();
+      scheduleVideo();
     }
   });
 

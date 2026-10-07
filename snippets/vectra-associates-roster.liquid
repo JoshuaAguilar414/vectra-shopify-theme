@@ -31,14 +31,14 @@
   {"name":"Prateek Kadambande","role":"Business Development Associate","img":{{ img_face_4 | json }},"slug":"prateek-kadambande"},
   {"name":"San Thida","role":"Marketplace Growth & Merchandising Associate","img":{{ img_face_1 | json }},"slug":"san-thida"},
   {"name":"Sheila Akpaso","role":"Chief HR Officer Consultant","img":{{ img_face_2 | json }},"slug":"sheila-akpaso"},
-  {"name":"Vinay S","role":"SEO Strategist","img":{{ img_face_3 | json }},"slug":"vinay-s"},
+  {"name":"Vinay Singh","role":"SEO Strategist","img":{{ img_face_3 | json }},"slug":"vinay-singh"},
   {"name":"William Nwokoji","role":"Content Strategist","img":{{ img_face_4 | json }},"slug":"william-nwokoji"}
 ]
 {% else %}
   {% liquid
-    assign names = 'Aeshwarya Das|Am Bintang|Bhupender Singh|Cecilia Francis|Danna Fadul|Eerab Akhlaq|Eloá Testoni|Gustian Lee|Israel Malit|Julie Hill|Lara Lorca|Leona Hitosis|Long Phi|Pamela Ramos|Pol Benliro|Prateek Kadambande|San Thida|Sheila Akpaso|Vinay S|William Nwokoji' | split: '|'
+    assign names = 'Aeshwarya Das|Am Bintang|Bhupender Singh|Cecilia Francis|Danna Fadul|Eerab Akhlaq|Eloá Testoni|Gustian Lee|Israel Malit|Julie Hill|Lara Lorca|Leona Hitosis|Long Phi|Pamela Ramos|Pol Benliro|Prateek Kadambande|San Thida|Sheila Akpaso|Vinay Singh|William Nwokoji' | split: '|'
     assign roles = 'Automation and Analytics Manager|Social Media Specialist|Business Solutions Consultant|Executive Assistant & Admin Operations Support|RFP Coordinator|Senior Marketing Manager|Territory Business Manager|Web Developer|Global Ecommerce Manager|Digital Systems Support Coordinator|Graphic Designer|Instructional Designer|Territory Business Manager|Instructional Designer|Instructional Designer|Business Development Associate|Marketplace Growth & Merchandising Associate|Chief HR Officer Consultant|SEO Strategist|Content Strategist' | split: '|'
-    assign slugs = 'aeshwarya-das|am-bintang|bhupender-singh|cecilia-francis|danna-fadul|eerab-akhlaq|eloa-testoni|gustian-lee|israel-malit|julie-hill|lara-lorca|leona-hitosis|long-phi|pamela-ramos|pol-benliro|prateek-kadambande|san-thida|sheila-akpaso|vinay-s|william-nwokoji' | split: '|'
+    assign slugs = 'aeshwarya-das|am-bintang|bhupender-singh|cecilia-francis|danna-fadul|eerab-akhlaq|eloa-testoni|gustian-lee|israel-malit|julie-hill|lara-lorca|leona-hitosis|long-phi|pamela-ramos|pol-benliro|prateek-kadambande|san-thida|sheila-akpaso|vinay-singh|william-nwokoji' | split: '|'
   %}
   {% for name in names %}
     {% liquid

@@ -503,19 +503,20 @@
         else
           assign map_poster = img_globe
         endif
-        assign map_locations_url = 'vectra-associate-locations.json' | asset_url
       %}
       <div
         class="vs-people__map"
         data-vs-map
         data-map-src="{{ map_src }}"
         data-map-poster="{{ map_poster }}"
-        data-map-locations="{{ map_locations_url }}"
         data-map-pin="{{ img_pin }}"
       >
         <img class="vs-people__map-poster" src="{{ map_poster }}" alt="VECTRA International global associate network map" width="1600" height="900" loading="lazy" decoding="async">
-        <video muted loop playsinline preload="none" poster="{{ map_poster }}" data-vs-map-video hidden></video>
-        <ul class="vs-people__pins" data-vs-map-pins aria-label="Associate locations"></ul>
+        <video muted loop playsinline preload="none" poster="{{ map_poster }}" data-vs-map-video hidden aria-hidden="true"></video>
+        <script type="application/json" data-vs-map-locations>{% render 'vectra-associate-locations', mode: 'json' %}</script>
+        <ul class="vs-people__pins" data-vs-map-pins aria-label="Associate locations">
+          {% render 'vectra-associate-locations', mode: 'pins', img_pin: img_pin %}
+        </ul>
       </div>
     </section>
 
