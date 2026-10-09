@@ -124,12 +124,9 @@
   };
 
   qsa('[data-vs-map]').forEach((map) => {
-    const video = qs('[data-vs-map-video]', map);
     const pins = qs('[data-vs-map-pins]', map);
     const locationsEl = qs('[data-vs-map-locations]', map);
-    const src = map.dataset.mapSrc;
     const pinUrl = map.dataset.mapPin || '';
-    let loaded = false;
     let locations = [];
 
     try {
@@ -137,60 +134,10 @@
     } catch (_err) {
       locations = [];
     }
-    // Prefer server-rendered pins; only rebuild if the list is empty.
+    // Pins are server-rendered from the approved location list.
+    // Rebuild only if markup is missing (e.g. cached empty HTML).
     if (pins && !pins.children.length && locations.length) {
       renderMapPins(pins, pinUrl, locations);
-    }
-
-    const activateVideo = () => {
-      if (loaded || !video || !src) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      loaded = true;
-      video.hidden = false;
-      video.muted = true;
-      video.playsInline = true;
-      video.setAttribute('playsinline', '');
-      if (!video.querySelector('source')) {
-        const source = document.createElement('source');
-        source.src = src;
-        source.type = 'video/mp4';
-        video.appendChild(source);
-      }
-      video.load();
-      video.addEventListener(
-        'loadeddata',
-        () => {
-          video.dataset.vsMapReady = 'true';
-          map.classList.add('is-video-ready');
-        },
-        { once: true }
-      );
-      video.play().catch(() => {});
-    };
-
-    const scheduleVideo = () => {
-      const start = () => activateVideo();
-      if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(start, { timeout: 1800 });
-      } else {
-        window.setTimeout(start, 400);
-      }
-    };
-
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            scheduleVideo();
-            io.disconnect();
-          });
-        },
-        { rootMargin: '120px 0px', threshold: 0.05 }
-      );
-      io.observe(map);
-    } else {
-      scheduleVideo();
     }
   });
 

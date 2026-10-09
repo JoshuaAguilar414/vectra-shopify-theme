@@ -41,7 +41,6 @@
   assign img_face_3 = 'vectra-26b8a07235b9d48b395528564d6124a59d29f6e3.png' | asset_url
   assign img_face_4 = 'vectra-portrait-placeholder.png' | asset_url
   assign vid_hero = 'vectra-story-hero.mp4' | asset_url
-  assign vid_map = 'vectra-story-map.mp4' | asset_url
   assign home = routes.root_url
   assign story = pages['about-us'].url | default: pages['our-story'].url | default: '/pages/about-us'
   assign experts_url = pages['experts'].url | default: '/pages/experts'
@@ -491,31 +490,25 @@
       </div>
       <a class="vs-cta-btn" href="{{ block.settings.people_button_link | default: associates_href }}">{{ block.settings.people_button_label | default: 'Meet Our People' }}<img src="{{ img_arrow_btn }}" alt=""></a>
       {% liquid
-        assign map_src = vid_map
-        if block.settings.map_video != blank
-          assign map_video_src = block.settings.map_video.sources.first.url
-          if map_video_src != blank
-            assign map_src = map_video_src
-          endif
-        endif
+        assign map_base = 'vectra-story-map-base.png' | asset_url
+        assign map_pin_icon = 'vectra-map-pin.svg' | asset_url
         if block.settings.map_poster != blank
-          assign map_poster = block.settings.map_poster | image_url: width: 1600
-        else
-          assign map_poster = img_globe
+          assign map_base = block.settings.map_poster | image_url: width: 1600
         endif
       %}
-      <div
-        class="vs-people__map"
-        data-vs-map
-        data-map-src="{{ map_src }}"
-        data-map-poster="{{ map_poster }}"
-        data-map-pin="{{ img_pin }}"
-      >
-        <img class="vs-people__map-poster" src="{{ map_poster }}" alt="VECTRA International global associate network map" width="1600" height="900" loading="lazy" decoding="async">
-        <video muted loop playsinline preload="none" poster="{{ map_poster }}" data-vs-map-video hidden aria-hidden="true"></video>
+      <div class="vs-people__map" data-vs-map data-map-pin="{{ map_pin_icon }}">
+        <img
+          class="vs-people__map-poster"
+          src="{{ map_base }}"
+          alt="VECTRA International global associate network map"
+          width="1024"
+          height="509"
+          loading="lazy"
+          decoding="async"
+        >
         <script type="application/json" data-vs-map-locations>{% render 'vectra-associate-locations', mode: 'json' %}</script>
         <ul class="vs-people__pins" data-vs-map-pins aria-label="Associate locations">
-          {% render 'vectra-associate-locations', mode: 'pins', img_pin: img_pin %}
+          {% render 'vectra-associate-locations', mode: 'pins', img_pin: map_pin_icon %}
         </ul>
       </div>
     </section>
