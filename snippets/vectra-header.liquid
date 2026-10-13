@@ -67,14 +67,6 @@
     assign profile_url = routes.account_url
     assign orders_url = routes.account_url
   endif
-  if customer
-    assign courses_url = '/marketplace/lms/my-courses'
-    assign academy_url = '/marketplace/lms'
-  else
-    assign academy_return = '/marketplace/lms' | url_encode
-    assign academy_url = routes.account_login_url | append: '?return_url=' | append: academy_return
-    assign courses_url = academy_url
-  endif
   assign customer_initial = customer.first_name | default: customer.email | slice: 0 | upcase
   assign customer_hello = customer.first_name | default: 'there'
 %}
@@ -91,7 +83,6 @@
 {% capture why %}{% render 'vectra-preview-href', url: why_base, view: 'why-partner' %}{% endcapture %}
 {% assign contact_base = pages['contact'].url | default: pages['contact-us'].url | default: '/pages/contact' %}
 {% capture contact %}{% render 'vectra-preview-href', url: contact_base, view: 'contact-us' %}{% endcapture %}
-{% assign academy = academy_url %}
 {% assign story = story | strip %}
 {% assign solutions = solutions | strip %}
 {% assign resources = resources | strip %}
@@ -104,7 +95,6 @@
 {% assign careers = careers | strip %}
 {% assign why = why | strip %}
 {% assign contact = contact | strip %}
-{% assign academy = academy | strip %}
 
 <header class="vh-header" data-vh-header>
   <div class="vh-util">
@@ -173,10 +163,6 @@
                 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path fill="none" stroke="currentColor" stroke-width="1.7" d="M5.5 19c.7-3.2 3.2-5 6.5-5s5.8 1.8 6.5 5"/></svg>
                 Profile
               </a>
-              <a class="vh-account__chip vh-account__chip--wide" href="{{ courses_url }}">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M4 6.5c3.2-1.4 6.2.2 8 1.8 1.8-1.6 4.8-3.2 8-1.8v11c-3.2-1.4-6.2.2-8 1.8-1.8-1.6-4.8-3.2-8-1.8v-11Z"/><path fill="none" stroke="currentColor" stroke-width="1.7" d="M12 8.3v11"/></svg>
-                My Courses
-              </a>
               <a class="vh-account__chip" href="{{ routes.account_logout_url }}">Log out</a>
             </div>
           </div>
@@ -203,7 +189,6 @@
         story: story,
         solutions: solutions,
         marketplace: marketplace,
-        academy: academy,
         resources: resources,
         faq: faq,
         experts: experts,
@@ -241,7 +226,6 @@
         story: story,
         solutions: solutions,
         marketplace: marketplace,
-        academy: academy,
         resources: resources,
         faq: faq,
         experts: experts,
