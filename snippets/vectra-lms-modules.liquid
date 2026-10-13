@@ -9,12 +9,20 @@
 {% liquid
   assign screen = module | default: block.settings.screen | default: 'overview'
   assign require_staff = false
+  assign require_admin = false
   if screen == 'overview' or screen == 'participants' or screen == 'users' or screen == 'courses' or screen == 'reports' or screen == 'settings'
     assign require_staff = true
+  endif
+  if screen == 'settings'
+    assign require_admin = true
   endif
   assign show_gate = false
   assign show_content = true
   if require_staff and vlms_is_staff == false and block.settings.preview_without_gate == false
+    assign show_gate = true
+    assign show_content = false
+  endif
+  if require_admin and vlms_is_admin == false and block.settings.preview_without_gate == false
     assign show_gate = true
     assign show_content = false
   endif
@@ -38,7 +46,7 @@
   {{ block.shopify_attributes }}
 >
   {% if require_staff %}
-    {% render 'vectra-lms-nav', active: screen, staff: true %}
+    {% render 'vectra-lms-nav', active: screen, staff: true, admin: vlms_is_admin %}
   {% else %}
     {% render 'vectra-lms-nav', active: screen, staff: false %}
   {% endif %}
@@ -48,10 +56,15 @@
 
     {% if show_gate %}
       <div class="vlms-card vlms-gate">
-        {% if require_staff %}
+        {% if require_admin %}
+          <h1 class="vlms-title">Admin access required</h1>
+          <p class="vlms-lead">
+            Settings are limited to Admins. Sign in with a customer account tagged <code>lms-admin</code>.
+          </p>
+        {% elsif require_staff %}
           <h1 class="vlms-title">Staff access required</h1>
           <p class="vlms-lead">
-            Sign in with a Shopify customer account tagged <code>lms-admin</code> or <code>lms-coordinator</code> to manage VECTRA Academy.
+            Sign in with a customer account tagged <code>lms-admin</code> (Admin) or <code>lms-coordinator</code> (Coordinator) to manage VECTRA Academy.
           </p>
         {% else %}
           <h1 class="vlms-title">Sign in to learn</h1>
@@ -205,7 +218,7 @@
 
         {% when 'users' %}
           <h1 class="vlms-title">{{ block.settings.heading | default: 'Users' }}</h1>
-          <p class="vlms-lead">{{ block.settings.text | default: 'Invite learners linked to the participant roster. Staff use lms-admin / lms-coordinator tags plus staffProfiles.' }}</p>
+          <p class="vlms-lead">{{ block.settings.text | default: 'Invite learners linked to the participant roster. Staff: lms-admin (full) or lms-coordinator (no roster write / settings).' }}</p>
 
           <div class="vlms-split">
             <article class="vlms-card">

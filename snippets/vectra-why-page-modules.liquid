@@ -1,0 +1,291 @@
+{%- doc -%}
+  Why VECTRA / why-partner-with-us page modules.
+  Hero answer is the 45-word AEO block, opening with the primary keyword.
+{%- enddoc -%}
+
+{% liquid
+  assign hide_section = false
+  if block != blank and block.settings.hide_section
+    assign hide_section = true
+  endif
+  assign contact_base = pages['contact'].url | default: pages['contact-us'].url | default: '/pages/contact'
+  assign solutions_base = pages['solutions'].url | default: '/pages/solutions'
+  assign about_base = pages['about-us'].url | default: pages['our-story'].url | default: '/pages/about-us'
+  assign experts_base = pages['experts'].url | default: '/pages/experts'
+  assign leadership_base = pages['our-leadership-team'].url | default: pages['leadership'].url | default: pages['about-us'].url | default: pages['our-story'].url | default: '/pages/about-us'
+  assign faq_base = pages['faq'].url | default: '/pages/faq'
+  assign risk_base = pages['risk-assessment'].url | default: pages['services-risk-assessment'].url | default: '/pages/risk-assessment'
+  assign resources_base = pages['resources'].url | default: '/pages/resources'
+%}
+{% capture contact_href %}{% render 'vectra-preview-href', url: contact_base, view: 'contact-us' %}{% endcapture %}
+{% capture solutions_href %}{% render 'vectra-preview-href', url: solutions_base, view: 'solutions' %}{% endcapture %}
+{% capture about_href %}{% render 'vectra-preview-href', url: about_base, view: 'our-story' %}{% endcapture %}
+{% capture experts_href %}{% render 'vectra-preview-href', url: experts_base, view: 'experts' %}{% endcapture %}
+{% capture leadership_href %}{% render 'vectra-preview-href', url: leadership_base, view: 'leadership' %}{% endcapture %}
+{% capture faq_href %}{% render 'vectra-preview-href', url: faq_base, view: 'faq' %}{% endcapture %}
+{% capture risk_href %}{% render 'vectra-preview-href', url: risk_base, view: 'risk-assessment' %}{% endcapture %}
+{% capture resources_href %}{% render 'vectra-preview-href', url: resources_base, view: 'resources' %}{% endcapture %}
+{% assign contact_href = contact_href | strip %}
+{% assign solutions_href = solutions_href | strip %}
+{% assign about_href = about_href | strip %}
+{% assign experts_href = experts_href | strip %}
+{% assign leadership_href = leadership_href | strip %}
+{% assign faq_href = faq_href | strip %}
+{% assign risk_href = risk_href | strip %}
+{% assign cases_href = resources_href | strip | append: '#case-studies' %}
+
+{% case module %}
+  {% when 'hero' %}
+{% render 'vectra-seo', page_key: 'why-partner' %}
+{% unless hide_section %}
+<section class="vwhy-hero" aria-label="Why partner with VECTRA International" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
+  <div class="vwhy-hero__glow" aria-hidden="true"></div>
+  <div class="vwhy-hero__rings" aria-hidden="true"></div>
+  <div class="vwhy-hero__inner">
+    <p class="vwhy-hero__badge" data-vh-reveal="up">Why VECTRA</p>
+    <h1 data-vh-reveal="up">Why Partner with VECTRA International | Our Partnership Approach</h1>
+    <p class="vwhy-display" data-vh-reveal="up">Making Change Work in Practice</p>
+    <p class="vwhy-aeo" data-vh-reveal="up">Why partner with VECTRA International? Because VECTRA closes the gap between deciding what should change and making that change work. We combine specialist expertise, technology, and accountable implementation, work with the systems you already have, and stay involved until the change holds in day-to-day operations.</p>
+    <p class="vwhy-hero__support" data-vh-reveal="up">You can buy advice, software, assessments, and training almost anywhere. The harder part is getting the right people, systems, and actions working together once a decision has been made.</p>
+    <div class="vwhy-hero__actions" data-vh-reveal="up">
+      <a class="vh-btn vh-btn--green" href="{{ contact_href }}">Talk to an Expert</a>
+      <a class="vh-btn vh-btn--outline vh-btn--outline-light" href="{{ solutions_href }}">Explore How We Help</a>
+    </div>
+  </div>
+</section>
+{% endunless %}
+
+  {% when 'gap' %}
+{% unless hide_section %}
+<section class="vwhy-gap" id="why-our-model" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
+  <div class="vwhy-wrap" data-vh-reveal="up">
+    <h2 class="vwhy-kicker-heading">Why Our Model Is Different</h2>
+    <h2>From Recommendation to Implementation</h2>
+    <p>A recommendation can be sound and still fail in practice when it meets competing priorities, unclear ownership, existing systems, and the way people actually work.</p>
+    <p>When you partner with VECTRA, we help turn the decision into clear ownership, practical action, the right specialist support, and evidence that the change is working.</p>
+    <p>That may mean specialist advice, implementation support, capability building, or better use of the systems you already have.</p>
+  </div>
+</section>
+{% endunless %}
+
+  {% when 'different' %}
+{% unless hide_section %}
+<section class="vwhy-diff" id="what-makes-vectra-different" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
+  <div class="vwhy-wrap">
+    <div class="vwhy-diff__intro" data-vh-reveal="up">
+      <p class="vwhy-kicker">What Makes VECTRA International Different</p>
+      <h2>Built Around the Outcome, Not the Deliverable</h2>
+    </div>
+    <div class="vwhy-diff__list">
+      <article data-vh-reveal="up">
+        <span>01</span>
+        <div>
+          <h3>Outcome-First Partnership</h3>
+          <p>We agree what needs to be improved before we decide what the work should include. That keeps the engagement focused on the business issue, the people responsible for it, and the result you need. We stay accountable for that result alongside your team.</p>
+        </div>
+      </article>
+      <article data-vh-reveal="up">
+        <span>02</span>
+        <div>
+          <h3>Human-Led. AI-Enabled.</h3>
+          <p class="vwhy-diff__lede">Technology supports the decision. People stay accountable for it.</p>
+          <p>We use technology where it earns its place: working through large volumes of supplier information, finding patterns behind repeat findings, and keeping evidence current. Judgment, context, and accountability stay with experienced people.</p>
+        </div>
+      </article>
+      <article data-vh-reveal="up">
+        <span>03</span>
+        <div>
+          <h3>The Right Expertise for the Challenge</h3>
+          <p class="vwhy-diff__lede">Your problem should not have to fit our organisation chart.</p>
+          <p>We bring together the specialists and capabilities the work requires, whether the issue sits with suppliers, operations, governance, evidence, systems, capability, or several of them at once. <a href="{{ experts_href }}">Meet our experts</a>.</p>
+        </div>
+      </article>
+      <article data-vh-reveal="up">
+        <span>04</span>
+        <div>
+          <h3>Practical Implementation</h3>
+          <p class="vwhy-diff__lede">We stay involved through implementation.</p>
+          <p>VECTRA works alongside the teams, suppliers, and system owners responsible for putting the change into practice, and makes sure it works in day-to-day operations.</p>
+        </div>
+      </article>
+      <article data-vh-reveal="up">
+        <span>05</span>
+        <div>
+          <h3>Progress You Can Measure</h3>
+          <p class="vwhy-diff__lede">We define what improvement looks like and track it.</p>
+          <p>We agree what improvement should look like at the start. Depending on the engagement, that may mean clearer ownership, closed actions, stronger evidence, improved capability, or better supplier performance. We then look at what changed, what is still open, and where attention is needed.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+{% endunless %}
+
+  {% when 'approach' %}
+{% unless hide_section %}
+<section class="vwhy-approach" id="partnership-approach" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
+  <div class="vwhy-wrap">
+    <div class="vwhy-approach__intro" data-vh-reveal="up">
+      <p class="vwhy-kicker">Our Partnership Approach</p>
+      <h2>From Problem Definition to Ongoing Support</h2>
+      <p>VECTRA International engagements start with the business challenge and the operating context around it. From there, we determine the expertise, support, and actions the work requires.</p>
+      <p>As the engagement progresses, the focus may move from defining the problem to specialist support, implementation, capability building, improvement, or ongoing support. The relationship follows a continuous working cycle:</p>
+    </div>
+    <ol class="vwhy-cycle">
+      <li data-vh-reveal="up">
+        <span>01</span>
+        <div>
+          <h3>Concept</h3>
+          <p>Clarify the challenge, desired result, and wider business context.</p>
+        </div>
+      </li>
+      <li data-vh-reveal="up">
+        <span>02</span>
+        <div>
+          <h3>Consult</h3>
+          <p>Understand the current position, risks, requirements, evidence, and priorities with the people closest to the work.</p>
+        </div>
+      </li>
+      <li data-vh-reveal="up">
+        <span>03</span>
+        <div>
+          <h3>Design</h3>
+          <p>Co-design the response, including practical controls, ownership, roadmap, capability, and the right technology for the context.</p>
+        </div>
+      </li>
+      <li data-vh-reveal="up">
+        <span>04</span>
+        <div>
+          <h3>Service</h3>
+          <p>Work alongside client teams to implement, build capability, verify progress, and resolve issues.</p>
+        </div>
+      </li>
+      <li data-vh-reveal="up">
+        <span>05</span>
+        <div>
+          <h3>Expand / Enhance</h3>
+          <p>Extend what works, strengthen weak points, and scale where it adds value.</p>
+        </div>
+      </li>
+      <li data-vh-reveal="up">
+        <span>06</span>
+        <div>
+          <h3>Maintain</h3>
+          <p>Reinforce governance, evidence, ownership, and internal capability so progress holds.</p>
+        </div>
+      </li>
+      <li data-vh-reveal="up">
+        <span>07</span>
+        <div>
+          <h3>Repeat</h3>
+          <p>Revisit the cycle as requirements, operations, risks, and business priorities change.</p>
+        </div>
+      </li>
+    </ol>
+    <p class="vwhy-approach__link" data-vh-reveal="up"><a href="{{ solutions_href }}">See how we work</a></p>
+  </div>
+</section>
+{% endunless %}
+
+  {% when 'foundation' %}
+{% unless hide_section %}
+<section class="vwhy-foundation" id="our-foundation" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
+  <div class="vwhy-wrap">
+    <div class="vwhy-foundation__intro" data-vh-reveal="up">
+      <p class="vwhy-kicker">Our Foundation</p>
+      <h2>Built on 20+ Years of Supply Chain and Responsible Business Experience</h2>
+      <p>VECTRA International was founded in 2005, working across responsible business, supply chains, and workplace standards where evidence had to stand up to scrutiny.</p>
+      <p>That work taught us where supplier improvement stalls, how evidence breaks down, and why controls that look complete on paper can still fail in day-to-day operations.</p>
+      <p>Today, VECTRA's supply chain consulting expertise is part of a broader role in business resilience and operational capability, connecting risk, operations, systems, people, and implementation around the issues that affect business performance.</p>
+      <p>Our work is led by the VECTRA International <a href="{{ leadership_href }}">leadership team</a> and delivered with our <a href="{{ experts_href }}">experts</a>.</p>
+    </div>
+    <div class="vwhy-stats" data-vh-reveal="up">
+      <div>
+        <strong>20+</strong>
+        <span>Years of expertise</span>
+      </div>
+      <div>
+        <strong>50+</strong>
+        <span>Global experts</span>
+      </div>
+      <div>
+        <strong>500+</strong>
+        <span>Organizations supported</span>
+      </div>
+    </div>
+    <p class="vwhy-foundation__link" data-vh-reveal="up"><a class="vh-btn vh-btn--green vh-btn--rect" href="{{ about_href }}">About VECTRA</a></p>
+  </div>
+</section>
+{% endunless %}
+
+  {% when 'proof' %}
+{% unless hide_section %}
+<section class="vwhy-proof" id="proof" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
+  <div class="vwhy-wrap vwhy-proof__card" data-vh-reveal="up">
+    <p class="vwhy-kicker">Proof in Practice</p>
+    <h2>See VECTRA’s Work in Practice</h2>
+    <p>Explore how VECTRA has worked through real operational and value-chain challenges, from the starting problem through implementation and the change that followed.</p>
+    <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ cases_href }}">Explore Case Studies</a>
+  </div>
+</section>
+{% endunless %}
+
+  {% when 'faq' %}
+{% unless hide_section %}
+<section class="vwhy-faq" id="faq" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
+  <div class="vwhy-wrap">
+    <div class="vwhy-faq__intro" data-vh-reveal="up">
+      <p class="vwhy-kicker">FAQ</p>
+      <h2>Questions About Working With VECTRA International</h2>
+    </div>
+    <div class="vh-accordion" data-vh-faq-accordion data-vh-reveal="up">
+      <div class="vh-acc is-open" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="true">What makes VECTRA International different from a traditional consulting firm?</button>
+        <div class="vh-acc__body"><p>VECTRA combines specialist advice with implementation, capability building, and technology. We agree what needs to improve, shape the work around that outcome, and stay involved as the decision is put into practice across teams, systems, suppliers, and processes.</p></div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Is VECTRA International an ESG consultancy?</button>
+        <div class="vh-acc__body" hidden><p>VECTRA International is a business resilience and operational capability-building partner. Responsible business, ESG, compliance, and supply chain consulting expertise remain important parts of our work and our history. Today, that experience sits within a broader role covering operational control, governance, evidence, systems, capability, and implementation.</p></div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">How does VECTRA International use AI and technology?</button>
+        <div class="vh-acc__body" hidden><p>Technology supports the work where it improves analysis, visibility, or execution. That includes working through large volumes of supplier information, finding patterns behind repeat findings, and keeping evidence current. Experienced people remain responsible for judgment, context, and accountability.</p></div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Can VECTRA International work with systems and partners we already use?</button>
+        <div class="vh-acc__body" hidden><p>Yes. VECTRA is platform-agnostic. We work with the systems, data, internal teams, consultants, and partners already supporting your business, then focus on what needs to connect, improve, or work differently.</p></div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">How does VECTRA International measure success?</button>
+        <div class="vh-acc__body" hidden><p>We agree what improvement should look like at the beginning of the work. Depending on the issue, that may include clearer ownership, closed actions, stronger evidence, improved capability, fewer recurring problems, or better supplier performance. The measure follows the business outcome. Where a baseline helps, such as VECTRA's SCDD Maturity Risk Assessment, we use it to show progress over time.</p></div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">What types of organizations does VECTRA International work with?</button>
+        <div class="vh-acc__body" hidden><p>VECTRA works with mid-sized organizations, larger enterprises, and value-chain or industry partners dealing with operational, procurement, supplier, risk, and responsible-business challenges. The scope reflects the issue, the operating environment, and the capability already available inside the organization.</p></div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">How do we get started with VECTRA International?</button>
+        <div class="vh-acc__body" hidden><p>Tell us what is not working. We review what you share, bring in the right specialists, and agree on the most useful first step with you, whether that is a focused assessment, specialist support, or implementation help. You can also start with a short pre-assessment to see which SCDD assessment level fits. <a href="{{ risk_href }}">Risk Assessment</a>.</p></div>
+      </div>
+    </div>
+    <div class="vwhy-faq__more" data-vh-reveal="up">
+      <h3>Have another question?</h3>
+      <p>Explore the full FAQ for more on VECTRA International, how we work, where we operate, our capabilities, and getting started.</p>
+      <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ faq_href }}">View All FAQs</a>
+    </div>
+  </div>
+</section>
+{% endunless %}
+
+  {% when 'close' %}
+{% unless hide_section %}
+<section class="vwhy-close" id="start" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
+  <div class="vwhy-wrap" data-vh-reveal="up">
+    <p class="vwhy-kicker vwhy-kicker--light">Start Here</p>
+    <h2>Tell Us the Problem. We’ll Help Define the Next Step.</h2>
+    <p>You do not need a finished scope or a service name. Tell us what is not working, where the problem is showing up, and what you need to improve. We'll help identify what needs attention first and bring in the right expertise.</p>
+    <a class="vh-btn vh-btn--green" href="{{ contact_href }}">Talk to an Expert</a>
+  </div>
+</section>
+{% endunless %}
+{% endcase %}

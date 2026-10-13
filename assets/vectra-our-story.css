@@ -158,6 +158,18 @@
   margin-top: 32px;
 }
 
+.vectra-story .vs-hero__why {
+  margin: 16px 0 0;
+  text-align: center;
+}
+
+.vectra-story .vs-hero__why a {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .vectra-story .vs-hero__actions .vh-btn {
   min-width: 200px;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);

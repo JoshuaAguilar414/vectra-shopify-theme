@@ -55,17 +55,20 @@
   assign mv_solutions_2 = "The result isn't just a plan. It's clarity you can act on, control you can trust, and capability that stays with your team long after we're done."
   assign jobs_url = pages['job-openings'].url | default: pages['careers'].url | default: careers_url
   assign solutions_page = pages['solutions'].url | default: '/pages/solutions'
+  assign why_base = pages['why-partner-with-us'].url | default: '/pages/why-partner-with-us'
 %}
 {% capture faq_href %}{% render 'vectra-preview-href', url: faq_url, view: 'faq' %}{% endcapture %}
 {% capture leadership_href %}{% render 'vectra-preview-href', url: leadership_url, view: 'leadership' %}{% endcapture %}
 {% capture experts_href %}{% render 'vectra-preview-href', url: experts_url, view: 'experts' %}{% endcapture %}
 {% capture associates_href %}{% render 'vectra-preview-href', url: associates_url, view: 'associates' %}{% endcapture %}
 {% capture interns_href %}{% render 'vectra-preview-href', url: interns_url, view: 'interns' %}{% endcapture %}
+{% capture why_href %}{% render 'vectra-preview-href', url: why_base, view: 'why-partner' %}{% endcapture %}
 {% assign faq_href = faq_href | strip %}
 {% assign leadership_href = leadership_href | strip %}
 {% assign experts_href = experts_href | strip %}
 {% assign associates_href = associates_href | strip %}
 {% assign interns_href = interns_href | strip %}
+{% assign why_href = why_href | strip %}
 {% case module %}
   {% when 'hero' %}
 {% render 'vectra-seo', page_key: 'about' %}
@@ -116,6 +119,7 @@
         <a class="vh-btn vh-btn--green" href="{{ block.settings.button_link | default: solutions_page }}">{{ story_btn }}</a>
         <a class="vh-btn vh-btn--outline vh-btn--outline-light" href="{{ block.settings.button_2_link | default: '#VectraContactModal' }}"{% if block.settings.button_2_link == blank or block.settings.button_2_link == '#VectraContactModal' %} data-vh-contact-open{% endif %}>{{ story_btn2 }}</a>
       </div>
+      <p class="vs-hero__why" data-vh-reveal="up"><a href="{{ why_href }}">Why partner with VECTRA</a></p>
     </div>
   </section>
 {% endunless %}

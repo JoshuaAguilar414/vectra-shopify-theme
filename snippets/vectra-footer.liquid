@@ -77,6 +77,7 @@
   assign experts_base = pages['experts'].url | default: '/pages/experts'
   assign associates_base = pages['associates'].url | default: '/pages/associates'
   assign interns_base = pages['interns'].url | default: '/pages/interns'
+  assign why_base = pages['why-partner-with-us'].url | default: '/pages/why-partner-with-us'
 %}
 {% capture story %}{% render 'vectra-preview-href', url: story_base, view: 'our-story' %}{% endcapture %}
 {% capture solutions %}{% render 'vectra-preview-href', url: solutions_base, view: 'solutions' %}{% endcapture %}
@@ -87,6 +88,7 @@
 {% capture experts %}{% render 'vectra-preview-href', url: experts_base, view: 'experts' %}{% endcapture %}
 {% capture associates %}{% render 'vectra-preview-href', url: associates_base, view: 'associates' %}{% endcapture %}
 {% capture interns %}{% render 'vectra-preview-href', url: interns_base, view: 'interns' %}{% endcapture %}
+{% capture why %}{% render 'vectra-preview-href', url: why_base, view: 'why-partner' %}{% endcapture %}
 {% assign contact_base = pages['contact'].url | default: pages['contact-us'].url | default: '/pages/contact' %}
 {% capture contact %}{% render 'vectra-preview-href', url: contact_base, view: 'contact-us' %}{% endcapture %}
 {% assign story = story | strip %}
@@ -98,6 +100,7 @@
 {% assign experts = experts | strip %}
 {% assign associates = associates | strip %}
 {% assign interns = interns | strip %}
+{% assign why = why | strip %}
 {% assign contact = contact | strip %}
 
 <footer class="vh-footer" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
@@ -150,6 +153,7 @@
               {% endfor %}
             {% else %}
               <a href="{{ story }}">About VECTRA</a>
+              <a href="{{ why }}">Why VECTRA</a>
               <a href="{{ experts }}">Experts</a>
               <a href="{{ associates }}">Associates</a>
               <a href="{{ interns }}">Interns</a>

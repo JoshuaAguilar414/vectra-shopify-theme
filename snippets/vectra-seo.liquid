@@ -1,5 +1,5 @@
 {%- doc -%}
-  JSON-LD for VECTRA pages. page_key: home | about | resources | blogs | e-books-playbooks | press-releases | podcasts | event-webinars | contact | leadership | risk-assessment
+  JSON-LD for VECTRA pages. page_key: home | about | resources | blogs | e-books-playbooks | press-releases | podcasts | event-webinars | contact | leadership | risk-assessment | why-partner
 {%- enddoc -%}
 {%- liquid
   assign key = page_key | default: 'home'
@@ -408,6 +408,36 @@
             "text": "The information you provide is used to process your responses, recommend an assessment pathway, and support any follow-up you request."
           }
         }
+      ]
+    }
+  ]
+}
+</script>
+{%- elsif key == 'why-partner' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "Why Partner with VECTRA International | Our Partnership Approach",
+      "headline": "Why Partner with VECTRA International | Our Approach",
+      "description": "Discover why organizations partner with VECTRA International for business resilience, supply chain due diligence, ESG, and Risk Assessment.",
+      "keywords": "Why partner with VECTRA International, Partner with VECTRA",
+      "url": "{{ request.origin }}{{ page.url | default: '/pages/why-partner-with-us' }}",
+      "about": { "@type": "Organization", "name": "VECTRA International", "url": "{{ shop.url }}" },
+      "publisher": { "@type": "Organization", "name": "VECTRA International", "url": "{{ shop.url }}" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"What makes VECTRA International different from a traditional consulting firm?","acceptedAnswer":{"@type":"Answer","text":"VECTRA combines specialist advice with implementation, capability building, and technology. We agree what needs to improve, shape the work around that outcome, and stay involved as the decision is put into practice across teams, systems, suppliers, and processes."}},
+        {"@type":"Question","name":"Is VECTRA International an ESG consultancy?","acceptedAnswer":{"@type":"Answer","text":"VECTRA International is a business resilience and operational capability-building partner. Responsible business, ESG, compliance, and supply chain consulting expertise remain important parts of our work and our history. Today, that experience sits within a broader role covering operational control, governance, evidence, systems, capability, and implementation."}},
+        {"@type":"Question","name":"How does VECTRA International use AI and technology?","acceptedAnswer":{"@type":"Answer","text":"Technology supports the work where it improves analysis, visibility, or execution. That includes working through large volumes of supplier information, finding patterns behind repeat findings, and keeping evidence current. Experienced people remain responsible for judgment, context, and accountability."}},
+        {"@type":"Question","name":"Can VECTRA International work with systems and partners we already use?","acceptedAnswer":{"@type":"Answer","text":"Yes. VECTRA is platform-agnostic. We work with the systems, data, internal teams, consultants, and partners already supporting your business, then focus on what needs to connect, improve, or work differently."}},
+        {"@type":"Question","name":"How does VECTRA International measure success?","acceptedAnswer":{"@type":"Answer","text":"We agree what improvement should look like at the beginning of the work. Depending on the issue, that may include clearer ownership, closed actions, stronger evidence, improved capability, fewer recurring problems, or better supplier performance. The measure follows the business outcome. Where a baseline helps, such as VECTRA's SCDD Maturity Risk Assessment, we use it to show progress over time."}},
+        {"@type":"Question","name":"What types of organizations does VECTRA International work with?","acceptedAnswer":{"@type":"Answer","text":"VECTRA works with mid-sized organizations, larger enterprises, and value-chain or industry partners dealing with operational, procurement, supplier, risk, and responsible-business challenges. The scope reflects the issue, the operating environment, and the capability already available inside the organization."}},
+        {"@type":"Question","name":"How do we get started with VECTRA International?","acceptedAnswer":{"@type":"Answer","text":"Tell us what is not working. We review what you share, bring in the right specialists, and agree on the most useful first step with you, whether that is a focused assessment, specialist support, or implementation help. You can also start with a short pre-assessment to see which SCDD assessment level fits."}}
       ]
     }
   ]

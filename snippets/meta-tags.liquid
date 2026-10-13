@@ -65,6 +65,10 @@
     assign og_title = 'Supplier Risk Assessment Solutions | VECTRA International'
     assign og_description = 'Strengthen supply chains with supply chain due diligence risk assessment, supplier risk assessment, and SCDD maturity solutions from VECTRA.'
     assign vectra_meta_locked = true
+  elsif template.suffix == 'why-partner' or page.handle == 'why-partner-with-us' or page.handle == 'why-partner' or page.handle == 'why-vectra'
+    assign og_title = 'Why Partner with VECTRA International | Our Approach'
+    assign og_description = 'Discover why organizations partner with VECTRA International for business resilience, supply chain due diligence, ESG, and Risk Assessment.'
+    assign vectra_meta_locked = true
   endif
 
   if request.page_type == 'product'

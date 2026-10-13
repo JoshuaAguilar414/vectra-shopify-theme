@@ -63,6 +63,11 @@
 
   {% when 'intro' %}
 {% unless block.settings.hide_section %}
+{% liquid
+  assign why_page = pages['why-partner-with-us'].url | default: '/pages/why-partner-with-us'
+%}
+{% capture why_href %}{% render 'vectra-preview-href', url: why_page, view: 'why-partner' %}{% endcapture %}
+{% assign why_href = why_href | strip %}
 <section class="vsol-intro" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     <div class="vsol-intro__grid">
       <div class="vsol-collage">
@@ -77,6 +82,7 @@
         <h2>{{ block.settings.heading | default: 'Design. Govern. Execute.' }}</h2>
         <p>
           {{ block.settings.text | default: 'We connect the right expertise, specialist partners, AI-enabled intelligence, and capability building around the outcome your organisation needs to achieve.' }}
+          <a href="{{ why_href }}">See why organizations partner with VECTRA.</a>
         </p>
         {% assign nested_extras = nested_extras | strip %}
         {% if nested_extras != blank %}

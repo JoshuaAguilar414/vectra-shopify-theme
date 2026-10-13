@@ -24,6 +24,7 @@
   assign interns_url = pages['interns'].url | default: '/pages/interns'
   assign careers_url = pages['careers'].url | default: '/pages/careers'
   assign faq_url = pages['faq'].url | default: '/pages/faq'
+  assign why_base = pages['why-partner-with-us'].url | default: '/pages/why-partner-with-us'
   assign jobs_url = ''
   assign name_1 = ''
   assign name_2 = ''
@@ -56,6 +57,8 @@
     assign jobs_url = 'https://vectra-intl.com/job-openings/'
   endif
 %}
+{% capture why_href %}{% render 'vectra-preview-href', url: why_base, view: 'why-partner' %}{% endcapture %}
+{% assign why_href = why_href | strip %}
 {% case module %}
   {% when 'experts' %}
 {% unless block.settings.hide_section %}
@@ -102,6 +105,7 @@
   <div class="vh-wrap vp-cta" data-vh-reveal="up">
     <h2>Not Sure Which Expert You Need?</h2>
     <p>You do not need to know which specialist you need before getting in touch. Tell us what you are dealing with, and VECTRA will help connect the challenge with the expertise needed to move it forward.</p>
+    <p class="vp-cta__aside">See <a href="{{ why_href }}">why organizations partner with VECTRA</a>.</p>
     <div class="vs-experts__more">
       <a class="vs-cta-btn" href="{{ block.settings.cta_link | default: contact_url }}">
         {{ block.settings.cta_label | default: 'Talk to an Expert' }}
@@ -314,7 +318,7 @@
       <p>VECTRA’s future will not be shaped by leadership alone.</p>
       <p>It will be shaped by the people who bring their expertise, the clients who trust us with important challenges, the ideas we are willing to test, and the relationships we build across markets and disciplines.</p>
       <p>Our leaders set the direction. Our people bring it to life.</p>
-      <p>As VECTRA grows, the goal stays simple: become a company that creates more value for the people who work here, the organizations we support, and the communities our work touches. To see how our experts and leaders work with clients day to day, explore <a href="{{ solutions_url }}">How We Help</a> and <a href="{{ experts_url }}">Our Experts</a>.</p>
+      <p>As VECTRA grows, the goal stays simple: become a company that creates more value for the people who work here, the organizations we support, and the communities our work touches. To see how our experts and leaders work with clients day to day, explore <a href="{{ solutions_url }}">How We Help</a>, <a href="{{ experts_url }}">Our Experts</a>, and <a href="{{ why_href }}">why organizations partner with VECTRA</a>.</p>
     </div>
   </div>
   <div class="vh-wrap vp-cta" data-vh-reveal="up">

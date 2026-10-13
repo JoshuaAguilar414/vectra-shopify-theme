@@ -30,6 +30,7 @@
   assign associates_base = pages['associates'].url | default: '/pages/associates'
   assign interns_base = pages['interns'].url | default: '/pages/interns'
   assign careers_base = pages['careers'].url | default: '/pages/careers'
+  assign why_base = pages['why-partner-with-us'].url | default: '/pages/why-partner-with-us'
   assign login_url = routes.account_login_url
   assign register_url = routes.account_register_url | default: routes.account_login_url
 
@@ -66,8 +67,14 @@
     assign profile_url = routes.account_url
     assign orders_url = routes.account_url
   endif
-  assign courses_url = '/marketplace/lms/my-courses'
-  assign academy_url = '/marketplace/lms'
+  if customer
+    assign courses_url = '/marketplace/lms/my-courses'
+    assign academy_url = '/marketplace/lms'
+  else
+    assign academy_return = '/marketplace/lms' | url_encode
+    assign academy_url = routes.account_login_url | append: '?return_url=' | append: academy_return
+    assign courses_url = academy_url
+  endif
   assign customer_initial = customer.first_name | default: customer.email | slice: 0 | upcase
   assign customer_hello = customer.first_name | default: 'there'
 %}
@@ -81,6 +88,7 @@
 {% capture associates %}{% render 'vectra-preview-href', url: associates_base, view: 'associates' %}{% endcapture %}
 {% capture interns %}{% render 'vectra-preview-href', url: interns_base, view: 'interns' %}{% endcapture %}
 {% capture careers %}{% render 'vectra-preview-href', url: careers_base, view: 'careers' %}{% endcapture %}
+{% capture why %}{% render 'vectra-preview-href', url: why_base, view: 'why-partner' %}{% endcapture %}
 {% assign contact_base = pages['contact'].url | default: pages['contact-us'].url | default: '/pages/contact' %}
 {% capture contact %}{% render 'vectra-preview-href', url: contact_base, view: 'contact-us' %}{% endcapture %}
 {% assign academy = academy_url %}
@@ -94,6 +102,7 @@
 {% assign associates = associates | strip %}
 {% assign interns = interns | strip %}
 {% assign careers = careers | strip %}
+{% assign why = why | strip %}
 {% assign contact = contact | strip %}
 {% assign academy = academy | strip %}
 
@@ -201,7 +210,8 @@
         leadership: leadership,
         associates: associates,
         interns: interns,
-        careers: careers
+        careers: careers,
+        why: why
       %}
     </div>
 
@@ -238,7 +248,8 @@
         leadership: leadership,
         associates: associates,
         interns: interns,
-        careers: careers
+        careers: careers,
+        why: why
       %}
       <a class="vh-contact-link" href="{{ contact }}">Talk to an Expert</a>
     </div>

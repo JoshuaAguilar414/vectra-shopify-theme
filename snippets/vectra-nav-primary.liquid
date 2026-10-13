@@ -1,6 +1,6 @@
 {%- doc -%}
   Homepage V2 primary nav (fixed labels + order):
-  INSIDE VECTRA (Our Company, Our Leadership Team, Our Experts, Associates, Our Interns),
+  INSIDE VECTRA (Our Company, Why VECTRA, Our Leadership Team, Our Experts, Associates, Our Interns),
   How We Help, Marketplace, Resources (Insights, Ebooks & Playbooks, Events & Webinars,
   VCASTs, Case Studies, Press Releases), FAQ.
   Talk to an Expert lives in the header CTA, not this list.
@@ -11,6 +11,7 @@
     <button type="button" data-vh-mobile-sub aria-expanded="false">INSIDE VECTRA</button>
     <div class="vh-nav-panel__sub">
       <a href="{{ story }}">Our Company</a>
+      <a href="{{ why }}">Why VECTRA</a>
       <a href="{{ leadership }}">Our Leadership Team</a>
       <a href="{{ experts }}">Our Experts</a>
       <a href="{{ associates }}">Associates</a>
@@ -19,7 +20,7 @@
   </div>
   <a href="{{ solutions }}">How We Help</a>
   <a href="{{ marketplace }}">Marketplace</a>
-  <a href="{{ academy | default: '/marketplace/lms' }}">Academy</a>
+  <a href="{{ academy | default: routes.account_login_url }}">Academy</a>
   <div class="vh-nav-panel__item has-children">
     <button type="button" data-vh-mobile-sub aria-expanded="false">Resources</button>
     <div class="vh-nav-panel__sub">
@@ -39,6 +40,7 @@
       <div class="vh-mega vh-mega--list vh-dropdown" role="menu">
         <ul class="vh-mega__list">
           <li><a href="{{ story }}" role="menuitem">Our Company</a></li>
+          <li><a href="{{ why }}" role="menuitem">Why VECTRA</a></li>
           <li><a href="{{ leadership }}" role="menuitem">Our Leadership Team</a></li>
           <li><a href="{{ experts }}" role="menuitem">Our Experts</a></li>
           <li><a href="{{ associates }}" role="menuitem">Associates</a></li>
@@ -54,7 +56,7 @@
     <a href="{{ marketplace }}">Marketplace</a>
   </div>
   <div class="vh-menu__item">
-    <a href="{{ academy | default: '/marketplace/lms' }}">Academy</a>
+    <a href="{{ academy | default: routes.account_login_url }}">Academy</a>
   </div>
   <div class="vh-menu__item has-children" data-vh-mega-item>
     <div class="vh-menu__anchor">

@@ -37,7 +37,7 @@ When `LMS_DEV_BYPASS=true`, send:
 | `X-LMS-Shop` | Shop domain (e.g. `vectra-dev.myshopify.com`) |
 | `X-LMS-Customer-Id` | Optional Shopify customer id |
 | `X-LMS-Staff` | `true` for staff endpoints |
-| `X-LMS-Customer-Tags` | Optional `lms-admin,lms-coordinator` |
+| `X-LMS-Customer-Tags` | Optional `lms-admin` or `lms-coordinator` |
 
 Example:
 
@@ -69,7 +69,7 @@ HMAC signature verification uses `SHOPIFY_API_SECRET`.
 
 ## Authz
 
-- **Staff:** `staffProfiles` for the customer, or tags `lms-admin` / `lms-coordinator` (or bypass `X-LMS-Staff`)
+- **Staff:** `staffProfiles` role, or tags `lms-admin` / `lms-coordinator` (or bypass `X-LMS-Staff` in local dev). Coordinators: no roster write, no Settings.
 - **Learners:** `learnerProfiles` linked by `shopifyCustomerId` (auto-link by email when possible)
 - **Reminders:** `POST /jobs/reminders` with header `X-Cron-Secret: $CRON_SECRET`
 

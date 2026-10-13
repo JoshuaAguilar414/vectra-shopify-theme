@@ -296,6 +296,13 @@
   text-transform: none;
 }
 
+.vectra-sol .vsol-intro__copy p:last-child a {
+  color: #3f9a00;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .vectra-sol .vsol-eco {
   padding: 88px 0 110px;
   background: #f0f0f0;

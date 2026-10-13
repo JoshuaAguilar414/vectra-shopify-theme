@@ -1,0 +1,44 @@
+{{ 'vectra-why-page.css' | asset_url | stylesheet_tag }}
+{% capture children %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{% render 'vectra-page-shell', children: children, skip_footer: true %}
+
+{% schema %}
+{
+  "name": "VECTRA Why Partner",
+  "class": "vectra-partner-section",
+  "enabled_on": {
+    "templates": ["page"]
+  },
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "MEGA Navigation",
+      "info": "Uses VECTRA Website Mega Menu (handle: vectra-website-mega-menu)."
+    }
+  ],
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA Why Partner",
+      "blocks": [
+        { "type": "vectra-header" },
+        { "type": "vectra-partner-hero" },
+        { "type": "vectra-partner-gap" },
+        { "type": "vectra-partner-different" },
+        { "type": "vectra-partner-approach" },
+        { "type": "vectra-partner-foundation" },
+        { "type": "vectra-partner-proof" },
+        { "type": "vectra-partner-faq" },
+        { "type": "vectra-partner-close" },
+        { "type": "vectra-footer" }
+      ]
+    }
+  ]
+}
+{% endschema %}

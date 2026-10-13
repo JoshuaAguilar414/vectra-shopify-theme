@@ -49,6 +49,8 @@
       assign view_name = 'marketplace'
     elsif title_key == 'risk assessment' or title_key == 'scdd' or title_key == 'scdd maturity risk assessment' or title_key contains 'due diligence risk'
       assign view_name = 'risk-assessment'
+    elsif title_key == 'why vectra' or title_key == 'why partner with us' or title_key == 'why partner with vectra' or title_key contains 'why partner'
+      assign view_name = 'why-partner'
     endif
   endif
 
@@ -141,6 +143,9 @@
   elsif view_name == 'risk-assessment'
     assign force_view = true
     assign href = pages['risk-assessment'].url | default: pages['services-risk-assessment'].url | default: '/pages/risk-assessment'
+  elsif view_name == 'why-partner'
+    assign force_view = true
+    assign href = pages['why-partner-with-us'].url | default: pages['why-partner'].url | default: pages['why-vectra'].url | default: '/pages/why-partner-with-us'
   elsif view_name == 'experts'
     assign href = pages['experts'].url | default: '/pages/experts'
   elsif view_name == 'leadership'

@@ -13,6 +13,7 @@ declare global {
   }
 }
 
+/** Match original LMS: Admin + Coordinator via customer tags. */
 const STAFF_TAGS = new Set(["lms-admin", "lms-coordinator"]);
 
 function emptyPermissions(staff = false): SessionPermissions {
@@ -25,6 +26,32 @@ function emptyPermissions(staff = false): SessionPermissions {
     removeUsers: staff,
     viewReports: staff,
     manageSettings: staff
+  };
+}
+
+function coordinatorPermissions(): SessionPermissions {
+  return {
+    staff: true,
+    manageRoster: false,
+    manageCourses: true,
+    manageUsers: true,
+    createStaff: false,
+    removeUsers: false,
+    viewReports: true,
+    manageSettings: false
+  };
+}
+
+function adminPermissions(): SessionPermissions {
+  return {
+    staff: true,
+    manageRoster: true,
+    manageCourses: true,
+    manageUsers: true,
+    createStaff: true,
+    removeUsers: true,
+    viewReports: true,
+    manageSettings: true
   };
 }
 
@@ -104,34 +131,26 @@ export async function resolveProxyActor(req: Request, res: Response, next: NextF
         staffRole = staffProfile.role;
         email = staffProfile.email;
         const role = await getRoleByKey(db, shopId, staffProfile.role);
+        const isAdmin = staffProfile.role === "ADMIN";
         permissions = {
           staff: true,
-          manageRoster: Boolean(role?.canManageRoster || staffProfile.role === "ADMIN"),
+          manageRoster: Boolean(role?.canManageRoster || isAdmin),
           manageCourses: true,
           manageUsers: true,
-          createStaff: Boolean(role?.canCreateStaff || staffProfile.role === "ADMIN"),
-          removeUsers: Boolean(role?.canRemoveUsers || staffProfile.role === "ADMIN"),
+          createStaff: Boolean(role?.canCreateStaff || isAdmin),
+          removeUsers: Boolean(role?.canRemoveUsers || isAdmin),
           viewReports: true,
-          manageSettings: staffProfile.role === "ADMIN" || Boolean(role?.pages?.includes("settings"))
+          manageSettings: isAdmin || Boolean(role?.pages?.includes("settings"))
         };
       }
 
       const tagStaff = tags.some((tag) => STAFF_TAGS.has(tag));
       if (!staff && (tagStaff || (bypass && staffBypass))) {
         staff = true;
-        staffRole = tags.includes("lms-admin") ? "ADMIN" : "COORDINATOR";
-        permissions = emptyPermissions(true);
-        if (staffRole === "ADMIN") {
-          permissions.createStaff = true;
-          permissions.removeUsers = true;
-          permissions.manageRoster = true;
-          permissions.manageSettings = true;
-        } else {
-          permissions.manageRoster = false;
-          permissions.createStaff = false;
-          permissions.removeUsers = false;
-          permissions.manageSettings = false;
-        }
+        staffRole = tags.includes("lms-admin") || (bypass && staffBypass && !tags.includes("lms-coordinator"))
+          ? "ADMIN"
+          : "COORDINATOR";
+        permissions = staffRole === "ADMIN" ? adminPermissions() : coordinatorPermissions();
       }
 
       const learner = await linkCustomerToLearner(db, shopId, customerId, email);
@@ -142,7 +161,7 @@ export async function resolveProxyActor(req: Request, res: Response, next: NextF
     } else if (bypass && staffBypass) {
       staff = true;
       staffRole = "ADMIN";
-      permissions = emptyPermissions(true);
+      permissions = adminPermissions();
     }
 
     req.lms = {

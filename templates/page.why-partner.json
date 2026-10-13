@@ -1,0 +1,40 @@
+{
+  "sections": {
+    "vectra_partner": {
+      "type": "vectra-partner-page",
+      "blocks": {
+        "header": {
+          "type": "vectra-header",
+          "settings": {
+            "menu": "vectra-website-mega-menu"
+          }
+        },
+        "hero": { "type": "vectra-partner-hero", "settings": {} },
+        "gap": { "type": "vectra-partner-gap", "settings": {} },
+        "different": { "type": "vectra-partner-different", "settings": {} },
+        "approach": { "type": "vectra-partner-approach", "settings": {} },
+        "foundation": { "type": "vectra-partner-foundation", "settings": {} },
+        "proof": { "type": "vectra-partner-proof", "settings": {} },
+        "faq": { "type": "vectra-partner-faq", "settings": {} },
+        "close": { "type": "vectra-partner-close", "settings": {} },
+        "footer": { "type": "vectra-footer", "settings": {} }
+      },
+      "block_order": [
+        "header",
+        "hero",
+        "gap",
+        "different",
+        "approach",
+        "foundation",
+        "proof",
+        "faq",
+        "close",
+        "footer"
+      ],
+      "settings": {
+        "menu": "vectra-website-mega-menu"
+      }
+    }
+  },
+  "order": ["vectra_partner"]
+}

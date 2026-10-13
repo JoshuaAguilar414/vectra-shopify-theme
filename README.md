@@ -16,8 +16,15 @@ This is **not** a Next.js app. The storefront is the Shopify theme; the LMS API 
 Theme JS            →  /apps/lms/api/* (App Proxy)  →  apps/lms  →  MongoDB + R2
 ```
 
-Staff: customer tags `lms-admin` or `lms-coordinator`  
-Learners: logged-in customers linked in `learnerProfiles`
+Staff roles (customer tags on the storefront account — Shopify Admin login alone is not enough):
+- `lms-admin` — Admin (full control, including Settings + roster write)
+- `lms-coordinator` — Coordinator (learners, courses, reports; roster read-only; no Settings)
+
+Learners: other logged-in customers linked in `learnerProfiles`
+
+### Fix “page not found” for LMS
+
+Theme templates are not enough. In **Shopify Admin → Online Store → Pages**, create each page below, set **Theme template** to the matching `lms-*` template, and publish. Then `/marketplace/lms` can redirect to a real page.
 
 ## Public LMS URLs
 

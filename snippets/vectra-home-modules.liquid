@@ -65,8 +65,10 @@
   assign course_buy = pages['course-purchasing-practices'].url | default: '/pages/course-purchasing-practices'
   assign course_dis = pages['course-disability-accommodation'].url | default: '/pages/course-disability-accommodation'
   assign faq_base = pages['faq'].url | default: '/pages/faq'
+  assign why_base = pages['why-partner-with-us'].url | default: '/pages/why-partner-with-us'
 %}
 {% capture faq_href %}{% render 'vectra-preview-href', url: faq_base, view: 'faq' %}{% endcapture %}
+{% capture why_href %}{% render 'vectra-preview-href', url: why_base, view: 'why-partner' %}{% endcapture %}
 {% capture marketplace_href %}{% render 'vectra-preview-href', url: marketplace_url, view: 'marketplace' %}{% endcapture %}
 {% capture resources_href %}{% render 'vectra-preview-href', url: resources_base, view: 'resources' %}{% endcapture %}
 {% capture course_esg_href %}{% render 'vectra-preview-href', url: course_esg, view: 'course' %}{% endcapture %}
@@ -74,6 +76,7 @@
 {% capture course_buy_href %}{% render 'vectra-preview-href', url: course_buy, view: 'course' %}{% endcapture %}
 {% capture course_dis_href %}{% render 'vectra-preview-href', url: course_dis, view: 'course' %}{% endcapture %}
 {% assign faq_href = faq_href | strip %}
+{% assign why_href = why_href | strip %}
 {% assign marketplace_href = marketplace_href | strip %}
 {% assign resources_href = resources_href | strip %}
 {% assign course_esg_href = course_esg_href | strip %}
@@ -212,7 +215,7 @@
         <p>And when we hand over a recommendation, we don't disappear. We stay while it becomes real. While your team adapts. While the improvement actually sticks.</p>
         <p>Your success is our success. We mean that literally, not as a tagline.</p>
       </div>
-      <a class="vh-btn vh-btn--green vh-btn--rect" href="#why-cards">
+      <a class="vh-btn vh-btn--green vh-btn--rect" href="{{ why_href }}">
         See Why VECTRA
         <img src="{{ img_arrow }}" alt="">
       </a>
