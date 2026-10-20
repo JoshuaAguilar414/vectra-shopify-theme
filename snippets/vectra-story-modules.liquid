@@ -369,38 +369,36 @@
   {% when 'faq' %}
 {% unless block.settings.hide_section %}
 {% comment %} About Us Version 2 FAQ + AEO supporting copy — hardcoded. {% endcomment %}
-<section class="vh-faq vh-faq--story vh-faq--story-full" id="about-faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-  <div class="vh-wrap vh-faq__grid">
-    <div class="vh-faq__right">
-      <div class="vh-faq__glow" aria-hidden="true"></div>
-      <div class="vh-accordion" data-vh-faq-accordion>
-        <p class="vh-kicker">FAQ</p>
-        <h2 class="vh-h2">Questions About VECTRA International</h2>
-        <p class="vs-aeo">VECTRA International is a business resilience and operational capability building partner founded in 2005. We combine expert people and technology to turn responsible business, supply chain, and operational challenges into clearer decisions and lasting capability.</p>
-        <div class="vh-acc is-open" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn aria-expanded="true">Who is VECTRA International?</button>
-          <div class="vh-acc__body">VECTRA International is a business resilience and operational capability building partner founded in 2005. We combine expert people and technology to turn responsible business, supply chain, and operational challenges into clearer decisions and lasting capability.</div>
-        </div>
-        <div class="vh-acc" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn aria-expanded="false">When was VECTRA International founded?</button>
-          <div class="vh-acc__body" hidden>VECTRA International was founded in 2005. Since then, our work has grown from responsible business and supply-chain challenges into a broader role supporting business resilience, operational capability, governance, and performance.</div>
-        </div>
-        <div class="vh-acc" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn aria-expanded="false">What does VECTRA International do?</button>
-          <div class="vh-acc__body" hidden>We help organizations turn complex requirements and operational challenges into clear priorities and practical action. Depending on the issue, that may involve supplier risk, governance, evidence, technology, capability building, responsible business, or operational improvement.</div>
-        </div>
-        <div class="vh-acc" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn aria-expanded="false">How is VECTRA different from a traditional consulting company?</button>
-          <div class="vh-acc__body" hidden>VECTRA consulting support is built around partnership, implementation, and follow-through. Organizations may come to us while looking for an operational resilience consulting company, but our role is broader. We bring together specialist expertise, capability building, practical implementation, and technology where it adds value, then stay involved as decisions move into practice and progress is measured.</div>
-        </div>
-        <div class="vh-acc" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn aria-expanded="false">Where does VECTRA International operate?</button>
-          <div class="vh-acc__body" hidden>VECTRA International works globally, supported by associates and specialist experts who bring local context and experience across regions, markets, and industries.</div>
-        </div>
-        <div class="vh-acc" data-vh-faq-item>
-          <button type="button" data-vh-faq-btn aria-expanded="false">Who leads VECTRA International?</button>
-          <div class="vh-acc__body" hidden>VECTRA International is led by CEO Patrick Neyts alongside a global leadership team spanning operations, sales and marketing, and applied AI.</div>
-        </div>
+<section class="vh-faq vh-faq--story vh-faq--story-full vs-faq-full" id="about-faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vs-faq-full__inner">
+    <div class="vh-faq__glow" aria-hidden="true"></div>
+    <div class="vh-accordion" data-vh-faq-accordion>
+      <p class="vh-kicker">FAQ</p>
+      <h2 class="vh-h2">Questions About VECTRA International</h2>
+      <p class="vs-aeo">VECTRA International is a business resilience and operational capability building partner founded in 2005. We combine expert people and technology to turn responsible business, supply chain, and operational challenges into clearer decisions and lasting capability.</p>
+      <div class="vh-acc is-open" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="true">Who is VECTRA International?</button>
+        <div class="vh-acc__body">VECTRA International is a business resilience and operational capability building partner founded in 2005. We combine expert people and technology to turn responsible business, supply chain, and operational challenges into clearer decisions and lasting capability.</div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">When was VECTRA International founded?</button>
+        <div class="vh-acc__body" hidden>VECTRA International was founded in 2005. Since then, our work has grown from responsible business and supply-chain challenges into a broader role supporting business resilience, operational capability, governance, and performance.</div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">What does VECTRA International do?</button>
+        <div class="vh-acc__body" hidden>We help organizations turn complex requirements and operational challenges into clear priorities and practical action. Depending on the issue, that may involve supplier risk, governance, evidence, technology, capability building, responsible business, or operational improvement.</div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">How is VECTRA different from a traditional consulting company?</button>
+        <div class="vh-acc__body" hidden>VECTRA consulting support is built around partnership, implementation, and follow-through. Organizations may come to us while looking for an operational resilience consulting company, but our role is broader. We bring together specialist expertise, capability building, practical implementation, and technology where it adds value, then stay involved as decisions move into practice and progress is measured.</div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Where does VECTRA International operate?</button>
+        <div class="vh-acc__body" hidden>VECTRA International works globally, supported by associates and specialist experts who bring local context and experience across regions, markets, and industries.</div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Who leads VECTRA International?</button>
+        <div class="vh-acc__body" hidden>VECTRA International is led by CEO Patrick Neyts alongside a global leadership team spanning operations, sales and marketing, and applied AI.</div>
       </div>
     </div>
   </div>
