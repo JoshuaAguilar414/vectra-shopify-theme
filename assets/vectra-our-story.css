@@ -548,34 +548,59 @@
 .vectra-story .vs-solutions {
   position: relative;
   z-index: 1;
+  overflow: hidden;
   width: min(1100px, calc(100% - 64px));
   margin: 0 auto calc(72px * var(--vs-s));
-  padding: clamp(36px, 4vw, 48px) clamp(28px, 4vw, 48px);
+  padding: clamp(28px, 3vw, 40px) clamp(24px, 2.8vw, 36px) clamp(32px, 3.2vw, 44px);
   text-align: center;
-  background:
-    linear-gradient(180deg, rgba(214, 255, 173, 0.28) 0%, rgba(214, 255, 173, 0.08) 100%);
-  border: 1px solid rgba(84, 189, 1, 0.18);
-  border-radius: 24px;
+  background: #ffffff;
+  border: 1px solid rgba(9, 37, 67, 0.06);
+  border-radius: 20px;
+  box-shadow: 0 18px 40px rgba(9, 37, 67, 0.08);
+  transition: background-color 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease, border-color 0.45s ease;
 }
 
 .vectra-story .vs-solutions h2 {
+  position: relative;
+  z-index: 1;
   margin: 0 0 14px;
-  color: #092543;
-  font-size: clamp(28px, 3vw, 40px);
+  color: #54bd01;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(28px, 2.6vw, 36px);
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  transition: color 0.45s ease;
 }
 
 .vectra-story .vs-solutions p {
+  position: relative;
+  z-index: 1;
   margin: 0 auto;
   max-width: 46em;
-  color: rgba(9, 37, 67, 0.78);
-  font-size: 17px;
-  line-height: 1.6;
+  color: #092543;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(15px, 1.2vw, 17px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.55;
+  transition: color 0.45s ease;
 }
 
 .vectra-story .vs-solutions p + p {
   margin-top: 14px;
+}
+
+.vectra-story .vs-solutions:hover {
+  background: #54bd01;
+  border-color: transparent;
+  transform: translateY(-8px);
+  box-shadow: 0 22px 44px rgba(84, 189, 1, 0.28);
+}
+
+.vectra-story .vs-solutions:hover h2,
+.vectra-story .vs-solutions:hover p {
+  color: #ffffff;
 }
 
 .vectra-story .vs-card__watermark {
@@ -691,11 +716,15 @@
 }
 
 .vectra-story .vs-values__kicker {
-  margin: 0 0 12px;
+  width: 100%;
+  margin: 0 0 calc(24px * var(--vs-s));
   color: #54bd01;
-  font-size: 13px;
+  font-family: 'Poppins', sans-serif;
+  font-size: calc(18px * var(--vs-s));
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  text-align: center;
   text-transform: uppercase;
 }
 
@@ -751,8 +780,11 @@
 .vectra-story .vs-experts__kicker,
 .vectra-story .vs-people > p.vs-people__kicker,
 .vectra-story .vs-people__kicker {
-  margin: 0 0 12px;
+  display: block;
+  width: 100%;
+  margin: 0 auto 12px;
   color: #54bd01;
+  font-family: 'Poppins', sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -954,10 +986,24 @@
 }
 
 .vectra-story .vs-people {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding-top: 64px;
+  text-align: center;
   background:
     radial-gradient(ellipse 70% 45% at 50% 100%, rgba(214, 255, 173, 0.22) 0%, transparent 65%),
     linear-gradient(180deg, #ffffff 0%, #f7faf7 100%);
+}
+
+.vectra-story .vs-people > .vs-people__kicker,
+.vectra-story .vs-people > h2,
+.vectra-story .vs-people > .vs-people__body,
+.vectra-story .vs-people > .vs-cta-btn,
+.vectra-story .vs-people > .vs-people__map {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .vectra-story .vs-leaders__viewport {
@@ -1435,11 +1481,25 @@
   background-color: var(--vh-bg) !important;
 }
 
-/* About Us FAQ — full-width accordion (no join card) */
+/* About Us FAQ — full-bleed width with side padding */
 .vectra-story .vh-faq--story {
   background:
     radial-gradient(ellipse 55% 70% at 50% 42%, rgba(214, 255, 173, 0.45) 0%, transparent 68%),
     linear-gradient(180deg, #ffffff 0%, #f8fcf4 52%, #ffffff 100%);
+}
+
+.vectra-story #about-faq.vh-faq {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  max-width: none;
+  margin-top: 8px;
+  margin-inline: 0;
+  padding: clamp(48px, 6vw, 88px) clamp(20px, 4vw, 64px);
+  border-radius: 32px 32px 0 0;
+  overflow: visible;
+  isolation: isolate;
+  box-sizing: border-box;
 }
 
 .vectra-story .vh-faq--story .vh-faq__grid,
@@ -1449,11 +1509,16 @@
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) !important;
   gap: 0 !important;
-  width: var(--vh-wrap) !important;
-  max-width: 100% !important;
-  margin-inline: auto;
+  width: 100% !important;
+  max-width: none !important;
+  margin-inline: 0 !important;
+  padding: 0 !important;
   justify-content: stretch;
   align-items: stretch;
+  overflow: visible;
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
 }
 
 .vectra-story #about-faq .vh-faq__right,
@@ -1471,27 +1536,6 @@
 .vectra-story #about-faq .vh-accordion .vh-kicker {
   max-width: none;
   width: 100%;
-}
-
-/* Standalone join stays hidden while unused on About Us */
-.vectra-story section.vs-join,
-.vectra-story .vs-join {
-  display: none !important;
-}
-
-.vectra-story #about-faq.vh-faq {
-  position: relative;
-  z-index: 4;
-  margin-top: 8px;
-  border-radius: 32px 32px 0 0;
-  overflow: visible;
-  isolation: isolate;
-}
-
-.vectra-story #about-faq .vh-faq__grid {
-  overflow: visible;
-  position: relative;
-  z-index: 2;
 }
 
 .vectra-story #about-faq .vh-faq__right,
@@ -1512,9 +1556,13 @@
 }
 
 @media (max-width: 989px) {
+  .vectra-story #about-faq.vh-faq {
+    padding: 40px 16px 56px;
+  }
+
   .vectra-home.vectra-story #about-faq .vh-faq__grid,
   .vectra-story #about-faq .vh-faq__grid {
-    width: min(100% - 32px, var(--vh-wrap)) !important;
+    width: 100% !important;
     grid-template-columns: minmax(0, 1fr) !important;
   }
 }
@@ -1753,7 +1801,8 @@
     width: 100%;
   }
 
-  .vectra-story .vs-who__kicker {
+  .vectra-story .vs-who__kicker,
+  .vectra-story .vs-values__kicker {
     margin-bottom: 16px;
     font-size: 28px;
   }
@@ -2028,6 +2077,8 @@
   .vectra-story .vs-card:hover,
   .vectra-story .vs-card__watermark,
   .vectra-story .vs-card:hover .vs-card__watermark,
+  .vectra-story .vs-solutions,
+  .vectra-story .vs-solutions:hover,
   .vectra-story .vs-value,
   .vectra-story .vs-value:hover,
   .vectra-story .vs-expert,
