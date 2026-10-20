@@ -1,18 +1,4 @@
-{% unless block.settings.hide_section %}
-<section class="vh-faq vh-faq--story vh-faq--story-full" id="about-faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-  <div class="vh-wrap vh-faq__grid">
-    <div class="vh-faq__right">
-      <div class="vh-faq__glow" aria-hidden="true"></div>
-      <div class="vh-accordion" data-vh-faq-accordion>
-        <p class="vh-kicker">{{ block.settings.kicker | default: 'FAQ' }}</p>
-        <h2 class="vh-h2">{{ block.settings.heading | default: 'Questions About VECTRA International' }}</h2>
-        <p class="vh-lead">{{ block.settings.lead | default: 'Answers about who we are, how we work, and where we operate.' }}</p>
-        {% content_for 'blocks' %}
-      </div>
-    </div>
-  </div>
-</section>
-{% endunless %}
+{% render 'vectra-story-modules', module: 'faq', block: block %}
 
 {% schema %}
 {

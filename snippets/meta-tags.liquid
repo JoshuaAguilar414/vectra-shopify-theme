@@ -29,7 +29,7 @@
     assign og_title = 'Responsible Business | Risk Assessment & Supply Chain Risk Consulting'
     assign og_description = 'Drive responsible business transformation with VECTRA’s business resilience, ESG consulting, operational resilience, supply chain consulting expertise, and resources.'
     assign vectra_meta_locked = true
-  elsif template.suffix == 'our-story' or template.suffix == 'vectra'
+  elsif template.suffix == 'our-story' or template.suffix == 'about-us' or template.suffix == 'vectra' or page.handle == 'our-story' or page.handle == 'about-us'
     assign og_title = 'About VECTRA International | Our DNA & Values'
     assign og_description = "Discover VECTRA International's DNA, values and global expertise in ESG, responsible business, supply chain resilience and business transformation."
     assign vectra_meta_locked = true
