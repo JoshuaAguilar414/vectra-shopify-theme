@@ -19,28 +19,28 @@
 
 <div class="vh-form__grid">
   <label class="vh-form__field">
-    <span class="visually-hidden">First name (required)</span>
-    <input type="text" name="contact[first_name]" placeholder="First name*" value="{{ customer.first_name }}" required autocomplete="given-name">
+    <span class="visually-hidden">First Name (required)</span>
+    <input type="text" name="contact[first_name]" placeholder="First Name*" value="{{ customer.first_name }}" required autocomplete="given-name">
   </label>
   <label class="vh-form__field">
-    <span class="visually-hidden">Last name (required)</span>
-    <input type="text" name="contact[last_name]" placeholder="Last name*" value="{{ customer.last_name }}" required autocomplete="family-name">
+    <span class="visually-hidden">Last Name (required)</span>
+    <input type="text" name="contact[last_name]" placeholder="Last Name*" value="{{ customer.last_name }}" required autocomplete="family-name">
   </label>
   <label class="vh-form__field">
-    <span class="visually-hidden">Work email (required)</span>
-    <input type="email" name="contact[email]" placeholder="Work email*" value="{{ customer.email }}" required autocomplete="email">
+    <span class="visually-hidden">Work Email (required)</span>
+    <input type="email" name="contact[email]" placeholder="Work Email*" value="{{ customer.email }}" required autocomplete="email">
   </label>
   {% if phone_before_company %}
     <label class="vh-form__field">
-      <span class="visually-hidden">Phone number</span>
-      <input type="tel" name="contact[phone]" placeholder="Phone number" value="{{ customer.phone }}" autocomplete="tel">
+      <span class="visually-hidden">Phone Number</span>
+      <input type="tel" name="contact[phone]" placeholder="Phone Number" value="{{ customer.phone }}" autocomplete="tel">
     </label>
     <label class="vh-form__field">
       <span class="visually-hidden">Company (required)</span>
       <input type="text" name="contact[company]" placeholder="Company*" autocomplete="organization" required>
     </label>
     <label class="vh-form__field">
-      <span class="visually-hidden">Job title / role</span>
+      <span class="visually-hidden">Job Title / Role</span>
       <input type="text" name="contact[role]" placeholder="Job Title / Role" autocomplete="organization-title">
     </label>
   {% else %}
@@ -49,12 +49,12 @@
       <input type="text" name="contact[company]" placeholder="Company*" autocomplete="organization" required>
     </label>
     <label class="vh-form__field">
-      <span class="visually-hidden">{% if is_contact_page %}Role{% else %}Job title / role{% endif %}</span>
+      <span class="visually-hidden">{% if is_contact_page %}Role{% else %}Job Title / Role{% endif %}</span>
       <input type="text" name="contact[role]" placeholder="{% if is_contact_page %}Role{% else %}Job Title / Role{% endif %}" autocomplete="organization-title">
     </label>
     <label class="vh-form__field">
-      <span class="visually-hidden">Phone number</span>
-      <input type="tel" name="contact[phone]" placeholder="Phone number" value="{{ customer.phone }}" autocomplete="tel">
+      <span class="visually-hidden">Phone Number</span>
+      <input type="tel" name="contact[phone]" placeholder="Phone Number" value="{{ customer.phone }}" autocomplete="tel">
     </label>
   {% endif %}
 </div>

@@ -3243,13 +3243,6 @@
   margin-top: 12px;
 }
 
-.vh-portal__tagline {
-  margin-top: 18px;
-  color: #54bd01;
-  font-size: 16px;
-  font-weight: 700;
-}
-
 .vh-esg__copy .vh-kicker {
   margin: 0 0 12px;
   color: #54bd01;
@@ -3610,7 +3603,7 @@
   min-height: 0;
   margin-bottom: 0;
   padding: 0;
-  overflow: hidden;
+  overflow: visible;
   background: transparent;
   color: var(--vh-white);
 }
@@ -3628,14 +3621,19 @@
   z-index: 0;
 }
 
+.vh-portal > .vh-wrap {
+  position: relative;
+  z-index: 1;
+}
+
 .vh-portal__grid {
   position: relative;
   z-index: 1;
   height: auto;
-  width: min(var(--vh-wrap), calc(100% - 48px));
-  margin-inline: auto;
+  width: 100%;
+  margin: 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 730px);
+  grid-template-columns: minmax(260px, 0.9fr) minmax(320px, 1.15fr);
   column-gap: clamp(32px, 5vw, 80px);
   justify-content: center;
   align-items: center;
@@ -3644,19 +3642,26 @@
 
 .vh-portal__copy {
   width: auto;
-  max-width: 36em;
+  max-width: 34em;
   padding-top: 0;
   min-width: 0;
+}
+
+.vh-portal__form {
+  width: 100%;
+  min-width: 0;
+  max-width: 730px;
+  justify-self: end;
 }
 
 .vh-portal h2 {
   width: auto;
   max-width: 100%;
   color: #ffffff;
-  font-size: 64px;
-  font-weight: 500;
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 700;
   letter-spacing: -0.03em;
-  line-height: 1.2;
+  line-height: 1.15;
   margin: 0 0 16px;
 }
 
@@ -3665,15 +3670,24 @@
   line-height: inherit;
 }
 
-.vh-portal p {
+.vh-portal p,
+.vh-portal__lead {
   width: auto;
   max-width: 100%;
   margin: 0;
-  font-size: 32px;
+  font-size: clamp(16px, 1.35vw, 18px);
   font-weight: 400;
-  letter-spacing: -0.03em;
-  line-height: 1.45;
+  letter-spacing: -0.02em;
+  line-height: 1.55;
   color: #ffffff;
+}
+
+.vh-portal__tagline {
+  margin-top: 18px !important;
+  color: #ffffff !important;
+  font-size: clamp(16px, 1.35vw, 18px) !important;
+  font-weight: 600 !important;
+  line-height: 1.45 !important;
 }
 
 .vh-form {
@@ -3682,14 +3696,14 @@
   height: auto;
   min-height: 0;
   min-width: 0;
-  justify-self: end;
   box-sizing: border-box;
   background: rgba(231, 231, 231, 0.35);
   border: 1px solid #ffffff;
   backdrop-filter: blur(31.5px);
   -webkit-backdrop-filter: blur(31.5px);
   border-radius: 20px;
-  padding: clamp(32px, 4vw, 56px) clamp(24px, 3vw, 48px) 36px;
+  padding: clamp(28px, 3.5vw, 48px) clamp(20px, 2.5vw, 40px) 32px;
+  display: block;
 }
 
 .vh-form h3 {
@@ -4755,13 +4769,17 @@ body:has(.vectra-home) #MainContent {
     justify-content: stretch;
   }
 
-  .vh-portal__copy {
+  .vh-portal__copy,
+  .vh-portal__form {
     width: 100%;
+    max-width: 100%;
     padding-top: 0;
+    justify-self: stretch;
   }
 
   .vh-portal h2,
-  .vh-portal p {
+  .vh-portal p,
+  .vh-portal__lead {
     width: 100%;
   }
 

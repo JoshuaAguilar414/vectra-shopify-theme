@@ -941,31 +941,35 @@ Explore how VECTRA has supported organizations across responsible business, supp
     {% if is_solutions_portal %}
       <canvas class="vh-portal__cells" data-vs-join-grid aria-hidden="true"></canvas>
     {% endif %}
-    <div class="vh-wrap vh-portal__grid">
-      <div class="vh-portal__copy">
-        {% unless is_solutions_portal %}
-          <p class="vh-kicker">{{ portal_kicker }}</p>
-        {% endunless %}
-        <h2>{{ portal_heading }}</h2>
-        <p>{{ portal_text }}</p>
-        {% unless is_solutions_portal %}
-          <p class="vh-portal__tagline">Your success is our success.</p>
-        {% endunless %}
+    <div class="vh-wrap">
+      <div class="vh-portal__grid">
+        <div class="vh-portal__copy">
+          {% unless is_solutions_portal %}
+            <p class="vh-kicker">{{ portal_kicker }}</p>
+          {% endunless %}
+          <h2>{{ portal_heading }}</h2>
+          <p class="vh-portal__lead">{{ portal_text }}</p>
+          {% unless is_solutions_portal %}
+            <p class="vh-portal__tagline">Your success is our success.</p>
+          {% endunless %}
+        </div>
+        <div class="vh-portal__form">
+          {% if is_solutions_portal %}
+            {% form 'contact', id: 'VectraHomeContactSol', class: 'vh-form', data-vh-reveal: 'scale' %}
+              <h3>{{ portal_form_heading }}</h3>
+              {% render 'vectra-contact-fields', img_arrow: img_arrow, solutions_form: true, submit_label: portal_submit %}
+            {% endform %}
+          {% else %}
+            {% form 'contact', id: 'VectraHomeContact', class: 'vh-form' %}
+              {% render 'vectra-contact-fields', img_arrow: img_arrow, home_form: true, submit_label: portal_submit, message_placeholder: 'Tell us what you need help with and what you would like to improve.' %}
+            {% endform %}
+          {% endif %}
+        </div>
+        {% assign nested_extras = nested_extras | strip %}
+        {% if nested_extras != blank %}
+          <div class="vh-block-extras">{{ nested_extras }}</div>
+        {% endif %}
       </div>
-      {% if is_solutions_portal %}
-        {% form 'contact', class: 'vh-form', data-vh-reveal: 'scale' %}
-          <h3>{{ portal_form_heading }}</h3>
-          {% render 'vectra-contact-fields', img_arrow: img_arrow, solutions_form: true, submit_label: portal_submit %}
-        {% endform %}
-      {% else %}
-        {% form 'contact', class: 'vh-form' %}
-          {% render 'vectra-contact-fields', img_arrow: img_arrow, home_form: true, submit_label: portal_submit, message_placeholder: 'Tell us what you need help with and what you would like to improve.' %}
-        {% endform %}
-      {% endif %}
-      {% assign nested_extras = nested_extras | strip %}
-      {% if nested_extras != blank %}
-        <div class="vh-block-extras">{{ nested_extras }}</div>
-      {% endif %}
     </div>
   </section>
 {% endunless %}

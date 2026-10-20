@@ -201,10 +201,17 @@
 .vectra-sol .vsol-eco__head > p:not(.vsol-kicker),
 .vectra-sol .vsol-svc__head p,
 .vectra-sol .vh-portal p,
-.vectra-home .vh-portal p {
+.vectra-home .vh-portal p,
+.vectra-home .vh-portal__lead {
   font-size: var(--vh-fs-lead) !important;
   line-height: 1.45 !important;
   letter-spacing: -0.02em !important;
+}
+
+.vectra-home .vh-portal__tagline {
+  font-size: var(--vh-fs-lead) !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
 }
 
 .vectra-home p,
@@ -389,8 +396,8 @@
 
 @media (max-width: 1399px) {
   .vectra-home .vh-portal__grid {
-    grid-template-columns: 1fr;
-    row-gap: 36px;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 1.1fr);
+    column-gap: clamp(24px, 3vw, 48px);
     padding-top: 64px;
     padding-bottom: 72px;
   }
