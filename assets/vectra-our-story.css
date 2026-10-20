@@ -2259,6 +2259,37 @@
   font-size: clamp(17px, 1.5vw, 20px);
 }
 
+.vectra-home .vh-people-page .vs-expert__focus {
+  margin: 8px 0 0;
+  color: #092543;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.vectra-home .vh-people-page .vp-section-divider {
+  width: min(720px, calc(100% - 80px));
+  height: 1px;
+  margin: 8px auto 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(9, 37, 67, 0.14) 18%,
+    rgba(9, 37, 67, 0.22) 50%,
+    rgba(9, 37, 67, 0.14) 82%,
+    transparent 100%
+  );
+}
+
+.vectra-home .vh-people-page#leadership .vp-closing {
+  margin-bottom: 8px;
+}
+
+.vectra-home .vh-people-page#leadership .vp-cta {
+  margin-top: 36px;
+  padding-top: 8px;
+}
+
 .vectra-home .vh-people-page .vp-cta__aside {
   margin: 18px 0 0;
   color: rgba(9, 37, 67, 0.7);

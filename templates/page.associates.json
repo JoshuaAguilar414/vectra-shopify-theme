@@ -13,7 +13,8 @@
             "page_type": "associates",
             "kicker": "OUR PEOPLE",
             "heading": "VECTRA International Associates | Specialist Expertise & Network",
-            "cta_label": "Become an Associate"
+            "cta_label": "Become an Associate",
+            "cta_link": "shopify://pages/contact-us"
           }
         },
         "footer": { "type": "vectra-footer", "settings": {} }

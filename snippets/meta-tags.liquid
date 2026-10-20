@@ -61,6 +61,22 @@
     assign og_title = 'Contact VECTRA International | Get in Touch'
     assign og_description = 'Contact VECTRA International for ESG, supply chain, and operational resilience expertise. Reach our consultants by form, email, or phone.'
     assign vectra_meta_locked = true
+  elsif template.suffix == 'leadership' or page.handle == 'our-leadership-team' or page.handle == 'leadership'
+    assign og_title = 'VECTRA International Leadership Team | Our Leaders'
+    assign og_description = 'Meet the VECTRA International leadership team, including our leaders and management team driving responsible, resilient and transparent supply chains.'
+    assign vectra_meta_locked = true
+  elsif template.suffix == 'experts' or page.handle == 'experts' or page.handle == 'our-experts'
+    assign og_title = 'VECTRA International Experts | Subject Matter Experts'
+    assign og_description = 'Meet VECTRA International experts bringing specialist ESG, supply chain due diligence, sustainability, and responsible business expertise.'
+    assign vectra_meta_locked = true
+  elsif template.suffix == 'associates' or page.handle == 'associates'
+    assign og_title = 'VECTRA International Associates | Specialist Expertise'
+    assign og_description = 'Meet VECTRA International Associates, the specialists in analytics, training, marketing, technology and operations who support our client solutions.'
+    assign vectra_meta_locked = true
+  elsif template.suffix == 'interns' or page.handle == 'interns'
+    assign og_title = 'VECTRA International Interns | Internship Opportunities'
+    assign og_description = 'Meet VECTRA International Interns and explore internships where you learn from experts, contribute to real work, and build practical skills.'
+    assign vectra_meta_locked = true
   elsif template.suffix == 'risk-assessment' or page.handle == 'risk-assessment' or page.handle == 'services-risk-assessment'
     assign og_title = 'Supplier Risk Assessment Solutions | VECTRA International'
     assign og_description = 'Strengthen supply chains with supply chain due diligence risk assessment, supplier risk assessment, and SCDD maturity solutions from VECTRA.'

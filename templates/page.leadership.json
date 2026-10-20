@@ -15,7 +15,7 @@
               "settings": {
                 "name": "Patrick Neyts",
                 "role": "Chief Executive Officer",
-                "bio": "Patrick has more than 30 years of experience in responsible business, ESG programs, and corporate codes, across 11 industry sectors and 40 countries. Focus: Company direction and growth.",
+                "bio": "Patrick has more than 30 years of experience in responsible business, ESG programs, and corporate codes, across 11 industry sectors and 40 countries.\n\nFocus: Company direction and growth",
                 "link": "https://www.linkedin.com/in/patrick-neyts-enabling-positive-responsible-business-change/",
                 "fallback_asset": "vectra-4a782677c9907a899d2e84025df9fda627b7fbf8.png"
               }
@@ -25,7 +25,7 @@
               "settings": {
                 "name": "Shelly Sanders",
                 "role": "SVP, Global Sales, Marketing & Communications",
-                "bio": "Shelly has more than 30 years of leadership experience in consultative, solution-based sales and operations across healthcare, finance, and IT. Focus: Global sales, marketing, and communications.",
+                "bio": "Shelly has more than 30 years of leadership experience in consultative, solution-based sales and operations. She has worked across healthcare, finance, and IT, driving global growth, strategic partnerships, and ESG-aligned outcomes.\n\nFocus: Global sales, marketing, and communications",
                 "link": "https://www.linkedin.com/in/michelesanders/",
                 "fallback_asset": "vectra-5a45cef3c985f7964fd6f04020f73a021850f52c.png"
               }
@@ -35,7 +35,7 @@
               "settings": {
                 "name": "Lorenz Berzau",
                 "role": "VP Operations",
-                "bio": "Lorenz brings 20 years of consultancy experience and a background in law, with a focus on sustainability strategy, human rights, and social compliance. Focus: Operations.",
+                "bio": "Lorenz brings 20 years of consultancy experience and a background in law, with a focus on sustainability strategy, human rights, and social compliance.\n\nFocus: Operations",
                 "link": "https://www.linkedin.com/in/lorenz-berzau-futurefitsme/",
                 "fallback_asset": "vectra-dc0daa0599cf1e7890ac477b6fd8c91f8bc1743a.png"
               }
@@ -45,7 +45,7 @@
               "settings": {
                 "name": "Alana van Wouw",
                 "role": "AI Architect",
-                "bio": "Alana has more than 20 years of experience in project management, ESG, financial modeling, and AI across emerging markets. Focus: Applied AI.",
+                "bio": "Alana has more than 20 years of experience in project management, ESG, financial modeling, and AI, leading high-impact initiatives across emerging markets with strong sustainability and data-driven expertise.\n\nFocus: Applied AI",
                 "link": "https://www.linkedin.com/in/alana-van-wouw-717511233/",
                 "fallback_asset": "vectra-dd46b740bdec4d3fe0852fbab0c2855306beb4e4.png"
               }
@@ -55,7 +55,7 @@
               "settings": {
                 "name": "Elizabeth Korban",
                 "role": "Director of Organizational Enablement",
-                "bio": "Elizabeth has 15+ years of experience leading work to embed ESG principles into organizational culture, governance, and operations. Focus: Organizational enablement.",
+                "bio": "Elizabeth has 15+ years of experience leading work to embed ESG principles into organizational culture, governance, and operations.\n\nFocus: Organizational enablement",
                 "link": "https://www.linkedin.com/in/elizabeth-korban-0690625/",
                 "fallback_asset": "vectra-8606670d35448bf9a7c0b601a64c49b9be7e86de.png"
               }
@@ -66,7 +66,8 @@
             "page_type": "leadership",
             "kicker": "OUR LEADERSHIP",
             "heading": "VECTRA International Leadership Team | Our Leaders & Management",
-            "cta_label": "Start the Conversation"
+            "cta_label": "Start the Conversation",
+            "cta_link": "shopify://pages/contact-us"
           }
         },
         "footer": { "type": "vectra-footer", "settings": {} }

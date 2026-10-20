@@ -25,7 +25,8 @@
             "page_type": "experts",
             "kicker": "OUR PEOPLE",
             "heading": "VECTRA International Experts | Subject Matter Experts & Associates",
-            "cta_label": "Talk to an Expert"
+            "cta_label": "Talk to an Expert",
+            "cta_link": "shopify://pages/contact-us"
           }
         },
         "footer": { "type": "vectra-footer", "settings": {} }

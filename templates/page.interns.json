@@ -13,7 +13,8 @@
             "page_type": "interns",
             "kicker": "OUR PEOPLE",
             "heading": "VECTRA International Interns | Internship & Learning Opportunities",
-            "cta_label": "Apply for an Internship"
+            "cta_label": "Apply for an Internship",
+            "cta_link": "mailto:info@vectra-intl.com?subject=Internship%20Opportunities"
           }
         },
         "footer": { "type": "vectra-footer", "settings": {} }

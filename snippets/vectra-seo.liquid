@@ -240,7 +240,8 @@
       "name": "VECTRA International Leadership Team | Our Leaders",
       "headline": "VECTRA International Leadership Team | Our Leaders & Management",
       "description": "Meet the VECTRA International leadership team, including our leaders and management team driving responsible, resilient and transparent supply chains.",
-      "url": "{{ request.origin }}{{ page.url }}",
+      "keywords": "VECTRA International leadership team, VECTRA International leaders, VECTRA International management",
+      "url": "{{ request.origin }}{{ page.url | default: '/pages/our-leadership-team' }}",
       "isPartOf": {
         "@type": "WebSite",
         "name": "VECTRA International",
@@ -297,7 +298,10 @@
     {
       "@type": "WebPage",
       "name": "VECTRA International Experts | Subject Matter Experts",
-      "description": "Meet VECTRA International experts bringing specialist ESG, supply chain due diligence, sustainability, and responsible business expertise."
+      "headline": "VECTRA International Experts | Subject Matter Experts & Associates",
+      "description": "Meet VECTRA International experts bringing specialist ESG, supply chain due diligence, sustainability, and responsible business expertise.",
+      "keywords": "VECTRA International experts, VECTRA subject matter experts, VECTRA International Associates",
+      "url": "{{ request.origin }}{{ page.url | default: '/pages/experts' }}"
     },
     {
       "@type": "ItemList",
@@ -324,8 +328,31 @@
     {
       "@type": "CollectionPage",
       "name": "VECTRA International Associates | Specialist Expertise",
-      "description": "Meet VECTRA International Associates, the specialists in analytics, training, marketing, technology and operations who support our client solutions."
-    }
+      "headline": "VECTRA International Associates | Specialist Expertise & Network",
+      "description": "Meet VECTRA International Associates, the specialists in analytics, training, marketing, technology and operations who support our client solutions.",
+      "keywords": "VECTRA International Associates, VECTRA Associates",
+      "url": "{{ request.origin }}{{ page.url | default: '/pages/associates' }}"
+    },
+    {"@type":"Person","name":"Aeshwarya Das","jobTitle":"Automation and Analytics Manager","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"Bhupender Singh","jobTitle":"Business Solutions Consultant","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"Sheila Akpaso","jobTitle":"Chief HR Officer Consultant","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"Leona Hitosis","jobTitle":"Instructional Designer","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"Pamela Ramos","jobTitle":"Instructional Designer","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"Pol Benliro","jobTitle":"Instructional Designer","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"Eloá Testoni","jobTitle":"Territory Business Manager","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"Long Phi","jobTitle":"Territory Business Manager","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"Prateek Kadambande","jobTitle":"Business Development Associate","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"Danna Fadul","jobTitle":"RFP Coordinator","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"Eerab Akhlaq","jobTitle":"Senior Marketing Manager","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"Am Bintang","jobTitle":"Social Media Specialist","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"Lara Lorca","jobTitle":"Graphic Designer","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"Vinay","jobTitle":"SEO Strategist","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"Gustian Lee","jobTitle":"Web Developer","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"Israel Malit","jobTitle":"Global Ecommerce Manager","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"San Thida","jobTitle":"Marketplace Growth & Merchandising Associate","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"William Nwokoji","jobTitle":"Content Strategist","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"Julie Hill","jobTitle":"Digital Systems Support Coordinator","worksFor":{"@type":"Organization","name":"VECTRA International"}},
+    {"@type":"Person","name":"Cecilia Francis","jobTitle":"Executive Assistant & Admin Operations Support","worksFor":{"@type":"Organization","name":"VECTRA International"}}
   ]
 }
 </script>
@@ -337,7 +364,10 @@
     {
       "@type": "WebPage",
       "name": "VECTRA International Interns | Internship Opportunities",
-      "description": "Meet VECTRA International Interns and explore internships where you learn from experts, contribute to real work, and build practical skills."
+      "headline": "VECTRA International Interns | Internship & Learning Opportunities",
+      "description": "Meet VECTRA International Interns and explore internships where you learn from experts, contribute to real work, and build practical skills.",
+      "keywords": "VECTRA International Interns, VECTRA Interns",
+      "url": "{{ request.origin }}{{ page.url | default: '/pages/interns' }}"
     }
   ]
 }
