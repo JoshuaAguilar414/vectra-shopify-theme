@@ -93,6 +93,10 @@
     assign og_title = 'ESG Courses & Compliance Training | VECTRA Marketplace'
     assign og_description = 'Explore ESG and compliance courses covering sustainability, human rights, health and safety, supply chain due diligence, and responsible business.'
     assign vectra_meta_locked = true
+  elsif template.suffix == 'faq' or page.handle == 'faq' or page.handle == 'faqs'
+    assign og_title = 'Responsible Business Consulting FAQs | VECTRA International'
+    assign og_description = 'Find answers about VECTRA International, responsible business consulting, supply chain consulting, business resilience, technology, and more.'
+    assign vectra_meta_locked = true
   endif
 
   if request.page_type == 'product'

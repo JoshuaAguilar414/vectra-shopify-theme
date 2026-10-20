@@ -6342,8 +6342,7 @@ body.vh-contact-open .page-wrapper {
 }
 
 .vs-hero__actions,
-.vres-hero__actions,
-.vsol-hero__actions {
+.vres-hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;

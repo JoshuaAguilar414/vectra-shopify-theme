@@ -58,7 +58,7 @@
   assign img_blog_2 = img_sol_4
   assign img_blog_3 = img_sol_2
   assign careers_url = pages['careers'].url | default: '/pages/careers'
-  assign marketplace_url = pages['marketplace'].url | default: '/pages/marketplace'
+  assign marketplace_url = pages['marketplace'].url | default: pages['vsuites'].url | default: pages['courses'].url | default: pages['solutions'].url | default: '/pages/marketplace'
   assign resources_base = pages['resources'].url | default: '/pages/resources'
   assign course_esg = pages['course-esg-acronyms'].url | default: '/pages/course-esg-acronyms'
   assign course_prev = pages['course-preventative-measures'].url | default: '/pages/course-preventative-measures'

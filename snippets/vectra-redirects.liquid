@@ -2,6 +2,25 @@
   Client-side fallback for WordPress → Shopify pretty paths.
   Import the same map in Shopify Admin > Navigation > URL redirects for 301s.
 {%- enddoc -%}
+{%- liquid
+  if pages['marketplace'].url != blank
+    assign marketplace_redirect = pages['marketplace'].url
+  elsif pages['vsuites'].url != blank
+    assign marketplace_redirect = pages['vsuites'].url | append: '?view=marketplace'
+  elsif pages['courses'].url != blank
+    assign marketplace_redirect = pages['courses'].url | append: '?view=marketplace'
+  elsif pages['solutions'].url != blank
+    assign marketplace_redirect = pages['solutions'].url | append: '?view=marketplace'
+  elsif pages['resources'].url != blank
+    assign marketplace_redirect = pages['resources'].url | append: '?view=marketplace'
+  elsif pages['about-us'].url != blank
+    assign marketplace_redirect = pages['about-us'].url | append: '?view=marketplace'
+  elsif pages['our-story'].url != blank
+    assign marketplace_redirect = pages['our-story'].url | append: '?view=marketplace'
+  else
+    assign marketplace_redirect = '/pages/marketplace'
+  endif
+-%}
 
 <script>
   (function () {
@@ -9,6 +28,7 @@
     window.__vectraRedirects = true;
 
     var path = (location.pathname || '/').replace(/\/+$/, '') || '/';
+    var marketplaceDest = {{ marketplace_redirect | json }};
     var exact = {
       '/careers': '/pages/careers',
       '/job-openings': '/pages/careers',
@@ -48,10 +68,10 @@
       '/why-vectra': '/pages/why-partner-with-us',
       '/faq': '/pages/faq',
       '/faqs': '/pages/faq',
-      '/marketplace': '/pages/marketplace',
-      '/courses': '/pages/marketplace',
-      '/course': '/pages/marketplace',
-      '/vsuites': '/pages/marketplace',
+      '/marketplace': marketplaceDest,
+      '/courses': marketplaceDest,
+      '/course': marketplaceDest,
+      '/vsuites': marketplaceDest,
       '/blog': '/blogs/news'
     };
 

@@ -166,8 +166,6 @@
 .vectra-home .vh-ig h3,
 .vectra-story .vs-leader h3,
 .vectra-sol .vsol-card__title,
-.vectra-sol .vsol-glass h3,
-.vectra-sol .vsol-svc-card h3,
 .vectra-sol .vsol-step h3,
 .vectra-sol .vsol-custom-card {
   font-size: var(--vh-fs-section) !important;
@@ -234,8 +232,6 @@
 .vectra-story p,
 .vectra-sol p,
 .vectra-sol .vsol-card__panel p,
-.vectra-sol .vsol-glass p,
-.vectra-sol .vsol-svc-card p,
 .vectra-sol .vsol-step p,
 .vectra-res .vres-prose p,
 .vectra-res .vres-search input,
@@ -248,7 +244,6 @@
 .vectra-home .vh-stat--100 b,
 .vectra-home .vh-stat--30 b,
 .vectra-home .vh-stat--500 b,
-.vectra-sol .vsol-svc-card__num,
 .vectra-sol .vsol-step span {
   font-size: var(--vh-fs-stat) !important;
   line-height: 1 !important;

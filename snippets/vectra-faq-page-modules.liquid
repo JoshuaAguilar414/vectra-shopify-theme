@@ -1,0 +1,342 @@
+{%- doc -%}
+  Full FAQ page — Version 2 final CMS copy (hardcoded).
+{%- enddoc -%}
+
+{{ 'vectra-faq-page.css' | asset_url | stylesheet_tag }}
+{% render 'vectra-assets' %}
+{% liquid
+  assign img_arrow = 'vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg' | asset_url
+  assign contact_base = pages['contact'].url | default: pages['contact-us'].url | default: '/pages/contact'
+  assign solutions_base = pages['solutions'].url | default: '/pages/solutions'
+  assign why_base = pages['why-partner-with-us'].url | default: pages['why-partner'].url | default: '/pages/why-partner-with-us'
+  assign market_base = pages['marketplace'].url | default: pages['vsuites'].url | default: pages['courses'].url | default: pages['solutions'].url | default: '/pages/marketplace'
+  assign risk_base = pages['risk-assessment'].url | default: pages['services-risk-assessment'].url | default: '/pages/risk-assessment'
+%}
+{% capture contact_href %}{% render 'vectra-preview-href', url: contact_base, view: 'contact-us' %}{% endcapture %}
+{% capture solutions_href %}{% render 'vectra-preview-href', url: solutions_base, view: 'solutions' %}{% endcapture %}
+{% capture why_href %}{% render 'vectra-preview-href', url: why_base, view: 'why-partner' %}{% endcapture %}
+{% capture market_href %}{% render 'vectra-preview-href', url: market_base, view: 'marketplace' %}{% endcapture %}
+{% capture risk_href %}{% render 'vectra-preview-href', url: risk_base, view: 'risk-assessment' %}{% endcapture %}
+{% assign contact_href = contact_href | strip %}
+{% assign solutions_href = solutions_href | strip %}
+{% assign why_href = why_href | strip %}
+{% assign market_href = market_href | strip %}
+{% assign risk_href = risk_href | strip %}
+
+{% render 'vectra-seo', page_key: 'faq' %}
+
+<section class="vfaq-hero" aria-label="FAQ" {% if block != blank %}style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}{% endif %}>
+  <div class="vfaq-wrap" data-vh-reveal="up">
+    <p class="vfaq-kicker">FAQ</p>
+    <h1>Responsible Business Consulting FAQs</h1>
+    <p class="vfaq-display">Frequently Asked Questions About VECTRA International</p>
+    <p class="vfaq-lead">Straight answers about VECTRA International, responsible business consulting, supply chains, business resilience, technology, capability building, and how we work.</p>
+    <p class="vfaq-lead">Use the sections below to find the question closest to what you are working through.</p>
+    <nav class="vfaq-jump" aria-label="Jump to FAQ section">
+      <span class="vfaq-jump__label">Jump to:</span>
+      <a href="#about-vectra">About VECTRA</a>
+      <a href="#working-with-us">Working With Us</a>
+      <a href="#business-resilience">Business Resilience</a>
+      <a href="#supply-chains">Supply Chains &amp; Suppliers</a>
+      <a href="#technology-ai">Technology &amp; AI</a>
+      <a href="#responsible-business">Responsible Business &amp; ESG</a>
+      <a href="#capability-marketplace">Capability Building &amp; Marketplace</a>
+      <a href="#getting-started">Getting Started</a>
+    </nav>
+    <div class="vfaq-hero__actions">
+      <a class="vh-btn vh-btn--green" href="{{ contact_href }}">Talk to a VECTRA Expert <img src="{{ img_arrow }}" alt=""></a>
+    </div>
+  </div>
+</section>
+
+<section class="vfaq-section" id="about-vectra">
+  <div class="vfaq-wrap">
+    <p class="vfaq-kicker" data-vh-reveal="up">ABOUT VECTRA INTERNATIONAL</p>
+    <h2 data-vh-reveal="up">What is VECTRA International and What We Do</h2>
+    <div class="vh-accordion" data-vh-faq-accordion data-vh-reveal="up">
+      <div class="vh-acc is-open" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="true">What is VECTRA International?</button>
+        <div class="vh-acc__body">
+          <p>VECTRA International is a business resilience and operational capability-building partner founded in 2005.</p>
+          <p>Our work includes responsible business consulting, supplier and value-chain issues, risk, reporting, technology, operational improvement, and capability building. We help organizations turn identified issues into clearer ownership, practical action, stronger evidence, and changes that work in day-to-day operations.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Why work with VECTRA International?</button>
+        <div class="vh-acc__body" hidden>
+          <p>VECTRA International brings more than 20 years of experience, a network of 50+ global experts, and experience supporting 500+ organizations.</p>
+          <p>More importantly, we stay close to what happens after the assessment, finding, or recommendation. That may mean clarifying ownership, improving a process, working with suppliers, strengthening evidence, building capability, or supporting implementation.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Is VECTRA International a global organization?</button>
+        <div class="vh-acc__body" hidden>
+          <p>Yes.</p>
+          <p>VECTRA International works globally through a network of specialists and associates with experience across markets, industries, and value chains.</p>
+          <p>Our office is in Brussels, Belgium, while project teams are built around the technical expertise and local context the work requires.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Where does VECTRA International work?</button>
+        <div class="vh-acc__body" hidden>
+          <p>VECTRA International supports organizations and value chains globally.</p>
+          <p>The exact team depends on the issue, operating context, and specialist knowledge required. We do not use one generalist team for every engagement.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Who does VECTRA International work with?</button>
+        <div class="vh-acc__body" hidden>
+          <p>VECTRA International works with small and mid-sized businesses, global enterprises, industry groups, and value-chain partners.</p>
+          <p>Client teams often include executive leadership, operations, procurement, supply chain, risk, compliance, sustainability, finance, quality, legal, and people functions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vfaq-section vfaq-section--alt" id="working-with-us">
+  <div class="vfaq-wrap">
+    <p class="vfaq-kicker" data-vh-reveal="up">WORKING WITH VECTRA INTERNATIONAL</p>
+    <h2 data-vh-reveal="up">How VECTRA International Works With Clients</h2>
+    <div class="vh-accordion" data-vh-faq-accordion data-vh-reveal="up">
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">When should we bring VECTRA International into a business challenge?</button>
+        <div class="vh-acc__body" hidden>
+          <p>Bring us in when you know something needs attention but the path forward is unclear, or when the same issue keeps returning despite previous action.</p>
+          <p>That could be a supplier problem, recurring finding, weak evidence, unclear ownership, a new requirement, or a change that is not working as expected.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Can VECTRA International help with one specific problem?</button>
+        <div class="vh-acc__body" hidden>
+          <p>Yes.</p>
+          <p>You can start with one defined issue or business outcome. The first piece of work can establish what is happening, what needs to change, and whether a wider response is actually necessary.</p>
+          <p>A large program does not need to be the starting point.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Can VECTRA International work alongside our existing teams and advisors?</button>
+        <div class="vh-acc__body" hidden>
+          <p>Yes.</p>
+          <p>We work with the people, systems, specialists, and partners already involved.</p>
+          <p>The aim is to add the expertise, structure, or implementation support the work is missing without creating another disconnected layer around it.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">What if our challenge crosses several teams or functions?</button>
+        <div class="vh-acc__body" hidden>
+          <p>That is common.</p>
+          <p>A supplier problem, for example, may involve procurement, operations, risk, evidence, remediation, and capability at the same time.</p>
+          <p>VECTRA International can bring the relevant expertise around the same issue so the work does not get split into unrelated projects with different owners and priorities. <a href="{{ solutions_href }}">See how this works on How We Help</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vfaq-section" id="business-resilience">
+  <div class="vfaq-wrap">
+    <p class="vfaq-kicker" data-vh-reveal="up">BUSINESS RESILIENCE</p>
+    <h2 data-vh-reveal="up">What Business Resilience Means</h2>
+    <div class="vh-accordion" data-vh-faq-accordion data-vh-reveal="up">
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">What does business resilience mean in VECTRA International’s work?</button>
+        <div class="vh-acc__body" hidden>
+          <p>Business resilience is the ability to keep important business outcomes under control as conditions change.</p>
+          <p>In practice, that can mean understanding risk earlier, keeping ownership clear, strengthening suppliers and processes, having evidence people can trust, and making sure teams know how to respond when something changes. See <a href="{{ why_href }}">Why Partner with VECTRA International</a> for the full model.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">How is business resilience different from business continuity?</button>
+        <div class="vh-acc__body" hidden>
+          <p>Business continuity focuses mainly on keeping critical activities running or restoring them after disruption.</p>
+          <p>Business resilience is broader. It includes continuity, but also covers how the organization understands risk, manages suppliers, strengthens controls, uses evidence, builds capability, and adapts before, during, and after disruption.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vfaq-section vfaq-section--alt" id="supply-chains">
+  <div class="vfaq-wrap">
+    <p class="vfaq-kicker" data-vh-reveal="up">SUPPLY CHAIN CONSULTING FAQS</p>
+    <h2 data-vh-reveal="up">How VECTRA International Helps With Supply Chain Risk</h2>
+    <div class="vh-accordion" data-vh-faq-accordion data-vh-reveal="up">
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">What is supply chain due diligence?</button>
+        <div class="vh-acc__body" hidden>
+          <p>Supply chain due diligence is the process of identifying, assessing, prioritizing, and responding to risks connected to suppliers and other value-chain relationships.</p>
+          <p>The useful part comes after the assessment: deciding what matters, who owns the response, and what action should follow. <a href="{{ risk_href }}">See VECTRA's SCDD Maturity Risk Assessment</a>.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Can VECTRA International work directly with suppliers?</button>
+        <div class="vh-acc__body" hidden>
+          <p>Yes, where the engagement requires it.</p>
+          <p>VECTRA International's supply chain consulting work can include direct engagement with suppliers on assessment, remediation, performance improvement, evidence, and capability alongside the client's procurement, operations, risk, compliance, or sustainability teams.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">What happens after a supplier risk is identified?</button>
+        <div class="vh-acc__body" hidden>
+          <p>First, determine how significant the issue is, who owns the response, and what needs to happen next.</p>
+          <p>That may involve further assessment, mitigation, remediation, supplier improvement, stronger evidence, or follow-through over time.</p>
+          <p>A risk score on its own does not close the issue.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">How can VECTRA International help improve supplier performance?</button>
+        <div class="vh-acc__body" hidden>
+          <p>We look behind the recurring problem.</p>
+          <p>The gap may sit in process, ownership, controls, communication, capability, or the way corrective actions are followed through.</p>
+          <p>The aim is to understand what needs to change, make the action clear, and see whether the improvement holds after the immediate issue is closed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vfaq-section" id="technology-ai">
+  <div class="vfaq-wrap">
+    <p class="vfaq-kicker" data-vh-reveal="up">TECHNOLOGY, DATA AND SYSTEMS</p>
+    <h2 data-vh-reveal="up">How VECTRA International Uses Technology and AI</h2>
+    <div class="vh-accordion" data-vh-faq-accordion data-vh-reveal="up">
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Is VECTRA International a software or AI company?</button>
+        <div class="vh-acc__body" hidden>
+          <p>No.</p>
+          <p>VECTRA International is a business resilience and operational capability-building partner.</p>
+          <p>Technology and AI can support analysis, monitoring, workflows, and decision-making, but people remain responsible for interpreting the situation, deciding what matters, and carrying the response into practice.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">How does VECTRA International use AI?</button>
+        <div class="vh-acc__body" hidden>
+          <p>We use AI where it can make information easier to analyze, highlight patterns, improve visibility, or support faster decisions.</p>
+          <p>AI supports the work. Human judgment, business context, specialist knowledge, and accountability determine what the information means and what happens next.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Can VECTRA International work with the platforms and systems we already use?</button>
+        <div class="vh-acc__body" hidden>
+          <p>Yes.</p>
+          <p>VECTRA International is platform-agnostic. We start with what is already in place and look at where the real gap sits.</p>
+          <p>If existing systems can support the work, we work with them. A new platform should only be introduced when it solves a clear problem.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">What if our data and evidence are spread across different systems?</button>
+        <div class="vh-acc__body" hidden>
+          <p>That is often less a technology problem than an ownership and control problem.</p>
+          <p>VECTRA can help clarify which information matters, where it comes from, who owns it, how it is used, and where gaps affect decisions or evidence.</p>
+          <p>The goal is to make existing information more useful before assuming another system is required.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vfaq-section vfaq-section--alt" id="responsible-business">
+  <div class="vfaq-wrap">
+    <p class="vfaq-kicker" data-vh-reveal="up">RESPONSIBLE BUSINESS FAQS</p>
+    <h2 data-vh-reveal="up">How VECTRA International Helps With Responsible Business and ESG Compliance</h2>
+    <div class="vh-accordion" data-vh-faq-accordion data-vh-reveal="up">
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Is ESG Consulting part of VECTRA International’s work?</button>
+        <div class="vh-acc__body" hidden>
+          <p>Yes.</p>
+          <p>ESG Compliance and responsible business consulting are part of VECTRA International’s work where they affect risk, suppliers, governance, reporting, evidence, market requirements, or operational performance.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Can VECTRA International help with sustainability reporting and disclosure?</button>
+        <div class="vh-acc__body" hidden>
+          <p>Yes.</p>
+          <p>We can help strengthen the work behind the report, including data ownership, evidence, internal review, disclosure readiness, and coordination between the teams responsible for producing and supporting the information.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">What is assurance and verification?</button>
+        <div class="vh-acc__body" hidden>
+          <p>Assurance and verification provide an independent check on whether information, evidence, controls, or processes can be relied on.</p>
+          <p>They help decision-makers understand what holds up, where gaps remain, and where stronger evidence or control is required.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Can VECTRA International strengthen the evidence behind our reporting or decisions?</button>
+        <div class="vh-acc__body" hidden>
+          <p>Yes.</p>
+          <p>We can help identify evidence gaps, clarify ownership, improve traceability, and strengthen the way information is collected, reviewed, and supported.</p>
+          <p>The practical test is whether the people relying on that information can find it, trust it, and defend the decision it supports.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vfaq-section" id="capability-marketplace">
+  <div class="vfaq-wrap">
+    <p class="vfaq-kicker" data-vh-reveal="up">CAPABILITY BUILDING</p>
+    <h2 data-vh-reveal="up">How VECTRA International Builds Capability</h2>
+    <div class="vh-accordion" data-vh-faq-accordion data-vh-reveal="up">
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">How does capability building fit into VECTRA International’s work?</button>
+        <div class="vh-acc__body" hidden>
+          <p>Capability building helps the people responsible for a change understand what is expected and apply it in their everyday work.</p>
+          <p>It may support a wider engagement or address a focused knowledge or adoption gap for leaders, employees, suppliers, or other teams.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">What is VECTRA Marketplace?</button>
+        <div class="vh-acc__body" hidden>
+          <p>VECTRA Marketplace is VECTRA International's learning platform for practical courses across responsible business, supply chains, compliance, risk, governance, and related business needs.</p>
+          <p>It gives individuals and teams a direct way to build knowledge where learning is the immediate need. <a href="{{ market_href }}">Explore VECTRA Marketplace</a>.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Is Marketplace training the same as a VECTRA International consulting or implementation engagement?</button>
+        <div class="vh-acc__body" hidden>
+          <p>No.</p>
+          <p>Marketplace is a learning route.</p>
+          <p>A wider VECTRA International engagement starts with a defined business problem and may involve assessment, specialist expertise, process improvement, implementation, assurance, supplier work, or capability building.</p>
+          <p>The two can work together when stronger knowledge is part of solving the business problem.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vfaq-section vfaq-section--alt" id="getting-started">
+  <div class="vfaq-wrap">
+    <p class="vfaq-kicker" data-vh-reveal="up">GETTING STARTED</p>
+    <h2 data-vh-reveal="up">You Can Start With the Problem</h2>
+    <div class="vh-accordion" data-vh-faq-accordion data-vh-reveal="up">
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Do we need a finished scope before contacting VECTRA International?</button>
+        <div class="vh-acc__body" hidden>
+          <p>No.</p>
+          <p>Start with the issue, recurring problem, requirement, or business result that needs attention.</p>
+          <p>A first conversation can help clarify where the gap sits and what kind of support makes sense next.</p>
+        </div>
+      </div>
+      <div class="vh-acc" data-vh-faq-item>
+        <button type="button" data-vh-faq-btn aria-expanded="false">Can we start with one area and expand later?</button>
+        <div class="vh-acc__body" hidden>
+          <p>Yes.</p>
+          <p>Starting with one clearly defined issue can make priorities, ownership, and progress easier to see.</p>
+          <p>If the work later points to a broader need, you can decide what comes next from a clearer baseline instead of starting with a program larger than the problem requires.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vfaq-close" id="more-questions">
+  <div class="vfaq-wrap" data-vh-reveal="up">
+    <p class="vfaq-kicker vfaq-kicker--light">HAVE MORE QUESTIONS?</p>
+    <h2>Bring us the problem.</h2>
+    <p>Sometimes the issue does not fit neatly into an FAQ.</p>
+    <p>Tell us what is happening, what keeps coming back, or where the work is getting stuck.</p>
+    <a class="vh-btn vh-btn--green" href="{{ contact_href }}">Start the conversation <img src="{{ img_arrow }}" alt=""></a>
+  </div>
+</section>

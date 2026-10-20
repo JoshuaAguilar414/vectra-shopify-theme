@@ -73,7 +73,7 @@
   assign resources_base = pages['resources'].url | default: '/pages/resources'
   assign careers_base = pages['careers'].url | default: '/pages/careers'
   assign faq_base = pages['faq'].url | default: '/pages/faq'
-  assign marketplace_base = pages['marketplace'].url | default: '/pages/marketplace'
+  assign marketplace_base = pages['marketplace'].url | default: pages['vsuites'].url | default: pages['courses'].url | default: pages['solutions'].url | default: '/pages/marketplace'
   assign experts_base = pages['experts'].url | default: '/pages/experts'
   assign associates_base = pages['associates'].url | default: '/pages/associates'
   assign interns_base = pages['interns'].url | default: '/pages/interns'

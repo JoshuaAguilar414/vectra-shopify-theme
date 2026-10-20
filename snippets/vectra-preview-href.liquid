@@ -167,11 +167,28 @@
   elsif view_name == 'faq'
     assign href = pages['faq'].url | default: '/pages/faq'
   elsif view_name == 'marketplace'
-    assign href = pages['marketplace'].url | default: '/pages/marketplace'
+    if pages['marketplace'].url != blank
+      assign href = pages['marketplace'].url
+    elsif pages['vsuites'].url != blank
+      assign href = pages['vsuites'].url
+      assign force_view = true
+    elsif pages['courses'].url != blank
+      assign href = pages['courses'].url
+      assign force_view = true
+    else
+      assign href = pages['solutions'].url | default: pages['resources'].url | default: pages['about-us'].url | default: pages['our-story'].url | default: pages['contact'].url | default: '/'
+      assign force_view = true
+    endif
   elsif view_name == 'course'
     assign href = url
     if href == blank
-      assign href = pages['marketplace'].url | default: '/pages/marketplace'
+      if pages['marketplace'].url != blank
+        assign href = pages['marketplace'].url
+      else
+        assign href = pages['solutions'].url | default: pages['resources'].url | default: pages['about-us'].url | default: '/'
+        assign force_view = true
+        assign view_name = 'marketplace'
+      endif
     endif
   endif
 

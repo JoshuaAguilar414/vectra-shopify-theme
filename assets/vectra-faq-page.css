@@ -1,0 +1,239 @@
+/* Full FAQ page (/faq/) */
+
+.vectra-home:has(.vfaq-hero),
+.vectra-people-section:has(.vfaq-hero) {
+  --vfaq-navy: #092543;
+  --vfaq-green: #54bd01;
+  background: #fff;
+  color: var(--vfaq-navy);
+}
+
+.vfaq-wrap {
+  width: min(920px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.vfaq-kicker {
+  margin: 0 0 12px;
+  color: var(--vfaq-green);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.vfaq-kicker--light {
+  color: #b6f27a;
+}
+
+.vfaq-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(ellipse 70% 60% at 28% 35%, #1f6b45 0%, transparent 58%),
+    linear-gradient(145deg, #0b3a2a 0%, #0f4a35 46%, #092543 100%);
+  border-radius: 0 0 48px 48px;
+  padding: clamp(140px, 13vw, 180px) 24px 64px;
+}
+
+.vfaq-hero .vfaq-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.vfaq-hero h1 {
+  margin: 0 0 14px;
+  max-width: 28em;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(15px, 1.45vw, 18px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+}
+
+.vfaq-display {
+  margin: 0 0 20px;
+  max-width: 16em;
+  color: #fff;
+  font-size: clamp(30px, 4vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+}
+
+.vfaq-lead {
+  margin: 0 0 12px;
+  max-width: 44em;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+}
+
+.vfaq-jump {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 22px 0 28px;
+}
+
+.vfaq-jump__label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.vfaq-jump a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.vfaq-jump a:hover,
+.vfaq-jump a:focus-visible {
+  background: rgba(84, 189, 1, 0.35);
+}
+
+.vfaq-hero__actions {
+  margin-top: 8px;
+}
+
+.vfaq-section {
+  padding: 64px 0 24px;
+  background: #fff;
+}
+
+.vfaq-section--alt {
+  background: #f4f7f2;
+}
+
+.vfaq-section h2 {
+  margin: 0 0 28px;
+  max-width: 18em;
+  color: var(--vfaq-navy);
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+
+.vfaq-section .vh-accordion {
+  margin: 0;
+}
+
+.vfaq-section .vh-acc {
+  margin: 0 0 12px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 2px 14px rgba(9, 37, 67, 0.05);
+  overflow: hidden;
+}
+
+.vfaq-section--alt .vh-acc {
+  background: #fff;
+}
+
+.vfaq-section .vh-acc [data-vh-faq-btn] {
+  width: 100%;
+  padding: 18px 20px;
+  border: 0;
+  background: transparent;
+  color: var(--vfaq-navy);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+}
+
+.vfaq-section .vh-acc__body {
+  padding: 0 20px 18px;
+}
+
+.vfaq-section .vh-acc__body p {
+  margin: 0 0 10px;
+  color: rgba(9, 37, 67, 0.78);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.vfaq-section .vh-acc__body p:last-child {
+  margin-bottom: 0;
+}
+
+.vfaq-section .vh-acc__body a {
+  color: var(--vfaq-green);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.vfaq-close {
+  margin-top: 24px;
+  padding: 72px 24px;
+  color: #fff;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 30%, rgba(84, 189, 1, 0.22), transparent 55%),
+    linear-gradient(145deg, #092543 0%, #0f4a35 100%);
+  border-radius: 48px 48px 0 0;
+  text-align: center;
+}
+
+.vfaq-close h2 {
+  margin: 0 auto 16px;
+  max-width: 12em;
+  color: #fff;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.vfaq-close p {
+  margin: 0 auto 10px;
+  max-width: 36em;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.vfaq-close .vh-btn {
+  margin-top: 24px;
+}
+
+@media (max-width: 749px) {
+  .vfaq-wrap {
+    width: calc(100% - 32px);
+  }
+
+  .vfaq-hero {
+    padding: 120px 16px 48px;
+    border-radius: 0 0 32px 32px;
+  }
+
+  .vfaq-section {
+    padding: 48px 0 16px;
+  }
+
+  .vfaq-close {
+    padding: 56px 16px;
+    border-radius: 32px 32px 0 0;
+  }
+}
