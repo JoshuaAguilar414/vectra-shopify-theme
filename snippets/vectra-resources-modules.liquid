@@ -119,10 +119,9 @@
     <h1>Responsible Business Resources &amp; Insights</h1>
     <h2 class="vres-hero__display">Better Insight. Clearer Decisions.</h2>
     <div class="vres-hero__lead">
-      <p>VECTRA Resources helps you work out what matters, what it means for your organization, and what to do next.</p>
-      <p>There is already enough information available. The harder part is separating what is relevant from what is not, understanding what it means for your operations, and knowing where your attention needs to go.</p>
+      <p>There is already enough information available. The harder part is separating what is relevant from what is not. VECTRA Resources helps you do exactly that, so you can see what it means for your organization and where your attention needs to go.</p>
     </div>
-    <p class="vres-hero__aeo">Responsible business resources help organizations understand ESG, supply chain, sustainability, compliance, risk, and operational resilience issues and decide what to do about them. VECTRA International brings together ESG resources, supply chain resources, Insights, Ebooks and Playbooks, Events and Webinars, VCASTs, Case Studies, and Press Releases, organized by the kind of answer you need.</p>
+    <p class="vres-hero__aeo">Responsible business resources help organizations understand ESG, supply chain, risk, and resilience issues and decide what to do next. VECTRA International brings together ESG resources, supply chain resources, risk management resources, business resilience resources, and operational resilience resources, organized by the kind of answer you need.</p>
   </div>
 </section>
 {% endunless %}
@@ -462,9 +461,9 @@
   <div class="vh-wrap vh-faq__grid">
     <aside class="vh-contact-card" data-vh-reveal="left">
       <img class="vh-contact-card__icon" src="{{ img_chat }}" alt="">
-      <p class="vh-contact-card__title">Still looking for clarity?</p>
-      <p>If what you have learned needs to become a decision, a plan, or a change to how your team works, talk to a VECTRA expert.</p>
-      <a class="vh-btn vh-btn--white" href="#VectraContactModal" data-vh-contact-open>
+      <p class="vh-contact-card__title">Talk to a VECTRA Expert</p>
+      <p>If what you have learned needs to become a decision, a plan, or a change to how your team works, VECTRA International can help you move it forward.</p>
+      <a class="vh-btn vh-btn--white" href="#what-comes-next">
         Start the Conversation
         <img src="{{ 'vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg' | asset_url }}" alt="">
       </a>
@@ -505,11 +504,26 @@
 
   {% when 'closing' %}
 {% unless block.settings.hide_section %}
-<section class="vres-closing vh-portal vres-closing--copy-only" id="what-comes-next" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-  <div class="vh-wrap vres-closing__inner">
-    <p class="vh-kicker">WHAT COMES NEXT</p>
-    <h2>Better insight should lead somewhere.</h2>
-    <p>If what you have learned needs to become a decision, a plan, or a change to how your team works, VECTRA International can help you move it forward.</p>
+<section class="vres-closing vh-portal" id="what-comes-next" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-wrap">
+    <div class="vh-portal__grid">
+      <div class="vh-portal__copy">
+        <p class="vh-kicker">WHAT COMES NEXT</p>
+        <h2>Better insight should lead somewhere.</h2>
+        <p class="vh-portal__lead">If what you have learned needs to become a decision, a plan, or a change to how your team works, VECTRA International can help you move it forward.</p>
+      </div>
+      <div class="vh-portal__form">
+        {% form 'contact', id: 'VectraResourcesContact', class: 'vh-form' %}
+          <h3>Talk to a VECTRA Expert</h3>
+          {% render 'vectra-contact-fields',
+            img_arrow: img_arrow,
+            home_form: true,
+            submit_label: 'Start the Conversation',
+            message_placeholder: 'Tell us what you are working through and where you need clarity or support.'
+          %}
+        {% endform %}
+      </div>
+    </div>
   </div>
 </section>
 {% endunless %}

@@ -65,35 +65,35 @@
       assign hero_h1 = 'VECTRA International Ebooks &amp; Playbooks | Practical Guides'
       assign hero_display = 'Practical Guides for the Decisions Your Team Needs to Make.'
       assign hero_lead = 'Trying to turn a complex issue into a workable plan? Start here. These ebooks and playbooks help you sort through the details, ask better questions, and work out the next steps with your team.'
-      assign hero_aeo = 'VECTRA International Ebooks &amp; Playbooks offer structured guides and practical frameworks on business resilience, supply chain risk, responsible business, and operational challenges. They help business, procurement, and operations teams understand a complex issue, organize the work involved, and plan practical next steps for their organization.'
+      assign hero_aeo = 'VECTRA International Ebooks &amp; Playbooks offer responsible business guides, supply chain guides, and practical frameworks on business resilience, supply chain risk, and operational challenges. They help business, procurement, and operations teams organize the work involved and turn expert guidance into action across their organization.'
     when 'press-releases'
       assign hero_label = 'Press Releases'
       assign hero_kicker = 'PRESS RELEASES'
       assign hero_h1 = 'VECTRA International Press Releases | News &amp; Announcements'
       assign hero_display = 'What’s New at VECTRA, and Why It Matters.'
       assign hero_lead = 'Seen an update about VECTRA and want the full details? Here you can find our official announcements about partnerships, company developments, and milestones, with the original release to read for yourself.'
-      assign hero_aeo = 'VECTRA International press releases are the official source for company news, announcements, partnerships, and key updates. This page brings the latest releases together in one place so clients, partners, media professionals, and other readers can see what VECTRA has announced and find the details in the original release.'
+      assign hero_aeo = 'VECTRA International press releases are the official source for VECTRA International news and announcements, from leadership updates to industry developments. They help clients, partners, media professionals, and other readers keep up with VECTRA’s work and see how the company is growing.'
     when 'podcasts'
       assign hero_label = 'Podcast'
       assign hero_kicker = ''
       assign hero_h1 = 'VECTRA International Podcast | Expert Insights &amp; Discussions'
       assign hero_display = 'What Does Responsible Business Look Like in Practice?'
       assign hero_lead = 'VECTRA experts take time to discuss the questions behind responsible business and supply chain decisions. Hear how they weigh evidence, work through practical challenges, and connect industry developments to the work your team does every day.'
-      assign hero_aeo = 'VECTRA International podcast shares expert discussions on business resilience, supply chain risk, responsible business, and industry developments. VECTRA experts examine the questions behind day-to-day decisions, explain how they approach practical challenges, and offer perspectives that business leaders and supply chain teams can apply to their own work.'
+      assign hero_aeo = 'The VECTRA International podcast shares expert discussions on ESG, business resilience, supply chain risk, and responsible business. Featuring VECTRA experts, partners, and practitioners, each episode is made for business leaders and supply chain teams. Episodes are available on Spotify, Apple Podcasts, and YouTube.'
     when 'event-webinars'
       assign hero_label = 'Events and Webinars'
       assign hero_kicker = 'EVENTS &amp; WEBINARS'
       assign hero_h1 = 'VECTRA International Events | Webinars &amp; Industry Events'
       assign hero_display = 'Hear How Experts Approach the Questions Your Team Is Facing.'
       assign hero_lead = 'Some questions make more sense when you hear people talk them through. Join VECTRA at an upcoming webinar or industry event, or watch an available replay when you have time. Find a conversation that speaks to what your team is working on.'
-      assign hero_aeo = 'VECTRA International events include webinars, industry events, and expert-led sessions on business resilience, supply chain risk, and responsible business. This page lists upcoming opportunities to hear from VECTRA experts and join relevant conversations. It also brings together available webinar replays so you can revisit a session or watch one you missed.'
+      assign hero_aeo = 'VECTRA International events include webinars, industry events, and expert-led sessions on business resilience, supply chain risk, and responsible business. VECTRA experts join online discussions with partners such as Ethisphere and take part in trade fairs, conferences, and roundtables across Europe, Asia, and North America. Replays of VECTRA webinars are available to watch anytime.'
     else
       assign hero_label = 'Insights'
       assign hero_kicker = 'INSIGHTS'
       assign hero_h1 = 'VECTRA International Blogs | Industry Insights &amp; Reports'
       assign hero_display = 'Understand What’s Changing. Decide What Comes Next.'
-      assign hero_lead = 'Trying to make sense of a new rule or a supplier issue? Start here. VECTRA’s experts explain what matters in plain language and share practical ideas you can use in your next team discussion.'
-      assign hero_aeo = 'VECTRA International Insights brings together industry perspectives, expert analysis, research, and reports on business resilience, supply chain risk, responsible business, and operational performance. It helps business leaders, procurement, and supply chain teams make sense of changing requirements, examine practical challenges, and find ideas they can use to make better decisions.'
+      assign hero_lead = "Trying to make sense of a new rule or a supplier issue? Start here. VECTRA's experts explain what matters in plain language and share practical ideas you can use in your next team discussion."
+      assign hero_aeo = 'VECTRA International Insights brings together industry perspectives, expert analysis, research, and reports on business resilience, supply chain risk, responsible business, and operational performance. It helps business leaders, procurement, and supply chain teams stay ahead of changing requirements and make better decisions.'
   endcase
 %}
 {% unless block.settings.hide_section %}
@@ -213,8 +213,7 @@
       <div class="vres-about__copy" data-vh-reveal="up">
         <p class="vh-kicker">THE CONVERSATION</p>
         <h2 class="vh-h2">VECTRA International Podcast</h2>
-        <p class="vh-lead">A supplier issue may look different to someone in procurement, risk, or operations. VECTRA Podcasts give our experts room to explore those perspectives and explain how they shape a decision.</p>
-        <p class="vh-lead">The conversations cover the evidence teams need, the challenges they meet in practice, and the choices involved in building more responsible and resilient businesses.</p>
+        <p class="vh-lead">A supplier issue may look different to someone in procurement, risk, or operations. VECTRA podcasts give our experts room to explore those perspectives and explain how they shape a decision.</p>
         <div class="vres-platforms" data-vh-reveal="up">
           <p class="vres-platforms__label">Listen or watch on</p>
           <ul class="vres-platforms__list">
@@ -256,7 +255,7 @@
     assign list_id = 'ebooks-listing'
     assign list_eyebrow = 'EXPLORE E-BOOKS &amp; PLAYBOOKS'
     assign list_heading = 'VECTRA International E-books &amp; Playbooks'
-    assign cta_label = 'Read'
+    assign cta_label = 'Read or Download'
     assign ph_titles = 'Risk Management &amp; Supply Chain Due Diligence|A Guide to EU Corporate Sustainability Due Diligence|ESG Due Diligence Insights and Actionable Steps' | split: '|'
     assign ph_topics = 'Value Chain Resilience|Governance & Regulatory|ESG Compliance' | split: '|'
     assign ph_types = 'Ebook|Playbook|Ebook' | split: '|'
@@ -547,7 +546,7 @@
         <h2 class="vh-h2">Questions About VECTRA Insights</h2>
         <div class="vh-acc is-open" data-vh-faq-item>
           <button type="button" data-vh-faq-btn aria-expanded="true">What kind of content is published here?</button>
-          <div class="vh-acc__body">Industry insights, expert perspectives, and reports on business resilience, supply chain risk, responsible business, ESG compliance, and operational performance, written by VECTRA’s leaders, experts, and specialists.</div>
+          <div class="vh-acc__body">Industry insights, expert perspectives, and reports on business resilience, supply chain risk, responsible business, ESG Compliance, and operational performance, written by VECTRA’s leaders, experts, and specialists.</div>
         </div>
         <div class="vh-acc" data-vh-faq-item>
           <button type="button" data-vh-faq-btn aria-expanded="false">How often is new content published?</button>

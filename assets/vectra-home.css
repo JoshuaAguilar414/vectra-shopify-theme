@@ -3143,6 +3143,15 @@
     linear-gradient(180deg, #ffffff 0%, #f8fcf4 52%, #ffffff 100%);
 }
 
+/* About FAQ side gutter — also set on base .vh-faq path so it cannot miss */
+#about-faq.vh-faq {
+  margin-left: clamp(24px, 5vw, 80px) !important;
+  margin-right: clamp(24px, 5vw, 80px) !important;
+  padding-left: clamp(20px, 3vw, 48px) !important;
+  padding-right: clamp(20px, 3vw, 48px) !important;
+  box-sizing: border-box !important;
+}
+
 .vh-faq__grid {
   position: relative;
   z-index: 1;

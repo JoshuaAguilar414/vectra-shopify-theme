@@ -1506,22 +1506,26 @@
   background-color: var(--vh-bg) !important;
 }
 
-/* About Us FAQ — inset with left/right margin + inner padding */
-.vectra-home.vectra-story #about-faq,
-.vectra-home.vectra-story #about-faq.vs-faq-full,
+/* About Us FAQ — left/right margin + padding (hard values so they always apply) */
+#about-faq.vs-faq-full,
+.vectra-home #about-faq,
 .vectra-story #about-faq,
-.vectra-story #about-faq.vs-faq-full {
-  position: relative;
+.vectra-home.vectra-story #about-faq,
+.vectra-home.vectra-story #about-faq.vs-faq-full {
+  position: relative !important;
   z-index: 4;
   display: block !important;
   width: auto !important;
   max-width: none !important;
   margin-top: 8px !important;
-  margin-left: var(--vs-pad-x) !important;
-  margin-right: var(--vs-pad-x) !important;
   margin-bottom: 0 !important;
-  padding: clamp(48px, 6vw, 88px) clamp(20px, 3vw, 48px) !important;
-  border-radius: 32px;
+  margin-left: clamp(24px, 5vw, 80px) !important;
+  margin-right: clamp(24px, 5vw, 80px) !important;
+  padding-top: clamp(48px, 6vw, 88px) !important;
+  padding-bottom: clamp(48px, 6vw, 88px) !important;
+  padding-left: clamp(20px, 3vw, 48px) !important;
+  padding-right: clamp(20px, 3vw, 48px) !important;
+  border-radius: 32px !important;
   overflow: visible;
   isolation: isolate;
   box-sizing: border-box !important;
@@ -1530,14 +1534,11 @@
     linear-gradient(180deg, #ffffff 0%, #f8fcf4 52%, #ffffff 100%);
 }
 
-.vectra-home.vectra-story #about-faq .vs-faq-full__inner,
-.vectra-home.vectra-story #about-faq .vh-faq__grid,
-.vectra-home.vectra-story #about-faq .vh-wrap,
-.vectra-home.vectra-story #about-faq .vh-faq__right,
-.vectra-story #about-faq .vs-faq-full__inner,
-.vectra-story #about-faq .vh-faq__grid,
-.vectra-story #about-faq .vh-wrap,
-.vectra-story #about-faq .vh-faq__right {
+#about-faq .vs-faq-full__inner,
+.vectra-home #about-faq .vs-faq-full__inner,
+.vectra-home #about-faq .vh-faq__grid,
+.vectra-home #about-faq .vh-wrap,
+.vectra-home #about-faq .vh-faq__right {
   position: relative;
   z-index: 2;
   display: block !important;
@@ -1548,7 +1549,6 @@
   max-width: none !important;
   min-width: 0 !important;
   margin: 0 !important;
-  padding: 0 !important;
   box-sizing: border-box !important;
 }
 
@@ -1609,27 +1609,21 @@
 }
 
 @media (min-width: 990px) {
-  .vectra-home.vectra-story #about-faq,
-  .vectra-home.vectra-story #about-faq.vs-faq-full,
-  .vectra-story #about-faq,
-  .vectra-story #about-faq.vs-faq-full {
-    width: auto !important;
-    max-width: none !important;
-    margin-left: var(--vs-pad-x) !important;
-    margin-right: var(--vs-pad-x) !important;
-    padding: clamp(64px, 7vw, 100px) clamp(28px, 3.5vw, 56px) !important;
+  #about-faq.vs-faq-full,
+  .vectra-home #about-faq {
+    margin-left: clamp(24px, 5vw, 80px) !important;
+    margin-right: clamp(24px, 5vw, 80px) !important;
+    padding-top: clamp(64px, 7vw, 100px) !important;
+    padding-bottom: clamp(64px, 7vw, 100px) !important;
+    padding-left: clamp(28px, 3.5vw, 56px) !important;
+    padding-right: clamp(28px, 3.5vw, 56px) !important;
   }
 
-  .vectra-home.vectra-story #about-faq .vh-faq__grid,
-  .vectra-home.vectra-story #about-faq .vs-faq-full__inner,
-  .vectra-home.vectra-story #about-faq .vh-faq__right,
-  .vectra-home.vectra-story #about-faq .vh-accordion,
-  .vectra-home.vectra-story #about-faq .vh-acc,
-  .vectra-story #about-faq .vh-faq__grid,
-  .vectra-story #about-faq .vs-faq-full__inner,
-  .vectra-story #about-faq .vh-faq__right,
-  .vectra-story #about-faq .vh-accordion,
-  .vectra-story #about-faq .vh-acc {
+  #about-faq .vh-faq__grid,
+  #about-faq .vs-faq-full__inner,
+  #about-faq .vh-faq__right,
+  #about-faq .vh-accordion,
+  #about-faq .vh-acc {
     width: 100% !important;
     max-width: none !important;
     grid-template-columns: minmax(0, 1fr) !important;
@@ -1637,13 +1631,14 @@
 }
 
 @media (max-width: 989px) {
-  .vectra-home.vectra-story #about-faq,
-  .vectra-home.vectra-story #about-faq.vs-faq-full,
-  .vectra-story #about-faq,
-  .vectra-story #about-faq.vs-faq-full {
-    margin-left: var(--vs-pad-x) !important;
-    margin-right: var(--vs-pad-x) !important;
-    padding: 40px 16px 56px !important;
+  #about-faq.vs-faq-full,
+  .vectra-home #about-faq {
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    padding-top: 40px !important;
+    padding-bottom: 56px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
 }
 

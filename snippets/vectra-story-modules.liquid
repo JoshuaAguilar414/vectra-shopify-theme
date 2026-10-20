@@ -369,7 +369,12 @@
   {% when 'faq' %}
 {% unless block.settings.hide_section %}
 {% comment %} About Us Version 2 FAQ + AEO supporting copy — hardcoded. {% endcomment %}
-<section class="vh-faq vh-faq--story vh-faq--story-full vs-faq-full" id="about-faq" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+<section
+  class="vh-faq vh-faq--story vh-faq--story-full vs-faq-full"
+  id="about-faq"
+  style="margin-left: clamp(24px, 5vw, 80px); margin-right: clamp(24px, 5vw, 80px); padding-left: clamp(20px, 3vw, 48px); padding-right: clamp(20px, 3vw, 48px); box-sizing: border-box; {% render 'vectra-block-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
   <div class="vs-faq-full__inner">
     <div class="vh-faq__glow" aria-hidden="true"></div>
     <div class="vh-accordion" data-vh-faq-accordion>

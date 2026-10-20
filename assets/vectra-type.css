@@ -635,15 +635,28 @@
   font-size: clamp(13px, 0.95vw, 18px) !important;
 }
 
-/* About FAQ: left/right margin gutter (loads after story CSS) */
-.vectra-home.vectra-story #about-faq,
-.vectra-home.vectra-story #about-faq.vs-faq-full {
+/* About FAQ: left/right margin + padding (hard values, last stylesheet) */
+#about-faq,
+.vectra-home #about-faq,
+.vectra-home.vectra-story #about-faq {
   display: block !important;
   width: auto !important;
   max-width: none !important;
-  margin-left: var(--vs-pad-x, clamp(24px, 5vw, 80px)) !important;
-  margin-right: var(--vs-pad-x, clamp(24px, 5vw, 80px)) !important;
+  margin-left: clamp(24px, 5vw, 80px) !important;
+  margin-right: clamp(24px, 5vw, 80px) !important;
+  padding-left: clamp(20px, 3vw, 48px) !important;
+  padding-right: clamp(20px, 3vw, 48px) !important;
   box-sizing: border-box !important;
+}
+
+@media (max-width: 989px) {
+  #about-faq,
+  .vectra-home #about-faq {
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
 }
 
 .vectra-home.vectra-story #about-faq .vh-wrap,

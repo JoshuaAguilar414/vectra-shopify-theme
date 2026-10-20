@@ -15,8 +15,8 @@
             "kicker": "VECTRA RESOURCES",
             "heading": "Responsible Business Resources & Insights",
             "subheading": "Better Insight. Clearer Decisions.",
-            "text": "VECTRA Resources helps you work out what matters, what it means for your organization, and what to do next.\n\nThere is already enough information available. The harder part is separating what is relevant from what is not, understanding what it means for your operations, and knowing where your attention needs to go.",
-            "aeo_text": "Responsible business resources help organizations understand ESG, supply chain, sustainability, compliance, risk, and operational resilience issues and decide what to do about them. VECTRA International brings together ESG resources, supply chain resources, Insights, Ebooks and Playbooks, Events and Webinars, VCASTs, Case Studies, and Press Releases, organized by the kind of answer you need."
+            "text": "There is already enough information available. The harder part is separating what is relevant from what is not. VECTRA Resources helps you do exactly that, so you can see what it means for your organization and where your attention needs to go.",
+            "aeo_text": "Responsible business resources help organizations understand ESG, supply chain, risk, and resilience issues and decide what to do next. VECTRA International brings together ESG resources, supply chain resources, risk management resources, business resilience resources, and operational resilience resources, organized by the kind of answer you need."
           }
         },
         "explore": {
@@ -113,9 +113,9 @@
           "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"],
           "settings": {
             "heading": "Frequently Asked Questions",
-            "card_title": "Still looking for clarity?",
-            "card_text": "If what you have learned needs to become a decision, a plan, or a change to how your team works, talk to a VECTRA expert.",
-            "button_label": "Talk to a VECTRA Expert",
+            "card_title": "Talk to a VECTRA Expert",
+            "card_text": "If what you have learned needs to become a decision, a plan, or a change to how your team works, VECTRA International can help you move it forward.",
+            "button_label": "Start the Conversation",
             "button_link": "#what-comes-next"
           }
         },
@@ -124,7 +124,9 @@
           "settings": {
             "kicker": "WHAT COMES NEXT",
             "heading": "Better insight should lead somewhere.",
-            "text": "If what you have learned needs to become a decision, a plan, or a change to how your team works, VECTRA International can help you move it forward."
+            "text": "If what you have learned needs to become a decision, a plan, or a change to how your team works, VECTRA International can help you move it forward.",
+            "form_heading": "Talk to a VECTRA Expert",
+            "button_label": "Start the Conversation"
           }
         },
         "footer": { "type": "vectra-footer", "settings": {} }
