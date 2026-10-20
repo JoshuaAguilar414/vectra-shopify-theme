@@ -54,6 +54,10 @@
     endif
   endif
 
+  if view_name == 'Marketplace' or view_name == 'MARKETPLACE'
+    assign view_name = 'marketplace'
+  endif
+
   # Infer listing view from URL when nav already points at a resource listing page.
   if view_name == blank
     if href_key contains '/pages/insights-page' or href_key contains '/pages/blogs' or href_key contains '/pages/insights' or href_key contains '/resources/blogs'
