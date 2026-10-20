@@ -33,7 +33,7 @@
   overflow: hidden;
   display: flex;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: center;
   gap: clamp(24px, 4vw, 64px);
   height: auto;
   min-height: clamp(520px, 52vw, 680px);
@@ -62,6 +62,55 @@
   top: auto;
   width: min(720px, 100%);
   height: auto;
+  margin: 0 auto;
+}
+
+.vectra-sol .vsol-hero--align-center .vsol-hero__inner {
+  text-align: center;
+}
+
+.vectra-sol .vsol-hero--align-center .vsol-hero__kicker {
+  justify-content: center;
+}
+
+.vectra-sol .vsol-hero--align-center h1,
+.vectra-sol .vsol-hero--align-center .vsol-hero__lead,
+.vectra-sol .vsol-hero--align-center .vsol-hero__lead p,
+.vectra-sol .vsol-hero--align-center .vsol-hero__aeo {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vectra-sol .vsol-hero--align-center .vsol-hero__actions {
+  justify-content: center;
+}
+
+.vectra-sol .vsol-hero--align-left {
+  justify-content: flex-start;
+}
+
+.vectra-sol .vsol-hero--align-left .vsol-hero__inner {
+  margin-left: 0;
+  margin-right: auto;
+  text-align: left;
+}
+
+.vectra-sol .vsol-hero--align-right {
+  justify-content: flex-end;
+}
+
+.vectra-sol .vsol-hero--align-right .vsol-hero__inner {
+  margin-left: auto;
+  margin-right: 0;
+  text-align: right;
+}
+
+.vectra-sol .vsol-hero--align-right .vsol-hero__kicker {
+  justify-content: flex-end;
+}
+
+.vectra-sol .vsol-hero--align-right .vsol-hero__actions {
+  justify-content: flex-end;
 }
 
 .vectra-sol .vsol-hero__kicker {

@@ -2432,8 +2432,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 26px 36px 20px;
+  padding: 22px 18px 18px;
   box-sizing: border-box;
+  overflow: hidden;
   cursor: pointer;
   transition: background-color 0.3s ease, border-color 0.3s ease, filter 0.3s ease;
 }
@@ -2480,20 +2481,24 @@
 
 .vh-course__meta {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
   margin-top: auto;
   width: 100%;
+  min-width: 0;
 }
 
 .vh-price {
   color: #54bd01;
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
-  font-size: 16px;
-  line-height: 1.2;
+  font-size: 14px;
+  line-height: 1.25;
   letter-spacing: -0.03em;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .vh-course__cta {
@@ -2501,24 +2506,26 @@
   align-items: center;
   justify-content: center;
   width: auto;
-  min-width: 168px;
+  max-width: 100%;
+  min-width: 0;
   height: auto;
-  min-height: 44px;
-  padding: 10px 16px;
+  min-height: 40px;
+  padding: 8px 12px;
   background: #ffffff;
   border: 1px solid transparent;
   border-radius: 5px;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
-  font-size: 18px;
+  font-size: 13px;
   font-weight: 700;
-  line-height: 120%;
-  letter-spacing: -0.03em;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
   text-transform: none;
   text-align: center;
+  white-space: nowrap;
   color: #092543;
   filter: drop-shadow(0px 0px 4.7px rgba(0, 0, 0, 0.25));
-  flex: none;
+  flex: 0 1 auto;
   box-sizing: border-box;
   transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
@@ -5987,33 +5994,71 @@ body.vh-contact-open .page-wrapper {
   background: #ffffff;
 }
 
+.vh-market-page {
+  text-align: center;
+}
+
+.vh-market-page .vh-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(1080px, calc(100% - 48px));
+  margin-inline: auto;
+  text-align: center;
+}
+
+.vh-market-page__hero,
+.vh-market-page__section,
+.vh-market-page__close {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .vh-market-page__hero {
   padding: 24px 0 8px;
+  text-align: center;
 }
 
 .vh-market-page__h1 {
-  margin: 0 0 12px;
+  margin: 0 auto 12px;
   max-width: 28em;
+  width: 100%;
   color: #092543;
   font-size: clamp(18px, 1.6vw, 22px);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.25;
+  text-align: center;
 }
 
 .vh-market-page__display {
-  margin: 0 0 18px;
+  margin: 0 auto 18px;
   max-width: 16em;
+  width: 100%;
   color: #092543;
   font-size: clamp(32px, 4.2vw, 56px);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1.05;
+  text-align: center;
+}
+
+.vh-market-page__hero .vh-lead,
+.vh-market-page__section .vh-lead,
+.vh-market-page.vh-course-land .vh-lead,
+.vh-market-page .vh-lead {
+  display: block;
+  width: 100%;
+  max-width: 46em;
+  margin: 12px auto 0 !important;
+  text-align: center;
 }
 
 .vh-market-page__aeo {
+  box-sizing: border-box;
+  width: 100%;
   max-width: 46em;
-  margin: 22px 0 28px;
+  margin: 22px auto 28px;
   padding: 18px 20px;
   border-left: 3px solid #54bd01;
   background: rgba(84, 189, 1, 0.08);
@@ -6022,19 +6067,35 @@ body.vh-contact-open .page-wrapper {
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.5;
+  text-align: left;
 }
 
 .vh-market-page__section {
   padding: 56px 0 8px;
+  text-align: center;
 }
 
-.vh-market-page__section .vh-kicker {
-  margin-bottom: 10px;
+.vh-market-page__section .vh-kicker,
+.vh-market-page .vh-kicker {
+  display: block;
+  width: 100%;
+  margin: 0 auto 10px;
+  text-align: center;
 }
 
-.vh-market-page__section .vh-h2 {
+.vh-market-page__section .vh-h2,
+.vh-market-page.vh-course-land .vh-h2,
+.vh-market-page .vh-h2 {
+  display: block;
+  width: 100%;
   max-width: 22em;
-  margin: 0 0 16px;
+  margin: 0 auto 16px !important;
+  text-align: center;
+}
+
+.vh-market-page .vh-btn {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .vh-market-page__pillars,
@@ -6043,7 +6104,10 @@ body.vh-contact-open .page-wrapper {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px 28px;
-  margin-top: 28px;
+  width: 100%;
+  margin: 28px auto 0;
+  max-width: 960px;
+  text-align: left;
 }
 
 .vh-market-page__pillars article,
@@ -6054,6 +6118,7 @@ body.vh-contact-open .page-wrapper {
   padding: 22px 24px;
   border-radius: 16px;
   background: #f4f7f2;
+  text-align: left;
 }
 
 .vh-market-page__pillars h3,
@@ -6082,7 +6147,9 @@ body.vh-contact-open .page-wrapper {
 }
 
 .vh-market-page__why {
-  margin-top: 24px;
+  max-width: 960px;
+  margin: 24px auto 0;
+  text-align: left;
 }
 
 .vh-market-page__note {
@@ -6093,8 +6160,10 @@ body.vh-contact-open .page-wrapper {
 .vh-market-page__chips {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
-  margin-top: 24px;
+  margin: 24px auto 0;
+  max-width: 960px;
 }
 
 .vh-market-page__chips span {
@@ -6111,22 +6180,44 @@ body.vh-contact-open .page-wrapper {
 }
 
 .vh-market-page__more-frameworks {
-  margin-top: 16px;
+  max-width: 720px;
+  margin: 16px auto 0;
 }
 
 .vh-market-page__actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 14px;
   margin-top: 28px;
 }
 
+.vh-market-page .vh-courses,
+.vh-market-page .vh-course-land__grid {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.vh-market-page .vh-course__meta {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.vh-market-page .vh-course__cta {
+  width: 100%;
+  white-space: normal;
+}
+
 .vh-market-page__banner {
-  margin-top: 48px;
+  max-width: 1080px;
+  margin: 48px auto 0;
   padding: 40px 36px;
   border-radius: 24px;
   background: linear-gradient(135deg, #092543 0%, #163d0a 55%, #245016 100%);
   color: #fff;
+  text-align: center;
 }
 
 .vh-market-page__banner .vh-kicker {
@@ -6141,14 +6232,19 @@ body.vh-contact-open .page-wrapper {
 
 .vh-market-page__banner .vh-h2 {
   max-width: 18em;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .vh-market-page__banner .vh-lead {
+  max-width: 42em;
+  margin-left: auto;
+  margin-right: auto;
   color: rgba(255, 255, 255, 0.9);
 }
 
 .vh-market-page__pillars-inline {
-  margin: 18px 0 24px;
+  margin: 18px auto 24px;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -6156,8 +6252,15 @@ body.vh-contact-open .page-wrapper {
 }
 
 .vh-market-page__faq {
-  margin-top: 28px;
+  margin: 28px auto 0;
   max-width: 920px;
+  text-align: left;
+}
+
+.vh-market-page__card {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .vh-market-page__faq details {
@@ -6216,6 +6319,26 @@ body.vh-contact-open .page-wrapper {
   font-weight: 500;
   color: #092543;
   letter-spacing: -0.02em;
+}
+
+.vh-market-page.vh-course-land .vh-lead,
+.vh-market-page .vh-lead {
+  max-width: 46em;
+  margin: 12px auto 0 !important;
+  text-align: center;
+}
+
+.vh-market-page.vh-course-land .vh-h2,
+.vh-market-page .vh-h2 {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center;
+}
+
+.vh-market-page .vh-courses,
+.vh-market-page .vh-course-land__grid {
+  width: 100%;
+  max-width: 1080px;
 }
 
 .vh-course-land__note {
