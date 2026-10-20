@@ -5778,6 +5778,16 @@ body:has(.vectra-home) #MainContent {
   font-weight: 700;
 }
 
+/* Hide Why VECTRA inside INSIDE VECTRA dropdown if still present in markup */
+.vh-header [data-vh-inside-vectra] a[href*='why-partner'],
+.vh-header [data-vh-inside-vectra] a[href*='why-vectra'],
+.vh-header [data-vh-inside-vectra] .vh-mega__list li:has(a[href*='why-partner']),
+.vh-header [data-vh-inside-vectra] .vh-mega__list li:has(a[href*='why-vectra']),
+.vh-header [data-vh-inside-vectra] .vh-nav-panel__sub a[href*='why-partner'],
+.vh-header [data-vh-inside-vectra] .vh-nav-panel__sub a[href*='why-vectra'] {
+  display: none !important;
+}
+
 .vh-mega__list {
   list-style: none;
   margin: 0;

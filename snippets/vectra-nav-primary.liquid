@@ -7,7 +7,7 @@
 {%- enddoc -%}
 
 {% if mode == 'mobile' %}
-  <div class="vh-nav-panel__item has-children">
+  <div class="vh-nav-panel__item has-children" data-vh-inside-vectra>
     <button type="button" data-vh-mobile-sub aria-expanded="false">INSIDE VECTRA</button>
     <div class="vh-nav-panel__sub">
       <a href="{{ story }}">Our Company</a>
@@ -32,7 +32,7 @@
   </div>
   <a href="{{ faq }}">FAQ</a>
 {% else %}
-  <div class="vh-menu__item has-children" data-vh-mega-item>
+  <div class="vh-menu__item has-children" data-vh-mega-item data-vh-inside-vectra>
     <div class="vh-menu__anchor">
       <a href="{{ story }}" aria-haspopup="true" aria-expanded="false">INSIDE VECTRA</a>
       <div class="vh-mega vh-mega--list vh-dropdown" role="menu">

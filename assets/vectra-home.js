@@ -71,6 +71,29 @@
     });
   }
 
+  // Remove Why VECTRA from INSIDE VECTRA menus (Shopify menu leftovers / stale HTML).
+  qsa('[data-vh-inside-vectra] a, .vh-menu__item.has-children .vh-mega a, .vh-nav-panel__sub a').forEach((link) => {
+    const label = (link.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+    const href = (link.getAttribute('href') || '').toLowerCase();
+    const isWhy =
+      label === 'why vectra' ||
+      label.includes('why vectra') ||
+      href.includes('why-partner') ||
+      href.includes('why-vectra');
+    if (!isWhy) return;
+    const inside = link.closest('[data-vh-inside-vectra]');
+    const panel = link.closest('.vh-nav-panel__sub');
+    const mega = link.closest('.vh-mega');
+    const trigger = mega?.closest('.vh-menu__item')?.querySelector('.vh-menu__anchor > a');
+    const underInside =
+      inside ||
+      (panel && panel.previousElementSibling?.textContent?.toLowerCase().includes('inside vectra')) ||
+      (trigger && (trigger.textContent || '').toLowerCase().includes('inside vectra'));
+    if (!underInside) return;
+    const row = link.closest('li') || link;
+    row.remove();
+  });
+
   const megaItems = qsa('[data-vh-mega-item]');
   const alignMega = (item) => {
     const trigger = item.querySelector('.vh-menu__anchor > a') || item.querySelector('a');
