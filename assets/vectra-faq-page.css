@@ -9,17 +9,22 @@
 }
 
 .vfaq-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: min(920px, calc(100% - 48px));
   margin: 0 auto;
+  text-align: center;
 }
 
 .vfaq-kicker {
-  margin: 0 0 12px;
+  margin: 0 auto 12px;
   color: var(--vfaq-green);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .vfaq-kicker--light {
@@ -44,40 +49,48 @@
 }
 
 .vfaq-hero h1 {
-  margin: 0 0 14px;
+  margin: 0 auto 14px;
   max-width: 28em;
+  width: 100%;
   color: rgba(255, 255, 255, 0.78);
   font-size: clamp(15px, 1.45vw, 18px);
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.4;
+  text-align: center;
 }
 
 .vfaq-display {
-  margin: 0 0 20px;
+  margin: 0 auto 20px;
   max-width: 16em;
+  width: 100%;
   color: #fff;
   font-size: clamp(30px, 4vw, 52px);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1.08;
+  text-align: center;
 }
 
 .vfaq-lead {
-  margin: 0 0 12px;
+  margin: 0 auto 12px;
   max-width: 44em;
+  width: 100%;
   color: rgba(255, 255, 255, 0.9);
   font-size: 16px;
   font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.5;
+  text-align: center;
 }
 
 .vfaq-jump {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 8px 12px;
+  width: 100%;
   margin: 22px 0 28px;
 }
 
@@ -110,6 +123,8 @@
 }
 
 .vfaq-hero__actions {
+  display: flex;
+  justify-content: center;
   margin-top: 8px;
 }
 
@@ -122,18 +137,27 @@
   background: #f4f7f2;
 }
 
+.vfaq-section .vfaq-wrap {
+  align-items: center;
+  text-align: center;
+}
+
 .vfaq-section h2 {
-  margin: 0 0 28px;
+  margin: 0 auto 28px;
   max-width: 18em;
+  width: 100%;
   color: var(--vfaq-navy);
   font-size: clamp(26px, 3vw, 36px);
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1.15;
+  text-align: center;
 }
 
 .vfaq-section .vh-accordion {
+  width: 100%;
   margin: 0;
+  text-align: left;
 }
 
 .vfaq-section .vh-acc {

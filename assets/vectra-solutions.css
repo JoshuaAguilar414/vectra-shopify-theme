@@ -81,6 +81,15 @@
   margin-right: auto;
 }
 
+.vectra-sol .vsol-hero--align-center .vsol-hero__aeo {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  max-width: 38em;
+  margin: 0 auto 36px;
+  text-align: left;
+}
+
 .vectra-sol .vsol-hero--align-center .vsol-hero__actions {
   justify-content: center;
 }
@@ -93,6 +102,11 @@
   margin-left: 0;
   margin-right: auto;
   text-align: left;
+}
+
+.vectra-sol .vsol-hero--align-left .vsol-hero__aeo {
+  margin-left: 0;
+  margin-right: auto;
 }
 
 .vectra-sol .vsol-hero--align-right {
@@ -111,6 +125,11 @@
 
 .vectra-sol .vsol-hero--align-right .vsol-hero__actions {
   justify-content: flex-end;
+}
+
+.vectra-sol .vsol-hero--align-right .vsol-hero__aeo {
+  margin-left: auto;
+  margin-right: 0;
 }
 
 .vectra-sol .vsol-hero__kicker {
@@ -166,8 +185,10 @@
 
 .vectra-sol .vsol-hero__aeo {
   position: relative;
+  box-sizing: border-box;
   display: block;
-  margin: 0 0 36px;
+  width: 100%;
+  margin: 0 auto 36px;
   max-width: 38em;
   padding: 14px 16px;
   border-left: 3px solid var(--vsol-green);

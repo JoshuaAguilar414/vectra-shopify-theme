@@ -6071,6 +6071,9 @@ body.vh-contact-open .page-wrapper {
 }
 
 .vh-market-page__section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 56px 0 8px;
   text-align: center;
 }
@@ -6147,6 +6150,8 @@ body.vh-contact-open .page-wrapper {
 }
 
 .vh-market-page__why {
+  box-sizing: border-box;
+  width: 100%;
   max-width: 960px;
   margin: 24px auto 0;
   text-align: left;
@@ -6225,7 +6230,6 @@ body.vh-contact-open .page-wrapper {
 }
 
 .vh-market-page__banner .vh-h2,
-.vh-market-page__banner .vh-lead,
 .vh-market-page__banner .vh-market-page__pillars-inline {
   color: #fff;
 }
@@ -6240,7 +6244,6 @@ body.vh-contact-open .page-wrapper {
   max-width: 42em;
   margin-left: auto;
   margin-right: auto;
-  color: rgba(255, 255, 255, 0.9);
 }
 
 .vh-market-page__pillars-inline {
@@ -6258,9 +6261,16 @@ body.vh-contact-open .page-wrapper {
 }
 
 .vh-market-page__card {
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  max-width: 46em;
+  margin: 28px auto 0;
+  text-align: left;
+}
+
+.vh-market-page__card .vh-btn {
+  margin-top: 18px;
 }
 
 .vh-market-page__faq details {
@@ -6326,6 +6336,12 @@ body.vh-contact-open .page-wrapper {
   max-width: 46em;
   margin: 12px auto 0 !important;
   text-align: center;
+}
+
+.vh-market-page__banner .vh-lead,
+.vh-market-page.vh-course-land .vh-market-page__banner .vh-lead,
+.vh-market-page .vh-market-page__banner .vh-lead {
+  color: #fff !important;
 }
 
 .vh-market-page.vh-course-land .vh-h2,
