@@ -27,7 +27,9 @@
   font-family: var(--vh-font);
   background: var(--vh-white);
   position: relative;
-  overflow-x: visible;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
   font-weight: 400;
   letter-spacing: -0.02em;
   text-transform: none;
@@ -4202,6 +4204,17 @@ body:has(.vh-header) .page-wrapper > footer {
 body:has(.vectra-home) {
   --header-height: 0px;
   --header-group-height: 0px;
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+.vectra-home-page .page-wrapper,
+body:has(.vectra-home) .page-wrapper,
+.vectra-home-page #MainContent,
+body:has(.vectra-home) #MainContent {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 .vectra-home-page .shopify-section:has(.vectra-home),
