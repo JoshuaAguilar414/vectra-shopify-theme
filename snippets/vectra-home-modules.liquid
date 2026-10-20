@@ -922,22 +922,19 @@ Explore how VECTRA has supported organizations across responsible business, supp
     assign is_solutions_portal = true
   endif
   if is_solutions_portal
-    assign portal_heading = block.settings.heading | default: 'Start with the <strong>challenge</strong> in front of you.'
-    assign portal_kicker = block.settings.kicker | default: "LET'S TALK"
-    assign portal_text = block.settings.text | default: 'We will help you determine the right combination of expert support, intelligence, and capability-building.'
+    assign portal_heading = 'Start With The Business Challenge in Front of You'
+    assign portal_kicker = "LET'S TALK"
+    assign portal_submit = 'Start the Conversation'
+    assign portal_form_heading = "Tell Us What You're Working Through"
   else
     assign portal_heading = 'Start a Conversation'
     assign portal_kicker = "LET'S TALK"
     assign portal_text = "You don't need a finished brief or the name of a VECTRA service. Tell us what you're trying to improve or where you need support. We'll make sure the right person gets involved."
-  endif
-  assign portal_submit = 'Start the Conversation'
-  assign portal_form_heading = 'Start a Conversation'
-  if is_solutions_portal
     assign portal_submit = 'Start the Conversation'
-    assign portal_form_heading = 'Talk to a VECTRA Expert'
+    assign portal_form_heading = 'Start a Conversation'
   endif
 %}
-<section class="vh-portal{% if is_solutions_portal %} vh-portal--sol{% endif %}" id="{{ block.settings.anchor_id | default: 'get-in-touch' }}" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+<section class="vh-portal{% if is_solutions_portal %} vh-portal--sol{% endif %}" id="{% if is_solutions_portal %}get-in-touch{% else %}{{ block.settings.anchor_id | default: 'get-in-touch' }}{% endif %}" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     {% if is_solutions_portal %}
       <canvas class="vh-portal__cells" data-vs-join-grid aria-hidden="true"></canvas>
     {% endif %}
@@ -948,16 +945,20 @@ Explore how VECTRA has supported organizations across responsible business, supp
             <p class="vh-kicker">{{ portal_kicker }}</p>
           {% endunless %}
           <h2>{{ portal_heading }}</h2>
-          <p class="vh-portal__lead">{{ portal_text }}</p>
-          {% unless is_solutions_portal %}
+          {% if is_solutions_portal %}
+            <p class="vh-portal__lead">You do not need to know which VECTRA Solution or Service you need before we talk.</p>
+            <p class="vh-portal__lead">Tell us what is not working, what keeps coming back, or what needs to perform better.</p>
+            <p class="vh-portal__lead">We’ll help clarify the issue and determine the right combination of expertise, specialist support, technology, and practical implementation to move it forward.</p>
+          {% else %}
+            <p class="vh-portal__lead">{{ portal_text }}</p>
             <p class="vh-portal__tagline">Your success is our success.</p>
-          {% endunless %}
+          {% endif %}
         </div>
         <div class="vh-portal__form">
           {% if is_solutions_portal %}
             {% form 'contact', id: 'VectraHomeContactSol', class: 'vh-form', data-vh-reveal: 'scale' %}
               <h3>{{ portal_form_heading }}</h3>
-              {% render 'vectra-contact-fields', img_arrow: img_arrow, solutions_form: true, submit_label: portal_submit %}
+              {% render 'vectra-contact-fields', img_arrow: img_arrow, solutions_form: true, submit_label: portal_submit, message_placeholder: 'Tell us what is happening, what is getting in the way, and what you need to change.' %}
             {% endform %}
           {% else %}
             {% form 'contact', id: 'VectraHomeContact', class: 'vh-form' %}

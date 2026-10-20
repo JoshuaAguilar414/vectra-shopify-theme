@@ -49,8 +49,8 @@
       <input type="text" name="contact[company]" placeholder="Company*" autocomplete="organization" required>
     </label>
     <label class="vh-form__field">
-      <span class="visually-hidden">{% if is_contact_page %}Role{% else %}Job Title / Role{% endif %}</span>
-      <input type="text" name="contact[role]" placeholder="{% if is_contact_page %}Role{% else %}Job Title / Role{% endif %}" autocomplete="organization-title">
+      <span class="visually-hidden">{% if is_contact_page or solutions_form %}Role{% else %}Job Title / Role{% endif %}</span>
+      <input type="text" name="contact[role]" placeholder="{% if is_contact_page or solutions_form %}Role{% else %}Job Title / Role{% endif %}" autocomplete="organization-title">
     </label>
     <label class="vh-form__field">
       <span class="visually-hidden">Phone Number</span>

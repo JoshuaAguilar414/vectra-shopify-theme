@@ -197,9 +197,13 @@
 .vectra-home .vh-page-hero p,
 .vectra-home .vh-lead,
 .vectra-story .vs-hero__body p,
-.vectra-sol .vsol-hero__inner > p:not(.vsol-hero__kicker),
+.vectra-sol .vsol-hero__inner > p:not(.vsol-hero__kicker):not(.vsol-hero__aeo),
+.vectra-sol .vsol-hero__lead p,
 .vectra-sol .vsol-intro__copy p:last-child,
 .vectra-sol .vsol-eco__head > p:not(.vsol-kicker),
+.vectra-sol .vsol-eco__custom p,
+.vectra-sol .vsol-out__lead,
+.vectra-sol .vsol-process__lead,
 .vectra-sol .vsol-svc__head p,
 .vectra-sol .vh-portal p,
 .vectra-home .vh-portal p,
@@ -509,7 +513,8 @@
   .vectra-sol .vsol-hero__inner,
   .vectra-sol .vsol-hero__kicker,
   .vectra-sol .vsol-hero h1,
-  .vectra-sol .vsol-hero__inner > p:not(.vsol-hero__kicker) {
+  .vectra-sol .vsol-hero__inner > p:not(.vsol-hero__kicker):not(.vsol-hero__aeo),
+  .vectra-sol .vsol-hero__lead p {
     position: relative;
     left: auto;
     top: auto;

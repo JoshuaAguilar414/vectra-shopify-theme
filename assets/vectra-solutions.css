@@ -96,11 +96,12 @@
   line-height: 1.2;
 }
 
-.vectra-sol .vsol-hero__inner > p:not(.vsol-hero__kicker) {
+.vectra-sol .vsol-hero__inner > p:not(.vsol-hero__kicker),
+.vectra-sol .vsol-hero__lead p {
   position: relative;
   left: auto;
   top: auto;
-  margin: 0;
+  margin: 0 0 12px;
   width: auto;
   max-width: 38em;
   color: rgba(255, 255, 255, 0.9);
@@ -108,6 +109,28 @@
   font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.45;
+}
+
+.vectra-sol .vsol-hero__lead {
+  margin: 0 0 16px;
+}
+
+.vectra-sol .vsol-hero__aeo {
+  position: relative;
+  margin: 0 0 24px;
+  max-width: 42em;
+  padding: 16px 18px;
+  border-left: 3px solid var(--vsol-green);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+}
+
+.vectra-sol .vsol-hero__actions {
+  margin-top: 4px;
 }
 
 .vectra-sol .vsol-quote {
@@ -354,6 +377,30 @@
   margin: 0 auto;
 }
 
+.vectra-sol .vsol-eco__custom {
+  width: min(870px, 100%);
+  margin: 0 auto 20px;
+  text-align: center;
+}
+
+.vectra-sol .vsol-eco__custom h3 {
+  margin: 0 0 12px;
+  color: #000;
+  font-size: calc(28px * var(--vsol-s));
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+
+.vectra-sol .vsol-eco__custom p {
+  margin: 0;
+  color: rgba(0, 0, 0, 0.55);
+  font-size: calc(16px * var(--vsol-s));
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.45;
+}
+
 .vectra-sol .vsol-eco__cols > *:not(.vsol-eco__col) {
   min-width: 0;
 }
@@ -571,13 +618,14 @@
   position: relative;
   isolation: isolate;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 8px 16px;
   width: min(720px, calc(100% - 48px));
   height: auto;
   min-height: 72px;
-  margin: 0 auto 24px;
+  margin: 0 auto 16px;
   padding: 16px 56px 16px 28px;
   overflow: hidden;
   background: #fff;
@@ -589,6 +637,21 @@
   letter-spacing: -0.03em;
   line-height: 1.3;
   text-align: center;
+}
+
+.vectra-sol .vsol-custom-card__cta {
+  display: block;
+  width: 100%;
+  color: var(--vsol-green);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.vectra-sol .vsol-custom-card:hover .vsol-custom-card__cta,
+.vectra-sol .vsol-custom-card:focus-visible .vsol-custom-card__cta {
+  color: #fff;
 }
 
 .vectra-sol .vsol-custom-card > * {
@@ -686,6 +749,10 @@
   margin: 0 auto;
 }
 
+.vectra-sol .vsol-out .vsol-kicker {
+  margin: 0 auto 14px;
+}
+
 .vectra-sol .vsol-out h2 {
   text-align: center;
   max-width: 1328px;
@@ -695,6 +762,20 @@
   font-weight: 700;
   letter-spacing: -0.05em;
   line-height: 1.05;
+}
+
+.vectra-sol .vsol-out__lead {
+  max-width: 820px;
+  margin: 18px auto 0;
+  color: rgba(9, 37, 67, 0.7);
+  font-size: calc(18px * var(--vsol-s));
+  letter-spacing: -0.03em;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.vectra-sol .vsol-out__lead + .vsol-out__lead {
+  margin-top: 8px;
 }
 
 .vectra-sol .vsol-out__cards {
@@ -799,13 +880,17 @@
 }
 
 .vectra-sol .vsol-svc__head p {
-  margin: 0 auto;
+  margin: 0 auto 12px;
   max-width: 870px;
   color: rgba(0, 0, 0, 0.72);
   font-size: 18px;
   font-weight: 400;
   letter-spacing: -0.04em;
   line-height: 1.45;
+}
+
+.vectra-sol .vsol-svc__head p:last-child {
+  margin-bottom: 0;
 }
 
 .vectra-sol .vsol-svc__grid {
@@ -974,7 +1059,7 @@
   position: relative;
   overflow: hidden;
   width: var(--vsol-panel-w);
-  min-height: calc(462px * var(--vsol-s));
+  min-height: calc(620px * var(--vsol-s));
   margin: 0 auto;
   padding: calc(69px * var(--vsol-s)) 0 calc(56px * var(--vsol-s));
   background: #fff;
@@ -988,6 +1073,12 @@
   height: 100%;
   display: block;
   pointer-events: none;
+}
+
+.vectra-sol .vsol-process .vsol-kicker {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto 12px;
 }
 
 .vectra-sol .vsol-process h2 {
@@ -1004,13 +1095,40 @@
   text-transform: none;
 }
 
+.vectra-sol .vsol-process__lead {
+  position: relative;
+  z-index: 1;
+  width: min(820px, 90%);
+  margin: 14px auto 0;
+  color: rgba(9, 37, 67, 0.7);
+  font-size: calc(16px * var(--vsol-s));
+  letter-spacing: -0.03em;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.vectra-sol .vsol-process__pillars {
+  position: relative;
+  z-index: 1;
+  width: min(960px, 92%);
+  margin: 22px auto 0;
+  color: var(--vsol-navy);
+  font-size: calc(13px * var(--vsol-s));
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .vectra-sol .vsol-process__cards {
   position: relative;
   z-index: 1;
   display: flex;
   justify-content: center;
-  gap: 63px;
-  width: min(1189px, 100%);
+  flex-wrap: wrap;
+  gap: 28px 36px;
+  width: min(1280px, 96%);
   margin: calc(43px * var(--vsol-s)) auto 0;
 }
 
@@ -1024,10 +1142,20 @@
   cursor: pointer;
 }
 
+.vectra-sol .vsol-process__cards--cycle .vsol-step {
+  width: min(220px, calc(50% - 18px));
+  height: auto;
+  min-height: 220px;
+  padding-bottom: 48px;
+}
+
 .vectra-sol .vsol-process__cards .vsol-step:nth-child(1) { transition-delay: 0s; }
 .vectra-sol .vsol-process__cards .vsol-step:nth-child(2) { transition-delay: 0.1s; }
 .vectra-sol .vsol-process__cards .vsol-step:nth-child(3) { transition-delay: 0.2s; }
 .vectra-sol .vsol-process__cards .vsol-step:nth-child(4) { transition-delay: 0.3s; }
+.vectra-sol .vsol-process__cards .vsol-step:nth-child(5) { transition-delay: 0.4s; }
+.vectra-sol .vsol-process__cards .vsol-step:nth-child(6) { transition-delay: 0.5s; }
+.vectra-sol .vsol-process__cards .vsol-step:nth-child(7) { transition-delay: 0.6s; }
 
 .vectra-sol .vsol-step.is-in:hover {
   transition-delay: 0s;

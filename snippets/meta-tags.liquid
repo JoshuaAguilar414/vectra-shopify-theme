@@ -85,6 +85,14 @@
     assign og_title = 'Why Partner with VECTRA International | Our Approach'
     assign og_description = 'Discover why organizations partner with VECTRA International for business resilience, supply chain due diligence, ESG, and Risk Assessment.'
     assign vectra_meta_locked = true
+  elsif template.suffix == 'solutions' or page.handle == 'solutions' or page.handle == 'how-we-help'
+    assign og_title = 'How VECTRA Helps Businesses | Solutions & Services'
+    assign og_description = 'See how VECTRA combines integrated solutions and specialist services to strengthen business resilience, performance, control, and capability.'
+    assign vectra_meta_locked = true
+  elsif template.suffix == 'marketplace' or page.handle == 'marketplace'
+    assign og_title = 'ESG Courses & Compliance Training | VECTRA Marketplace'
+    assign og_description = 'Explore ESG and compliance courses covering sustainability, human rights, health and safety, supply chain due diligence, and responsible business.'
+    assign vectra_meta_locked = true
   endif
 
   if request.page_type == 'product'

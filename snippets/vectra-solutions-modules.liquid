@@ -1,5 +1,5 @@
 {%- doc -%}
-  VECTRA Solutions / How We Help page modules.
+  VECTRA Solutions / How We Help — Version 2 final CMS copy (hardcoded).
 {%- enddoc -%}
 
 {% render 'vectra-assets' %}
@@ -12,16 +12,15 @@
   assign img_collage_4 = 'vectra-78626510a1ed0aa2ddc4170280cbb69d727b4968.png' | asset_url
   assign img_leaf = 'vectra-7e32b8cb91105f95e3244070f5f535fb9ce04c02.svg' | asset_url
   assign img_svc = 'vectra-fba768472f693dc9d17736644f117390ddfce96f.png' | asset_url
-  assign img_sol_1 = 'vectra-d7047ac7e66609406a0cb2e3fa6ac8ad2faf5cca.png' | asset_url
-  assign img_sol_2 = 'vectra-add817f67c59297c528c5d57486a2794644fb47c.png' | asset_url
-  assign img_sol_3 = 'vectra-d9fea5c48820c581c90942feb5bfc3997b28135f.png' | asset_url
-  assign img_sol_4 = 'vectra-a22c67e8c858a4742869caed8035aebee50f5996.png' | asset_url
-  assign img_hero_2 = 'vectra-6a69557ce365aa215c5c28bca6a6e51af0a2c987.png' | asset_url
-  assign img_course_1 = 'vectra-514da1e5ddd8e93543da62a9818e4183b5547b3a.png' | asset_url
   assign img_arrow = 'vectra-33469c114cd0dac188b171519c338a0fcdfa79a7.svg' | asset_url
+  assign why_page = pages['why-partner-with-us'].url | default: '/pages/why-partner-with-us'
 %}
+{% capture why_href %}{% render 'vectra-preview-href', url: why_page, view: 'why-partner' %}{% endcapture %}
+{% assign why_href = why_href | strip %}
+
 {% case module %}
   {% when 'hero' %}
+{% render 'vectra-seo', page_key: 'solutions' %}
 {% unless block.settings.hide_section %}
 <section
   class="vsol-hero vsol-hero--align-{{ block.settings.text_align | default: 'left' }}"
@@ -29,127 +28,95 @@
   style="{% render 'vectra-block-style', settings: block.settings %}"
   {{ block.shopify_attributes }}
 >
-    {% render 'vectra-image', image: block.settings.watermark, fallback: img_mark, alt: '', class: 'vsol-hero__icon', width: 901, height: 909, image_width: 900 %}
-    <div class="vsol-hero__inner" data-vh-reveal="up">
-      <p class="vsol-hero__kicker">{{ block.settings.kicker | default: 'Business resilience &amp; operational capability building' }}</p>
-      <h1>{{ block.settings.heading | default: 'Integrated solutions for operations that need to hold.' }}</h1>
-      <p>
-        {{ block.settings.text | default: 'For SMBs, enterprises, and value chain partners navigating supply chain, procurement, and operational complexity, VECTRA combines expert teams, ecosystem solutions, and practical implementation.' }}
-      </p>
-      {% if block.settings.button_2_label != blank %}
-        <div class="vsol-hero__actions">
-          {% if block.settings.button_link != blank %}
-            <a class="vh-btn vh-btn--green" href="{{ block.settings.button_link }}">{{ block.settings.button_label | default: 'Request a Quote' }}</a>
-          {% else %}
-            <button class="vsol-quote" type="button" data-vh-contact-open>{{ block.settings.button_label | default: 'Request a Quote' }}</button>
-          {% endif %}
-          <a class="vh-btn vh-btn--outline" href="{{ block.settings.button_2_link | default: '#' }}">{{ block.settings.button_2_label }}</a>
-        </div>
-      {% endif %}
+  {% render 'vectra-image', image: block.settings.watermark, fallback: img_mark, alt: '', class: 'vsol-hero__icon', width: 901, height: 909, image_width: 900 %}
+  <div class="vsol-hero__inner" data-vh-reveal="up">
+    <p class="vsol-hero__kicker">HOW VECTRA HELPS BUSINESSES</p>
+    <h1>Integrated Solutions for Operations That Need to Keep Performing</h1>
+    <div class="vsol-hero__lead">
+      <p>When operational pressure, supplier issues, changing requirements, weak controls, or capability gaps start getting in the way of performance, VECTRA International helps bring the right pieces together.</p>
+      <p>We work with SMBs, enterprises, and value-chain partners to strengthen how the business operates, responds, and grows.</p>
     </div>
-    {% if block.settings.button_2_label == blank %}
-      {% if block.settings.button_link != blank %}
-        <a class="vsol-quote" href="{{ block.settings.button_link }}" data-vh-reveal="scale">
-          {{ block.settings.button_label | default: 'Request a Quote' }}
-        </a>
-      {% else %}
-        <button class="vsol-quote" type="button" data-vh-contact-open data-vh-reveal="scale">
-          {{ block.settings.button_label | default: 'Request a Quote' }}
-        </button>
-      {% endif %}
-    {% endif %}
-  </section>
+    <p class="vsol-hero__aeo">How VECTRA helps businesses is straightforward: we start with the outcome that needs to improve, then bring together the right solutions, specialist services, expertise, technology, and capability to make it happen. From context and design through implementation and measurement, we stay focused on stronger control, resilience, performance, and lasting capability.</p>
+    <div class="vsol-hero__actions">
+      <a class="vh-btn vh-btn--green" href="#solutions">See Our Solutions</a>
+    </div>
+  </div>
+</section>
 {% endunless %}
 
   {% when 'intro' %}
 {% unless block.settings.hide_section %}
-{% liquid
-  assign why_page = pages['why-partner-with-us'].url | default: '/pages/why-partner-with-us'
-%}
-{% capture why_href %}{% render 'vectra-preview-href', url: why_page, view: 'why-partner' %}{% endcapture %}
-{% assign why_href = why_href | strip %}
 <section class="vsol-intro" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-    <div class="vsol-intro__grid">
-      <div class="vsol-collage">
-        {% render 'vectra-image', image: block.settings.image_1, fallback: img_collage_1, alt: 'Teams reviewing operational dashboards', class: 'vsol-collage__a', width: 246, height: 246, image_width: 500 %}
-        {% render 'vectra-image', image: block.settings.image_2, fallback: img_collage_2, alt: 'Connected operations across landscapes', class: 'vsol-collage__b', width: 314, height: 314, image_width: 640 %}
-        {% render 'vectra-image', image: block.settings.image_3, fallback: img_collage_3, alt: 'ESG reporting in practice', class: 'vsol-collage__c', width: 314, height: 314, image_width: 640 %}
-        {% render 'vectra-image', image: block.settings.image_4, fallback: img_collage_4, alt: 'Collaborative planning around sustainability', class: 'vsol-collage__d', width: 246, height: 246, image_width: 500 %}
-        {% render 'vectra-image', image: block.settings.badge, fallback: img_badge, alt: 'Enabling Positive Business Impact', class: 'vsol-collage__badge', width: 143, height: 143, image_width: 300 %}
-      </div>
-      <div class="vsol-intro__copy" data-vh-reveal="right">
-        <p class="vsol-kicker">{{ block.settings.kicker | default: 'How We Help' }}</p>
-        <h2>{{ block.settings.heading | default: 'Design. Govern. Execute.' }}</h2>
-        <p>
-          {{ block.settings.text | default: 'We connect the right expertise, specialist partners, AI-enabled intelligence, and capability building around the outcome your organisation needs to achieve.' }}
-          <a href="{{ why_href }}">See why organizations partner with VECTRA.</a>
-        </p>
-        {% assign nested_extras = nested_extras | strip %}
-        {% if nested_extras != blank %}
-          <div class="vh-block-extras">{{ nested_extras }}</div>
-        {% endif %}
-      </div>
+  <div class="vsol-intro__grid">
+    <div class="vsol-collage">
+      {% render 'vectra-image', image: block.settings.image_1, fallback: img_collage_1, alt: 'Teams reviewing operational dashboards', class: 'vsol-collage__a', width: 246, height: 246, image_width: 500 %}
+      {% render 'vectra-image', image: block.settings.image_2, fallback: img_collage_2, alt: 'Connected operations across landscapes', class: 'vsol-collage__b', width: 314, height: 314, image_width: 640 %}
+      {% render 'vectra-image', image: block.settings.image_3, fallback: img_collage_3, alt: 'ESG reporting in practice', class: 'vsol-collage__c', width: 314, height: 314, image_width: 640 %}
+      {% render 'vectra-image', image: block.settings.image_4, fallback: img_collage_4, alt: 'Collaborative planning around sustainability', class: 'vsol-collage__d', width: 246, height: 246, image_width: 500 %}
+      {% render 'vectra-image', image: block.settings.badge, fallback: img_badge, alt: 'Enabling Positive Business Impact', class: 'vsol-collage__badge', width: 143, height: 143, image_width: 300 %}
     </div>
-  </section>
+    <div class="vsol-intro__copy" data-vh-reveal="right">
+      <p class="vsol-kicker">OUR ECOSYSTEM OF SOLUTIONS</p>
+      <h2>Design. Govern. Execute.</h2>
+      <p>Most business problems do not stay inside one department.</p>
+      <p>A supplier issue may become an operational problem. A regulatory requirement may expose a process gap. A new system may fail because the people using it are not ready.</p>
+      <p>VECTRA brings together human expertise, specialist partners, AI-enabled intelligence, and practical support around what the business needs to achieve.</p>
+      <p>Whatever the mix, VECTRA works as an <a href="{{ why_href }}">operational resilience partner</a> to keep the response coordinated as conditions change.</p>
+    </div>
+  </div>
+</section>
 {% endunless %}
 
   {% when 'ecosystem' %}
 {% unless block.settings.hide_section %}
-{% assign nested_cards = nested_cards | strip %}
 <section class="vsol-eco" id="solutions" data-vsol-eco style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-    <div class="vsol-eco__head" data-vh-reveal>
-      <p class="vsol-kicker vsol-kicker--center">{{ block.settings.kicker | default: 'Our ecosystem of solutions' }}</p>
-      <h2>{{ block.settings.heading | default: 'Design. Govern. Execute.' }}</h2>
-      <p>
-        {{ block.settings.text | default: 'We connect the right expertise, specialist partners, AI-enabled intelligence, and capability building around the outcome your organisation needs to achieve.' }}
-      </p>
+  <div class="vsol-eco__wrap">
+    <div class="vsol-eco__custom" data-vh-reveal>
+      <h3>Customized Solutions Built Around Your Business Needs</h3>
+      <p>When the issue crosses several areas, we curate the right combination of expertise, Services, technology, and implementation support rather than forcing the work into a standard package.</p>
     </div>
-    <div class="vsol-eco__wrap">
-      <a class="vsol-custom-card" href="#custom">
-        <span>{{ block.settings.custom_label | default: 'Customized Solution Catered To Your Business Needs' }}</span>
-        <span class="vsol-custom-card__plus" aria-hidden="true"></span>
-      </a>
-      <div class="vsol-eco__cols">
-      {% if nested_cards != blank %}
-        {{ nested_cards }}
-      {% else %}
+    <a class="vsol-custom-card" href="#get-in-touch">
+      <span>Talk to an Expert</span>
+      <span class="vsol-custom-card__plus" aria-hidden="true"></span>
+    </a>
+    <div class="vsol-eco__cols">
       <div class="vsol-eco__col">
         <article class="vsol-card" data-vsol-card>
           <button class="vsol-card__hit" type="button" aria-expanded="false" onclick="window.vsolToggleCard && window.vsolToggleCard(this)">
             <span class="vsol-card__title">Operational Resilience</span>
-              <span class="vsol-card__num">01</span>
+            <span class="vsol-card__num">01</span>
           </button>
           <div class="vsol-card__panel">
             <img src="{{ img_collage_4 }}" alt="Operational resilience in practice">
             <div>
-              <p>Build operational control, continuity, and a stronger response to disruption.</p>
-              <a class="vsol-card__cta" href="#VectraContactModal" data-vh-contact-open>Start a briefing</a>
+              <p>Strengthen operational control, business continuity, and response so critical work keeps moving when conditions change.</p>
+              <a class="vsol-card__cta" href="#get-in-touch">Explore Operational Resilience</a>
             </div>
           </div>
         </article>
         <article class="vsol-card" data-vsol-card>
           <button class="vsol-card__hit" type="button" aria-expanded="false" onclick="window.vsolToggleCard && window.vsolToggleCard(this)">
             <span class="vsol-card__title">Value Chain Resilience &amp; Improvement</span>
-              <span class="vsol-card__num">02</span>
+            <span class="vsol-card__num">02</span>
           </button>
           <div class="vsol-card__panel">
             <img src="{{ img_collage_4 }}" alt="Value chain resilience">
             <div>
-              <p>Connect due diligence, supplier improvement, risk visibility, and practical follow-through.</p>
-              <a class="vsol-card__cta" href="#VectraContactModal" data-vh-contact-open>Explore delivery</a>
+              <p>See where supplier and value-chain risk is building, focus attention where it matters most, and turn findings into stronger supplier performance.</p>
+              <a class="vsol-card__cta" href="#get-in-touch">Explore Value Chain Resilience &amp; Improvement</a>
             </div>
           </div>
         </article>
         <article class="vsol-card" data-vsol-card>
           <button class="vsol-card__hit" type="button" aria-expanded="false" onclick="window.vsolToggleCard && window.vsolToggleCard(this)">
             <span class="vsol-card__title">Responsible Business Performance</span>
-              <span class="vsol-card__num">03</span>
+            <span class="vsol-card__num">03</span>
           </button>
           <div class="vsol-card__panel">
             <img src="{{ img_collage_4 }}" alt="Responsible business performance">
             <div>
-              <p>Turn stakeholder expectations into clearer decisions, stronger governance, and durable operating practice.</p>
-              <a class="vsol-card__cta" href="#VectraContactModal" data-vh-contact-open>Build capability</a>
+              <p>Turn responsible-business and ESG requirements into clearer decisions, credible evidence, and stronger business performance.</p>
+              <a class="vsol-card__cta" href="#get-in-touch">Explore Responsible Business Performance</a>
             </div>
           </div>
         </article>
@@ -158,195 +125,190 @@
         <article class="vsol-card" data-vsol-card>
           <button class="vsol-card__hit" type="button" aria-expanded="false" onclick="window.vsolToggleCard && window.vsolToggleCard(this)">
             <span class="vsol-card__title">Governance &amp; Regulatory Readiness</span>
-              <span class="vsol-card__num">04</span>
+            <span class="vsol-card__num">04</span>
           </button>
           <div class="vsol-card__panel">
             <img src="{{ img_collage_4 }}" alt="Governance and regulatory readiness">
             <div>
-              <p>Translate shifting requirements into accountable controls, reliable evidence, and implementation plans.</p>
-              <a class="vsol-card__cta" href="#VectraContactModal" data-vh-contact-open>Start a briefing</a>
+              <p>Translate changing requirements into clear ownership, workable controls, and evidence your teams can stand behind.</p>
+              <a class="vsol-card__cta" href="#get-in-touch">Explore Governance &amp; Regulatory Readiness</a>
             </div>
           </div>
         </article>
         <article class="vsol-card" data-vsol-card>
           <button class="vsol-card__hit" type="button" aria-expanded="false" onclick="window.vsolToggleCard && window.vsolToggleCard(this)">
             <span class="vsol-card__title">Capability Building at Scale</span>
-              <span class="vsol-card__num">05</span>
+            <span class="vsol-card__num">05</span>
           </button>
           <div class="vsol-card__panel">
             <img src="{{ img_collage_4 }}" alt="Capability building at scale">
             <div>
-              <p>Equip teams, leaders, and networks with the confidence and tools to carry the work forward.</p>
-              <a class="vsol-card__cta" href="#VectraContactModal" data-vh-contact-open>Explore delivery</a>
+              <p>Give teams and suppliers the practical knowledge, confidence, and support they need to apply change consistently across the organization and value chain.</p>
+              <a class="vsol-card__cta" href="#get-in-touch">Explore Capability Building at Scale</a>
             </div>
           </div>
         </article>
-        <article class="vsol-card" data-vsol-card>
-          <button class="vsol-card__hit" type="button" aria-expanded="false" onclick="window.vsolToggleCard && window.vsolToggleCard(this)">
-            <span class="vsol-card__title">Human-Centered<br>AI-Enabled Intelligence</span>
-              <span class="vsol-card__num">06</span>
-          </button>
-          <div class="vsol-card__panel">
-            <img src="{{ img_collage_4 }}" alt="Human-centered AI-enabled intelligence">
-            <div>
-              <p>Use technology to strengthen expert judgment, surface relevant signals, and accelerate action.</p>
-              <a class="vsol-card__cta" href="#VectraContactModal" data-vh-contact-open>Build capability</a>
-            </div>
-          </div>
-        </article>
-      </div>
-      {% endif %}
       </div>
     </div>
-  </section>
+  </div>
+</section>
 {% endunless %}
 
   {% when 'outcomes' %}
 {% unless block.settings.hide_section %}
-{% assign nested_cards = nested_cards | strip %}
 <section class="vsol-out" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-    <canvas class="vsol-out__grid" data-vsol-cell-grid aria-hidden="true"></canvas>
-    <div class="vsol-out__inner">
-      <h2 data-vh-reveal>{{ block.settings.heading | default: 'From complexity to clearer, more resilient performance.' }}</h2>
-      <div class="vsol-out__cards">
-        {% if nested_cards != blank %}
-          {{ nested_cards }}
-        {% else %}
-        <article class="vsol-glass" data-vh-reveal="down">
-          <img src="{{ img_leaf }}" alt="">
-          <h3>Operational control</h3>
-          <p>Priorities, responsibilities, and next steps are clearer across the work.</p>
-        </article>
-        <article class="vsol-glass" data-vh-reveal="down">
-          <img src="{{ img_leaf }}" alt="">
-          <h3>Stronger resilience</h3>
-          <p>Teams and systems are better prepared to adapt, respond, and sustain performance.</p>
-        </article>
-        <article class="vsol-glass" data-vh-reveal="down">
-          <img src="{{ img_leaf }}" alt="">
-          <h3>Measurable progress</h3>
-          <p>Evidence is structured so leaders can see what is moving and why.</p>
-        </article>
-        <article class="vsol-glass" data-vh-reveal="down">
-          <img src="{{ img_leaf }}" alt="">
-          <h3>Lasting capability</h3>
-          <p>People build the knowledge and confidence to improve performance over time.</p>
-        </article>
-        {% endif %}
-      </div>
+  <canvas class="vsol-out__grid" data-vsol-cell-grid aria-hidden="true"></canvas>
+  <div class="vsol-out__inner">
+    <p class="vsol-kicker vsol-kicker--center" data-vh-reveal>WHAT STRONGER PERFORMANCE LOOKS LIKE</p>
+    <h2 data-vh-reveal>From Complexity to Clearer, More Resilient Performance</h2>
+    <p class="vsol-out__lead" data-vh-reveal>The real test of a solution is not how good the recommendation sounds.</p>
+    <p class="vsol-out__lead" data-vh-reveal>It is whether the business becomes easier to control, better prepared to respond, and more capable of sustaining progress.</p>
+    <div class="vsol-out__cards">
+      <article class="vsol-glass" data-vh-reveal="down">
+        <img src="{{ img_leaf }}" alt="">
+        <h3>Operational Control</h3>
+        <p>Priorities, responsibilities, owners, and next steps become clearer across the work.</p>
+      </article>
+      <article class="vsol-glass" data-vh-reveal="down">
+        <img src="{{ img_leaf }}" alt="">
+        <h3>Stronger Resilience</h3>
+        <p>Teams, suppliers, and systems are better prepared to adapt and keep critical performance moving when conditions change.</p>
+      </article>
+      <article class="vsol-glass" data-vh-reveal="down">
+        <img src="{{ img_leaf }}" alt="">
+        <h3>Measurable Progress</h3>
+        <p>Leaders have evidence that shows what has changed, what still needs attention, and where action should go next.</p>
+      </article>
+      <article class="vsol-glass" data-vh-reveal="down">
+        <img src="{{ img_leaf }}" alt="">
+        <h3>Lasting Capability</h3>
+        <p>People build the knowledge and confidence to keep stronger ways of working in place after the immediate engagement ends.</p>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
 {% endunless %}
 
   {% when 'services' %}
 {% unless block.settings.hide_section %}
-{% assign nested_cards = nested_cards | strip %}
 <section class="vsol-svc" id="services" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-    <div class="vsol-svc__head" data-vh-reveal>
-      <p class="vsol-kicker vsol-kicker--center">{{ block.settings.kicker | default: 'Our ecosystem of services' }}</p>
-      <h2>{{ block.settings.heading | default: 'Every engagement starts with the business outcome.' }}</h2>
-      <p>
-        {{ block.settings.text | default: 'We align the baseline, the decision, the accountable owner, and the measurable result before delivery begins—so progress is visible, useful, and owned.' }}
-      </p>
-    </div>
-    <div class="vsol-svc__grid">
-      {% if nested_cards != blank %}
-        {{ nested_cards }}
-      {% else %}
-      <article class="vsol-svc-card" data-vh-reveal>
-        <img src="{{ img_svc }}" alt="">
-        <span class="vsol-svc-card__num">01</span>
-        <div class="vsol-svc-card__body">
-          <h3>Audit Readiness &amp; Practical Remediation</h3>
-          <p>Prepare with confidence, address findings with structure, and convert assurance pressure into operational improvement.</p>
-          <a href="#VectraContactModal" data-vh-contact-open>Explore This Service →</a>
-        </div>
-      </article>
-      <article class="vsol-svc-card" data-vh-reveal>
-        <img src="{{ img_svc }}" alt="">
-        <span class="vsol-svc-card__num">02</span>
-        <div class="vsol-svc-card__body">
-          <h3>Due Diligence &amp; Value Chain Risk Management</h3>
-          <p>Identify priority exposure, strengthen decision-making, and establish practical controls across complex value chains.</p>
-          <a href="#VectraContactModal" data-vh-contact-open>Explore This Service →</a>
-        </div>
-      </article>
-      <article class="vsol-svc-card" data-vh-reveal>
-        <img src="{{ img_svc }}" alt="">
-        <span class="vsol-svc-card__num">03</span>
-        <div class="vsol-svc-card__body">
-          <h3>Operational Performance &amp; Improvement</h3>
-          <p>Support factories, farms, mines, and operating sites to build stronger performance, capability, and responsible practice.</p>
-          <a href="#VectraContactModal" data-vh-contact-open>Explore This Service →</a>
-        </div>
-      </article>
-      <article class="vsol-svc-card" data-vh-reveal>
-        <img src="{{ img_svc }}" alt="">
-        <span class="vsol-svc-card__num">04</span>
-        <div class="vsol-svc-card__body">
-          <h3>Independent Assurance, Governance &amp; Oversight</h3>
-          <p>Bring trusted review, quality assurance, and governance visibility to high-stakes programmes and commitments.</p>
-          <a href="#VectraContactModal" data-vh-contact-open>Explore This Service →</a>
-        </div>
-      </article>
-      <article class="vsol-svc-card" data-vh-reveal>
-        <img src="{{ img_svc }}" alt="">
-        <span class="vsol-svc-card__num">05</span>
-        <div class="vsol-svc-card__body">
-          <h3>Responsible Business Reporting &amp; Disclosure</h3>
-          <p>Build credible reporting processes and stronger evidence that connects disclosure with better operational decisions.</p>
-          <a href="#VectraContactModal" data-vh-contact-open>Explore This Service →</a>
-        </div>
-      </article>
-      <article class="vsol-svc-card" data-vh-reveal>
-        <img src="{{ img_svc }}" alt="">
-        <span class="vsol-svc-card__num">06</span>
-        <div class="vsol-svc-card__body">
-          <h3>Capability Building &amp; Change Enablement</h3>
-          <p>Build practical confidence across leaders, teams, and suppliers through learning, coaching, and tailored pathways.</p>
-          <a href="#VectraContactModal" data-vh-contact-open>Explore This Service →</a>
-        </div>
-      </article>
-      {% endif %}
-    </div>
-  </section>
+  <div class="vsol-svc__head" data-vh-reveal>
+    <p class="vsol-kicker vsol-kicker--center">OUR ECOSYSTEM OF SERVICES</p>
+    <h2>Every Engagement Starts With the Business Outcome</h2>
+    <p>We do not begin by asking which Service you want to avail.</p>
+    <p>We begin by understanding the issue, the decision that needs to be made, who owns it, and what meaningful progress should look like.</p>
+    <p>Then we bring in the Service expertise the work requires.</p>
+    <p>Sometimes one service is enough. Sometimes several need to work together around the same priorities, owners, and next actions.</p>
+  </div>
+  <div class="vsol-svc__grid">
+    <article class="vsol-svc-card" data-vh-reveal>
+      <img src="{{ img_svc }}" alt="">
+      <span class="vsol-svc-card__num">01</span>
+      <div class="vsol-svc-card__body">
+        <h3>Pre &amp; Post Audit Assistance</h3>
+        <p>Prepare more confidently before an audit and keep progress moving after it. VECTRA helps teams understand readiness gaps, organize the evidence they need, respond to findings, and turn corrective actions into clear responsibilities and follow-through.</p>
+        <a href="#get-in-touch">Explore Pre &amp; Post Audit Assistance</a>
+      </div>
+    </article>
+    <article class="vsol-svc-card" data-vh-reveal>
+      <img src="{{ img_svc }}" alt="">
+      <span class="vsol-svc-card__num">02</span>
+      <div class="vsol-svc-card__body">
+        <h3>Compliance, Risk, &amp; Due Diligence</h3>
+        <p>See where risk sits, understand what deserves attention, and make better-informed decisions about what happens next. VECTRA helps organizations assess compliance and due diligence needs, strengthen visibility across suppliers and operations, and turn risk information into practical action.</p>
+        <a href="#get-in-touch">Explore Compliance, Risk, &amp; Due Diligence</a>
+      </div>
+    </article>
+    <article class="vsol-svc-card" data-vh-reveal>
+      <img src="{{ img_svc }}" alt="">
+      <span class="vsol-svc-card__num">03</span>
+      <div class="vsol-svc-card__body">
+        <h3>Trainings</h3>
+        <p>Give people the knowledge and confidence to put requirements, processes, and better ways of working into practice. VECTRA training connects learning with real business needs so teams and partners understand not only what is expected, but how to apply it in their day-to-day responsibilities.</p>
+        <a href="#get-in-touch">Explore Trainings</a>
+      </div>
+    </article>
+    <article class="vsol-svc-card" data-vh-reveal>
+      <img src="{{ img_svc }}" alt="">
+      <span class="vsol-svc-card__num">04</span>
+      <div class="vsol-svc-card__body">
+        <h3>Reporting</h3>
+        <p>Turn scattered information into reporting that people can understand, use, and stand behind. VECTRA helps bring information, ownership, evidence, and review processes together so reporting becomes clearer, more consistent, and more useful for the decisions it needs to support.</p>
+        <a href="#get-in-touch">Explore Reporting</a>
+      </div>
+    </article>
+    <article class="vsol-svc-card" data-vh-reveal>
+      <img src="{{ img_svc }}" alt="">
+      <span class="vsol-svc-card__num">05</span>
+      <div class="vsol-svc-card__body">
+        <h3>Factory, Farm &amp; Mine Performance Improvement</h3>
+        <p>Help operations perform better where day-to-day activity actually happens. VECTRA works with factories, farms, and mines to identify recurring performance issues, strengthen processes and responsibilities, and help teams put practical improvements into place and sustain them.</p>
+        <a href="#get-in-touch">Explore Factory, Farm &amp; Mine Performance Improvement</a>
+      </div>
+    </article>
+    <article class="vsol-svc-card" data-vh-reveal>
+      <img src="{{ img_svc }}" alt="">
+      <span class="vsol-svc-card__num">06</span>
+      <div class="vsol-svc-card__body">
+        <h3>Independent Quality Assurance</h3>
+        <p>Bring an independent view to the quality, evidence, and processes behind important decisions and outcomes. VECTRA helps organizations verify whether expectations are being met, identify where greater confidence is needed, and strengthen the consistency and reliability of what is being delivered.</p>
+        <a href="#get-in-touch">Explore Independent Quality Assurance</a>
+      </div>
+    </article>
+  </div>
+</section>
 {% endunless %}
 
   {% when 'process' %}
 {% unless block.settings.hide_section %}
-{% assign nested_steps = nested_steps | strip %}
-<section class="vsol-process" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-    <div class="vsol-process__inner">
-      <canvas class="vsol-process__grid" data-vsol-cell-grid aria-hidden="true"></canvas>
-      <h2 data-vh-reveal>{{ block.settings.heading | default: 'From complexity to clearer, more resilient performance.' }}</h2>
-      <div class="vsol-process__cards">
-        {% if nested_steps != blank %}
-          {{ nested_steps }}
-        {% else %}
-        <article class="vsol-step" data-vh-reveal="down">
-          <span>01</span>
-          <h3>Context</h3>
-          <p>See the real operating environment.</p>
-        </article>
-        <article class="vsol-step" data-vh-reveal="down">
-          <span>02</span>
-          <h3>Path</h3>
-          <p>Design the practical route forward.</p>
-        </article>
-        <article class="vsol-step vsol-step--impl" data-vh-reveal="down">
-          <span>03</span>
-          <h3>Implementation</h3>
-          <p>Work alongside accountable owners.</p>
-        </article>
-        <article class="vsol-step" data-vh-reveal="down">
-          <span>04</span>
-          <h3>Impact</h3>
-          <p>Measure what changed for the business.</p>
-        </article>
-        {% endif %}
-      </div>
+<section class="vsol-process" id="how-we-partner" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vsol-process__inner">
+    <canvas class="vsol-process__grid" data-vsol-cell-grid aria-hidden="true"></canvas>
+    <p class="vsol-kicker vsol-kicker--center" data-vh-reveal>HOW WE PARTNER</p>
+    <h2 data-vh-reveal>We Stay With the Work</h2>
+    <p class="vsol-process__lead" data-vh-reveal>We work alongside your team from the first conversation through implementation, ongoing support, and continuous improvement.</p>
+    <p class="vsol-process__lead" data-vh-reveal>VECTRA specialists work with the people closest to your operations. Human judgment guides the work, while AI-enabled, platform-agnostic technology helps speed up analysis, monitoring, and delivery.</p>
+    <p class="vsol-process__lead" data-vh-reveal>We shape the approach around your systems, priorities, and capacity, and adapt it as requirements, operations, and business goals change.</p>
+    <p class="vsol-process__pillars" data-vh-reveal>SHARED GOALS · JOINT OWNERSHIP · CLEAR COMMUNICATION · PRACTICAL IMPLEMENTATION · ONGOING SUPPORT</p>
+    <div class="vsol-process__cards vsol-process__cards--cycle">
+      <article class="vsol-step" data-vh-reveal="down">
+        <span>01</span>
+        <h3>Concept</h3>
+        <p>Clarify the challenge, desired result, and wider business context.</p>
+      </article>
+      <article class="vsol-step" data-vh-reveal="down">
+        <span>02</span>
+        <h3>Consult</h3>
+        <p>Understand the current position, risks, requirements, evidence, and priorities with the people closest to the work.</p>
+      </article>
+      <article class="vsol-step" data-vh-reveal="down">
+        <span>03</span>
+        <h3>Design</h3>
+        <p>Co-design the response, including practical controls, ownership, roadmap, capability, and the right technology for the context.</p>
+      </article>
+      <article class="vsol-step vsol-step--impl" data-vh-reveal="down">
+        <span>04</span>
+        <h3>Service</h3>
+        <p>Work alongside client teams to implement, build capability, verify progress, and resolve issues.</p>
+      </article>
+      <article class="vsol-step" data-vh-reveal="down">
+        <span>05</span>
+        <h3>Expand / Enhance</h3>
+        <p>Extend what works, strengthen weak points, and scale where it adds value.</p>
+      </article>
+      <article class="vsol-step" data-vh-reveal="down">
+        <span>06</span>
+        <h3>Maintain</h3>
+        <p>Reinforce governance, evidence, ownership, and internal capability so progress holds.</p>
+      </article>
+      <article class="vsol-step" data-vh-reveal="down">
+        <span>07</span>
+        <h3>Repeat</h3>
+        <p>Revisit the cycle as requirements, operations, risks, and business priorities change.</p>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
+{% endunless %}
 
 {% endcase %}
-{% endunless %}

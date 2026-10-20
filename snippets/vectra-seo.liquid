@@ -1,5 +1,5 @@
 {%- doc -%}
-  JSON-LD for VECTRA pages. page_key: home | about | resources | blogs | e-books-playbooks | press-releases | podcasts | event-webinars | contact | leadership | risk-assessment | why-partner
+  JSON-LD for VECTRA pages. page_key: home | about | resources | blogs | e-books-playbooks | press-releases | podcasts | event-webinars | contact | leadership | risk-assessment | why-partner | solutions | marketplace
 {%- enddoc -%}
 {%- liquid
   assign key = page_key | default: 'home'
@@ -472,6 +472,80 @@
         {"@type":"Question","name":"How does VECTRA International measure success?","acceptedAnswer":{"@type":"Answer","text":"We agree what improvement should look like at the beginning of the work. Depending on the issue, that may include clearer ownership, closed actions, stronger evidence, improved capability, fewer recurring problems, or better supplier performance. The measure follows the business outcome. Where a baseline helps, such as VECTRA's SCDD Maturity Risk Assessment, we use it to show progress over time."}},
         {"@type":"Question","name":"What types of organizations does VECTRA International work with?","acceptedAnswer":{"@type":"Answer","text":"VECTRA works with mid-sized organizations, larger enterprises, and value-chain or industry partners dealing with operational, procurement, supplier, risk, and responsible-business challenges. The scope reflects the issue, the operating environment, and the capability already available inside the organization."}},
         {"@type":"Question","name":"How do we get started with VECTRA International?","acceptedAnswer":{"@type":"Answer","text":"Tell us what is not working. We review what you share, bring in the right specialists, and agree on the most useful first step with you, whether that is a focused assessment, specialist support, or implementation help. You can also start with a short pre-assessment to see which SCDD assessment level fits."}}
+      ]
+    }
+  ]
+}
+</script>
+{%- elsif key == 'solutions' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "How VECTRA Helps Businesses | Solutions & Services",
+      "headline": "Integrated Solutions for Operations That Need to Keep Performing",
+      "description": "See how VECTRA combines integrated solutions and specialist services to strengthen business resilience, performance, control, and capability.",
+      "keywords": "How VECTRA helps businesses, business continuity, How VECTRA helps organizations",
+      "url": "{{ request.origin }}{{ page.url | default: '/pages/solutions' }}",
+      "about": { "@type": "Organization", "name": "VECTRA International", "url": "{{ shop.url }}" },
+      "publisher": { "@type": "Organization", "name": "VECTRA International", "url": "{{ shop.url }}" }
+    }
+  ]
+}
+</script>
+{%- elsif key == 'marketplace' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["CollectionPage", "WebPage"],
+      "name": "ESG Courses & Compliance Training | VECTRA Marketplace",
+      "headline": "ESG Courses and Responsible Business Learning",
+      "description": "Explore ESG and compliance courses covering sustainability, human rights, health and safety, supply chain due diligence, and responsible business.",
+      "keywords": "ESG courses, ESG training courses, supply chain training, sustainability courses, human rights training, health and safety training",
+      "url": "{{ request.origin }}{{ page.url | default: '/pages/marketplace' }}",
+      "about": { "@type": "Organization", "name": "VECTRA International", "url": "{{ shop.url }}" },
+      "publisher": { "@type": "Organization", "name": "VECTRA International", "url": "{{ shop.url }}" }
+    },
+    {
+      "@type": "Course",
+      "name": "Acronyms Used in ESG Area",
+      "description": "A shared vocabulary for ESG, due diligence, and supply-chain reporting so teams can act faster and with less confusion.",
+      "provider": { "@type": "Organization", "name": "VECTRA International", "url": "{{ shop.url }}" },
+      "url": "{{ request.origin }}/pages/course-esg-acronyms"
+    },
+    {
+      "@type": "Course",
+      "name": "Preventative and Corrective Measures",
+      "description": "A practical framework for supply chain due diligence: prevent issues before they escalate, and correct findings with a clear owner and evidence trail.",
+      "provider": { "@type": "Organization", "name": "VECTRA International", "url": "{{ shop.url }}" },
+      "url": "{{ request.origin }}/pages/course-preventative-measures"
+    },
+    {
+      "@type": "Course",
+      "name": "Optimizing Purchasing Practices",
+      "description": "How buying decisions shape supplier performance, cost, and ESG outcomes — and how to build practices that hold up under scrutiny.",
+      "provider": { "@type": "Organization", "name": "VECTRA International", "url": "{{ shop.url }}" },
+      "url": "{{ request.origin }}/pages/course-purchasing-practices"
+    },
+    {
+      "@type": "Course",
+      "name": "Disability Accommodation Training",
+      "description": "Practical capability for teams who need to make accommodation part of normal work, not a one-off exception.",
+      "provider": { "@type": "Organization", "name": "VECTRA International", "url": "{{ shop.url }}" },
+      "url": "{{ request.origin }}/pages/course-disability-accommodation"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"How are VECTRA's ESG courses different from generic online training?","acceptedAnswer":{"@type":"Answer","text":"VECTRA courses are built by the specialists who do the implementation work, not by a general training provider. Each course connects directly to responsibilities you'll actually apply on the job, and to deeper VECTRA support if the need turns out to be bigger than a course."}},
+        {"@type":"Question","name":"Do I need to know exactly which course I need before I start?","acceptedAnswer":{"@type":"Answer","text":"No. Use the ESG Knowledge Assessment to see what you already understand and where to focus, or browse by regulation, topic, or level to find a starting point."}},
+        {"@type":"Question","name":"Can I buy courses for my whole team?","acceptedAnswer":{"@type":"Answer","text":"Yes. Individual courses work well for a focused knowledge gap. For teams that need shared understanding across several people, talk to an expert about team learning."}},
+        {"@type":"Question","name":"What happens if a course shows my team needs more than training?","acceptedAnswer":{"@type":"Answer","text":"Marketplace connects straight into VECTRA's wider expertise. If a course points to a gap in evidence, ownership, supplier data, or implementation, we can bring in the relevant specialist support or point you to the Risk Assessment."}},
+        {"@type":"Question","name":"Do I need to be a VECTRA client to use Marketplace?","acceptedAnswer":{"@type":"Answer","text":"No. Anyone can browse and purchase courses. Clients working with VECTRA on other engagements can also access courses, documents, and support through the Client Portal."}}
       ]
     }
   ]

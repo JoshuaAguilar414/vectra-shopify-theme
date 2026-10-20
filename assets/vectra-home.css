@@ -5987,6 +5987,217 @@ body.vh-contact-open .page-wrapper {
   background: #ffffff;
 }
 
+.vh-market-page__hero {
+  padding: 24px 0 8px;
+}
+
+.vh-market-page__h1 {
+  margin: 0 0 12px;
+  max-width: 28em;
+  color: #092543;
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+}
+
+.vh-market-page__display {
+  margin: 0 0 18px;
+  max-width: 16em;
+  color: #092543;
+  font-size: clamp(32px, 4.2vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.vh-market-page__aeo {
+  max-width: 46em;
+  margin: 22px 0 28px;
+  padding: 18px 20px;
+  border-left: 3px solid #54bd01;
+  background: rgba(84, 189, 1, 0.08);
+  color: #092543;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+}
+
+.vh-market-page__section {
+  padding: 56px 0 8px;
+}
+
+.vh-market-page__section .vh-kicker {
+  margin-bottom: 10px;
+}
+
+.vh-market-page__section .vh-h2 {
+  max-width: 22em;
+  margin: 0 0 16px;
+}
+
+.vh-market-page__pillars,
+.vh-market-page__topics,
+.vh-market-page__levels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 28px;
+  margin-top: 28px;
+}
+
+.vh-market-page__pillars article,
+.vh-market-page__topics article,
+.vh-market-page__levels article,
+.vh-market-page__card,
+.vh-market-page__why {
+  padding: 22px 24px;
+  border-radius: 16px;
+  background: #f4f7f2;
+}
+
+.vh-market-page__pillars h3,
+.vh-market-page__topics h3,
+.vh-market-page__levels h3,
+.vh-market-page__card h3,
+.vh-market-page__why h3 {
+  margin: 0 0 10px;
+  color: #092543;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.vh-market-page__pillars p,
+.vh-market-page__topics p,
+.vh-market-page__levels p,
+.vh-market-page__card p,
+.vh-market-page__why p,
+.vh-market-page__more-frameworks,
+.vh-market-page__note {
+  margin: 0;
+  color: rgba(9, 37, 67, 0.75);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.vh-market-page__why {
+  margin-top: 24px;
+}
+
+.vh-market-page__note {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.vh-market-page__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.vh-market-page__chips span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #eef5e8;
+  color: #092543;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.vh-market-page__more-frameworks {
+  margin-top: 16px;
+}
+
+.vh-market-page__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.vh-market-page__banner {
+  margin-top: 48px;
+  padding: 40px 36px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #092543 0%, #163d0a 55%, #245016 100%);
+  color: #fff;
+}
+
+.vh-market-page__banner .vh-kicker {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.vh-market-page__banner .vh-h2,
+.vh-market-page__banner .vh-lead,
+.vh-market-page__banner .vh-market-page__pillars-inline {
+  color: #fff;
+}
+
+.vh-market-page__banner .vh-h2 {
+  max-width: 18em;
+}
+
+.vh-market-page__banner .vh-lead {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.vh-market-page__pillars-inline {
+  margin: 18px 0 24px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.vh-market-page__faq {
+  margin-top: 28px;
+  max-width: 920px;
+}
+
+.vh-market-page__faq details {
+  margin: 0 0 12px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: #f4f7f2;
+}
+
+.vh-market-page__faq summary {
+  cursor: pointer;
+  color: #092543;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.vh-market-page__faq p {
+  margin: 12px 0 0;
+  color: rgba(9, 37, 67, 0.75);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.vh-market-page__close {
+  padding-bottom: 24px;
+}
+
+@media (max-width: 899px) {
+  .vh-market-page__pillars,
+  .vh-market-page__topics,
+  .vh-market-page__levels {
+    grid-template-columns: 1fr;
+  }
+
+  .vh-market-page__banner {
+    padding: 32px 24px;
+  }
+}
+
 .vectra-home:has(.vh-course-land) .vh-header {
   position: relative;
   background: #092543;

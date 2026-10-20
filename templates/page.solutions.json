@@ -62,9 +62,9 @@
         "portal": {
           "type": "vectra-portal",
           "settings": {
-            "heading": "Start with the <strong>challenge</strong> in front of you.",
-            "text": "We will help you determine the right combination of expert support, intelligence, and capability-building.",
-            "anchor_id": "custom"
+            "heading": "Start With The Business Challenge in Front of You",
+            "text": "You do not need to know which VECTRA Solution or Service you need before we talk.",
+            "anchor_id": "get-in-touch"
           }
         },
         "footer": { "type": "vectra-footer", "settings": {} }

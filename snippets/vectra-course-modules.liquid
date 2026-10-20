@@ -1,5 +1,5 @@
 {%- doc -%}
-  Course placeholders and marketplace landing until Shopify commerce is live.
+  VECTRA Marketplace landing (V2 final CMS) and individual course placeholders.
 {%- enddoc -%}
 
 {% render 'vectra-assets' %}
@@ -14,6 +14,8 @@
   assign c2 = pages['course-preventative-measures'].url | default: '/pages/course-preventative-measures'
   assign c3 = pages['course-purchasing-practices'].url | default: '/pages/course-purchasing-practices'
   assign c4 = pages['course-disability-accommodation'].url | default: '/pages/course-disability-accommodation'
+  assign contact_base = pages['contact'].url | default: pages['contact-us'].url | default: '/pages/contact'
+  assign risk_base = pages['risk-assessment'].url | default: pages['services-risk-assessment'].url | default: '/pages/risk-assessment'
   assign key = course_key | default: page.handle
   if module == 'catalog' or key == 'marketplace'
     assign view = 'catalog'
@@ -26,65 +28,317 @@
 {% capture href_2 %}{% render 'vectra-preview-href', url: c2, view: 'course' %}{% endcapture %}
 {% capture href_3 %}{% render 'vectra-preview-href', url: c3, view: 'course' %}{% endcapture %}
 {% capture href_4 %}{% render 'vectra-preview-href', url: c4, view: 'course' %}{% endcapture %}
+{% capture contact_href %}{% render 'vectra-preview-href', url: contact_base, view: 'contact-us' %}{% endcapture %}
+{% capture risk_href %}{% render 'vectra-preview-href', url: risk_base, view: 'risk-assessment' %}{% endcapture %}
 {% assign market_href = market_href | strip %}
 {% assign href_1 = href_1 | strip %}
 {% assign href_2 = href_2 | strip %}
 {% assign href_3 = href_3 | strip %}
 {% assign href_4 = href_4 | strip %}
+{% assign contact_href = contact_href | strip %}
+{% assign risk_href = risk_href | strip %}
 
 {% if view == 'catalog' %}
-<section class="vh-course-land" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-  <div class="vh-wrap" data-vh-reveal="up">
-    <p class="vh-kicker">{{ block.settings.kicker | default: 'Marketplace' }}</p>
-    <h1 class="vh-h2">{{ block.settings.heading | default: 'Courses and capability paths' }}</h1>
-    <p class="vh-lead">{{ block.settings.text | default: 'Checkout and enrolment are not live on this first release. These landing pages are the real course experience until Shopify commerce is connected. Enquire and we will place you on the right path.' }}</p>
+{% render 'vectra-seo', page_key: 'marketplace' %}
+{% liquid
+  assign course_products = collections['courses'].products
+  if course_products.size == 0
+    assign course_products = collections['frontpage'].products
+  endif
+  if course_products.size == 0
+    assign course_products = collections.all.products
+  endif
+  assign nested_courses = nested_courses | strip
+%}
+
+<section class="vh-course-land vh-market-page" style="{% render 'vectra-block-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <div class="vh-wrap vh-market-page__hero" data-vh-reveal="up">
+    <h1 class="vh-market-page__h1">ESG Courses and Responsible Business Learning</h1>
+    <p class="vh-market-page__display">Learn What You Need. Apply It With Confidence.</p>
+    <p class="vh-lead">Requirements make a difference when people know how to apply them.</p>
+    <p class="vh-lead">VECTRA Marketplace brings together expert-led ESG training courses and learning across sustainability, responsible business, compliance, due diligence, and supply chains, with courses designed to help people apply what they learn at work.</p>
+    <p class="vh-market-page__aeo">ESG courses are structured learning programs covering environmental, social, and governance requirements, sustainability, compliance, due diligence, and supply chains. VECTRA Marketplace connects that learning to real business responsibilities, helping professionals and teams strengthen performance, manage risk, build resilience, and support responsible growth as regulations and expectations change.</p>
+    <a class="vh-btn vh-btn--green" href="#featured-courses">Explore Courses <img src="{{ img_arrow }}" alt=""></a>
   </div>
-  <div class="vh-wrap vh-courses vh-course-land__grid">
-    {% assign nested_courses = nested_courses | strip %}
-    {% if nested_courses != blank %}
-      {{ nested_courses }}
-    {% else %}
-    <article class="vh-course" data-vh-reveal="up">
-      <img src="{{ img_1 }}" alt="">
-      <div class="vh-course__body">
-        <h2>Acronyms Used in ESG Area</h2>
-        <div class="vh-course__meta">
-          <span class="vh-price">Coming to Marketplace</span>
-          <a class="vh-course__cta" href="{{ href_1 }}">View landing page</a>
-        </div>
-      </div>
+
+  <div class="vh-wrap vh-market-page__section" data-vh-reveal="up">
+    <p class="vh-kicker">MARKETPLACE IN THE VECTRA ECOSYSTEM</p>
+    <h2 class="vh-h2">Learn What You Need. Get Help Applying It.</h2>
+    <p class="vh-lead">A course may be enough when the main gap is knowledge.</p>
+    <p class="vh-lead">For teams, the need may be broader: shared understanding of a new requirement, stronger knowledge around a responsibility, or support applying what people have learned.</p>
+    <p class="vh-lead">When the issue also involves processes, suppliers, evidence, ownership, or implementation, Marketplace can connect learning with the relevant VECTRA expertise and support.</p>
+    <div class="vh-market-page__pillars">
+      <article>
+        <h3>Start With the Knowledge Gap</h3>
+        <p>Choose focused learning when you know the topic or responsibility people need to understand better.</p>
+      </article>
+      <article>
+        <h3>Build Shared Understanding</h3>
+        <p>Give teams a common foundation when several people need to work from the same requirements or responsibilities, including supply chain training and supply chain compliance training where consistent knowledge matters across the team.</p>
+      </article>
+      <article>
+        <h3>Apply What You Learn</h3>
+        <p>Connect what people learn to the decisions, responsibilities, and situations they deal with every day.</p>
+      </article>
+      <article>
+        <h3>Get Expert Support When You Need It</h3>
+        <p>When learning alone is not enough, bring in the right expertise and support to address the wider issue.</p>
+      </article>
+    </div>
+    <div class="vh-market-page__why">
+      <h3>Why learn with VECTRA International?</h3>
+      <p>VECTRA Marketplace isn't a stand-alone course library. It's built by the same specialists who do the implementation work, stays accountable for whether learning actually gets applied, and connects straight into deeper support, human-led and AI-enabled, when a course alone isn't enough.</p>
+    </div>
+  </div>
+
+  <div class="vh-wrap vh-market-page__section" id="featured-courses" data-vh-reveal="up">
+    <h2 class="vh-h2">Explore ESG Courses for Professionals &amp; Businesses</h2>
+    <div class="vh-courses vh-course-land__grid">
+      {% if nested_courses != blank %}
+        {{ nested_courses }}
+      {% elsif course_products.size > 0 %}
+        {% for product in course_products limit: 4 %}
+          <article class="vh-course" data-vh-reveal="up">
+            {% if product.featured_image %}
+              {{ product.featured_image | image_url: width: 640 | image_tag: loading: 'lazy', alt: product.title }}
+            {% else %}
+              <img src="{{ img_1 }}" alt="">
+            {% endif %}
+            <div class="vh-course__body">
+              <h3>{{ product.title }}</h3>
+              <div class="vh-course__meta">
+                <span class="vh-price">{% if product.price > 0 %}{{ product.price | money }}{% else %}Coming to Marketplace{% endif %}</span>
+                <a class="vh-course__cta" href="{{ product.url }}">Access This Course</a>
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      {% else %}
+        <article class="vh-course" data-vh-reveal="up">
+          <img src="{{ img_1 }}" alt="">
+          <div class="vh-course__body">
+            <h3>Acronyms Used in ESG Area</h3>
+            <div class="vh-course__meta">
+              <span class="vh-price">Coming to Marketplace</span>
+              <a class="vh-course__cta" href="{{ href_1 }}">Access This Course</a>
+            </div>
+          </div>
+        </article>
+        <article class="vh-course" data-vh-reveal="up">
+          <img src="{{ img_2 }}" alt="">
+          <div class="vh-course__body">
+            <h3>Preventative and Corrective Measures</h3>
+            <div class="vh-course__meta">
+              <span class="vh-price">Coming to Marketplace</span>
+              <a class="vh-course__cta" href="{{ href_2 }}">Access This Course</a>
+            </div>
+          </div>
+        </article>
+        <article class="vh-course" data-vh-reveal="up">
+          <img src="{{ img_3 }}" alt="">
+          <div class="vh-course__body">
+            <h3>Optimizing Purchasing Practices</h3>
+            <div class="vh-course__meta">
+              <span class="vh-price">Coming to Marketplace</span>
+              <a class="vh-course__cta" href="{{ href_3 }}">Access This Course</a>
+            </div>
+          </div>
+        </article>
+        <article class="vh-course" data-vh-reveal="up">
+          <img src="{{ img_4 }}" alt="">
+          <div class="vh-course__body">
+            <h3>Disability Accommodation Training</h3>
+            <div class="vh-course__meta">
+              <span class="vh-price">Coming to Marketplace</span>
+              <a class="vh-course__cta" href="{{ href_4 }}">Access This Course</a>
+            </div>
+          </div>
+        </article>
+      {% endif %}
+    </div>
+    <div class="vh-market-page__actions">
+      <a class="vh-btn vh-btn--outline" href="#featured-courses">Explore All Courses</a>
+    </div>
+  </div>
+
+  <div class="vh-wrap vh-market-page__section" data-vh-reveal="up">
+    <p class="vh-kicker">BROWSE BY REGULATION &amp; FRAMEWORK</p>
+    <h2 class="vh-h2">ESG Training Courses for Sustainability &amp; Compliance</h2>
+    <p class="vh-lead">Explore sustainability courses on CSRD, CSDDD, EUDR, CBAM, SFDR, ISSB, GRI, SASB, and other regulations, standards, and disclosure frameworks relevant to reporting, due diligence, and responsible-business decisions.</p>
+    <div class="vh-market-page__chips" role="list">
+      <span role="listitem">CSRD/ESRS</span>
+      <span role="listitem">CSDDD</span>
+      <span role="listitem">EUDR</span>
+      <span role="listitem">CBAM</span>
+      <span role="listitem">SFDR/Taxonomy</span>
+      <span role="listitem">ISSB</span>
+      <span role="listitem">GRI</span>
+      <span role="listitem">SASB</span>
+      <span role="listitem">More Frameworks →</span>
+    </div>
+    <p class="vh-market-page__more-frameworks">Full set behind More: EU ETS · TNFD &amp; Nature Risk · UNGPs · OECD RBC · SBTi · ISO 14064-2 · ISSA 5000 · AWS Water Stewardship · Digital Product Passport · Integrated Reporting (IR)</p>
+  </div>
+
+  <div class="vh-wrap vh-market-page__section" data-vh-reveal="up">
+    <p class="vh-kicker">BROWSE BY TOPIC</p>
+    <h2 class="vh-h2">Find Courses for What You're Working On</h2>
+    <div class="vh-market-page__topics">
+      <article>
+        <h3>Operational Resilience</h3>
+        <p>Occupational health &amp; safety, emergency preparedness, industrial hygiene, machine safeguarding, heat stress, workplace mental health, root-cause and corrective-action methods.</p>
+      </article>
+      <article>
+        <h3>Value Chain Resilience &amp; Improvement</h3>
+        <p>Supply chain due diligence, supplier monitoring, purchasing practices, logistics/freight/shipping risk, responsible sourcing of minerals, Scope 3, digital traceability, CSDDD in practice.</p>
+      </article>
+      <article>
+        <h3>Responsible Business Performance</h3>
+        <p>Forced labor &amp; trafficking, child labor, living wages, freedom of association, non-discrimination, DEI, POSH &amp; gender sensitivity, grievance mechanisms, climate/carbon/net-zero, circular economy, biodiversity, sustainable packaging.</p>
+        <p class="vh-market-page__note">By industry: Agriculture · Manufacturing · Food</p>
+      </article>
+      <article>
+        <h3>Governance &amp; Regulatory Readiness</h3>
+        <p>Every named framework course, ethics, management accountability, ESG data governance, materiality.</p>
+      </article>
+      <article>
+        <h3>Capability Building &amp; AI</h3>
+        <p>AI fluency, AI in ESG reporting, AI business essentials, ESG fundamentals/what-is courses, case studies.</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="vh-wrap vh-market-page__section" data-vh-reveal="up">
+    <p class="vh-kicker">BROWSE BY LEVEL</p>
+    <h2 class="vh-h2">Start at the Level That Fits</h2>
+    <p class="vh-lead">Choose the level that matches what you already know and what you need to learn next.</p>
+    <div class="vh-market-page__levels">
+      <article>
+        <h3>Beginner Courses</h3>
+        <p>Build the foundation and get clear on the core concepts, requirements, and terminology.</p>
+      </article>
+      <article>
+        <h3>Intermediate Courses</h3>
+        <p>Build on the fundamentals and develop a stronger working understanding of how the topic applies in practice.</p>
+      </article>
+      <article>
+        <h3>Advanced Courses</h3>
+        <p>Go deeper into complex requirements, decisions, and applications where stronger specialist knowledge is needed.</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="vh-wrap vh-market-page__section" data-vh-reveal="up">
+    <p class="vh-kicker">MARKETPLACE ACCOUNT</p>
+    <h2 class="vh-h2">Your VECTRA Client Portal</h2>
+    <p class="vh-lead">Already working with VECTRA International?</p>
+    <p class="vh-lead">Use the Client Portal to access the resources, services, documents, and support available to your account.</p>
+    <a class="vh-btn vh-btn--green" href="{{ routes.account_url }}">View Client Portal <img src="{{ img_arrow }}" alt=""></a>
+  </div>
+
+  <div class="vh-wrap vh-market-page__section" id="new-courses" data-vh-reveal="up">
+    <h2 class="vh-h2">New Courses</h2>
+    <div class="vh-courses vh-course-land__grid">
+      {% if course_products.size > 0 %}
+        {% for product in course_products limit: 4 %}
+          <article class="vh-course" data-vh-reveal="up">
+            {% if product.featured_image %}
+              {{ product.featured_image | image_url: width: 640 | image_tag: loading: 'lazy', alt: product.title }}
+            {% else %}
+              <img src="{{ img_2 }}" alt="">
+            {% endif %}
+            <div class="vh-course__body">
+              <h3>{{ product.title }}</h3>
+              <div class="vh-course__meta">
+                <span class="vh-price">{% if product.price > 0 %}{{ product.price | money }}{% else %}Coming to Marketplace{% endif %}</span>
+                <a class="vh-course__cta" href="{{ product.url }}">Access This Course</a>
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      {% else %}
+        <article class="vh-course" data-vh-reveal="up">
+          <img src="{{ img_2 }}" alt="">
+          <div class="vh-course__body">
+            <h3>Preventative and Corrective Measures</h3>
+            <div class="vh-course__meta">
+              <span class="vh-price">Coming to Marketplace</span>
+              <a class="vh-course__cta" href="{{ href_2 }}">Access This Course</a>
+            </div>
+          </div>
+        </article>
+        <article class="vh-course" data-vh-reveal="up">
+          <img src="{{ img_3 }}" alt="">
+          <div class="vh-course__body">
+            <h3>Optimizing Purchasing Practices</h3>
+            <div class="vh-course__meta">
+              <span class="vh-price">Coming to Marketplace</span>
+              <a class="vh-course__cta" href="{{ href_3 }}">Access This Course</a>
+            </div>
+          </div>
+        </article>
+      {% endif %}
+    </div>
+    <div class="vh-market-page__actions">
+      <a class="vh-btn vh-btn--outline" href="#new-courses">Explore All New Courses</a>
+    </div>
+  </div>
+
+  <div class="vh-wrap vh-market-page__section" data-vh-reveal="up">
+    <p class="vh-kicker">FIND YOUR STARTING POINT</p>
+    <h2 class="vh-h2">Find the Right Course for You</h2>
+    <p class="vh-lead">Not sure where to begin? Use the ESG Knowledge Assessment to check what you already understand and identify the topics to focus on next.</p>
+    <article class="vh-market-page__card">
+      <h3>ESG Knowledge Assessment</h3>
+      <p>Get a clearer picture of your understanding across key environmental, social, and governance topics, then use the result to choose where to focus your learning.</p>
+      <a class="vh-btn vh-btn--green" href="{{ contact_href }}">Start the Assessment <img src="{{ img_arrow }}" alt=""></a>
     </article>
-    <article class="vh-course" data-vh-reveal="up">
-      <img src="{{ img_2 }}" alt="">
-      <div class="vh-course__body">
-        <h2>Preventative and Corrective Measures</h2>
-        <div class="vh-course__meta">
-          <span class="vh-price">Coming to Marketplace</span>
-          <a class="vh-course__cta" href="{{ href_2 }}">View landing page</a>
-        </div>
-      </div>
-    </article>
-    <article class="vh-course" data-vh-reveal="up">
-      <img src="{{ img_3 }}" alt="">
-      <div class="vh-course__body">
-        <h2>Optimizing Purchasing Practices</h2>
-        <div class="vh-course__meta">
-          <span class="vh-price">Coming to Marketplace</span>
-          <a class="vh-course__cta" href="{{ href_3 }}">View landing page</a>
-        </div>
-      </div>
-    </article>
-    <article class="vh-course" data-vh-reveal="up">
-      <img src="{{ img_4 }}" alt="">
-      <div class="vh-course__body">
-        <h2>Disability Accommodation Training</h2>
-        <div class="vh-course__meta">
-          <span class="vh-price">Coming to Marketplace</span>
-          <a class="vh-course__cta" href="{{ href_4 }}">View landing page</a>
-        </div>
-      </div>
-    </article>
-    {% endif %}
+  </div>
+
+  <div class="vh-wrap vh-market-page__banner" data-vh-reveal="up">
+    <p class="vh-kicker">RISK ASSESSMENT FOR ORGANIZATIONS</p>
+    <h2 class="vh-h2">Know Your Risk. Understand How Strong Your Controls Are.</h2>
+    <p class="vh-lead">Your operating locations and sector shape your inherent risk. The strength of your management controls determines how much of that risk remains.</p>
+    <p class="vh-lead">VECTRA's Risk Assessment evaluates both, giving you a clearer view of control maturity, residual risk, and where attention is needed first.</p>
+    <p class="vh-market-page__pillars-inline">Initial Diagnostic · Deeper Evidence Review · Implementation Support</p>
+    <a class="vh-btn vh-btn--green" href="{{ risk_href }}">Explore Risk Assessment <img src="{{ img_arrow }}" alt=""></a>
+  </div>
+
+  <div class="vh-wrap vh-market-page__section" data-vh-reveal="up">
+    <p class="vh-kicker">FREQUENTLY ASKED QUESTIONS</p>
+    <h2 class="vh-h2">Questions About VECTRA Marketplace</h2>
+    <div class="vh-accordion vh-market-page__faq">
+      <details>
+        <summary>How are VECTRA's ESG courses different from generic online training?</summary>
+        <p>VECTRA courses are built by the specialists who do the implementation work, not by a general training provider. Each course connects directly to responsibilities you'll actually apply on the job, and to deeper VECTRA support if the need turns out to be bigger than a course.</p>
+      </details>
+      <details>
+        <summary>Do I need to know exactly which course I need before I start?</summary>
+        <p>No. Use the ESG Knowledge Assessment to see what you already understand and where to focus, or browse by regulation, topic, or level to find a starting point.</p>
+      </details>
+      <details>
+        <summary>Can I buy courses for my whole team?</summary>
+        <p>Yes. Individual courses work well for a focused knowledge gap. For teams that need shared understanding across several people, <a href="{{ contact_href }}">talk to an expert about team learning</a>.</p>
+      </details>
+      <details>
+        <summary>What happens if a course shows my team needs more than training?</summary>
+        <p>Marketplace connects straight into VECTRA's wider expertise. If a course points to a gap in evidence, ownership, supplier data, or implementation, we can bring in the relevant specialist support or point you to the <a href="{{ risk_href }}">Risk Assessment</a>.</p>
+      </details>
+      <details>
+        <summary>Do I need to be a VECTRA client to use Marketplace?</summary>
+        <p>No. Anyone can browse and purchase courses. Clients working with VECTRA on other engagements can also access courses, documents, and support through the Client Portal.</p>
+      </details>
+    </div>
+  </div>
+
+  <div class="vh-wrap vh-market-page__section vh-market-page__close" data-vh-reveal="up">
+    <p class="vh-kicker">FOR TEAMS AND WIDER NEEDS</p>
+    <h2 class="vh-h2">Build the Skills and Knowledge Your Team Needs</h2>
+    <p class="vh-lead">One course may be enough for a focused knowledge gap. A team may need several people to build the same understanding.</p>
+    <p class="vh-lead">If the need also involves suppliers, processes, evidence, ownership, or implementation, VECTRA can connect the learning with the specialist support needed to address those areas.</p>
+    <div class="vh-market-page__actions">
+      <a class="vh-btn vh-btn--green" href="#featured-courses">Explore Courses <img src="{{ img_arrow }}" alt=""></a>
+      <a class="vh-btn vh-btn--outline" href="{{ contact_href }}">Talk to an Expert About Team Learning</a>
+    </div>
   </div>
 </section>
 
