@@ -23,7 +23,7 @@
   assign associates_url = pages['associates'].url | default: '/pages/associates'
   assign interns_url = pages['interns'].url | default: '/pages/interns'
   assign careers_url = pages['careers'].url | default: '/pages/careers'
-  assign faq_url = pages['faq'].url | default: '/pages/faq'
+  assign faq_url = pages['faq'].url | default: pages['faqs'].url | default: pages['about-us'].url | default: pages['our-story'].url | default: '/pages/faq'
   assign why_base = pages['why-partner-with-us'].url | default: '/pages/why-partner-with-us'
   assign jobs_url = ''
   assign name_1 = ''

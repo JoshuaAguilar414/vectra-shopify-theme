@@ -17,7 +17,7 @@
   assign img_phone = 'vectra-7c0e54b37d57d95df328b0e4ee1f7b87844a7372.svg' | asset_url
   assign img_pin = 'vectra-484bca36e3874bd30d1d6dd79807ed0314378e3d.svg' | asset_url
   assign img_chat = 'vectra-da137306dcbc6716d83295ef75678ab141a500e1.svg' | asset_url
-  assign faq_base = pages['faq'].url | default: '/pages/faq'
+  assign faq_base = pages['faq'].url | default: pages['faqs'].url | default: pages['about-us'].url | default: pages['our-story'].url | default: '/pages/faq'
   assign resources_url = pages['resources'].url | default: '/pages/resources'
 %}
 {% capture faq_href %}{% render 'vectra-preview-href', url: faq_base, view: 'faq' %}{% endcapture %}

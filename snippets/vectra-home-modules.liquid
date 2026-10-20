@@ -64,7 +64,7 @@
   assign course_prev = pages['course-preventative-measures'].url | default: '/pages/course-preventative-measures'
   assign course_buy = pages['course-purchasing-practices'].url | default: '/pages/course-purchasing-practices'
   assign course_dis = pages['course-disability-accommodation'].url | default: '/pages/course-disability-accommodation'
-  assign faq_base = pages['faq'].url | default: '/pages/faq'
+  assign faq_base = pages['faq'].url | default: pages['faqs'].url | default: pages['about-us'].url | default: pages['our-story'].url | default: '/pages/faq'
   assign why_base = pages['why-partner-with-us'].url | default: '/pages/why-partner-with-us'
   assign contact_base = pages['contact'].url | default: pages['contact-us'].url | default: '/pages/contact'
   assign solutions_base = pages['solutions'].url | default: '/pages/solutions'

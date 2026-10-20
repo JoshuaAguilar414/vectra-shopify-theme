@@ -165,7 +165,15 @@
   elsif view_name == 'careers'
     assign href = pages['careers'].url | default: '/pages/careers'
   elsif view_name == 'faq'
-    assign href = pages['faq'].url | default: '/pages/faq'
+    if pages['faq'].url != blank
+      assign href = pages['faq'].url
+    elsif pages['faqs'].url != blank
+      assign href = pages['faqs'].url
+      assign force_view = true
+    else
+      assign href = pages['about-us'].url | default: pages['our-story'].url | default: pages['resources'].url | default: pages['solutions'].url | default: pages['contact'].url | default: '/'
+      assign force_view = true
+    endif
   elsif view_name == 'marketplace'
     if pages['marketplace'].url != blank
       assign href = pages['marketplace'].url

@@ -32,12 +32,12 @@
   isolation: isolate;
   overflow: hidden;
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   gap: clamp(24px, 4vw, 64px);
   height: auto;
-  min-height: clamp(460px, 48vw, 620px);
-  padding: calc(150px + var(--vh-pad-top, 0px)) 40px calc(72px + var(--vh-pad-bottom, 0px));
+  min-height: clamp(520px, 52vw, 680px);
+  padding: calc(200px + var(--vh-pad-top, 0px)) 40px calc(72px + var(--vh-pad-bottom, 0px));
   color: #fff;
   background: linear-gradient(106.42deg, #54bd01 -32.39%, #092543 72.71%);
   border-radius: 0 0 clamp(40px, 5vw, 101px) clamp(40px, 5vw, 101px);
@@ -1369,7 +1369,7 @@
   .vectra-sol .vsol-hero {
     height: auto;
     min-height: 0;
-    padding: 140px 24px 80px;
+    padding: 168px 24px 80px;
     border-radius: 0 0 48px 48px;
   }
 
@@ -1420,7 +1420,7 @@
   .vectra-sol .vsol-hero {
     flex-direction: column;
     align-items: flex-start;
-    padding: 140px 24px 64px;
+    padding: 168px 24px 64px;
   }
 
   .vectra-sol .vsol-quote {

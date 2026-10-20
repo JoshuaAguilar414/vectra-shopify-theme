@@ -13,7 +13,7 @@
   assign about_base = pages['about-us'].url | default: pages['our-story'].url | default: '/pages/about-us'
   assign experts_base = pages['experts'].url | default: '/pages/experts'
   assign leadership_base = pages['our-leadership-team'].url | default: pages['leadership'].url | default: pages['about-us'].url | default: pages['our-story'].url | default: '/pages/about-us'
-  assign faq_base = pages['faq'].url | default: '/pages/faq'
+  assign faq_base = pages['faq'].url | default: pages['faqs'].url | default: pages['about-us'].url | default: pages['our-story'].url | default: '/pages/faq'
   assign risk_base = pages['risk-assessment'].url | default: pages['services-risk-assessment'].url | default: '/pages/risk-assessment'
   assign resources_base = pages['resources'].url | default: '/pages/resources'
 %}

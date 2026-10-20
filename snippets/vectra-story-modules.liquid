@@ -48,7 +48,7 @@
   assign associates_url = pages['associates'].url | default: '/pages/associates'
   assign interns_url = pages['interns'].url | default: '/pages/interns'
   assign careers_url = pages['careers'].url | default: '/pages/careers'
-  assign faq_url = pages['faq'].url | default: '/pages/faq'
+  assign faq_url = pages['faq'].url | default: pages['faqs'].url | default: pages['about-us'].url | default: pages['our-story'].url | default: '/pages/faq'
   assign mv_mission = 'We enable positive business impact by partnering with organizations to transform end-to-end operational complexity into resilient, well-governed performance through expert teams, and human led state of the art technology—creating measurable value for people, operations, and sustainable growth.'
   assign mv_vision = 'To be the trusted partner in building operational control and resilience and achieving sustainable competitive advantage by transforming business complexity into strategic clarity, human-centered AI capability, and measurable value.'
   assign mv_solutions = 'We bring together deep expertise, a trusted network of partners, and technology that actually earns its place, then put all of it to work helping you design what needs to change, govern how it runs, and execute it in the real world.'

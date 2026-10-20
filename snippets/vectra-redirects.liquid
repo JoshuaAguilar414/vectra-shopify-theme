@@ -20,6 +20,22 @@
   else
     assign marketplace_redirect = '/pages/marketplace'
   endif
+
+  if pages['faq'].url != blank
+    assign faq_redirect = pages['faq'].url
+  elsif pages['faqs'].url != blank
+    assign faq_redirect = pages['faqs'].url | append: '?view=faq'
+  elsif pages['about-us'].url != blank
+    assign faq_redirect = pages['about-us'].url | append: '?view=faq'
+  elsif pages['our-story'].url != blank
+    assign faq_redirect = pages['our-story'].url | append: '?view=faq'
+  elsif pages['resources'].url != blank
+    assign faq_redirect = pages['resources'].url | append: '?view=faq'
+  elsif pages['solutions'].url != blank
+    assign faq_redirect = pages['solutions'].url | append: '?view=faq'
+  else
+    assign faq_redirect = '/pages/faq'
+  endif
 -%}
 
 <script>
@@ -29,6 +45,7 @@
 
     var path = (location.pathname || '/').replace(/\/+$/, '') || '/';
     var marketplaceDest = {{ marketplace_redirect | json }};
+    var faqDest = {{ faq_redirect | json }};
     var exact = {
       '/careers': '/pages/careers',
       '/job-openings': '/pages/careers',
@@ -66,8 +83,8 @@
       '/why-partner-with-us': '/pages/why-partner-with-us',
       '/why-partner': '/pages/why-partner-with-us',
       '/why-vectra': '/pages/why-partner-with-us',
-      '/faq': '/pages/faq',
-      '/faqs': '/pages/faq',
+      '/faq': faqDest,
+      '/faqs': faqDest,
       '/marketplace': marketplaceDest,
       '/courses': marketplaceDest,
       '/course': marketplaceDest,
