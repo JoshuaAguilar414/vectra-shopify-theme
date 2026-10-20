@@ -1538,6 +1538,23 @@
   width: 100%;
 }
 
+.vectra-story #about-faq .vs-aeo {
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0 0 28px;
+  padding: 20px 22px;
+  color: #092543;
+  background: rgba(84, 189, 1, 0.08);
+  border: 0;
+  border-top: 3px solid #54bd01;
+  border-radius: 0 0 14px 14px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.6;
+  text-align: left;
+}
+
 .vectra-story #about-faq .vh-faq__right,
 .vectra-story #about-faq .vh-accordion,
 .vectra-story #about-faq .vh-acc,

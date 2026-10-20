@@ -21,7 +21,7 @@
     endfor
   endif
   assign nav_title = link.title
-  if nav_title == 'Our DNA' or nav_title == 'OUR DNA' or nav_title contains 'Our DNA'
+  if nav_title == 'Our DNA' or nav_title == 'OUR DNA' or nav_title contains 'Our DNA' or nav_title == 'INSIDE VECTRA' or nav_title == 'Inside VECTRA'
     assign nav_title = 'About Us'
   endif
   # Always expose a Resources submenu for the five listing pages.
@@ -45,6 +45,13 @@
         {% endunless %}
         {% unless nav_title == 'Resources' %}
           {% for child in link.links %}
+            {% assign child_title_key = child.title | downcase %}
+            {% if nav_title == 'About Us' and child_title_key contains 'why vectra' %}
+              {% continue %}
+            {% endif %}
+            {% if nav_title == 'About Us' and child_title_key contains 'why partner' %}
+              {% continue %}
+            {% endif %}
             <a href="{% render 'vectra-preview-href', url: child.url, title: child.title %}">{{ child.title }}</a>
             {% if child.links.size > 0 %}
               {% for grandchild in child.links %}
@@ -153,6 +160,13 @@
             <ul class="vh-mega__list">
               {% unless nav_title == 'Resources' %}
                 {% for child in link.links %}
+                  {% assign child_title_key = child.title | downcase %}
+                  {% if nav_title == 'About Us' and child_title_key contains 'why vectra' %}
+                    {% continue %}
+                  {% endif %}
+                  {% if nav_title == 'About Us' and child_title_key contains 'why partner' %}
+                    {% continue %}
+                  {% endif %}
                   <li>
                     <a href="{% render 'vectra-preview-href', url: child.url, title: child.title %}" role="menuitem">{{ child.title }}</a>
                   </li>
