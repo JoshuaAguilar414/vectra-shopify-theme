@@ -3155,6 +3155,16 @@
   overflow: visible;
 }
 
+/* About Us FAQ must never use the homepage contact+FAQ 2-col grid */
+.vectra-story #about-faq .vh-faq__grid,
+.vectra-home.vectra-story #about-faq .vh-faq__grid {
+  display: block !important;
+  grid-template-columns: none !important;
+  gap: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+
 .vh-contact-card {
   position: relative;
   z-index: 2;

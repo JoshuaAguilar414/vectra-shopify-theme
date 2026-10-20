@@ -1484,8 +1484,10 @@
   background-color: var(--vh-bg) !important;
 }
 
-/* About Us FAQ — true full-viewport width (not the homepage 2-col FAQ grid) */
+/* About Us FAQ — full viewport; never use homepage 2-col .vh-faq__grid */
+.vectra-home.vectra-story #about-faq,
 .vectra-home.vectra-story #about-faq.vs-faq-full,
+.vectra-story #about-faq,
 .vectra-story #about-faq.vs-faq-full {
   position: relative;
   z-index: 4;
@@ -1501,63 +1503,76 @@
   isolation: isolate;
   box-sizing: border-box !important;
   background:
-    radial-gradient(ellipse 55% 70% at 50% 42%, rgba(214, 255, 173, 0.45) 0%, transparent 68%),
+    radial-gradient(ellipse 55% 70% at 78% 42%, rgba(214, 255, 173, 0.45) 0%, transparent 68%),
     linear-gradient(180deg, #ffffff 0%, #f8fcf4 52%, #ffffff 100%);
 }
 
 .vectra-home.vectra-story #about-faq .vs-faq-full__inner,
-.vectra-story #about-faq .vs-faq-full__inner {
+.vectra-home.vectra-story #about-faq .vh-faq__grid,
+.vectra-home.vectra-story #about-faq .vh-wrap,
+.vectra-home.vectra-story #about-faq .vh-faq__right,
+.vectra-story #about-faq .vs-faq-full__inner,
+.vectra-story #about-faq .vh-faq__grid,
+.vectra-story #about-faq .vh-wrap,
+.vectra-story #about-faq .vh-faq__right {
   position: relative;
   z-index: 2;
   display: block !important;
+  grid-template-columns: none !important;
+  grid-template-rows: none !important;
+  gap: 0 !important;
   width: 100% !important;
   max-width: none !important;
+  min-width: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
-  box-sizing: border-box;
+  box-sizing: border-box !important;
 }
 
 .vectra-home.vectra-story #about-faq .vh-accordion,
-.vectra-story #about-faq .vh-accordion,
+.vectra-story #about-faq .vh-accordion {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  max-width: none !important;
+  position: relative;
+  z-index: 3;
+  pointer-events: auto !important;
+}
+
 .vectra-home.vectra-story #about-faq .vh-acc,
-.vectra-story #about-faq .vh-acc,
 .vectra-home.vectra-story #about-faq [data-vh-faq-btn],
-.vectra-story #about-faq [data-vh-faq-btn],
 .vectra-home.vectra-story #about-faq .vh-accordion .vh-h2,
-.vectra-story #about-faq .vh-accordion .vh-h2,
-.vectra-home.vectra-story #about-faq .vh-accordion .vh-kicker,
-.vectra-story #about-faq .vh-accordion .vh-kicker,
 .vectra-home.vectra-story #about-faq .vs-aeo,
+.vectra-story #about-faq .vh-acc,
+.vectra-story #about-faq [data-vh-faq-btn],
+.vectra-story #about-faq .vh-accordion .vh-h2,
 .vectra-story #about-faq .vs-aeo {
   width: 100% !important;
   max-width: none !important;
   box-sizing: border-box;
 }
 
-.vectra-home.vectra-story #about-faq .vh-accordion,
-.vectra-story #about-faq .vh-accordion,
-.vectra-home.vectra-story #about-faq .vh-acc,
-.vectra-story #about-faq .vh-acc,
-.vectra-home.vectra-story #about-faq [data-vh-faq-btn],
-.vectra-story #about-faq [data-vh-faq-btn] {
-  position: relative;
-  z-index: 3;
-  pointer-events: auto !important;
+.vectra-home.vectra-story #about-faq .vh-accordion .vh-kicker,
+.vectra-story #about-faq .vh-accordion .vh-kicker {
+  width: auto !important;
+  max-width: none !important;
 }
 
 .vectra-home.vectra-story #about-faq .vs-aeo,
 .vectra-story #about-faq .vs-aeo {
   display: block;
   margin: 0 0 28px;
-  padding: 20px 22px;
-  color: #092543;
-  background: rgba(84, 189, 1, 0.08);
+  padding: 0;
+  color: #54bd01;
+  background: none;
   border: 0;
-  border-top: 3px solid #54bd01;
-  border-radius: 0 0 14px 14px;
-  font-size: 15px;
+  border-radius: 0;
+  font-size: 16px;
   font-weight: 500;
-  line-height: 1.6;
+  letter-spacing: -0.015em;
+  line-height: 1.55;
   text-align: left;
 }
 
@@ -1570,8 +1585,36 @@
   transform: none;
 }
 
-@media (max-width: 989px) {
+@media (min-width: 990px) {
+  .vectra-home.vectra-story #about-faq,
   .vectra-home.vectra-story #about-faq.vs-faq-full,
+  .vectra-story #about-faq,
+  .vectra-story #about-faq.vs-faq-full {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    padding: clamp(64px, 7vw, 100px) clamp(40px, 5.5vw, 96px) !important;
+  }
+
+  .vectra-home.vectra-story #about-faq .vh-faq__grid,
+  .vectra-home.vectra-story #about-faq .vs-faq-full__inner,
+  .vectra-home.vectra-story #about-faq .vh-faq__right,
+  .vectra-home.vectra-story #about-faq .vh-accordion,
+  .vectra-home.vectra-story #about-faq .vh-acc,
+  .vectra-story #about-faq .vh-faq__grid,
+  .vectra-story #about-faq .vs-faq-full__inner,
+  .vectra-story #about-faq .vh-faq__right,
+  .vectra-story #about-faq .vh-accordion,
+  .vectra-story #about-faq .vh-acc {
+    width: 100% !important;
+    max-width: none !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+@media (max-width: 989px) {
+  .vectra-home.vectra-story #about-faq,
+  .vectra-home.vectra-story #about-faq.vs-faq-full,
+  .vectra-story #about-faq,
   .vectra-story #about-faq.vs-faq-full {
     padding: 40px 16px 56px !important;
   }

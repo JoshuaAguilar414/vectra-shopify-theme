@@ -633,3 +633,43 @@
 .vectra-res .vres-cat {
   font-size: clamp(13px, 0.95vw, 18px) !important;
 }
+
+/* About FAQ desktop: kill homepage 2-col grid (loads after home/story CSS) */
+.vectra-home.vectra-story #about-faq,
+.vectra-home.vectra-story #about-faq.vs-faq-full {
+  display: block !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+  box-sizing: border-box !important;
+}
+
+.vectra-home.vectra-story #about-faq .vh-wrap,
+.vectra-home.vectra-story #about-faq .vh-faq__grid,
+.vectra-home.vectra-story #about-faq .vs-faq-full__inner,
+.vectra-home.vectra-story #about-faq .vh-faq__right {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  grid-template-columns: none !important;
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.vectra-home.vectra-story #about-faq .vh-accordion,
+.vectra-home.vectra-story #about-faq .vh-acc,
+.vectra-home.vectra-story #about-faq [data-vh-faq-btn],
+.vectra-home.vectra-story #about-faq .vh-accordion .vh-h2,
+.vectra-home.vectra-story #about-faq .vs-aeo {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+@media (min-width: 990px) {
+  .vectra-home.vectra-story #about-faq .vh-faq__grid {
+    display: block !important;
+    grid-template-columns: none !important;
+  }
+}
