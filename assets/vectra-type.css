@@ -513,9 +513,14 @@
     position: relative;
     left: auto;
     top: auto;
-    width: auto;
-    max-width: none;
     height: auto;
+  }
+
+  .vectra-sol .vsol-hero__inner {
+    width: min(720px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
   }
 
   .vectra-sol .vsol-quote {
