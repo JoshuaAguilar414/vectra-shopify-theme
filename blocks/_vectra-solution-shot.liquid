@@ -3,8 +3,12 @@
   if shot_href == blank
     assign cta_down = block.settings.cta_label | downcase
     if block.settings.plus_overlay or cta_down contains 'talk'
-      assign shot_href = '#VectraContactModal'
+      assign shot_href = pages['contact'].url | default: pages['contact-us'].url | default: '/pages/contact'
+    else
+      assign shot_href = pages['solutions'].url | default: '/pages/solutions'
     endif
+  elsif shot_href == '#VectraContactModal'
+    assign shot_href = pages['contact'].url | default: pages['contact-us'].url | default: '/pages/contact'
   endif
 %}
 <button

@@ -260,22 +260,26 @@
     const text = qs('[data-vh-sol-text]', solutions);
     const cta = qs('[data-vh-sol-cta]', solutions);
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let animating = false;
+    let dragMoved = false;
+    let solTimer = 0;
+    let resumeTimer = 0;
 
     const setCopy = (item) => {
       if (!item) return;
       const fade = (el, value) => {
         if (!el) return;
         const next = value == null ? '' : String(value);
-        if (!next) return;
+        if (!next || el.textContent === next) return;
         el.style.transition = 'none';
         el.style.opacity = '0';
-        el.style.transform = 'translateY(10px)';
+        el.style.transform = 'translateY(8px)';
         el.textContent = next;
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             el.style.transition = reduceMotion
               ? 'none'
-              : 'opacity 0.35s ease, transform 0.35s ease';
+              : 'opacity 0.28s ease, transform 0.28s ease';
             el.style.opacity = '1';
             el.style.transform = 'none';
           });
@@ -285,27 +289,20 @@
       fade(text, item.dataset.text);
       fade(cta, item.dataset.cta);
       if (cta) {
-        const href = item.dataset.href;
-        if (href) {
-          cta.setAttribute('href', href);
-          if (href === '#VectraContactModal') {
-            cta.setAttribute('data-vh-contact-open', '');
-          } else {
-            cta.removeAttribute('data-vh-contact-open');
-          }
-        } else {
-          cta.setAttribute('href', '#solutions');
-          cta.removeAttribute('data-vh-contact-open');
-        }
+        const href = item.dataset.href || '/pages/solutions';
+        cta.setAttribute('href', href);
+        cta.removeAttribute('data-vh-contact-open');
       }
     };
 
     const activate = (item) => {
       const shots = qsa('[data-vh-sol-item]', gallery || solutions);
-      if (!item || shots[0] === item) {
+      if (!item) return;
+      if (shots[0] === item) {
         setCopy(item);
-        return;
+        return true;
       }
+      if (animating) return false;
 
       const firstRects = shots.map((el) => el.getBoundingClientRect());
       const wrapOf = (el) => {
@@ -330,6 +327,7 @@
       });
 
       if (!reduceMotion && gallery) {
+        animating = true;
         nextShots.forEach((el) => {
           const prev = firstRects[shots.indexOf(el)];
           if (!prev) return;
@@ -345,7 +343,7 @@
         });
         gallery.getBoundingClientRect();
         nextShots.forEach((el) => {
-          el.style.transition = 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)';
+          el.style.transition = 'transform 0.38s cubic-bezier(0.22, 1, 0.36, 1)';
           el.style.transform = 'none';
         });
         const clear = (event) => {
@@ -356,11 +354,36 @@
           el.style.transformOrigin = '';
           el.style.zIndex = '';
           el.removeEventListener('transitionend', clear);
+          animating = false;
         };
         nextShots.forEach((el) => el.addEventListener('transitionend', clear));
+        window.setTimeout(() => {
+          animating = false;
+        }, 420);
       }
 
       setCopy(item);
+      return true;
+    };
+
+    const step = (dir) => {
+      const shots = qsa('[data-vh-sol-item]', gallery || solutions);
+      if (shots.length < 2) return false;
+      if (dir > 0 && shots[1]) return activate(shots[1]);
+      if (dir < 0 && shots[shots.length - 1]) return activate(shots[shots.length - 1]);
+      return false;
+    };
+
+    const startSol = () => {
+      window.clearInterval(solTimer);
+      if (reduceMotion || shotsInit.length < 2) return;
+      solTimer = window.setInterval(() => step(1), 2800);
+    };
+
+    const bumpAuto = () => {
+      window.clearInterval(solTimer);
+      window.clearTimeout(resumeTimer);
+      resumeTimer = window.setTimeout(startSol, 1800);
     };
 
     const shotsInit = qsa('[data-vh-sol-item]', solutions);
@@ -373,26 +396,29 @@
     });
     if (activeInit) setCopy(activeInit);
     solutions.dataset.vhSolReady = String(shotsInit.length);
+
     solutions.addEventListener('click', (event) => {
       const item = event.target.closest('[data-vh-sol-item]');
-      if (!item) return;
+      if (!item || dragMoved) return;
       activate(item);
-      startSol();
+      bumpAuto();
     });
 
     if (gallery) {
       let lastX = null;
       let hoverLock = false;
-      gallery.style.cursor = 'ew-resize';
-      gallery.addEventListener('mousemove', (event) => {
-        if (reduceMotion) return;
+      let pointerId = null;
+      let dragOriginX = 0;
+
+      gallery.addEventListener('pointermove', (event) => {
+        if (reduceMotion || pointerId != null) return;
         const x = event.clientX;
         if (lastX == null) {
           lastX = x;
           return;
         }
         const dx = x - lastX;
-        if (Math.abs(dx) < 10) return;
+        if (Math.abs(dx) < 14) return;
         if (hoverLock) {
           lastX = x;
           return;
@@ -401,31 +427,70 @@
         hoverLock = true;
         window.setTimeout(() => {
           hoverLock = false;
-        }, 180);
-        const shots = qsa('[data-vh-sol-item]', gallery);
-        if (shots.length < 2) return;
-        if (dx > 0) {
-          if (shots[1]) activate(shots[1]);
-        } else if (shots[shots.length - 1]) {
-          activate(shots[shots.length - 1]);
-        }
-        startSol();
+        }, 120);
+        if (step(dx > 0 ? 1 : -1)) bumpAuto();
       });
-      gallery.addEventListener('mouseleave', () => {
+
+      gallery.addEventListener('pointerleave', () => {
         lastX = null;
         hoverLock = false;
       });
+
+      gallery.addEventListener('pointerdown', (event) => {
+        if (event.button != null && event.button !== 0) return;
+        pointerId = event.pointerId;
+        dragOriginX = event.clientX;
+        dragMoved = false;
+        gallery.classList.add('is-dragging');
+        gallery.setPointerCapture?.(pointerId);
+      });
+
+      gallery.addEventListener('pointermove', (event) => {
+        if (pointerId == null || event.pointerId !== pointerId) return;
+        const dx = event.clientX - dragOriginX;
+        if (Math.abs(dx) < 24) return;
+        dragMoved = true;
+        if (step(dx > 0 ? 1 : -1)) {
+          dragOriginX = event.clientX;
+          bumpAuto();
+        }
+      });
+
+      const endDrag = (event) => {
+        if (pointerId == null || (event && event.pointerId !== pointerId)) return;
+        pointerId = null;
+        gallery.classList.remove('is-dragging');
+        bumpAuto();
+        window.setTimeout(() => {
+          dragMoved = false;
+        }, 40);
+      };
+      gallery.addEventListener('pointerup', endDrag);
+      gallery.addEventListener('pointercancel', endDrag);
+
+      gallery.addEventListener(
+        'wheel',
+        (event) => {
+          const horizontal = Math.abs(event.deltaX) > Math.abs(event.deltaY);
+          if (!horizontal && Math.abs(event.deltaY) < 8) return;
+          if (!horizontal) return;
+          event.preventDefault();
+          if (step(event.deltaX > 0 ? 1 : -1)) bumpAuto();
+        },
+        { passive: false }
+      );
+
+      gallery.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          if (step(1)) bumpAuto();
+        } else if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          if (step(-1)) bumpAuto();
+        }
+      });
     }
 
-    let solTimer = 0;
-    const startSol = () => {
-      window.clearInterval(solTimer);
-      if (reduceMotion || shotsInit.length < 2) return;
-      solTimer = window.setInterval(() => {
-        const shots = qsa('[data-vh-sol-item]', gallery || solutions);
-        if (shots[1]) activate(shots[1]);
-      }, 4500);
-    };
     startSol();
   }
 

@@ -652,6 +652,7 @@
 }
 
 .vh-hero--home .vh-hero__h1 {
+  order: 1;
   width: min(720px, 92%);
   margin: 0 auto 18px;
   font-family: 'Poppins', sans-serif;
@@ -663,12 +664,16 @@
   text-align: center !important;
   color: rgba(255, 255, 255, 0.88);
   text-shadow: 0 1px 18px rgba(0, 0, 0, 0.35);
-  opacity: 1;
-  transform: none;
-  animation: none;
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+  position: relative;
+  top: auto !important;
+  left: auto !important;
 }
 
 .vh-hero--home .vh-hero__display {
+  order: 2;
   width: min(980px, 94%);
   margin: 0 auto 26px;
   font-family: 'Poppins', sans-serif;
@@ -679,9 +684,12 @@
   text-align: center !important;
   color: #ffffff;
   text-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
-  opacity: 1;
-  transform: none;
-  animation: none;
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+  position: relative;
+  top: auto !important;
+  left: auto !important;
 }
 
 .vh-hero--home .vh-hero__display::after,
@@ -691,6 +699,7 @@
 }
 
 .vh-hero--home .vh-hero__body {
+  order: 3;
   width: min(760px, 90%);
   margin: 0 auto;
   color: rgba(255, 255, 255, 0.92);
@@ -721,6 +730,7 @@
 }
 
 .vh-hero--home .vh-hero__actions {
+  order: 4;
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
@@ -729,9 +739,9 @@
   margin: 32px auto 0;
   position: relative;
   z-index: 4;
-  opacity: 1;
-  transform: none;
-  animation: none;
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
 }
 
 .vh-hero--home .vh-hero__actions .vh-btn {
@@ -1925,6 +1935,17 @@
   box-shadow: 0 0 20.7px -3px rgba(0, 0, 0, 0.25);
 }
 
+.vh-stat--combo {
+  /* 100+ years of combined expertise — lower left of the green circle */
+  left: 4%;
+  right: auto;
+  top: 58cqi;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 0 24px -6px rgba(0, 0, 0, 0.22);
+}
+
 .vh-stat--500 {
   /* 500+ Organizations — right rim, same overhang style as 50+ */
   left: auto;
@@ -2056,10 +2077,10 @@
   margin: 0 0 16px;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
-  font-size: clamp(28px, 3vw, 42px);
+  font-size: clamp(26px, 2.6vw, 38px);
   font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
   color: #ffffff;
 }
 
@@ -2069,9 +2090,9 @@
   margin: 0 0 24px;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
-  font-size: clamp(14px, 1vw, 16px);
+  font-size: clamp(15px, 1.1vw, 17px);
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.55;
   letter-spacing: -0.01em;
   color: rgba(255, 255, 255, 0.92);
 }
@@ -2105,6 +2126,19 @@
   height: auto;
   min-height: 0;
   overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  scrollbar-width: none;
+}
+
+.vh-solutions__gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.vh-solutions__gallery.is-dragging {
+  cursor: grabbing;
 }
 
 .vh-sol-shot {
@@ -3110,13 +3144,14 @@
 .vh-faq__grid {
   position: relative;
   z-index: 1;
-  display: flex;
-  padding: 60px;
-  justify-content: stretch;
+  display: grid;
+  grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
+  gap: clamp(32px, 4vw, 64px);
+  padding: 0;
   align-items: start;
-  width: var(--vh-wrap);
+  width: 100%;
   max-width: 100%;
-  margin-inline: auto;
+  margin: 0;
   overflow: visible;
 }
 
@@ -3143,6 +3178,7 @@
   text-align: center;
   pointer-events: auto;
   overflow: hidden;
+  justify-self: stretch;
 }
 
 .vh-contact-card p {
@@ -3374,19 +3410,20 @@
 .vh-faq__right {
   position: relative;
   width: 100%;
-  max-width: 100%;
+  max-width: none;
   min-width: 0;
   height: auto;
   min-height: 0;
   isolation: isolate;
   z-index: 1;
+  justify-self: stretch;
 }
 
 .vh-accordion {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 100%;
+  max-width: none;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -4191,11 +4228,15 @@ body:has(.vectra-home) #MainContent {
 }
 
 .vh-stat--100[data-vh-reveal] {
-  transition-delay: 0.16s;
+  transition-delay: 0.12s;
+}
+
+.vh-stat--combo[data-vh-reveal] {
+  transition-delay: 0.24s;
 }
 
 .vh-stat--500[data-vh-reveal] {
-  transition-delay: 0.32s;
+  transition-delay: 0.36s;
 }
 
 .vh-stat.is-in {
@@ -4208,6 +4249,10 @@ body:has(.vectra-home) #MainContent {
 
 .vh-stat--30.is-in {
   animation-delay: 1.4s;
+}
+
+.vh-stat--combo.is-in {
+  animation-delay: 1.62s;
 }
 
 .vh-stat--500.is-in {
@@ -4289,12 +4334,16 @@ body:has(.vectra-home) #MainContent {
   }
 
   .vectra-home .vh-wrap,
-  .vectra-home .vh-why .vh-wrap,
-  .vectra-home .vh-faq__grid {
+  .vectra-home .vh-why .vh-wrap {
     width: min(100% - 32px, 720px);
     max-width: 100%;
     min-width: 0;
     margin-inline: auto;
+  }
+
+  .vh-why__grid,
+  .vh-faq__grid {
+    grid-template-columns: 1fr;
   }
 
   .vh-why__grid,
@@ -4856,6 +4905,7 @@ body:has(.vectra-home) #MainContent {
   .vh-faq__grid {
     grid-template-columns: 1fr;
     gap: 32px;
+    padding: 40px 0;
   }
 
   .vh-faq__right,
@@ -4864,8 +4914,13 @@ body:has(.vectra-home) #MainContent {
   .vh-acc,
   .vh-acc.is-open {
     width: 100%;
+    max-width: 100%;
     height: auto;
     min-height: 0;
+  }
+
+  .vh-contact-card {
+    max-width: none;
   }
 
   .vh-acc button {
@@ -5069,6 +5124,12 @@ body:has(.vectra-home) #MainContent {
     left: 0;
     right: auto;
     top: 18cqi;
+  }
+
+  .vh-stat--combo {
+    left: 6%;
+    right: auto;
+    top: 62cqi;
   }
 
   .vh-stat--500 {

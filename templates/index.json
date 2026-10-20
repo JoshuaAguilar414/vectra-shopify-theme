@@ -50,7 +50,6 @@
           "settings": {
             "kicker": "WHY VECTRA",
             "heading": "We Serve People With People.",
-            "text": "Behind every supplier issue, every audit finding, every new requirement your team is trying to get ahead of, there's a person trying to make it work. Usually more than one.\n\nThat's who we're really talking to. Not a department. Not a system. You.\n\nWe start by listening, not presenting. We sit with the people closest to the problem, learn what's actually getting in the way, and bring in exactly the expertise that moment needs, without ever taking the wheel away from your team.\n\nTechnology helps us move fast. It spots patterns, flags what needs attention, and keeps the evidence honest. But the judgment calls, the hard conversations, and the follow-through when things get complicated? That stays human. That stays with us, working alongside you.\n\nAnd when we hand over a recommendation, we don't disappear. We stay while it becomes real. While your team adapts. While the improvement actually sticks.\n\nYour success is our success. We mean that literally, not as a tagline.",
             "button_label": "See Why VECTRA",
             "button_link": "/pages/why-partner-with-us",
             "hide_ceo_note": false,
@@ -65,7 +64,6 @@
           "settings": {
             "kicker": "OUR EXPERIENCE",
             "heading": "20+ Years of Experience You Can Rely On",
-            "text": "VECTRA International was founded in 2005. But the experience behind our work goes back further than that, because the people doing it had already spent years, in some cases decades, in these exact situations before they ever became a team.\n\nVECTRA International has worked with organizations across responsible business, supply chains, workplace standards, and operational improvement. That's not a number on a slide. It's why we already know where change tends to stall, what actually helps people move it forward, and why even a good plan still has to survive contact with a Monday morning.\n\nToday, we bring that experience to a broader role in business resilience and operational capability building, helping organizations make stronger decisions, build stronger teams, and create improvements they can sustain.",
             "stat_1_value": "20+",
             "stat_1_label": "Years of Experience",
             "stat_2_value": "50+",
@@ -78,21 +76,22 @@
         "solutions": {
           "type": "vectra-solutions",
           "blocks": {
-            "shot_1": { "type": "_vectra-solution-shot", "settings": { "is_active": true, "title": "Operational Resilience", "text": "Keep the work moving even when conditions change, with clear ownership, a faster response, and decisions your team can make with confidence.", "cta_label": "Explore Operational Resilience", "fallback_asset": "vectra-add817f67c59297c528c5d57486a2794644fb47c.png" } },
-            "shot_2": { "type": "_vectra-solution-shot", "settings": { "title": "Value Chain Resilience & Improvement", "text": "See where supplier risk really sits, focus where it matters most, and help your suppliers actually get better, not just get audited.", "cta_label": "Explore Value Chain Resilience & Improvement", "fallback_asset": "vectra-6a69557ce365aa215c5c28bca6a6e51af0a2c987.png" } },
-            "shot_3": { "type": "_vectra-solution-shot", "settings": { "title": "Responsible Business Performance", "text": "Turn responsible business requirements into decisions your team trusts, evidence that holds up, and habits that stick.", "cta_label": "Explore Responsible Business Performance", "fallback_asset": "vectra-d9fea5c48820c581c90942feb5bfc3997b28135f.png" } },
-            "shot_4": { "type": "_vectra-solution-shot", "settings": { "title": "Governance & Regulatory Readiness", "text": "Turn changing rules into controls your team actually understands, and evidence you can stand behind without crossing your fingers.", "cta_label": "Explore Governance & Regulatory Readiness", "fallback_asset": "vectra-d7047ac7e66609406a0cb2e3fa6ac8ad2faf5cca.png" } },
-            "shot_5": { "type": "_vectra-solution-shot", "settings": { "title": "Capability Building at Scale", "text": "Give your teams and suppliers the confidence, not just the training, to make change stick.", "cta_label": "Explore Capability Building at Scale", "fallback_asset": "vectra-ae8b362b8368e8b200e58c921e1c7c274608a975.png" } },
-            "shot_6": { "type": "_vectra-solution-shot", "settings": { "plus_overlay": true, "title": "Customized Business Solutions", "text": "Some problems don't fit in one box. Tell us what you're up against. We'll bring together whoever it takes.", "cta_label": "Talk to an Expert", "cta_link": "#VectraContactModal", "fallback_asset": "vectra-a22c67e8c858a4742869caed8035aebee50f5996.png" } }
+            "shot_1": { "type": "_vectra-solution-shot", "settings": { "is_active": true, "title": "Operational Resilience", "text": "Keep the work moving even when conditions change, with clear ownership, a faster response, and decisions your team can make with confidence.", "cta_label": "Explore Operational Resilience", "cta_link": "/pages/solutions", "fallback_asset": "vectra-add817f67c59297c528c5d57486a2794644fb47c.png" } },
+            "shot_2": { "type": "_vectra-solution-shot", "settings": { "title": "Value Chain Resilience & Improvement", "text": "See where supplier risk really sits, focus where it matters most, and help your suppliers actually get better, not just get audited.", "cta_label": "Explore Value Chain Resilience & Improvement", "cta_link": "/pages/solutions", "fallback_asset": "vectra-6a69557ce365aa215c5c28bca6a6e51af0a2c987.png" } },
+            "shot_3": { "type": "_vectra-solution-shot", "settings": { "title": "Responsible Business Performance", "text": "Turn responsible business requirements into decisions your team trusts, evidence that holds up, and habits that stick.", "cta_label": "Explore Responsible Business Performance", "cta_link": "/pages/solutions", "fallback_asset": "vectra-d9fea5c48820c581c90942feb5bfc3997b28135f.png" } },
+            "shot_4": { "type": "_vectra-solution-shot", "settings": { "title": "Governance & Regulatory Readiness", "text": "Turn changing rules into controls your team actually understands, and evidence you can stand behind without crossing your fingers.", "cta_label": "Explore Governance & Regulatory Readiness", "cta_link": "/pages/solutions", "fallback_asset": "vectra-d7047ac7e66609406a0cb2e3fa6ac8ad2faf5cca.png" } },
+            "shot_5": { "type": "_vectra-solution-shot", "settings": { "title": "Capability Building at Scale", "text": "Give your teams and suppliers the confidence, not just the training, to make change stick.", "cta_label": "Explore Capability Building at Scale", "cta_link": "/pages/solutions", "fallback_asset": "vectra-ae8b362b8368e8b200e58c921e1c7c274608a975.png" } },
+            "shot_6": { "type": "_vectra-solution-shot", "settings": { "plus_overlay": true, "title": "Customized Business Solutions", "text": "Some problems don't fit in one box. Tell us what you're up against. We'll bring together whoever it takes.", "cta_label": "Talk to an Expert", "cta_link": "/pages/contact", "fallback_asset": "vectra-a22c67e8c858a4742869caed8035aebee50f5996.png" } }
           },
           "block_order": ["shot_1", "shot_2", "shot_3", "shot_4", "shot_5", "shot_6"],
           "settings": {
             "kicker": "HOW WE HELP",
             "heading": "Solutions for the Results Your Business Needs",
-            "intro": "Maybe it's one specific fire that keeps reigniting. Maybe it's bigger than that, and it touches suppliers, systems, evidence, and people all at once. Either way, we organize what we do around what you're actually trying to achieve, not around what's convenient for us to sell.",
+            "intro": "Maybe it's one fire that keeps reigniting. Maybe it involves suppliers, systems, evidence, and people all at once. Either way, we organize what we do around what you're trying to achieve.",
             "cta_heading": "Not Sure Where to Start? That's Completely Normal.",
             "cta_text": "Tell us what you're trying to improve. We'll help you find the right next step, together.",
-            "button_label": "Talk to an Expert"
+            "button_label": "Talk to an Expert",
+            "button_link": "/pages/contact"
           }
         },
         "marketplace": {
@@ -100,7 +99,7 @@
           "settings": {
             "kicker": "VECTRA MARKETPLACE",
             "heading": "Learn What You Need. Apply It With Confidence.",
-            "text": "Explore 100+ expert-led courses across ESG, sustainability, responsible business, compliance, due diligence, and supply chains.\n\nWhether it's one person trying to get their head around a new requirement, or a whole team that needs to be speaking the same language, Marketplace gives people somewhere real to start.",
+            "text": "Explore 100+ expert-led courses across ESG, sustainability, responsible business, compliance, due diligence, and supply chains.\n\nWhether you're getting your head around a new requirement or helping a whole team do the same, Marketplace gives you somewhere to start.",
             "button_label": "Find the Right Course",
             "explore_courses_label": "Explore All Courses",
             "hide_topics": true
@@ -117,7 +116,7 @@
           "settings": {
             "kicker": "SELECTED CLIENT EXPERIENCE",
             "heading": "The Proof Isn't What We Say. It's What Changed For Them.",
-            "lead": "The best evidence of how we work isn't a claim on this page. It's what's different for the people who worked with us: what stopped happening, what got easier, what their team stopped worrying about.\n\nExplore how VECTRA has supported organizations across responsible business, supply chains, operational improvement, and capability building, from the challenge they faced to the support provided and the progress that followed.",
+            "lead": "The best evidence of how we work is what's different for the people who worked with us: what got easier and what their team stopped worrying about.\n\nExplore how VECTRA has supported organizations across responsible business, supply chains, operational improvement, and capability building, from the challenge they faced to the progress that followed.",
             "reviews_label": "5/5 — Based on 500 reviews",
             "button_label": "Explore Case Studies"
           }
@@ -125,22 +124,23 @@
         "faq": {
           "type": "vectra-faq",
           "blocks": {
-            "faq_1": { "type": "_vectra-faq-item", "settings": { "open": true, "question": "What does VECTRA help organizations improve?", "answer": "VECTRA helps organizations strengthen responsible business, operational resilience, supply chain resilience, and day to day business performance. Depending on the challenge, our support may include responsible business transformation, ESG consulting, sustainability consulting, supply chain consulting, technology, capability building, or implementation support. We start with the result that needs to improve, then bring the relevant expertise and support around it. Not the other way around." } },
+            "faq_1": { "type": "_vectra-faq-item", "settings": { "open": true, "question": "What does VECTRA help organizations improve?", "answer": "VECTRA helps organizations strengthen responsible business, operational resilience, supply chain resilience, and day to day business performance. Depending on the challenge, our support may include responsible business transformation, ESG consulting and other ESG services, sustainability consulting, supply chain consulting, technology, capability building, or implementation support. We start with the result that needs to improve, then bring the relevant expertise and support around it. Not the other way around." } },
             "faq_2": { "type": "_vectra-faq-item", "settings": { "question": "We already have consultants, platforms, and dashboards. Where does VECTRA fit?", "answer": "We work with what you already have. When the information, expertise, or system is already there, we focus on what's stopping it from producing the result you need. That may be ownership, process, supplier engagement, evidence, capability, or follow-through." } },
             "faq_3": { "type": "_vectra-faq-item", "settings": { "question": "Can VECTRA work with the systems we already use?", "answer": "Yes. VECTRA is platform-agnostic. We work with your existing systems, data, teams, consultants, and partners, then introduce additional technology only where it solves a clear problem." } },
             "faq_4": { "type": "_vectra-faq-item", "settings": { "question": "Where do we start if we know the problem but not the solution?", "answer": "Start by telling us what's happening and what you want to improve. We'll help clarify the issue, identify what needs attention first, and figure out the most practical next step, together." } },
-            "faq_5": { "type": "_vectra-faq-item", "settings": { "question": "How does VECTRA measure progress?", "answer": "We agree at the start on what success should look like. Depending on the challenge, that may include clearer ownership, closed actions, stronger evidence, improved capability, fewer recurring problems, or better supplier performance." } }
+            "faq_5": { "type": "_vectra-faq-item", "settings": { "question": "How does VECTRA measure progress?", "answer": "We agree at the start on what success should look like. Depending on the challenge, that may include clearer ownership, closed actions, stronger evidence, improved capability, fewer recurring problems, or better supplier performance." } },
+            "faq_6": { "type": "_vectra-faq-item", "settings": { "question": "What is responsible business, and how does VECTRA help?", "answer": "Responsible business means managing supplier risk, environmental and social impact, and regulatory responsibility to protect people, performance, and long-term value. VECTRA helps organizations turn those responsibilities into clear ownership, practical action, operational resilience, and measurable improvement across teams, suppliers, and systems." } }
           },
-          "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"],
+          "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5", "faq_6"],
           "settings": {
             "card_kicker": "TALK TO US",
             "card_title": "Tell Us What You Need Help With",
-            "card_text": "You may already know exactly what needs to change. Or you may simply know that something needs to work better.\n\nA supplier issue may be slowing progress. A new requirement may be creating uncertainty. Your team may need stronger evidence, better controls, or more support.\n\nTell us what is happening and what you are trying to improve. We'll listen, help make sense of the situation, and connect you with the right people.",
+            "card_text": "You may already know exactly what needs to change. Or you may simply know that something needs to work better.\n\nTell us what's happening and what you're trying to improve. We'll listen, help make sense of the situation, and connect you with the right people.",
             "kicker": "FAQ",
             "heading": "Questions Business Leaders Ask Us",
             "lead": "Clear answers about what VECTRA does, how we work, and where to start.",
             "button_label": "Talk to a VECTRA Expert",
-            "button_link": "#VectraContactModal",
+            "button_link": "/pages/contact",
             "more_heading": "Have another question?",
             "more_text": "Find more answers about VECTRA International, how we work, our capabilities, and getting started.",
             "more_button_label": "View All FAQs"
@@ -159,7 +159,7 @@
           "settings": {
             "kicker": "LET'S TALK",
             "heading": "Start a Conversation",
-            "text": "You do not need a finished brief or the name of a VECTRA Service. Tell us what you are trying to improve, where you need support, or what you would like to understand better. We'll make sure the right person gets involved."
+            "text": "You don't need a finished brief or the name of a VECTRA service. Tell us what you're trying to improve or where you need support. We'll make sure the right person gets involved."
           }
         },
         "careers": { "type": "vectra-careers", "settings": { "hide_section": true } },
