@@ -808,11 +808,11 @@
             "badge": "",
             "bio": "<p>Craig Moss is the Executive Vice President of Measurement at Ethisphere and a leading expert on using management systems to improve compliance and risk management performance within companies and across supply chains.</p>",
             "expertise": "Management systems, Compliance, Supply chain risk",
-            "linkedin_url": "",
+            "linkedin_url": "https://www.linkedin.com/in/craig-moss-90104010",
             "linkedin_label": "",
             "additional_url": "",
             "additional_label": "Read more",
-            "custom_colors": false,
+            "custom_colors": true,
             "card_color": "#fbfcfb",
             "heading_color": "#082946",
             "body_color": "#596d80",
@@ -823,8 +823,8 @@
             "tag_color": "#285400",
             "button_background": "#082946",
             "button_color": "#ffffff",
-            "button_hover_background": "#55c900",
-            "button_hover_color": "#082946"
+            "button_hover_background": "{{ settings.color_palette.foreground }}",
+            "button_hover_color": "{{ settings.color_palette.background }}"
           }
         },
         "design_A87JVJ": {
