@@ -3,6 +3,8 @@ VECTRA SCDD pre-assessment — full Shopify section
 
 ROUTING
 Q1–Q10 retain the spreadsheet's A–E choices and 1–5 points.
+P1 records Social/Environmental product interest only; it is unscored.
+The approved question set remains unchanged and includes human-rights questions.
 T1/T2 remain unscored. S1 is a separate, unscored service-fit question:
 A = Level 1 diagnostic; B = Level 2 evidence review;
 C = Level 3 implementation. A valid service-fit answer is required.
@@ -45,6 +47,7 @@ EXPECTED COMPLETED RECEIPT (after durable storage AND Shopify writes):
 { "ok": true, "persisted": true, "submission_id": "<same ID>",
   "event_id": "<same event ID>", "shopify_customer_verified": true,
   "shopify_tags_saved": true, "recommended_level": 1,
+  "assessment_focus": "social",
   "crm_status": "pending", "email_status": "test_only" }
 For other tiers return 2 or 3. Receipt status flags for
 CRM/email are independent; do not invent verified/delivered outcomes.
@@ -85,7 +88,25 @@ SERVER RESPONSIBILITIES
 BROWSER BEHAVIOR
 Default transport is backend; no URL means saving is disabled, with a
 clear customer message. No silent fallback to the Shopify newsletter form.
-Successful receipt is required before clearing drafts or revealing a CTA.
+Successful receipt is required before clearing drafts or opening checkout.
+PRODUCT / EMAIL / CRM HANDOFF (frontend preparation; backend changes required)
+- P1 A = social, product 9064127135968; B = environmental, product 9003575181536.
+- Carry assessment_focus, product_id, variant_id, level_1_checkout_url and
+  assessment_product_url through durable intake, Shopify metafields and CRM.
+- Backend must validate P1 against its canonical product/variant map and
+  echo assessment_focus in the completed receipt. Reject a mismatch.
+- Keep the existing Level 1 email and CRM triggers on completed submission,
+  independently of checkout clicks/purchase. Populate [LEVEL 1 CHECKOUT LINK]
+  from the SAME canonical focus-specific checkout mapping. Do not send a
+  second email from this frontend. No purchase is required to enter CRM.
+- Product IDs are NOT variant IDs. Liquid resolves a single available variant
+  only when the product ID matches; otherwise set a verified checkout URL in
+  the section settings. Never guess a variant or select among multiple prices.
+- Checkout attributes carry submission_id and focus for order reconciliation;
+  backend must reconcile orders by verified customer/order/product data too.
+- Purchase/fulfillment/completion notifications remain server-side workflows:
+  paid order -> confirmation + Ethisphere handoff -> partner completion ->
+  consultation follow-up. This section does not implement those workflows.
 Failures preserve answers and the attempt ID. All scoring/routing is a
 preview until the backend validates it. Preview mode never sends data.
 Explicit legacy Shopify modes remain available, but do not save the full
@@ -99,6 +120,16 @@ assessment/consent/answers to CRM or guarantee email delivery.
   assign submission_transport = section.settings.submission_transport | default: 'backend'
   if submission_transport == 'backend'
     assign integration_mode = 'assessment_backend'
+  endif
+  assign social_product = all_products['social-management-system-risk-assessment-1']
+  assign environmental_product = all_products['management-system-risk-assessment']
+  assign social_variant_id = ''
+  assign environmental_variant_id = ''
+  if social_product.id == 9064127135968 and social_product.variants.size == 1 and social_product.available
+    assign social_variant_id = social_product.selected_or_first_available_variant.id | append: ''
+  endif
+  if environmental_product.id == 9003575181536 and environmental_product.variants.size == 1 and environmental_product.available
+    assign environmental_variant_id = environmental_product.selected_or_first_available_variant.id | append: ''
   endif
   assign question_count = 0
   for block in section.blocks
@@ -392,11 +423,14 @@ assessment/consent/answers to CRM or guarantee email delivery.
     </div>
   </div>
 <script type="application/json" data-scdd-questionnaire>
-[{"id": "Q1", "type": "core", "category": "Supply Chain Mapping", "question": "The supply chain mapping our organization conducts for purposes of understanding the risk in the supply chain covers the following levels of suppliers:", "options": [{"id": "A", "text": "We have mapped our most critical direct contractors that are core to the products or services offered to our customers", "score": 1}, {"id": "B", "text": "We have mapped all direct contractors in addition to the most critical ones", "score": 2}, {"id": "C", "text": "We have mapped the most critical sub-contractors and suppliers to our direct contractors", "score": 3}, {"id": "D", "text": "We have mapped all sub-contractors and suppliers to our direct contractors in addition to the most critical ones", "score": 4}, {"id": "E", "text": "We have mapped the origination of our most critical raw materials", "score": 5}]}, {"id": "Q2", "type": "core", "category": "Risk Assessments", "question": "We conduct a supply chain risk assessments for due diligence purposes when the following events occur", "options": [{"id": "A", "text": "In response to a particular issue", "score": 1}, {"id": "B", "text": "When entering a new market", "score": 2}, {"id": "C", "text": "In response to new regulations or voluntary standards", "score": 3}, {"id": "D", "text": "Any changes in suppliers", "score": 4}, {"id": "E", "text": "Every new and existing transaction", "score": 5}]}, {"id": "Q3", "type": "core", "category": "Strategy and Goals", "question": "The following best describes our organization’s strategy for responsible business conduct concerning  our supply chain:", "options": [{"id": "A", "text": "We have not established a strategy", "score": 1}, {"id": "B", "text": "We have started developing a strategy", "score": 2}, {"id": "C", "text": "We have established a strategy that addresses the prioritized risks in bringing to market our core goods/services", "score": 3}, {"id": "D", "text": "We have established a strategy that addresses the prioritized risks in bringing to market our core goods/services as well as suppliers we use in running our business.", "score": 4}, {"id": "E", "text": "Our organization has established an overarching vision or purpose that enables the alignment of our strategy for responsible business conduct concerning supply chain issues into our overall business strategy", "score": 5}]}, {"id": "Q4", "type": "core", "category": "Policies Procedures and Records", "question": "Our supplier contracts specifically include provisions that are aligned with the following", "options": [{"id": "A", "text": "Relevant domestic supply chain due diligence laws", "score": 1}, {"id": "B", "text": "Applicable international supply chain  due diligence laws", "score": 2}, {"id": "C", "text": "Supplier code of conduct", "score": 3}, {"id": "D", "text": "Relevant international voluntary standards regarding supply chain  due diligence", "score": 4}, {"id": "E", "text": "Internal policies related to responsible supply chain engagement for minimizing impacts of our suppliers", "score": 5}]}, {"id": "Q5", "type": "core", "category": "Responsible Supply Chain Engagement", "question": "When looking to bring on a new supplier, our organization conducts due diligence regarding the supplier’s ability to manage risks as follows", "options": [{"id": "A", "text": "Due diligence on a new supplier is not conducted regarding risks before a new supplier is approved.", "score": 1}, {"id": "B", "text": "Due Diligence is conducted on a new supplier but not necessarily before contracting", "score": 2}, {"id": "C", "text": "Due Diligence must be completed prior to contracting.", "score": 3}, {"id": "D", "text": "Due Diligence is completed before contracting and there is an agreed upon timeline for remediating any issues found are agreed upon with the new supplier", "score": 4}, {"id": "E", "text": "Due Diligence is completed and all issues remediated before contracting.", "score": 5}]}, {"id": "Q6", "type": "core", "category": "Governance and oversight", "question": "The following describes senior management’s level of involvement in our supply chain human rights due diligence program", "options": [{"id": "A", "text": "Senior management is not involved", "score": 1}, {"id": "B", "text": "They have approved a policy requiring supply chain to adhere with relevant supply chain laws.", "score": 2}, {"id": "C", "text": "They have approved the company policies by risk area, mandated the formation of a supply chain due diligence program and team, and communicate the importance internally", "score": 3}, {"id": "D", "text": "They have approved the company policy or policies, mandated the formation of a supply chain due diligence program and team led by a senior-level employee, and have provided it adequate resources, authority and visible support. They also review implementation of the program at least annually", "score": 4}, {"id": "E", "text": "They fully support the supply chain due diligence team and have regular, ongoing input in and oversight of the program to ensure that it is effective and communicate its importance both internally and externally", "score": 5}]}, {"id": "Q7", "type": "core", "category": "Training and Communication", "question": "Our internal supply chain due diligence training curriculum is customized for audiences based on the following criteria", "options": [{"id": "A", "text": "Whether they interact with supply chain members", "score": 1}, {"id": "B", "text": "Employee function", "score": 2}, {"id": "C", "text": "Employee job level", "score": 3}, {"id": "D", "text": "Employee business unit", "score": 4}, {"id": "E", "text": "Employee location or geography", "score": 5}]}, {"id": "Q8", "type": "core", "category": "Monitoring", "question": "The following best describes how we determine which suppliers will be monitored", "options": [{"id": "A", "text": "We monitor suppliers only on an ‘as-needed’ basis where we have discovered a specific issue or problem", "score": 1}, {"id": "B", "text": "We monitor suppliers from time to time where there have been problems in the past", "score": 2}, {"id": "C", "text": "We routinely monitor  high-risk suppliers", "score": 3}, {"id": "D", "text": "We routinely monitor all suppliers", "score": 4}, {"id": "E", "text": "We routinely engage with all suppliers on their supply chain  performance including all aspect of ESG", "score": 5}]}, {"id": "Q9", "type": "core", "category": "Stakeholder Engagement", "question": "The following best describes our plan for stakeholder engagement related to  due diligence and performance in our supply chain", "options": [{"id": "A", "text": "We don’t have a plan", "score": 1}, {"id": "B", "text": "We have started to develop a plan", "score": 2}, {"id": "C", "text": "We have a plan in place that includes critical international external stakeholders", "score": 3}, {"id": "D", "text": "We have a plan in place that includes international and local/community external stakeholders", "score": 4}, {"id": "E", "text": "We have a plan in place that includes  external stakeholders and is routinely updated as part of a continual improvement process", "score": 5}]}, {"id": "Q10", "type": "core", "category": "Reporting and Disclosure", "question": "The following best describes how we report on our human rights supply chain due diligence program and its results", "options": [{"id": "A", "text": "We do not publicly report", "score": 1}, {"id": "B", "text": "We report against some elements of established due diligence reporting standards", "score": 2}, {"id": "C", "text": "We report on only material topics using one established ESG reporting standards", "score": 3}, {"id": "D", "text": "We report on only material topics using multiple established ESG reporting standards", "score": 4}, {"id": "E", "text": "We report on only material topics using multiple established ESG reporting standards with full supply chain transparence and performance", "score": 5}]}, {"id": "T1", "type": "commercial", "category": "Scope", "question": "I have completed the pre-assessment for:", "options": [{"id": "A", "text": "one location", "score": null}, {"id": "B", "text": "one country/region", "score": null}, {"id": "C", "text": "one division", "score": null}, {"id": "D", "text": "one product category", "score": null}, {"id": "E", "text": "entire company globally (only when multiple locations in multiple countries)", "score": null}]}, {"id": "T2", "type": "commercial", "category": "Supply Chain overview", "question": "The following are present in my supply chain", "options": [{"id": "A", "text": "agents/importers/exporters", "score": null}, {"id": "B", "text": "Labor agents/brokers", "score": null}, {"id": "C", "text": "Foreign migrant workers", "score": null}, {"id": "D", "text": "Conflict raw materials (Gold, Tin, Tantalum, Tungsten, Cobalt, Mica, …)", "score": null}, {"id": "E", "text": "High risk countries/  conflict regions", "score": null}]}, {"id": "S1", "type": "routing", "category": "Your next step", "question": "What support would be most useful to your organization right now?", "options": [{"id": "A", "text": "Understand our current position and priorities through a full self-assessment.", "score": null, "level": 1}, {"id": "B", "text": "Have an expert independently review our existing controls, policies and supporting evidence.", "score": null, "level": 2}, {"id": "C", "text": "Get hands-on help implementing improvements or building our due diligence program.", "score": null, "level": 3}]}]
+[{"id": "Q1", "type": "core", "category": "Supply Chain Mapping", "question": "The supply chain mapping our organization conducts for purposes of understanding the risk in the supply chain covers the following levels of suppliers:", "options": [{"id": "A", "text": "We have mapped our most critical direct contractors that are core to the products or services offered to our customers", "score": 1}, {"id": "B", "text": "We have mapped all direct contractors in addition to the most critical ones", "score": 2}, {"id": "C", "text": "We have mapped the most critical sub-contractors and suppliers to our direct contractors", "score": 3}, {"id": "D", "text": "We have mapped all sub-contractors and suppliers to our direct contractors in addition to the most critical ones", "score": 4}, {"id": "E", "text": "We have mapped the origination of our most critical raw materials", "score": 5}]}, {"id": "Q2", "type": "core", "category": "Risk Assessments", "question": "We conduct a supply chain risk assessments for due diligence purposes when the following events occur", "options": [{"id": "A", "text": "In response to a particular issue", "score": 1}, {"id": "B", "text": "When entering a new market", "score": 2}, {"id": "C", "text": "In response to new regulations or voluntary standards", "score": 3}, {"id": "D", "text": "Any changes in suppliers", "score": 4}, {"id": "E", "text": "Every new and existing transaction", "score": 5}]}, {"id": "Q3", "type": "core", "category": "Strategy and Goals", "question": "The following best describes our organization’s strategy for responsible business conduct concerning  our supply chain:", "options": [{"id": "A", "text": "We have not established a strategy", "score": 1}, {"id": "B", "text": "We have started developing a strategy", "score": 2}, {"id": "C", "text": "We have established a strategy that addresses the prioritized risks in bringing to market our core goods/services", "score": 3}, {"id": "D", "text": "We have established a strategy that addresses the prioritized risks in bringing to market our core goods/services as well as suppliers we use in running our business.", "score": 4}, {"id": "E", "text": "Our organization has established an overarching vision or purpose that enables the alignment of our strategy for responsible business conduct concerning supply chain issues into our overall business strategy", "score": 5}]}, {"id": "Q4", "type": "core", "category": "Policies Procedures and Records", "question": "Our supplier contracts specifically include provisions that are aligned with the following", "options": [{"id": "A", "text": "Relevant domestic supply chain due diligence laws", "score": 1}, {"id": "B", "text": "Applicable international supply chain  due diligence laws", "score": 2}, {"id": "C", "text": "Supplier code of conduct", "score": 3}, {"id": "D", "text": "Relevant international voluntary standards regarding supply chain  due diligence", "score": 4}, {"id": "E", "text": "Internal policies related to responsible supply chain engagement for minimizing impacts of our suppliers", "score": 5}]}, {"id": "Q5", "type": "core", "category": "Responsible Supply Chain Engagement", "question": "When looking to bring on a new supplier, our organization conducts due diligence regarding the supplier’s ability to manage risks as follows", "options": [{"id": "A", "text": "Due diligence on a new supplier is not conducted regarding risks before a new supplier is approved.", "score": 1}, {"id": "B", "text": "Due Diligence is conducted on a new supplier but not necessarily before contracting", "score": 2}, {"id": "C", "text": "Due Diligence must be completed prior to contracting.", "score": 3}, {"id": "D", "text": "Due Diligence is completed before contracting and there is an agreed upon timeline for remediating any issues found are agreed upon with the new supplier", "score": 4}, {"id": "E", "text": "Due Diligence is completed and all issues remediated before contracting.", "score": 5}]}, {"id": "Q6", "type": "core", "category": "Governance and oversight", "question": "The following describes senior management’s level of involvement in our supply chain human rights due diligence program", "options": [{"id": "A", "text": "Senior management is not involved", "score": 1}, {"id": "B", "text": "They have approved a policy requiring supply chain to adhere with relevant supply chain laws.", "score": 2}, {"id": "C", "text": "They have approved the company policies by risk area, mandated the formation of a supply chain due diligence program and team, and communicate the importance internally", "score": 3}, {"id": "D", "text": "They have approved the company policy or policies, mandated the formation of a supply chain due diligence program and team led by a senior-level employee, and have provided it adequate resources, authority and visible support. They also review implementation of the program at least annually", "score": 4}, {"id": "E", "text": "They fully support the supply chain due diligence team and have regular, ongoing input in and oversight of the program to ensure that it is effective and communicate its importance both internally and externally", "score": 5}]}, {"id": "Q7", "type": "core", "category": "Training and Communication", "question": "Our internal supply chain due diligence training curriculum is customized for audiences based on the following criteria", "options": [{"id": "A", "text": "Whether they interact with supply chain members", "score": 1}, {"id": "B", "text": "Employee function", "score": 2}, {"id": "C", "text": "Employee job level", "score": 3}, {"id": "D", "text": "Employee business unit", "score": 4}, {"id": "E", "text": "Employee location or geography", "score": 5}]}, {"id": "Q8", "type": "core", "category": "Monitoring", "question": "The following best describes how we determine which suppliers will be monitored", "options": [{"id": "A", "text": "We monitor suppliers only on an ‘as-needed’ basis where we have discovered a specific issue or problem", "score": 1}, {"id": "B", "text": "We monitor suppliers from time to time where there have been problems in the past", "score": 2}, {"id": "C", "text": "We routinely monitor  high-risk suppliers", "score": 3}, {"id": "D", "text": "We routinely monitor all suppliers", "score": 4}, {"id": "E", "text": "We routinely engage with all suppliers on their supply chain  performance including all aspect of ESG", "score": 5}]}, {"id": "Q9", "type": "core", "category": "Stakeholder Engagement", "question": "The following best describes our plan for stakeholder engagement related to  due diligence and performance in our supply chain", "options": [{"id": "A", "text": "We don’t have a plan", "score": 1}, {"id": "B", "text": "We have started to develop a plan", "score": 2}, {"id": "C", "text": "We have a plan in place that includes critical international external stakeholders", "score": 3}, {"id": "D", "text": "We have a plan in place that includes international and local/community external stakeholders", "score": 4}, {"id": "E", "text": "We have a plan in place that includes  external stakeholders and is routinely updated as part of a continual improvement process", "score": 5}]}, {"id": "Q10", "type": "core", "category": "Reporting and Disclosure", "question": "The following best describes how we report on our human rights supply chain due diligence program and its results", "options": [{"id": "A", "text": "We do not publicly report", "score": 1}, {"id": "B", "text": "We report against some elements of established due diligence reporting standards", "score": 2}, {"id": "C", "text": "We report on only material topics using one established ESG reporting standards", "score": 3}, {"id": "D", "text": "We report on only material topics using multiple established ESG reporting standards", "score": 4}, {"id": "E", "text": "We report on only material topics using multiple established ESG reporting standards with full supply chain transparence and performance", "score": 5}]}, {"id": "T1", "type": "commercial", "category": "Scope", "question": "I have completed the pre-assessment for:", "options": [{"id": "A", "text": "one location", "score": null}, {"id": "B", "text": "one country/region", "score": null}, {"id": "C", "text": "one division", "score": null}, {"id": "D", "text": "one product category", "score": null}, {"id": "E", "text": "entire company globally (only when multiple locations in multiple countries)", "score": null}]}, {"id": "T2", "type": "commercial", "category": "Supply Chain overview", "question": "The following are present in my supply chain", "options": [{"id": "A", "text": "agents/importers/exporters", "score": null}, {"id": "B", "text": "Labor agents/brokers", "score": null}, {"id": "C", "text": "Foreign migrant workers", "score": null}, {"id": "D", "text": "Conflict raw materials (Gold, Tin, Tantalum, Tungsten, Cobalt, Mica, …)", "score": null}, {"id": "E", "text": "High risk countries/  conflict regions", "score": null}]}, {"id": "S1", "type": "routing", "category": "Your next step", "question": "What support would be most useful to your organization right now?", "options": [{"id": "A", "text": "Understand our current position and priorities through a full self-assessment.", "score": null, "level": 1}, {"id": "B", "text": "Have an expert independently review our existing controls, policies and supporting evidence.", "score": null, "level": 2}, {"id": "C", "text": "Get hands-on help implementing improvements or building our due diligence program.", "score": null, "level": 3}]}, {"id": "P1", "type": "product", "category": "Assessment focus", "question": "Which assessment would you like to explore?", "options": [{"id": "A", "text": "Social — working conditions, human rights and social management systems.", "score": null, "focus": "social"}, {"id": "B", "text": "Environmental — environmental impacts and environmental management systems.", "score": null, "focus": "environmental"}]}]
 </script>
 <script type="application/json" data-routing-config>
 {
-  "checkoutUrl": {{ section.settings.level_1_checkout_url | json }},
+  "products": {
+    "social": { "label": "Social", "productId": "9064127135968", "productUrl": "https://marketplace.vectra-intl.com/products/social-management-system-risk-assessment-1", "variantId": {{ social_variant_id | json }}, "checkoutUrl": {{ section.settings.social_checkout_url | json }} },
+    "environmental": { "label": "Environmental", "productId": "9003575181536", "productUrl": "https://marketplace.vectra-intl.com/products/management-system-risk-assessment", "variantId": {{ environmental_variant_id | json }}, "checkoutUrl": {{ section.settings.environmental_checkout_url | json }} }
+  },
   "bookingUrl": {{ section.settings.consultation_url | json }},
   "levelTags": [{{ section.settings.level_1_tag | json }}, {{ section.settings.level_2_tag | json }}, {{ section.settings.level_3_tag | json }}],
   "completedTag": {{ section.settings.completed_tag | json }},
@@ -797,7 +831,7 @@ assessment/consent/answers to CRM or guarantee email delivery.
       {
         const allSource = JSON.parse(root.querySelector('[data-scdd-questionnaire]').textContent);
         const custom = root.dataset.questionSource === 'custom';
-        const source = custom ? allSource.filter(q => q.type === 'routing') : allSource;
+        const source = custom ? allSource.filter(q => ['routing', 'product'].includes(q.type)) : allSource;
         if (!custom) root.querySelectorAll('[data-panel="question"]').forEach(q => q.remove());
         const existingCount = root.querySelectorAll('[data-panel="question"]').length;
         const totalCount = existingCount + source.length;
@@ -834,6 +868,7 @@ assessment/consent/answers to CRM or guarantee email delivery.
             input.dataset.score = option.score === null ? '' : String(option.score);
             input.dataset.optionIndex = optionIndex; input.dataset.optionId = option.id;
             input.dataset.routeLevel = option.level == null ? '' : String(option.level);
+            input.dataset.assessmentFocus = option.focus || '';
             const marker = document.createElement('span'); marker.className = 'vectra-quiz__option-marker'; marker.setAttribute('aria-hidden', 'true');
             const copy = document.createElement('span'); copy.className = 'vectra-quiz__option-copy'; copy.textContent = option.text;
             label.append(input, marker, copy); options.append(label);
@@ -902,12 +937,25 @@ assessment/consent/answers to CRM or guarantee email delivery.
         } catch (error) { return null; }
       })();
       let draftEnabled = !window.Shopify?.designMode;
-      const selected = q => q.querySelector('input[type="radio"]:checked');
+      const selected = q => q?.querySelector('input[type="radio"]:checked');
       const invalidFields = () => fields.filter(field => {
         const blankText = field.required && field.type !== 'checkbox' && !field.value.trim();
         return blankText || !field.validity.valid;
       });
-      const complete = () => questions.length > 0 && questions.every(q => selected(q)) && questions.some(q => q.dataset.questionType === 'routing' && [1, 2, 3].includes(Number(selected(q)?.dataset.routeLevel)));
+      const assessmentProduct = () => {
+        const focus = selected(questions.find(q => q.dataset.questionType === 'product'))?.dataset.assessmentFocus;
+        return routingConfig.products[focus] ? { focus, ...routingConfig.products[focus] } : null;
+      };
+      const productCheckoutUrl = product => {
+        if (!product) return '';
+        const raw = product.checkoutUrl || (/^\d+$/.test(product.variantId) ? `https://marketplace.vectra-intl.com/cart/${product.variantId}:1` : '');
+        try {
+          const url = new URL(raw);
+          // Checkout URLs are merchant-configured, never supplied by an answer or a draft.
+          return url.protocol === 'https:' && url.origin === 'https://marketplace.vectra-intl.com' && /^\/cart\/\d+:1\/?$/.test(url.pathname) && !url.username && !url.password ? url.href : '';
+        } catch (error) { return ''; }
+      };
+      const complete = () => questions.length > 0 && questions.every(q => selected(q)) && questions.some(q => q.dataset.questionType === 'routing' && [1, 2, 3].includes(Number(selected(q)?.dataset.routeLevel))) && Boolean(assessmentProduct());
       const leadData = () => Object.fromEntries(fields.map(f => [f.name, f.type === 'checkbox' ? f.checked : f.value]));
       const removeDraft = () => {
         clearTimeout(saveTimer);
@@ -954,7 +1002,15 @@ assessment/consent/answers to CRM or guarantee email delivery.
           ? 'Everything is complete. Continue to preview your summary before final submission.'
           : 'Complete your required details and all questions before continuing.';
         const submit = root.querySelector('[data-native-submit]');
-        if (submit) submit.disabled = !ready || submitted || submitting || (backendMode && !endpoint);
+        if (submit) {
+          submit.disabled = !ready || submitted || submitting || (backendMode && !endpoint);
+          if (!submitting) {
+            const product = assessmentProduct();
+            submit.textContent = backendMode && resultLevel === 1 && productCheckoutUrl(product)
+              ? `Save result & continue to ${product.label} checkout`
+              : {{ section.settings.native_cta_label | json }};
+          }
+        }
         root.querySelectorAll('[data-result-back], [data-restart]').forEach(b => { b.disabled = submitting; });
         if (backendMode && !endpoint && !submitted) submitStatus.textContent = 'Saving your result is temporarily unavailable. Your answers remain saved in this browser.';
         const handoff = root.querySelector('[data-forms-handoff]');
@@ -1022,7 +1078,7 @@ assessment/consent/answers to CRM or guarantee email delivery.
         root.querySelector('[data-result-kicker]').textContent = route.kicker;
         root.querySelector('[data-result-level]').textContent = route.title;
         root.querySelector('[data-route-heading]').textContent = route.heading;
-        root.querySelector('[data-route-description]').textContent = route.body;
+        root.querySelector('[data-route-description]').textContent = route.body + (assessmentProduct() ? ` Your selected focus: ${assessmentProduct().label}.` : '');
         const configuredLevelTags = routingConfig.levelTags.map(t => (t || '').trim());
         const baseTags = originalTags.split(',').map(t => t.trim()).filter(t => t && !/^SCDD Level\s*[123]$/.test(t) && !configuredLevelTags.includes(t) && t !== routingConfig.completedTag);
         const tags = [...new Set([...baseTags, routingConfig.completedTag, resultLevel ? configuredLevelTags[resultLevel - 1] : null].filter(Boolean))];
@@ -1032,17 +1088,18 @@ assessment/consent/answers to CRM or guarantee email delivery.
           questionType: questions[index].dataset.questionType || 'core',
           questionText: questions[index].querySelector('h3').textContent.replace(/\s*\*\s*$/, '').trim(),
           answer: answer?.value || '', optionId: answer?.dataset.optionId || String.fromCharCode(65 + Number(answer?.dataset.optionIndex || 0)),
-          score: questions[index].dataset.questionType === 'commercial' || questions[index].dataset.questionType === 'routing' ? null : Number(answer?.dataset.score || 0)
+          score: ['commercial', 'routing', 'product'].includes(questions[index].dataset.questionType) ? null : Number(answer?.dataset.score || 0)
         }));
         return {
           level: resultLevel, recommendedLevel: resultLevel, recommended_level: resultLevel,
           assessmentType: 'pre-assessment', assessment_stage: 'simplified_level_1',
           routing_status: resultLevel ? 'provisional' : 'not_assessed',
           routing_reason: routeAnswer?.value || '', routing_version: 'service-fit-v1',
+          assessment_focus: assessmentProduct()?.focus || null,
           workflow: route.workflow, priority: route.priority,
           risk_category: null, risk_rating_status: 'not_verified',
           score, scoreMaximum, averageScore,
-          scoringVersion: 'SCDD Pre-Assessment (4): Q1-Q10 scored; T1-T2 and S1 unscored',
+          scoringVersion: 'SCDD Pre-Assessment (4): Q1-Q10 scored; T1-T2, S1 and P1 unscored',
           lead: leadData(), shopify_tags: tags,
           commercial: Object.fromEntries(questions.filter(q => q.dataset.questionType === 'commercial').map(q => [q.dataset.questionId, selected(q)?.value || ''])),
           answers: response
@@ -1134,6 +1191,11 @@ assessment/consent/answers to CRM or guarantee email delivery.
             question_type: a.questionType, question: a.questionText,
             option_id: a.optionId, answer: a.answer, score: a.score
           })) : [],
+          assessment_focus: full ? assessmentProduct()?.focus || null : null,
+          product_id: full ? assessmentProduct()?.productId || null : null,
+          variant_id: full ? (productCheckoutUrl(assessmentProduct()).match(/\/cart\/(\d+):1/)?.[1] || null) : null,
+          assessment_product_url: full ? assessmentProduct()?.productUrl || null : null,
+          level_1_checkout_url: full && outcome.recommended_level === 1 ? productCheckoutUrl(assessmentProduct()) || null : null,
           commercial: outcome?.commercial || {},
           shopify_tags: outcome?.shopify_tags || [...new Set([originalTags, routingConfig.startedTag].filter(Boolean).join(',').split(',').map(t => t.trim()).filter(t => t && !/^SCDD Level\s*[123]$/.test(t) && t !== routingConfig.completedTag))],
           shopify_customer_id_hint: root.dataset.customerId || null,
@@ -1157,7 +1219,7 @@ assessment/consent/answers to CRM or guarantee email delivery.
             throw new Error('We could not confirm that your result was saved. Your answers are preserved; please try again.');
           }
           if (packet.event === 'assessment.completed' && (
-            receipt.shopify_customer_verified !== true || receipt.shopify_tags_saved !== true || receipt.recommended_level !== packet.recommended_level
+            receipt.shopify_customer_verified !== true || receipt.shopify_tags_saved !== true || receipt.recommended_level !== packet.recommended_level || receipt.assessment_focus !== packet.assessment_focus
           )) throw new Error('Your assessment needs a further save check. Your answers are preserved; please try again.');
           return receipt;
         } finally { clearTimeout(timer); }
@@ -1189,16 +1251,22 @@ assessment/consent/answers to CRM or guarantee email delivery.
         root.querySelector('.vectra-quiz__actions--result:not([data-saved-actions])').hidden = true;
         root.querySelector('[data-saved-actions]').hidden = false;
         const action = root.querySelector('[data-route-action]');
-        const raw = packet.level === 1 ? routingConfig.checkoutUrl : routingConfig.bookingUrl;
+        const checkoutUrl = packet.level === 1 ? packet.level_1_checkout_url : null;
+        const raw = packet.level === 1 ? checkoutUrl || packet.assessment_product_url : routingConfig.bookingUrl;
         action.hidden = true;
         if (raw) {
           try {
             const target = new URL(raw, location.origin);
             if (target.protocol === 'https:' && !target.username && !target.password) {
               target.searchParams.set('assessment_id', packet.submission_id);
+              if (checkoutUrl) {
+                target.searchParams.set('attributes[scdd_submission_id]', packet.submission_id);
+                target.searchParams.set('attributes[scdd_assessment_focus]', packet.assessment_focus);
+                target.searchParams.set('attributes[scdd_recommended_level]', String(packet.level));
+              }
               if (packet.level) target.searchParams.set('recommended_level', packet.level);
               action.href = target.href;
-              action.textContent = packet.level === 1 ? 'Continue to the full assessment' : packet.level === 3 ? 'Discuss implementation support' : 'Book an expert consultation';
+              action.textContent = packet.level === 1 ? (checkoutUrl ? `Buy the ${routingConfig.products[packet.assessment_focus].label} assessment` : `View the ${routingConfig.products[packet.assessment_focus].label} assessment`) : packet.level === 3 ? 'Discuss implementation support' : 'Book an expert consultation';
               action.hidden = false;
             }
           } catch (error) {}
@@ -1286,6 +1354,7 @@ assessment/consent/answers to CRM or guarantee email delivery.
           if (startPromise) await startPromise;
           const receipt = await postPacket(packet);
           revealSaved(packet, receipt);
+          if (packet.level === 1 && packet.level_1_checkout_url) root.querySelector('[data-route-action]').click();
         } catch (error) {
           submitStatus.textContent = error.name === 'AbortError'
             ? 'The save could not be confirmed in time. Your answers are preserved. Please try again; your submission ID stays the same.'
@@ -1326,10 +1395,9 @@ assessment/consent/answers to CRM or guarantee email delivery.
             try {
               const oldQuestions = JSON.parse(draft.signature);
               const currentQuestions = JSON.parse(signature);
-              // Retain the unchanged spreadsheet answers when the final service choices change.
-              sourceMatches = sourceMatches || ([questions.length - 1, questions.length].includes(draft.answers?.length) && oldQuestions.length === draft.answers.length && (oldQuestions.length === questions.length - 1 || oldQuestions[oldQuestions.length - 1][0] === currentQuestions[currentQuestions.length - 1][0]) && JSON.stringify(oldQuestions.slice(0, questions.length - 1)) === JSON.stringify(currentQuestions.slice(0, -1)));
+              sourceMatches = sourceMatches || ([12, 13].includes(oldQuestions.length) && oldQuestions.length === draft.answers?.length && currentQuestions.length === 14 && JSON.stringify(oldQuestions.slice(0, 12)) === JSON.stringify(currentQuestions.slice(0, 12)));
             } catch (error) {}
-            if (draft.version !== 1 || !sourceMatches || !(draft.expiresAt > Date.now()) || !Array.isArray(draft.answers) || ![questions.length, questions.length - 1].includes(draft.answers.length)) {
+            if (draft.version !== 1 || !sourceMatches || !(draft.expiresAt > Date.now()) || !Array.isArray(draft.answers) || ![questions.length, questions.length - 1, questions.length - 2].includes(draft.answers.length)) {
               removeDraft();
             } else {
               if (typeof draft.submissionId === 'string' && /^[a-zA-Z0-9.-]{8,150}$/.test(draft.submissionId)) submissionId = draft.submissionId;
@@ -1391,7 +1459,7 @@ assessment/consent/answers to CRM or guarantee email delivery.
       "options": [
         {
           "value": "sheet",
-          "label": "Spreadsheet + service fit (13 questions)"
+          "label": "Spreadsheet + service / focus (14 questions)"
         },
         {
           "value": "custom",
@@ -1401,7 +1469,7 @@ assessment/consent/answers to CRM or guarantee email delivery.
     },
     {
       "type": "paragraph",
-      "content": "Spreadsheet mode uses the 12 approved questions plus one unscored service-fit question. Core scores do not select the service tier. Service fit routes to Levels 1–3. A support selection is required. Choices remain in A–E order."
+      "content": "Spreadsheet mode uses the 12 approved questions plus an unscored service-fit question and an unscored Social/Environmental product-interest question. Core scores do not select the service tier. Service fit routes to Levels 1–3. A support selection is required. Choices remain in A–E order."
     },
     {
       "type": "text",
@@ -1730,8 +1798,17 @@ assessment/consent/answers to CRM or guarantee email delivery.
     },
     {
       "type": "url",
-      "id": "level_1_checkout_url",
-      "label": "Level 1 checkout / product URL"
+      "id": "social_checkout_url",
+      "label": "Social checkout permalink"
+    },
+    {
+      "type": "url",
+      "id": "environmental_checkout_url",
+      "label": "Environmental checkout permalink"
+    },
+    {
+      "type": "paragraph",
+      "content": "Optional overrides: use https://marketplace.vectra-intl.com/cart/VARIANT_ID:1 for each product. Product IDs are not variant IDs. Blank uses automatic lookup for a matching product with one available variant. If checkout cannot be resolved, the result still saves and offers the correct product page. Configure the backend and Level 1 email with the same mapping and echo assessment_focus in completion receipts."
     },
     {
       "type": "url",
