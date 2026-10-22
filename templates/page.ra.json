@@ -1071,23 +1071,23 @@
     "ra_testimonials_HcEbtm": {
       "type": "ra-testimonials",
       "blocks": {
-        "testimonial_rRVVYx": {
+        "testimonial_Ce6XPL": {
           "type": "testimonial",
           "settings": {
-            "company": "TechVenture Startups",
-            "logo_initials": "",
-            "logo": "shopify://shop_images/techventure-v-logo.png",
-            "company_url": "https://www.techventurevc.com/",
+            "company": "Heritage Insurance Group",
+            "logo_initials": "HI",
+            "logo": "shopify://shop_images/heritage-h-logo-inverted.png",
+            "company_url": "https://www.heritageinsgroup.com/",
             "website_label": "",
             "category": "",
-            "title": "Building investor confidence",
-            "result": "Secured $15M in funding",
+            "title": "Strengthening cyber resilience",
+            "result": "Zero data breaches, protected 500K customer records",
             "result_detail": "",
-            "timeline": "3 months",
-            "summary": "<p>A security review and stronger safeguards helped address investor concerns before a funding round.</p>",
-            "quote": "When we were preparing for Series B funding, investors had concerns about our data security practices. Dr. Mitchell and her team conducted a comprehensive risk audit and helped us implement enterprise-grade security protocols. Not only did we close the funding round successfully, but we also discovered and fixed vulnerabilities that could have cost us millions down the line.",
-            "person": "Sarah Johnson",
-            "role": "CEO",
+            "timeline": "Partnership ongoing since 2024",
+            "summary": "<p>A review of backups, training, and incident response helped strengthen defenses against an attempted breach.</p>",
+            "quote": "After a ransomware attack hit our competitor, we realized we were vulnerable. Vectra International performed a full security assessment and found gaps in our backup systems, employee training, and incident response plans. They helped us build a robust defense strategy. When we faced an attempted breach last year, our systems held strong—we stopped it before any data was compromised.",
+            "person": "Linda Park",
+            "role": "CFO",
             "story_url": "",
             "story_label": "",
             "custom_colors": false,
@@ -1139,23 +1139,23 @@
             "badge_color": "#345267"
           }
         },
-        "testimonial_Ce6XPL": {
+        "testimonial_rRVVYx": {
           "type": "testimonial",
           "settings": {
-            "company": "Heritage Insurance Group",
-            "logo_initials": "HI",
-            "logo": "shopify://shop_images/heritage-h-logo-inverted.png",
-            "company_url": "https://www.heritageinsgroup.com/",
+            "company": "TechVenture Startups",
+            "logo_initials": "",
+            "logo": "shopify://shop_images/techventure-v-logo.png",
+            "company_url": "https://www.techventurevc.com/",
             "website_label": "",
             "category": "",
-            "title": "Strengthening cyber resilience",
-            "result": "Zero data breaches, protected 500K customer records",
+            "title": "Building investor confidence",
+            "result": "Secured $15M in funding",
             "result_detail": "",
-            "timeline": "Partnership ongoing since 2024",
-            "summary": "<p>A review of backups, training, and incident response helped strengthen defenses against an attempted breach.</p>",
-            "quote": "After a ransomware attack hit our competitor, we realized we were vulnerable. Vectra International performed a full security assessment and found gaps in our backup systems, employee training, and incident response plans. They helped us build a robust defense strategy. When we faced an attempted breach last year, our systems held strong—we stopped it before any data was compromised.",
-            "person": "Linda Park",
-            "role": "CFO",
+            "timeline": "3 months",
+            "summary": "<p>A security review and stronger safeguards helped address investor concerns before a funding round.</p>",
+            "quote": "When we were preparing for Series B funding, investors had concerns about our data security practices. Dr. Mitchell and her team conducted a comprehensive risk audit and helped us implement enterprise-grade security protocols. Not only did we close the funding round successfully, but we also discovered and fixed vulnerabilities that could have cost us millions down the line.",
+            "person": "Sarah Johnson",
+            "role": "CEO",
             "story_url": "",
             "story_label": "",
             "custom_colors": false,
@@ -1226,9 +1226,9 @@
         }
       },
       "block_order": [
-        "testimonial_rRVVYx",
-        "testimonial_HV8wfn",
         "testimonial_Ce6XPL",
+        "testimonial_HV8wfn",
+        "testimonial_rRVVYx",
         "design_aVDRdM",
         "appearance_BDFkQJ"
       ],
@@ -1268,11 +1268,11 @@
         "accent_color": "{{ settings.color_palette.foreground }}",
         "border_color": "#dce4dd",
         "eyebrow_color": "{{ settings.color_palette.foreground }}",
-        "result_background": "#eaf5e2",
+        "result_background": "#EFF6EA",
         "result_color": "#214600",
         "show_titles": false,
         "show_summaries": false,
-        "outcome_panel": true
+        "outcome_panel": false
       }
     },
     "ra_faqs_fxTqAc": {
