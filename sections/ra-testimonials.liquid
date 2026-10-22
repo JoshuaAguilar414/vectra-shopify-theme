@@ -1,6 +1,6 @@
 {% comment %}
 VECTRA testimonials. Install as sections/vectra-testimonials.liquid.
-Self-contained Online Store 2.0 section; no JavaScript or snippets required.
+Self-contained Online Store 2.0 section with optional motion and sliding cards.
 Source: VECTRA legacy risk assessment page; concise quote excerpts and case summaries.
 Company URLs/logos intentionally blank pending exact company identification.
 Add verified company websites and upload logos within each Testimonial block.
@@ -13,6 +13,9 @@ Advanced design block is optional: all its settings have layout defaults.
   assign d = design_block.settings
   assign appearance_block = section.blocks | where: 'type', 'appearance' | first
   assign a = appearance_block.settings
+  assign studio_block = section.blocks | where: 'type', 'studio' | first
+  assign c = studio_block.settings
+  assign motion_style = c.motion_style | default: 'drift'
   assign columns = s.columns | plus: 0 | at_most: stories.size | at_least: 1
   case s.font_family
     when 'body'
@@ -23,17 +26,19 @@ Advanced design block is optional: all its settings have layout defaults.
       assign story_font = "'Poppins', var(--font-body-family, Arial, sans-serif)"
   endcase
 %}
-<section id="VStories-{{ section.id }}" class="vts vts--{{ s.layout }} vts--{{ s.card_design }} vts--align-{{ s.alignment }} vts--bg-{{ s.background_design }}{% if s.hover_effect %} vts--hover{% endif %}{% if s.shadow %} vts--shadow{% endif %}{% if s.outcome_panel %} vts--outcome-panel{% endif %}"
+<vectra-testimonials>
+<section id="VStories-{{ section.id }}" data-logo-surface="{{ c.logo_surface_mode | default: 'clear' }}" data-hover="{{ c.hover_style | default: 'lift' }}" data-motion="{{ motion_style }}" data-autoplay="{{ c.autoplay | default: false }}" data-interval="{{ c.slide_interval | default: 7 }}" class="vts vts--header-{{ c.header_style | default: 'classic' }} vts--{{ s.layout }} vts--{{ s.card_design }} vts--align-{{ s.alignment }} vts--bg-{{ s.background_design }}{% if s.hover_effect %} vts--hover{% endif %}{% if s.shadow %} vts--shadow{% endif %}{% if s.outcome_panel %} vts--outcome-panel{% endif %}"
   {% if s.heading != blank %}aria-labelledby="VStoriesHeading-{{ section.id }}"{% endif %}>
   <div class="vts__backdrop" aria-hidden="true" {{ appearance_block.shopify_attributes }}></div>
   <div class="vts__shell" {{ design_block.shopify_attributes }}>
+    {% if request.design_mode and studio_block != blank %}<div class="vts__studio-target" {{ studio_block.shopify_attributes }}></div>{% endif %}
     <header class="vts__header">
       {% if s.eyebrow != blank %}<p class="vts__eyebrow">{{ s.eyebrow | escape }}</p>{% endif %}
       {% if s.heading != blank %}<h2 id="VStoriesHeading-{{ section.id }}">{{ s.heading | escape }}</h2>{% endif %}
       {% if s.subheading != blank %}<div class="vts__intro">{{ s.subheading }}</div>{% endif %}
     </header>
     {% if stories.size > 0 %}
-      <div class="vts__grid">
+      <div class="vts__grid" data-vts-track tabindex="{% if s.layout == 'carousel' %}0{% else %}-1{% endif %}" {% if s.layout == 'carousel' %}role="region" aria-label="Client testimonials"{% endif %}>
         {% for block in stories %}
           {% liquid
             assign b = block.settings
@@ -50,12 +55,17 @@ Advanced design block is optional: all its settings have layout defaults.
             {% if s.show_logos and b.company != blank or s.show_logos and b.logo != blank %}
               <div class="vts__brand">
                 {% if b.company_url != blank %}<a class="vts__brand-link" href="{{ b.company_url | escape }}" {% if s.new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>{% endif %}
-                  {% if b.logo != blank %}
-                    {{ b.logo | image_url: width: 600 | image_tag: widths: '120, 240, 360, 600', sizes: '240px', alt: logo_alt, loading: 'lazy', class: 'vts__logo' }}
-                  {% else %}
-                    <span class="vts__logo-fallback" aria-hidden="true">{{ initials | escape }}</span><span class="vts__brand-name">{{ b.company | escape }}</span>
-                  {% endif %}
-                  {% if b.company_url != blank %}<span class="vts__sr">{{ b.company | escape }} website{% if s.new_tab %} (opens in a new tab){% endif %}</span>{% endif %}
+                  <span class="vts__brand-lockup">
+                    <span class="vts__brand-logo">
+                      {% if b.logo != blank %}
+                        {{ b.logo | image_url: width: 600 | image_tag: widths: '120, 240, 360, 600', sizes: '120px', alt: logo_alt, loading: 'lazy', class: 'vts__logo' }}
+                      {% else %}
+                        <span class="vts__logo-fallback" aria-hidden="true">{{ initials | escape }}</span>
+                      {% endif %}
+                    </span>
+                    {% if b.company != blank %}<span class="vts__brand-name">{{ b.company | escape }}</span>{% endif %}
+                  </span>
+                  {% if b.company_url != blank and s.new_tab %}<span class="vts__sr"> (opens in a new tab)</span>{% endif %}
                 {% if b.company_url != blank %}</a>{% endif %}
               </div>
             {% endif %}
@@ -97,6 +107,14 @@ Advanced design block is optional: all its settings have layout defaults.
           </article>
         {% endfor %}
       </div>
+      <div class="vts__controls" data-vts-controls>
+        {% if s.layout == 'carousel' %}
+          <button class="vts__control" type="button" data-vts-prev aria-label="Previous testimonials">←</button>
+          <span class="vts__counter" data-vts-counter aria-live="off">1 / {{ stories.size }}</span>
+          <button class="vts__control" type="button" data-vts-next aria-label="Next testimonials">→</button>
+        {% endif %}
+        {% if motion_style != 'none' or s.layout == 'carousel' %}<button class="vts__control vts__pause" type="button" data-vts-pause aria-pressed="false">Pause motion</button>{% endif %}
+      </div>
     {% endif %}
     {% if s.footer_text != blank or s.cta_url != blank %}
       <div class="vts__footer">
@@ -106,7 +124,9 @@ Advanced design block is optional: all its settings have layout defaults.
     {% endif %}
   </div>
 </section>
+</vectra-testimonials>
 {% style %}
+  vectra-testimonials { display: block; min-width: 0; }
   #VStories-{{ section.id }} {
     --bg: {{ s.background_color }}; --card: {{ s.card_color }}; --ink: {{ s.heading_color }}; --body: {{ s.body_color }};
     --accent: {{ s.accent_color }}; --line: {{ s.border_color }}; --eyebrow: {{ s.eyebrow_color }};
@@ -229,14 +249,196 @@ Advanced design block is optional: all its settings have layout defaults.
 
   #VStories-{{ section.id }}.vts--outline .vts__card { background: transparent; }
   #VStories-{{ section.id }}.vts--outcome-panel .vts__result { background: var(--result-bg); padding: 14px; border: 0; border-radius: {{ d.result_radius | default: 14 }}px; }
+
+  /* Creative Studio: existing colors/content remain the base of every design. */
+  #VStories-{{ section.id }} {
+    --studio-one: {{ c.primary_color | default: '#55c900' }};
+    --studio-two: {{ c.secondary_color | default: '#082946' }};
+    --studio-line: {{ c.grid_color | default: '#55c900' | color_modify: 'alpha', 0.23 }};
+    --studio-cell: {{ c.grid_size | default: 56 }}px;
+    --studio-duration: {{ c.motion_duration | default: 60 }}s;
+    --studio-veil: {{ c.glass_opacity | default: 70 }}%;
+    --studio-logo-width: {{ c.logo_tile_width | default: 64 }}px;
+    --studio-logo-height: {{ d.logo_height | default: 48 }}px;
+  }
+  #VStories-{{ section.id }} .vts__studio-target { display: contents; }
+  #VStories-{{ section.id }} .vts__brand, #VStories-{{ section.id }} .vts__brand-link { min-width: 0; width: 100%; }
+  #VStories-{{ section.id }} .vts__brand-lockup { display: flex; align-items: center; gap: {{ c.brand_gap | default: 14 }}px; min-width: 0; width: 100%; }
+  #VStories-{{ section.id }} .vts__brand-logo { display: grid; place-items: center; width: var(--studio-logo-width); height: var(--studio-logo-height); flex: 0 0 var(--studio-logo-width); padding: {{ c.logo_padding | default: 0 }}px; border-radius: {{ c.logo_radius | default: 10 }}px; background: {{ c.logo_surface | default: '#ffffff' | color_modify: 'alpha', 0.0 }}; }
+  #VStories-{{ section.id }} .vts__brand-logo .vts__logo { width: 100%; height: 100%; max-width: 100%; max-height: var(--studio-logo-height); object-fit: contain; object-position: center; }
+  #VStories-{{ section.id }} .vts__brand-logo .vts__logo-fallback { width: 100%; height: 100%; margin: 0; }
+  #VStories-{{ section.id }} .vts__brand-name { flex: 1; min-width: 0; font-size: {{ c.company_size | default: 15 }}px; line-height: 1.4; letter-spacing: -.02em; overflow-wrap: anywhere; }
+  #VStories-{{ section.id }}[data-logo-surface="solid"] .vts__brand-logo { background: {{ c.logo_surface | default: '#ffffff' }}; }
+  #VStories-{{ section.id }} .vts__backdrop { inset: -100px; }
+  #VStories-{{ section.id }}.vts--bg-blueprint .vts__backdrop {
+    background-image: linear-gradient(var(--studio-line) 1px,transparent 1px),linear-gradient(90deg,var(--studio-line) 1px,transparent 1px),radial-gradient(ellipse at 30% 50%,{{ c.primary_color | default: '#55c900' | color_modify: 'alpha', 0.10 }},transparent 65%);
+    background-size: var(--studio-cell) var(--studio-cell),var(--studio-cell) var(--studio-cell),100% 100%;
+  }
+  #VStories-{{ section.id }}.vts--bg-mesh .vts__backdrop { background: radial-gradient(ellipse at 20% 35%,{{ c.primary_color | default: '#55c900' | color_modify: 'alpha', 0.25 }},transparent 48%),radial-gradient(ellipse at 80% 65%,{{ c.secondary_color | default: '#082946' | color_modify: 'alpha', 0.22 }},transparent 52%),radial-gradient(ellipse at 60% 10%,{{ c.primary_color | default: '#55c900' | color_modify: 'alpha', 0.12 }},transparent 50%); }
+  #VStories-{{ section.id }}.vts--bg-orbits .vts__backdrop { background: repeating-radial-gradient(ellipse at 50% 55%,transparent 0,transparent 76px,var(--studio-line) 77px,transparent 78px,transparent 116px); }
+  #VStories-{{ section.id }}.vts--bg-spotlight .vts__backdrop { background: radial-gradient(ellipse at 50% 15%,{{ c.primary_color | default: '#55c900' | color_modify: 'alpha', 0.32 }},transparent 65%),linear-gradient(120deg,transparent 40%,{{ c.secondary_color | default: '#082946' | color_modify: 'alpha', 0.08 }} 50%,transparent 60%); }
+  #VStories-{{ section.id }}[data-motion="drift"] .vts__backdrop { animation: vts-drift-{{ section.id }} var(--studio-duration) linear infinite alternate; }
+  #VStories-{{ section.id }}[data-motion="breathe"] .vts__backdrop { animation: vts-breathe-{{ section.id }} var(--studio-duration) ease-in-out infinite alternate; }
+  #VStories-{{ section.id }}.vts--bg-plain .vts__backdrop { animation: none; }
+  @keyframes vts-drift-{{ section.id }} { from { transform: translate(-30px,-20px) scale(1.03); } to { transform: translate(30px,20px) scale(1.03); } }
+  @keyframes vts-breathe-{{ section.id }} { from { transform: scale(1); filter: saturate(.8); } to { transform: scale(1.10); filter: saturate(1.3); } }
+  #VStories-{{ section.id }}.vts--paused .vts__backdrop { animation-play-state: paused; }
+  #VStories-{{ section.id }}.vts--glass .vts__card { background: color-mix(in srgb,var(--card) var(--studio-veil),transparent); backdrop-filter: blur({{ c.glass_blur | default: 14 }}px); -webkit-backdrop-filter: blur({{ c.glass_blur | default: 14 }}px); border-color: color-mix(in srgb,var(--line) 65%,transparent); }
+  #VStories-{{ section.id }}.vts--gradient .vts__card { background: linear-gradient(145deg,var(--card) 30%,color-mix(in srgb,var(--card) 88%,var(--studio-one))); }
+  #VStories-{{ section.id }}.vts--editorial .vts__card { border-radius: 0; border: 0; border-top: 2px solid var(--accent); border-bottom: 1px solid var(--line); box-shadow: none; }
+  #VStories-{{ section.id }}.vts--editorial .vts__card::before { display: none; }
+  #VStories-{{ section.id }}.vts--editorial blockquote { font-family: Georgia,serif; font-style: italic; line-height: 1.55; }
+  #VStories-{{ section.id }}.vts--offset .vts__card { box-shadow: {{ c.offset_size | default: 8 }}px {{ c.offset_size | default: 8 }}px 0 color-mix(in srgb,var(--studio-one) 18%,transparent); border-color: var(--accent); }
+  #VStories-{{ section.id }}.vts--neon .vts__card { box-shadow: inset 0 0 0 1px color-mix(in srgb,var(--accent) 35%,transparent),0 0 28px {{ c.primary_color | default: '#55c900' | color_modify: 'alpha', 0.12 }}; border-color: color-mix(in srgb,var(--accent) 60%,var(--line)); }
+  #VStories-{{ section.id }} .vts__card { transition: transform .3s ease,box-shadow .3s ease,border-color .3s ease; }
+  #VStories-{{ section.id }}[data-hover="outline"] .vts__card:hover { transform: none; border-color: var(--accent); }
+  #VStories-{{ section.id }}[data-hover="none"] .vts__card:hover { transform: none; }
+  #VStories-{{ section.id }} .vts__controls { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 28px; }
+  #VStories-{{ section.id }} .vts__controls:empty { display: none; }
+  #VStories-{{ section.id }} .vts__control { display: inline-flex; justify-content: center; align-items: center; min-width: 44px; min-height: 44px; border: 1px solid var(--line); border-radius: 999px; padding: 10px 15px; background: var(--card); color: var(--ink); font: inherit; font-size: 12px; line-height: 1.5; cursor: pointer; }
+  #VStories-{{ section.id }} .vts__control:hover { border-color: var(--accent); }
+  #VStories-{{ section.id }} .vts__control:focus-visible, #VStories-{{ section.id }} .vts__grid:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+  #VStories-{{ section.id }} .vts__counter { color: var(--body); font-size: 12px; }
+  #VStories-{{ section.id }} .vts__pause { margin-left: 8px; }
+  #VStories-{{ section.id }}.vts--carousel .vts__grid {
+    grid-template-columns: none; grid-template-rows: repeat(12,auto); grid-auto-flow: column;
+    grid-auto-columns: calc((100% - ({{ columns }} - 1) * var(--gap)) / {{ columns }});
+    column-gap: var(--gap); row-gap: 0; overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent; padding-bottom: 16px; margin-bottom: 0;
+  }
+  #VStories-{{ section.id }}.vts--carousel .vts__card { grid-row: 1 / span 12; grid-column: auto; margin-bottom: 0; scroll-snap-align: start; }
+  @media (min-width: 990px) {
+    #VStories-{{ section.id }}.vts--header-split .vts__header { display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; max-width: none; text-align: left; }
+    #VStories-{{ section.id }}.vts--header-split .vts__eyebrow { grid-column: 1 / -1; }
+    #VStories-{{ section.id }}.vts--header-split .vts__intro { margin-top: 0; align-self: end; }
+  }
+  @media (min-width: 750px) and (max-width: 989px) { #VStories-{{ section.id }}.vts--carousel .vts__grid { grid-template-columns: none; grid-auto-columns: calc((100% - ({{ columns | at_most: 2 }} - 1) * var(--gap)) / {{ columns | at_most: 2 }}); } }
+  @media (max-width: 749px) {
+    #VStories-{{ section.id }}.vts--carousel .vts__grid { display: flex; align-items: stretch; gap: var(--gap); }
+    #VStories-{{ section.id }}.vts--carousel .vts__card { flex: 0 0 {{ c.mobile_slide_width | default: 88 }}%; }
+    #VStories-{{ section.id }} .vts__controls { flex-wrap: wrap; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #VStories-{{ section.id }} .vts__backdrop { animation: none !important; }
+    #VStories-{{ section.id }} .vts__grid { scroll-behavior: auto !important; }
+    #VStories-{{ section.id }} .vts__card { transition: none; }
+  }
 {% endstyle %}
+
+
+<script>
+  if (!customElements.get('vectra-testimonials')) {
+    customElements.define('vectra-testimonials', class extends HTMLElement {
+      connectedCallback() {
+        this.frame = requestAnimationFrame(() => this.setup());
+      }
+      setup() {
+        if (!this.isConnected || this.abort) return;
+        this.root = this.querySelector('section');
+        this.track = this.querySelector('[data-vts-track]');
+        if (!this.root || !this.track) return;
+        this.abort = new AbortController();
+        const options = { signal: this.abort.signal };
+        this.carousel = this.root.classList.contains('vts--carousel');
+        this.reduced = matchMedia('(prefers-reduced-motion: reduce)');
+        this.paused = this.reduced.matches;
+        this.visible = true;
+        this.hovered = false;
+        this.focused = false;
+        this.autoplay = this.carousel && this.root.dataset.autoplay === 'true';
+        this.cards = [...this.track.querySelectorAll('.vts__card')];
+        this.querySelector('[data-vts-next]')?.addEventListener('click', () => this.move(1), options);
+        this.querySelector('[data-vts-prev]')?.addEventListener('click', () => this.move(-1), options);
+        this.querySelector('[data-vts-pause]')?.addEventListener('click', () => {
+          this.paused = !this.paused; this.applyState();
+        }, options);
+        this.addEventListener('mouseenter', () => { this.hovered = true; this.schedule(); }, options);
+        this.addEventListener('mouseleave', () => { this.hovered = false; this.schedule(); }, options);
+        this.addEventListener('focusin', () => { this.focused = true; this.schedule(); }, options);
+        this.addEventListener('focusout', event => { this.focused = this.contains(event.relatedTarget); this.schedule(); }, options);
+        this.track.addEventListener('scroll', () => this.updateCounter(), { ...options, passive: true });
+        this.track.addEventListener('keydown', event => {
+          if (event.target !== this.track || !this.carousel) return;
+          if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+            event.preventDefault(); this.move(event.key === 'ArrowRight' ? 1 : -1);
+          }
+        }, options);
+        document.addEventListener('visibilitychange', () => this.schedule(), options);
+        this.reduced.addEventListener('change', () => {
+          this.paused = this.reduced.matches; this.applyState();
+        }, options);
+        this.intersection = new IntersectionObserver(entries => {
+          this.visible = entries[0].isIntersecting; this.schedule();
+        });
+        this.intersection.observe(this);
+        this.resize = new ResizeObserver(() => this.updateCounter());
+        this.resize.observe(this.track);
+        this.applyState(); this.updateCounter();
+      }
+      currentIndex() {
+        const left = this.track.getBoundingClientRect().left;
+        let index = 0, distance = Infinity;
+        this.cards.forEach((card, i) => {
+          const next = Math.abs(card.getBoundingClientRect().left - left);
+          if (next < distance) { index = i; distance = next; }
+        });
+        return index;
+      }
+      move(direction) {
+        if (!this.carousel || !this.cards.length) return;
+        const max = this.track.scrollWidth - this.track.clientWidth;
+        if (max < 2) return;
+        const index = this.currentIndex();
+        const atEnd = this.track.scrollLeft >= max - 2;
+        const atStart = this.track.scrollLeft <= 2;
+        let target;
+        if (direction > 0 && atEnd) target = 0;
+        else if (direction < 0 && atStart) target = max;
+        else {
+          const next = this.cards[Math.max(0, Math.min(this.cards.length - 1, index + direction))];
+          target = Math.max(0, Math.min(max, next.getBoundingClientRect().left - this.track.getBoundingClientRect().left + this.track.scrollLeft));
+        }
+        this.track.scrollTo({ left: target, behavior: this.reduced.matches ? 'instant' : 'smooth' });
+        this.schedule();
+      }
+      updateCounter() {
+        const counter = this.querySelector('[data-vts-counter]');
+        if (!counter || !this.cards?.length) return;
+        const box = this.track.getBoundingClientRect();
+        const visible = this.cards.map((card, i) => ({ box: card.getBoundingClientRect(), index: i + 1 }))
+          .filter(card => card.box.right > box.left + 8 && card.box.left < box.right - 8);
+        const first = visible[0]?.index || 1;
+        const last = visible.at(-1)?.index || first;
+        counter.textContent = (first === last ? first : `${first}–${last}`) + ' / ' + this.cards.length;
+      }
+      applyState() {
+        this.root.classList.toggle('vts--paused', this.paused);
+        const button = this.querySelector('[data-vts-pause]');
+        if (button) { button.textContent = this.paused ? 'Resume motion' : 'Pause motion'; button.setAttribute('aria-pressed', String(this.paused)); }
+        this.schedule();
+      }
+      schedule() {
+        clearTimeout(this.timer);
+        if (!this.autoplay || this.paused || this.reduced?.matches || !this.visible || document.hidden || this.hovered || this.focused) return;
+        const interval = Math.max(4, Number(this.root.dataset.interval) || 7) * 1000;
+        this.timer = setTimeout(() => this.move(1), interval);
+      }
+      disconnectedCallback() {
+        cancelAnimationFrame(this.frame); clearTimeout(this.timer);
+        this.abort?.abort(); this.intersection?.disconnect(); this.resize?.disconnect();
+        this.abort = null;
+      }
+    });
+  }
+</script>
 
 {% schema %}
 {
   "name": "VECTRA testimonials",
   "tag": "section",
   "class": "section-vectra-testimonials",
-  "max_blocks": 14,
+  "max_blocks": 15,
   "settings": [
     {
       "type": "paragraph",
@@ -301,6 +503,10 @@ Advanced design block is optional: all its settings have layout defaults.
         {
           "value": "stacked",
           "label": "Stacked stories"
+        },
+        {
+          "value": "carousel",
+          "label": "Sliding cards"
         }
       ],
       "default": "grid"
@@ -341,6 +547,26 @@ Advanced design block is optional: all its settings have layout defaults.
         {
           "value": "minimal",
           "label": "Minimal cards"
+        },
+        {
+          "value": "glass",
+          "label": "Frosted glass"
+        },
+        {
+          "value": "gradient",
+          "label": "Soft gradient"
+        },
+        {
+          "value": "editorial",
+          "label": "Editorial"
+        },
+        {
+          "value": "offset",
+          "label": "Offset shadow"
+        },
+        {
+          "value": "neon",
+          "label": "Luminous outline"
         }
       ],
       "default": "filled"
@@ -381,6 +607,22 @@ Advanced design block is optional: all its settings have layout defaults.
         {
           "value": "bands",
           "label": "Diagonal bands"
+        },
+        {
+          "value": "blueprint",
+          "label": "Animated technical grid"
+        },
+        {
+          "value": "mesh",
+          "label": "Ambient mesh"
+        },
+        {
+          "value": "orbits",
+          "label": "Orbital lines"
+        },
+        {
+          "value": "spotlight",
+          "label": "Soft spotlight"
         }
       ],
       "default": "glow"
@@ -1154,6 +1396,236 @@ Advanced design block is optional: all its settings have layout defaults.
           "default": "#082946"
         }
       ]
+    },
+    {
+      "type": "studio",
+      "name": "Creative studio",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "header_style",
+          "label": "Header composition",
+          "options": [
+            {
+              "value": "classic",
+              "label": "Existing alignment"
+            },
+            {
+              "value": "split",
+              "label": "Split header on desktop"
+            }
+          ],
+          "default": "classic"
+        },
+        {
+          "type": "select",
+          "id": "motion_style",
+          "label": "Background motion",
+          "options": [
+            {
+              "value": "none",
+              "label": "Still"
+            },
+            {
+              "value": "drift",
+              "label": "Slow drift"
+            },
+            {
+              "value": "breathe",
+              "label": "Breathe"
+            }
+          ],
+          "default": "drift"
+        },
+        {
+          "type": "range",
+          "id": "motion_duration",
+          "label": "Background animation duration",
+          "min": 20,
+          "max": 100,
+          "step": 5,
+          "unit": "s",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "grid_size",
+          "label": "Grid cell size",
+          "min": 24,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 56
+        },
+        {
+          "type": "color",
+          "id": "grid_color",
+          "label": "Technical grid lines",
+          "default": "#55c900"
+        },
+        {
+          "type": "color",
+          "id": "primary_color",
+          "label": "Creative accent one",
+          "default": "#55c900"
+        },
+        {
+          "type": "color",
+          "id": "secondary_color",
+          "label": "Creative accent two",
+          "default": "#082946"
+        },
+        {
+          "type": "range",
+          "id": "glass_opacity",
+          "label": "Glass card opacity",
+          "min": 20,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 70
+        },
+        {
+          "type": "range",
+          "id": "glass_blur",
+          "label": "Glass blur",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "offset_size",
+          "label": "Offset shadow size",
+          "min": 2,
+          "max": 16,
+          "step": 1,
+          "unit": "px",
+          "default": 8
+        },
+        {
+          "type": "select",
+          "id": "hover_style",
+          "label": "Hover behavior",
+          "options": [
+            {
+              "value": "lift",
+              "label": "Existing lift effect"
+            },
+            {
+              "value": "outline",
+              "label": "Accent outline"
+            },
+            {
+              "value": "none",
+              "label": "Still"
+            }
+          ],
+          "default": "lift"
+        },
+        {
+          "type": "range",
+          "id": "company_size",
+          "label": "Company name size",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "logo_tile_width",
+          "label": "Logo space width",
+          "min": 40,
+          "max": 140,
+          "step": 2,
+          "unit": "px",
+          "default": 64
+        },
+        {
+          "type": "range",
+          "id": "brand_gap",
+          "label": "Gap beside company logo",
+          "min": 8,
+          "max": 32,
+          "step": 2,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "logo_padding",
+          "label": "Logo internal padding",
+          "min": 0,
+          "max": 16,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "logo_radius",
+          "label": "Logo tile corners",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "select",
+          "id": "logo_surface_mode",
+          "label": "Logo tile background",
+          "options": [
+            {
+              "value": "clear",
+              "label": "Transparent"
+            },
+            {
+              "value": "solid",
+              "label": "Solid color"
+            }
+          ],
+          "default": "clear"
+        },
+        {
+          "type": "color",
+          "id": "logo_surface",
+          "label": "Logo tile background color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "checkbox",
+          "id": "autoplay",
+          "label": "Auto advance sliding cards",
+          "info": "Pauses on hover, keyboard focus, and when off screen. Reduced motion disables auto advance.",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "slide_interval",
+          "label": "Seconds between slides",
+          "min": 4,
+          "max": 20,
+          "step": 1,
+          "unit": "s",
+          "default": 7
+        },
+        {
+          "type": "range",
+          "id": "mobile_slide_width",
+          "label": "Mobile slide width",
+          "min": 80,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 88
+        }
+      ]
     }
   ],
   "presets": [
@@ -1212,6 +1684,9 @@ Advanced design block is optional: all its settings have layout defaults.
         },
         {
           "type": "appearance"
+        },
+        {
+          "type": "studio"
         }
       ]
     }
