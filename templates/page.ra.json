@@ -437,7 +437,7 @@
           "type": "step",
           "settings": {
             "number": "01",
-            "icon": "search",
+            "icon": "supplier_risk",
             "heading": "Identify Where Supplier Risk Needs More Attention",
             "body": "<p>See which suppliers, activities, or parts of the supply chain need closer review.</p>"
           }
@@ -446,7 +446,7 @@
           "type": "step",
           "settings": {
             "number": "",
-            "icon": "pathway",
+            "icon": "due_diligence",
             "heading": "Strengthen Due Diligence Controls",
             "body": "<p>Find out where governance, responsibilities, and processes work well, and where they need strengthening.</p>"
           }
@@ -455,16 +455,36 @@
           "type": "step",
           "settings": {
             "number": "",
-            "icon": "arrow",
+            "icon": "visibility",
             "heading": "Close Gaps in Supply Chain Visibility and Evidence",
             "body": "<p>Spot where supplier information or documentation is incomplete or inconsistent.</p>"
+          }
+        },
+        "step_XLQVbV": {
+          "type": "step",
+          "settings": {
+            "number": "",
+            "icon": "monitoring",
+            "heading": "Strengthen Monitoring and Corrective Action",
+            "body": "<p>Know where monitoring is enough and where closer oversight or corrective action is needed.</p>"
+          }
+        },
+        "step_ghnKNC": {
+          "type": "step",
+          "settings": {
+            "number": "",
+            "icon": "residual_risk",
+            "heading": "Understand and Address Residual Risk",
+            "body": "<p>Get clear recommendations on the risk that remains and what to address next.</p>"
           }
         }
       },
       "block_order": [
         "step_dDx8KB",
         "step_QCagc8",
-        "step_xEMLz8"
+        "step_xEMLz8",
+        "step_XLQVbV",
+        "step_ghnKNC"
       ],
       "name": "VECTRA how it works",
       "settings": {
@@ -481,9 +501,9 @@
         "padding_bottom": 80,
         "background_color": "#ffffff",
         "card_color": "#fbfcfb",
-        "heading_color": "#082946",
+        "heading_color": "{{ settings.color_palette.color1 }}",
         "body_color": "#6c7d92",
-        "accent_color": "#55c900",
+        "accent_color": "{{ settings.color_palette.foreground }}",
         "border_color": "#dce4dd"
       }
     },
