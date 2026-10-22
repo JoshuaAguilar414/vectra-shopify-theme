@@ -1,0 +1,996 @@
+{% comment %}
+  VECTRA interactive SCDD screening quiz
+
+  Drafts: saved in localStorage for 30 days on this origin/path/section.
+  No lead is submitted by autosave. Start again deletes the local draft.
+  A confirmed native Shopify success deletes the local draft. A Forms
+  handoff retains it because this section cannot confirm that form's success.
+
+  New standard name/phone controls are included in the native form.
+  Custom organization/role/scope data and answers are available in the
+  final vectra:assessment-complete event's detail.lead and detail.answers.
+  Map these custom properties in the connected CRM integration; collecting
+  them here does not itself create Shopify customer metafields.
+
+  Shopify integration modes:
+  1. Shopify customer form — submits the lead to Shopify and adds the
+     calculated pathway as customer tags. This uses Shopify's native
+     {% form 'customer' %} endpoint.
+  2. Shopify Forms handoff — sends the visitor to a published Shopify Forms
+     inline-form landing page after the result is calculated. Add that page's
+     URL in the section settings.
+
+  Shopify Forms does not expose a documented storefront JavaScript submission
+  API, so this section does not imitate or reverse-engineer one. A custom
+  `vectra:assessment-complete` browser event is emitted for analytics or a
+  future app integration.
+{% endcomment %}
+
+{% liquid
+  assign quiz_form_id = 'VectraQuizForm-' | append: section.id
+  assign integration_mode = section.settings.integration_mode
+  assign question_count = 0
+  for block in section.blocks
+    if block.type == 'question'
+      assign question_count = question_count | plus: 1
+    endif
+  endfor
+%}
+
+<section
+  id="VectraQuiz-{{ section.id }}"
+  class="vectra-quiz"
+  data-integration-mode="{{ integration_mode }}"
+  data-question-count="{{ question_count }}"
+  data-forms-url="{{ section.settings.shopify_forms_url | escape }}"
+  aria-labelledby="VectraQuizHeading-{{ section.id }}"
+>
+  <div class="vectra-quiz__shell">
+    <header class="vectra-quiz__intro">
+      {% if section.settings.eyebrow != blank %}
+        <p class="vectra-quiz__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {% endif %}
+      <h2 id="VectraQuizHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      {% if section.settings.intro != blank %}
+        <div class="vectra-quiz__intro-copy">{{ section.settings.intro }}</div>
+      {% endif %}
+      <div class="vectra-quiz__assurance" aria-label="Assessment information">
+        <span>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 0 15 7.5 7.5 0 0 0 0-15Zm0 3v4.2l2.8 1.7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.6"/></svg>
+          {{ section.settings.time_label | escape }}
+        </span>
+        <span>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.4 16 4.7v4.5c0 3.8-2.3 6.5-6 8.2-3.7-1.7-6-4.4-6-8.2V4.7Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"/><path d="m7 9.9 1.8 1.8 4-4.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg>
+          {{ section.settings.privacy_label | escape }}
+        </span>
+      </div>
+    </header>
+
+    <div class="vectra-quiz__card">
+      <div class="vectra-quiz__resume" data-resume-banner hidden>
+        <p><strong>Welcome back.</strong> Your saved assessment is ready to resume.</p>
+        <div>
+          <button type="button" class="vectra-quiz__button vectra-quiz__button--primary" data-resume>Resume assessment</button>
+          <button type="button" class="vectra-quiz__restart" data-discard>Start again</button>
+        </div>
+      </div>
+      <p class="vectra-quiz__save-status" data-save-status role="status">Your progress is saved in this browser for 30 days. Use Start again to clear it.</p>
+      <div class="vectra-quiz__topline">
+        <div>
+          <span class="vectra-quiz__phase-label" data-phase-label>{{ section.settings.details_step_label | escape }}</span>
+          <strong data-step-count>Before we begin</strong>
+        </div>
+        <button class="vectra-quiz__restart" type="button" data-restart hidden>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.1 7.3A6.5 6.5 0 1 1 4 12.2M4.1 7.3V3.8m0 3.5h3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/></svg>
+          Start again
+        </button>
+      </div>
+
+      <div class="vectra-quiz__progress" data-progress-wrap hidden>
+        <span data-progress-bar></span>
+      </div>
+
+      {% form 'customer', id: quiz_form_id, class: 'vectra-quiz__form' %}
+        <input type="hidden" data-posted-successfully value="{% if form.posted_successfully? %}true{% else %}false{% endif %}">
+        <input type="hidden" name="contact[tags]" value="{{ section.settings.customer_tag | escape }}" data-tags-input>
+
+        {% if form.errors %}
+          <div class="vectra-quiz__notice vectra-quiz__notice--error" role="alert">
+            {{ form.errors | default_errors }}
+          </div>
+        {% endif %}
+
+        {% if form.posted_successfully? %}
+          <div class="vectra-quiz__notice vectra-quiz__notice--success" role="status">
+            {{ section.settings.submit_success | escape }}
+          </div>
+        {% endif %}
+
+        <div class="vectra-quiz__panel is-active" data-panel="details">
+          <div class="vectra-quiz__panel-heading">
+            <span class="vectra-quiz__number">01</span>
+            <div>
+              <h3>{{ section.settings.details_heading | escape }}</h3>
+              <p>{{ section.settings.details_body | escape }}</p>
+            </div>
+          </div>
+
+          <p class="vectra-quiz__required-note"><span class="vectra-quiz__required" aria-hidden="true">*</span> Required fields</p>
+          <div class="vectra-quiz__fields">
+            <label class="vectra-quiz__field">
+              <span>First name <span class="vectra-quiz__required" aria-hidden="true">*</span></span>
+              <input type="text" name="contact[first_name]" autocomplete="given-name" required data-lead-field data-field-label="First name">
+            </label>
+            <label class="vectra-quiz__field">
+              <span>Last name <span class="vectra-quiz__required" aria-hidden="true">*</span></span>
+              <input type="text" name="contact[last_name]" autocomplete="family-name" required data-lead-field data-field-label="Last name">
+            </label>
+            <label class="vectra-quiz__field">
+              <span>Work email <span class="vectra-quiz__required" aria-hidden="true">*</span></span>
+              <input type="email" name="contact[email]" autocomplete="email" required data-lead-field data-field-label="Work email">
+            </label>
+            <label class="vectra-quiz__field">
+              <span>Phone number <small>(optional)</small></span>
+              <input type="tel" name="contact[phone]" autocomplete="tel" data-lead-field data-field-label="Phone number">
+            </label>
+            <label class="vectra-quiz__field">
+              <span>Organization <span class="vectra-quiz__required" aria-hidden="true">*</span></span>
+              <input type="text" name="vectra_organization" autocomplete="organization" required data-lead-field data-field-label="Organization">
+            </label>
+            <label class="vectra-quiz__field">
+              <span>Role <span class="vectra-quiz__required" aria-hidden="true">*</span></span>
+              <input type="text" name="vectra_role" autocomplete="organization-title" required data-lead-field data-field-label="Role">
+            </label>
+            <label class="vectra-quiz__field vectra-quiz__field--wide">
+              <span>Who are you answering for? <span class="vectra-quiz__required" aria-hidden="true">*</span></span>
+              <select name="vectra_answering_for" required data-lead-field data-field-label="Who you are answering for">
+                <option value="">Select an option</option>
+                <option value="Own company">My own company</option>
+                <option value="Supplier">A supplier</option>
+                <option value="Partner">A partner</option>
+              </select>
+            </label>
+            <label class="vectra-quiz__field vectra-quiz__field--wide">
+              <span>Assessment scope <span class="vectra-quiz__required" aria-hidden="true">*</span></span>
+              <select name="vectra_scope" required data-lead-field data-field-label="Assessment scope">
+                <option value="">Select the scope that fits best</option>
+                <option>Whole organization / corporate</option>
+                <option>Division or region</option>
+                <option>Factory or operating site</option>
+                <option>Supplier or supply-chain group</option>
+                <option>Not sure yet</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="vectra-quiz__consent">
+            <input type="checkbox" name="vectra_consent" required data-lead-field data-field-label="Consent">
+            <span><span class="vectra-quiz__required" aria-hidden="true">*</span> {{ section.settings.consent_text }}</span>
+          </label>
+          <p class="vectra-quiz__required-note" id="VectraQuizMissing-{{ section.id }}" data-details-status aria-live="polite"></p>
+
+          <div class="vectra-quiz__actions vectra-quiz__actions--end">
+            <button class="vectra-quiz__button vectra-quiz__button--primary" type="button" data-start disabled aria-describedby="VectraQuizMissing-{{ section.id }}">
+              <span data-start-copy>{{ section.settings.start_label | escape }}</span>
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        {% assign question_index = 0 %}
+        {% for block in section.blocks %}
+          {% if block.type == 'question' %}
+            {% assign question_index = question_index | plus: 1 %}
+            <fieldset
+              class="vectra-quiz__panel vectra-quiz__question"
+              data-panel="question"
+              data-question-index="{{ question_index }}"
+              data-question-id="{{ block.id }}"
+              {{ block.shopify_attributes }}
+            >
+              <legend class="visually-hidden">Question {{ question_index }}: {{ block.settings.question | escape }}</legend>
+              <div class="vectra-quiz__question-meta">
+                <span>{{ block.settings.category | escape }}</span>
+                <span>Question {{ question_index }} of {{ question_count }}</span>
+              </div>
+              <h3>{{ block.settings.question | escape }} <span class="vectra-quiz__required" aria-hidden="true">*</span></h3>
+              {% if block.settings.helper != blank %}
+                <p class="vectra-quiz__helper">{{ block.settings.helper | escape }}</p>
+              {% endif %}
+
+              <div class="vectra-quiz__options" role="radiogroup" aria-required="true" aria-label="{{ block.settings.question | escape }}">
+                {% for option_number in (1..4) %}
+                  {% capture option_key %}option_{{ option_number }}{% endcapture %}
+                  {% capture score_key %}score_{{ option_number }}{% endcapture %}
+                  {% assign option_text = block.settings[option_key] %}
+                  {% assign option_score = block.settings[score_key] %}
+                  {% if option_text != blank %}
+                    <label class="vectra-quiz__option">
+                      <input
+                        type="radio"
+                        name="vectra_question_{{ question_index }}"
+                        value="{{ option_text | escape }}"
+                        data-score="{{ option_score }}"
+                        data-option-index="{{ option_number | minus: 1 }}"
+                      >
+                      <span class="vectra-quiz__option-marker" aria-hidden="true"></span>
+                      <span class="vectra-quiz__option-copy">{{ option_text | escape }}</span>
+                      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 10 3.2 3.2L15 6.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/></svg>
+                    </label>
+                  {% endif %}
+                {% endfor %}
+              </div>
+
+              <p class="vectra-quiz__required-note" data-validation role="status">Please choose one answer to continue.</p>
+              <div class="vectra-quiz__actions">
+                <button class="vectra-quiz__button vectra-quiz__button--secondary" type="button" data-back>
+                  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H5m4-4-4 4 4 4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg>
+                  Back
+                </button>
+                <button class="vectra-quiz__button vectra-quiz__button--primary" type="button" data-next disabled>
+                  <span>{% if question_index == question_count %}Review answers{% else %}Next question{% endif %}</span>
+                  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg>
+                </button>
+              </div>
+            </fieldset>
+          {% endif %}
+        {% endfor %}
+
+        <div class="vectra-quiz__panel" data-panel="review">
+          <h3 tabindex="-1">Review your assessment</h3>
+          <p class="vectra-quiz__helper">Check your details and answers. You can change anything before submitting.</p>
+          <div class="vectra-quiz__review-lead">
+            <h4>Your details</h4>
+            <dl data-review-details></dl>
+            <button class="vectra-quiz__restart" type="button" data-edit-details>Edit details</button>
+          </div>
+          <ol class="vectra-quiz__review-list" data-review-list></ol>
+          <p class="vectra-quiz__required-note" data-review-status role="status"></p>
+          <div class="vectra-quiz__actions">
+            <button type="button" class="vectra-quiz__button vectra-quiz__button--secondary" data-review-back>Back</button>
+            <button type="button" class="vectra-quiz__button vectra-quiz__button--primary" data-review-continue disabled>See my pathway</button>
+          </div>
+        </div>
+        <div class="vectra-quiz__panel vectra-quiz__result" data-panel="result" aria-live="polite">
+          <div class="vectra-quiz__result-badge">
+            <span>Recommended pathway</span>
+            <strong data-result-level>Level 1</strong>
+          </div>
+
+          <div data-result-copy="1">
+            <p class="vectra-quiz__result-kicker">Level 1 · Diagnose</p>
+            <h3>{{ section.settings.level_1_heading | escape }}</h3>
+            <p>{{ section.settings.level_1_body | escape }}</p>
+            <ul><li>Foundational governance</li><li>Baseline visibility</li><li>Clear starting point</li></ul>
+          </div>
+          <div data-result-copy="2" hidden>
+            <p class="vectra-quiz__result-kicker">Level 2 · Validate</p>
+            <h3>{{ section.settings.level_2_heading | escape }}</h3>
+            <p>{{ section.settings.level_2_body | escape }}</p>
+            <ul><li>Existing structure</li><li>Evidence validation</li><li>Targeted review</li></ul>
+          </div>
+          <div data-result-copy="3" hidden>
+            <p class="vectra-quiz__result-kicker">Level 3 · Advance</p>
+            <h3>{{ section.settings.level_3_heading | escape }}</h3>
+            <p>{{ section.settings.level_3_body | escape }}</p>
+            <ul><li>Active business driver</li><li>Complex scope</li><li>Expert-led pathway</li></ul>
+          </div>
+
+          <div class="vectra-quiz__result-note">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 0 15 7.5 7.5 0 0 0 0-15Zm0 4v4m0 3h.01" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.6"/></svg>
+            <span>{{ section.settings.result_note | escape }}</span>
+          </div>
+
+          <div class="vectra-quiz__actions vectra-quiz__actions--result">
+            <button class="vectra-quiz__button vectra-quiz__button--secondary" type="button" data-result-back>Review answers</button>
+
+            {% if integration_mode == 'shopify_forms' %}
+              {% if section.settings.shopify_forms_url != blank %}
+                <a
+                  class="vectra-quiz__button vectra-quiz__button--primary"
+                  href="{{ section.settings.shopify_forms_url }}"
+                  data-forms-handoff
+                  {% if section.settings.open_forms_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+                >
+                  {{ section.settings.forms_cta_label | escape }}
+                  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg>
+                </a>
+              {% else %}
+                <button class="vectra-quiz__button vectra-quiz__button--primary" type="button" disabled>
+                  Add Shopify Forms URL
+                </button>
+              {% endif %}
+            {% else %}
+              <button class="vectra-quiz__button vectra-quiz__button--primary" type="submit" data-native-submit>
+                {{ section.settings.native_cta_label | escape }}
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg>
+              </button>
+            {% endif %}
+          </div>
+        </div>
+      {% endform %}
+
+
+    </div>
+  </div>
+</section>
+
+{% style %}
+  #VectraQuiz-{{ section.id }} {
+    --vq-navy: {{ section.settings.navy_color }};
+    --vq-green: {{ section.settings.accent_color }};
+    --vq-ink: {{ section.settings.text_color }};
+    --vq-muted: {{ section.settings.muted_color }};
+    --vq-line: {{ section.settings.border_color }};
+    --vq-surface: {{ section.settings.card_color }};
+    position: relative;
+    overflow: hidden;
+    padding: {{ section.settings.padding_top }}px 24px {{ section.settings.padding_bottom }}px;
+    color: var(--vq-ink);
+    background-color: {{ section.settings.background_color }};
+    background-image:
+      linear-gradient({{ section.settings.grid_color | color_modify: 'alpha', 0.06 }} 1px, transparent 1px),
+      linear-gradient(90deg, {{ section.settings.grid_color | color_modify: 'alpha', 0.06 }} 1px, transparent 1px);
+    background-size: 34px 34px;
+    font-family: 'Poppins', var(--font-body-family, Arial, sans-serif);
+  }
+
+  #VectraQuiz-{{ section.id }} *,
+  #VectraQuiz-{{ section.id }} *::before,
+  #VectraQuiz-{{ section.id }} *::after { box-sizing: border-box; }
+  #VectraQuiz-{{ section.id }} [hidden] { display: none !important; }
+  #VectraQuiz-{{ section.id }} .visually-hidden {
+    position: absolute !important; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap; clip-path: inset(50%);
+  }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__shell {
+    width: min({{ section.settings.content_width }}px, 100%);
+    margin-inline: auto;
+  }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__intro {
+    max-width: 720px;
+    margin: 0 auto 38px;
+    text-align: center;
+  }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__eyebrow,
+  #VectraQuiz-{{ section.id }} .vectra-quiz__result-kicker {
+    margin: 0 0 10px;
+    color: #359800;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__intro h2 {
+    margin: 0;
+    color: var(--vq-navy);
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.04;
+    letter-spacing: -.045em;
+  }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__intro-copy {
+    max-width: 650px;
+    margin: 18px auto 0;
+    color: var(--vq-muted);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__intro-copy p { margin: 0; }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__assurance {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    margin-top: 22px;
+    color: var(--vq-navy);
+    font-size: 12px;
+    font-weight: 600;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__assurance span { display: inline-flex; align-items: center; gap: 7px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__assurance svg { width: 18px; height: 18px; color: #42b500; }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__card {
+    width: min(880px, 100%);
+    margin-inline: auto;
+    overflow: hidden;
+    border: 1px solid var(--vq-line);
+    border-radius: {{ section.settings.corner_radius }}px;
+    background: var(--vq-surface);
+    box-shadow: 0 24px 80px rgba(8, 41, 70, .12);
+  }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 78px;
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--vq-line);
+    background: #f7f9f7;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__topline > div { display: flex; flex-direction: column; gap: 3px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__phase-label { color: #399c05; font-size: 10px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__topline strong { color: var(--vq-navy); font-size: 14px; }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__restart {
+    display: inline-flex; align-items: center; gap: 6px; padding: 7px;
+    border: 0; background: transparent; color: var(--vq-muted); cursor: pointer;
+    font: inherit; font-size: 12px; font-weight: 600;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__restart svg { width: 17px; height: 17px; }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__progress { height: 5px; overflow: hidden; background: #e7ece8; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__progress span {
+    display: block; width: 0; height: 100%; background: var(--vq-green);
+    transition: width .32s ease;
+  }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__panel { display: none; min-width: 0; padding: 44px 48px 48px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__panel.is-active { display: block; animation: vq-enter-{{ section.id }} .28s ease both; }
+  @keyframes vq-enter-{{ section.id }} { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__panel-heading { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 30px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__number {
+    flex: 0 0 auto; display: grid; place-items: center; width: 44px; height: 44px;
+    border-radius: 13px; background: var(--vq-navy); color: #fff; font-size: 13px; font-weight: 800;
+  }
+  #VectraQuiz-{{ section.id }} h3 { margin: 0; color: var(--vq-navy); font-size: clamp(23px, 3.2vw, 34px); line-height: 1.18; letter-spacing: -.035em; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__panel-heading p,
+  #VectraQuiz-{{ section.id }} .vectra-quiz__helper { margin: 9px 0 0; color: var(--vq-muted); font-size: 14px; line-height: 1.65; }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__fields { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__field { display: grid; gap: 7px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__field--wide { grid-column: 1 / -1; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__field > span { color: var(--vq-navy); font-size: 12px; font-weight: 700; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__field input,
+  #VectraQuiz-{{ section.id }} .vectra-quiz__field select {
+    width: 100%; min-height: 50px; padding: 12px 14px; border: 1px solid #cad5cd;
+    border-radius: 10px; outline: 0; background: #fff; color: var(--vq-ink); font: inherit; font-size: 14px;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__field input:focus,
+  #VectraQuiz-{{ section.id }} .vectra-quiz__field select:focus { border-color: #46b900; box-shadow: 0 0 0 3px rgba(85, 201, 0, .14); }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__consent { display: flex; align-items: flex-start; gap: 11px; margin-top: 20px; color: var(--vq-muted); font-size: 12px; line-height: 1.55; cursor: pointer; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__consent input { flex: 0 0 auto; width: 17px; height: 17px; margin-top: 1px; accent-color: var(--vq-green); }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__consent p { display: inline; margin: 0; }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__question-meta { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 20px; color: #399c05; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__options { display: grid; gap: 11px; margin-top: 28px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option {
+    position: relative; display: grid; grid-template-columns: 22px minmax(0, 1fr) 20px; align-items: center;
+    gap: 13px; min-height: 64px; padding: 14px 17px; border: 1px solid #d6ded8; border-radius: 12px;
+    background: #fff; color: var(--vq-ink); cursor: pointer; transition: border-color .18s ease, background .18s ease, transform .18s ease;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option:hover { border-color: #79c94b; transform: translateY(-1px); }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option:has(input:checked) { border-color: var(--vq-green); background: #f2fbe9; box-shadow: 0 0 0 1px var(--vq-green); }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option input { position: absolute; opacity: 0; pointer-events: none; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option-marker { width: 20px; height: 20px; border: 1.5px solid #aebbb1; border-radius: 999px; background: #fff; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option:has(input:checked) .vectra-quiz__option-marker { border: 6px solid var(--vq-green); }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option-copy { font-size: 14px; font-weight: 600; line-height: 1.45; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option svg { width: 19px; height: 19px; color: #3da800; opacity: 0; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option:has(input:checked) svg { opacity: 1; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option:has(input:focus-visible) { outline: 3px solid rgba(85, 201, 0, .28); outline-offset: 2px; }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__validation { margin: 15px 0 0; color: #b42318; font-size: 12px; font-weight: 600; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 30px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__actions--end { justify-content: flex-end; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__button {
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 48px;
+    padding: 12px 19px; border: 1px solid transparent; border-radius: 9px; font: inherit;
+    font-size: 13px; font-weight: 700; line-height: 1.2; text-decoration: none; cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__button:hover:not(:disabled) { transform: translateY(-1px); }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__button:focus-visible { outline: 3px solid rgba(85, 201, 0, .35); outline-offset: 3px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__button svg { width: 18px; height: 18px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__button--primary { background: var(--vq-green); color: var(--vq-navy); box-shadow: 0 8px 18px rgba(85, 201, 0, .17); }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__button--primary:hover:not(:disabled) { background: #66db16; box-shadow: 0 10px 24px rgba(85, 201, 0, .25); }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__button--secondary { border-color: #cbd6ce; background: #fff; color: var(--vq-navy); }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__button:disabled { opacity: .48; cursor: not-allowed; }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__result { text-align: center; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__result-badge { display: inline-flex; flex-direction: column; gap: 2px; min-width: 160px; margin-bottom: 24px; padding: 12px 20px; border-radius: 999px; background: var(--vq-navy); color: #fff; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__result-badge span { color: #a9b9c4; font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__result-badge strong { font-size: 20px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__result > div[data-result-copy] > p:not(.vectra-quiz__result-kicker) { max-width: 630px; margin: 14px auto 0; color: var(--vq-muted); font-size: 15px; line-height: 1.7; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__result ul { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 24px 0 0; padding: 0; list-style: none; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__result li { padding: 8px 11px; border-radius: 999px; background: #eff7eb; color: #296c16; font-size: 11px; font-weight: 700; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__result-note { display: flex; align-items: flex-start; gap: 10px; max-width: 650px; margin: 28px auto 0; padding: 14px 16px; border-radius: 11px; background: #f6f8f6; color: var(--vq-muted); text-align: left; font-size: 12px; line-height: 1.55; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__result-note svg { flex: 0 0 auto; width: 18px; height: 18px; color: #399c05; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__actions--result { justify-content: center; }
+
+  #VectraQuiz-{{ section.id }} .vectra-quiz__notice { margin: 24px 32px 0; padding: 14px 16px; border-radius: 10px; font-size: 13px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__notice--error { background: #fff1f0; color: #9f1c13; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__notice--success { background: #edf9e9; color: #24690e; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__integration-note { margin: 0; padding: 11px 24px; border-top: 1px solid var(--vq-line); background: #f7f9f7; color: var(--vq-muted); text-align: center; font-size: 10px; }
+
+  @media screen and (max-width: 749px) {
+    #VectraQuiz-{{ section.id }} { padding-inline: 14px; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__intro { margin-bottom: 28px; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__card { border-radius: 18px; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__topline { min-height: 68px; padding: 14px 20px; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__panel { padding: 30px 20px 28px; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__fields { grid-template-columns: 1fr; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__field--wide { grid-column: auto; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__panel-heading { gap: 12px; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__number { width: 38px; height: 38px; border-radius: 10px; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__option { min-height: 58px; padding: 12px 13px; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__actions { align-items: stretch; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__button { flex: 1; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__actions--result { flex-direction: column-reverse; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #VectraQuiz-{{ section.id }} *, #VectraQuiz-{{ section.id }} *::before, #VectraQuiz-{{ section.id }} *::after {
+      scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important;
+    }
+  }
+
+  /* Preserve all explanatory copy beside the quiz on larger screens. */
+  #VectraQuiz-{{ section.id }} .vectra-quiz__shell {
+    display: grid;
+    grid-template-columns: minmax(240px, .75fr) minmax(0, 1.5fr);
+    align-items: start;
+    gap: clamp(24px, 4vw, 56px);
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__intro {
+    min-width: 0; max-width: none; margin: 0; text-align: left;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__intro h2 {
+    font-size: clamp(30px, 3.8vw, 48px); line-height: 1.1;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__intro-copy { margin-inline: 0; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__intro-copy p + p { margin-top: 14px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__assurance { justify-content: flex-start; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__card { min-width: 0; width: 100%; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__panel { padding: 32px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__required { color: var(--vq-green); font-weight: 800; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__required-note {
+    margin: 14px 0; color: var(--vq-muted); font-size: 12px; line-height: 1.6;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__field small { font-weight: 400; color: var(--vq-muted); }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__field [aria-invalid="true"] { border-color: #b42318; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__button--primary:disabled,
+  #VectraQuiz-{{ section.id }} .vectra-quiz__button--primary:disabled:hover {
+    background: #dce1e4; color: #58636d; box-shadow: none; opacity: 1; transform: none;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__save-status {
+    margin: 0; padding: 12px 24px; background: #f2f8ee; color: var(--vq-muted); font-size: 11px; line-height: 1.6;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__resume {
+    padding: 20px 24px; border-bottom: 1px solid var(--vq-line); background: #edf8e6;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__resume p { margin: 0 0 12px; font-size: 13px; line-height: 1.6; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__resume > div { display: flex; flex-wrap: wrap; gap: 12px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__review-lead {
+    margin-top: 24px; padding: 18px; background: #f6f8f6; border-radius: 12px;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__review-lead h4 { margin: 0 0 12px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__review-lead dl {
+    display: grid; grid-template-columns: minmax(90px, .8fr) minmax(0, 1.2fr); gap: 8px 12px;
+    font-size: 12px; line-height: 1.6; overflow-wrap: anywhere;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__review-lead dt { font-weight: 700; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__review-lead dd { margin: 0; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__review-list { list-style: none; padding: 0; margin: 20px 0 0; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__review-list li {
+    display: flex; align-items: flex-start; gap: 14px; justify-content: space-between;
+    padding: 16px 0; border-bottom: 1px solid var(--vq-line);
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__review-list li > div { min-width: 0; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__review-list strong { display: block; font-size: 13px; line-height: 1.5; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__review-list p { margin: 6px 0 0; font-size: 12px; color: var(--vq-muted); }
+  @media screen and (max-width: 989px) {
+    #VectraQuiz-{{ section.id }} .vectra-quiz__shell { grid-template-columns: 1fr; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__intro { max-width: 720px; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__card { max-width: 880px; }
+  }
+  @media screen and (max-width: 749px) {
+    #VectraQuiz-{{ section.id }} .vectra-quiz__panel { padding: 28px 20px; }
+  }
+{% endstyle %}
+
+<script>
+  (() => {
+    const initialize = () => {
+      const root = document.getElementById('VectraQuiz-{{ section.id }}');
+      if (!root || root.dataset.initialized === 'true') return;
+      root.dataset.initialized = 'true';
+      const form = root.querySelector('.vectra-quiz__form');
+      form.noValidate = true; // Validate the visible panel before navigating or submitting.
+      const panels = Array.from(root.querySelectorAll('[data-panel]'));
+      const questions = Array.from(root.querySelectorAll('[data-panel="question"]'));
+      const details = root.querySelector('[data-panel="details"]');
+      const review = root.querySelector('[data-panel="review"]');
+      const result = root.querySelector('[data-panel="result"]');
+      const fields = Array.from(details.querySelectorAll('[data-lead-field]'));
+      const start = root.querySelector('[data-start]');
+      const restart = root.querySelector('[data-restart]');
+      const resumeBanner = root.querySelector('[data-resume-banner]');
+      const status = root.querySelector('[data-save-status]');
+      const tagsInput = root.querySelector('[data-tags-input]');
+      const originalTags = tagsInput?.value || '';
+      const storageKey = 'vectra-scdd-draft:v1:' + location.pathname + ':' + root.id;
+      const lifetime = 30 * 24 * 60 * 60 * 1000;
+      const signature = JSON.stringify(questions.map(q => [
+        q.dataset.questionId,
+        q.querySelector('h3').textContent.trim(),
+        Array.from(q.querySelectorAll('input[type="radio"]')).map(a => [a.value, a.dataset.score])
+      ]));
+      let phase = 'details';
+      let questionIndex = 0;
+      let resultLevel = 1;
+      let resumeTarget = null;
+      let editing = false;
+      let saveTimer;
+      let submitted = false;
+      let draftEnabled = !window.Shopify?.designMode;
+      const selected = q => q.querySelector('input[type="radio"]:checked');
+      const invalidFields = () => fields.filter(field => {
+        const blankText = field.required && field.type !== 'checkbox' && !field.value.trim();
+        return blankText || !field.validity.valid;
+      });
+      const complete = () => questions.length > 0 && questions.every(q => selected(q));
+      const leadData = () => Object.fromEntries(fields.map(f => [f.name, f.type === 'checkbox' ? f.checked : f.value]));
+      const removeDraft = () => {
+        clearTimeout(saveTimer);
+        try { localStorage.removeItem(storageKey); } catch (error) {}
+      };
+      const saveDraft = () => {
+        if (!draftEnabled || submitted) return;
+        const hasInput = fields.some(f => f.type === 'checkbox' ? f.checked : f.value.trim()) || questions.some(q => selected(q));
+        if (!hasInput) { removeDraft(); return; }
+        try {
+          localStorage.setItem(storageKey, JSON.stringify({
+            version: 1, signature, expiresAt: Date.now() + lifetime,
+            phase: resumeTarget?.phase || phase, questionIndex: resumeTarget?.questionIndex ?? questionIndex, fields: leadData(),
+            answers: questions.map(q => selected(q)?.value || null)
+          }));
+          status.textContent = 'Progress saved in this browser for 30 days. Use Start again to clear it.';
+        } catch (error) {
+          status.textContent = 'Browser saving is unavailable. Keep this page open to retain your progress.';
+        }
+      };
+      const queueSave = () => {
+        clearTimeout(saveTimer);
+        saveTimer = setTimeout(saveDraft, 250);
+      };
+      const updateButtons = () => {
+        const invalid = invalidFields();
+        root.querySelector('[data-start-copy]').textContent = editing ? 'Save details and review' : {{ section.settings.start_label | json }};
+        start.disabled = invalid.length > 0 || !questions.length || submitted;
+        root.querySelector('[data-details-status]').textContent = !questions.length
+          ? 'This assessment is not available yet.'
+          : invalid.length
+            ? 'To continue, complete: ' + invalid.map(f => f.dataset.fieldLabel).join(', ') + '. Work email must be a valid email address.'
+            : 'Your required details are complete. You can continue.';
+        questions.forEach(q => {
+          const answered = Boolean(selected(q));
+          q.querySelector('[data-next]').disabled = !answered;
+          q.querySelector('[data-next] span').textContent = editing ? 'Save answer and review' : (q === questions[questions.length - 1] ? 'Review answers' : 'Next question');
+          q.querySelector('[data-validation]').hidden = answered;
+        });
+        const ready = !invalid.length && complete();
+        root.querySelector('[data-review-continue]').disabled = !ready;
+        root.querySelector('[data-review-status]').textContent = ready
+          ? 'Everything is complete. Continue to preview your pathway before final submission.'
+          : 'Complete your required details and all questions before continuing.';
+        const submit = root.querySelector('[data-native-submit]');
+        if (submit) submit.disabled = !ready || submitted;
+        const handoff = root.querySelector('[data-forms-handoff]');
+        if (handoff) handoff.setAttribute('aria-disabled', String(!ready));
+        restart.hidden = submitted || (!fields.some(f => f.type === 'checkbox' ? f.checked : f.value) && !questions.some(q => selected(q)));
+      };
+      const updateChrome = () => {
+        const progress = root.querySelector('[data-progress-wrap]');
+        const bar = root.querySelector('[data-progress-bar]');
+        const label = root.querySelector('[data-phase-label]');
+        const count = root.querySelector('[data-step-count]');
+        progress.hidden = phase === 'details';
+        if (phase === 'details') {
+          label.textContent = {{ section.settings.details_step_label | json }};
+          count.textContent = editing ? 'Update your details' : 'Before we begin';
+        } else if (phase === 'question') {
+          label.textContent = questions[questionIndex].querySelector('.vectra-quiz__question-meta span')?.textContent || 'Assessment';
+          count.textContent = `Question ${questionIndex + 1} of ${questions.length}`;
+          bar.style.width = `${questions.filter(q => selected(q)).length / questions.length * 100}%`;
+        } else {
+          label.textContent = phase === 'review' ? 'Review before continuing' : 'Your pathway preview';
+          count.textContent = phase === 'review' ? 'Check your details and answers' : 'Ready for final submission';
+          bar.style.width = '100%';
+        }
+      };
+      const renderReview = () => {
+        const dl = root.querySelector('[data-review-details]');
+        dl.replaceChildren();
+        fields.forEach(f => {
+          const dt = document.createElement('dt'); dt.textContent = f.dataset.fieldLabel;
+          const dd = document.createElement('dd');
+          dd.textContent = f.type === 'checkbox' ? (f.checked ? 'Agreed' : 'Required') : (f.value || 'Not provided');
+          dl.append(dt, dd);
+        });
+        const list = root.querySelector('[data-review-list]'); list.replaceChildren();
+        questions.forEach((q, index) => {
+          const li = document.createElement('li');
+          const copy = document.createElement('div');
+          const heading = document.createElement('strong');
+          heading.textContent = `${index + 1}. ${q.querySelector('h3').textContent.replace(/\s*\*\s*$/, '').trim()}`;
+          const answer = document.createElement('p'); answer.textContent = selected(q)?.value || 'Not answered';
+          copy.append(heading, answer);
+          const edit = document.createElement('button'); edit.type = 'button'; edit.className = 'vectra-quiz__restart';
+          edit.textContent = 'Edit'; edit.setAttribute('aria-label', `Edit answer to question ${index + 1}`);
+          edit.addEventListener('click', () => { editing = true; go('question', index); });
+          li.append(copy, edit); list.append(li);
+        });
+      };
+      const calculateResult = () => {
+        const answers = questions.map(q => selected(q));
+        const score = answers.reduce((total, answer) => total + Number(answer?.dataset.score || 0), 0);
+        const deadlineIndex = Number(answers[8]?.dataset.optionIndex || 0);
+        const intentIndex = Number(answers[9]?.dataset.optionIndex || 0);
+        // Preserve the existing pathway rules from the supplied section.
+        if (deadlineIndex >= 2 || intentIndex === 3 || score >= 20) resultLevel = 3;
+        else if (score >= 11) resultLevel = 2;
+        else resultLevel = 1;
+        root.querySelector('[data-result-level]').textContent = `Level ${resultLevel}`;
+        root.querySelectorAll('[data-result-copy]').forEach(copy => { copy.hidden = copy.dataset.resultCopy !== String(resultLevel); });
+        tagsInput.value = [originalTags, `SCDD Level ${resultLevel}`, 'SCDD quiz complete', `SCDD answering for: ${details.querySelector('[name="vectra_answering_for"]').value}`].filter(Boolean).join(', ');
+        return {
+          level: resultLevel, score,
+          lead: leadData(),
+          answers: answers.map((answer, index) => ({
+            question: index + 1, questionId: questions[index].dataset.questionId,
+            questionText: questions[index].querySelector('h3').textContent.replace(/\s*\*\s*$/, '').trim(),
+            answer: answer?.value || ''
+          }))
+        };
+      };
+      const go = (nextPhase, index = questionIndex, focus = true) => {
+        phase = nextPhase;
+        questionIndex = Math.max(0, Math.min(index, Math.max(questions.length - 1, 0)));
+        if (phase === 'review') renderReview();
+        if (phase === 'result') calculateResult();
+        const panel = phase === 'question' ? questions[questionIndex] : root.querySelector(`[data-panel="${phase}"]`);
+        panels.forEach(p => { p.classList.toggle('is-active', p === panel); p.setAttribute('aria-hidden', String(p !== panel)); });
+        updateButtons(); updateChrome(); saveDraft();
+        if (focus && panel) {
+          const heading = panel.querySelector('h3');
+          if (heading) { heading.tabIndex = -1; heading.focus({ preventScroll: true }); }
+          root.querySelector('.vectra-quiz__card').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+        }
+      };
+      const validateLead = () => {
+        const invalid = invalidFields();
+        if (!invalid.length) return true;
+        go('details');
+        invalid[0].setAttribute('aria-invalid', 'true');
+        invalid[0].focus(); invalid[0].reportValidity();
+        return false;
+      };
+      const reset = () => {
+        removeDraft();
+        try { sessionStorage.removeItem('vectraAssessmentResult'); } catch (error) {}
+        form.reset();
+        fields.forEach(f => { if (f.type === 'checkbox') f.checked = false; else f.value = ''; f.removeAttribute('aria-invalid'); });
+        questions.forEach(q => q.querySelectorAll('input[type="radio"]').forEach(a => { a.checked = false; }));
+        tagsInput.value = originalTags;
+        submitted = false; editing = false; resumeTarget = null; resumeBanner.hidden = true;
+        go('details', 0);
+      };
+      start.addEventListener('click', () => {
+        if (!validateLead() || !questions.length) return;
+        resumeBanner.hidden = true;
+        if (editing) { editing = false; go('review'); }
+        else if (resumeTarget) {
+          const target = resumeTarget; resumeTarget = null;
+          go(target.phase, target.questionIndex);
+        } else go('question', 0);
+      });
+      questions.forEach((q, index) => {
+        q.querySelector('[data-next]').addEventListener('click', () => {
+          if (!selected(q)) return;
+          if (editing || index === questions.length - 1) { editing = false; go('review'); }
+          else go('question', index + 1);
+        });
+        q.querySelector('[data-back]').addEventListener('click', () => {
+          if (editing) { editing = false; go('review'); }
+          else if (index === 0) go('details');
+          else go('question', index - 1);
+        });
+      });
+      root.querySelector('[data-edit-details]').addEventListener('click', () => { editing = true; go('details'); });
+      root.querySelector('[data-review-back]').addEventListener('click', () => go('question', questions.length - 1));
+      root.querySelector('[data-review-continue]').addEventListener('click', () => {
+        if (validateLead() && complete()) go('result');
+      });
+      root.querySelector('[data-result-back]').addEventListener('click', () => go('review'));
+      restart.addEventListener('click', reset);
+      root.querySelector('[data-discard]').addEventListener('click', reset);
+      root.querySelector('[data-resume]').addEventListener('click', () => {
+        resumeBanner.hidden = true;
+        if (!validateLead()) return;
+        const target = resumeTarget || { phase: 'question', questionIndex: 0 };
+        resumeTarget = null; go(target.phase, target.questionIndex);
+      });
+      fields.forEach(field => {
+        field.addEventListener('blur', () => {
+          if (field.required) field.setAttribute('aria-invalid', String(invalidFields().includes(field)));
+        });
+      });
+      form.addEventListener('input', event => {
+        event.target.removeAttribute('aria-invalid'); updateButtons(); queueSave();
+      });
+      form.addEventListener('change', () => { updateButtons(); saveDraft(); });
+      const finalPayload = () => {
+        const payload = { ...calculateResult(), completedAt: new Date().toISOString() };
+        try { sessionStorage.setItem('vectraAssessmentResult', JSON.stringify(payload)); } catch (error) {}
+        root.dispatchEvent(new CustomEvent('vectra:assessment-complete', { bubbles: true, detail: payload }));
+        return payload;
+      };
+      form.addEventListener('submit', event => {
+        if (root.dataset.integrationMode === 'shopify_forms') { event.preventDefault(); return; }
+        if (phase !== 'result' || submitted) { event.preventDefault(); return; }
+        if (!validateLead() || !complete()) { event.preventDefault(); if (!invalidFields().length) go('review'); return; }
+        saveDraft();
+        finalPayload();
+        submitted = true;
+        // Keep the draft until Shopify confirms success; rejected submissions can resume.
+      });
+      root.querySelector('[data-forms-handoff]')?.addEventListener('click', event => {
+        if (!validateLead() || !complete()) { event.preventDefault(); return; }
+        finalPayload(); saveDraft();
+        root.dispatchEvent(new CustomEvent('vectra:shopify-forms-handoff', {
+          bubbles: true, detail: { level: resultLevel, url: root.dataset.formsUrl, lead: leadData() }
+        }));
+        // A handoff is not confirmed submission. Preserve the draft for the return visit.
+      });
+      // Read only known fields and matching questions; never replay HTML or scores from storage.
+      if (root.querySelector('[data-posted-successfully]').value === 'true') {
+        removeDraft(); submitted = true;
+        try { sessionStorage.removeItem('vectraAssessmentResult'); } catch (error) {}
+        status.textContent = 'Your result has been submitted. Your saved browser draft has been cleared.';
+        panels.forEach(p => { p.classList.remove('is-active'); p.setAttribute('aria-hidden', 'true'); });
+        root.querySelector('[data-progress-wrap]').hidden = true;
+        restart.hidden = true;
+        return;
+      }
+      if (draftEnabled) {
+        try {
+          const draft = JSON.parse(localStorage.getItem(storageKey) || 'null');
+          if (draft) {
+            if (draft.version !== 1 || draft.signature !== signature || !(draft.expiresAt > Date.now()) || !Array.isArray(draft.answers) || draft.answers.length !== questions.length) {
+              removeDraft();
+            } else {
+              fields.forEach(f => {
+                const value = draft.fields?.[f.name];
+                if (f.type === 'checkbox') f.checked = value === true;
+                else if (typeof value === 'string') f.value = value;
+              });
+              questions.forEach((q, index) => q.querySelectorAll('input[type="radio"]').forEach(a => { a.checked = a.value === draft.answers[index]; }));
+              const savedPhase = ['details', 'question', 'review', 'result'].includes(draft.phase) ? draft.phase : 'details';
+              const firstMissing = questions.findIndex(q => !selected(q));
+              resumeTarget = {
+                phase: (savedPhase === 'review' || savedPhase === 'result') && !complete() ? 'question' : savedPhase,
+                questionIndex: Number.isInteger(draft.questionIndex) ? Math.max(0, Math.min(draft.questionIndex, questions.length - 1)) : Math.max(0, firstMissing)
+              };
+              resumeBanner.hidden = false;
+            }
+          }
+        } catch (error) {
+          status.textContent = 'Browser saving is unavailable. Keep this page open to retain your progress.';
+        }
+      }
+      updateButtons(); updateChrome();
+      // Flush pending keystrokes when leaving; no network request or lead submission occurs.
+      window.addEventListener('pagehide', () => { if (root.isConnected) saveDraft(); });
+      document.addEventListener('visibilitychange', () => { if (document.hidden && root.isConnected) saveDraft(); });
+    };
+    initialize();
+    document.addEventListener('shopify:section:load', initialize);
+  })();
+</script>
+
+
+{% schema %}
+{
+  "name": "VECTRA interactive quiz",
+  "tag": "section",
+  "class": "section-vectra-interactive-quiz",
+  "max_blocks": 10,
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "SCDD readiness screening" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Find the right starting point." },
+    { "type": "richtext", "id": "intro", "label": "Introduction", "default": "<p>Answer ten focused questions to receive a recommended VECTRA assessment pathway.</p>" },
+    { "type": "text", "id": "time_label", "label": "Time label", "default": "About 4 minutes" },
+    { "type": "text", "id": "privacy_label", "label": "Privacy label", "default": "Screening outcome only" },
+    { "type": "text", "id": "details_step_label", "label": "Details step label", "default": "Your details" },
+    { "type": "text", "id": "details_heading", "label": "Details heading", "default": "Tell us a little about your scope." },
+    { "type": "text", "id": "details_body", "label": "Details text", "default": "We use this information to make the pathway relevant to your organization." },
+    { "type": "richtext", "id": "consent_text", "label": "Consent text", "default": "<p>I agree that VECTRA may use these details to provide my result and follow up about the most relevant assessment pathway.</p>" },
+    { "type": "text", "id": "start_label", "label": "Start button", "default": "Start assessment" },
+    { "type": "header", "content": "Shopify connection" },
+    {
+      "type": "select",
+      "id": "integration_mode",
+      "label": "Submission mode",
+      "default": "shopify_customer",
+      "options": [
+        { "value": "shopify_customer", "label": "Shopify customer form" },
+        { "value": "shopify_forms", "label": "Shopify Forms handoff" }
+      ]
+    },
+    { "type": "paragraph", "content": "Customer form mode saves the email and pathway tags in Shopify. Forms handoff mode opens your published Shopify Forms landing page after the result." },
+    { "type": "url", "id": "shopify_forms_url", "label": "Shopify Forms landing page" },
+    { "type": "checkbox", "id": "open_forms_new_tab", "label": "Open Forms in a new tab", "default": false },
+    { "type": "text", "id": "forms_cta_label", "label": "Shopify Forms button", "default": "Continue with VECTRA" },
+    { "type": "text", "id": "native_cta_label", "label": "Customer form button", "default": "Save my result" },
+    { "type": "text", "id": "customer_tag", "label": "Base customer tag", "default": "VECTRA SCDD lead" },
+    { "type": "text", "id": "submit_success", "label": "Submission success", "default": "Thank you. Your result has been saved and the VECTRA team can now follow up." },
+    { "type": "header", "content": "Result copy" },
+    { "type": "text", "id": "level_1_heading", "label": "Level 1 heading", "default": "Build a dependable baseline." },
+    { "type": "textarea", "id": "level_1_body", "label": "Level 1 text", "default": "Your responses suggest that key responsible sourcing structures are still being established or formalized." },
+    { "type": "text", "id": "level_2_heading", "label": "Level 2 heading", "default": "Validate how your controls work." },
+    { "type": "textarea", "id": "level_2_body", "label": "Level 2 text", "default": "Your organization appears to have several structures in place, with an opportunity to test consistency, evidence and implementation." },
+    { "type": "text", "id": "level_3_heading", "label": "Level 3 heading", "default": "Turn complexity into an action plan." },
+    { "type": "textarea", "id": "level_3_body", "label": "Level 3 text", "default": "Your answers indicate an advanced, urgent or implementation-focused need that is better shaped with direct expert support." },
+    { "type": "textarea", "id": "result_note", "label": "Result note", "default": "This is a screening recommendation, not a legal opinion, assurance conclusion or complete maturity assessment." },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#f3f5f3" },
+    { "type": "color", "id": "card_color", "label": "Card", "default": "#ffffff" },
+    { "type": "color", "id": "navy_color", "label": "Navy", "default": "#082946" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#55c900" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#15364f" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#667685" },
+    { "type": "color", "id": "border_color", "label": "Borders", "default": "#dce4dd" },
+    { "type": "color", "id": "grid_color", "label": "Grid", "default": "#082946" },
+    { "type": "range", "id": "content_width", "min": 760, "max": 1200, "step": 20, "unit": "px", "label": "Content width", "default": 1200 },
+    { "type": "range", "id": "corner_radius", "min": 0, "max": 32, "step": 2, "unit": "px", "label": "Card corners", "default": 24 },
+    { "type": "range", "id": "padding_top", "min": 40, "max": 160, "step": 8, "unit": "px", "label": "Top spacing", "default": 104 },
+    { "type": "range", "id": "padding_bottom", "min": 40, "max": 160, "step": 8, "unit": "px", "label": "Bottom spacing", "default": 112 }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "category", "label": "Category", "default": "Understand" },
+        { "type": "textarea", "id": "question", "label": "Question", "default": "Add your question" },
+        { "type": "textarea", "id": "helper", "label": "Helper text" },
+        { "type": "text", "id": "option_1", "label": "Option 1", "default": "Not yet" },
+        { "type": "range", "id": "score_1", "label": "Option 1 score", "min": 0, "max": 3, "step": 1, "default": 0 },
+        { "type": "text", "id": "option_2", "label": "Option 2", "default": "Starting to develop" },
+        { "type": "range", "id": "score_2", "label": "Option 2 score", "min": 0, "max": 3, "step": 1, "default": 1 },
+        { "type": "text", "id": "option_3", "label": "Option 3", "default": "Partly established" },
+        { "type": "range", "id": "score_3", "label": "Option 3 score", "min": 0, "max": 3, "step": 1, "default": 2 },
+        { "type": "text", "id": "option_4", "label": "Option 4", "default": "Consistently established" },
+        { "type": "range", "id": "score_4", "label": "Option 4 score", "min": 0, "max": 3, "step": 1, "default": 3 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA interactive quiz",
+      "blocks": [
+        { "type": "question", "settings": { "category": "Understand", "question": "What sector does your organization operate in?", "helper": "This helps VECTRA understand the risk profile and benchmarks most relevant to you.", "option_1": "Agriculture, food or commodities", "score_1": 0, "option_2": "Apparel, retail or consumer goods", "score_2": 0, "option_3": "Manufacturing, construction or industrial", "score_3": 0, "option_4": "Technology, services or another sector", "score_4": 0 } },
+        { "type": "question", "settings": { "category": "Understand", "question": "Do you currently conduct formal supply chain risk assessments?", "helper": "Consider documented assessments that are repeated or updated, not one-off conversations.", "option_1": "No formal assessment yet", "score_1": 0, "option_2": "Informally or only when an issue arises", "score_2": 1, "option_3": "Yes, for selected risks or business units", "score_3": 2, "option_4": "Yes, through a consistent enterprise process", "score_4": 3 } },
+        { "type": "question", "settings": { "category": "Understand", "question": "How far into your supply chain do you have reliable visibility?", "helper": "Choose the answer that best reflects what you can identify and monitor today.", "option_1": "Mostly direct suppliers only", "score_1": 0, "option_2": "Some visibility beyond direct suppliers", "score_2": 1, "option_3": "Multiple tiers for priority categories", "score_3": 2, "option_4": "Mapped and monitored across relevant tiers", "score_4": 3 } },
+        { "type": "question", "settings": { "category": "Plan", "question": "Do you have a documented responsible sourcing or ESG policy?", "helper": "This may be a standalone policy or part of a broader governance framework.", "option_1": "Not yet", "score_1": 0, "option_2": "Informal expectations exist", "score_2": 1, "option_3": "Yes, it is documented and communicated", "score_3": 2, "option_4": "Yes, with ownership, review and oversight", "score_4": 3 } },
+        { "type": "question", "settings": { "category": "Plan", "question": "Is there a named owner for compliance or ESG within your organization?", "helper": "Think about accountability, authority and access to decision-makers—not only a job title.", "option_1": "No clear owner", "score_1": 0, "option_2": "Responsibility is shared informally", "score_2": 1, "option_3": "A named owner exists with a defined remit", "score_3": 2, "option_4": "A cross-functional owner has authority and oversight", "score_4": 3 } },
+        { "type": "question", "settings": { "category": "Act", "question": "Do you assess suppliers against a code of conduct or equivalent standard?", "helper": "Include audits, visits, evidence reviews and other structured supplier engagement.", "option_1": "Not currently", "score_1": 0, "option_2": "Only after incidents or customer requests", "score_2": 1, "option_3": "Yes, for selected or higher-risk suppliers", "score_3": 2, "option_4": "Yes, through a consistent risk-based program", "score_4": 3 } },
+        { "type": "question", "settings": { "category": "Act", "question": "Do you have a grievance and remediation mechanism in place?", "helper": "Consider whether workers and affected stakeholders can access it and whether outcomes are tracked.", "option_1": "No mechanism yet", "score_1": 0, "option_2": "Issues are handled informally", "score_2": 1, "option_3": "A documented channel exists", "score_3": 2, "option_4": "It is accessible, tracked and linked to remediation", "score_4": 3 } },
+        { "type": "question", "settings": { "category": "Improve", "question": "Do you track and report compliance or responsible sourcing KPIs over time?", "helper": "Examples include supplier coverage, findings, corrective actions and remediation progress.", "option_1": "We do not track formal KPIs", "score_1": 0, "option_2": "We collect some data when needed", "score_2": 1, "option_3": "We review a defined set of KPIs regularly", "score_3": 2, "option_4": "KPIs have targets, ownership and leadership review", "score_4": 3 } },
+        { "type": "question", "settings": { "category": "Improve", "question": "Are you responding to a specific compliance deadline or regulatory driver?", "helper": "For example: CSDDD, CSRD, EUDR, customer requirements or another active obligation.", "option_1": "No immediate driver", "score_1": 0, "option_2": "We are monitoring requirements", "score_2": 1, "option_3": "Yes, preparation is already underway", "score_3": 2, "option_4": "Yes, we have an active or near-term deadline", "score_4": 3 } },
+        { "type": "question", "settings": { "category": "Intent", "question": "What would be most useful to your organization right now?", "helper": "Your goal helps determine whether a self-assessment or expert-led path is the better next step.", "option_1": "Establish a benchmark and understand our starting point", "score_1": 1, "option_2": "Prepare for a regulation or customer requirement", "score_2": 2, "option_3": "Validate our existing controls and evidence", "score_3": 2, "option_4": "Work directly with an expert on implementation", "score_4": 3 } }
+      ]
+    }
+  ]
+}
+{% endschema %}
