@@ -1,0 +1,1159 @@
+{% comment %}
+VECTRA testimonials. Install as sections/vectra-testimonials.liquid.
+Self-contained Online Store 2.0 section; no JavaScript or snippets required.
+Source: VECTRA legacy risk assessment page; concise quote excerpts and case summaries.
+Company URLs/logos intentionally blank pending exact company identification.
+Add verified company websites and upload logos within each Testimonial block.
+Advanced design block is optional: all its settings have layout defaults.
+{% endcomment %}
+{% liquid
+  assign s = section.settings
+  assign stories = section.blocks | where: 'type', 'testimonial'
+  assign design_block = section.blocks | where: 'type', 'design' | first
+  assign d = design_block.settings
+  assign appearance_block = section.blocks | where: 'type', 'appearance' | first
+  assign a = appearance_block.settings
+  assign columns = s.columns | plus: 0 | at_most: stories.size | at_least: 1
+  case s.font_family
+    when 'body'
+      assign story_font = 'var(--font-body-family, Arial, sans-serif)'
+    when 'heading'
+      assign story_font = 'var(--font-heading-family, Arial, sans-serif)'
+    else
+      assign story_font = "'Poppins', var(--font-body-family, Arial, sans-serif)"
+  endcase
+%}
+<section id="VStories-{{ section.id }}" class="vts vts--{{ s.layout }} vts--{{ s.card_design }} vts--align-{{ s.alignment }} vts--bg-{{ s.background_design }}{% if s.hover_effect %} vts--hover{% endif %}{% if s.shadow %} vts--shadow{% endif %}"
+  {% if s.heading != blank %}aria-labelledby="VStoriesHeading-{{ section.id }}"{% endif %}>
+  <div class="vts__backdrop" aria-hidden="true" {{ appearance_block.shopify_attributes }}></div>
+  <div class="vts__shell" {{ design_block.shopify_attributes }}>
+    <header class="vts__header">
+      {% if s.eyebrow != blank %}<p class="vts__eyebrow">{{ s.eyebrow | escape }}</p>{% endif %}
+      {% if s.heading != blank %}<h2 id="VStoriesHeading-{{ section.id }}">{{ s.heading | escape }}</h2>{% endif %}
+      {% if s.subheading != blank %}<div class="vts__intro">{{ s.subheading }}</div>{% endif %}
+    </header>
+    {% if stories.size > 0 %}
+      <div class="vts__grid">
+        {% for block in stories %}
+          {% liquid
+            assign b = block.settings
+            assign logo_alt = b.logo.alt | default: b.company
+            assign portrait_alt = b.portrait.alt | default: b.person
+            assign initials = b.logo_initials | default: b.company | slice: 0, 3
+            assign person_initial = b.person | slice: 0, 1
+          %}
+          <article class="vts__card" {% if b.custom_colors %}style="--card: {{ b.card_color }}; --ink: {{ b.heading_color }}; --body: {{ b.body_color }}; --accent: {{ b.accent_color }}; --line: {{ b.border_color }}; --result-bg: {{ b.result_background }}; --result-ink: {{ b.result_color }}; --logo-bg: {{ b.logo_background }}; --logo-ink: {{ b.logo_color }}; --link: {{ b.link_color }}; --badge-bg: {{ b.badge_background }}; --badge-ink: {{ b.badge_color }};"{% endif %} {{ block.shopify_attributes }}>
+            <div class="vts__card-top">
+              {% if b.category != blank %}<span class="vts__category">{{ b.category | escape }}</span>{% endif %}
+              {% if s.quote_mark %}<span class="vts__quote-mark" aria-hidden="true">“</span>{% endif %}
+            </div>
+            {% if s.show_logos and b.company != blank or s.show_logos and b.logo != blank %}
+              <div class="vts__brand">
+                {% if b.company_url != blank %}<a class="vts__brand-link" href="{{ b.company_url | escape }}" {% if s.new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>{% endif %}
+                  {% if b.logo != blank %}
+                    {{ b.logo | image_url: width: 600 | image_tag: widths: '120, 240, 360, 600', sizes: '240px', alt: logo_alt, loading: 'lazy', class: 'vts__logo' }}
+                  {% else %}
+                    <span class="vts__logo-fallback" aria-hidden="true">{{ initials | escape }}</span><span class="vts__brand-name">{{ b.company | escape }}</span>
+                  {% endif %}
+                  {% if b.company_url != blank %}<span class="vts__sr">{{ b.company | escape }} website{% if s.new_tab %} (opens in a new tab){% endif %}</span>{% endif %}
+                {% if b.company_url != blank %}</a>{% endif %}
+              </div>
+            {% endif %}
+            {% if b.title != blank %}<h3>{{ b.title | escape }}</h3>{% endif %}
+            {% if s.show_results and b.result != blank %}
+              <div class="vts__result">
+                {% if s.result_label != blank %}<p class="vts__result-label">{{ s.result_label | escape }}</p>{% endif %}
+                <p class="vts__result-value">{{ b.result | escape }}</p>
+                {% if b.result_detail != blank %}<p class="vts__result-detail">{{ b.result_detail | escape }}</p>{% endif %}
+              </div>
+            {% endif %}
+            {% if b.summary != blank %}<div class="vts__summary">{{ b.summary }}</div>{% endif %}
+            {% if b.quote != blank %}
+              <figure class="vts__quote">
+                <blockquote><p>“{{ b.quote | escape | newline_to_br }}”</p></blockquote>
+                {% if b.person != blank or b.role != blank or b.company != blank %}
+                  <figcaption class="vts__attribution">
+                    {% if s.show_portraits and b.person != blank %}
+                      {% if b.portrait != blank %}{{ b.portrait | image_url: width: 160 | image_tag: widths: '80, 160', sizes: '48px', alt: portrait_alt, loading: 'lazy', class: 'vts__portrait' }}{% else %}<span class="vts__avatar" aria-hidden="true">{{ person_initial | escape }}</span>{% endif %}
+                    {% endif %}
+                    <span class="vts__person"><strong>{{ b.person | escape }}</strong>{% if b.role != blank %}<span>{{ b.role | escape }}</span>{% endif %}{% if b.company != blank %}<span>{{ b.company | escape }}</span>{% endif %}</span>
+                  </figcaption>
+                {% endif %}
+              </figure>
+            {% elsif b.person != blank %}
+              <p class="vts__person vts__attribution"><strong>{{ b.person | escape }}</strong>{% if b.role != blank %}<span>{{ b.role | escape }}</span>{% endif %}{% if b.company != blank %}<span>{{ b.company | escape }}</span>{% endif %}</p>
+            {% endif %}
+            {% if s.show_timelines and b.timeline != blank or b.company_url != blank or b.story_url != blank %}
+              <footer class="vts__card-footer">
+                {% if s.show_timelines and b.timeline != blank %}<p class="vts__timeline">{% if s.timeline_label != blank %}<span>{{ s.timeline_label | escape }}</span>{% endif %}{{ b.timeline | escape }}</p>{% endif %}
+                {% if b.company_url != blank or b.story_url != blank %}
+                  <div class="vts__links">
+                    {% if b.company_url != blank %}<a href="{{ b.company_url | escape }}" {% if s.new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ b.website_label | default: s.website_label | escape }}<span aria-hidden="true"> ↗</span><span class="vts__sr"> — {{ b.company | escape }}{% if s.new_tab %} (opens in a new tab){% endif %}</span></a>{% endif %}
+                    {% if b.story_url != blank %}<a href="{{ b.story_url | escape }}" {% if s.new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ b.story_label | default: s.story_label | escape }}<span aria-hidden="true"> ↗</span><span class="vts__sr"> — {{ b.company | escape }}{% if s.new_tab %} (opens in a new tab){% endif %}</span></a>{% endif %}
+                  </div>
+                {% endif %}
+              </footer>
+            {% endif %}
+            {% if request.design_mode and b.company_url == blank %}<p class="vts__editor-note">Add the verified company website and upload its logo in this testimonial block.</p>{% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if s.footer_text != blank or s.cta_url != blank %}
+      <div class="vts__footer">
+        {% if s.footer_text != blank %}<div>{{ s.footer_text }}</div>{% endif %}
+        {% if s.cta_url != blank %}<a class="vts__cta" href="{{ s.cta_url | escape }}">{{ s.cta_label | default: 'Start pre-assessment' | escape }} <span aria-hidden="true">→</span></a>{% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% style %}
+  #VStories-{{ section.id }} {
+    --bg: {{ s.background_color }}; --card: {{ s.card_color }}; --ink: {{ s.heading_color }}; --body: {{ s.body_color }};
+    --accent: {{ s.accent_color }}; --line: {{ s.border_color }}; --eyebrow: {{ s.eyebrow_color }};
+    --result-bg: {{ s.result_background }}; --result-ink: {{ s.result_color }};
+    --logo-bg: {{ a.logo_background | default: '#edf2ef' }}; --logo-ink: {{ a.logo_color | default: '#082946' }};
+    --badge-bg: {{ a.badge_background | default: '#edf2ef' }}; --badge-ink: {{ a.badge_color | default: '#345267' }}; --link: {{ d.link_color | default: '#082946' }};
+    --gap: {{ d.card_gap | default: 24 }}px; --radius: {{ d.card_radius | default: 22 }}px;
+    position: relative; isolation: isolate; overflow: hidden; background: var(--bg); color: var(--body); font-family: {{ story_font }};
+    padding: {{ d.padding_top | default: 88 }}px {{ d.side_padding | default: 24 }}px {{ d.padding_bottom | default: 88 }}px;
+  }
+  #VStories-{{ section.id }} *, #VStories-{{ section.id }} *::before, #VStories-{{ section.id }} *::after { box-sizing: border-box; }
+  #VStories-{{ section.id }} .vts__shell { position: relative; z-index: 1; max-width: {{ d.content_width | default: 1260 }}px; margin-inline: auto; }
+  #VStories-{{ section.id }} .vts__header { max-width: {{ d.header_width | default: 800 }}px; margin-bottom: {{ d.header_gap | default: 48 }}px; text-align: {{ s.alignment }}; }
+  #VStories-{{ section.id }}.vts--align-center .vts__header { margin-inline: auto; }
+  #VStories-{{ section.id }} .vts__eyebrow { margin: 0 0 18px; font-size: {{ d.eyebrow_size | default: 11 }}px; font-weight: 800; letter-spacing: .17em; line-height: 1.4; text-transform: uppercase; color: var(--eyebrow); }
+  #VStories-{{ section.id }} h2 { margin: 0; font-family: inherit; font-size: clamp({{ s.heading_mobile }}px, 5vw, {{ s.heading_size }}px); line-height: 1.06; font-weight: 800; letter-spacing: -.045em; text-wrap: balance; color: var(--ink); }
+  #VStories-{{ section.id }} .vts__intro { margin-top: 22px; font-size: {{ d.intro_size | default: 15 }}px; line-height: 1.7; }
+  #VStories-{{ section.id }} .vts__intro > :last-child, #VStories-{{ section.id }} .vts__summary > :last-child, #VStories-{{ section.id }} .vts__footer p:last-child { margin-bottom: 0; }
+  #VStories-{{ section.id }} .vts__grid { display: grid; grid-template-columns: repeat({{ columns }},minmax(0,1fr)); gap: var(--gap); align-items: stretch; }
+  #VStories-{{ section.id }} .vts__card { position: relative; min-width: 0; display: flex; flex-direction: column; padding: {{ d.card_padding | default: 30 }}px; border: {{ d.border_width | default: 1 }}px solid var(--line); border-radius: var(--radius); background: var(--card); color: var(--body); overflow-wrap: anywhere; transition: transform .25s ease, box-shadow .25s ease; }
+  #VStories-{{ section.id }}.vts--shadow .vts__card { box-shadow: 0 14px 44px rgb(8 41 70 / .06); }
+  #VStories-{{ section.id }} .vts__card::before { content: ''; position: absolute; top: 0; left: var(--radius); right: var(--radius); height: {{ d.accent_thickness | default: 3 }}px; background: var(--accent); border-radius: 0 0 4px 4px; pointer-events: none; }
+  #VStories-{{ section.id }}.vts--minimal .vts__card { box-shadow: none; border-color: transparent; }
+  #VStories-{{ section.id }}.vts--outline .vts__result { background: transparent; border: 1px solid var(--line); }
+  #VStories-{{ section.id }} .vts__card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; min-height: 30px; }
+  #VStories-{{ section.id }} .vts__category { padding: 6px 10px; border-radius: {{ d.badge_radius | default: 40 }}px; background: var(--badge-bg); color: var(--badge-ink); font-size: 11px; line-height: 1.5; font-weight: 600; }
+  #VStories-{{ section.id }} .vts__quote-mark { margin-left: auto; height: 34px; font: 64px/.95 Georgia,serif; color: var(--accent); }
+  #VStories-{{ section.id }} .vts__brand { display: flex; align-items: center; min-height: {{ d.logo_height | default: 48 }}px; margin-bottom: 24px; }
+  #VStories-{{ section.id }} .vts__brand-link { display: flex; align-items: center; gap: 12px; max-width: 100%; color: var(--ink); text-decoration: none; }
+  #VStories-{{ section.id }} .vts__logo { display: block; width: auto; max-width: min(100%, {{ d.logo_width | default: 200 }}px); height: {{ d.logo_height | default: 48 }}px; object-fit: contain; object-position: left center; }
+  #VStories-{{ section.id }} .vts__logo-fallback { display: grid; place-items: center; flex-shrink: 0; width: {{ d.logo_height | default: 48 }}px; height: {{ d.logo_height | default: 48 }}px; margin-right: 12px; border-radius: 10px; color: var(--logo-ink); background: var(--logo-bg); font-size: 14px; font-weight: 800; letter-spacing: -.03em; }
+  #VStories-{{ section.id }} .vts__brand-link .vts__logo-fallback { margin-right: 0; }
+  #VStories-{{ section.id }} .vts__brand-name { color: var(--ink); font-size: 13px; line-height: 1.4; font-weight: 700; }
+  #VStories-{{ section.id }} h3 { margin: 0 0 22px; font-family: inherit; color: var(--ink); font-size: {{ d.title_size | default: 24 }}px; font-weight: 750; line-height: 1.25; letter-spacing: -.035em; text-wrap: pretty; }
+  #VStories-{{ section.id }} .vts__result { padding: 20px; background: var(--result-bg); color: var(--result-ink); border-radius: {{ d.result_radius | default: 14 }}px; margin-bottom: 22px; }
+  #VStories-{{ section.id }} .vts__result-label { margin: 0 0 8px; font-size: 10px; line-height: 1.5; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+  #VStories-{{ section.id }} .vts__result-value { margin: 0; font-size: {{ d.result_size | default: 30 }}px; line-height: 1.15; font-weight: 800; letter-spacing: -.04em; }
+  #VStories-{{ section.id }} .vts__result-detail { margin: 10px 0 0; font-size: 12px; line-height: 1.6; }
+  #VStories-{{ section.id }} .vts__summary { margin-bottom: 22px; font-size: {{ s.body_size }}px; line-height: 1.75; }
+  #VStories-{{ section.id }} .vts__quote { margin: 0 0 24px; }
+  #VStories-{{ section.id }} blockquote { margin: 0; padding: 0 0 0 16px; border: 0; border-left: 2px solid var(--accent); color: var(--ink); font-size: {{ d.quote_size | default: 18 }}px; line-height: 1.65; font-style: {{ a.quote_style | default: 'normal' }}; }
+  #VStories-{{ section.id }} blockquote p { margin: 0; }
+  #VStories-{{ section.id }} .vts__attribution { display: flex; gap: 12px; align-items: center; margin: 24px 0 0; }
+  #VStories-{{ section.id }} .vts__person { display: flex; flex-direction: column; gap: 3px; min-width: 0; font-size: 12px; line-height: 1.55; }
+  #VStories-{{ section.id }} .vts__person strong { color: var(--ink); font-size: {{ d.person_size | default: 14 }}px; font-weight: 700; }
+  #VStories-{{ section.id }} .vts__portrait, #VStories-{{ section.id }} .vts__avatar { display: grid; place-items: center; width: {{ d.portrait_size | default: 48 }}px; height: {{ d.portrait_size | default: 48 }}px; flex-shrink: 0; object-fit: cover; border-radius: 50%; background: var(--logo-bg); color: var(--logo-ink); font-weight: 700; }
+  #VStories-{{ section.id }} .vts__card-footer { margin-top: auto; border-top: 1px solid var(--line); padding-top: 20px; }
+  #VStories-{{ section.id }} .vts__timeline { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; font-size: 12px; line-height: 1.6; }
+  #VStories-{{ section.id }} .vts__timeline > span { color: var(--ink); font-weight: 700; }
+  #VStories-{{ section.id }} .vts__links { display: flex; gap: 10px 20px; flex-wrap: wrap; margin-top: 8px; }
+  #VStories-{{ section.id }} .vts__links a { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; color: var(--link); font-size: 12px; line-height: 1.5; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+  #VStories-{{ section.id }} a:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+  #VStories-{{ section.id }} .vts__summary a, #VStories-{{ section.id }} .vts__intro a { color: inherit; text-decoration: underline; }
+  #VStories-{{ section.id }} .vts__footer { display: flex; align-items: center; justify-content: {{ s.alignment }}; flex-wrap: wrap; gap: 24px; margin-top: {{ d.footer_gap | default: 40 }}px; font-size: {{ s.body_size }}px; line-height: 1.7; }
+  #VStories-{{ section.id }} .vts__footer a:not(.vts__cta) { color: inherit; text-decoration: underline; }
+  #VStories-{{ section.id }} .vts__cta { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 44px; padding: 14px 22px; border-radius: {{ d.button_radius | default: 10 }}px; background: {{ d.button_background | default: '#082946' }}; color: {{ d.button_color | default: '#ffffff' }}; text-decoration: none; font-size: 13px; font-weight: 700; line-height: 1.5; }
+  #VStories-{{ section.id }} .vts__cta:hover { background: {{ a.button_hover_background | default: '#55c900' }}; color: {{ a.button_hover_color | default: '#082946' }}; }
+  #VStories-{{ section.id }} .vts__backdrop { position: absolute; inset: 0; pointer-events: none; opacity: {{ a.design_opacity | default: 50 | divided_by: 100.0 }}; }
+  #VStories-{{ section.id }}.vts--bg-glow .vts__backdrop { background: radial-gradient(ellipse at 0% 100%, {{ d.design_color | default: '#55c900' | color_modify: 'alpha', 0.18 }},transparent 65%),radial-gradient(ellipse at 100% 0%, {{ d.design_secondary | default: '#082946' | color_modify: 'alpha', 0.08 }},transparent 55%); }
+  #VStories-{{ section.id }}.vts--bg-grid .vts__backdrop { background-image: linear-gradient({{ d.design_color | default: '#55c900' | color_modify: 'alpha', 0.13 }} 1px,transparent 1px),linear-gradient(90deg, {{ d.design_secondary | default: '#082946' | color_modify: 'alpha', 0.09 }} 1px,transparent 1px); background-size: 48px 48px; }
+  #VStories-{{ section.id }}.vts--bg-bands .vts__backdrop { background: linear-gradient(150deg,transparent 30%, {{ d.design_color | default: '#55c900' | color_modify: 'alpha', 0.12 }} 30%, {{ d.design_color | default: '#55c900' | color_modify: 'alpha', 0.12 }} 46%,transparent 46%,transparent 54%, {{ d.design_secondary | default: '#082946' | color_modify: 'alpha', 0.07 }} 54%, {{ d.design_secondary | default: '#082946' | color_modify: 'alpha', 0.07 }} 66%,transparent 66%); }
+  #VStories-{{ section.id }} .vts__editor-note { font-size: 11px; line-height: 1.5; margin: 16px 0 0; }
+  #VStories-{{ section.id }} .vts__sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  @media (min-width: 990px) {
+    #VStories-{{ section.id }}.vts--featured .vts__grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    #VStories-{{ section.id }}.vts--featured .vts__card:first-child { grid-column: 1 / -1; }
+    #VStories-{{ section.id }}.vts--featured .vts__card:first-child .vts__result-value { font-size: {{ d.featured_result_size | default: 44 }}px; }
+  }
+  #VStories-{{ section.id }}.vts--stacked .vts__grid { grid-template-columns: minmax(0,1fr); }
+  @media (min-width: 750px) and (max-width: 989px) { #VStories-{{ section.id }}:not(.vts--stacked) .vts__grid { grid-template-columns: repeat({{ columns | at_most: 2 }},minmax(0,1fr)); } }
+  @media (max-width: 749px) {
+    #VStories-{{ section.id }} { padding: {{ d.mobile_padding_top | default: 48 }}px 16px {{ d.mobile_padding_bottom | default: 48 }}px; }
+    #VStories-{{ section.id }} .vts__grid { grid-template-columns: minmax(0,1fr); }
+    #VStories-{{ section.id }} .vts__card { padding: {{ d.mobile_card_padding | default: 24 }}px; }
+    #VStories-{{ section.id }} .vts__header { margin-bottom: 32px; }
+    #VStories-{{ section.id }} h2 { font-size: {{ s.heading_mobile }}px; }
+  }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) { #VStories-{{ section.id }}.vts--hover .vts__card:hover { transform: translateY(-4px); box-shadow: 0 20px 44px rgb(8 41 70 / .09); } }
+  @media (prefers-reduced-motion: reduce) { #VStories-{{ section.id }} .vts__card { transition: none; } }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "VECTRA testimonials",
+  "tag": "section",
+  "class": "section-vectra-testimonials",
+  "max_blocks": 14,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Edit each Testimonial block for story content, company website, logo and individual colors. Extra layout controls are in the Advanced design block."
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Client success stories"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Confidence to move forward."
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Hear how our clients have addressed risk and strengthened their businesses.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "footer_text",
+      "label": "Footer text"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Footer button label",
+      "default": "Start pre-assessment"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Footer button link",
+      "info": "Select a page or enter your existing quiz anchor."
+    },
+    {
+      "type": "header",
+      "content": "Design and layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Story layout",
+      "options": [
+        {
+          "value": "grid",
+          "label": "Equal cards"
+        },
+        {
+          "value": "featured",
+          "label": "Featured first story"
+        },
+        {
+          "value": "stacked",
+          "label": "Stacked stories"
+        }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Grid columns on desktop",
+      "options": [
+        {
+          "value": "1",
+          "label": "One"
+        },
+        {
+          "value": "2",
+          "label": "Two"
+        },
+        {
+          "value": "3",
+          "label": "Three"
+        }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "select",
+      "id": "card_design",
+      "label": "Card design",
+      "options": [
+        {
+          "value": "filled",
+          "label": "Soft result panels"
+        },
+        {
+          "value": "outline",
+          "label": "Outlined result panels"
+        },
+        {
+          "value": "minimal",
+          "label": "Minimal cards"
+        }
+      ],
+      "default": "filled"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Header and footer alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "background_design",
+      "label": "Background design",
+      "options": [
+        {
+          "value": "plain",
+          "label": "Plain"
+        },
+        {
+          "value": "glow",
+          "label": "Soft glow"
+        },
+        {
+          "value": "grid",
+          "label": "Technical grid"
+        },
+        {
+          "value": "bands",
+          "label": "Diagonal bands"
+        }
+      ],
+      "default": "glow"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Font family",
+      "options": [
+        {
+          "value": "body",
+          "label": "Theme body"
+        },
+        {
+          "value": "heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "poppins",
+          "label": "Poppins (if loaded by theme)"
+        }
+      ],
+      "default": "poppins"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_logos",
+      "label": "Show company logos / initials",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_portraits",
+      "label": "Show speaker portraits / initials",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_results",
+      "label": "Show results",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_timelines",
+      "label": "Show timelines",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "quote_mark",
+      "label": "Show decorative quotation marks",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "new_tab",
+      "label": "Open company and story links in new tab",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hover_effect",
+      "label": "Lift cards on hover",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "shadow",
+      "label": "Soft card shadows",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "result_label",
+      "label": "Result label",
+      "default": "Outcome"
+    },
+    {
+      "type": "text",
+      "id": "timeline_label",
+      "label": "Timeline label",
+      "default": "Timeline:"
+    },
+    {
+      "type": "text",
+      "id": "website_label",
+      "label": "Company website link label",
+      "default": "Company website"
+    },
+    {
+      "type": "text",
+      "id": "story_label",
+      "label": "Case study link label",
+      "default": "Read the story"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Desktop heading size",
+      "min": 32,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 58
+    },
+    {
+      "type": "range",
+      "id": "heading_mobile",
+      "label": "Mobile heading size",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Body text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_color",
+      "label": "Card background",
+      "default": "#fbfcfb"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Headings and quote text",
+      "default": "#082946"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body text",
+      "default": "#596d80"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent",
+      "default": "#398600"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Borders",
+      "default": "#dce4dd"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow",
+      "default": "#398600"
+    },
+    {
+      "type": "color",
+      "id": "result_background",
+      "label": "Result panel background",
+      "default": "#eaf5e2"
+    },
+    {
+      "type": "color",
+      "id": "result_color",
+      "label": "Result panel text",
+      "default": "#214600"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Story content"
+        },
+        {
+          "type": "text",
+          "id": "company",
+          "label": "Company name",
+          "default": "Company name"
+        },
+        {
+          "type": "text",
+          "id": "logo_initials",
+          "label": "Logo placeholder initials"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Company logo"
+        },
+        {
+          "type": "url",
+          "id": "company_url",
+          "label": "Verified company website"
+        },
+        {
+          "type": "text",
+          "id": "website_label",
+          "label": "Override website link label"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category badge"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Story title",
+          "default": "A clearer path forward"
+        },
+        {
+          "type": "text",
+          "id": "result",
+          "label": "Main outcome"
+        },
+        {
+          "type": "text",
+          "id": "result_detail",
+          "label": "Outcome supporting text"
+        },
+        {
+          "type": "text",
+          "id": "timeline",
+          "label": "Timeline"
+        },
+        {
+          "type": "richtext",
+          "id": "summary",
+          "label": "Case summary"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Client quote"
+        },
+        {
+          "type": "text",
+          "id": "person",
+          "label": "Speaker name"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Speaker title"
+        },
+        {
+          "type": "image_picker",
+          "id": "portrait",
+          "label": "Speaker portrait (optional)"
+        },
+        {
+          "type": "url",
+          "id": "story_url",
+          "label": "Full case study link"
+        },
+        {
+          "type": "text",
+          "id": "story_label",
+          "label": "Override case study link label"
+        },
+        {
+          "type": "header",
+          "content": "Optional card color overrides"
+        },
+        {
+          "type": "checkbox",
+          "id": "custom_colors",
+          "label": "Use custom colors for this story",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "card_color",
+          "label": "Card background",
+          "default": "#fbfcfb"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Headings and quote text",
+          "default": "#082946"
+        },
+        {
+          "type": "color",
+          "id": "body_color",
+          "label": "Body text",
+          "default": "#596d80"
+        },
+        {
+          "type": "color",
+          "id": "accent_color",
+          "label": "Accent",
+          "default": "#398600"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Borders",
+          "default": "#dce4dd"
+        },
+        {
+          "type": "color",
+          "id": "result_background",
+          "label": "Result panel background",
+          "default": "#eaf5e2"
+        },
+        {
+          "type": "color",
+          "id": "result_color",
+          "label": "Result panel text",
+          "default": "#214600"
+        },
+        {
+          "type": "color",
+          "id": "logo_background",
+          "label": "Logo / avatar placeholder background",
+          "default": "#edf2ef"
+        },
+        {
+          "type": "color",
+          "id": "logo_color",
+          "label": "Logo / avatar placeholder text",
+          "default": "#082946"
+        },
+        {
+          "type": "color",
+          "id": "link_color",
+          "label": "Company and story links",
+          "default": "#082946"
+        },
+        {
+          "type": "color",
+          "id": "badge_background",
+          "label": "Category background",
+          "default": "#edf2ef"
+        },
+        {
+          "type": "color",
+          "id": "badge_color",
+          "label": "Category text",
+          "default": "#345267"
+        }
+      ]
+    },
+    {
+      "type": "design",
+      "name": "Advanced design",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "color",
+          "id": "link_color",
+          "label": "Company and story links",
+          "default": "#082946"
+        },
+        {
+          "type": "color",
+          "id": "button_background",
+          "label": "Footer button background",
+          "default": "#082946"
+        },
+        {
+          "type": "color",
+          "id": "button_color",
+          "label": "Footer button text",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "design_color",
+          "label": "Background design primary",
+          "default": "#55c900"
+        },
+        {
+          "type": "color",
+          "id": "design_secondary",
+          "label": "Background design secondary",
+          "default": "#082946"
+        },
+        {
+          "type": "header",
+          "content": "Sizing and spacing"
+        },
+        {
+          "type": "range",
+          "id": "content_width",
+          "label": "Content width",
+          "min": 800,
+          "max": 1600,
+          "step": 20,
+          "unit": "px",
+          "default": 1260
+        },
+        {
+          "type": "range",
+          "id": "header_width",
+          "label": "Header width",
+          "min": 400,
+          "max": 1000,
+          "step": 20,
+          "unit": "px",
+          "default": 800
+        },
+        {
+          "type": "range",
+          "id": "header_gap",
+          "label": "Space below header",
+          "min": 24,
+          "max": 96,
+          "step": 4,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "card_gap",
+          "label": "Card gap",
+          "min": 8,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "card_padding",
+          "label": "Card padding",
+          "min": 16,
+          "max": 56,
+          "step": 2,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "mobile_card_padding",
+          "label": "Mobile card padding",
+          "min": 16,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "card_radius",
+          "label": "Card corners",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 22
+        },
+        {
+          "type": "range",
+          "id": "border_width",
+          "label": "Border width",
+          "min": 0,
+          "max": 4,
+          "step": 1,
+          "unit": "px",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "accent_thickness",
+          "label": "Top accent thickness",
+          "min": 0,
+          "max": 8,
+          "step": 1,
+          "unit": "px",
+          "default": 3
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Top spacing",
+          "min": 0,
+          "max": 160,
+          "step": 4,
+          "unit": "px",
+          "default": 88
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Bottom spacing",
+          "min": 0,
+          "max": 160,
+          "step": 4,
+          "unit": "px",
+          "default": 88
+        },
+        {
+          "type": "range",
+          "id": "side_padding",
+          "label": "Desktop side spacing",
+          "min": 16,
+          "max": 80,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_top",
+          "label": "Mobile top spacing",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_bottom",
+          "label": "Mobile bottom spacing",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "eyebrow_size",
+          "label": "Eyebrow size",
+          "min": 10,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 11
+        },
+        {
+          "type": "range",
+          "id": "intro_size",
+          "label": "Subheading size",
+          "min": 13,
+          "max": 22,
+          "step": 1,
+          "unit": "px",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "logo_height",
+          "label": "Logo height",
+          "min": 24,
+          "max": 96,
+          "step": 2,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "logo_width",
+          "label": "Maximum logo width",
+          "min": 100,
+          "max": 300,
+          "step": 10,
+          "unit": "px",
+          "default": 200
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Story title size",
+          "min": 18,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "result_size",
+          "label": "Result text size",
+          "min": 20,
+          "max": 44,
+          "step": 2,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "featured_result_size",
+          "label": "Featured result size",
+          "min": 28,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "default": 44
+        },
+        {
+          "type": "range",
+          "id": "quote_size",
+          "label": "Quote size",
+          "min": 14,
+          "max": 26,
+          "step": 1,
+          "unit": "px",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "person_size",
+          "label": "Speaker name size",
+          "min": 12,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "portrait_size",
+          "label": "Portrait size",
+          "min": 32,
+          "max": 80,
+          "step": 2,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "footer_gap",
+          "label": "Footer spacing",
+          "min": 16,
+          "max": 80,
+          "step": 2,
+          "unit": "px",
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "result_radius",
+          "label": "Result panel corners",
+          "min": 0,
+          "max": 32,
+          "step": 2,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "button_radius",
+          "label": "Footer button corners",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "badge_radius",
+          "label": "Category corners",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 40
+        }
+      ]
+    },
+    {
+      "type": "appearance",
+      "name": "Finishing touches",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "color",
+          "id": "logo_background",
+          "label": "Logo / avatar placeholder background",
+          "default": "#edf2ef"
+        },
+        {
+          "type": "color",
+          "id": "logo_color",
+          "label": "Logo / avatar placeholder text",
+          "default": "#082946"
+        },
+        {
+          "type": "color",
+          "id": "badge_background",
+          "label": "Category background",
+          "default": "#edf2ef"
+        },
+        {
+          "type": "color",
+          "id": "badge_color",
+          "label": "Category text",
+          "default": "#345267"
+        },
+        {
+          "type": "select",
+          "id": "quote_style",
+          "label": "Quote text style",
+          "options": [
+            {
+              "value": "normal",
+              "label": "Regular"
+            },
+            {
+              "value": "italic",
+              "label": "Italic"
+            }
+          ],
+          "default": "normal"
+        },
+        {
+          "type": "range",
+          "id": "design_opacity",
+          "label": "Background design intensity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "color",
+          "id": "button_hover_background",
+          "label": "Footer button hover background",
+          "default": "#55c900"
+        },
+        {
+          "type": "color",
+          "id": "button_hover_color",
+          "label": "Footer button hover text",
+          "default": "#082946"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "company": "TechVenture Startups",
+            "logo_initials": "TV",
+            "category": "Data security",
+            "title": "Building investor confidence",
+            "result": "$15M funding secured",
+            "timeline": "3 months",
+            "summary": "<p>A security review and stronger safeguards helped address investor concerns before a funding round.</p>",
+            "quote": "…we also discovered and fixed vulnerabilities…",
+            "person": "Sarah Johnson",
+            "role": "CEO"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "company": "Global Retail Solutions",
+            "logo_initials": "GR",
+            "category": "Market expansion",
+            "title": "Entering new markets with clarity",
+            "result": "$8M potential loss avoided",
+            "result_detail": "Expansion into two new markets",
+            "timeline": "6 months",
+            "summary": "<p>On-site reviews surfaced overlooked market-entry risks and informed expansion decisions.</p>",
+            "quote": "…helped us successfully launch in two others.",
+            "person": "Robert Martinez",
+            "role": "Operations Director"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "company": "Heritage Insurance Group",
+            "logo_initials": "HI",
+            "category": "Business resilience",
+            "title": "Strengthening cyber resilience",
+            "result": "500K customer records protected",
+            "result_detail": "No breaches reported in the engagement",
+            "timeline": "Partnership ongoing since 2024",
+            "summary": "<p>A review of backups, training, and incident response helped strengthen defenses against an attempted breach.</p>",
+            "quote": "…our systems held strong…",
+            "person": "Linda Park",
+            "role": "CFO"
+          }
+        },
+        {
+          "type": "design"
+        },
+        {
+          "type": "appearance"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
