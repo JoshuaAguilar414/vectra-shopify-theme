@@ -897,10 +897,10 @@
         "button_color": "#ffffff",
         "button_hover_background": "#55c900",
         "button_hover_color": "#082946",
-        "background_style": "glow",
+        "background_style": "bands",
         "design_color": "#55c900",
         "design_secondary": "#082946",
-        "design_opacity": 50
+        "design_opacity": 30
       }
     },
     "ra_pathways_UVC87Q": {
