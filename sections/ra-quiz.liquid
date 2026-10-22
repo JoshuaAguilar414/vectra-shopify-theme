@@ -14,10 +14,10 @@
 
   Shopify integration modes:
   1. Shopify customer form — submits the lead to Shopify and adds the
-     calculated pathway as customer tags. This uses Shopify's native
+     pre-assessment completion as customer tags. This uses Shopify's native
      {% form 'customer' %} endpoint.
   2. Shopify Forms handoff — sends the visitor to a published Shopify Forms
-     inline-form landing page after the result is calculated. Add that page's
+     inline-form landing page after the response summary is calculated. Add that page's
      URL in the section settings.
 
   Shopify Forms does not expose a documented storefront JavaScript submission
@@ -41,6 +41,7 @@
   id="VectraQuiz-{{ section.id }}"
   class="vectra-quiz"
   data-integration-mode="{{ integration_mode }}"
+  data-question-source="{{ section.settings.question_source | default: 'sheet' }}"
   data-question-count="{{ question_count }}"
   data-forms-url="{{ section.settings.shopify_forms_url | escape }}"
   aria-labelledby="VectraQuizHeading-{{ section.id }}"
@@ -52,7 +53,7 @@
       {% endif %}
       <h2 id="VectraQuizHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
       {% if section.settings.intro != blank %}
-        <div class="vectra-quiz__intro-copy">{{ section.settings.intro }}</div>
+        <div class="vectra-quiz__intro-copy">{{ section.settings.intro | replace: "Answer ten focused questions to receive a recommended VECTRA assessment pathway.", "Answer ten core screening questions and two short context questions to establish your self-reported supply chain due diligence baseline." }}</div>
       {% endif %}
       <div class="vectra-quiz__assurance" aria-label="Assessment information">
         <span>
@@ -177,6 +178,7 @@
           </div>
         </div>
 
+        {% if section.settings.question_source == 'custom' %}
         {% assign question_index = 0 %}
         {% for block in section.blocks %}
           {% if block.type == 'question' %}
@@ -186,6 +188,7 @@
               data-panel="question"
               data-question-index="{{ question_index }}"
               data-question-id="{{ block.id }}"
+              data-question-type="{% if block.settings.question_type == 'commercial' %}commercial{% else %}core{% endif %}"
               {{ block.shopify_attributes }}
             >
               <legend class="visually-hidden">Question {{ question_index }}: {{ block.settings.question | escape }}</legend>
@@ -199,7 +202,7 @@
               {% endif %}
 
               <div class="vectra-quiz__options" role="radiogroup" aria-required="true" aria-label="{{ block.settings.question | escape }}">
-                {% for option_number in (1..4) %}
+                {% for option_number in (1..5) %}
                   {% capture option_key %}option_{{ option_number }}{% endcapture %}
                   {% capture score_key %}score_{{ option_number }}{% endcapture %}
                   {% assign option_text = block.settings[option_key] %}
@@ -236,49 +239,48 @@
           {% endif %}
         {% endfor %}
 
+        {% endif %}
         <div class="vectra-quiz__panel" data-panel="review">
           <h3 tabindex="-1">Review your assessment</h3>
           <p class="vectra-quiz__helper">Check your details and answers. You can change anything before submitting.</p>
-          <div class="vectra-quiz__review-lead">
-            <h4>Your details</h4>
+          <details class="vectra-quiz__review-lead vectra-quiz__review-accordion">
+            <summary>Your details — review or edit</summary>
             <dl data-review-details></dl>
             <button class="vectra-quiz__restart" type="button" data-edit-details>Edit details</button>
-          </div>
-          <ol class="vectra-quiz__review-list" data-review-list></ol>
+          </details>
+          <details class="vectra-quiz__review-accordion">
+            <summary>Your answers — review or edit</summary>
+            <ol class="vectra-quiz__review-list" data-review-list></ol>
+          </details>
           <p class="vectra-quiz__required-note" data-review-status role="status"></p>
           <div class="vectra-quiz__actions">
             <button type="button" class="vectra-quiz__button vectra-quiz__button--secondary" data-review-back>Back</button>
-            <button type="button" class="vectra-quiz__button vectra-quiz__button--primary" data-review-continue disabled>See my pathway</button>
+            <button type="button" class="vectra-quiz__button vectra-quiz__button--primary" data-review-continue disabled>See my summary</button>
           </div>
         </div>
         <div class="vectra-quiz__panel vectra-quiz__result" data-panel="result" aria-live="polite">
           <div class="vectra-quiz__result-badge">
-            <span>Recommended pathway</span>
-            <strong data-result-level>Level 1</strong>
+            <span>Pre-assessment complete</span>
+            <strong data-result-level>Self-reported baseline</strong>
           </div>
 
-          <div data-result-copy="1">
-            <p class="vectra-quiz__result-kicker">Level 1 · Diagnose</p>
-            <h3>{{ section.settings.level_1_heading | escape }}</h3>
-            <p>{{ section.settings.level_1_body | escape }}</p>
-            <ul><li>Foundational governance</li><li>Baseline visibility</li><li>Clear starting point</li></ul>
+          <div class="vectra-quiz__baseline-copy">
+            <p class="vectra-quiz__result-kicker">Simplified Level 1 assessment</p>
+            <h3>Your self-reported assessment summary</h3>
+            <div class="vectra-quiz__score-grid">
+              <p><strong data-score-total>—</strong><span>Unweighted response total</span></p>
+              <p><strong data-score-average>—</strong><span>Average response level</span></p>
+            </div>
+            <p>These scores summarize the answers you selected. They do not automatically recommend a service level or verify your supply chain risk.</p>
+            <details class="vectra-quiz__review-accordion">
+              <summary>How the full assessment builds on this</summary>
+              <p><strong>Level 1:</strong> Assess your current position through self-reported answers.</p>
+              <p><strong>Level 2:</strong> VECTRA reviews supporting evidence and may revise the same scores.</p>
+              <p><strong>Level 3:</strong> Consultancy helps implement improvements identified through Level 1 or Level 2. It is not a scored assessment.</p>
+            </details>
           </div>
-          <div data-result-copy="2" hidden>
-            <p class="vectra-quiz__result-kicker">Level 2 · Validate</p>
-            <h3>{{ section.settings.level_2_heading | escape }}</h3>
-            <p>{{ section.settings.level_2_body | escape }}</p>
-            <ul><li>Existing structure</li><li>Evidence validation</li><li>Targeted review</li></ul>
-          </div>
-          <div data-result-copy="3" hidden>
-            <p class="vectra-quiz__result-kicker">Level 3 · Advance</p>
-            <h3>{{ section.settings.level_3_heading | escape }}</h3>
-            <p>{{ section.settings.level_3_body | escape }}</p>
-            <ul><li>Active business driver</li><li>Complex scope</li><li>Expert-led pathway</li></ul>
-          </div>
-
           <div class="vectra-quiz__result-note">
-            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 0 15 7.5 7.5 0 0 0 0-15Zm0 4v4m0 3h.01" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.6"/></svg>
-            <span>{{ section.settings.result_note | escape }}</span>
+            <span>Your scope and supply chain context are recorded separately and do not add points. VECTRA can use your responses to discuss the appropriate next step.</span>
           </div>
 
           <div class="vectra-quiz__actions vectra-quiz__actions--result">
@@ -313,6 +315,9 @@
 
     </div>
   </div>
+<script type="application/json" data-scdd-questionnaire>
+[{"id": "Q1", "type": "core", "category": "Supply Chain Mapping", "question": "The supply chain mapping our organization conducts for purposes of understanding the risk in the supply chain covers the following levels of suppliers:", "options": [{"id": "A", "text": "We have mapped our most critical direct contractors that are core to the products or services offered to our customers", "score": 1}, {"id": "B", "text": "We have mapped all direct contractors in addition to the most critical ones", "score": 2}, {"id": "C", "text": "We have mapped the most critical sub-contractors and suppliers to our direct contractors", "score": 3}, {"id": "D", "text": "We have mapped all sub-contractors and suppliers to our direct contractors in addition to the most critical ones", "score": 4}, {"id": "E", "text": "We have mapped the origination of our most critical raw materials", "score": 5}]}, {"id": "Q2", "type": "core", "category": "Risk Assessments", "question": "We conduct a supply chain risk assessments for due diligence purposes when the following events occur", "options": [{"id": "A", "text": "In response to a particular issue", "score": 1}, {"id": "B", "text": "When entering a new market", "score": 2}, {"id": "C", "text": "In response to new regulations or voluntary standards", "score": 3}, {"id": "D", "text": "Any changes in suppliers", "score": 4}, {"id": "E", "text": "Every new and existing transaction", "score": 5}]}, {"id": "Q3", "type": "core", "category": "Strategy and Goals", "question": "The following best describes our organization’s strategy for responsible business conduct concerning  our supply chain:", "options": [{"id": "A", "text": "We have not established a strategy", "score": 1}, {"id": "B", "text": "We have started developing a strategy", "score": 2}, {"id": "C", "text": "We have established a strategy that addresses the prioritized risks in bringing to market our core goods/services", "score": 3}, {"id": "D", "text": "We have established a strategy that addresses the prioritized risks in bringing to market our core goods/services as well as suppliers we use in running our business.", "score": 4}, {"id": "E", "text": "Our organization has established an overarching vision or purpose that enables the alignment of our strategy for responsible business conduct concerning supply chain issues into our overall business strategy", "score": 5}]}, {"id": "Q4", "type": "core", "category": "Policies Procedures and Records", "question": "Our supplier contracts specifically include provisions that are aligned with the following", "options": [{"id": "A", "text": "Relevant domestic supply chain due diligence laws", "score": 1}, {"id": "B", "text": "Applicable international supply chain  due diligence laws", "score": 2}, {"id": "C", "text": "Supplier code of conduct", "score": 3}, {"id": "D", "text": "Relevant international voluntary standards regarding supply chain  due diligence", "score": 4}, {"id": "E", "text": "Internal policies related to responsible supply chain engagement for minimizing impacts of our suppliers", "score": 5}]}, {"id": "Q5", "type": "core", "category": "Responsible Supply Chain Engagement", "question": "When looking to bring on a new supplier, our organization conducts due diligence regarding the supplier’s ability to manage risks as follows", "options": [{"id": "A", "text": "Due diligence on a new supplier is not conducted regarding risks before a new supplier is approved.", "score": 1}, {"id": "B", "text": "Due Diligence is conducted on a new supplier but not necessarily before contracting", "score": 2}, {"id": "C", "text": "Due Diligence must be completed prior to contracting.", "score": 3}, {"id": "D", "text": "Due Diligence is completed before contracting and there is an agreed upon timeline for remediating any issues found are agreed upon with the new supplier", "score": 4}, {"id": "E", "text": "Due Diligence is completed and all issues remediated before contracting.", "score": 5}]}, {"id": "Q6", "type": "core", "category": "Governance and oversight", "question": "The following describes senior management’s level of involvement in our supply chain human rights due diligence program", "options": [{"id": "A", "text": "Senior management is not involved", "score": 1}, {"id": "B", "text": "They have approved a policy requiring supply chain to adhere with relevant supply chain laws.", "score": 2}, {"id": "C", "text": "They have approved the company policies by risk area, mandated the formation of a supply chain due diligence program and team, and communicate the importance internally", "score": 3}, {"id": "D", "text": "They have approved the company policy or policies, mandated the formation of a supply chain due diligence program and team led by a senior-level employee, and have provided it adequate resources, authority and visible support. They also review implementation of the program at least annually", "score": 4}, {"id": "E", "text": "They fully support the supply chain due diligence team and have regular, ongoing input in and oversight of the program to ensure that it is effective and communicate its importance both internally and externally", "score": 5}]}, {"id": "Q7", "type": "core", "category": "Training and Communication", "question": "Our internal supply chain due diligence training curriculum is customized for audiences based on the following criteria", "options": [{"id": "A", "text": "Whether they interact with supply chain members", "score": 1}, {"id": "B", "text": "Employee function", "score": 2}, {"id": "C", "text": "Employee job level", "score": 3}, {"id": "D", "text": "Employee business unit", "score": 4}, {"id": "E", "text": "Employee location or geography", "score": 5}]}, {"id": "Q8", "type": "core", "category": "Monitoring", "question": "The following best describes how we determine which suppliers will be monitored", "options": [{"id": "A", "text": "We monitor suppliers only on an ‘as-needed’ basis where we have discovered a specific issue or problem", "score": 1}, {"id": "B", "text": "We monitor suppliers from time to time where there have been problems in the past", "score": 2}, {"id": "C", "text": "We routinely monitor  high-risk suppliers", "score": 3}, {"id": "D", "text": "We routinely monitor all suppliers", "score": 4}, {"id": "E", "text": "We routinely engage with all suppliers on their supply chain  performance including all aspect of ESG", "score": 5}]}, {"id": "Q9", "type": "core", "category": "Stakeholder Engagement", "question": "The following best describes our plan for stakeholder engagement related to  due diligence and performance in our supply chain", "options": [{"id": "A", "text": "We don’t have a plan", "score": 1}, {"id": "B", "text": "We have started to develop a plan", "score": 2}, {"id": "C", "text": "We have a plan in place that includes critical international external stakeholders", "score": 3}, {"id": "D", "text": "We have a plan in place that includes international and local/community external stakeholders", "score": 4}, {"id": "E", "text": "We have a plan in place that includes  external stakeholders and is routinely updated as part of a continual improvement process", "score": 5}]}, {"id": "Q10", "type": "core", "category": "Reporting and Disclosure", "question": "The following best describes how we report on our human rights supply chain due diligence program and its results", "options": [{"id": "A", "text": "We do not publicly report", "score": 1}, {"id": "B", "text": "We report against some elements of established due diligence reporting standards", "score": 2}, {"id": "C", "text": "We report on only material topics using one established ESG reporting standards", "score": 3}, {"id": "D", "text": "We report on only material topics using multiple established ESG reporting standards", "score": 4}, {"id": "E", "text": "We report on only material topics using multiple established ESG reporting standards with full supply chain transparence and performance", "score": 5}]}, {"id": "T1", "type": "commercial", "category": "Scope", "question": "I have completed the pre-assessment for:", "options": [{"id": "A", "text": "one location", "score": null}, {"id": "B", "text": "one country/region", "score": null}, {"id": "C", "text": "one division", "score": null}, {"id": "D", "text": "one product category", "score": null}, {"id": "E", "text": "entire company globally (only when multiple locations in multiple countries)", "score": null}]}, {"id": "T2", "type": "commercial", "category": "Supply Chain overview", "question": "The following are present in my supply chain", "options": [{"id": "A", "text": "agents/importers/exporters", "score": null}, {"id": "B", "text": "Labor agents/brokers", "score": null}, {"id": "C", "text": "Foreign migrant workers", "score": null}, {"id": "D", "text": "Conflict raw materials (Gold, Tin, Tantalum, Tungsten, Cobalt, Mica, …)", "score": null}, {"id": "E", "text": "High risk countries/  conflict regions", "score": null}]}]
+</script>
 </section>
 
 {% style %}
@@ -595,7 +600,49 @@
   @media screen and (max-width: 749px) {
     #VectraQuiz-{{ section.id }} .vectra-quiz__panel { padding: 28px 20px; }
   }
+
+  /* Compact spacing; all content remains visible and can grow naturally. */
+  #VectraQuiz-{{ section.id }} .vectra-quiz__panel { padding: 24px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__topline { min-height: 60px; padding: 12px 24px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__panel-heading { gap: 12px; margin-bottom: 16px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__panel h3 { font-size: clamp(21px, 2.2vw, 28px); line-height: 1.25; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__fields { gap: 12px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__field--wide { grid-column: auto; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__field input,
+  #VectraQuiz-{{ section.id }} .vectra-quiz__field select { min-height: 44px; padding: 10px 12px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__required-note { margin: 10px 0; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__consent { margin-top: 14px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__actions { margin-top: 20px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__question-meta { margin-bottom: 12px; gap: 10px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__helper { font-size: 12px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__options { margin-top: 18px; gap: 8px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option { min-height: 48px; padding: 10px 12px; gap: 10px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option-copy { font-size: 13px; line-height: 1.45; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__save-status { padding: 8px 24px; font-size: 10px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__result-badge { margin-bottom: 16px; padding: 10px 18px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__baseline-copy > p { color: var(--vq-muted); font-size: 13px; line-height: 1.65; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__score-grid p { margin: 0; padding: 14px 10px; border-radius: 12px; background: #f1f8ed; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__score-grid strong { display: block; color: var(--vq-navy); font-size: 24px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__score-grid span { display: block; margin-top: 5px; color: var(--vq-muted); font-size: 11px; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__review-accordion { margin-top: 16px; padding: 14px 16px; border: 1px solid var(--vq-line); border-radius: 12px; text-align: left; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__review-accordion summary { cursor: pointer; color: var(--vq-navy); font-size: 13px; font-weight: 700; }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__review-accordion p { font-size: 12px; line-height: 1.65; color: var(--vq-muted); }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__result-note { margin-top: 16px; padding: 12px 14px; }
+  @media screen and (min-width: 750px) {
+    #VectraQuiz-{{ section.id }} .vectra-quiz__options { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__option { grid-template-columns: 18px minmax(0, 1fr); align-items: start; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__option svg { display: none; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__option-marker { width: 18px; height: 18px; margin-top: 1px; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__option:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  }
+  @media screen and (max-width: 749px) {
+    #VectraQuiz-{{ section.id }} .vectra-quiz__panel { padding: 22px 18px; }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__options { grid-template-columns: 1fr; }
+  }
 {% endstyle %}
+
+
 
 <script>
   (() => {
@@ -605,6 +652,50 @@
       root.dataset.initialized = 'true';
       const form = root.querySelector('.vectra-quiz__form');
       form.noValidate = true; // Validate the visible panel before navigating or submitting.
+      // Use the approved spreadsheet as the default question source. Never infer a
+      // service tier from scores; the source specifies no routing thresholds.
+      if (root.dataset.questionSource !== 'custom') {
+        const source = JSON.parse(root.querySelector('[data-scdd-questionnaire]').textContent);
+        root.querySelectorAll('[data-panel="question"]').forEach(q => q.remove());
+        const reviewPanel = root.querySelector('[data-panel="review"]');
+        source.forEach((item, index) => {
+          const q = document.createElement('fieldset');
+          q.className = 'vectra-quiz__panel vectra-quiz__question';
+          q.dataset.panel = 'question'; q.dataset.questionIndex = index + 1;
+          q.dataset.questionId = item.id; q.dataset.questionType = item.type;
+          q.innerHTML = `<legend class="visually-hidden"></legend>
+            <div class="vectra-quiz__question-meta"><span></span><span></span></div>
+            <h3></h3><p class="vectra-quiz__helper"></p>
+            <div class="vectra-quiz__options" role="radiogroup" aria-required="true"></div>
+            <p class="vectra-quiz__required-note" data-validation role="status">Please choose one answer to continue.</p>
+            <div class="vectra-quiz__actions">
+              <button class="vectra-quiz__button vectra-quiz__button--secondary" type="button" data-back>Back</button>
+              <button class="vectra-quiz__button vectra-quiz__button--primary" type="button" data-next disabled><span></span></button>
+            </div>`;
+          q.querySelector('legend').textContent = `Question ${index + 1}: ${item.question}`;
+          const meta = q.querySelectorAll('.vectra-quiz__question-meta span');
+          meta[0].textContent = item.category; meta[1].textContent = `Question ${index + 1} of ${source.length}`;
+          q.querySelector('h3').textContent = item.question + ' ';
+          const required = document.createElement('span'); required.className = 'vectra-quiz__required';
+          required.setAttribute('aria-hidden', 'true'); required.textContent = '*'; q.querySelector('h3').append(required);
+          q.querySelector('.vectra-quiz__helper').textContent = item.type === 'core'
+            ? 'Choose the one statement that best matches your current position.'
+            : 'Choose one answer. This adds context and is not scored.';
+          const options = q.querySelector('.vectra-quiz__options'); options.setAttribute('aria-label', item.question);
+          item.options.forEach((option, optionIndex) => {
+            const label = document.createElement('label'); label.className = 'vectra-quiz__option';
+            const input = document.createElement('input'); input.type = 'radio';
+            input.name = `vectra_question_${index + 1}`; input.value = option.text;
+            input.dataset.score = option.score === null ? '' : String(option.score);
+            input.dataset.optionIndex = optionIndex; input.dataset.optionId = option.id;
+            const marker = document.createElement('span'); marker.className = 'vectra-quiz__option-marker'; marker.setAttribute('aria-hidden', 'true');
+            const copy = document.createElement('span'); copy.className = 'vectra-quiz__option-copy'; copy.textContent = option.text;
+            label.append(input, marker, copy); options.append(label);
+          });
+          reviewPanel.before(q);
+        });
+        root.dataset.questionCount = source.length;
+      }
       const panels = Array.from(root.querySelectorAll('[data-panel]'));
       const questions = Array.from(root.querySelectorAll('[data-panel="question"]'));
       const details = root.querySelector('[data-panel="details"]');
@@ -622,8 +713,18 @@
       const signature = JSON.stringify(questions.map(q => [
         q.dataset.questionId,
         q.querySelector('h3').textContent.trim(),
-        Array.from(q.querySelectorAll('input[type="radio"]')).map(a => [a.value, a.dataset.score])
+        Array.from(q.querySelectorAll('input[type="radio"]')).map(a => [a.value, a.dataset.score]).sort((a, b) => a[0].localeCompare(b[0]))
       ]));
+      const shuffleOptions = () => questions.forEach(q => {
+        const container = q.querySelector('.vectra-quiz__options');
+        const labels = Array.from(container.children);
+        for (let i = labels.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [labels[i], labels[j]] = [labels[j], labels[i]];
+        }
+        labels.forEach(label => container.append(label));
+      });
+      shuffleOptions();
       let phase = 'details';
       let questionIndex = 0;
       let resultLevel = 1;
@@ -651,7 +752,8 @@
           localStorage.setItem(storageKey, JSON.stringify({
             version: 1, signature, expiresAt: Date.now() + lifetime,
             phase: resumeTarget?.phase || phase, questionIndex: resumeTarget?.questionIndex ?? questionIndex, fields: leadData(),
-            answers: questions.map(q => selected(q)?.value || null)
+            answers: questions.map(q => selected(q)?.value || null),
+            answerOrders: questions.map(q => Array.from(q.querySelectorAll('input[type="radio"]')).map(a => a.dataset.optionIndex))
           }));
           status.textContent = 'Progress saved in this browser for 30 days. Use Start again to clear it.';
         } catch (error) {
@@ -669,7 +771,7 @@
         root.querySelector('[data-details-status]').textContent = !questions.length
           ? 'This assessment is not available yet.'
           : invalid.length
-            ? 'To continue, complete: ' + invalid.map(f => f.dataset.fieldLabel).join(', ') + '. Work email must be a valid email address.'
+            ? 'To continue, complete: ' + invalid.map(f => f.dataset.fieldLabel).join(', ') + '.' + (invalid.some(f => f.type === 'email' && f.value) ? ' Enter a valid work email.' : '')
             : 'Your required details are complete. You can continue.';
         questions.forEach(q => {
           const answered = Boolean(selected(q));
@@ -680,7 +782,7 @@
         const ready = !invalid.length && complete();
         root.querySelector('[data-review-continue]').disabled = !ready;
         root.querySelector('[data-review-status]').textContent = ready
-          ? 'Everything is complete. Continue to preview your pathway before final submission.'
+          ? 'Everything is complete. Continue to preview your summary before final submission.'
           : 'Complete your required details and all questions before continuing.';
         const submit = root.querySelector('[data-native-submit]');
         if (submit) submit.disabled = !ready || submitted;
@@ -702,7 +804,7 @@
           count.textContent = `Question ${questionIndex + 1} of ${questions.length}`;
           bar.style.width = `${questions.filter(q => selected(q)).length / questions.length * 100}%`;
         } else {
-          label.textContent = phase === 'review' ? 'Review before continuing' : 'Your pathway preview';
+          label.textContent = phase === 'review' ? 'Review before continuing' : 'Your assessment summary';
           count.textContent = phase === 'review' ? 'Check your details and answers' : 'Ready for final submission';
           bar.style.width = '100%';
         }
@@ -732,23 +834,27 @@
       };
       const calculateResult = () => {
         const answers = questions.map(q => selected(q));
-        const score = answers.reduce((total, answer) => total + Number(answer?.dataset.score || 0), 0);
-        const deadlineIndex = Number(answers[8]?.dataset.optionIndex || 0);
-        const intentIndex = Number(answers[9]?.dataset.optionIndex || 0);
-        // Preserve the existing pathway rules from the supplied section.
-        if (deadlineIndex >= 2 || intentIndex === 3 || score >= 20) resultLevel = 3;
-        else if (score >= 11) resultLevel = 2;
-        else resultLevel = 1;
-        root.querySelector('[data-result-level]').textContent = `Level ${resultLevel}`;
-        root.querySelectorAll('[data-result-copy]').forEach(copy => { copy.hidden = copy.dataset.resultCopy !== String(resultLevel); });
-        tagsInput.value = [originalTags, `SCDD Level ${resultLevel}`, 'SCDD quiz complete', `SCDD answering for: ${details.querySelector('[name="vectra_answering_for"]').value}`].filter(Boolean).join(', ');
+        const scoredQuestions = questions.filter(q => q.dataset.questionType !== 'commercial');
+        const score = scoredQuestions.reduce((sum, q) => sum + Number(selected(q)?.dataset.score || 0), 0);
+        const scoreMaximum = scoredQuestions.length * 5;
+        const averageScore = scoredQuestions.length ? score / scoredQuestions.length : null;
+        resultLevel = 1; // Assessment type only. This is NOT a service recommendation.
+        root.querySelector('[data-result-level]').textContent = 'Self-reported baseline';
+        root.querySelector('[data-score-total]').textContent = scoredQuestions.length ? `${score} / ${scoreMaximum}` : 'Not scored';
+        root.querySelector('[data-score-average]').textContent = averageScore === null ? 'Not scored' : `${averageScore.toFixed(1)} / 5`;
+        tagsInput.value = [originalTags, 'SCDD pre-assessment complete', 'SCDD self-reported baseline', `SCDD answering for: ${details.querySelector('[name="vectra_answering_for"]').value}`].filter(Boolean).join(', ');
         return {
-          level: resultLevel, score,
+          level: 1, assessmentLevel: 1, assessmentType: 'pre-assessment',
+          recommendedLevel: null, score, scoreMaximum, averageScore,
+          scoringVersion: 'SCDD Pre-Assessment (4): Q1-Q10 scored; T1-T2 unscored',
           lead: leadData(),
+          commercial: Object.fromEntries(questions.filter(q => q.dataset.questionType === 'commercial').map(q => [q.dataset.questionId, selected(q)?.value || ''])),
           answers: answers.map((answer, index) => ({
             question: index + 1, questionId: questions[index].dataset.questionId,
+            questionType: questions[index].dataset.questionType || 'core',
             questionText: questions[index].querySelector('h3').textContent.replace(/\s*\*\s*$/, '').trim(),
-            answer: answer?.value || ''
+            answer: answer?.value || '',
+            score: questions[index].dataset.questionType === 'commercial' ? null : Number(answer?.dataset.score || 0)
           }))
         };
       };
@@ -778,6 +884,7 @@
         removeDraft();
         try { sessionStorage.removeItem('vectraAssessmentResult'); } catch (error) {}
         form.reset();
+        shuffleOptions();
         fields.forEach(f => { if (f.type === 'checkbox') f.checked = false; else f.value = ''; f.removeAttribute('aria-invalid'); });
         questions.forEach(q => q.querySelectorAll('input[type="radio"]').forEach(a => { a.checked = false; }));
         tagsInput.value = originalTags;
@@ -847,7 +954,7 @@
         if (!validateLead() || !complete()) { event.preventDefault(); return; }
         finalPayload(); saveDraft();
         root.dispatchEvent(new CustomEvent('vectra:shopify-forms-handoff', {
-          bubbles: true, detail: { level: resultLevel, url: root.dataset.formsUrl, lead: leadData() }
+          bubbles: true, detail: { level: 1, assessmentLevel: 1, recommendedLevel: null, url: root.dataset.formsUrl, lead: leadData() }
         }));
         // A handoff is not confirmed submission. Preserve the draft for the return visit.
       });
@@ -874,6 +981,15 @@
                 else if (typeof value === 'string') f.value = value;
               });
               questions.forEach((q, index) => q.querySelectorAll('input[type="radio"]').forEach(a => { a.checked = a.value === draft.answers[index]; }));
+              questions.forEach((q, index) => {
+                const order = draft.answerOrders?.[index];
+                const inputs = Array.from(q.querySelectorAll('input[type="radio"]'));
+                if (Array.isArray(order) && order.length === inputs.length && new Set(order).size === inputs.length && inputs.every(a => order.includes(a.dataset.optionIndex))) {
+                  const container = q.querySelector('.vectra-quiz__options');
+                  order.forEach(id => container.append(inputs.find(a => a.dataset.optionIndex === id).closest('label')));
+                }
+              });
+
               const savedPhase = ['details', 'question', 'review', 'result'].includes(draft.phase) ? draft.phase : 'details';
               const firstMissing = questions.findIndex(q => !selected(q));
               resumeTarget = {
@@ -903,75 +1019,402 @@
   "name": "VECTRA interactive quiz",
   "tag": "section",
   "class": "section-vectra-interactive-quiz",
-  "max_blocks": 10,
+  "max_blocks": 12,
   "settings": [
-    { "type": "header", "content": "Content" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "SCDD readiness screening" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Find the right starting point." },
-    { "type": "richtext", "id": "intro", "label": "Introduction", "default": "<p>Answer ten focused questions to receive a recommended VECTRA assessment pathway.</p>" },
-    { "type": "text", "id": "time_label", "label": "Time label", "default": "About 4 minutes" },
-    { "type": "text", "id": "privacy_label", "label": "Privacy label", "default": "Screening outcome only" },
-    { "type": "text", "id": "details_step_label", "label": "Details step label", "default": "Your details" },
-    { "type": "text", "id": "details_heading", "label": "Details heading", "default": "Tell us a little about your scope." },
-    { "type": "text", "id": "details_body", "label": "Details text", "default": "We use this information to make the pathway relevant to your organization." },
-    { "type": "richtext", "id": "consent_text", "label": "Consent text", "default": "<p>I agree that VECTRA may use these details to provide my result and follow up about the most relevant assessment pathway.</p>" },
-    { "type": "text", "id": "start_label", "label": "Start button", "default": "Start assessment" },
-    { "type": "header", "content": "Shopify connection" },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "select",
+      "id": "question_source",
+      "label": "Question source",
+      "default": "sheet",
+      "options": [
+        {
+          "value": "sheet",
+          "label": "Approved spreadsheet (12 questions)"
+        },
+        {
+          "value": "custom",
+          "label": "Custom question blocks"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "Spreadsheet mode uses 10 scored questions (1–5) and two unscored commercial questions. Choices are randomized per attempt. There are no approved score cutoffs for service-level recommendations. Custom blocks are used only in Custom mode."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "SCDD readiness screening"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find the right starting point."
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "<p>Answer ten core screening questions and two short context questions to establish your self-reported supply chain due diligence baseline.</p>"
+    },
+    {
+      "type": "text",
+      "id": "time_label",
+      "label": "Time label",
+      "default": "About 4 minutes"
+    },
+    {
+      "type": "text",
+      "id": "privacy_label",
+      "label": "Privacy label",
+      "default": "Self-reported baseline"
+    },
+    {
+      "type": "text",
+      "id": "details_step_label",
+      "label": "Details step label",
+      "default": "Your details"
+    },
+    {
+      "type": "text",
+      "id": "details_heading",
+      "label": "Details heading",
+      "default": "Tell us a little about your scope."
+    },
+    {
+      "type": "text",
+      "id": "details_body",
+      "label": "Details text",
+      "default": "We use this information to make the pathway relevant to your organization."
+    },
+    {
+      "type": "richtext",
+      "id": "consent_text",
+      "label": "Consent text",
+      "default": "<p>I agree that VECTRA may use these details to provide my result and follow up about the most relevant assessment pathway.</p>"
+    },
+    {
+      "type": "text",
+      "id": "start_label",
+      "label": "Start button",
+      "default": "Start assessment"
+    },
+    {
+      "type": "header",
+      "content": "Shopify connection"
+    },
     {
       "type": "select",
       "id": "integration_mode",
       "label": "Submission mode",
       "default": "shopify_customer",
       "options": [
-        { "value": "shopify_customer", "label": "Shopify customer form" },
-        { "value": "shopify_forms", "label": "Shopify Forms handoff" }
+        {
+          "value": "shopify_customer",
+          "label": "Shopify customer form"
+        },
+        {
+          "value": "shopify_forms",
+          "label": "Shopify Forms handoff"
+        }
       ]
     },
-    { "type": "paragraph", "content": "Customer form mode saves the email and pathway tags in Shopify. Forms handoff mode opens your published Shopify Forms landing page after the result." },
-    { "type": "url", "id": "shopify_forms_url", "label": "Shopify Forms landing page" },
-    { "type": "checkbox", "id": "open_forms_new_tab", "label": "Open Forms in a new tab", "default": false },
-    { "type": "text", "id": "forms_cta_label", "label": "Shopify Forms button", "default": "Continue with VECTRA" },
-    { "type": "text", "id": "native_cta_label", "label": "Customer form button", "default": "Save my result" },
-    { "type": "text", "id": "customer_tag", "label": "Base customer tag", "default": "VECTRA SCDD lead" },
-    { "type": "text", "id": "submit_success", "label": "Submission success", "default": "Thank you. Your result has been saved and the VECTRA team can now follow up." },
-    { "type": "header", "content": "Result copy" },
-    { "type": "text", "id": "level_1_heading", "label": "Level 1 heading", "default": "Build a dependable baseline." },
-    { "type": "textarea", "id": "level_1_body", "label": "Level 1 text", "default": "Your responses suggest that key responsible sourcing structures are still being established or formalized." },
-    { "type": "text", "id": "level_2_heading", "label": "Level 2 heading", "default": "Validate how your controls work." },
-    { "type": "textarea", "id": "level_2_body", "label": "Level 2 text", "default": "Your organization appears to have several structures in place, with an opportunity to test consistency, evidence and implementation." },
-    { "type": "text", "id": "level_3_heading", "label": "Level 3 heading", "default": "Turn complexity into an action plan." },
-    { "type": "textarea", "id": "level_3_body", "label": "Level 3 text", "default": "Your answers indicate an advanced, urgent or implementation-focused need that is better shaped with direct expert support." },
-    { "type": "textarea", "id": "result_note", "label": "Result note", "default": "This is a screening recommendation, not a legal opinion, assurance conclusion or complete maturity assessment." },
-    { "type": "header", "content": "Style" },
-    { "type": "color", "id": "background_color", "label": "Background", "default": "#f3f5f3" },
-    { "type": "color", "id": "card_color", "label": "Card", "default": "#ffffff" },
-    { "type": "color", "id": "navy_color", "label": "Navy", "default": "#082946" },
-    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#55c900" },
-    { "type": "color", "id": "text_color", "label": "Text", "default": "#15364f" },
-    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#667685" },
-    { "type": "color", "id": "border_color", "label": "Borders", "default": "#dce4dd" },
-    { "type": "color", "id": "grid_color", "label": "Grid", "default": "#082946" },
-    { "type": "range", "id": "content_width", "min": 760, "max": 1200, "step": 20, "unit": "px", "label": "Content width", "default": 1200 },
-    { "type": "range", "id": "corner_radius", "min": 0, "max": 32, "step": 2, "unit": "px", "label": "Card corners", "default": 24 },
-    { "type": "range", "id": "padding_top", "min": 40, "max": 160, "step": 8, "unit": "px", "label": "Top spacing", "default": 104 },
-    { "type": "range", "id": "padding_bottom", "min": 40, "max": 160, "step": 8, "unit": "px", "label": "Bottom spacing", "default": 112 }
+    {
+      "type": "paragraph",
+      "content": "Customer form mode saves the email and pathway tags in Shopify. Forms handoff mode opens your published Shopify Forms landing page after the result."
+    },
+    {
+      "type": "url",
+      "id": "shopify_forms_url",
+      "label": "Shopify Forms landing page"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_forms_new_tab",
+      "label": "Open Forms in a new tab",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "forms_cta_label",
+      "label": "Shopify Forms button",
+      "default": "Continue with VECTRA"
+    },
+    {
+      "type": "text",
+      "id": "native_cta_label",
+      "label": "Customer form button",
+      "default": "Save my result"
+    },
+    {
+      "type": "text",
+      "id": "customer_tag",
+      "label": "Base customer tag",
+      "default": "VECTRA SCDD lead"
+    },
+    {
+      "type": "text",
+      "id": "submit_success",
+      "label": "Submission success",
+      "default": "Thank you. Your result has been saved and the VECTRA team can now follow up."
+    },
+    {
+      "type": "header",
+      "content": "Legacy pathway copy (not used)"
+    },
+    {
+      "type": "text",
+      "id": "level_1_heading",
+      "label": "Level 1 heading",
+      "default": "Build a dependable baseline."
+    },
+    {
+      "type": "textarea",
+      "id": "level_1_body",
+      "label": "Level 1 text",
+      "default": "Your responses suggest that key responsible sourcing structures are still being established or formalized."
+    },
+    {
+      "type": "text",
+      "id": "level_2_heading",
+      "label": "Level 2 heading",
+      "default": "Validate how your controls work."
+    },
+    {
+      "type": "textarea",
+      "id": "level_2_body",
+      "label": "Level 2 text",
+      "default": "Your organization appears to have several structures in place, with an opportunity to test consistency, evidence and implementation."
+    },
+    {
+      "type": "text",
+      "id": "level_3_heading",
+      "label": "Level 3 heading",
+      "default": "Turn complexity into an action plan."
+    },
+    {
+      "type": "textarea",
+      "id": "level_3_body",
+      "label": "Level 3 text",
+      "default": "Your answers indicate an advanced, urgent or implementation-focused need that is better shaped with direct expert support."
+    },
+    {
+      "type": "textarea",
+      "id": "result_note",
+      "label": "Result note",
+      "default": "This is a screening recommendation, not a legal opinion, assurance conclusion or complete maturity assessment."
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f3f5f3"
+    },
+    {
+      "type": "color",
+      "id": "card_color",
+      "label": "Card",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "navy_color",
+      "label": "Navy",
+      "default": "#082946"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent",
+      "default": "#55c900"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#15364f"
+    },
+    {
+      "type": "color",
+      "id": "muted_color",
+      "label": "Muted text",
+      "default": "#667685"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Borders",
+      "default": "#dce4dd"
+    },
+    {
+      "type": "color",
+      "id": "grid_color",
+      "label": "Grid",
+      "default": "#082946"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 760,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "label": "Content width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Card corners",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 40,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Top spacing",
+      "default": 104
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 40,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Bottom spacing",
+      "default": 112
+    }
   ],
   "blocks": [
     {
       "type": "question",
       "name": "Question",
       "settings": [
-        { "type": "text", "id": "category", "label": "Category", "default": "Understand" },
-        { "type": "textarea", "id": "question", "label": "Question", "default": "Add your question" },
-        { "type": "textarea", "id": "helper", "label": "Helper text" },
-        { "type": "text", "id": "option_1", "label": "Option 1", "default": "Not yet" },
-        { "type": "range", "id": "score_1", "label": "Option 1 score", "min": 0, "max": 3, "step": 1, "default": 0 },
-        { "type": "text", "id": "option_2", "label": "Option 2", "default": "Starting to develop" },
-        { "type": "range", "id": "score_2", "label": "Option 2 score", "min": 0, "max": 3, "step": 1, "default": 1 },
-        { "type": "text", "id": "option_3", "label": "Option 3", "default": "Partly established" },
-        { "type": "range", "id": "score_3", "label": "Option 3 score", "min": 0, "max": 3, "step": 1, "default": 2 },
-        { "type": "text", "id": "option_4", "label": "Option 4", "default": "Consistently established" },
-        { "type": "range", "id": "score_4", "label": "Option 4 score", "min": 0, "max": 3, "step": 1, "default": 3 }
+        {
+          "type": "select",
+          "id": "question_type",
+          "label": "Question type",
+          "default": "core",
+          "options": [
+            {
+              "value": "core",
+              "label": "Core — scored"
+            },
+            {
+              "value": "commercial",
+              "label": "Commercial — not scored"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category",
+          "default": "Understand"
+        },
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "Add your question"
+        },
+        {
+          "type": "textarea",
+          "id": "helper",
+          "label": "Helper text"
+        },
+        {
+          "type": "text",
+          "id": "option_1",
+          "label": "Option 1",
+          "default": "Not yet"
+        },
+        {
+          "type": "range",
+          "id": "score_1",
+          "label": "Option 1 score",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "default": 1
+        },
+        {
+          "type": "text",
+          "id": "option_2",
+          "label": "Option 2",
+          "default": "Starting to develop"
+        },
+        {
+          "type": "range",
+          "id": "score_2",
+          "label": "Option 2 score",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "text",
+          "id": "option_3",
+          "label": "Option 3",
+          "default": "Partly established"
+        },
+        {
+          "type": "range",
+          "id": "score_3",
+          "label": "Option 3 score",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "default": 3
+        },
+        {
+          "type": "text",
+          "id": "option_4",
+          "label": "Option 4",
+          "default": "Consistently established"
+        },
+        {
+          "type": "range",
+          "id": "score_4",
+          "label": "Option 4 score",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "default": 4
+        },
+        {
+          "type": "text",
+          "id": "option_5",
+          "label": "Option 5"
+        },
+        {
+          "type": "range",
+          "id": "score_5",
+          "label": "Option 5 score",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        }
       ]
     }
   ],
@@ -979,16 +1422,234 @@
     {
       "name": "VECTRA interactive quiz",
       "blocks": [
-        { "type": "question", "settings": { "category": "Understand", "question": "What sector does your organization operate in?", "helper": "This helps VECTRA understand the risk profile and benchmarks most relevant to you.", "option_1": "Agriculture, food or commodities", "score_1": 0, "option_2": "Apparel, retail or consumer goods", "score_2": 0, "option_3": "Manufacturing, construction or industrial", "score_3": 0, "option_4": "Technology, services or another sector", "score_4": 0 } },
-        { "type": "question", "settings": { "category": "Understand", "question": "Do you currently conduct formal supply chain risk assessments?", "helper": "Consider documented assessments that are repeated or updated, not one-off conversations.", "option_1": "No formal assessment yet", "score_1": 0, "option_2": "Informally or only when an issue arises", "score_2": 1, "option_3": "Yes, for selected risks or business units", "score_3": 2, "option_4": "Yes, through a consistent enterprise process", "score_4": 3 } },
-        { "type": "question", "settings": { "category": "Understand", "question": "How far into your supply chain do you have reliable visibility?", "helper": "Choose the answer that best reflects what you can identify and monitor today.", "option_1": "Mostly direct suppliers only", "score_1": 0, "option_2": "Some visibility beyond direct suppliers", "score_2": 1, "option_3": "Multiple tiers for priority categories", "score_3": 2, "option_4": "Mapped and monitored across relevant tiers", "score_4": 3 } },
-        { "type": "question", "settings": { "category": "Plan", "question": "Do you have a documented responsible sourcing or ESG policy?", "helper": "This may be a standalone policy or part of a broader governance framework.", "option_1": "Not yet", "score_1": 0, "option_2": "Informal expectations exist", "score_2": 1, "option_3": "Yes, it is documented and communicated", "score_3": 2, "option_4": "Yes, with ownership, review and oversight", "score_4": 3 } },
-        { "type": "question", "settings": { "category": "Plan", "question": "Is there a named owner for compliance or ESG within your organization?", "helper": "Think about accountability, authority and access to decision-makers—not only a job title.", "option_1": "No clear owner", "score_1": 0, "option_2": "Responsibility is shared informally", "score_2": 1, "option_3": "A named owner exists with a defined remit", "score_3": 2, "option_4": "A cross-functional owner has authority and oversight", "score_4": 3 } },
-        { "type": "question", "settings": { "category": "Act", "question": "Do you assess suppliers against a code of conduct or equivalent standard?", "helper": "Include audits, visits, evidence reviews and other structured supplier engagement.", "option_1": "Not currently", "score_1": 0, "option_2": "Only after incidents or customer requests", "score_2": 1, "option_3": "Yes, for selected or higher-risk suppliers", "score_3": 2, "option_4": "Yes, through a consistent risk-based program", "score_4": 3 } },
-        { "type": "question", "settings": { "category": "Act", "question": "Do you have a grievance and remediation mechanism in place?", "helper": "Consider whether workers and affected stakeholders can access it and whether outcomes are tracked.", "option_1": "No mechanism yet", "score_1": 0, "option_2": "Issues are handled informally", "score_2": 1, "option_3": "A documented channel exists", "score_3": 2, "option_4": "It is accessible, tracked and linked to remediation", "score_4": 3 } },
-        { "type": "question", "settings": { "category": "Improve", "question": "Do you track and report compliance or responsible sourcing KPIs over time?", "helper": "Examples include supplier coverage, findings, corrective actions and remediation progress.", "option_1": "We do not track formal KPIs", "score_1": 0, "option_2": "We collect some data when needed", "score_2": 1, "option_3": "We review a defined set of KPIs regularly", "score_3": 2, "option_4": "KPIs have targets, ownership and leadership review", "score_4": 3 } },
-        { "type": "question", "settings": { "category": "Improve", "question": "Are you responding to a specific compliance deadline or regulatory driver?", "helper": "For example: CSDDD, CSRD, EUDR, customer requirements or another active obligation.", "option_1": "No immediate driver", "score_1": 0, "option_2": "We are monitoring requirements", "score_2": 1, "option_3": "Yes, preparation is already underway", "score_3": 2, "option_4": "Yes, we have an active or near-term deadline", "score_4": 3 } },
-        { "type": "question", "settings": { "category": "Intent", "question": "What would be most useful to your organization right now?", "helper": "Your goal helps determine whether a self-assessment or expert-led path is the better next step.", "option_1": "Establish a benchmark and understand our starting point", "score_1": 1, "option_2": "Prepare for a regulation or customer requirement", "score_2": 2, "option_3": "Validate our existing controls and evidence", "score_3": 2, "option_4": "Work directly with an expert on implementation", "score_4": 3 } }
+        {
+          "type": "question",
+          "settings": {
+            "question_type": "core",
+            "category": "Supply Chain Mapping",
+            "question": "The supply chain mapping our organization conducts for purposes of understanding the risk in the supply chain covers the following levels of suppliers:",
+            "helper": "Choose one answer.",
+            "option_1": "We have mapped our most critical direct contractors that are core to the products or services offered to our customers",
+            "score_1": 1,
+            "option_2": "We have mapped all direct contractors in addition to the most critical ones",
+            "score_2": 2,
+            "option_3": "We have mapped the most critical sub-contractors and suppliers to our direct contractors",
+            "score_3": 3,
+            "option_4": "We have mapped all sub-contractors and suppliers to our direct contractors in addition to the most critical ones",
+            "score_4": 4,
+            "option_5": "We have mapped the origination of our most critical raw materials",
+            "score_5": 5
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question_type": "core",
+            "category": "Risk Assessments",
+            "question": "We conduct a supply chain risk assessments for due diligence purposes when the following events occur",
+            "helper": "Choose one answer.",
+            "option_1": "In response to a particular issue",
+            "score_1": 1,
+            "option_2": "When entering a new market",
+            "score_2": 2,
+            "option_3": "In response to new regulations or voluntary standards",
+            "score_3": 3,
+            "option_4": "Any changes in suppliers",
+            "score_4": 4,
+            "option_5": "Every new and existing transaction",
+            "score_5": 5
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question_type": "core",
+            "category": "Strategy and Goals",
+            "question": "The following best describes our organization’s strategy for responsible business conduct concerning  our supply chain:",
+            "helper": "Choose one answer.",
+            "option_1": "We have not established a strategy",
+            "score_1": 1,
+            "option_2": "We have started developing a strategy",
+            "score_2": 2,
+            "option_3": "We have established a strategy that addresses the prioritized risks in bringing to market our core goods/services",
+            "score_3": 3,
+            "option_4": "We have established a strategy that addresses the prioritized risks in bringing to market our core goods/services as well as suppliers we use in running our business.",
+            "score_4": 4,
+            "option_5": "Our organization has established an overarching vision or purpose that enables the alignment of our strategy for responsible business conduct concerning supply chain issues into our overall business strategy",
+            "score_5": 5
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question_type": "core",
+            "category": "Policies Procedures and Records",
+            "question": "Our supplier contracts specifically include provisions that are aligned with the following",
+            "helper": "Choose one answer.",
+            "option_1": "Relevant domestic supply chain due diligence laws",
+            "score_1": 1,
+            "option_2": "Applicable international supply chain  due diligence laws",
+            "score_2": 2,
+            "option_3": "Supplier code of conduct",
+            "score_3": 3,
+            "option_4": "Relevant international voluntary standards regarding supply chain  due diligence",
+            "score_4": 4,
+            "option_5": "Internal policies related to responsible supply chain engagement for minimizing impacts of our suppliers",
+            "score_5": 5
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question_type": "core",
+            "category": "Responsible Supply Chain Engagement",
+            "question": "When looking to bring on a new supplier, our organization conducts due diligence regarding the supplier’s ability to manage risks as follows",
+            "helper": "Choose one answer.",
+            "option_1": "Due diligence on a new supplier is not conducted regarding risks before a new supplier is approved.",
+            "score_1": 1,
+            "option_2": "Due Diligence is conducted on a new supplier but not necessarily before contracting",
+            "score_2": 2,
+            "option_3": "Due Diligence must be completed prior to contracting.",
+            "score_3": 3,
+            "option_4": "Due Diligence is completed before contracting and there is an agreed upon timeline for remediating any issues found are agreed upon with the new supplier",
+            "score_4": 4,
+            "option_5": "Due Diligence is completed and all issues remediated before contracting.",
+            "score_5": 5
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question_type": "core",
+            "category": "Governance and oversight",
+            "question": "The following describes senior management’s level of involvement in our supply chain human rights due diligence program",
+            "helper": "Choose one answer.",
+            "option_1": "Senior management is not involved",
+            "score_1": 1,
+            "option_2": "They have approved a policy requiring supply chain to adhere with relevant supply chain laws.",
+            "score_2": 2,
+            "option_3": "They have approved the company policies by risk area, mandated the formation of a supply chain due diligence program and team, and communicate the importance internally",
+            "score_3": 3,
+            "option_4": "They have approved the company policy or policies, mandated the formation of a supply chain due diligence program and team led by a senior-level employee, and have provided it adequate resources, authority and visible support. They also review implementation of the program at least annually",
+            "score_4": 4,
+            "option_5": "They fully support the supply chain due diligence team and have regular, ongoing input in and oversight of the program to ensure that it is effective and communicate its importance both internally and externally",
+            "score_5": 5
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question_type": "core",
+            "category": "Training and Communication",
+            "question": "Our internal supply chain due diligence training curriculum is customized for audiences based on the following criteria",
+            "helper": "Choose one answer.",
+            "option_1": "Whether they interact with supply chain members",
+            "score_1": 1,
+            "option_2": "Employee function",
+            "score_2": 2,
+            "option_3": "Employee job level",
+            "score_3": 3,
+            "option_4": "Employee business unit",
+            "score_4": 4,
+            "option_5": "Employee location or geography",
+            "score_5": 5
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question_type": "core",
+            "category": "Monitoring",
+            "question": "The following best describes how we determine which suppliers will be monitored",
+            "helper": "Choose one answer.",
+            "option_1": "We monitor suppliers only on an ‘as-needed’ basis where we have discovered a specific issue or problem",
+            "score_1": 1,
+            "option_2": "We monitor suppliers from time to time where there have been problems in the past",
+            "score_2": 2,
+            "option_3": "We routinely monitor  high-risk suppliers",
+            "score_3": 3,
+            "option_4": "We routinely monitor all suppliers",
+            "score_4": 4,
+            "option_5": "We routinely engage with all suppliers on their supply chain  performance including all aspect of ESG",
+            "score_5": 5
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question_type": "core",
+            "category": "Stakeholder Engagement",
+            "question": "The following best describes our plan for stakeholder engagement related to  due diligence and performance in our supply chain",
+            "helper": "Choose one answer.",
+            "option_1": "We don’t have a plan",
+            "score_1": 1,
+            "option_2": "We have started to develop a plan",
+            "score_2": 2,
+            "option_3": "We have a plan in place that includes critical international external stakeholders",
+            "score_3": 3,
+            "option_4": "We have a plan in place that includes international and local/community external stakeholders",
+            "score_4": 4,
+            "option_5": "We have a plan in place that includes  external stakeholders and is routinely updated as part of a continual improvement process",
+            "score_5": 5
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question_type": "core",
+            "category": "Reporting and Disclosure",
+            "question": "The following best describes how we report on our human rights supply chain due diligence program and its results",
+            "helper": "Choose one answer.",
+            "option_1": "We do not publicly report",
+            "score_1": 1,
+            "option_2": "We report against some elements of established due diligence reporting standards",
+            "score_2": 2,
+            "option_3": "We report on only material topics using one established ESG reporting standards",
+            "score_3": 3,
+            "option_4": "We report on only material topics using multiple established ESG reporting standards",
+            "score_4": 4,
+            "option_5": "We report on only material topics using multiple established ESG reporting standards with full supply chain transparence and performance",
+            "score_5": 5
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question_type": "commercial",
+            "category": "Scope",
+            "question": "I have completed the pre-assessment for:",
+            "helper": "Choose one answer.",
+            "option_1": "one location",
+            "score_1": 1,
+            "option_2": "one country/region",
+            "score_2": 1,
+            "option_3": "one division",
+            "score_3": 1,
+            "option_4": "one product category",
+            "score_4": 1,
+            "option_5": "entire company globally (only when multiple locations in multiple countries)",
+            "score_5": 1
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question_type": "commercial",
+            "category": "Supply Chain overview",
+            "question": "The following are present in my supply chain",
+            "helper": "Choose one answer.",
+            "option_1": "agents/importers/exporters",
+            "score_1": 1,
+            "option_2": "Labor agents/brokers",
+            "score_2": 1,
+            "option_3": "Foreign migrant workers",
+            "score_3": 1,
+            "option_4": "Conflict raw materials (Gold, Tin, Tantalum, Tungsten, Cobalt, Mica, …)",
+            "score_4": 1,
+            "option_5": "High risk countries/  conflict regions",
+            "score_5": 1
+          }
+        }
       ]
     }
   ]
