@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "vectra_home": {
@@ -7,163 +16,374 @@
           "type": "vectra-header",
           "settings": {
             "menu": "vectra-website-mega-menu"
-          }
+          },
+          "blocks": {}
         },
         "hero": {
           "type": "vectra-hero",
-          "blocks": {},
-          "block_order": [],
-          "settings": {}
+          "settings": {
+            "hide_section": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0
+          },
+          "blocks": {}
         },
         "trust": {
           "type": "vectra-trust",
           "settings": {
+            "hide_section": false,
             "heading": "20+ Years of Experience. 500+ Organizations Supported.",
-            "button_label": "Explore Case Studies"
-          }
+            "button_label": "Explore Case Studies",
+            "button_link": "",
+            "button_2_label": "",
+            "button_2_link": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": ""
+          },
+          "blocks": {}
         },
         "logos": {
           "type": "vectra-logos",
-          "blocks": {
-            "logo_1": { "type": "_vectra-logo", "settings": { "alt": "Marks & Spencer", "fallback_asset": "vectra-a4cdfe52a81d802c9aaf6b7bf6d694343cbedde4.png" } },
-            "logo_2": { "type": "_vectra-logo", "settings": { "alt": "The Copper Mark", "fallback_asset": "vectra-e1d133cc580029cb6b8074e5aae5a7dda46406b4.png" } },
-            "logo_3": { "type": "_vectra-logo", "settings": { "alt": "Responsible Business Alliance", "fallback_asset": "vectra-b45406e535c5bbc9c26b808cd8cbca66f572f9e7.png" } },
-            "logo_4": { "type": "_vectra-logo", "settings": { "alt": "OTTO", "fallback_asset": "vectra-f9891ea3bc104013ef4392a154f93dad123a8da6.png" } },
-            "logo_5": { "type": "_vectra-logo", "settings": { "alt": "Applied Materials", "fallback_asset": "vectra-08b090be3b1f1972589bc05ef1d4cf3d74f30fca.png" } },
-            "logo_6": { "type": "_vectra-logo", "settings": { "alt": "adidas", "fallback_asset": "vectra-cb8e65114981244bc1e02bd76e369c2e9275bc0b.png" } },
-            "logo_7": { "type": "_vectra-logo", "settings": { "alt": "BetterWork", "fallback_asset": "vectra-ac45449dcc22ca95791fd9c0955f7d62850045d2.png" } },
-            "logo_8": { "type": "_vectra-logo", "settings": { "alt": "JYSK", "fallback_asset": "vectra-fc0d652f27cfacfaf98915d93a3a90bbb65771bf.png" } }
+          "settings": {
+            "hide_section": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "gap": 0
           },
-          "block_order": ["logo_1", "logo_2", "logo_3", "logo_4", "logo_5", "logo_6", "logo_7", "logo_8"],
-          "settings": {}
+          "blocks": {}
         },
-        "impact": { "type": "vectra-impact", "settings": {} },
+        "impact": {
+          "type": "vectra-impact",
+          "settings": {
+            "hide_section": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0
+          },
+          "blocks": {}
+        },
         "why": {
           "type": "vectra-why",
-          "blocks": {
-            "why_1": { "type": "_vectra-why-card", "settings": { "heading": "We Sit on Your Side of the Table", "text": "We work alongside your people, learn how your business actually runs, and bring in support without taking ownership away from your team.", "fallback_asset": "vectra-why-icon-partnership.png" } },
-            "why_2": { "type": "_vectra-why-card", "settings": { "heading": "A Person Is Always Accountable", "text": "Technology helps us move faster. A person is still the one who owns the judgment call, the decision, and the follow-through.", "fallback_asset": "vectra-why-icon-ai.png" } },
-            "why_3": { "type": "_vectra-why-card", "settings": { "heading": "The Right Expert, Not a Fixed Package", "text": "Your challenge doesn't come with a pre-built solution. We bring in whoever the problem actually needs, exactly when you need them.", "fallback_asset": "vectra-why-icon-expertise.png" } },
-            "why_4": { "type": "_vectra-why-card", "settings": { "heading": "You'll See What Changed", "text": "We agree on what success looks like before we start. Then we show you what moved, what's still in motion, and what's next.", "fallback_asset": "vectra-why-icon-progress.png" } }
-          },
-          "block_order": ["why_1", "why_2", "why_3", "why_4"],
-          "settings": {
-            "kicker": "WHY VECTRA",
-            "heading": "We Serve People With People.",
-            "button_label": "See Why VECTRA",
-            "button_link": "/pages/why-partner-with-us",
-            "hide_ceo_note": false,
-            "bridge_text": "Here's what that actually looks like:",
-            "ceo_note_kicker": "A Note From Our CEO",
-            "ceo_note_label": "A note from Patrick Neyts, CEO",
-            "ceo_note_text": "I started VECTRA because I watched too many good plans fall apart the moment they left the boardroom. Not because the thinking was wrong, but because nobody stayed close enough to see it through.\n\nThat's still what drives us today. Whatever you're working through, I want you to feel like there's a real person on the other end of this. Because there is.\n\nWelcome to VECTRA."
-          }
+          "settings": {},
+          "blocks": {}
         },
         "esg": {
           "type": "vectra-esg",
           "settings": {
+            "hide_section": false,
             "kicker": "OUR EXPERIENCE",
             "heading": "20+ Years of Experience You Can Rely On",
+            "text": "VECTRA International was founded in 2005. But the experience behind our work goes back further than that, because the people doing it had already spent years, in some cases decades, in these exact situations before they ever became a team.\n\nVECTRA International has worked with organizations across responsible business, supply chains, workplace standards, and operational improvement. That's not a number on a slide. It's why we already know where change tends to stall, what actually helps people move it forward, and why even a good plan still has to survive contact with a Monday morning.\n\nToday, we bring that experience to a broader role in business resilience and operational capability building, helping organizations make stronger decisions, build stronger teams, and create improvements they can sustain.",
+            "button_label": "About VECTRA International",
+            "button_link": "",
             "stat_1_value": "20+",
             "stat_1_label": "Years of Experience",
             "stat_2_value": "50+",
             "stat_2_label": "Global Experts",
             "stat_3_value": "500+",
             "stat_3_label": "Organizations Supported",
-            "button_label": "About VECTRA International"
-          }
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": ""
+          },
+          "blocks": {}
         },
         "solutions": {
           "type": "vectra-solutions",
-          "blocks": {
-            "shot_1": { "type": "_vectra-solution-shot", "settings": { "is_active": true, "title": "Operational Resilience", "text": "Keep the work moving even when conditions change, with clear ownership, a faster response, and decisions your team can make with confidence.", "cta_label": "Explore Operational Resilience", "cta_link": "/pages/solutions", "fallback_asset": "vectra-add817f67c59297c528c5d57486a2794644fb47c.png" } },
-            "shot_2": { "type": "_vectra-solution-shot", "settings": { "title": "Value Chain Resilience & Improvement", "text": "See where supplier risk really sits, focus where it matters most, and help your suppliers actually get better, not just get audited.", "cta_label": "Explore Value Chain Resilience & Improvement", "cta_link": "/pages/solutions", "fallback_asset": "vectra-6a69557ce365aa215c5c28bca6a6e51af0a2c987.png" } },
-            "shot_3": { "type": "_vectra-solution-shot", "settings": { "title": "Responsible Business Performance", "text": "Turn responsible business requirements into decisions your team trusts, evidence that holds up, and habits that stick.", "cta_label": "Explore Responsible Business Performance", "cta_link": "/pages/solutions", "fallback_asset": "vectra-d9fea5c48820c581c90942feb5bfc3997b28135f.png" } },
-            "shot_4": { "type": "_vectra-solution-shot", "settings": { "title": "Governance & Regulatory Readiness", "text": "Turn changing rules into controls your team actually understands, and evidence you can stand behind without crossing your fingers.", "cta_label": "Explore Governance & Regulatory Readiness", "cta_link": "/pages/solutions", "fallback_asset": "vectra-d7047ac7e66609406a0cb2e3fa6ac8ad2faf5cca.png" } },
-            "shot_5": { "type": "_vectra-solution-shot", "settings": { "title": "Capability Building at Scale", "text": "Give your teams and suppliers the confidence, not just the training, to make change stick.", "cta_label": "Explore Capability Building at Scale", "cta_link": "/pages/solutions", "fallback_asset": "vectra-ae8b362b8368e8b200e58c921e1c7c274608a975.png" } },
-            "shot_6": { "type": "_vectra-solution-shot", "settings": { "plus_overlay": true, "title": "Customized Business Solutions", "text": "Some problems don't fit in one box. Tell us what you're up against. We'll bring together whoever it takes.", "cta_label": "Talk to an Expert", "cta_link": "/pages/contact", "fallback_asset": "vectra-a22c67e8c858a4742869caed8035aebee50f5996.png" } }
-          },
-          "block_order": ["shot_1", "shot_2", "shot_3", "shot_4", "shot_5", "shot_6"],
           "settings": {
+            "hide_section": false,
             "kicker": "HOW WE HELP",
             "heading": "Solutions for the Results Your Business Needs",
-            "intro": "Maybe it's one fire that keeps reigniting. Maybe it involves suppliers, systems, evidence, and people all at once. Either way, we organize what we do around what you're trying to achieve.",
+            "intro": "Maybe it's one specific fire that keeps reigniting. Maybe it's bigger than that, and it touches suppliers, systems, evidence, and people all at once. Either way, we organize what we do around what you're actually trying to achieve, not around what's convenient for us to sell.",
             "cta_heading": "Not Sure Where to Start? That's Completely Normal.",
             "cta_text": "Tell us what you're trying to improve. We'll help you find the right next step, together.",
             "button_label": "Talk to an Expert",
-            "button_link": "/pages/contact"
-          }
+            "button_link": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": ""
+          },
+          "blocks": {}
         },
         "marketplace": {
           "type": "vectra-marketplace",
           "settings": {
-            "kicker": "VECTRA MARKETPLACE",
             "heading": "Learn What You Need. Apply It With Confidence.",
-            "text": "Explore 100+ expert-led courses across ESG, sustainability, responsible business, compliance, due diligence, and supply chains.\n\nWhether you're getting your head around a new requirement or helping a whole team do the same, Marketplace gives you somewhere to start.",
+            "text": "Explore 100+ expert-led courses across ESG, sustainability, responsible business, compliance, due diligence, and supply chains.\n\nWhether it's one person trying to get their head around a new requirement, or a whole team that needs to be speaking the same language, Marketplace gives people somewhere real to start.",
+            "kicker": "VECTRA MARKETPLACE",
             "button_label": "Find the Right Course",
+            "button_link": "",
+            "collection": "",
+            "hide_topics": true,
             "explore_courses_label": "Explore All Courses",
-            "hide_topics": true
-          }
+            "explore_courses_link": "",
+            "topics_heading": "Relevant Topics",
+            "pill_1": "Most Popular →",
+            "pill_2": "By Regulation →",
+            "pill_3": "By Role →",
+            "topic_label": "Certificate Course",
+            "price_label": "Coming to Marketplace",
+            "hide_section": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": ""
+          },
+          "blocks": {}
         },
         "cases": {
           "type": "vectra-cases",
-          "blocks": {
-            "case_1": { "type": "_vectra-case-card", "settings": { "name": "OTTO Group", "location": "Hamburg, Germany", "quote": "“Working together transformed our ESG compliance framework. The team simplified complex EU CSRD reporting into a clear roadmap, cutting our data collection timeline by 40% and delivering our annual sustainability report six weeks ahead of schedule.”", "fallback_asset": "vectra-f9891ea3bc104013ef4392a154f93dad123a8da6.png" } },
-            "case_2": { "type": "_vectra-case-card", "settings": { "name": "CRH", "location": "Hamburg, Germany", "quote": "\"An essential partner for our climate tech scale-up. They optimized our carbon accounting infrastructure to handle rapid user growth while maintaining 100% compliance during intensive third-party client audits.\"", "fallback_asset": "vectra-28a1d7e111c00e8a7fc45b900983e7447e9874e4.png" } },
-            "case_3": { "type": "_vectra-case-card", "settings": { "name": "Kodak", "location": "Hamburg, Germany", "quote": "\"Finding partners who truly understand Scope 3 emissions tracing is rare. They brought deep domain expertise and seamless execution, enabling us to verify and onboard over 150 sustainable suppliers in under six months.\"", "fallback_asset": "vectra-c581678ac8eabd45e9273d17ceb6fa657d364dc9.png" } }
-          },
-          "block_order": ["case_1", "case_2", "case_3"],
           "settings": {
-            "kicker": "SELECTED CLIENT EXPERIENCE",
+            "hide_section": false,
             "heading": "The Proof Isn't What We Say. It's What Changed For Them.",
-            "lead": "The best evidence of how we work is what's different for the people who worked with us: what got easier and what their team stopped worrying about.\n\nExplore how VECTRA has supported organizations across responsible business, supply chains, operational improvement, and capability building, from the challenge they faced to the progress that followed.",
+            "lead": "The best evidence of how we work isn't a claim on this page. It's what's different for the people who worked with us: what stopped happening, what got easier, what their team stopped worrying about.\n\nExplore how VECTRA has supported organizations across responsible business, supply chains, operational improvement, and capability building, from the challenge they faced to the support provided and the progress that followed.",
+            "kicker": "SELECTED CLIENT EXPERIENCE",
             "reviews_label": "5/5 — Based on 500 reviews",
-            "button_label": "Explore Case Studies"
-          }
-        },
-        "faq": {
-          "type": "vectra-faq",
-          "blocks": {
-            "faq_1": { "type": "_vectra-faq-item", "settings": { "open": true, "question": "What does VECTRA help organizations improve?", "answer": "VECTRA helps organizations strengthen responsible business, operational resilience, supply chain resilience, and day to day business performance. Depending on the challenge, our support may include responsible business transformation, ESG consulting and other ESG services, sustainability consulting, supply chain consulting, technology, capability building, or implementation support. We start with the result that needs to improve, then bring the relevant expertise and support around it. Not the other way around." } },
-            "faq_2": { "type": "_vectra-faq-item", "settings": { "question": "We already have consultants, platforms, and dashboards. Where does VECTRA fit?", "answer": "We work with what you already have. When the information, expertise, or system is already there, we focus on what's stopping it from producing the result you need. That may be ownership, process, supplier engagement, evidence, capability, or follow-through." } },
-            "faq_3": { "type": "_vectra-faq-item", "settings": { "question": "Can VECTRA work with the systems we already use?", "answer": "Yes. VECTRA is platform-agnostic. We work with your existing systems, data, teams, consultants, and partners, then introduce additional technology only where it solves a clear problem." } },
-            "faq_4": { "type": "_vectra-faq-item", "settings": { "question": "Where do we start if we know the problem but not the solution?", "answer": "Start by telling us what's happening and what you want to improve. We'll help clarify the issue, identify what needs attention first, and figure out the most practical next step, together." } },
-            "faq_5": { "type": "_vectra-faq-item", "settings": { "question": "How does VECTRA measure progress?", "answer": "We agree at the start on what success should look like. Depending on the challenge, that may include clearer ownership, closed actions, stronger evidence, improved capability, fewer recurring problems, or better supplier performance." } },
-            "faq_6": { "type": "_vectra-faq-item", "settings": { "question": "What is responsible business, and how does VECTRA help?", "answer": "Responsible business means managing supplier risk, environmental and social impact, and regulatory responsibility to protect people, performance, and long-term value. VECTRA helps organizations turn those responsibilities into clear ownership, practical action, operational resilience, and measurable improvement across teams, suppliers, and systems." } }
+            "button_label": "Explore Case Studies",
+            "button_link": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "gap": 0
           },
-          "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5", "faq_6"],
-          "settings": {
-            "card_kicker": "TALK TO US",
-            "card_title": "Tell Us What You Need Help With",
-            "card_text": "You may already know exactly what needs to change. Or you may simply know that something needs to work better.\n\nTell us what's happening and what you're trying to improve. We'll listen, help make sense of the situation, and connect you with the right people.",
-            "kicker": "FAQ",
-            "heading": "Questions Business Leaders Ask Us",
-            "lead": "Clear answers about what VECTRA does, how we work, and where to start.",
-            "button_label": "Talk to a VECTRA Expert",
-            "button_link": "/pages/contact",
-            "more_heading": "Have another question?",
-            "more_text": "Find more answers about VECTRA International, how we work, our capabilities, and getting started.",
-            "more_button_label": "View All FAQs"
-          }
+          "blocks": {}
         },
-        "insights": {
+        "blog": {
           "type": "vectra-blog",
           "settings": {
             "kicker": "INSIGHTS",
             "heading": "Latest Insights",
-            "button_label": "See All Insights"
-          }
+            "blog": "",
+            "button_label": "See All Insights",
+            "button_link": "",
+            "hide_section": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": ""
+          },
+          "blocks": {}
+        },
+        "faq": {
+          "type": "vectra-faq",
+          "settings": {
+            "card_kicker": "TALK TO US",
+            "card_title": "Tell Us What You Need Help With",
+            "card_text": "You may already know exactly what needs to change. Or you may simply know that something needs to work better.\n\nA supplier issue may be slowing progress. A new requirement may be creating uncertainty. Your team may need stronger evidence, better controls, or more support.\n\nTell us what is happening and what you are trying to improve. We'll listen, help make sense of the situation, and connect you with the right people.",
+            "kicker": "FAQ",
+            "heading": "Questions Business Leaders Ask Us",
+            "lead": "Clear answers about what VECTRA does, how we work, and where to start.",
+            "button_label": "Talk to a VECTRA Expert",
+            "button_link": "",
+            "more_heading": "Have another question?",
+            "more_text": "Find more answers about VECTRA International, how we work, our capabilities, and getting started.",
+            "more_button_label": "View All FAQs",
+            "more_button_link": "",
+            "hide_section": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "gap": 0
+          },
+          "blocks": {}
         },
         "portal": {
           "type": "vectra-portal",
           "settings": {
             "kicker": "LET'S TALK",
             "heading": "Start a Conversation",
-            "text": "You don't need a finished brief or the name of a VECTRA service. Tell us what you're trying to improve or where you need support. We'll make sure the right person gets involved."
-          }
+            "text": "You do not need a finished brief or the name of a VECTRA Service. Tell us what you are trying to improve, where you need support, or what you would like to understand better. We'll make sure the right person gets involved.",
+            "anchor_id": "get-in-touch",
+            "hide_section": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": ""
+          },
+          "blocks": {}
         },
-        "careers": { "type": "vectra-careers", "settings": { "hide_section": true } },
-        "footer": { "type": "vectra-footer", "settings": {} }
+        "careers": {
+          "type": "vectra-careers",
+          "settings": {
+            "hide_section": false,
+            "kicker": "Careers",
+            "heading": "Join Our Team",
+            "text": "",
+            "button_label": "Explore our open roles",
+            "button_link": "",
+            "button_2_label": "",
+            "button_2_link": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": ""
+          },
+          "blocks": {}
+        },
+        "footer": {
+          "type": "vectra-footer",
+          "settings": {
+            "tagline": "Your partner for business resilience and operational capability building through an ecosystem of integrated solutions.",
+            "explore_heading": "Explore",
+            "explore_menu": "",
+            "start_heading": "Start here",
+            "start_menu": "",
+            "company_heading": "Company",
+            "company_menu": "",
+            "follow_heading": "Follow us",
+            "linkedin_url": "",
+            "youtube_url": "",
+            "instagram_url": "",
+            "facebook_url": "",
+            "x_url": "",
+            "notice_heading": "Website upgrade notice",
+            "notice_text": "VECTRA International is moving this website from WordPress to Shopify. This is a one-time go-live notice, not an email list. Enter your email if you want to know when the new site is live.",
+            "cookie_url": "",
+            "privacy_url": "",
+            "copyright_text": "VECTRA International | All rights reserved.",
+            "hide_section": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          },
+          "blocks": {}
+        }
       },
       "block_order": [
         "header",
@@ -176,8 +396,8 @@
         "solutions",
         "marketplace",
         "cases",
+        "blog",
         "faq",
-        "insights",
         "portal",
         "careers",
         "footer"
@@ -187,5 +407,7 @@
       }
     }
   },
-  "order": ["vectra_home"]
+  "order": [
+    "vectra_home"
+  ]
 }

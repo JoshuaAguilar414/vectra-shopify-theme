@@ -1,0 +1,1097 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "vectra_home_mfggqh": {
+      "type": "vectra-home",
+      "blocks": {
+        "vectra_header_aEbhQR": {
+          "type": "vectra-header",
+          "settings": {
+            "menu": ""
+          },
+          "blocks": {}
+        },
+        "vectra_risk_hero_BUXCeK": {
+          "type": "vectra-risk-hero",
+          "name": "VECTRA: Risk hero",
+          "settings": {
+            "hide_section": false
+          },
+          "blocks": {}
+        },
+        "vectra_hero_LwHG9F": {
+          "type": "vectra-hero",
+          "disabled": true,
+          "settings": {
+            "hide_section": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0
+          },
+          "blocks": {}
+        },
+        "vectra_trust_JhLR8J": {
+          "type": "vectra-trust",
+          "disabled": true,
+          "settings": {
+            "hide_section": false,
+            "heading": "20+ Years of Experience. 500+ Organizations Supported.",
+            "button_label": "Explore Case Studies",
+            "button_link": "",
+            "button_2_label": "",
+            "button_2_link": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": ""
+          },
+          "blocks": {}
+        },
+        "vectra_logos_9bpPEx": {
+          "type": "vectra-logos",
+          "disabled": true,
+          "settings": {
+            "hide_section": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "gap": 0
+          },
+          "blocks": {}
+        },
+        "vectra_impact_eA8Vta": {
+          "type": "vectra-impact",
+          "disabled": true,
+          "settings": {
+            "hide_section": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0
+          },
+          "blocks": {}
+        },
+        "vectra_why_w3DTGd": {
+          "type": "vectra-why",
+          "disabled": true,
+          "settings": {},
+          "blocks": {}
+        },
+        "vectra_esg_UhiTn6": {
+          "type": "vectra-esg",
+          "disabled": true,
+          "settings": {
+            "hide_section": false,
+            "kicker": "OUR EXPERIENCE",
+            "heading": "20+ Years of Experience You Can Rely On",
+            "text": "VECTRA International was founded in 2005. But the experience behind our work goes back further than that, because the people doing it had already spent years, in some cases decades, in these exact situations before they ever became a team.\n\nVECTRA International has worked with organizations across responsible business, supply chains, workplace standards, and operational improvement. That's not a number on a slide. It's why we already know where change tends to stall, what actually helps people move it forward, and why even a good plan still has to survive contact with a Monday morning.\n\nToday, we bring that experience to a broader role in business resilience and operational capability building, helping organizations make stronger decisions, build stronger teams, and create improvements they can sustain.",
+            "button_label": "About VECTRA International",
+            "button_link": "",
+            "stat_1_value": "20+",
+            "stat_1_label": "Years of Experience",
+            "stat_2_value": "50+",
+            "stat_2_label": "Global Experts",
+            "stat_3_value": "500+",
+            "stat_3_label": "Organizations Supported",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": ""
+          },
+          "blocks": {}
+        },
+        "vectra_solutions_EAkErX": {
+          "type": "vectra-solutions",
+          "disabled": true,
+          "settings": {
+            "hide_section": false,
+            "kicker": "HOW WE HELP",
+            "heading": "Solutions for the Results Your Business Needs",
+            "intro": "Maybe it's one specific fire that keeps reigniting. Maybe it's bigger than that, and it touches suppliers, systems, evidence, and people all at once. Either way, we organize what we do around what you're actually trying to achieve, not around what's convenient for us to sell.",
+            "cta_heading": "Not Sure Where to Start? That's Completely Normal.",
+            "cta_text": "Tell us what you're trying to improve. We'll help you find the right next step, together.",
+            "button_label": "Talk to an Expert",
+            "button_link": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": ""
+          },
+          "blocks": {}
+        },
+        "vectra_marketplace_cDHB7n": {
+          "type": "vectra-marketplace",
+          "disabled": true,
+          "settings": {
+            "heading": "Learn What You Need. Apply It With Confidence.",
+            "text": "Explore 100+ expert-led courses across ESG, sustainability, responsible business, compliance, due diligence, and supply chains.\n\nWhether it's one person trying to get their head around a new requirement, or a whole team that needs to be speaking the same language, Marketplace gives people somewhere real to start.",
+            "kicker": "VECTRA MARKETPLACE",
+            "button_label": "Find the Right Course",
+            "button_link": "",
+            "collection": "",
+            "hide_topics": true,
+            "explore_courses_label": "Explore All Courses",
+            "explore_courses_link": "",
+            "topics_heading": "Relevant Topics",
+            "pill_1": "Most Popular →",
+            "pill_2": "By Regulation →",
+            "pill_3": "By Role →",
+            "topic_label": "Certificate Course",
+            "price_label": "Coming to Marketplace",
+            "hide_section": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": ""
+          },
+          "blocks": {}
+        },
+        "vectra_cases_9XxfAz": {
+          "type": "vectra-cases",
+          "disabled": true,
+          "settings": {
+            "hide_section": false,
+            "heading": "The Proof Isn't What We Say. It's What Changed For Them.",
+            "lead": "The best evidence of how we work isn't a claim on this page. It's what's different for the people who worked with us: what stopped happening, what got easier, what their team stopped worrying about.\n\nExplore how VECTRA has supported organizations across responsible business, supply chains, operational improvement, and capability building, from the challenge they faced to the support provided and the progress that followed.",
+            "kicker": "SELECTED CLIENT EXPERIENCE",
+            "reviews_label": "5/5 — Based on 500 reviews",
+            "button_label": "Explore Case Studies",
+            "button_link": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "gap": 0
+          },
+          "blocks": {}
+        },
+        "vectra_faq_wxbJKX": {
+          "type": "vectra-faq",
+          "disabled": true,
+          "settings": {
+            "card_kicker": "TALK TO US",
+            "card_title": "Tell Us What You Need Help With",
+            "card_text": "You may already know exactly what needs to change. Or you may simply know that something needs to work better.\n\nA supplier issue may be slowing progress. A new requirement may be creating uncertainty. Your team may need stronger evidence, better controls, or more support.\n\nTell us what is happening and what you are trying to improve. We'll listen, help make sense of the situation, and connect you with the right people.",
+            "kicker": "FAQ",
+            "heading": "Questions Business Leaders Ask Us",
+            "lead": "Clear answers about what VECTRA does, how we work, and where to start.",
+            "button_label": "Talk to a VECTRA Expert",
+            "button_link": "",
+            "more_heading": "Have another question?",
+            "more_text": "Find more answers about VECTRA International, how we work, our capabilities, and getting started.",
+            "more_button_label": "View All FAQs",
+            "more_button_link": "",
+            "hide_section": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "gap": 0
+          },
+          "blocks": {}
+        },
+        "vectra_blog_ix3pWP": {
+          "type": "vectra-blog",
+          "disabled": true,
+          "settings": {
+            "kicker": "INSIGHTS",
+            "heading": "Latest Insights",
+            "blog": "",
+            "button_label": "See All Insights",
+            "button_link": "",
+            "hide_section": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": ""
+          },
+          "blocks": {}
+        },
+        "vectra_portal_KKUW4U": {
+          "type": "vectra-portal",
+          "disabled": true,
+          "settings": {
+            "kicker": "LET'S TALK",
+            "heading": "Start a Conversation",
+            "text": "You do not need a finished brief or the name of a VECTRA Service. Tell us what you are trying to improve, where you need support, or what you would like to understand better. We'll make sure the right person gets involved.",
+            "anchor_id": "get-in-touch",
+            "hide_section": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": ""
+          },
+          "blocks": {}
+        },
+        "vectra_careers_weTXrq": {
+          "type": "vectra-careers",
+          "disabled": true,
+          "settings": {
+            "hide_section": false,
+            "kicker": "Careers",
+            "heading": "Join Our Team",
+            "text": "",
+            "button_label": "Explore our open roles",
+            "button_link": "",
+            "button_2_label": "",
+            "button_2_link": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "background_color": "",
+            "text_color": "",
+            "border_radius": 0,
+            "heading_size": "default",
+            "text_size": "default",
+            "font_weight": "default",
+            "line_height": "default",
+            "letter_spacing": "default",
+            "text_case": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": ""
+          },
+          "blocks": {}
+        },
+        "vectra_footer_kXKBh4": {
+          "type": "vectra-footer",
+          "disabled": true,
+          "settings": {
+            "tagline": "Your partner for business resilience and operational capability building through an ecosystem of integrated solutions.",
+            "explore_heading": "Explore",
+            "explore_menu": "",
+            "start_heading": "Start here",
+            "start_menu": "",
+            "company_heading": "Company",
+            "company_menu": "",
+            "follow_heading": "Follow us",
+            "linkedin_url": "",
+            "youtube_url": "",
+            "instagram_url": "",
+            "facebook_url": "",
+            "x_url": "",
+            "notice_heading": "Website upgrade notice",
+            "notice_text": "VECTRA International is moving this website from WordPress to Shopify. This is a one-time go-live notice, not an email list. Enter your email if you want to know when the new site is live.",
+            "cookie_url": "",
+            "privacy_url": "",
+            "copyright_text": "VECTRA International | All rights reserved.",
+            "hide_section": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "vectra_header_aEbhQR",
+        "vectra_risk_hero_BUXCeK",
+        "vectra_hero_LwHG9F",
+        "vectra_trust_JhLR8J",
+        "vectra_logos_9bpPEx",
+        "vectra_impact_eA8Vta",
+        "vectra_why_w3DTGd",
+        "vectra_esg_UhiTn6",
+        "vectra_solutions_EAkErX",
+        "vectra_marketplace_cDHB7n",
+        "vectra_cases_9XxfAz",
+        "vectra_faq_wxbJKX",
+        "vectra_blog_ix3pWP",
+        "vectra_portal_KKUW4U",
+        "vectra_careers_weTXrq",
+        "vectra_footer_kXKBh4"
+      ],
+      "name": "VECTRA homepage",
+      "settings": {
+        "menu": ""
+      }
+    },
+    "ra_hero_banner_GNALV9": {
+      "type": "ra-hero-banner",
+      "blocks": {
+        "metric_8nz3wz": {
+          "type": "metric",
+          "settings": {
+            "value": "10",
+            "label": "Focused questions"
+          }
+        },
+        "metric_JbVxGh": {
+          "type": "metric",
+          "settings": {
+            "value": "~2",
+            "label": "Minutes to complete"
+          }
+        },
+        "metric_FmfJeX": {
+          "type": "metric",
+          "settings": {
+            "value": "Level 1, 2, or 3",
+            "label": "Recommended Assessment Pathway"
+          }
+        },
+        "metric_pFJdXW": {
+          "type": "metric",
+          "settings": {
+            "value": "1",
+            "label": "Recommended Next Step"
+          }
+        }
+      },
+      "block_order": [
+        "metric_8nz3wz",
+        "metric_JbVxGh",
+        "metric_FmfJeX",
+        "metric_pFJdXW"
+      ],
+      "disabled": true,
+      "name": "VECTRA hero banner",
+      "settings": {
+        "eyebrow": "Supply Chain Due Diligence Risk Assessment",
+        "heading": "Find the Right Assessment Level for Your Organization&nbsp;",
+        "body": "Answer 10 focused questions to help determine whether your organization needs an initial diagnostic, deeper evidence review, or implementation support.\n\nThe pre-assessment considers your scope, current controls, and supply chain due diligence position to recommend the most appropriate VECTRA assessment pathway.",
+        "primary_label": "Start your pre-assessment",
+        "primary_link": "",
+        "secondary_label": "Preview sample report",
+        "show_trust_notes": true,
+        "trust_note_one": "About 2 minutes",
+        "trust_note_two": "No detailed diagnosis from screening alone",
+        "show_pathway_card": false,
+        "pathway_aria_label": "Three assessment pathways",
+        "route_kicker": "Your route",
+        "route_range": "01—03",
+        "route_core": "SCDD",
+        "route_one_number": "01",
+        "route_one_name": "Diagnose",
+        "route_two_number": "02",
+        "route_two_name": "Validate",
+        "route_three_number": "03",
+        "route_three_name": "Advance",
+        "route_summary": "One focused starting point, shaped to your maturity and urgency.",
+        "content_width": 1200,
+        "minimum_height": 720,
+        "padding_top": 88,
+        "padding_bottom": 76,
+        "corner_radius": 56,
+        "heading_size": 80,
+        "body_size": 14,
+        "gradient_start": "#318f1d",
+        "gradient_middle": "#1f742b",
+        "gradient_end": "#082946",
+        "grid_color": "#69dc1d",
+        "text_color": "#ffffff",
+        "accent_color": "#65dc13",
+        "accent_light": "#d8ffbf",
+        "button_background": "#55c900",
+        "button_text": "#082946",
+        "card_color": "#052539",
+        "node_one_color": "#123e57",
+        "node_two_color": "#317a35",
+        "node_three_color": "#55c900",
+        "text_width": 820,
+        "body_width": 740,
+        "copy_share": 62,
+        "column_gap": 44,
+        "image_height": 560,
+        "image_fit": "contain",
+        "image_radius": 24,
+        "report_title": "See a sample report",
+        "report_body": "Enter your email to request a sample SCDD report and see what your assessment can look like.",
+        "report_submit": "Email me the sample report",
+        "report_success": "Thanks — your sample-report request has been received.",
+        "popup_background": "#ffffff",
+        "popup_text": "#082946"
+      }
+    },
+    "ra_grid_ABDFMN": {
+      "type": "ra-grid",
+      "blocks": {
+        "step_dDx8KB": {
+          "type": "step",
+          "settings": {
+            "number": "01",
+            "icon": "clipboard",
+            "heading": "Answer 10 Focused Questions",
+            "body": "<p>Provide information about areas such as governance, supply-chain visibility, supplier controls, monitoring, and the reason for the assessment.</p>"
+          }
+        },
+        "step_QCagc8": {
+          "type": "step",
+          "settings": {
+            "number": "02",
+            "icon": "pathway",
+            "heading": "See Your Recommended Assessment Level",
+            "body": "<p>Your responses indicate whether Level 1, Level 2, or Level 3 is the most appropriate starting point.</p><p>The result is a recommendation, not a detailed maturity score. Most organizations start at Level 1 — Level 2 or Level 3 needs are often identified once Level 1 results are in and specific gaps are clear.&nbsp;</p>"
+          }
+        },
+        "step_xEMLz8": {
+          "type": "step",
+          "settings": {
+            "number": "03",
+            "icon": "arrow",
+            "heading": "Continue to the Recommended Assessment",
+            "body": "<p>If Level 1 is recommended, you can proceed straight to purchase. Once payment is confirmed, VECTRA sends an enrollment key by email so you can begin the assessment.<br/><br/>If Level 2 or Level 3 is recommended, you’ll speak with VECTRA about the scope, evidence, and support required — these engagements are scoped individually.&nbsp;<br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_dDx8KB",
+        "step_QCagc8",
+        "step_xEMLz8"
+      ],
+      "name": "VECTRA how it works",
+      "settings": {
+        "eyebrow": "WHAT TO EXPECT",
+        "heading": "What Happens During the Pre-Assessment",
+        "body": "<p>The pre-assessment helps identify the level of SCDD assessment your organization may need, without requiring you to complete the full assessment first.</p>",
+        "content_width": 1260,
+        "heading_size": 58,
+        "cards_margin_top": 64,
+        "card_gap": 18,
+        "card_height": 330,
+        "card_radius": 22,
+        "padding_top": 88,
+        "padding_bottom": 80,
+        "background_color": "#ffffff",
+        "card_color": "#fbfcfb",
+        "heading_color": "#082946",
+        "body_color": "#6c7d92",
+        "accent_color": "#55c900",
+        "border_color": "#dce4dd"
+      }
+    },
+    "ra_quiz_VNJDzX": {
+      "type": "ra-quiz",
+      "blocks": {
+        "question_DHTPdp": {
+          "type": "question",
+          "settings": {
+            "category": "Understand",
+            "question": "What sector does your organization operate in?",
+            "helper": "This helps VECTRA understand the risk profile and benchmarks most relevant to you.",
+            "option_1": "Agriculture, food or commodities",
+            "score_1": 0,
+            "option_2": "Apparel, retail or consumer goods",
+            "score_2": 0,
+            "option_3": "Manufacturing, construction or industrial",
+            "score_3": 0,
+            "option_4": "Technology, services or another sector",
+            "score_4": 0
+          }
+        },
+        "question_FP8z89": {
+          "type": "question",
+          "settings": {
+            "category": "Understand",
+            "question": "Do you currently conduct formal supply chain risk assessments?",
+            "helper": "Consider documented assessments that are repeated or updated, not one-off conversations.",
+            "option_1": "No formal assessment yet",
+            "score_1": 0,
+            "option_2": "Informally or only when an issue arises",
+            "score_2": 1,
+            "option_3": "Yes, for selected risks or business units",
+            "score_3": 2,
+            "option_4": "Yes, through a consistent enterprise process",
+            "score_4": 3
+          }
+        },
+        "question_rBGq8h": {
+          "type": "question",
+          "settings": {
+            "category": "Understand",
+            "question": "How far into your supply chain do you have reliable visibility?",
+            "helper": "Choose the answer that best reflects what you can identify and monitor today.",
+            "option_1": "Mostly direct suppliers only",
+            "score_1": 0,
+            "option_2": "Some visibility beyond direct suppliers",
+            "score_2": 1,
+            "option_3": "Multiple tiers for priority categories",
+            "score_3": 2,
+            "option_4": "Mapped and monitored across relevant tiers",
+            "score_4": 3
+          }
+        },
+        "question_cDmBXU": {
+          "type": "question",
+          "settings": {
+            "category": "Plan",
+            "question": "Do you have a documented responsible sourcing or ESG policy?",
+            "helper": "This may be a standalone policy or part of a broader governance framework.",
+            "option_1": "Not yet",
+            "score_1": 0,
+            "option_2": "Informal expectations exist",
+            "score_2": 1,
+            "option_3": "Yes, it is documented and communicated",
+            "score_3": 2,
+            "option_4": "Yes, with ownership, review and oversight",
+            "score_4": 3
+          }
+        },
+        "question_TVYLap": {
+          "type": "question",
+          "settings": {
+            "category": "Plan",
+            "question": "Is there a named owner for compliance or ESG within your organization?",
+            "helper": "Think about accountability, authority and access to decision-makers—not only a job title.",
+            "option_1": "No clear owner",
+            "score_1": 0,
+            "option_2": "Responsibility is shared informally",
+            "score_2": 1,
+            "option_3": "A named owner exists with a defined remit",
+            "score_3": 2,
+            "option_4": "A cross-functional owner has authority and oversight",
+            "score_4": 3
+          }
+        },
+        "question_PGXn8a": {
+          "type": "question",
+          "settings": {
+            "category": "Act",
+            "question": "Do you assess suppliers against a code of conduct or equivalent standard?",
+            "helper": "Include audits, visits, evidence reviews and other structured supplier engagement.",
+            "option_1": "Not currently",
+            "score_1": 0,
+            "option_2": "Only after incidents or customer requests",
+            "score_2": 1,
+            "option_3": "Yes, for selected or higher-risk suppliers",
+            "score_3": 2,
+            "option_4": "Yes, through a consistent risk-based program",
+            "score_4": 3
+          }
+        },
+        "question_WEpYgU": {
+          "type": "question",
+          "settings": {
+            "category": "Act",
+            "question": "Do you have a grievance and remediation mechanism in place?",
+            "helper": "Consider whether workers and affected stakeholders can access it and whether outcomes are tracked.",
+            "option_1": "No mechanism yet",
+            "score_1": 0,
+            "option_2": "Issues are handled informally",
+            "score_2": 1,
+            "option_3": "A documented channel exists",
+            "score_3": 2,
+            "option_4": "It is accessible, tracked and linked to remediation",
+            "score_4": 3
+          }
+        },
+        "question_HEGW8G": {
+          "type": "question",
+          "settings": {
+            "category": "Improve",
+            "question": "Do you track and report compliance or responsible sourcing KPIs over time?",
+            "helper": "Examples include supplier coverage, findings, corrective actions and remediation progress.",
+            "option_1": "We do not track formal KPIs",
+            "score_1": 0,
+            "option_2": "We collect some data when needed",
+            "score_2": 1,
+            "option_3": "We review a defined set of KPIs regularly",
+            "score_3": 2,
+            "option_4": "KPIs have targets, ownership and leadership review",
+            "score_4": 3
+          }
+        },
+        "question_bVbHKe": {
+          "type": "question",
+          "settings": {
+            "category": "Improve",
+            "question": "Are you responding to a specific compliance deadline or regulatory driver?",
+            "helper": "For example: CSDDD, CSRD, EUDR, customer requirements or another active obligation.",
+            "option_1": "No immediate driver",
+            "score_1": 0,
+            "option_2": "We are monitoring requirements",
+            "score_2": 1,
+            "option_3": "Yes, preparation is already underway",
+            "score_3": 2,
+            "option_4": "Yes, we have an active or near-term deadline",
+            "score_4": 3
+          }
+        },
+        "question_frAFNd": {
+          "type": "question",
+          "settings": {
+            "category": "Intent",
+            "question": "What would be most useful to your organization right now?",
+            "helper": "Your goal helps determine whether a self-assessment or expert-led path is the better next step.",
+            "option_1": "Establish a benchmark and understand our starting point",
+            "score_1": 1,
+            "option_2": "Prepare for a regulation or customer requirement",
+            "score_2": 2,
+            "option_3": "Validate our existing controls and evidence",
+            "score_3": 2,
+            "option_4": "Work directly with an expert on implementation",
+            "score_4": 3
+          }
+        }
+      },
+      "block_order": [
+        "question_DHTPdp",
+        "question_FP8z89",
+        "question_rBGq8h",
+        "question_cDmBXU",
+        "question_TVYLap",
+        "question_PGXn8a",
+        "question_WEpYgU",
+        "question_HEGW8G",
+        "question_bVbHKe",
+        "question_frAFNd"
+      ],
+      "name": "VECTRA interactive quiz",
+      "settings": {
+        "eyebrow": "SCDD readiness screening",
+        "heading": "Know Which Assessment Level You Need",
+        "intro": "<p>Complete 10 focused questions about your organization, assessment scope, current controls, and due diligence position.<br/><br/>Your responses help indicate whether Level 1, Level 2, or Level 3 is the most appropriate SCDD risk assessment pathway.<br/><br/>The pre-assessment recommends a pathway. It does not provide the detailed maturity findings of the full assessment.<br/></p>",
+        "time_label": "About 2 minutes",
+        "privacy_label": "Screening outcome only",
+        "details_step_label": "Your details",
+        "details_heading": "Tell Us About Your Organization and Assessment Scope",
+        "details_body": "We use this information to make the assessment pathway relevant to your organization.",
+        "consent_text": "<p>I agree that VECTRA may use these details to provide my result and follow up about the most relevant assessment pathway.</p>",
+        "start_label": "Start assessment",
+        "integration_mode": "shopify_customer",
+        "shopify_forms_url": "",
+        "open_forms_new_tab": false,
+        "forms_cta_label": "Continue with VECTRA",
+        "native_cta_label": "Save my result",
+        "customer_tag": "VECTRA SCDD lead",
+        "submit_success": "Thank you. Your result has been saved and the VECTRA team can now follow up.",
+        "level_1_heading": "Build a dependable baseline.",
+        "level_1_body": "Your responses suggest that key responsible sourcing structures are still being established or formalized.",
+        "level_2_heading": "Validate how your controls work.",
+        "level_2_body": "Your organization appears to have several structures in place, with an opportunity to test consistency, evidence and implementation.",
+        "level_3_heading": "Turn complexity into an action plan.",
+        "level_3_body": "Your answers indicate an advanced, urgent or implementation-focused need that is better shaped with direct expert support.",
+        "result_note": "This is a screening recommendation, not a legal opinion, assurance conclusion or complete maturity assessment.",
+        "background_color": "#f3f5f3",
+        "card_color": "#ffffff",
+        "navy_color": "#082946",
+        "accent_color": "#55c900",
+        "text_color": "#15364f",
+        "muted_color": "#667685",
+        "border_color": "#dce4dd",
+        "grid_color": "#082946",
+        "content_width": 1040,
+        "corner_radius": 24,
+        "padding_top": 104,
+        "padding_bottom": 112
+      }
+    },
+    "ra_pathways_UVC87Q": {
+      "type": "ra-pathways",
+      "blocks": {
+        "stage_cMdcnM": {
+          "type": "stage",
+          "settings": {
+            "number": "01",
+            "heading": "CONCEPT",
+            "description": "<p>Clarify the challenge, desired result, and wider business context.</p>",
+            "use_custom_colors": false,
+            "inactive_background": "#f4f6f4",
+            "inactive_text": "#6f7d88",
+            "active_background": "#082c49",
+            "active_text": "#ffffff",
+            "active_number_background": "#4de000",
+            "active_number_text": "#082c49"
+          }
+        },
+        "stage_wzCmi8": {
+          "type": "stage",
+          "settings": {
+            "number": "02",
+            "heading": "CONSULT",
+            "description": "<p>Understand the current position, risks, requirements, evidence, and priorities with the people closest to the work.</p>",
+            "use_custom_colors": false,
+            "inactive_background": "#f4f6f4",
+            "inactive_text": "#6f7d88",
+            "active_background": "#082c49",
+            "active_text": "#ffffff",
+            "active_number_background": "#4de000",
+            "active_number_text": "#082c49"
+          }
+        },
+        "stage_AnWUPB": {
+          "type": "stage",
+          "settings": {
+            "number": "03",
+            "heading": "DESIGN",
+            "description": "<p>Co-design the response, including practical controls, ownership, roadmap, capability, and the right technology for the context.</p>",
+            "use_custom_colors": false,
+            "inactive_background": "#f4f6f4",
+            "inactive_text": "#6f7d88",
+            "active_background": "#082c49",
+            "active_text": "#ffffff",
+            "active_number_background": "#4de000",
+            "active_number_text": "#082c49"
+          }
+        },
+        "stage_bfyRDE": {
+          "type": "stage",
+          "settings": {
+            "number": "04",
+            "heading": "SERVICE",
+            "description": "<p>Work alongside client teams to implement, build capability, verify progress, and resolve issues.</p>",
+            "use_custom_colors": false,
+            "inactive_background": "#f4f6f4",
+            "inactive_text": "#6f7d88",
+            "active_background": "#082c49",
+            "active_text": "#ffffff",
+            "active_number_background": "#4de000",
+            "active_number_text": "#082c49"
+          }
+        },
+        "stage_KHKaUh": {
+          "type": "stage",
+          "settings": {
+            "number": "05",
+            "heading": "EXPAND / ENHANCE ",
+            "description": "<p>Extend what works, strengthen weak points, and scale where it adds value.</p>",
+            "use_custom_colors": false,
+            "inactive_background": "#f4f6f4",
+            "inactive_text": "#6f7d88",
+            "active_background": "#082c49",
+            "active_text": "#ffffff",
+            "active_number_background": "#4de000",
+            "active_number_text": "#082c49"
+          }
+        },
+        "stage_RN83Nj": {
+          "type": "stage",
+          "settings": {
+            "number": "06",
+            "heading": "MAINTAIN",
+            "description": "<p>Reinforce governance, evidence, ownership, and internal capability so progress holds.</p>",
+            "use_custom_colors": false,
+            "inactive_background": "#f4f6f4",
+            "inactive_text": "#6f7d88",
+            "active_background": "#082c49",
+            "active_text": "#ffffff",
+            "active_number_background": "#4de000",
+            "active_number_text": "#082c49"
+          }
+        },
+        "stage_jbKadT": {
+          "type": "stage",
+          "settings": {
+            "number": "07",
+            "heading": "REPEAT",
+            "description": "<p>Revisit the cycle as requirements, operations, risks, and business priorities change.</p>",
+            "use_custom_colors": false,
+            "inactive_background": "#f4f6f4",
+            "inactive_text": "#6f7d88",
+            "active_background": "#082c49",
+            "active_text": "#ffffff",
+            "active_number_background": "#4de000",
+            "active_number_text": "#082c49"
+          }
+        }
+      },
+      "block_order": [
+        "stage_cMdcnM",
+        "stage_wzCmi8",
+        "stage_AnWUPB",
+        "stage_bfyRDE",
+        "stage_KHKaUh",
+        "stage_RN83Nj",
+        "stage_jbKadT"
+      ],
+      "name": "VECTRA pathways",
+      "settings": {
+        "eyebrow": "HOW WE PARTNER",
+        "heading": "We Stay With the Work",
+        "body": "<p>We work alongside your team from the first conversation through implementation, ongoing support, and continuous improvement.</p><p>VECTRA specialists work with the people closest to your operations. Human judgment guides the work, while AI-enabled, platform-agnostic technology helps speed up analysis, monitoring, and delivery.</p><p>We shape the approach around your systems, priorities, and capacity, and adapt it as requirements, operations, and business goals change.</p>",
+        "center_label": "Continuous improvement",
+        "show_interaction_hint": true,
+        "principle_1": "Shared goals",
+        "principle_2": "Joint ownership",
+        "principle_3": "Clear communication",
+        "principle_4": "Practical implementation",
+        "principle_5": "Ongoing support",
+        "content_width": "1260",
+        "header_width": "900",
+        "heading_size": "60",
+        "body_size": "16",
+        "cycle_height": "620",
+        "padding_top": "112",
+        "padding_bottom": "112",
+        "background_color": "#f2f4f1",
+        "heading_color": "#072a46",
+        "body_color": "#697a90",
+        "eyebrow_color": "#2e7e38",
+        "navy_color": "#082c49",
+        "accent_color": "#4de000",
+        "dark_accent_color": "#2e7e38",
+        "track_color": "#dde9df",
+        "card_color": "#082c49",
+        "border_color": "#d5dfd8",
+        "principle_text_color": "#072a46",
+        "principle_background_color": "#ffffff",
+        "principle_border_color": "#d5dfd8",
+        "principle_dot_color": "#4de000",
+        "transparent_inactive_stages": false,
+        "inactive_stage_opacity": "1",
+        "stage_inactive_background": "#f4f6f4",
+        "stage_inactive_text": "#6f7d88",
+        "stage_inactive_border": "#bcc8c1",
+        "stage_inactive_number_background": "#e1e7e3",
+        "stage_inactive_number_text": "#65736b",
+        "stage_active_background": "#082c49",
+        "stage_active_text": "#ffffff",
+        "stage_active_border": "#082c49",
+        "stage_active_number_background": "#4de000",
+        "stage_active_number_text": "#082c49"
+      }
+    },
+    "ra_faqs_fxTqAc": {
+      "type": "ra-faqs",
+      "blocks": {
+        "faq_CmmGpp": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does the pre-assessment take?",
+            "answer": "<p>About two minutes. It contains 10 focused questions designed to identify the most appropriate next step, not reproduce the full assessment.</p>",
+            "open_by_default": true
+          }
+        },
+        "faq_tRagy8": {
+          "type": "faq",
+          "settings": {
+            "question": "Who should complete it?",
+            "answer": "<p>The pre-assessment is intended for people responsible for areas such as supply chain due diligence, procurement, compliance, sustainability, supplier management, risk, or operational oversight.</p><p>You do not need to be a risk specialist to complete it.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_exwbxd": {
+          "type": "faq",
+          "settings": {
+            "question": "Will I receive a detailed maturity score?",
+            "answer": "<p>No. The pre-assessment recommends the most appropriate Level 1, Level 2, or Level 3 assessment pathway.<br/><br/>Detailed maturity scoring, findings, and recommendations come from the full SCDD Maturity Risk Assessment.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_Dz9EYG": {
+          "type": "faq",
+          "settings": {
+            "question": "What happens after I submit?",
+            "answer": "<p>Your responses are used to recommend the assessment level that best matches your organization’s current position and needs.<br/><br/><strong>If Level 1 is recommended</strong>, you can proceed directly to payment. Once payment is confirmed, our team sends an enrollment key by email so you can start the assessment.<br/><br/><strong>If Level 2 or Level 3 is recommended</strong>, you’ll be directed to schedule a scoping conversation with VECTRA, since these engagements are defined individually.&nbsp;<br/></p>",
+            "open_by_default": false
+          }
+        },
+        "faq_7EkhRq": {
+          "type": "faq",
+          "settings": {
+            "question": "Can colleagues help me complete the full assessment?",
+            "answer": "<p>Yes. Once you begin the full assessment, the main respondent can invite colleagues as co-respondents to help answer questions.<br/><br/>Only the main respondent can finalize and submit it — once submitted, the assessment is locked and your reports are generated automatically.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_ChMQAK": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I complete this on behalf of another company, such as a supplier or portfolio company?",
+            "answer": "<p>Yes. Buyers, investors, and private equity firms often purchase the assessment on behalf of the companies they want assessed — for example, a supplier or a portfolio company. In these cases, the paying company and the responding company can be different, and VECTRA coordinates enrollment directly with the company completing the assessment.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_7TNWbF": {
+          "type": "faq",
+          "settings": {
+            "question": "Is pricing shown immediately?",
+            "answer": "<p>Level 2 and Level 3 are scoped individually and route to a consultation with VECTRA, since pricing and required agreements vary by engagement. The final Level 1 pricing and display approach remain subject to approval.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_dzrTfH": {
+          "type": "faq",
+          "settings": {
+            "question": "How will my information be used?",
+            "answer": "<p>The information you provide is used to process your responses, recommend an assessment pathway, and support any follow-up you request.<br/><br/><a href=\"/pages/privacy-policy\" target=\"_blank\" title=\"Privacy Policy\">VECTRA International Privacy Policy.</a></p>",
+            "open_by_default": false
+          }
+        },
+        "faq_YYitWz": {
+          "type": "faq",
+          "settings": {
+            "question": "Is a supplier risk assessment the same as a vendor risk assessment?",
+            "answer": "<p>The terms are sometimes used interchangeably, but their scope can differ. A vendor risk assessment may cover areas such as technology, cybersecurity, financial exposure, or service continuity.</p><p>VECTRA’s assessment focuses on supplier and supply chain due diligence, including inherent risk, control maturity, and the residual risk that remains.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_nehH6D": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need a supplier risk assessment checklist before starting?",
+            "answer": "<p>No. You do not need to prepare a supplier risk assessment checklist before completing the pre-assessment. The 10 questions are designed to identify your current position and recommend the appropriate assessment level. Any deeper information or evidence needed will depend on the assessment pathway that follows.</p>",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "faq_CmmGpp",
+        "faq_tRagy8",
+        "faq_exwbxd",
+        "faq_Dz9EYG",
+        "faq_7EkhRq",
+        "faq_ChMQAK",
+        "faq_7TNWbF",
+        "faq_dzrTfH",
+        "faq_YYitWz",
+        "faq_nehH6D"
+      ],
+      "name": "VECTRA FAQs",
+      "settings": {
+        "eyebrow": "Frequently asked questions",
+        "heading": "Questions About the SCDD Pre-Assessment",
+        "body": "",
+        "show_assurance": true,
+        "assurance_heading": "Screening, not diagnosis",
+        "assurance_text": "Your detailed findings come from the full assessment.",
+        "cta_label": "",
+        "cta_link": "",
+        "single_open": true,
+        "sticky_intro": true,
+        "content_width": "1200",
+        "padding_top": "112",
+        "padding_bottom": "112",
+        "background_color": "#f3f5f2",
+        "card_color": "#ffffff",
+        "heading_color": "#082946",
+        "body_color": "#617083",
+        "accent_color": "#55c900",
+        "border_color": "#d7dfd8",
+        "assurance_end_color": "#0d5944"
+      }
+    }
+  },
+  "order": [
+    "vectra_home_mfggqh",
+    "ra_hero_banner_GNALV9",
+    "ra_grid_ABDFMN",
+    "ra_quiz_VNJDzX",
+    "ra_pathways_UVC87Q",
+    "ra_faqs_fxTqAc"
+  ]
+}
