@@ -23,7 +23,7 @@ Advanced design block is optional: all its settings have layout defaults.
       assign story_font = "'Poppins', var(--font-body-family, Arial, sans-serif)"
   endcase
 %}
-<section id="VStories-{{ section.id }}" class="vts vts--{{ s.layout }} vts--{{ s.card_design }} vts--align-{{ s.alignment }} vts--bg-{{ s.background_design }}{% if s.hover_effect %} vts--hover{% endif %}{% if s.shadow %} vts--shadow{% endif %}"
+<section id="VStories-{{ section.id }}" class="vts vts--{{ s.layout }} vts--{{ s.card_design }} vts--align-{{ s.alignment }} vts--bg-{{ s.background_design }}{% if s.hover_effect %} vts--hover{% endif %}{% if s.shadow %} vts--shadow{% endif %}{% if s.outcome_panel %} vts--outcome-panel{% endif %}"
   {% if s.heading != blank %}aria-labelledby="VStoriesHeading-{{ section.id }}"{% endif %}>
   <div class="vts__backdrop" aria-hidden="true" {{ appearance_block.shopify_attributes }}></div>
   <div class="vts__shell" {{ design_block.shopify_attributes }}>
@@ -59,15 +59,7 @@ Advanced design block is optional: all its settings have layout defaults.
                 {% if b.company_url != blank %}</a>{% endif %}
               </div>
             {% endif %}
-            {% if b.title != blank %}<h3>{{ b.title | escape }}</h3>{% endif %}
-            {% if s.show_results and b.result != blank %}
-              <div class="vts__result">
-                {% if s.result_label != blank %}<p class="vts__result-label">{{ s.result_label | escape }}</p>{% endif %}
-                <p class="vts__result-value">{{ b.result | escape }}</p>
-                {% if b.result_detail != blank %}<p class="vts__result-detail">{{ b.result_detail | escape }}</p>{% endif %}
-              </div>
-            {% endif %}
-            {% if b.summary != blank %}<div class="vts__summary">{{ b.summary }}</div>{% endif %}
+            {% if s.show_titles and b.title != blank %}<h3>{{ b.title | escape }}</h3>{% endif %}
             {% if b.quote != blank %}
               <figure class="vts__quote">
                 <blockquote><p>“{{ b.quote | escape | newline_to_br }}”</p></blockquote>
@@ -83,6 +75,14 @@ Advanced design block is optional: all its settings have layout defaults.
             {% elsif b.person != blank %}
               <p class="vts__person vts__attribution"><strong>{{ b.person | escape }}</strong>{% if b.role != blank %}<span>{{ b.role | escape }}</span>{% endif %}{% if b.company != blank %}<span>{{ b.company | escape }}</span>{% endif %}</p>
             {% endif %}
+            {% if s.show_summaries and b.summary != blank %}<div class="vts__summary">{{ b.summary }}</div>{% endif %}
+            {% if s.show_results and b.result != blank %}
+              <div class="vts__result">
+                {% if s.result_label != blank %}<p class="vts__result-label">{{ s.result_label | escape }}</p>{% endif %}
+                <p class="vts__result-value">{{ b.result | escape }}</p>
+                {% if b.result_detail != blank %}<p class="vts__result-detail">{{ b.result_detail | escape }}</p>{% endif %}
+              </div>
+            {% endif %}
             {% if s.show_timelines and b.timeline != blank or b.company_url != blank or b.story_url != blank %}
               <footer class="vts__card-footer">
                 {% if s.show_timelines and b.timeline != blank %}<p class="vts__timeline">{% if s.timeline_label != blank %}<span>{{ s.timeline_label | escape }}</span>{% endif %}{{ b.timeline | escape }}</p>{% endif %}
@@ -94,7 +94,6 @@ Advanced design block is optional: all its settings have layout defaults.
                 {% endif %}
               </footer>
             {% endif %}
-            {% if request.design_mode and b.company_url == blank %}<p class="vts__editor-note">Add the verified company website and upload its logo in this testimonial block.</p>{% endif %}
           </article>
         {% endfor %}
       </div>
@@ -131,7 +130,7 @@ Advanced design block is optional: all its settings have layout defaults.
   #VStories-{{ section.id }}.vts--shadow .vts__card { box-shadow: 0 14px 44px rgb(8 41 70 / .06); }
   #VStories-{{ section.id }} .vts__card::before { content: ''; position: absolute; top: 0; left: var(--radius); right: var(--radius); height: {{ d.accent_thickness | default: 3 }}px; background: var(--accent); border-radius: 0 0 4px 4px; pointer-events: none; }
   #VStories-{{ section.id }}.vts--minimal .vts__card { box-shadow: none; border-color: transparent; }
-  #VStories-{{ section.id }}.vts--outline .vts__result { background: transparent; border: 1px solid var(--line); }
+  #VStories-{{ section.id }}.vts--outline .vts__result { background: transparent; border: 0; border-top: 1px solid var(--line); }
   #VStories-{{ section.id }} .vts__card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; min-height: 30px; }
   #VStories-{{ section.id }} .vts__category { padding: 6px 10px; border-radius: {{ d.badge_radius | default: 40 }}px; background: var(--badge-bg); color: var(--badge-ink); font-size: 11px; line-height: 1.5; font-weight: 600; }
   #VStories-{{ section.id }} .vts__quote-mark { margin-left: auto; height: 34px; font: 64px/.95 Georgia,serif; color: var(--accent); }
@@ -142,19 +141,19 @@ Advanced design block is optional: all its settings have layout defaults.
   #VStories-{{ section.id }} .vts__brand-link .vts__logo-fallback { margin-right: 0; }
   #VStories-{{ section.id }} .vts__brand-name { color: var(--ink); font-size: 13px; line-height: 1.4; font-weight: 700; }
   #VStories-{{ section.id }} h3 { margin: 0 0 22px; font-family: inherit; color: var(--ink); font-size: {{ d.title_size | default: 24 }}px; font-weight: 750; line-height: 1.25; letter-spacing: -.035em; text-wrap: pretty; }
-  #VStories-{{ section.id }} .vts__result { padding: 20px; background: var(--result-bg); color: var(--result-ink); border-radius: {{ d.result_radius | default: 14 }}px; margin-bottom: 22px; }
+  #VStories-{{ section.id }} .vts__result { padding: 16px 0 0; background: transparent; color: var(--result-ink); border-top: 1px solid var(--line); border-radius: 0; margin-bottom: 18px; }
   #VStories-{{ section.id }} .vts__result-label { margin: 0 0 8px; font-size: 10px; line-height: 1.5; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
-  #VStories-{{ section.id }} .vts__result-value { margin: 0; font-size: {{ d.result_size | default: 30 }}px; line-height: 1.15; font-weight: 800; letter-spacing: -.04em; }
+  #VStories-{{ section.id }} .vts__result-value { margin: 0; font-size: clamp(12px, {{ d.outcome_text_size | default: 14 }}px, 20px); line-height: 1.6; font-weight: 600; letter-spacing: 0; }
   #VStories-{{ section.id }} .vts__result-detail { margin: 10px 0 0; font-size: 12px; line-height: 1.6; }
   #VStories-{{ section.id }} .vts__summary { margin-bottom: 22px; font-size: {{ s.body_size }}px; line-height: 1.75; }
   #VStories-{{ section.id }} .vts__quote { margin: 0 0 24px; }
-  #VStories-{{ section.id }} blockquote { margin: 0; padding: 0 0 0 16px; border: 0; border-left: 2px solid var(--accent); color: var(--ink); font-size: {{ d.quote_size | default: 18 }}px; line-height: 1.65; font-style: {{ a.quote_style | default: 'normal' }}; }
+  #VStories-{{ section.id }} blockquote { margin: 0; padding: 0; border: 0; color: var(--ink); font-size: {{ d.client_quote_size | default: 24 }}px; line-height: 1.5; font-weight: 500; letter-spacing: -.02em; font-style: {{ a.quote_style | default: 'normal' }}; }
   #VStories-{{ section.id }} blockquote p { margin: 0; }
   #VStories-{{ section.id }} .vts__attribution { display: flex; gap: 12px; align-items: center; margin: 24px 0 0; }
   #VStories-{{ section.id }} .vts__person { display: flex; flex-direction: column; gap: 3px; min-width: 0; font-size: 12px; line-height: 1.55; }
   #VStories-{{ section.id }} .vts__person strong { color: var(--ink); font-size: {{ d.person_size | default: 14 }}px; font-weight: 700; }
   #VStories-{{ section.id }} .vts__portrait, #VStories-{{ section.id }} .vts__avatar { display: grid; place-items: center; width: {{ d.portrait_size | default: 48 }}px; height: {{ d.portrait_size | default: 48 }}px; flex-shrink: 0; object-fit: cover; border-radius: 50%; background: var(--logo-bg); color: var(--logo-ink); font-weight: 700; }
-  #VStories-{{ section.id }} .vts__card-footer { margin-top: auto; border-top: 1px solid var(--line); padding-top: 20px; }
+  #VStories-{{ section.id }} .vts__card-footer { margin-top: auto; border-top: 0; padding-top: 4px; }
   #VStories-{{ section.id }} .vts__timeline { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; font-size: 12px; line-height: 1.6; }
   #VStories-{{ section.id }} .vts__timeline > span { color: var(--ink); font-weight: 700; }
   #VStories-{{ section.id }} .vts__links { display: flex; gap: 10px 20px; flex-wrap: wrap; margin-top: 8px; }
@@ -174,7 +173,7 @@ Advanced design block is optional: all its settings have layout defaults.
   @media (min-width: 990px) {
     #VStories-{{ section.id }}.vts--featured .vts__grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
     #VStories-{{ section.id }}.vts--featured .vts__card:first-child { grid-column: 1 / -1; }
-    #VStories-{{ section.id }}.vts--featured .vts__card:first-child .vts__result-value { font-size: {{ d.featured_result_size | default: 44 }}px; }
+    #VStories-{{ section.id }}.vts--featured .vts__card:first-child .vts__result-value { font-size: clamp(12px, {{ d.featured_outcome_size | default: 16 }}px, 20px); }
   }
   #VStories-{{ section.id }}.vts--stacked .vts__grid { grid-template-columns: minmax(0,1fr); }
   @media (min-width: 750px) and (max-width: 989px) { #VStories-{{ section.id }}:not(.vts--stacked) .vts__grid { grid-template-columns: repeat({{ columns | at_most: 2 }},minmax(0,1fr)); } }
@@ -187,6 +186,49 @@ Advanced design block is optional: all its settings have layout defaults.
   }
   @media (hover: hover) and (prefers-reduced-motion: no-preference) { #VStories-{{ section.id }}.vts--hover .vts__card:hover { transform: translateY(-4px); box-shadow: 0 20px 44px rgb(8 41 70 / .09); } }
   @media (prefers-reduced-motion: reduce) { #VStories-{{ section.id }} .vts__card { transition: none; } }
+
+  /* Share content-sized tracks across each visual row of cards. No fixed
+     heights, truncation, or resize scripts. Optional fields keep their slot. */
+  @supports (grid-template-rows: subgrid) {
+    @media (min-width: 750px) {
+      #VStories-{{ section.id }} .vts__grid { row-gap: 0; margin-bottom: calc(0px - var(--gap)); }
+      #VStories-{{ section.id }} .vts__card {
+        display: grid; grid-row: span 12; grid-template-rows: subgrid;
+        grid-template-columns: minmax(0, 1fr); row-gap: 0;
+        margin-bottom: var(--gap); align-items: stretch;
+      }
+      #VStories-{{ section.id }} .vts__card > * { min-width: 0; grid-column: 1; }
+      #VStories-{{ section.id }} .vts__card-top { grid-row: 1; }
+      #VStories-{{ section.id }} .vts__brand { grid-row: 2; }
+      #VStories-{{ section.id }} .vts__card > h3 { grid-row: 3; }
+      #VStories-{{ section.id }} .vts__result {
+        display: grid; grid-row: 7 / span 3; grid-template-rows: subgrid;
+        grid-template-columns: minmax(0, 1fr); row-gap: 0;
+      }
+      #VStories-{{ section.id }} .vts__result > * { min-width: 0; grid-column: 1; }
+      #VStories-{{ section.id }} .vts__result-label { grid-row: 1; align-self: start; }
+      #VStories-{{ section.id }} .vts__result-value { grid-row: 2; align-self: start; }
+      #VStories-{{ section.id }} .vts__result-detail { grid-row: 3; align-self: start; }
+      #VStories-{{ section.id }} .vts__summary { grid-row: 6; }
+      #VStories-{{ section.id }} .vts__quote {
+        display: grid; grid-row: 4 / span 2; grid-template-rows: subgrid;
+        grid-template-columns: minmax(0, 1fr); row-gap: 0;
+      }
+      #VStories-{{ section.id }} .vts__quote > blockquote { grid-row: 1; align-self: start; }
+      #VStories-{{ section.id }} .vts__quote > .vts__attribution { grid-row: 2; align-self: start; }
+      #VStories-{{ section.id }} .vts__card > .vts__attribution { grid-row: 5; align-self: start; margin-bottom: 24px; }
+      #VStories-{{ section.id }} .vts__card-footer {
+        display: grid; grid-row: 10 / span 2; grid-template-rows: subgrid;
+        grid-template-columns: minmax(0, 1fr); row-gap: 0; margin-top: 0;
+      }
+      #VStories-{{ section.id }} .vts__timeline { grid-row: 1; align-self: start; }
+      #VStories-{{ section.id }} .vts__links { grid-row: 2; align-self: start; }
+      #VStories-{{ section.id }} .vts__editor-note { grid-row: 12; align-self: start; }
+    }
+  }
+
+  #VStories-{{ section.id }}.vts--outline .vts__card { background: transparent; }
+  #VStories-{{ section.id }}.vts--outcome-panel .vts__result { background: var(--result-bg); padding: 14px; border: 0; border-radius: {{ d.result_radius | default: 14 }}px; }
 {% endstyle %}
 
 {% schema %}
@@ -290,11 +332,11 @@ Advanced design block is optional: all its settings have layout defaults.
       "options": [
         {
           "value": "filled",
-          "label": "Soft result panels"
+          "label": "Soft cards"
         },
         {
           "value": "outline",
-          "label": "Outlined result panels"
+          "label": "Outlined cards"
         },
         {
           "value": "minimal",
@@ -514,14 +556,32 @@ Advanced design block is optional: all its settings have layout defaults.
     {
       "type": "color",
       "id": "result_background",
-      "label": "Result panel background",
+      "label": "Optional outcome panel background",
       "default": "#eaf5e2"
     },
     {
       "type": "color",
       "id": "result_color",
       "label": "Result panel text",
-      "default": "#214600"
+      "default": "#596d80"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_titles",
+      "label": "Show supporting story headings",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_summaries",
+      "label": "Show supporting case summaries",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "outcome_panel",
+      "label": "Add a subtle background to the outcome",
+      "default": false
     }
   ],
   "blocks": [
@@ -593,7 +653,8 @@ Advanced design block is optional: all its settings have layout defaults.
         {
           "type": "textarea",
           "id": "quote",
-          "label": "Client quote"
+          "label": "Client quote",
+          "info": "Paste the client’s exact words. This is the main content of the card."
         },
         {
           "type": "text",
@@ -663,14 +724,14 @@ Advanced design block is optional: all its settings have layout defaults.
         {
           "type": "color",
           "id": "result_background",
-          "label": "Result panel background",
+          "label": "Optional outcome panel background",
           "default": "#eaf5e2"
         },
         {
           "type": "color",
           "id": "result_color",
           "label": "Result panel text",
-          "default": "#214600"
+          "default": "#596d80"
         },
         {
           "type": "color",
@@ -935,33 +996,33 @@ Advanced design block is optional: all its settings have layout defaults.
         },
         {
           "type": "range",
-          "id": "result_size",
-          "label": "Result text size",
-          "min": 20,
-          "max": 44,
-          "step": 2,
-          "unit": "px",
-          "default": 30
-        },
-        {
-          "type": "range",
-          "id": "featured_result_size",
-          "label": "Featured result size",
-          "min": 28,
-          "max": 60,
-          "step": 2,
-          "unit": "px",
-          "default": 44
-        },
-        {
-          "type": "range",
-          "id": "quote_size",
-          "label": "Quote size",
-          "min": 14,
-          "max": 26,
+          "id": "outcome_text_size",
+          "label": "Outcome text size",
+          "min": 12,
+          "max": 24,
           "step": 1,
           "unit": "px",
-          "default": 18
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "featured_outcome_size",
+          "label": "Featured outcome text size",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "client_quote_size",
+          "label": "Quote size",
+          "min": 16,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "default": 24
         },
         {
           "type": "range",
@@ -996,7 +1057,7 @@ Advanced design block is optional: all its settings have layout defaults.
         {
           "type": "range",
           "id": "result_radius",
-          "label": "Result panel corners",
+          "label": "Optional outcome panel corners",
           "min": 0,
           "max": 32,
           "step": 2,
