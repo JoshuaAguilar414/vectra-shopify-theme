@@ -1,0 +1,970 @@
+{% comment %}
+VECTRA Expert Highlights — standalone Online Store 2.0 section.
+Install as sections/vectra-expert-highlights.liquid, then add in Theme Editor.
+No snippets, scripts, remote images, or apps required. Inherits theme fonts.
+Add verified LinkedIn URLs to each expert; blank URLs render no link.
+Biographies adapted from VECTRA's legacy Risk Assessment page.
+{% endcomment %}
+{% liquid
+  assign s = section.settings
+  assign expert_blocks = section.blocks | where: 'type', 'expert'
+  assign design_block = section.blocks | where: 'type', 'design' | first
+  assign d = design_block.settings
+  assign heading_id = 'VExpertHeading-' | append: section.id
+  case s.font_family
+    when 'heading'
+      assign expert_font = 'var(--font-heading-family, Arial, sans-serif)'
+    when 'body'
+      assign expert_font = 'var(--font-body-family, Arial, sans-serif)'
+    else
+      assign expert_font = "'Poppins', var(--font-body-family, Arial, sans-serif)"
+  endcase
+%}
+<section id="VExperts-{{ section.id }}" class="vex vex--{{ s.card_layout }} vex--align-{{ s.header_alignment }} vex--bg-{{ s.background_style }}{% if s.hover_effect %} vex--hover{% endif %}{% if s.card_shadow %} vex--shadow{% endif %}"
+  {% if s.heading != blank %}aria-labelledby="{{ heading_id }}"{% endif %}>
+  <div class="vex__decoration" aria-hidden="true"></div>
+  <div class="vex__shell" {{ design_block.shopify_attributes }}>
+    <header class="vex__header">
+      {% if s.eyebrow != blank %}<p class="vex__eyebrow">{{ s.eyebrow | escape }}</p>{% endif %}
+      {% if s.heading != blank %}<h2 id="{{ heading_id }}">{{ s.heading | escape }}</h2>{% endif %}
+      {% if s.subheading != blank %}<div class="vex__intro">{{ s.subheading }}</div>{% endif %}
+    </header>
+    {% if expert_blocks.size > 0 %}
+      <div class="vex__grid">
+        {% for block in expert_blocks %}
+          {% liquid
+            assign b = block.settings
+            assign photo_alt = b.image.alt | default: b.name
+            assign tags = b.expertise | split: ','
+          %}
+          <article class="vex__card" {% if b.custom_colors %}style="--card-bg: {{ b.card_color }}; --title: {{ b.heading_color }}; --copy: {{ b.body_color }}; --accent: {{ b.accent_color }}; --line: {{ b.border_color }}; --photo-bg: {{ b.photo_background }}; --tag-bg: {{ b.tag_background }}; --tag-ink: {{ b.tag_color }}; --button-bg: {{ b.button_background }}; --button-ink: {{ b.button_color }}; --button-hover-bg: {{ b.button_hover_background }}; --button-hover-ink: {{ b.button_hover_color }};"{% endif %} {{ block.shopify_attributes }}>
+            <div class="vex__photo vex__photo--{{ s.photo_shape }}" style="--photo-position: {{ b.photo_x }}% {{ b.photo_y }}%;">
+              {% if b.image != blank %}
+                {{ b.image | image_url: width: 1200 | image_tag: widths: '240, 360, 480, 640, 900, 1200', sizes: '(max-width: 749px) 100vw, (max-width: 989px) 50vw, 600px', loading: 'lazy', alt: photo_alt, class: 'vex__image' }}
+              {% else %}
+                <svg class="vex__placeholder" viewBox="0 0 400 440" role="img" aria-label="{{ b.name | default: 'Expert' | escape }} — photo placeholder" focusable="false">
+                  <circle cx="200" cy="160" r="66" fill="currentColor" opacity=".15"/>
+                  <path d="M64 440v-70c0-77 61-125 136-125s136 48 136 125v70Z" fill="currentColor" opacity=".15"/>
+                  <circle cx="200" cy="180" r="150" fill="none" stroke="currentColor" opacity=".08"/>
+                </svg>
+              {% endif %}
+              {% if b.badge != blank %}<span class="vex__badge">{{ b.badge | escape }}</span>{% endif %}
+            </div>
+            <div class="vex__content">
+              {% if b.organization != blank %}<p class="vex__organization">{{ b.organization | escape }}</p>{% endif %}
+              {% if b.name != blank %}<h3>{{ b.name | escape }}</h3>{% endif %}
+              {% if b.role != blank %}<p class="vex__role">{{ b.role | escape }}</p>{% endif %}
+              {% if b.bio != blank %}<div class="vex__bio">{{ b.bio }}</div>{% endif %}
+              {% if s.show_tags and b.expertise != blank %}
+                <ul class="vex__tags" aria-label="Areas of expertise">
+                  {% for tag in tags %}{% assign tag_label = tag | strip %}{% if tag_label != blank %}<li>{{ tag_label | escape }}</li>{% endif %}{% endfor %}
+                </ul>
+              {% endif %}
+              {% if b.linkedin_url != blank or b.additional_url != blank %}
+                <div class="vex__links">
+                  {% if b.linkedin_url != blank %}
+                    <a class="vex__linkedin" href="{{ b.linkedin_url | escape }}" {% if s.new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M5.2 3a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4ZM3.4 9h3.6v12H3.4V9Zm6 0h3.4v1.6h.1c.5-.9 1.7-1.9 3.5-1.9 3.7 0 4.4 2.4 4.4 5.5V21h-3.6v-6c0-1.4 0-3.2-2-3.2s-2.3 1.5-2.3 3.1V21H9.4V9Z"/></svg>
+                      <span>{{ b.linkedin_label | default: s.linkedin_label | escape }}<span class="vex__sr"> — {{ b.name | escape }}{% if s.new_tab %} (opens in a new tab){% endif %}</span></span>
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  {% endif %}
+                  {% if b.additional_url != blank %}<a class="vex__extra" href="{{ b.additional_url | escape }}" {% if s.new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ b.additional_label | default: 'Read more' | escape }}<span class="vex__sr"> — {{ b.name | escape }}{% if s.new_tab %} (opens in a new tab){% endif %}</span><span aria-hidden="true"> ↗</span></a>{% endif %}
+                </div>
+              {% endif %}
+              {% if request.design_mode and b.linkedin_url == blank %}<p class="vex__editor-note">Add this expert’s LinkedIn URL to display their profile button.</p>{% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if s.footer_text != blank or s.cta_url != blank %}
+      <div class="vex__footer">
+        {% if s.footer_text != blank %}<div>{{ s.footer_text }}</div>{% endif %}
+        {% if s.cta_url != blank %}<a class="vex__cta" href="{{ s.cta_url | escape }}">{{ s.cta_label | default: 'Start pre-assessment' | escape }} <span aria-hidden="true">→</span></a>{% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% style %}
+  #VExperts-{{ section.id }} {
+    --bg: {{ s.background_color }}; --title: {{ s.heading_color }}; --copy: {{ s.body_color }};
+    --accent: {{ s.accent_color }}; --eyebrow: {{ s.eyebrow_color }}; --card-bg: {{ s.card_color }};
+    --line: {{ s.border_color }}; --photo-bg: {{ s.photo_background }};
+    --tag-bg: {{ s.tag_background }}; --tag-ink: {{ s.tag_color }};
+    --button-bg: {{ s.button_background }}; --button-ink: {{ s.button_color }};
+    --button-hover-bg: {{ s.button_hover_background }}; --button-hover-ink: {{ s.button_hover_color }};
+    --gap: {{ d.card_gap | default: 24 }}px; --radius: {{ d.card_radius | default: 22 }}px;
+    --columns: {{ s.columns | plus: 0 | at_most: expert_blocks.size | at_least: 1 }};
+    position: relative; isolation: isolate; overflow: hidden;
+    background: var(--bg); color: var(--copy); font-family: {{ expert_font }};
+    padding: {{ d.padding_top | default: 88 }}px {{ d.side_padding | default: 24 }}px {{ d.padding_bottom | default: 88 }}px;
+  }
+  #VExperts-{{ section.id }} *, #VExperts-{{ section.id }} *::before, #VExperts-{{ section.id }} *::after { box-sizing: border-box; }
+  #VExperts-{{ section.id }} .vex__shell { position: relative; z-index: 1; max-width: {{ d.content_width | default: 1260 }}px; margin-inline: auto; }
+  #VExperts-{{ section.id }} .vex__header { max-width: {{ d.header_width | default: 800 }}px; margin: 0 0 {{ d.header_gap | default: 48 }}px; text-align: {{ s.header_alignment }}; }
+  #VExperts-{{ section.id }}.vex--align-center .vex__header { margin-inline: auto; }
+  #VExperts-{{ section.id }} .vex__eyebrow { margin: 0 0 18px; font-size: {{ d.eyebrow_size | default: 11 }}px; font-weight: 800; letter-spacing: .17em; line-height: 1.4; text-transform: uppercase; color: var(--eyebrow); }
+  #VExperts-{{ section.id }} h2 { margin: 0; font-family: inherit; color: var(--title); font-size: clamp({{ s.heading_mobile }}px, 5vw, {{ s.heading_size }}px); font-weight: 800; line-height: 1.06; letter-spacing: -.045em; text-wrap: balance; }
+  #VExperts-{{ section.id }} .vex__intro { margin-top: 22px; font-size: {{ d.intro_size | default: 15 }}px; line-height: 1.7; }
+  #VExperts-{{ section.id }} p { margin-top: 0; }
+  #VExperts-{{ section.id }} .vex__intro > :last-child, #VExperts-{{ section.id }} .vex__bio > :last-child, #VExperts-{{ section.id }} .vex__footer p:last-child { margin-bottom: 0; }
+  #VExperts-{{ section.id }} .vex__grid { display: grid; grid-template-columns: repeat(var(--columns), minmax(0, 1fr)); gap: var(--gap); }
+  #VExperts-{{ section.id }} .vex__card { position: relative; display: flex; flex-direction: column; min-width: 0; border: {{ d.border_width | default: 1 }}px solid var(--line); border-radius: var(--radius); background: var(--card-bg); color: var(--copy); overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
+  #VExperts-{{ section.id }}.vex--shadow .vex__card { box-shadow: 0 12px 40px rgb(8 41 70 / .06); }
+  #VExperts-{{ section.id }} .vex__card::before { content: ''; position: absolute; z-index: 2; top: 0; left: 0; right: 0; height: {{ d.accent_thickness | default: 3 }}px; background: var(--accent); pointer-events: none; }
+  #VExperts-{{ section.id }} .vex__photo { position: relative; min-width: 0; background: var(--photo-bg); aspect-ratio: {{ s.photo_ratio }}; overflow: hidden; color: var(--title); }
+  #VExperts-{{ section.id }} .vex__image, #VExperts-{{ section.id }} .vex__placeholder { display: block; width: 100%; height: 100%; object-fit: {{ s.photo_fit }}; object-position: var(--photo-position); }
+  #VExperts-{{ section.id }} .vex__photo--circle { width: min({{ d.circle_size | default: 200 }}px, calc(100% - 48px)); aspect-ratio: 1; border-radius: 50%; margin: 28px auto 0; flex-shrink: 0; }
+  #VExperts-{{ section.id }} .vex__badge { position: absolute; bottom: 16px; left: 16px; right: 16px; width: fit-content; max-width: calc(100% - 32px); padding: 7px 12px; border-radius: 999px; background: var(--tag-bg); color: var(--tag-ink); font-size: 11px; line-height: 1.5; font-weight: 700; }
+  #VExperts-{{ section.id }} .vex__photo--circle .vex__badge { left: 50%; transform: translateX(-50%); text-align: center; }
+  #VExperts-{{ section.id }} .vex__content { display: flex; flex: 1; flex-direction: column; min-width: 0; padding: {{ d.card_padding | default: 32 }}px; overflow-wrap: anywhere; }
+  #VExperts-{{ section.id }} .vex__organization { margin: 0 0 10px; font-size: 11px; letter-spacing: .12em; font-weight: 800; text-transform: uppercase; color: var(--accent); line-height: 1.5; }
+  #VExperts-{{ section.id }} h3 { margin: 0 0 8px; font-family: inherit; font-size: {{ s.name_size }}px; line-height: 1.18; font-weight: 750; letter-spacing: -.035em; color: var(--title); }
+  #VExperts-{{ section.id }} .vex__role { margin: 0 0 20px; font-size: {{ s.body_size }}px; line-height: 1.6; font-weight: 600; color: var(--title); }
+  #VExperts-{{ section.id }} .vex__bio { font-size: {{ s.body_size }}px; line-height: 1.75; }
+  #VExperts-{{ section.id }} .vex__tags { display: flex; flex-wrap: wrap; gap: 7px; padding: 0; list-style: none; margin: 22px 0 0; }
+  #VExperts-{{ section.id }} .vex__tags li { padding: 6px 10px; border-radius: 999px; background: var(--tag-bg); color: var(--tag-ink); font-size: 11px; line-height: 1.5; }
+  #VExperts-{{ section.id }} .vex__links { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: auto; padding-top: 26px; }
+  #VExperts-{{ section.id }} .vex__linkedin, #VExperts-{{ section.id }} .vex__cta { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 12px 17px; border: 1px solid currentColor; border-radius: {{ d.button_radius | default: 10 }}px; text-decoration: none; font-size: 13px; font-weight: 700; line-height: 1.5; background: var(--button-bg); color: var(--button-ink); transition: background .2s, color .2s; }
+  #VExperts-{{ section.id }} .vex__linkedin svg { width: 18px; height: 18px; flex-shrink: 0; }
+  #VExperts-{{ section.id }} .vex__linkedin:hover, #VExperts-{{ section.id }} .vex__cta:hover { color: var(--button-hover-ink); background: var(--button-hover-bg); }
+  #VExperts-{{ section.id }} .vex__extra { display: inline-flex; align-items: center; min-height: 44px; color: var(--title); font-size: 13px; text-underline-offset: 4px; }
+  #VExperts-{{ section.id }} a:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+  #VExperts-{{ section.id }} .vex__bio a, #VExperts-{{ section.id }} .vex__intro a, #VExperts-{{ section.id }} .vex__footer a:not(.vex__cta) { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+  #VExperts-{{ section.id }} .vex__footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: {{ s.header_alignment }}; gap: 24px; margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); font-size: {{ s.body_size }}px; line-height: 1.7; }
+  #VExperts-{{ section.id }} .vex__decoration { position: absolute; inset: 0; pointer-events: none; opacity: {{ s.design_opacity | divided_by: 100.0 }}; }
+  #VExperts-{{ section.id }}.vex--bg-glow .vex__decoration { background: radial-gradient(ellipse at 0% 80%, {{ s.design_color | color_modify: 'alpha', 0.22 }}, transparent 60%), radial-gradient(ellipse at 100% 0%, {{ s.design_secondary | color_modify: 'alpha', 0.12 }}, transparent 55%); }
+  #VExperts-{{ section.id }}.vex--bg-grid .vex__decoration { background-image: linear-gradient({{ s.design_color | color_modify: 'alpha', 0.14 }} 1px, transparent 1px), linear-gradient(90deg, {{ s.design_secondary | color_modify: 'alpha', 0.10 }} 1px, transparent 1px); background-size: 48px 48px; }
+  #VExperts-{{ section.id }}.vex--bg-bands .vex__decoration { background: linear-gradient(150deg, transparent 35%, {{ s.design_color | color_modify: 'alpha', 0.13 }} 35%, {{ s.design_color | color_modify: 'alpha', 0.13 }} 49%, transparent 49%, transparent 56%, {{ s.design_secondary | color_modify: 'alpha', 0.07 }} 56%, {{ s.design_secondary | color_modify: 'alpha', 0.07 }} 65%, transparent 65%); }
+  #VExperts-{{ section.id }} .vex__editor-note { font-size: 12px; line-height: 1.5; padding-top: 18px; margin-bottom: 0; }
+  #VExperts-{{ section.id }} .vex__sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  @media (min-width: 990px) {
+    #VExperts-{{ section.id }}.vex--horizontal .vex__card { flex-direction: row; }
+    #VExperts-{{ section.id }}.vex--horizontal .vex__photo:not(.vex__photo--circle) { width: {{ d.photo_width | default: 38 }}%; flex-shrink: 0; aspect-ratio: auto; min-height: 320px; }
+    #VExperts-{{ section.id }}.vex--horizontal .vex__photo:not(.vex__photo--circle) .vex__image, #VExperts-{{ section.id }}.vex--horizontal .vex__photo:not(.vex__photo--circle) .vex__placeholder { position: absolute; inset: 0; }
+    #VExperts-{{ section.id }}.vex--horizontal .vex__photo--circle { width: min({{ d.circle_size | default: 200 }}px, 30%); margin: 28px 0 28px 24px; align-self: flex-start; }
+  }
+  @media (min-width: 750px) and (max-width: 989px) { #VExperts-{{ section.id }} .vex__grid { grid-template-columns: repeat({{ s.columns | plus: 0 | at_most: expert_blocks.size | at_most: 2 | at_least: 1 }}, minmax(0,1fr)); } }
+  @media (max-width: 749px) {
+    #VExperts-{{ section.id }} { padding: {{ d.mobile_padding_top | default: 48 }}px 16px {{ d.mobile_padding_bottom | default: 48 }}px; }
+    #VExperts-{{ section.id }} .vex__grid { grid-template-columns: minmax(0,1fr); }
+    #VExperts-{{ section.id }} .vex__content { padding: {{ d.mobile_card_padding | default: 24 }}px; }
+    #VExperts-{{ section.id }} h2 { font-size: {{ s.heading_mobile }}px; }
+    #VExperts-{{ section.id }} .vex__header { margin-bottom: 32px; }
+  }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) { #VExperts-{{ section.id }}.vex--hover .vex__card:hover { transform: translateY(-5px); box-shadow: 0 20px 45px rgb(8 41 70 / .10); } }
+  @media (prefers-reduced-motion: reduce) { #VExperts-{{ section.id }} .vex__card, #VExperts-{{ section.id }} a { transition: none; } }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "VECTRA expert highlights",
+  "tag": "section",
+  "max_blocks": 13,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Extra spacing, card borders, photo sizing, and layout controls are in the Advanced design block. Add that block if it is missing."
+    },
+    {
+      "type": "header",
+      "content": "Section content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The expertise behind the assessment"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Global experience. Practical guidance."
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Meet the specialists bringing responsible business and risk management experience to your assessment journey.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "footer_text",
+      "label": "Footer text"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Footer button label",
+      "default": "Start pre-assessment"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Footer button link",
+      "info": "Select a page or enter your existing quiz anchor, for example #VectraQuiz-YOUR_SECTION_ID."
+    },
+    {
+      "type": "header",
+      "content": "Layout and spacing"
+    },
+    {
+      "type": "select",
+      "id": "card_layout",
+      "label": "Card layout",
+      "options": [
+        {
+          "value": "vertical",
+          "label": "Portrait above text"
+        },
+        {
+          "value": "horizontal",
+          "label": "Portrait beside text (desktop)"
+        }
+      ],
+      "default": "vertical"
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header and footer alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Desktop columns",
+      "options": [
+        {
+          "value": "1",
+          "label": "One"
+        },
+        {
+          "value": "2",
+          "label": "Two"
+        },
+        {
+          "value": "3",
+          "label": "Three"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "checkbox",
+      "id": "card_shadow",
+      "label": "Soft card shadow",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hover_effect",
+      "label": "Lift cards on hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Font family",
+      "options": [
+        {
+          "value": "body",
+          "label": "Theme body font"
+        },
+        {
+          "value": "heading",
+          "label": "Theme heading font"
+        },
+        {
+          "value": "poppins",
+          "label": "Poppins (must be loaded by theme)"
+        }
+      ],
+      "default": "poppins"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Desktop heading size",
+      "min": 32,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 58
+    },
+    {
+      "type": "range",
+      "id": "heading_mobile",
+      "label": "Mobile heading size",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "name_size",
+      "label": "Expert name size",
+      "min": 20,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Bio and role size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Photos"
+    },
+    {
+      "type": "select",
+      "id": "photo_shape",
+      "label": "Photo shape",
+      "options": [
+        {
+          "value": "rectangle",
+          "label": "Rectangle"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        }
+      ],
+      "default": "rectangle"
+    },
+    {
+      "type": "select",
+      "id": "photo_ratio",
+      "label": "Rectangle aspect ratio",
+      "options": [
+        {
+          "value": "16 / 9",
+          "label": "Wide 16:9"
+        },
+        {
+          "value": "4 / 3",
+          "label": "Landscape 4:3"
+        },
+        {
+          "value": "1",
+          "label": "Square"
+        },
+        {
+          "value": "4 / 5",
+          "label": "Portrait 4:5"
+        }
+      ],
+      "default": "4 / 3"
+    },
+    {
+      "type": "select",
+      "id": "photo_fit",
+      "label": "Photo fit",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Fill and crop"
+        },
+        {
+          "value": "contain",
+          "label": "Show whole image"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "header",
+      "content": "Links and expertise"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "Show expertise tags",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "new_tab",
+      "label": "Open expert links in new tab",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "linkedin_label",
+      "label": "Default LinkedIn label",
+      "default": "View LinkedIn profile"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_color",
+      "label": "Card background",
+      "default": "#fbfcfb"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Headings and roles",
+      "default": "#082946"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body text",
+      "default": "#596d80"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow",
+      "default": "#398600"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent and organization",
+      "default": "#398600"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Card borders",
+      "default": "#dce4dd"
+    },
+    {
+      "type": "color",
+      "id": "photo_background",
+      "label": "Photo placeholder background",
+      "default": "#edf2ef"
+    },
+    {
+      "type": "color",
+      "id": "tag_background",
+      "label": "Expertise and badge background",
+      "default": "#eaf5e2"
+    },
+    {
+      "type": "color",
+      "id": "tag_color",
+      "label": "Expertise and badge text",
+      "default": "#285400"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#082946"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#55c900"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button hover text",
+      "default": "#082946"
+    },
+    {
+      "type": "header",
+      "content": "Background design"
+    },
+    {
+      "type": "select",
+      "id": "background_style",
+      "label": "Background design",
+      "options": [
+        {
+          "value": "plain",
+          "label": "Plain"
+        },
+        {
+          "value": "glow",
+          "label": "Soft glow"
+        },
+        {
+          "value": "grid",
+          "label": "Technical grid"
+        },
+        {
+          "value": "bands",
+          "label": "Diagonal bands"
+        }
+      ],
+      "default": "glow"
+    },
+    {
+      "type": "color",
+      "id": "design_color",
+      "label": "Design primary color",
+      "default": "#55c900"
+    },
+    {
+      "type": "color",
+      "id": "design_secondary",
+      "label": "Design secondary color",
+      "default": "#082946"
+    },
+    {
+      "type": "range",
+      "id": "design_opacity",
+      "label": "Design intensity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "expert",
+      "name": "Expert",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Expert content"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Expert name"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role / title",
+          "default": "Risk assessment specialist"
+        },
+        {
+          "type": "text",
+          "id": "organization",
+          "label": "Organization",
+          "default": "VECTRA International"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Expert photograph"
+        },
+        {
+          "type": "range",
+          "id": "photo_x",
+          "label": "Horizontal photo position",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "photo_y",
+          "label": "Vertical photo position",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 30
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Optional photo badge"
+        },
+        {
+          "type": "richtext",
+          "id": "bio",
+          "label": "Biography",
+          "default": "<p>Add this expert’s experience and areas of focus.</p>"
+        },
+        {
+          "type": "text",
+          "id": "expertise",
+          "label": "Expertise tags",
+          "info": "Separate each tag with a comma. Leave empty to hide."
+        },
+        {
+          "type": "header",
+          "content": "Expert links"
+        },
+        {
+          "type": "url",
+          "id": "linkedin_url",
+          "label": "LinkedIn profile URL"
+        },
+        {
+          "type": "text",
+          "id": "linkedin_label",
+          "label": "Override LinkedIn button label"
+        },
+        {
+          "type": "url",
+          "id": "additional_url",
+          "label": "Additional link"
+        },
+        {
+          "type": "text",
+          "id": "additional_label",
+          "label": "Additional link label",
+          "default": "Read more"
+        },
+        {
+          "type": "header",
+          "content": "Optional card color overrides"
+        },
+        {
+          "type": "checkbox",
+          "id": "custom_colors",
+          "label": "Use custom colors for this expert",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "card_color",
+          "label": "Card background",
+          "default": "#fbfcfb"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Headings and roles",
+          "default": "#082946"
+        },
+        {
+          "type": "color",
+          "id": "body_color",
+          "label": "Body text",
+          "default": "#596d80"
+        },
+        {
+          "type": "color",
+          "id": "accent_color",
+          "label": "Accent and organization",
+          "default": "#398600"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Card borders",
+          "default": "#dce4dd"
+        },
+        {
+          "type": "color",
+          "id": "photo_background",
+          "label": "Photo placeholder background",
+          "default": "#edf2ef"
+        },
+        {
+          "type": "color",
+          "id": "tag_background",
+          "label": "Expertise and badge background",
+          "default": "#eaf5e2"
+        },
+        {
+          "type": "color",
+          "id": "tag_color",
+          "label": "Expertise and badge text",
+          "default": "#285400"
+        },
+        {
+          "type": "color",
+          "id": "button_background",
+          "label": "Button background",
+          "default": "#082946"
+        },
+        {
+          "type": "color",
+          "id": "button_color",
+          "label": "Button text",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "button_hover_background",
+          "label": "Button hover background",
+          "default": "#55c900"
+        },
+        {
+          "type": "color",
+          "id": "button_hover_color",
+          "label": "Button hover text",
+          "default": "#082946"
+        }
+      ]
+    },
+    {
+      "type": "design",
+      "name": "Advanced design",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "content_width",
+          "label": "Content width",
+          "min": 800,
+          "max": 1600,
+          "step": 20,
+          "unit": "px",
+          "default": 1260
+        },
+        {
+          "type": "range",
+          "id": "header_width",
+          "label": "Header width",
+          "min": 400,
+          "max": 1000,
+          "step": 20,
+          "unit": "px",
+          "default": 800
+        },
+        {
+          "type": "range",
+          "id": "header_gap",
+          "label": "Space below header",
+          "min": 24,
+          "max": 96,
+          "step": 4,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "card_gap",
+          "label": "Card gap",
+          "min": 8,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "card_padding",
+          "label": "Card padding",
+          "min": 16,
+          "max": 56,
+          "step": 2,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "range",
+          "id": "mobile_card_padding",
+          "label": "Mobile card padding",
+          "min": 16,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "card_radius",
+          "label": "Card corners",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 22
+        },
+        {
+          "type": "range",
+          "id": "border_width",
+          "label": "Border width",
+          "min": 0,
+          "max": 4,
+          "step": 1,
+          "unit": "px",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "accent_thickness",
+          "label": "Top accent thickness",
+          "min": 0,
+          "max": 8,
+          "step": 1,
+          "unit": "px",
+          "default": 3
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Top spacing",
+          "min": 0,
+          "max": 160,
+          "step": 4,
+          "unit": "px",
+          "default": 88
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Bottom spacing",
+          "min": 0,
+          "max": 160,
+          "step": 4,
+          "unit": "px",
+          "default": 88
+        },
+        {
+          "type": "range",
+          "id": "side_padding",
+          "label": "Desktop side spacing",
+          "min": 16,
+          "max": 80,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_top",
+          "label": "Mobile top spacing",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_bottom",
+          "label": "Mobile bottom spacing",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "eyebrow_size",
+          "label": "Eyebrow size",
+          "min": 10,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 11
+        },
+        {
+          "type": "range",
+          "id": "intro_size",
+          "label": "Subheading size",
+          "min": 13,
+          "max": 22,
+          "step": 1,
+          "unit": "px",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "circle_size",
+          "label": "Circle diameter",
+          "min": 120,
+          "max": 320,
+          "step": 10,
+          "unit": "px",
+          "default": 200
+        },
+        {
+          "type": "range",
+          "id": "photo_width",
+          "label": "Horizontal photo width",
+          "min": 25,
+          "max": 50,
+          "step": 1,
+          "unit": "%",
+          "default": 38
+        },
+        {
+          "type": "range",
+          "id": "button_radius",
+          "label": "Button corners",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 10
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "VECTRA expert highlights",
+      "blocks": [
+        {
+          "type": "expert",
+          "settings": {
+            "name": "Patrick Neyts",
+            "role": "CEO",
+            "organization": "VECTRA International",
+            "bio": "<p>Patrick brings over 30 years of experience in ESG programs, corporate codes, and responsible business practices across 11 industry sectors and 40 countries.</p>",
+            "expertise": "ESG programs, Responsible business, Human rights"
+          }
+        },
+        {
+          "type": "expert",
+          "settings": {
+            "name": "Craig Moss",
+            "role": "Executive Vice President, Measurement",
+            "organization": "Ethisphere",
+            "bio": "<p>Craig specializes in using management systems to improve compliance and risk management performance within companies and across supply chains.</p>",
+            "expertise": "Management systems, Compliance, Supply chain risk"
+          }
+        },
+        {
+          "type": "design"
+        }
+      ]
+    }
+  ],
+  "class": "section-vectra-experts"
+}
+{% endschema %}
