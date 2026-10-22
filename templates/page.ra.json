@@ -512,6 +512,7 @@
         "question_DHTPdp": {
           "type": "question",
           "settings": {
+            "question_type": "core",
             "category": "Understand",
             "question": "What sector does your organization operate in?",
             "helper": "This helps VECTRA understand the risk profile and benchmarks most relevant to you.",
@@ -522,12 +523,15 @@
             "option_3": "Manufacturing, construction or industrial",
             "score_3": 0,
             "option_4": "Technology, services or another sector",
-            "score_4": 0
+            "score_4": 0,
+            "option_5": "",
+            "score_5": 5
           }
         },
         "question_FP8z89": {
           "type": "question",
           "settings": {
+            "question_type": "core",
             "category": "Understand",
             "question": "Do you currently conduct formal supply chain risk assessments?",
             "helper": "Consider documented assessments that are repeated or updated, not one-off conversations.",
@@ -538,12 +542,15 @@
             "option_3": "Yes, for selected risks or business units",
             "score_3": 2,
             "option_4": "Yes, through a consistent enterprise process",
-            "score_4": 3
+            "score_4": 3,
+            "option_5": "",
+            "score_5": 5
           }
         },
         "question_rBGq8h": {
           "type": "question",
           "settings": {
+            "question_type": "core",
             "category": "Understand",
             "question": "How far into your supply chain do you have reliable visibility?",
             "helper": "Choose the answer that best reflects what you can identify and monitor today.",
@@ -554,12 +561,15 @@
             "option_3": "Multiple tiers for priority categories",
             "score_3": 2,
             "option_4": "Mapped and monitored across relevant tiers",
-            "score_4": 3
+            "score_4": 3,
+            "option_5": "",
+            "score_5": 5
           }
         },
         "question_cDmBXU": {
           "type": "question",
           "settings": {
+            "question_type": "core",
             "category": "Plan",
             "question": "Do you have a documented responsible sourcing or ESG policy?",
             "helper": "This may be a standalone policy or part of a broader governance framework.",
@@ -570,12 +580,15 @@
             "option_3": "Yes, it is documented and communicated",
             "score_3": 2,
             "option_4": "Yes, with ownership, review and oversight",
-            "score_4": 3
+            "score_4": 3,
+            "option_5": "",
+            "score_5": 5
           }
         },
         "question_TVYLap": {
           "type": "question",
           "settings": {
+            "question_type": "core",
             "category": "Plan",
             "question": "Is there a named owner for compliance or ESG within your organization?",
             "helper": "Think about accountability, authority and access to decision-makers—not only a job title.",
@@ -586,12 +599,15 @@
             "option_3": "A named owner exists with a defined remit",
             "score_3": 2,
             "option_4": "A cross-functional owner has authority and oversight",
-            "score_4": 3
+            "score_4": 3,
+            "option_5": "",
+            "score_5": 5
           }
         },
         "question_PGXn8a": {
           "type": "question",
           "settings": {
+            "question_type": "core",
             "category": "Act",
             "question": "Do you assess suppliers against a code of conduct or equivalent standard?",
             "helper": "Include audits, visits, evidence reviews and other structured supplier engagement.",
@@ -602,12 +618,15 @@
             "option_3": "Yes, for selected or higher-risk suppliers",
             "score_3": 2,
             "option_4": "Yes, through a consistent risk-based program",
-            "score_4": 3
+            "score_4": 3,
+            "option_5": "",
+            "score_5": 5
           }
         },
         "question_WEpYgU": {
           "type": "question",
           "settings": {
+            "question_type": "core",
             "category": "Act",
             "question": "Do you have a grievance and remediation mechanism in place?",
             "helper": "Consider whether workers and affected stakeholders can access it and whether outcomes are tracked.",
@@ -618,12 +637,15 @@
             "option_3": "A documented channel exists",
             "score_3": 2,
             "option_4": "It is accessible, tracked and linked to remediation",
-            "score_4": 3
+            "score_4": 3,
+            "option_5": "",
+            "score_5": 5
           }
         },
         "question_HEGW8G": {
           "type": "question",
           "settings": {
+            "question_type": "core",
             "category": "Improve",
             "question": "Do you track and report compliance or responsible sourcing KPIs over time?",
             "helper": "Examples include supplier coverage, findings, corrective actions and remediation progress.",
@@ -634,12 +656,15 @@
             "option_3": "We review a defined set of KPIs regularly",
             "score_3": 2,
             "option_4": "KPIs have targets, ownership and leadership review",
-            "score_4": 3
+            "score_4": 3,
+            "option_5": "",
+            "score_5": 5
           }
         },
         "question_bVbHKe": {
           "type": "question",
           "settings": {
+            "question_type": "core",
             "category": "Improve",
             "question": "Are you responding to a specific compliance deadline or regulatory driver?",
             "helper": "For example: CSDDD, CSRD, EUDR, customer requirements or another active obligation.",
@@ -650,12 +675,15 @@
             "option_3": "Yes, preparation is already underway",
             "score_3": 2,
             "option_4": "Yes, we have an active or near-term deadline",
-            "score_4": 3
+            "score_4": 3,
+            "option_5": "",
+            "score_5": 5
           }
         },
         "question_frAFNd": {
           "type": "question",
           "settings": {
+            "question_type": "core",
             "category": "Intent",
             "question": "What would be most useful to your organization right now?",
             "helper": "Your goal helps determine whether a self-assessment or expert-led path is the better next step.",
@@ -666,7 +694,9 @@
             "option_3": "Validate our existing controls and evidence",
             "score_3": 2,
             "option_4": "Work directly with an expert on implementation",
-            "score_4": 3
+            "score_4": 3,
+            "option_5": "",
+            "score_5": 5
           }
         }
       },
@@ -684,6 +714,7 @@
       ],
       "name": "VECTRA interactive quiz",
       "settings": {
+        "question_source": "sheet",
         "eyebrow": "SCDD readiness screening",
         "heading": "Know Which Assessment Level You Need",
         "intro": "<p>Complete 10 focused questions about your organization, assessment scope, current controls, and due diligence position.<br/><br/>Your responses help indicate whether Level 1, Level 2, or Level 3 is the most appropriate SCDD risk assessment pathway.<br/><br/>The pre-assessment recommends a pathway. It does not provide the detailed maturity findings of the full assessment.<br/></p>",
@@ -719,7 +750,155 @@
         "content_width": 1040,
         "corner_radius": 24,
         "padding_top": 104,
-        "padding_bottom": 112
+        "padding_bottom": 112,
+        "submission_transport": "backend",
+        "assessment_backend_url": "",
+        "capture_started_leads": true,
+        "completed_tag": "SCDD quiz complete",
+        "started_tag": "",
+        "level_1_tag": "SCDD Level 1",
+        "level_2_tag": "SCDD Level 2",
+        "level_3_tag": "SCDD Level 3",
+        "social_checkout_url": "",
+        "environmental_checkout_url": "",
+        "consultation_url": ""
+      }
+    },
+    "ra_expert_highlight_JRdCjN": {
+      "type": "ra-expert-highlight",
+      "blocks": {
+        "expert_cWVkqp": {
+          "type": "expert",
+          "settings": {
+            "name": "Patrick Neyts",
+            "role": "CEO",
+            "organization": "VECTRA International",
+            "photo_x": 50,
+            "photo_y": 30,
+            "badge": "",
+            "bio": "<p>With over 30 years of experience in ESG programs, Corporate Codes, and Responsible Business practices across 11 industry sectors and 40 countries. He has had a tremendous positive impact on many of the global CSR and human rights compliance programs.</p>",
+            "expertise": "ESG programs, Responsible business, Human rights",
+            "linkedin_url": "https://www.linkedin.com/in/patrick-neyts-enabling-positive-responsible-business-change",
+            "linkedin_label": "",
+            "additional_url": "",
+            "additional_label": "Read more",
+            "custom_colors": true,
+            "card_color": "#fbfcfb",
+            "heading_color": "#082946",
+            "body_color": "#596d80",
+            "accent_color": "{{ settings.color_palette.foreground }}",
+            "border_color": "#dce4dd",
+            "photo_background": "#edf2ef",
+            "tag_background": "#eaf5e2",
+            "tag_color": "#285400",
+            "button_background": "#082946",
+            "button_color": "#ffffff",
+            "button_hover_background": "{{ settings.color_palette.foreground }}",
+            "button_hover_color": "{{ settings.color_palette.background }}"
+          }
+        },
+        "expert_C8w9YQ": {
+          "type": "expert",
+          "settings": {
+            "name": "Craig Moss",
+            "role": "Executive Vice President, Measurement",
+            "organization": "Ethisphere",
+            "photo_x": 50,
+            "photo_y": 30,
+            "badge": "",
+            "bio": "<p>Craig Moss is the Executive Vice President of Measurement at Ethisphere and a leading expert on using management systems to improve compliance and risk management performance within companies and across supply chains.</p>",
+            "expertise": "Management systems, Compliance, Supply chain risk",
+            "linkedin_url": "",
+            "linkedin_label": "",
+            "additional_url": "",
+            "additional_label": "Read more",
+            "custom_colors": false,
+            "card_color": "#fbfcfb",
+            "heading_color": "#082946",
+            "body_color": "#596d80",
+            "accent_color": "#398600",
+            "border_color": "#dce4dd",
+            "photo_background": "#edf2ef",
+            "tag_background": "#eaf5e2",
+            "tag_color": "#285400",
+            "button_background": "#082946",
+            "button_color": "#ffffff",
+            "button_hover_background": "#55c900",
+            "button_hover_color": "#082946"
+          }
+        },
+        "design_A87JVJ": {
+          "type": "design",
+          "settings": {
+            "content_width": 1260,
+            "header_width": 800,
+            "header_gap": 48,
+            "card_gap": 24,
+            "card_padding": 32,
+            "mobile_card_padding": 24,
+            "card_radius": 22,
+            "border_width": 1,
+            "accent_thickness": 3,
+            "padding_top": 88,
+            "padding_bottom": 88,
+            "side_padding": 24,
+            "mobile_padding_top": 48,
+            "mobile_padding_bottom": 48,
+            "eyebrow_size": 11,
+            "intro_size": 15,
+            "circle_size": 200,
+            "photo_width": 38,
+            "button_radius": 10
+          }
+        }
+      },
+      "block_order": [
+        "expert_cWVkqp",
+        "expert_C8w9YQ",
+        "design_A87JVJ"
+      ],
+      "name": "VECTRA expert highlights",
+      "settings": {
+        "eyebrow": "",
+        "heading": "The expertise behind the assessment",
+        "subheading": "<p>Meet the specialists bringing responsible business and risk management experience to your assessment journey.</p>",
+        "footer_text": "",
+        "cta_label": "Start pre-assessment",
+        "cta_url": "",
+        "card_layout": "horizontal",
+        "header_alignment": "center",
+        "columns": "2",
+        "card_shadow": true,
+        "hover_effect": true,
+        "font_family": "poppins",
+        "heading_size": 58,
+        "heading_mobile": 36,
+        "name_size": 30,
+        "body_size": 14,
+        "photo_shape": "rectangle",
+        "photo_ratio": "4 / 3",
+        "photo_fit": "cover",
+        "show_tags": true,
+        "new_tab": true,
+        "linkedin_label": "View LinkedIn profile",
+        "background_color": "#ffffff",
+        "card_color": "#fbfcfb",
+        "heading_color": "#082946",
+        "body_color": "#596d80",
+        "eyebrow_color": "#398600",
+        "accent_color": "#398600",
+        "border_color": "#dce4dd",
+        "photo_background": "#edf2ef",
+        "tag_background": "#eaf5e2",
+        "tag_color": "#285400",
+        "button_background": "#082946",
+        "button_color": "#ffffff",
+        "button_hover_background": "#55c900",
+        "button_hover_color": "#082946",
+        "background_style": "glow",
+        "design_color": "#55c900",
+        "design_secondary": "#082946",
+        "design_opacity": 50
       }
     },
     "ra_pathways_UVC87Q": {
@@ -1012,6 +1191,7 @@
     "vectra_home_mfggqh",
     "ra_grid_ABDFMN",
     "ra_quiz_VNJDzX",
+    "ra_expert_highlight_JRdCjN",
     "ra_pathways_UVC87Q",
     "ra_faqs_fxTqAc"
   ]
