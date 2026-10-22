@@ -436,7 +436,6 @@
         "step_dDx8KB": {
           "type": "step",
           "settings": {
-            "number": "01",
             "icon": "supplier_risk",
             "heading": "Identify Where Supplier Risk Needs More Attention",
             "body": "<p>See which suppliers, activities, or parts of the supply chain need closer review.</p>"
@@ -445,7 +444,6 @@
         "step_QCagc8": {
           "type": "step",
           "settings": {
-            "number": "",
             "icon": "due_diligence",
             "heading": "Strengthen Due Diligence Controls",
             "body": "<p>Find out where governance, responsibilities, and processes work well, and where they need strengthening.</p>"
@@ -454,7 +452,6 @@
         "step_xEMLz8": {
           "type": "step",
           "settings": {
-            "number": "",
             "icon": "visibility",
             "heading": "Close Gaps in Supply Chain Visibility and Evidence",
             "body": "<p>Spot where supplier information or documentation is incomplete or inconsistent.</p>"
@@ -463,7 +460,6 @@
         "step_XLQVbV": {
           "type": "step",
           "settings": {
-            "number": "",
             "icon": "monitoring",
             "heading": "Strengthen Monitoring and Corrective Action",
             "body": "<p>Know where monitoring is enough and where closer oversight or corrective action is needed.</p>"
@@ -472,7 +468,6 @@
         "step_ghnKNC": {
           "type": "step",
           "settings": {
-            "number": "",
             "icon": "residual_risk",
             "heading": "Understand and Address Residual Risk",
             "body": "<p>Get clear recommendations on the risk that remains and what to address next.</p>"
@@ -494,8 +489,8 @@
         "content_width": 1260,
         "heading_size": 58,
         "cards_margin_top": 64,
-        "card_gap": 18,
-        "card_height": 330,
+        "card_gap": 20,
+        "card_height": 300,
         "card_radius": 22,
         "padding_top": 88,
         "padding_bottom": 80,
