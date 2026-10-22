@@ -499,7 +499,11 @@
         "heading_color": "{{ settings.color_palette.color1 }}",
         "body_color": "#6c7d92",
         "accent_color": "{{ settings.color_palette.foreground }}",
-        "border_color": "#dce4dd"
+        "border_color": "#dce4dd",
+        "background_style": "streaks",
+        "visual_color_primary": "#55c900",
+        "visual_color_secondary": "#082946",
+        "background_intensity": 35
       }
     },
     "ra_quiz_VNJDzX": {
