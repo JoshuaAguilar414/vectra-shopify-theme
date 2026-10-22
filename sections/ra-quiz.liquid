@@ -1,34 +1,105 @@
 {% comment %}
-  VECTRA interactive SCDD screening quiz
+VECTRA SCDD pre-assessment — full Shopify section
 
-  Drafts: saved in localStorage for 30 days on this origin/path/section.
-  No lead is submitted by autosave. Start again deletes the local draft.
-  A confirmed native Shopify success deletes the local draft. A Forms
-  handoff retains it because this section cannot confirm that form's success.
+ROUTING
+Q1–Q10 retain the spreadsheet's A–E choices and 1–5 points.
+T1/T2 remain unscored. S1 is a separate, unscored service-fit question:
+A = Level 1 diagnostic; B = Level 2 evidence review;
+C = Level 3 implementation; D = expert triage (level = null).
+The score is not a service tier or verified residual-risk rating.
+level/recommended_level always mean the recommended SERVICE tier, never
+"the pre-assessment itself is a simplified Level 1".
 
-  New standard name/phone controls are included in the native form.
-  Custom organization/role/scope data and answers are available in the
-  final vectra:assessment-complete event's detail.lead and detail.answers.
-  Map these custom properties in the connected CRM integration; collecting
-  them here does not itself create Shopify customer metafields.
+SOURCE ALIGNMENT
+20 October flowchart: complete quiz -> Save my result -> saved Shopify
+customer + SCDD tags -> authenticated Shopify Flow -> n8n email checks.
+The CRM relay is separate: n8n -> Zoho Flow RA Shopify Customer Intake ->
+verify the actual saved CRM record. An email/HTTP acceptance is not proof
+of CRM completion. The PDF labels email trials as test-inbox-only.
+29 September and 13 October notes: Level 1 downstream automation;
+Level 2/3 manual expert delivery, with the matching acknowledgement email.
+Started capture supports the backend's 24-hour abandonment check.
 
-  Shopify integration modes:
-  1. Shopify customer form — submits the lead to Shopify and adds the
-     pre-assessment completion as customer tags. This uses Shopify's native
-     {% form 'customer' %} endpoint.
-  2. Shopify Forms handoff — sends the visitor to a published Shopify Forms
-     inline-form landing page after the response summary is calculated. Add that page's
-     URL in the section settings.
+BACKEND HANDOFF — A PROPOSED CONTRACT, NOT A CLAIM OF AN EXISTING ENDPOINT
+Aeshwarya/Pardeep must provide the public HTTPS intake URL, on Railway or
+a signed Shopify App Proxy. Set it in "Assessment backend URL".
+No backend route, hosting access, or n8n secret was available to this build.
+This file contains only the frontend. It does not deploy a backend.
 
-  Shopify Forms does not expose a documented storefront JavaScript submission
-  API, so this section does not imitate or reverse-engineer one. A custom
-  `vectra:assessment-complete` browser event is emitted for analytics or a
-  future app integration.
+POST application/json, with Idempotency-Key equal to body.event_id.
+Events: assessment.started and assessment.completed.
+Payload schema: scdd-intake-v1. The body carries submission_id,
+event_id, timestamps, lead, consent and displayed consent text,
+answers (question_id, option_id, score), maturity_score, recommended_level,
+level (same tier value), commercial context, provisional routing_reason,
+workflow, priority, shopify_tags, scoring/routing versions and attribution.
+Started has no level, no completed tag, and no completion email trigger.
+Completion has exactly one level tag for tiers 1–3; triage has no level tag.
+The same attempt ID survives reload/retry; a deliberate new attempt gets
+an independent ID. Never deduplicate different attempts only by email.
+
+EXPECTED STARTED RECEIPT (after durable storage):
+{ "ok": true, "persisted": true, "submission_id": "<same ID>",
+  "event_id": "<same event ID>" }
+EXPECTED COMPLETED RECEIPT (after durable storage AND Shopify writes):
+{ "ok": true, "persisted": true, "submission_id": "<same ID>",
+  "event_id": "<same event ID>", "shopify_customer_verified": true,
+  "shopify_tags_saved": true, "recommended_level": 1,
+  "crm_status": "pending", "email_status": "test_only" }
+For other tiers return 2/3, or null for triage. Receipt status flags for
+CRM/email are independent; do not invent verified/delivered outcomes.
+Adapt frontend and backend together if the team's actual contract differs.
+
+SERVER RESPONSIBILITIES
+- Validate payload and consent; recompute scores and S1 routing from
+  canonical question IDs/option IDs. Do not trust client scores or tags.
+- Resolve/upsert the Shopify customer server-side. A customer ID supplied
+  by the browser is a hint, not authentication or proof of email ownership.
+- Preserve unrelated tags, remove every obsolete managed SCDD Level tag,
+  then publish base + completion + exactly one current level tag together.
+  Confirm the configured level tag strings against the live n8n filter.
+- Required PDF tags: VECTRA SCDD lead, SCDD quiz complete, one SCDD Level tag.
+- Keep expert triage out of all Level 1/2/3 email branches. Queue manual
+  review; do not force triage into an existing tier merely to satisfy CRM.
+- Preserve the existing authenticated Shopify-event email path. Do not
+  also send a second email directly from Railway or this browser.
+- Carry submission_id and submitted_at through the Shopify event relay
+  using agreed metafields or server-side enrichment; tags cannot carry all
+  answers. Do not invent a new public result URL from the assessment ID.
+- Use one idempotent CRM intake path per submission_id; reconcile/dedupe
+  the Shopify-event relay and any new secure backend-to-n8n relay.
+- Independently verify Zoho receipts and records, quota and flow activity.
+- Preserve n8n sender locks/delivery history. Duplicate/older results are
+  ignored; uncertain prior acceptance requires manual review, not a resend.
+- Queue/retry downstream work server-side. Completed must supersede Started
+  even if events arrive out of order. Started never downgrades Completed.
+- After 24 hours, follow up only on consented, genuinely incomplete attempts.
+  Suppress old-attempt reminders when a newer attempt for the same verified
+  customer has completed. Local browser saves alone cannot trigger a campaign.
+- For cross-origin Railway, configure storefront-origin CORS, JSON and
+  Idempotency-Key headers, rate controls and durable idempotency. For App
+  Proxy validate Shopify signatures server-side. Keep credentials private.
+- Signed/per-user result URLs and booking links belong to backend delivery;
+  this frontend does not manufacture a public URL exposing stored answers.
+
+BROWSER BEHAVIOR
+Default transport is backend; no URL means saving is disabled, with a
+clear customer message. No silent fallback to the Shopify newsletter form.
+Successful receipt is required before clearing drafts or revealing a CTA.
+Failures preserve answers and the attempt ID. All scoring/routing is a
+preview until the backend validates it. Preview mode never sends data.
+Explicit legacy Shopify modes remain available, but do not save the full
+assessment/consent/answers to CRM or guarantee email delivery.
+
 {% endcomment %}
 
 {% liquid
   assign quiz_form_id = 'VectraQuizForm-' | append: section.id
   assign integration_mode = section.settings.integration_mode
+  assign submission_transport = section.settings.submission_transport | default: 'backend'
+  if submission_transport == 'backend'
+    assign integration_mode = 'assessment_backend'
+  endif
   assign question_count = 0
   for block in section.blocks
     if block.type == 'question'
@@ -43,6 +114,9 @@
   data-integration-mode="{{ integration_mode }}"
   data-question-source="{{ section.settings.question_source | default: 'sheet' }}"
   data-question-count="{{ question_count }}"
+  data-backend-url="{{ section.settings.assessment_backend_url | escape }}"
+  data-capture-started="{{ section.settings.capture_started_leads }}"
+  data-customer-id="{{ customer.id }}"
   data-forms-url="{{ section.settings.shopify_forms_url | escape }}"
   aria-labelledby="VectraQuizHeading-{{ section.id }}"
 >
@@ -53,7 +127,7 @@
       {% endif %}
       <h2 id="VectraQuizHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
       {% if section.settings.intro != blank %}
-        <div class="vectra-quiz__intro-copy">{{ section.settings.intro | replace: "Answer ten focused questions to receive a recommended VECTRA assessment pathway.", "Answer ten core screening questions and two short context questions to establish your self-reported supply chain due diligence baseline." }}</div>
+        <div class="vectra-quiz__intro-copy">{{ section.settings.intro | replace: "Answer ten focused questions to receive a recommended VECTRA assessment pathway.", "Answer ten core screening questions, two context questions and one question about the support you need to establish your self-reported supply chain due diligence baseline." }}</div>
       {% endif %}
       <div class="vectra-quiz__assurance" aria-label="Assessment information">
         <span>
@@ -260,18 +334,20 @@
         </div>
         <div class="vectra-quiz__panel vectra-quiz__result" data-panel="result" aria-live="polite">
           <div class="vectra-quiz__result-badge">
-            <span>Pre-assessment complete</span>
-            <strong data-result-level>Self-reported baseline</strong>
+            <span>Recommended next step</span>
+            <strong data-result-level>—</strong>
           </div>
 
           <div class="vectra-quiz__baseline-copy">
             <p class="vectra-quiz__result-kicker">Simplified Level 1 assessment</p>
-            <h3>Your self-reported assessment summary</h3>
+            <h3 data-route-heading>Your recommended next step</h3>
+            <p data-route-description></p>
+            <p class="vectra-quiz__helper">This is a provisional service recommendation based on the support you selected. It is separate from your self-reported score.</p>
             <div class="vectra-quiz__score-grid">
               <p><strong data-score-total>—</strong><span>Unweighted response total</span></p>
               <p><strong data-score-average>—</strong><span>Average response level</span></p>
             </div>
-            <p>These scores summarize the answers you selected. They do not automatically recommend a service level or verify your supply chain risk.</p>
+            <p>These scores summarize the answers you selected. They summarize your self-reported position and do not verify your supply chain risk.</p>
             <details class="vectra-quiz__review-accordion">
               <summary>How the full assessment builds on this</summary>
               <p><strong>Level 1:</strong> Assess your current position through self-reported answers.</p>
@@ -283,6 +359,7 @@
             <span>Your scope and supply chain context are recorded separately and do not add points. VECTRA can use your responses to discuss the appropriate next step.</span>
           </div>
 
+          <p class="vectra-quiz__required-note" data-submit-status role="status" aria-live="polite"></p>
           <div class="vectra-quiz__actions vectra-quiz__actions--result">
             <button class="vectra-quiz__button vectra-quiz__button--secondary" type="button" data-result-back>Review answers</button>
 
@@ -309,6 +386,10 @@
               </button>
             {% endif %}
           </div>
+          <div class="vectra-quiz__actions vectra-quiz__actions--result" data-saved-actions hidden>
+            <a class="vectra-quiz__button vectra-quiz__button--primary" data-route-action hidden></a>
+            <button class="vectra-quiz__button vectra-quiz__button--secondary" type="button" data-new-assessment>Start a new assessment</button>
+          </div>
         </div>
       {% endform %}
 
@@ -316,7 +397,17 @@
     </div>
   </div>
 <script type="application/json" data-scdd-questionnaire>
-[{"id": "Q1", "type": "core", "category": "Supply Chain Mapping", "question": "The supply chain mapping our organization conducts for purposes of understanding the risk in the supply chain covers the following levels of suppliers:", "options": [{"id": "A", "text": "We have mapped our most critical direct contractors that are core to the products or services offered to our customers", "score": 1}, {"id": "B", "text": "We have mapped all direct contractors in addition to the most critical ones", "score": 2}, {"id": "C", "text": "We have mapped the most critical sub-contractors and suppliers to our direct contractors", "score": 3}, {"id": "D", "text": "We have mapped all sub-contractors and suppliers to our direct contractors in addition to the most critical ones", "score": 4}, {"id": "E", "text": "We have mapped the origination of our most critical raw materials", "score": 5}]}, {"id": "Q2", "type": "core", "category": "Risk Assessments", "question": "We conduct a supply chain risk assessments for due diligence purposes when the following events occur", "options": [{"id": "A", "text": "In response to a particular issue", "score": 1}, {"id": "B", "text": "When entering a new market", "score": 2}, {"id": "C", "text": "In response to new regulations or voluntary standards", "score": 3}, {"id": "D", "text": "Any changes in suppliers", "score": 4}, {"id": "E", "text": "Every new and existing transaction", "score": 5}]}, {"id": "Q3", "type": "core", "category": "Strategy and Goals", "question": "The following best describes our organization’s strategy for responsible business conduct concerning  our supply chain:", "options": [{"id": "A", "text": "We have not established a strategy", "score": 1}, {"id": "B", "text": "We have started developing a strategy", "score": 2}, {"id": "C", "text": "We have established a strategy that addresses the prioritized risks in bringing to market our core goods/services", "score": 3}, {"id": "D", "text": "We have established a strategy that addresses the prioritized risks in bringing to market our core goods/services as well as suppliers we use in running our business.", "score": 4}, {"id": "E", "text": "Our organization has established an overarching vision or purpose that enables the alignment of our strategy for responsible business conduct concerning supply chain issues into our overall business strategy", "score": 5}]}, {"id": "Q4", "type": "core", "category": "Policies Procedures and Records", "question": "Our supplier contracts specifically include provisions that are aligned with the following", "options": [{"id": "A", "text": "Relevant domestic supply chain due diligence laws", "score": 1}, {"id": "B", "text": "Applicable international supply chain  due diligence laws", "score": 2}, {"id": "C", "text": "Supplier code of conduct", "score": 3}, {"id": "D", "text": "Relevant international voluntary standards regarding supply chain  due diligence", "score": 4}, {"id": "E", "text": "Internal policies related to responsible supply chain engagement for minimizing impacts of our suppliers", "score": 5}]}, {"id": "Q5", "type": "core", "category": "Responsible Supply Chain Engagement", "question": "When looking to bring on a new supplier, our organization conducts due diligence regarding the supplier’s ability to manage risks as follows", "options": [{"id": "A", "text": "Due diligence on a new supplier is not conducted regarding risks before a new supplier is approved.", "score": 1}, {"id": "B", "text": "Due Diligence is conducted on a new supplier but not necessarily before contracting", "score": 2}, {"id": "C", "text": "Due Diligence must be completed prior to contracting.", "score": 3}, {"id": "D", "text": "Due Diligence is completed before contracting and there is an agreed upon timeline for remediating any issues found are agreed upon with the new supplier", "score": 4}, {"id": "E", "text": "Due Diligence is completed and all issues remediated before contracting.", "score": 5}]}, {"id": "Q6", "type": "core", "category": "Governance and oversight", "question": "The following describes senior management’s level of involvement in our supply chain human rights due diligence program", "options": [{"id": "A", "text": "Senior management is not involved", "score": 1}, {"id": "B", "text": "They have approved a policy requiring supply chain to adhere with relevant supply chain laws.", "score": 2}, {"id": "C", "text": "They have approved the company policies by risk area, mandated the formation of a supply chain due diligence program and team, and communicate the importance internally", "score": 3}, {"id": "D", "text": "They have approved the company policy or policies, mandated the formation of a supply chain due diligence program and team led by a senior-level employee, and have provided it adequate resources, authority and visible support. They also review implementation of the program at least annually", "score": 4}, {"id": "E", "text": "They fully support the supply chain due diligence team and have regular, ongoing input in and oversight of the program to ensure that it is effective and communicate its importance both internally and externally", "score": 5}]}, {"id": "Q7", "type": "core", "category": "Training and Communication", "question": "Our internal supply chain due diligence training curriculum is customized for audiences based on the following criteria", "options": [{"id": "A", "text": "Whether they interact with supply chain members", "score": 1}, {"id": "B", "text": "Employee function", "score": 2}, {"id": "C", "text": "Employee job level", "score": 3}, {"id": "D", "text": "Employee business unit", "score": 4}, {"id": "E", "text": "Employee location or geography", "score": 5}]}, {"id": "Q8", "type": "core", "category": "Monitoring", "question": "The following best describes how we determine which suppliers will be monitored", "options": [{"id": "A", "text": "We monitor suppliers only on an ‘as-needed’ basis where we have discovered a specific issue or problem", "score": 1}, {"id": "B", "text": "We monitor suppliers from time to time where there have been problems in the past", "score": 2}, {"id": "C", "text": "We routinely monitor  high-risk suppliers", "score": 3}, {"id": "D", "text": "We routinely monitor all suppliers", "score": 4}, {"id": "E", "text": "We routinely engage with all suppliers on their supply chain  performance including all aspect of ESG", "score": 5}]}, {"id": "Q9", "type": "core", "category": "Stakeholder Engagement", "question": "The following best describes our plan for stakeholder engagement related to  due diligence and performance in our supply chain", "options": [{"id": "A", "text": "We don’t have a plan", "score": 1}, {"id": "B", "text": "We have started to develop a plan", "score": 2}, {"id": "C", "text": "We have a plan in place that includes critical international external stakeholders", "score": 3}, {"id": "D", "text": "We have a plan in place that includes international and local/community external stakeholders", "score": 4}, {"id": "E", "text": "We have a plan in place that includes  external stakeholders and is routinely updated as part of a continual improvement process", "score": 5}]}, {"id": "Q10", "type": "core", "category": "Reporting and Disclosure", "question": "The following best describes how we report on our human rights supply chain due diligence program and its results", "options": [{"id": "A", "text": "We do not publicly report", "score": 1}, {"id": "B", "text": "We report against some elements of established due diligence reporting standards", "score": 2}, {"id": "C", "text": "We report on only material topics using one established ESG reporting standards", "score": 3}, {"id": "D", "text": "We report on only material topics using multiple established ESG reporting standards", "score": 4}, {"id": "E", "text": "We report on only material topics using multiple established ESG reporting standards with full supply chain transparence and performance", "score": 5}]}, {"id": "T1", "type": "commercial", "category": "Scope", "question": "I have completed the pre-assessment for:", "options": [{"id": "A", "text": "one location", "score": null}, {"id": "B", "text": "one country/region", "score": null}, {"id": "C", "text": "one division", "score": null}, {"id": "D", "text": "one product category", "score": null}, {"id": "E", "text": "entire company globally (only when multiple locations in multiple countries)", "score": null}]}, {"id": "T2", "type": "commercial", "category": "Supply Chain overview", "question": "The following are present in my supply chain", "options": [{"id": "A", "text": "agents/importers/exporters", "score": null}, {"id": "B", "text": "Labor agents/brokers", "score": null}, {"id": "C", "text": "Foreign migrant workers", "score": null}, {"id": "D", "text": "Conflict raw materials (Gold, Tin, Tantalum, Tungsten, Cobalt, Mica, …)", "score": null}, {"id": "E", "text": "High risk countries/  conflict regions", "score": null}]}]
+[{"id": "Q1", "type": "core", "category": "Supply Chain Mapping", "question": "The supply chain mapping our organization conducts for purposes of understanding the risk in the supply chain covers the following levels of suppliers:", "options": [{"id": "A", "text": "We have mapped our most critical direct contractors that are core to the products or services offered to our customers", "score": 1}, {"id": "B", "text": "We have mapped all direct contractors in addition to the most critical ones", "score": 2}, {"id": "C", "text": "We have mapped the most critical sub-contractors and suppliers to our direct contractors", "score": 3}, {"id": "D", "text": "We have mapped all sub-contractors and suppliers to our direct contractors in addition to the most critical ones", "score": 4}, {"id": "E", "text": "We have mapped the origination of our most critical raw materials", "score": 5}]}, {"id": "Q2", "type": "core", "category": "Risk Assessments", "question": "We conduct a supply chain risk assessments for due diligence purposes when the following events occur", "options": [{"id": "A", "text": "In response to a particular issue", "score": 1}, {"id": "B", "text": "When entering a new market", "score": 2}, {"id": "C", "text": "In response to new regulations or voluntary standards", "score": 3}, {"id": "D", "text": "Any changes in suppliers", "score": 4}, {"id": "E", "text": "Every new and existing transaction", "score": 5}]}, {"id": "Q3", "type": "core", "category": "Strategy and Goals", "question": "The following best describes our organization’s strategy for responsible business conduct concerning  our supply chain:", "options": [{"id": "A", "text": "We have not established a strategy", "score": 1}, {"id": "B", "text": "We have started developing a strategy", "score": 2}, {"id": "C", "text": "We have established a strategy that addresses the prioritized risks in bringing to market our core goods/services", "score": 3}, {"id": "D", "text": "We have established a strategy that addresses the prioritized risks in bringing to market our core goods/services as well as suppliers we use in running our business.", "score": 4}, {"id": "E", "text": "Our organization has established an overarching vision or purpose that enables the alignment of our strategy for responsible business conduct concerning supply chain issues into our overall business strategy", "score": 5}]}, {"id": "Q4", "type": "core", "category": "Policies Procedures and Records", "question": "Our supplier contracts specifically include provisions that are aligned with the following", "options": [{"id": "A", "text": "Relevant domestic supply chain due diligence laws", "score": 1}, {"id": "B", "text": "Applicable international supply chain  due diligence laws", "score": 2}, {"id": "C", "text": "Supplier code of conduct", "score": 3}, {"id": "D", "text": "Relevant international voluntary standards regarding supply chain  due diligence", "score": 4}, {"id": "E", "text": "Internal policies related to responsible supply chain engagement for minimizing impacts of our suppliers", "score": 5}]}, {"id": "Q5", "type": "core", "category": "Responsible Supply Chain Engagement", "question": "When looking to bring on a new supplier, our organization conducts due diligence regarding the supplier’s ability to manage risks as follows", "options": [{"id": "A", "text": "Due diligence on a new supplier is not conducted regarding risks before a new supplier is approved.", "score": 1}, {"id": "B", "text": "Due Diligence is conducted on a new supplier but not necessarily before contracting", "score": 2}, {"id": "C", "text": "Due Diligence must be completed prior to contracting.", "score": 3}, {"id": "D", "text": "Due Diligence is completed before contracting and there is an agreed upon timeline for remediating any issues found are agreed upon with the new supplier", "score": 4}, {"id": "E", "text": "Due Diligence is completed and all issues remediated before contracting.", "score": 5}]}, {"id": "Q6", "type": "core", "category": "Governance and oversight", "question": "The following describes senior management’s level of involvement in our supply chain human rights due diligence program", "options": [{"id": "A", "text": "Senior management is not involved", "score": 1}, {"id": "B", "text": "They have approved a policy requiring supply chain to adhere with relevant supply chain laws.", "score": 2}, {"id": "C", "text": "They have approved the company policies by risk area, mandated the formation of a supply chain due diligence program and team, and communicate the importance internally", "score": 3}, {"id": "D", "text": "They have approved the company policy or policies, mandated the formation of a supply chain due diligence program and team led by a senior-level employee, and have provided it adequate resources, authority and visible support. They also review implementation of the program at least annually", "score": 4}, {"id": "E", "text": "They fully support the supply chain due diligence team and have regular, ongoing input in and oversight of the program to ensure that it is effective and communicate its importance both internally and externally", "score": 5}]}, {"id": "Q7", "type": "core", "category": "Training and Communication", "question": "Our internal supply chain due diligence training curriculum is customized for audiences based on the following criteria", "options": [{"id": "A", "text": "Whether they interact with supply chain members", "score": 1}, {"id": "B", "text": "Employee function", "score": 2}, {"id": "C", "text": "Employee job level", "score": 3}, {"id": "D", "text": "Employee business unit", "score": 4}, {"id": "E", "text": "Employee location or geography", "score": 5}]}, {"id": "Q8", "type": "core", "category": "Monitoring", "question": "The following best describes how we determine which suppliers will be monitored", "options": [{"id": "A", "text": "We monitor suppliers only on an ‘as-needed’ basis where we have discovered a specific issue or problem", "score": 1}, {"id": "B", "text": "We monitor suppliers from time to time where there have been problems in the past", "score": 2}, {"id": "C", "text": "We routinely monitor  high-risk suppliers", "score": 3}, {"id": "D", "text": "We routinely monitor all suppliers", "score": 4}, {"id": "E", "text": "We routinely engage with all suppliers on their supply chain  performance including all aspect of ESG", "score": 5}]}, {"id": "Q9", "type": "core", "category": "Stakeholder Engagement", "question": "The following best describes our plan for stakeholder engagement related to  due diligence and performance in our supply chain", "options": [{"id": "A", "text": "We don’t have a plan", "score": 1}, {"id": "B", "text": "We have started to develop a plan", "score": 2}, {"id": "C", "text": "We have a plan in place that includes critical international external stakeholders", "score": 3}, {"id": "D", "text": "We have a plan in place that includes international and local/community external stakeholders", "score": 4}, {"id": "E", "text": "We have a plan in place that includes  external stakeholders and is routinely updated as part of a continual improvement process", "score": 5}]}, {"id": "Q10", "type": "core", "category": "Reporting and Disclosure", "question": "The following best describes how we report on our human rights supply chain due diligence program and its results", "options": [{"id": "A", "text": "We do not publicly report", "score": 1}, {"id": "B", "text": "We report against some elements of established due diligence reporting standards", "score": 2}, {"id": "C", "text": "We report on only material topics using one established ESG reporting standards", "score": 3}, {"id": "D", "text": "We report on only material topics using multiple established ESG reporting standards", "score": 4}, {"id": "E", "text": "We report on only material topics using multiple established ESG reporting standards with full supply chain transparence and performance", "score": 5}]}, {"id": "T1", "type": "commercial", "category": "Scope", "question": "I have completed the pre-assessment for:", "options": [{"id": "A", "text": "one location", "score": null}, {"id": "B", "text": "one country/region", "score": null}, {"id": "C", "text": "one division", "score": null}, {"id": "D", "text": "one product category", "score": null}, {"id": "E", "text": "entire company globally (only when multiple locations in multiple countries)", "score": null}]}, {"id": "T2", "type": "commercial", "category": "Supply Chain overview", "question": "The following are present in my supply chain", "options": [{"id": "A", "text": "agents/importers/exporters", "score": null}, {"id": "B", "text": "Labor agents/brokers", "score": null}, {"id": "C", "text": "Foreign migrant workers", "score": null}, {"id": "D", "text": "Conflict raw materials (Gold, Tin, Tantalum, Tungsten, Cobalt, Mica, …)", "score": null}, {"id": "E", "text": "High risk countries/  conflict regions", "score": null}]}, {"id": "S1", "type": "routing", "category": "Your next step", "question": "What support would be most useful to your organization right now?", "options": [{"id": "A", "text": "Understand our current position and priorities through a full self-assessment.", "score": null, "level": 1}, {"id": "B", "text": "Have an expert independently review our existing controls, policies and supporting evidence.", "score": null, "level": 2}, {"id": "C", "text": "Get hands-on help implementing improvements or building our due diligence program.", "score": null, "level": 3}, {"id": "D", "text": "We are unsure and would like an expert to help us choose the right next step.", "score": null, "level": null}]}]
+</script>
+<script type="application/json" data-routing-config>
+{
+  "checkoutUrl": {{ section.settings.level_1_checkout_url | json }},
+  "bookingUrl": {{ section.settings.consultation_url | json }},
+  "triageUrl": {{ section.settings.triage_url | json }},
+  "levelTags": [{{ section.settings.level_1_tag | json }}, {{ section.settings.level_2_tag | json }}, {{ section.settings.level_3_tag | json }}],
+  "completedTag": {{ section.settings.completed_tag | json }},
+  "startedTag": {{ section.settings.started_tag | json }}
+}
 </script>
 </section>
 
@@ -713,11 +804,16 @@
       form.noValidate = true; // Validate the visible panel before navigating or submitting.
       // Use the approved spreadsheet as the default question source. Never infer a
       // service tier from scores; the source specifies no routing thresholds.
-      if (root.dataset.questionSource !== 'custom') {
-        const source = JSON.parse(root.querySelector('[data-scdd-questionnaire]').textContent);
-        root.querySelectorAll('[data-panel="question"]').forEach(q => q.remove());
+      {
+        const allSource = JSON.parse(root.querySelector('[data-scdd-questionnaire]').textContent);
+        const custom = root.dataset.questionSource === 'custom';
+        const source = custom ? allSource.filter(q => q.type === 'routing') : allSource;
+        if (!custom) root.querySelectorAll('[data-panel="question"]').forEach(q => q.remove());
+        const existingCount = root.querySelectorAll('[data-panel="question"]').length;
+        const totalCount = existingCount + source.length;
         const reviewPanel = root.querySelector('[data-panel="review"]');
-        source.forEach((item, index) => {
+        source.forEach((item, itemIndex) => {
+          const index = existingCount + itemIndex;
           const q = document.createElement('fieldset');
           q.className = 'vectra-quiz__panel vectra-quiz__question';
           q.dataset.panel = 'question'; q.dataset.questionIndex = index + 1;
@@ -733,13 +829,13 @@
             </div>`;
           q.querySelector('legend').textContent = `Question ${index + 1}: ${item.question}`;
           const meta = q.querySelectorAll('.vectra-quiz__question-meta span');
-          meta[0].textContent = item.category; meta[1].textContent = `Question ${index + 1} of ${source.length}`;
+          meta[0].textContent = item.category; meta[1].textContent = `Question ${index + 1} of ${totalCount}`;
           q.querySelector('h3').textContent = item.question + ' ';
           const required = document.createElement('span'); required.className = 'vectra-quiz__required';
           required.setAttribute('aria-hidden', 'true'); required.textContent = '*'; q.querySelector('h3').append(required);
           q.querySelector('.vectra-quiz__helper').textContent = item.type === 'core'
             ? 'Choose the one statement that best matches your current position.'
-            : 'Choose one answer. This adds context and is not scored.';
+            : item.type === 'routing' ? 'Choose the support you need. This is not a scored risk question.' : 'Choose one answer. This adds context and is not scored.';
           const options = q.querySelector('.vectra-quiz__options'); options.setAttribute('aria-label', item.question);
           item.options.forEach((option, optionIndex) => {
             const label = document.createElement('label'); label.className = 'vectra-quiz__option';
@@ -747,13 +843,14 @@
             input.name = `vectra_question_${index + 1}`; input.value = option.text;
             input.dataset.score = option.score === null ? '' : String(option.score);
             input.dataset.optionIndex = optionIndex; input.dataset.optionId = option.id;
+            input.dataset.routeLevel = option.level == null ? '' : String(option.level);
             const marker = document.createElement('span'); marker.className = 'vectra-quiz__option-marker'; marker.setAttribute('aria-hidden', 'true');
             const copy = document.createElement('span'); copy.className = 'vectra-quiz__option-copy'; copy.textContent = option.text;
             label.append(input, marker, copy); options.append(label);
           });
           reviewPanel.before(q);
         });
-        root.dataset.questionCount = source.length;
+        root.dataset.questionCount = totalCount;
       }
       const panels = Array.from(root.querySelectorAll('[data-panel]'));
       const questions = Array.from(root.querySelectorAll('[data-panel="question"]'));
@@ -789,11 +886,31 @@
       orderOptions();
       let phase = 'details';
       let questionIndex = 0;
-      let resultLevel = 1;
+      let resultLevel = null;
       let resumeTarget = null;
       let editing = false;
       let saveTimer;
       let submitted = false;
+      let submitting = false;
+      let submissionId = window.crypto?.randomUUID?.() || ('scdd-' + Date.now().toString(36) + '-' + performance.now().toString(36).replace('.', ''));
+      let startedAt = new Date().toISOString();
+      let consentAt = null;
+      let completionAt = null;
+      let startRecorded = false;
+      let pendingCompletion = null;
+      let startPromise = null;
+      const routingConfig = JSON.parse(root.querySelector('[data-routing-config]').textContent);
+      const submitStatus = root.querySelector('[data-submit-status]');
+      const backendMode = root.dataset.integrationMode === 'assessment_backend';
+      const endpoint = (() => {
+        try {
+          const raw = root.dataset.backendUrl?.trim();
+          if (!raw) return null;
+          const u = new URL(raw, location.origin);
+          if (u.protocol !== 'https:' || u.username || u.password || u.hash) return null;
+          return u;
+        } catch (error) { return null; }
+      })();
       let draftEnabled = !window.Shopify?.designMode;
       const selected = q => q.querySelector('input[type="radio"]:checked');
       const invalidFields = () => fields.filter(field => {
@@ -813,6 +930,7 @@
         try {
           localStorage.setItem(storageKey, JSON.stringify({
             version: 1, signature, expiresAt: Date.now() + lifetime,
+            submissionId, startedAt, consentAt, completionAt, startRecorded,
             phase: resumeTarget?.phase || phase, questionIndex: resumeTarget?.questionIndex ?? questionIndex, fields: leadData(),
             answers: questions.map(q => selected(q)?.value || null)
           }));
@@ -828,7 +946,7 @@
       const updateButtons = () => {
         const invalid = invalidFields();
         root.querySelector('[data-start-copy]').textContent = editing ? 'Save details and review' : {{ section.settings.start_label | json }};
-        start.disabled = invalid.length > 0 || !questions.length || submitted;
+        start.disabled = invalid.length > 0 || !questions.length || submitted || submitting;
         root.querySelector('[data-details-status]').textContent = !questions.length
           ? 'This assessment is not available yet.'
           : invalid.length
@@ -846,7 +964,9 @@
           ? 'Everything is complete. Continue to preview your summary before final submission.'
           : 'Complete your required details and all questions before continuing.';
         const submit = root.querySelector('[data-native-submit]');
-        if (submit) submit.disabled = !ready || submitted;
+        if (submit) submit.disabled = !ready || submitted || submitting || (backendMode && !endpoint);
+        root.querySelectorAll('[data-result-back], [data-restart]').forEach(b => { b.disabled = submitting; });
+        if (backendMode && !endpoint && !submitted) submitStatus.textContent = 'Saving your result is temporarily unavailable. Your answers remain saved in this browser.';
         const handoff = root.querySelector('[data-forms-handoff]');
         if (handoff) handoff.setAttribute('aria-disabled', String(!ready));
         restart.hidden = submitted || (!fields.some(f => f.type === 'checkbox' ? f.checked : f.value) && !questions.some(q => selected(q)));
@@ -893,30 +1013,51 @@
           li.append(copy, edit); list.append(li);
         });
       };
+      const routeCopy = {
+        1: { title: 'Level 1 · Diagnose', heading: 'Start with a full self-assessment.', body: 'Build a baseline through the full assessment and expert interpretation. You can then explore evidence review or implementation support if needed.', workflow: 'level_1_automated', priority: 'standard' },
+        2: { title: 'Level 2 · Validate', heading: 'Discuss an independent evidence review.', body: 'Speak with VECTRA about reviewing your controls and supporting documents, revising self-reported scores and identifying priorities.', workflow: 'level_2_manual_handoff', priority: 'standard' },
+        3: { title: 'Level 3 · Implement', heading: 'Discuss hands-on implementation support.', body: 'Speak with VECTRA about a consulting engagement to implement improvements or build your due diligence program. The scope is confirmed with an expert.', workflow: 'level_3_priority_handoff', priority: 'high' },
+        triage: { title: 'Expert triage', heading: 'Choose your next step with an expert.', body: 'VECTRA can help clarify whether a full self-assessment, independent evidence review or implementation support best fits your needs.', workflow: 'expert_triage', priority: 'standard' }
+      };
       const calculateResult = () => {
         const answers = questions.map(q => selected(q));
-        const scoredQuestions = questions.filter(q => q.dataset.questionType !== 'commercial');
+        const scoredQuestions = questions.filter(q => !q.dataset.questionType || q.dataset.questionType === 'core');
         const score = scoredQuestions.reduce((sum, q) => sum + Number(selected(q)?.dataset.score || 0), 0);
         const scoreMaximum = scoredQuestions.length * 5;
         const averageScore = scoredQuestions.length ? score / scoredQuestions.length : null;
-        resultLevel = 1; // Assessment type only. This is NOT a service recommendation.
-        root.querySelector('[data-result-level]').textContent = 'Self-reported baseline';
+        const routeQuestion = questions.find(q => q.dataset.questionType === 'routing');
+        const routeAnswer = routeQuestion ? selected(routeQuestion) : null;
+        const candidate = Number(routeAnswer?.dataset.routeLevel);
+        resultLevel = [1, 2, 3].includes(candidate) ? candidate : null;
+        const route = routeCopy[resultLevel || 'triage'];
+        root.querySelector('[data-result-level]').textContent = route.title;
+        root.querySelector('[data-route-heading]').textContent = route.heading;
+        root.querySelector('[data-route-description]').textContent = route.body;
         root.querySelector('[data-score-total]').textContent = scoredQuestions.length ? `${score} / ${scoreMaximum}` : 'Not scored';
         root.querySelector('[data-score-average]').textContent = averageScore === null ? 'Not scored' : `${averageScore.toFixed(1)} / 5`;
-        tagsInput.value = [originalTags, 'SCDD pre-assessment complete', 'SCDD self-reported baseline', `SCDD answering for: ${details.querySelector('[name="vectra_answering_for"]').value}`].filter(Boolean).join(', ');
+        const configuredLevelTags = routingConfig.levelTags.map(t => (t || '').trim());
+        const baseTags = originalTags.split(',').map(t => t.trim()).filter(t => t && !/^SCDD Level\s*[123]$/.test(t) && !configuredLevelTags.includes(t) && t !== routingConfig.completedTag);
+        const tags = [...new Set([...baseTags, routingConfig.completedTag, resultLevel ? configuredLevelTags[resultLevel - 1] : null].filter(Boolean))];
+        tagsInput.value = tags.join(', ');
+        const response = answers.map((answer, index) => ({
+          question: index + 1, questionId: questions[index].dataset.questionId,
+          questionType: questions[index].dataset.questionType || 'core',
+          questionText: questions[index].querySelector('h3').textContent.replace(/\s*\*\s*$/, '').trim(),
+          answer: answer?.value || '', optionId: answer?.dataset.optionId || String.fromCharCode(65 + Number(answer?.dataset.optionIndex || 0)),
+          score: questions[index].dataset.questionType === 'commercial' || questions[index].dataset.questionType === 'routing' ? null : Number(answer?.dataset.score || 0)
+        }));
         return {
-          level: 1, assessmentLevel: 1, assessmentType: 'pre-assessment',
-          recommendedLevel: null, score, scoreMaximum, averageScore,
-          scoringVersion: 'SCDD Pre-Assessment (4): Q1-Q10 scored; T1-T2 unscored',
-          lead: leadData(),
+          level: resultLevel, recommendedLevel: resultLevel, recommended_level: resultLevel,
+          assessmentType: 'pre-assessment', assessment_stage: 'simplified_level_1',
+          routing_status: resultLevel ? 'provisional' : 'needs_expert_review',
+          routing_reason: routeAnswer?.value || '', routing_version: 'service-fit-v1',
+          workflow: route.workflow, priority: route.priority,
+          risk_category: null, risk_rating_status: 'not_verified',
+          score, scoreMaximum, averageScore,
+          scoringVersion: 'SCDD Pre-Assessment (4): Q1-Q10 scored; T1-T2 and S1 unscored',
+          lead: leadData(), shopify_tags: tags,
           commercial: Object.fromEntries(questions.filter(q => q.dataset.questionType === 'commercial').map(q => [q.dataset.questionId, selected(q)?.value || ''])),
-          answers: answers.map((answer, index) => ({
-            question: index + 1, questionId: questions[index].dataset.questionId,
-            questionType: questions[index].dataset.questionType || 'core',
-            questionText: questions[index].querySelector('h3').textContent.replace(/\s*\*\s*$/, '').trim(),
-            answer: answer?.value || '',
-            score: questions[index].dataset.questionType === 'commercial' ? null : Number(answer?.dataset.score || 0)
-          }))
+          answers: response
         };
       };
       const go = (nextPhase, index = questionIndex, focus = true) => {
@@ -942,6 +1083,7 @@
         return false;
       };
       const reset = () => {
+        if (submitting) return;
         removeDraft();
         try { sessionStorage.removeItem('vectraAssessmentResult'); } catch (error) {}
         form.reset();
@@ -950,10 +1092,136 @@
         questions.forEach(q => q.querySelectorAll('input[type="radio"]').forEach(a => { a.checked = false; }));
         tagsInput.value = originalTags;
         submitted = false; editing = false; resumeTarget = null; resumeBanner.hidden = true;
+        submissionId = window.crypto?.randomUUID?.() || ('scdd-' + Date.now().toString(36) + '-' + performance.now().toString(36).replace('.', ''));
+        startedAt = new Date().toISOString(); consentAt = null; completionAt = null;
+        startRecorded = false; pendingCompletion = null; startPromise = null;
+        submitStatus.textContent = ''; root.querySelector('[data-saved-actions]').hidden = true;
+        root.querySelector('[data-route-action]').hidden = true;
+        root.querySelector('.vectra-quiz__actions--result:not([data-saved-actions])').hidden = false;
+        fields.forEach(f => { f.disabled = false; });
         go('details', 0);
+      };
+      const normalizedLead = () => {
+        const values = leadData();
+        return {
+          first_name: (values['contact[first_name]'] || '').trim(),
+          last_name: (values['contact[last_name]'] || '').trim(),
+          email: (values['contact[email]'] || '').trim().toLowerCase(),
+          phone: (values['contact[phone]'] || '').trim(),
+          company: (values.vectra_organization || '').trim(),
+          role: (values.vectra_role || '').trim(),
+          answering_for: values.vectra_answering_for || '', scope: values.vectra_scope || ''
+        };
+      };
+      const buildPacket = kind => {
+        const full = kind === 'completed';
+        const outcome = full ? calculateResult() : null;
+        const consent = details.querySelector('[name="vectra_consent"]').checked;
+        if (consent && !consentAt) consentAt = new Date().toISOString();
+        const url = new URL(location.href);
+        const attribution = Object.fromEntries(['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].map(k => [k, (url.searchParams.get(k) || '').slice(0, 500)]));
+        if (full && !completionAt) completionAt = new Date().toISOString();
+        return {
+          payload_schema_version: 'scdd-intake-v1',
+          event: `assessment.${kind}`, event_id: `${submissionId}:${kind}`,
+          submission_id: submissionId, assessment_type: 'pre-assessment',
+          assessment_stage: 'simplified_level_1', status: full ? 'Completed' : 'Started',
+          started_at: startedAt, submitted_at: full ? completionAt : null,
+          lead: normalizedLead(), consent,
+          consent_details: {
+            given: consent, recorded_at: consentAt,
+            text: details.querySelector('[name="vectra_consent"]').nextElementSibling.textContent.replace(/^\s*\*\s*/, '').trim(),
+            purpose: 'assessment result and relevant assessment follow-up'
+          },
+          level: outcome?.recommended_level ?? null,
+          recommended_level: outcome?.recommended_level ?? null,
+          routing_status: full ? outcome.routing_status : 'not_assessed',
+          routing_reason: outcome?.routing_reason || '', routing_version: 'service-fit-v1',
+          workflow: outcome?.workflow || 'started_only', priority: outcome?.priority || 'standard',
+          maturity_score: outcome?.score ?? null, score_maximum: outcome?.scoreMaximum ?? null,
+          average_score: outcome?.averageScore ?? null, risk_category: null,
+          risk_rating_status: 'not_verified', scoring_version: outcome?.scoringVersion || 'SCDD Pre-Assessment (4)',
+          answers: outcome ? outcome.answers.map(a => ({
+            question_id: a.questionId, question_number: a.question,
+            question_type: a.questionType, question: a.questionText,
+            option_id: a.optionId, answer: a.answer, score: a.score
+          })) : [],
+          commercial: outcome?.commercial || {},
+          shopify_tags: outcome?.shopify_tags || [...new Set([originalTags, routingConfig.startedTag].filter(Boolean).join(',').split(',').map(t => t.trim()).filter(t => t && !/^SCDD Level\s*[123]$/.test(t) && t !== routingConfig.completedTag))],
+          shopify_customer_id_hint: root.dataset.customerId || null,
+          attribution, return_url: location.origin + location.pathname,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'
+        };
+      };
+      const postPacket = async packet => {
+        if (!endpoint) throw new Error('Saving is temporarily unavailable. Your answers remain saved in this browser.');
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 20000);
+        try {
+          const response = await fetch(endpoint.href, {
+            method: 'POST', credentials: endpoint.origin === location.origin ? 'same-origin' : 'omit',
+            headers: { 'Content-Type': 'application/json', 'Idempotency-Key': packet.event_id },
+            body: JSON.stringify(packet), signal: controller.signal
+          });
+          let receipt;
+          try { receipt = await response.json(); } catch (error) { throw new Error('We could not confirm that your result was saved. Your answers are preserved; please try again.'); }
+          if (!response.ok || receipt.ok !== true || receipt.persisted !== true || receipt.submission_id !== packet.submission_id || receipt.event_id !== packet.event_id) {
+            throw new Error('We could not confirm that your result was saved. Your answers are preserved; please try again.');
+          }
+          if (packet.event === 'assessment.completed' && (
+            receipt.shopify_customer_verified !== true || receipt.shopify_tags_saved !== true || receipt.recommended_level !== packet.recommended_level
+          )) throw new Error('Your assessment needs a further save check. Your answers are preserved; please try again.');
+          return receipt;
+        } finally { clearTimeout(timer); }
+      };
+      const recordStart = async () => {
+        if (window.Shopify?.designMode || !backendMode || !endpoint || root.dataset.captureStarted !== 'true' || startRecorded || submitted) return;
+        if (startPromise) return startPromise;
+        const attemptId = submissionId;
+        const packet = buildPacket('started');
+        startPromise = (async () => {
+          try {
+            await postPacket(packet);
+            if (submissionId !== attemptId) return;
+            startRecorded = true; saveDraft();
+            root.dispatchEvent(new CustomEvent('vectra:assessment-start-saved', { bubbles: true, detail: { submission_id: submissionId } }));
+          } catch (error) {
+            if (submissionId !== attemptId) return;
+            status.textContent = 'Your answers are saved in this browser. We will try to save your contact details again when you submit.';
+          } finally { if (submissionId === attemptId) startPromise = null; }
+        })();
+        return startPromise;
+      };
+      const revealSaved = (packet, receipt) => {
+        submitted = true;
+        removeDraft();
+        try { sessionStorage.setItem('vectraAssessmentResult', JSON.stringify({ ...packet, receipt })); } catch (error) {}
+        status.textContent = 'Your assessment has been saved. Your browser draft has been cleared.';
+        submitStatus.textContent = packet.level ? `Assessment saved. Recommended next step: Level ${packet.level}.` : 'Assessment saved for expert triage. No Level 1, 2 or 3 has been assigned.';
+        root.querySelector('.vectra-quiz__actions--result:not([data-saved-actions])').hidden = true;
+        root.querySelector('[data-saved-actions]').hidden = false;
+        const action = root.querySelector('[data-route-action]');
+        const raw = packet.level === 1 ? routingConfig.checkoutUrl : packet.level ? routingConfig.bookingUrl : (routingConfig.triageUrl || routingConfig.bookingUrl);
+        action.hidden = true;
+        if (raw) {
+          try {
+            const target = new URL(raw, location.origin);
+            if (target.protocol === 'https:' && !target.username && !target.password) {
+              target.searchParams.set('assessment_id', packet.submission_id);
+              if (packet.level) target.searchParams.set('recommended_level', packet.level);
+              action.href = target.href;
+              action.textContent = packet.level === 1 ? 'Continue to the full assessment' : packet.level === 3 ? 'Discuss implementation support' : 'Book an expert consultation';
+              action.hidden = false;
+            }
+          } catch (error) {}
+        }
+        updateButtons();
+        root.dispatchEvent(new CustomEvent('vectra:assessment-complete', { bubbles: true, detail: { ...packet, receipt } }));
       };
       start.addEventListener('click', () => {
         if (!validateLead() || !questions.length) return;
+        if (!consentAt) consentAt = new Date().toISOString();
+        if (backendMode && !editing) void recordStart();
         resumeBanner.hidden = true;
         if (editing) { editing = false; go('review'); }
         else if (resumeTarget) {
@@ -981,9 +1249,11 @@
       root.querySelector('[data-result-back]').addEventListener('click', () => go('review'));
       restart.addEventListener('click', reset);
       root.querySelector('[data-discard]').addEventListener('click', reset);
+      root.querySelector('[data-new-assessment]').addEventListener('click', reset);
       root.querySelector('[data-resume]').addEventListener('click', () => {
         resumeBanner.hidden = true;
         if (!validateLead()) return;
+        if (backendMode) void recordStart();
         const target = resumeTarget || { phase: 'question', questionIndex: 0 };
         resumeTarget = null; go(target.phase, target.questionIndex);
       });
@@ -993,34 +1263,65 @@
         });
       });
       form.addEventListener('input', event => {
+        if (event.target.name === 'vectra_consent') consentAt = event.target.checked ? new Date().toISOString() : null;
         event.target.removeAttribute('aria-invalid'); updateButtons(); queueSave();
       });
       form.addEventListener('change', () => { updateButtons(); saveDraft(); });
-      const finalPayload = () => {
-        const payload = { ...calculateResult(), completedAt: new Date().toISOString() };
-        try { sessionStorage.setItem('vectraAssessmentResult', JSON.stringify(payload)); } catch (error) {}
-        root.dispatchEvent(new CustomEvent('vectra:assessment-complete', { bubbles: true, detail: payload }));
-        return payload;
-      };
-      form.addEventListener('submit', event => {
+      form.addEventListener('submit', async event => {
         if (root.dataset.integrationMode === 'shopify_forms') { event.preventDefault(); return; }
-        if (phase !== 'result' || submitted) { event.preventDefault(); return; }
+        if (backendMode) event.preventDefault();
+        if (phase !== 'result' || submitted || submitting) { event.preventDefault(); return; }
         if (!validateLead() || !complete()) { event.preventDefault(); if (!invalidFields().length) go('review'); return; }
-        saveDraft();
-        finalPayload();
-        submitted = true;
-        // Keep the draft until Shopify confirms success; rejected submissions can resume.
+        const packet = buildPacket('completed');
+        if (!backendMode) {
+          // Legacy Shopify capture is retained explicitly, but is not full CRM intake.
+          saveDraft();
+          try { sessionStorage.setItem('vectraAssessmentPendingNative', JSON.stringify(packet)); } catch (error) {}
+          root.dispatchEvent(new CustomEvent('vectra:assessment-submitting', { bubbles: true, detail: packet }));
+          submitted = true;
+          return;
+        }
+        if (window.Shopify?.designMode) {
+          submitStatus.textContent = 'Preview only. Open the storefront preview to test saving.';
+          return;
+        }
+        if (!endpoint) { updateButtons(); return; }
+        pendingCompletion = packet; saveDraft();
+        submitting = true; updateButtons();
+        root.querySelector('[data-native-submit]').textContent = 'Saving…';
+        submitStatus.textContent = 'Saving your assessment…';
+        // Prevent changing the data after the request snapshot has been taken.
+        const locked = [...fields, ...root.querySelectorAll('input[type="radio"]')];
+        locked.forEach(f => { f.disabled = true; });
+        try {
+          // Do not let a delayed Started event arrive after Completed.
+          if (startPromise) await startPromise;
+          const receipt = await postPacket(packet);
+          revealSaved(packet, receipt);
+        } catch (error) {
+          submitStatus.textContent = error.name === 'AbortError'
+            ? 'The save could not be confirmed in time. Your answers are preserved. Please try again; your submission ID stays the same.'
+            : 'We could not confirm that your assessment was saved. Your answers are preserved. Please try again.';
+          root.dispatchEvent(new CustomEvent('vectra:assessment-save-failed', { bubbles: true, detail: { submission_id: submissionId } }));
+        } finally {
+          submitting = false;
+          locked.forEach(f => { f.disabled = false; });
+          root.querySelector('[data-native-submit]').textContent = {{ section.settings.native_cta_label | json }};
+          updateButtons();
+          if (!submitted) saveDraft();
+        }
       });
       root.querySelector('[data-forms-handoff]')?.addEventListener('click', event => {
         if (!validateLead() || !complete()) { event.preventDefault(); return; }
-        finalPayload(); saveDraft();
+        const packet = buildPacket('completed'); saveDraft();
+        try { sessionStorage.setItem('vectraAssessmentResult', JSON.stringify(packet)); } catch (error) {}
         root.dispatchEvent(new CustomEvent('vectra:shopify-forms-handoff', {
-          bubbles: true, detail: { level: 1, assessmentLevel: 1, recommendedLevel: null, url: root.dataset.formsUrl, lead: leadData() }
+          bubbles: true, detail: { ...packet, url: root.dataset.formsUrl }
         }));
-        // A handoff is not confirmed submission. Preserve the draft for the return visit.
+        // This is a handoff, not verified CRM completion. Keep the draft.
       });
       // Read only known fields and matching questions; never replay HTML or scores from storage.
-      if (root.querySelector('[data-posted-successfully]').value === 'true') {
+      if (!backendMode && root.querySelector('[data-posted-successfully]').value === 'true') {
         removeDraft(); submitted = true;
         try { sessionStorage.removeItem('vectraAssessmentResult'); } catch (error) {}
         status.textContent = 'Your result has been submitted. Your saved browser draft has been cleared.';
@@ -1033,9 +1334,19 @@
         try {
           const draft = JSON.parse(localStorage.getItem(storageKey) || 'null');
           if (draft) {
-            if (draft.version !== 1 || draft.signature !== signature || !(draft.expiresAt > Date.now()) || !Array.isArray(draft.answers) || draft.answers.length !== questions.length) {
+            let sourceMatches = draft.signature === signature;
+            try {
+              sourceMatches = sourceMatches || (draft.answers?.length === questions.length - 1 && JSON.stringify(JSON.parse(draft.signature)) === JSON.stringify(JSON.parse(signature).slice(0, -1)));
+            } catch (error) {}
+            if (draft.version !== 1 || !sourceMatches || !(draft.expiresAt > Date.now()) || !Array.isArray(draft.answers) || ![questions.length, questions.length - 1].includes(draft.answers.length)) {
               removeDraft();
             } else {
+              if (typeof draft.submissionId === 'string' && /^[a-zA-Z0-9.-]{8,150}$/.test(draft.submissionId)) submissionId = draft.submissionId;
+              if (typeof draft.startedAt === 'string' && Number.isFinite(Date.parse(draft.startedAt))) startedAt = draft.startedAt;
+              consentAt = typeof draft.consentAt === 'string' ? draft.consentAt : null;
+              completionAt = typeof draft.completionAt === 'string' && Number.isFinite(Date.parse(draft.completionAt)) ? draft.completionAt : null;
+              startRecorded = draft.startRecorded === true;
+              // Pending requests are rebuilt from current DOM values, never replayed blindly.
               fields.forEach(f => {
                 const value = draft.fields?.[f.name];
                 if (f.type === 'checkbox') f.checked = value === true;
@@ -1050,7 +1361,7 @@
               const firstMissing = questions.findIndex(q => !selected(q));
               resumeTarget = {
                 phase: (savedPhase === 'review' || savedPhase === 'result') && !complete() ? 'question' : savedPhase,
-                questionIndex: Number.isInteger(draft.questionIndex) ? Math.max(0, Math.min(draft.questionIndex, questions.length - 1)) : Math.max(0, firstMissing)
+                questionIndex: (savedPhase === 'review' || savedPhase === 'result') && firstMissing >= 0 ? firstMissing : Number.isInteger(draft.questionIndex) ? Math.max(0, Math.min(draft.questionIndex, questions.length - 1)) : Math.max(0, firstMissing)
               };
               resumeBanner.hidden = false;
             }
@@ -1089,7 +1400,7 @@
       "options": [
         {
           "value": "sheet",
-          "label": "Approved spreadsheet (12 questions)"
+          "label": "Spreadsheet + service fit (13 questions)"
         },
         {
           "value": "custom",
@@ -1099,7 +1410,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Spreadsheet mode uses 10 scored questions (1–5) and two unscored commercial questions. Choices always appear in the spreadsheet’s A–E order. There are no approved score cutoffs for service-level recommendations. Custom blocks are used only in Custom mode."
+      "content": "Spreadsheet mode uses the 12 approved questions plus one unscored service-fit question. Core scores do not select the service tier. Service fit routes to Levels 1–3 or expert triage. Choices remain in A–E order."
     },
     {
       "type": "text",
@@ -1117,7 +1428,7 @@
       "type": "richtext",
       "id": "intro",
       "label": "Introduction",
-      "default": "<p>Answer ten core screening questions and two short context questions to establish your self-reported supply chain due diligence baseline.</p>"
+      "default": "<p>Answer ten core screening questions, two context questions and one question about the support you need to find your recommended next step.</p>"
     },
     {
       "type": "text",
@@ -1218,7 +1529,7 @@
       "type": "text",
       "id": "submit_success",
       "label": "Submission success",
-      "default": "Thank you. Your result has been saved and the VECTRA team can now follow up."
+      "default": "Your assessment has been saved."
     },
     {
       "type": "header",
@@ -1357,6 +1668,89 @@
       "unit": "px",
       "label": "Bottom spacing",
       "default": 112
+    },
+    {
+      "type": "header",
+      "content": "Assessment backend"
+    },
+    {
+      "type": "select",
+      "id": "submission_transport",
+      "label": "Submission route",
+      "default": "backend",
+      "options": [
+        {
+          "value": "backend",
+          "label": "Assessment backend (recommended)"
+        },
+        {
+          "value": "legacy",
+          "label": "Legacy Shopify form / handoff"
+        }
+      ]
+    },
+    {
+      "type": "url",
+      "id": "assessment_backend_url",
+      "label": "Assessment backend URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "capture_started_leads",
+      "label": "Capture consented starts for follow-up",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "Enter the public intake URL provided by Aeshwarya/Pardeep (Railway or a signed Shopify app proxy). This is not an n8n webhook URL. Never enter API keys here. The backend must save the submission, verify the Shopify customer, and manage the exact SCDD tags. The legacy mode does not save the full assessment to CRM."
+    },
+    {
+      "type": "text",
+      "id": "completed_tag",
+      "label": "Quiz completed tag",
+      "default": "SCDD quiz complete"
+    },
+    {
+      "type": "text",
+      "id": "started_tag",
+      "label": "Started tag (optional)"
+    },
+    {
+      "type": "text",
+      "id": "level_1_tag",
+      "label": "Level 1 customer tag",
+      "default": "SCDD Level 1"
+    },
+    {
+      "type": "text",
+      "id": "level_2_tag",
+      "label": "Level 2 customer tag",
+      "default": "SCDD Level 2"
+    },
+    {
+      "type": "text",
+      "id": "level_3_tag",
+      "label": "Level 3 customer tag",
+      "default": "SCDD Level 3"
+    },
+    {
+      "type": "paragraph",
+      "content": "The 20 October flowchart requires VECTRA SCDD lead, SCDD quiz complete and exactly one level tag. Confirm the three level tag strings against the live n8n filter. Expert triage has no level tag and must not trigger a Level 1/2/3 email."
+    },
+    {
+      "type": "url",
+      "id": "level_1_checkout_url",
+      "label": "Level 1 checkout / product URL"
+    },
+    {
+      "type": "url",
+      "id": "consultation_url",
+      "label": "Level 2/3 consultation URL"
+    },
+    {
+      "type": "url",
+      "id": "triage_url",
+      "label": "Expert triage booking URL"
     }
   ],
   "blocks": [
