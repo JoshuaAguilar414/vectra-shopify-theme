@@ -634,11 +634,70 @@
     #VectraQuiz-{{ section.id }} .vectra-quiz__option { grid-template-columns: 18px minmax(0, 1fr); align-items: start; }
     #VectraQuiz-{{ section.id }} .vectra-quiz__option svg { display: none; }
     #VectraQuiz-{{ section.id }} .vectra-quiz__option-marker { width: 18px; height: 18px; margin-top: 1px; }
-    #VectraQuiz-{{ section.id }} .vectra-quiz__option:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
   }
   @media screen and (max-width: 749px) {
     #VectraQuiz-{{ section.id }} .vectra-quiz__panel { padding: 22px 18px; }
     #VectraQuiz-{{ section.id }} .vectra-quiz__options { grid-template-columns: 1fr; }
+  }
+
+  /* Uniform answer cards in canonical A–E reading order. */
+  #VectraQuiz-{{ section.id }} .vectra-quiz__options {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-flow: row;
+    grid-auto-rows: 1fr;
+    align-items: stretch;
+    gap: 10px;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option {
+    grid-column: span 2;
+    grid-template-columns: 24px minmax(0, 1fr);
+    align-items: start;
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    min-height: 58px;
+    padding: 12px;
+    gap: 10px;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option:last-child:nth-child(odd) {
+    grid-column: 2 / span 2;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option-marker {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    border: 1.5px solid #aebbb1;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--vq-navy);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option:has(input:checked) .vectra-quiz__option-marker {
+    border: 1.5px solid var(--vq-green);
+    background: var(--vq-green);
+    color: var(--vq-navy);
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option-copy {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+  }
+  #VectraQuiz-{{ section.id }} .vectra-quiz__option svg { display: none; }
+  @media screen and (max-width: 749px) {
+    #VectraQuiz-{{ section.id }} .vectra-quiz__options {
+      grid-template-columns: minmax(0, 1fr);
+      grid-auto-rows: auto;
+    }
+    #VectraQuiz-{{ section.id }} .vectra-quiz__option,
+    #VectraQuiz-{{ section.id }} .vectra-quiz__option:last-child:nth-child(odd) {
+      grid-column: auto;
+      height: auto;
+    }
   }
 {% endstyle %}
 
@@ -715,16 +774,19 @@
         q.querySelector('h3').textContent.trim(),
         Array.from(q.querySelectorAll('input[type="radio"]')).map(a => [a.value, a.dataset.score]).sort((a, b) => a[0].localeCompare(b[0]))
       ]));
-      const shuffleOptions = () => questions.forEach(q => {
+      // Always show canonical source order, including when restoring an older
+      // draft whose answer order was shuffled. Keep saved answers unchanged.
+      const orderOptions = () => questions.forEach(q => {
         const container = q.querySelector('.vectra-quiz__options');
-        const labels = Array.from(container.children);
-        for (let i = labels.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [labels[i], labels[j]] = [labels[j], labels[i]];
-        }
-        labels.forEach(label => container.append(label));
+        const inputs = Array.from(container.querySelectorAll('input[type="radio"]'));
+        inputs.sort((a, b) => Number(a.dataset.optionIndex) - Number(b.dataset.optionIndex));
+        inputs.forEach(input => {
+          const label = input.closest('label');
+          label.querySelector('.vectra-quiz__option-marker').textContent = String.fromCharCode(65 + Number(input.dataset.optionIndex));
+          container.append(label);
+        });
       });
-      shuffleOptions();
+      orderOptions();
       let phase = 'details';
       let questionIndex = 0;
       let resultLevel = 1;
@@ -752,8 +814,7 @@
           localStorage.setItem(storageKey, JSON.stringify({
             version: 1, signature, expiresAt: Date.now() + lifetime,
             phase: resumeTarget?.phase || phase, questionIndex: resumeTarget?.questionIndex ?? questionIndex, fields: leadData(),
-            answers: questions.map(q => selected(q)?.value || null),
-            answerOrders: questions.map(q => Array.from(q.querySelectorAll('input[type="radio"]')).map(a => a.dataset.optionIndex))
+            answers: questions.map(q => selected(q)?.value || null)
           }));
           status.textContent = 'Progress saved in this browser for 30 days. Use Start again to clear it.';
         } catch (error) {
@@ -884,7 +945,7 @@
         removeDraft();
         try { sessionStorage.removeItem('vectraAssessmentResult'); } catch (error) {}
         form.reset();
-        shuffleOptions();
+        orderOptions();
         fields.forEach(f => { if (f.type === 'checkbox') f.checked = false; else f.value = ''; f.removeAttribute('aria-invalid'); });
         questions.forEach(q => q.querySelectorAll('input[type="radio"]').forEach(a => { a.checked = false; }));
         tagsInput.value = originalTags;
@@ -981,14 +1042,9 @@
                 else if (typeof value === 'string') f.value = value;
               });
               questions.forEach((q, index) => q.querySelectorAll('input[type="radio"]').forEach(a => { a.checked = a.value === draft.answers[index]; }));
-              questions.forEach((q, index) => {
-                const order = draft.answerOrders?.[index];
-                const inputs = Array.from(q.querySelectorAll('input[type="radio"]'));
-                if (Array.isArray(order) && order.length === inputs.length && new Set(order).size === inputs.length && inputs.every(a => order.includes(a.dataset.optionIndex))) {
-                  const container = q.querySelector('.vectra-quiz__options');
-                  order.forEach(id => container.append(inputs.find(a => a.dataset.optionIndex === id).closest('label')));
-                }
-              });
+              // Older drafts may contain a shuffled answerOrders array.
+              // Ignore presentation order and retain selected values and position.
+              orderOptions();
 
               const savedPhase = ['details', 'question', 'review', 'result'].includes(draft.phase) ? draft.phase : 'details';
               const firstMissing = questions.findIndex(q => !selected(q));
@@ -1043,7 +1099,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Spreadsheet mode uses 10 scored questions (1–5) and two unscored commercial questions. Choices are randomized per attempt. There are no approved score cutoffs for service-level recommendations. Custom blocks are used only in Custom mode."
+      "content": "Spreadsheet mode uses 10 scored questions (1–5) and two unscored commercial questions. Choices always appear in the spreadsheet’s A–E order. There are no approved score cutoffs for service-level recommendations. Custom blocks are used only in Custom mode."
     },
     {
       "type": "text",
