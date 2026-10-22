@@ -5,7 +5,7 @@ ROUTING
 Q1–Q10 retain the spreadsheet's A–E choices and 1–5 points.
 T1/T2 remain unscored. S1 is a separate, unscored service-fit question:
 A = Level 1 diagnostic; B = Level 2 evidence review;
-C = Level 3 implementation; D = expert triage (level = null).
+C = Level 3 implementation. A valid service-fit answer is required.
 The score is not a service tier or verified residual-risk rating.
 level/recommended_level always mean the recommended SERVICE tier, never
 "the pre-assessment itself is a simplified Level 1".
@@ -34,7 +34,7 @@ answers (question_id, option_id, score), maturity_score, recommended_level,
 level (same tier value), commercial context, provisional routing_reason,
 workflow, priority, shopify_tags, scoring/routing versions and attribution.
 Started has no level, no completed tag, and no completion email trigger.
-Completion has exactly one level tag for tiers 1–3; triage has no level tag.
+Completion requires a valid tier 1–3 and exactly one matching level tag.
 The same attempt ID survives reload/retry; a deliberate new attempt gets
 an independent ID. Never deduplicate different attempts only by email.
 
@@ -46,7 +46,7 @@ EXPECTED COMPLETED RECEIPT (after durable storage AND Shopify writes):
   "event_id": "<same event ID>", "shopify_customer_verified": true,
   "shopify_tags_saved": true, "recommended_level": 1,
   "crm_status": "pending", "email_status": "test_only" }
-For other tiers return 2/3, or null for triage. Receipt status flags for
+For other tiers return 2 or 3. Receipt status flags for
 CRM/email are independent; do not invent verified/delivered outcomes.
 Adapt frontend and backend together if the team's actual contract differs.
 
@@ -59,8 +59,8 @@ SERVER RESPONSIBILITIES
   then publish base + completion + exactly one current level tag together.
   Confirm the configured level tag strings against the live n8n filter.
 - Required PDF tags: VECTRA SCDD lead, SCDD quiz complete, one SCDD Level tag.
-- Keep expert triage out of all Level 1/2/3 email branches. Queue manual
-  review; do not force triage into an existing tier merely to satisfy CRM.
+- Reject completion without a valid S1 answer and matching tier 1, 2 or 3.
+  Do not assign a default tier to missing or invalid answers.
 - Preserve the existing authenticated Shopify-event email path. Do not
   also send a second email directly from Railway or this browser.
 - Carry submission_id and submitted_at through the Shopify event relay
@@ -339,15 +339,10 @@ assessment/consent/answers to CRM or guarantee email delivery.
           </div>
 
           <div class="vectra-quiz__baseline-copy">
-            <p class="vectra-quiz__result-kicker">Simplified Level 1 assessment</p>
+            <p class="vectra-quiz__result-kicker" data-result-kicker>Your recommended service</p>
             <h3 data-route-heading>Your recommended next step</h3>
             <p data-route-description></p>
-            <p class="vectra-quiz__helper">This is a provisional service recommendation based on the support you selected. It is separate from your self-reported score.</p>
-            <div class="vectra-quiz__score-grid">
-              <p><strong data-score-total>—</strong><span>Unweighted response total</span></p>
-              <p><strong data-score-average>—</strong><span>Average response level</span></p>
-            </div>
-            <p>These scores summarize the answers you selected. They summarize your self-reported position and do not verify your supply chain risk.</p>
+            <p class="vectra-quiz__helper">This recommendation reflects the support you selected. VECTRA will confirm the scope with you.</p>
             <details class="vectra-quiz__review-accordion">
               <summary>How the full assessment builds on this</summary>
               <p><strong>Level 1:</strong> Assess your current position through self-reported answers.</p>
@@ -356,7 +351,7 @@ assessment/consent/answers to CRM or guarantee email delivery.
             </details>
           </div>
           <div class="vectra-quiz__result-note">
-            <span>Your scope and supply chain context are recorded separately and do not add points. VECTRA can use your responses to discuss the appropriate next step.</span>
+            <span>Your answers help VECTRA understand your needs and prepare for the next step. You can review and change them before saving your result.</span>
           </div>
 
           <p class="vectra-quiz__required-note" data-submit-status role="status" aria-live="polite"></p>
@@ -397,13 +392,12 @@ assessment/consent/answers to CRM or guarantee email delivery.
     </div>
   </div>
 <script type="application/json" data-scdd-questionnaire>
-[{"id": "Q1", "type": "core", "category": "Supply Chain Mapping", "question": "The supply chain mapping our organization conducts for purposes of understanding the risk in the supply chain covers the following levels of suppliers:", "options": [{"id": "A", "text": "We have mapped our most critical direct contractors that are core to the products or services offered to our customers", "score": 1}, {"id": "B", "text": "We have mapped all direct contractors in addition to the most critical ones", "score": 2}, {"id": "C", "text": "We have mapped the most critical sub-contractors and suppliers to our direct contractors", "score": 3}, {"id": "D", "text": "We have mapped all sub-contractors and suppliers to our direct contractors in addition to the most critical ones", "score": 4}, {"id": "E", "text": "We have mapped the origination of our most critical raw materials", "score": 5}]}, {"id": "Q2", "type": "core", "category": "Risk Assessments", "question": "We conduct a supply chain risk assessments for due diligence purposes when the following events occur", "options": [{"id": "A", "text": "In response to a particular issue", "score": 1}, {"id": "B", "text": "When entering a new market", "score": 2}, {"id": "C", "text": "In response to new regulations or voluntary standards", "score": 3}, {"id": "D", "text": "Any changes in suppliers", "score": 4}, {"id": "E", "text": "Every new and existing transaction", "score": 5}]}, {"id": "Q3", "type": "core", "category": "Strategy and Goals", "question": "The following best describes our organization’s strategy for responsible business conduct concerning  our supply chain:", "options": [{"id": "A", "text": "We have not established a strategy", "score": 1}, {"id": "B", "text": "We have started developing a strategy", "score": 2}, {"id": "C", "text": "We have established a strategy that addresses the prioritized risks in bringing to market our core goods/services", "score": 3}, {"id": "D", "text": "We have established a strategy that addresses the prioritized risks in bringing to market our core goods/services as well as suppliers we use in running our business.", "score": 4}, {"id": "E", "text": "Our organization has established an overarching vision or purpose that enables the alignment of our strategy for responsible business conduct concerning supply chain issues into our overall business strategy", "score": 5}]}, {"id": "Q4", "type": "core", "category": "Policies Procedures and Records", "question": "Our supplier contracts specifically include provisions that are aligned with the following", "options": [{"id": "A", "text": "Relevant domestic supply chain due diligence laws", "score": 1}, {"id": "B", "text": "Applicable international supply chain  due diligence laws", "score": 2}, {"id": "C", "text": "Supplier code of conduct", "score": 3}, {"id": "D", "text": "Relevant international voluntary standards regarding supply chain  due diligence", "score": 4}, {"id": "E", "text": "Internal policies related to responsible supply chain engagement for minimizing impacts of our suppliers", "score": 5}]}, {"id": "Q5", "type": "core", "category": "Responsible Supply Chain Engagement", "question": "When looking to bring on a new supplier, our organization conducts due diligence regarding the supplier’s ability to manage risks as follows", "options": [{"id": "A", "text": "Due diligence on a new supplier is not conducted regarding risks before a new supplier is approved.", "score": 1}, {"id": "B", "text": "Due Diligence is conducted on a new supplier but not necessarily before contracting", "score": 2}, {"id": "C", "text": "Due Diligence must be completed prior to contracting.", "score": 3}, {"id": "D", "text": "Due Diligence is completed before contracting and there is an agreed upon timeline for remediating any issues found are agreed upon with the new supplier", "score": 4}, {"id": "E", "text": "Due Diligence is completed and all issues remediated before contracting.", "score": 5}]}, {"id": "Q6", "type": "core", "category": "Governance and oversight", "question": "The following describes senior management’s level of involvement in our supply chain human rights due diligence program", "options": [{"id": "A", "text": "Senior management is not involved", "score": 1}, {"id": "B", "text": "They have approved a policy requiring supply chain to adhere with relevant supply chain laws.", "score": 2}, {"id": "C", "text": "They have approved the company policies by risk area, mandated the formation of a supply chain due diligence program and team, and communicate the importance internally", "score": 3}, {"id": "D", "text": "They have approved the company policy or policies, mandated the formation of a supply chain due diligence program and team led by a senior-level employee, and have provided it adequate resources, authority and visible support. They also review implementation of the program at least annually", "score": 4}, {"id": "E", "text": "They fully support the supply chain due diligence team and have regular, ongoing input in and oversight of the program to ensure that it is effective and communicate its importance both internally and externally", "score": 5}]}, {"id": "Q7", "type": "core", "category": "Training and Communication", "question": "Our internal supply chain due diligence training curriculum is customized for audiences based on the following criteria", "options": [{"id": "A", "text": "Whether they interact with supply chain members", "score": 1}, {"id": "B", "text": "Employee function", "score": 2}, {"id": "C", "text": "Employee job level", "score": 3}, {"id": "D", "text": "Employee business unit", "score": 4}, {"id": "E", "text": "Employee location or geography", "score": 5}]}, {"id": "Q8", "type": "core", "category": "Monitoring", "question": "The following best describes how we determine which suppliers will be monitored", "options": [{"id": "A", "text": "We monitor suppliers only on an ‘as-needed’ basis where we have discovered a specific issue or problem", "score": 1}, {"id": "B", "text": "We monitor suppliers from time to time where there have been problems in the past", "score": 2}, {"id": "C", "text": "We routinely monitor  high-risk suppliers", "score": 3}, {"id": "D", "text": "We routinely monitor all suppliers", "score": 4}, {"id": "E", "text": "We routinely engage with all suppliers on their supply chain  performance including all aspect of ESG", "score": 5}]}, {"id": "Q9", "type": "core", "category": "Stakeholder Engagement", "question": "The following best describes our plan for stakeholder engagement related to  due diligence and performance in our supply chain", "options": [{"id": "A", "text": "We don’t have a plan", "score": 1}, {"id": "B", "text": "We have started to develop a plan", "score": 2}, {"id": "C", "text": "We have a plan in place that includes critical international external stakeholders", "score": 3}, {"id": "D", "text": "We have a plan in place that includes international and local/community external stakeholders", "score": 4}, {"id": "E", "text": "We have a plan in place that includes  external stakeholders and is routinely updated as part of a continual improvement process", "score": 5}]}, {"id": "Q10", "type": "core", "category": "Reporting and Disclosure", "question": "The following best describes how we report on our human rights supply chain due diligence program and its results", "options": [{"id": "A", "text": "We do not publicly report", "score": 1}, {"id": "B", "text": "We report against some elements of established due diligence reporting standards", "score": 2}, {"id": "C", "text": "We report on only material topics using one established ESG reporting standards", "score": 3}, {"id": "D", "text": "We report on only material topics using multiple established ESG reporting standards", "score": 4}, {"id": "E", "text": "We report on only material topics using multiple established ESG reporting standards with full supply chain transparence and performance", "score": 5}]}, {"id": "T1", "type": "commercial", "category": "Scope", "question": "I have completed the pre-assessment for:", "options": [{"id": "A", "text": "one location", "score": null}, {"id": "B", "text": "one country/region", "score": null}, {"id": "C", "text": "one division", "score": null}, {"id": "D", "text": "one product category", "score": null}, {"id": "E", "text": "entire company globally (only when multiple locations in multiple countries)", "score": null}]}, {"id": "T2", "type": "commercial", "category": "Supply Chain overview", "question": "The following are present in my supply chain", "options": [{"id": "A", "text": "agents/importers/exporters", "score": null}, {"id": "B", "text": "Labor agents/brokers", "score": null}, {"id": "C", "text": "Foreign migrant workers", "score": null}, {"id": "D", "text": "Conflict raw materials (Gold, Tin, Tantalum, Tungsten, Cobalt, Mica, …)", "score": null}, {"id": "E", "text": "High risk countries/  conflict regions", "score": null}]}, {"id": "S1", "type": "routing", "category": "Your next step", "question": "What support would be most useful to your organization right now?", "options": [{"id": "A", "text": "Understand our current position and priorities through a full self-assessment.", "score": null, "level": 1}, {"id": "B", "text": "Have an expert independently review our existing controls, policies and supporting evidence.", "score": null, "level": 2}, {"id": "C", "text": "Get hands-on help implementing improvements or building our due diligence program.", "score": null, "level": 3}, {"id": "D", "text": "We are unsure and would like an expert to help us choose the right next step.", "score": null, "level": null}]}]
+[{"id": "Q1", "type": "core", "category": "Supply Chain Mapping", "question": "The supply chain mapping our organization conducts for purposes of understanding the risk in the supply chain covers the following levels of suppliers:", "options": [{"id": "A", "text": "We have mapped our most critical direct contractors that are core to the products or services offered to our customers", "score": 1}, {"id": "B", "text": "We have mapped all direct contractors in addition to the most critical ones", "score": 2}, {"id": "C", "text": "We have mapped the most critical sub-contractors and suppliers to our direct contractors", "score": 3}, {"id": "D", "text": "We have mapped all sub-contractors and suppliers to our direct contractors in addition to the most critical ones", "score": 4}, {"id": "E", "text": "We have mapped the origination of our most critical raw materials", "score": 5}]}, {"id": "Q2", "type": "core", "category": "Risk Assessments", "question": "We conduct a supply chain risk assessments for due diligence purposes when the following events occur", "options": [{"id": "A", "text": "In response to a particular issue", "score": 1}, {"id": "B", "text": "When entering a new market", "score": 2}, {"id": "C", "text": "In response to new regulations or voluntary standards", "score": 3}, {"id": "D", "text": "Any changes in suppliers", "score": 4}, {"id": "E", "text": "Every new and existing transaction", "score": 5}]}, {"id": "Q3", "type": "core", "category": "Strategy and Goals", "question": "The following best describes our organization’s strategy for responsible business conduct concerning  our supply chain:", "options": [{"id": "A", "text": "We have not established a strategy", "score": 1}, {"id": "B", "text": "We have started developing a strategy", "score": 2}, {"id": "C", "text": "We have established a strategy that addresses the prioritized risks in bringing to market our core goods/services", "score": 3}, {"id": "D", "text": "We have established a strategy that addresses the prioritized risks in bringing to market our core goods/services as well as suppliers we use in running our business.", "score": 4}, {"id": "E", "text": "Our organization has established an overarching vision or purpose that enables the alignment of our strategy for responsible business conduct concerning supply chain issues into our overall business strategy", "score": 5}]}, {"id": "Q4", "type": "core", "category": "Policies Procedures and Records", "question": "Our supplier contracts specifically include provisions that are aligned with the following", "options": [{"id": "A", "text": "Relevant domestic supply chain due diligence laws", "score": 1}, {"id": "B", "text": "Applicable international supply chain  due diligence laws", "score": 2}, {"id": "C", "text": "Supplier code of conduct", "score": 3}, {"id": "D", "text": "Relevant international voluntary standards regarding supply chain  due diligence", "score": 4}, {"id": "E", "text": "Internal policies related to responsible supply chain engagement for minimizing impacts of our suppliers", "score": 5}]}, {"id": "Q5", "type": "core", "category": "Responsible Supply Chain Engagement", "question": "When looking to bring on a new supplier, our organization conducts due diligence regarding the supplier’s ability to manage risks as follows", "options": [{"id": "A", "text": "Due diligence on a new supplier is not conducted regarding risks before a new supplier is approved.", "score": 1}, {"id": "B", "text": "Due Diligence is conducted on a new supplier but not necessarily before contracting", "score": 2}, {"id": "C", "text": "Due Diligence must be completed prior to contracting.", "score": 3}, {"id": "D", "text": "Due Diligence is completed before contracting and there is an agreed upon timeline for remediating any issues found are agreed upon with the new supplier", "score": 4}, {"id": "E", "text": "Due Diligence is completed and all issues remediated before contracting.", "score": 5}]}, {"id": "Q6", "type": "core", "category": "Governance and oversight", "question": "The following describes senior management’s level of involvement in our supply chain human rights due diligence program", "options": [{"id": "A", "text": "Senior management is not involved", "score": 1}, {"id": "B", "text": "They have approved a policy requiring supply chain to adhere with relevant supply chain laws.", "score": 2}, {"id": "C", "text": "They have approved the company policies by risk area, mandated the formation of a supply chain due diligence program and team, and communicate the importance internally", "score": 3}, {"id": "D", "text": "They have approved the company policy or policies, mandated the formation of a supply chain due diligence program and team led by a senior-level employee, and have provided it adequate resources, authority and visible support. They also review implementation of the program at least annually", "score": 4}, {"id": "E", "text": "They fully support the supply chain due diligence team and have regular, ongoing input in and oversight of the program to ensure that it is effective and communicate its importance both internally and externally", "score": 5}]}, {"id": "Q7", "type": "core", "category": "Training and Communication", "question": "Our internal supply chain due diligence training curriculum is customized for audiences based on the following criteria", "options": [{"id": "A", "text": "Whether they interact with supply chain members", "score": 1}, {"id": "B", "text": "Employee function", "score": 2}, {"id": "C", "text": "Employee job level", "score": 3}, {"id": "D", "text": "Employee business unit", "score": 4}, {"id": "E", "text": "Employee location or geography", "score": 5}]}, {"id": "Q8", "type": "core", "category": "Monitoring", "question": "The following best describes how we determine which suppliers will be monitored", "options": [{"id": "A", "text": "We monitor suppliers only on an ‘as-needed’ basis where we have discovered a specific issue or problem", "score": 1}, {"id": "B", "text": "We monitor suppliers from time to time where there have been problems in the past", "score": 2}, {"id": "C", "text": "We routinely monitor  high-risk suppliers", "score": 3}, {"id": "D", "text": "We routinely monitor all suppliers", "score": 4}, {"id": "E", "text": "We routinely engage with all suppliers on their supply chain  performance including all aspect of ESG", "score": 5}]}, {"id": "Q9", "type": "core", "category": "Stakeholder Engagement", "question": "The following best describes our plan for stakeholder engagement related to  due diligence and performance in our supply chain", "options": [{"id": "A", "text": "We don’t have a plan", "score": 1}, {"id": "B", "text": "We have started to develop a plan", "score": 2}, {"id": "C", "text": "We have a plan in place that includes critical international external stakeholders", "score": 3}, {"id": "D", "text": "We have a plan in place that includes international and local/community external stakeholders", "score": 4}, {"id": "E", "text": "We have a plan in place that includes  external stakeholders and is routinely updated as part of a continual improvement process", "score": 5}]}, {"id": "Q10", "type": "core", "category": "Reporting and Disclosure", "question": "The following best describes how we report on our human rights supply chain due diligence program and its results", "options": [{"id": "A", "text": "We do not publicly report", "score": 1}, {"id": "B", "text": "We report against some elements of established due diligence reporting standards", "score": 2}, {"id": "C", "text": "We report on only material topics using one established ESG reporting standards", "score": 3}, {"id": "D", "text": "We report on only material topics using multiple established ESG reporting standards", "score": 4}, {"id": "E", "text": "We report on only material topics using multiple established ESG reporting standards with full supply chain transparence and performance", "score": 5}]}, {"id": "T1", "type": "commercial", "category": "Scope", "question": "I have completed the pre-assessment for:", "options": [{"id": "A", "text": "one location", "score": null}, {"id": "B", "text": "one country/region", "score": null}, {"id": "C", "text": "one division", "score": null}, {"id": "D", "text": "one product category", "score": null}, {"id": "E", "text": "entire company globally (only when multiple locations in multiple countries)", "score": null}]}, {"id": "T2", "type": "commercial", "category": "Supply Chain overview", "question": "The following are present in my supply chain", "options": [{"id": "A", "text": "agents/importers/exporters", "score": null}, {"id": "B", "text": "Labor agents/brokers", "score": null}, {"id": "C", "text": "Foreign migrant workers", "score": null}, {"id": "D", "text": "Conflict raw materials (Gold, Tin, Tantalum, Tungsten, Cobalt, Mica, …)", "score": null}, {"id": "E", "text": "High risk countries/  conflict regions", "score": null}]}, {"id": "S1", "type": "routing", "category": "Your next step", "question": "What support would be most useful to your organization right now?", "options": [{"id": "A", "text": "Understand our current position and priorities through a full self-assessment.", "score": null, "level": 1}, {"id": "B", "text": "Have an expert independently review our existing controls, policies and supporting evidence.", "score": null, "level": 2}, {"id": "C", "text": "Get hands-on help implementing improvements or building our due diligence program.", "score": null, "level": 3}]}]
 </script>
 <script type="application/json" data-routing-config>
 {
   "checkoutUrl": {{ section.settings.level_1_checkout_url | json }},
   "bookingUrl": {{ section.settings.consultation_url | json }},
-  "triageUrl": {{ section.settings.triage_url | json }},
   "levelTags": [{{ section.settings.level_1_tag | json }}, {{ section.settings.level_2_tag | json }}, {{ section.settings.level_3_tag | json }}],
   "completedTag": {{ section.settings.completed_tag | json }},
   "startedTag": {{ section.settings.started_tag | json }}
@@ -712,10 +706,6 @@ assessment/consent/answers to CRM or guarantee email delivery.
   #VectraQuiz-{{ section.id }} .vectra-quiz__save-status { padding: 8px 24px; font-size: 10px; }
   #VectraQuiz-{{ section.id }} .vectra-quiz__result-badge { margin-bottom: 16px; padding: 10px 18px; }
   #VectraQuiz-{{ section.id }} .vectra-quiz__baseline-copy > p { color: var(--vq-muted); font-size: 13px; line-height: 1.65; }
-  #VectraQuiz-{{ section.id }} .vectra-quiz__score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
-  #VectraQuiz-{{ section.id }} .vectra-quiz__score-grid p { margin: 0; padding: 14px 10px; border-radius: 12px; background: #f1f8ed; }
-  #VectraQuiz-{{ section.id }} .vectra-quiz__score-grid strong { display: block; color: var(--vq-navy); font-size: 24px; }
-  #VectraQuiz-{{ section.id }} .vectra-quiz__score-grid span { display: block; margin-top: 5px; color: var(--vq-muted); font-size: 11px; }
   #VectraQuiz-{{ section.id }} .vectra-quiz__review-accordion { margin-top: 16px; padding: 14px 16px; border: 1px solid var(--vq-line); border-radius: 12px; text-align: left; }
   #VectraQuiz-{{ section.id }} .vectra-quiz__review-accordion summary { cursor: pointer; color: var(--vq-navy); font-size: 13px; font-weight: 700; }
   #VectraQuiz-{{ section.id }} .vectra-quiz__review-accordion p { font-size: 12px; line-height: 1.65; color: var(--vq-muted); }
@@ -917,7 +907,7 @@ assessment/consent/answers to CRM or guarantee email delivery.
         const blankText = field.required && field.type !== 'checkbox' && !field.value.trim();
         return blankText || !field.validity.valid;
       });
-      const complete = () => questions.length > 0 && questions.every(q => selected(q));
+      const complete = () => questions.length > 0 && questions.every(q => selected(q)) && questions.some(q => q.dataset.questionType === 'routing' && [1, 2, 3].includes(Number(selected(q)?.dataset.routeLevel)));
       const leadData = () => Object.fromEntries(fields.map(f => [f.name, f.type === 'checkbox' ? f.checked : f.value]));
       const removeDraft = () => {
         clearTimeout(saveTimer);
@@ -1014,10 +1004,9 @@ assessment/consent/answers to CRM or guarantee email delivery.
         });
       };
       const routeCopy = {
-        1: { title: 'Level 1 · Diagnose', heading: 'Start with a full self-assessment.', body: 'Build a baseline through the full assessment and expert interpretation. You can then explore evidence review or implementation support if needed.', workflow: 'level_1_automated', priority: 'standard' },
-        2: { title: 'Level 2 · Validate', heading: 'Discuss an independent evidence review.', body: 'Speak with VECTRA about reviewing your controls and supporting documents, revising self-reported scores and identifying priorities.', workflow: 'level_2_manual_handoff', priority: 'standard' },
-        3: { title: 'Level 3 · Implement', heading: 'Discuss hands-on implementation support.', body: 'Speak with VECTRA about a consulting engagement to implement improvements or build your due diligence program. The scope is confirmed with an expert.', workflow: 'level_3_priority_handoff', priority: 'high' },
-        triage: { title: 'Expert triage', heading: 'Choose your next step with an expert.', body: 'VECTRA can help clarify whether a full self-assessment, independent evidence review or implementation support best fits your needs.', workflow: 'expert_triage', priority: 'standard' }
+        1: { kicker: 'Full assessment', title: 'Level 1 · Diagnose', heading: 'Start with a full self-assessment.', body: 'Build a baseline through the full assessment and expert interpretation. You can then explore evidence review or implementation support if needed.', workflow: 'level_1_automated', priority: 'standard' },
+        2: { kicker: 'Independent evidence review', title: 'Level 2 · Validate', heading: 'Discuss an independent evidence review.', body: 'Speak with VECTRA about reviewing your controls and supporting documents, revising self-reported scores and identifying priorities.', workflow: 'level_2_manual_handoff', priority: 'standard' },
+        3: { kicker: 'Implementation support', title: 'Level 3 · Implement', heading: 'Discuss hands-on implementation support.', body: 'Speak with VECTRA about a consulting engagement to implement improvements or build your due diligence program. The scope is confirmed with an expert.', workflow: 'level_3_priority_handoff', priority: 'high' }
       };
       const calculateResult = () => {
         const answers = questions.map(q => selected(q));
@@ -1029,12 +1018,11 @@ assessment/consent/answers to CRM or guarantee email delivery.
         const routeAnswer = routeQuestion ? selected(routeQuestion) : null;
         const candidate = Number(routeAnswer?.dataset.routeLevel);
         resultLevel = [1, 2, 3].includes(candidate) ? candidate : null;
-        const route = routeCopy[resultLevel || 'triage'];
+        const route = routeCopy[resultLevel] || { kicker: 'Your recommended service', title: 'Select your next step', heading: 'Choose the support you need.', body: 'Return to the final question to select your support needs.', workflow: 'not_assessed', priority: 'standard' };
+        root.querySelector('[data-result-kicker]').textContent = route.kicker;
         root.querySelector('[data-result-level]').textContent = route.title;
         root.querySelector('[data-route-heading]').textContent = route.heading;
         root.querySelector('[data-route-description]').textContent = route.body;
-        root.querySelector('[data-score-total]').textContent = scoredQuestions.length ? `${score} / ${scoreMaximum}` : 'Not scored';
-        root.querySelector('[data-score-average]').textContent = averageScore === null ? 'Not scored' : `${averageScore.toFixed(1)} / 5`;
         const configuredLevelTags = routingConfig.levelTags.map(t => (t || '').trim());
         const baseTags = originalTags.split(',').map(t => t.trim()).filter(t => t && !/^SCDD Level\s*[123]$/.test(t) && !configuredLevelTags.includes(t) && t !== routingConfig.completedTag);
         const tags = [...new Set([...baseTags, routingConfig.completedTag, resultLevel ? configuredLevelTags[resultLevel - 1] : null].filter(Boolean))];
@@ -1049,7 +1037,7 @@ assessment/consent/answers to CRM or guarantee email delivery.
         return {
           level: resultLevel, recommendedLevel: resultLevel, recommended_level: resultLevel,
           assessmentType: 'pre-assessment', assessment_stage: 'simplified_level_1',
-          routing_status: resultLevel ? 'provisional' : 'needs_expert_review',
+          routing_status: resultLevel ? 'provisional' : 'not_assessed',
           routing_reason: routeAnswer?.value || '', routing_version: 'service-fit-v1',
           workflow: route.workflow, priority: route.priority,
           risk_category: null, risk_rating_status: 'not_verified',
@@ -1197,11 +1185,11 @@ assessment/consent/answers to CRM or guarantee email delivery.
         removeDraft();
         try { sessionStorage.setItem('vectraAssessmentResult', JSON.stringify({ ...packet, receipt })); } catch (error) {}
         status.textContent = 'Your assessment has been saved. Your browser draft has been cleared.';
-        submitStatus.textContent = packet.level ? `Assessment saved. Recommended next step: Level ${packet.level}.` : 'Assessment saved for expert triage. No Level 1, 2 or 3 has been assigned.';
+        submitStatus.textContent = `Assessment saved. Recommended next step: Level ${packet.level}.`;
         root.querySelector('.vectra-quiz__actions--result:not([data-saved-actions])').hidden = true;
         root.querySelector('[data-saved-actions]').hidden = false;
         const action = root.querySelector('[data-route-action]');
-        const raw = packet.level === 1 ? routingConfig.checkoutUrl : packet.level ? routingConfig.bookingUrl : (routingConfig.triageUrl || routingConfig.bookingUrl);
+        const raw = packet.level === 1 ? routingConfig.checkoutUrl : routingConfig.bookingUrl;
         action.hidden = true;
         if (raw) {
           try {
@@ -1336,7 +1324,10 @@ assessment/consent/answers to CRM or guarantee email delivery.
           if (draft) {
             let sourceMatches = draft.signature === signature;
             try {
-              sourceMatches = sourceMatches || (draft.answers?.length === questions.length - 1 && JSON.stringify(JSON.parse(draft.signature)) === JSON.stringify(JSON.parse(signature).slice(0, -1)));
+              const oldQuestions = JSON.parse(draft.signature);
+              const currentQuestions = JSON.parse(signature);
+              // Retain the unchanged spreadsheet answers when the final service choices change.
+              sourceMatches = sourceMatches || ([questions.length - 1, questions.length].includes(draft.answers?.length) && oldQuestions.length === draft.answers.length && (oldQuestions.length === questions.length - 1 || oldQuestions[oldQuestions.length - 1][0] === currentQuestions[currentQuestions.length - 1][0]) && JSON.stringify(oldQuestions.slice(0, questions.length - 1)) === JSON.stringify(currentQuestions.slice(0, -1)));
             } catch (error) {}
             if (draft.version !== 1 || !sourceMatches || !(draft.expiresAt > Date.now()) || !Array.isArray(draft.answers) || ![questions.length, questions.length - 1].includes(draft.answers.length)) {
               removeDraft();
@@ -1410,7 +1401,7 @@ assessment/consent/answers to CRM or guarantee email delivery.
     },
     {
       "type": "paragraph",
-      "content": "Spreadsheet mode uses the 12 approved questions plus one unscored service-fit question. Core scores do not select the service tier. Service fit routes to Levels 1–3 or expert triage. Choices remain in A–E order."
+      "content": "Spreadsheet mode uses the 12 approved questions plus one unscored service-fit question. Core scores do not select the service tier. Service fit routes to Levels 1–3. A support selection is required. Choices remain in A–E order."
     },
     {
       "type": "text",
@@ -1735,7 +1726,7 @@ assessment/consent/answers to CRM or guarantee email delivery.
     },
     {
       "type": "paragraph",
-      "content": "The 20 October flowchart requires VECTRA SCDD lead, SCDD quiz complete and exactly one level tag. Confirm the three level tag strings against the live n8n filter. Expert triage has no level tag and must not trigger a Level 1/2/3 email."
+      "content": "The 20 October flowchart requires VECTRA SCDD lead, SCDD quiz complete and exactly one level tag. Confirm the three level tag strings against the live n8n filter. Completion requires one of the three service levels."
     },
     {
       "type": "url",
@@ -1746,11 +1737,6 @@ assessment/consent/answers to CRM or guarantee email delivery.
       "type": "url",
       "id": "consultation_url",
       "label": "Level 2/3 consultation URL"
-    },
-    {
-      "type": "url",
-      "id": "triage_url",
-      "label": "Expert triage booking URL"
     }
   ],
   "blocks": [
