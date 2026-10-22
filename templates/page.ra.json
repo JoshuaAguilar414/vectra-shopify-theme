@@ -818,7 +818,7 @@
             "card_color": "#fbfcfb",
             "heading_color": "#082946",
             "body_color": "#596d80",
-            "accent_color": "#398600",
+            "accent_color": "{{ settings.color_palette.foreground }}",
             "border_color": "#dce4dd",
             "photo_background": "#edf2ef",
             "tag_background": "#eaf5e2",
