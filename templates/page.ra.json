@@ -1265,14 +1265,14 @@
         "card_color": "#fbfcfb",
         "heading_color": "#082946",
         "body_color": "#596d80",
-        "accent_color": "#398600",
+        "accent_color": "{{ settings.color_palette.foreground }}",
         "border_color": "#dce4dd",
-        "eyebrow_color": "#398600",
+        "eyebrow_color": "{{ settings.color_palette.foreground }}",
         "result_background": "#eaf5e2",
         "result_color": "#214600",
         "show_titles": false,
         "show_summaries": false,
-        "outcome_panel": false
+        "outcome_panel": true
       }
     },
     "ra_faqs_fxTqAc": {
