@@ -430,103 +430,6 @@
         "menu": ""
       }
     },
-    "ra_hero_banner_GNALV9": {
-      "type": "ra-hero-banner",
-      "blocks": {
-        "metric_8nz3wz": {
-          "type": "metric",
-          "settings": {
-            "value": "10",
-            "label": "Focused questions"
-          }
-        },
-        "metric_JbVxGh": {
-          "type": "metric",
-          "settings": {
-            "value": "~2",
-            "label": "Minutes to complete"
-          }
-        },
-        "metric_FmfJeX": {
-          "type": "metric",
-          "settings": {
-            "value": "Level 1, 2, or 3",
-            "label": "Recommended Assessment Pathway"
-          }
-        },
-        "metric_pFJdXW": {
-          "type": "metric",
-          "settings": {
-            "value": "1",
-            "label": "Recommended Next Step"
-          }
-        }
-      },
-      "block_order": [
-        "metric_8nz3wz",
-        "metric_JbVxGh",
-        "metric_FmfJeX",
-        "metric_pFJdXW"
-      ],
-      "disabled": true,
-      "name": "VECTRA hero banner",
-      "settings": {
-        "eyebrow": "Supply Chain Due Diligence Risk Assessment",
-        "heading": "Find the Right Assessment Level for Your Organization&nbsp;",
-        "body": "Answer 10 focused questions to help determine whether your organization needs an initial diagnostic, deeper evidence review, or implementation support.\n\nThe pre-assessment considers your scope, current controls, and supply chain due diligence position to recommend the most appropriate VECTRA assessment pathway.",
-        "primary_label": "Start your pre-assessment",
-        "primary_link": "",
-        "secondary_label": "Preview sample report",
-        "show_trust_notes": true,
-        "trust_note_one": "About 2 minutes",
-        "trust_note_two": "No detailed diagnosis from screening alone",
-        "show_pathway_card": false,
-        "pathway_aria_label": "Three assessment pathways",
-        "route_kicker": "Your route",
-        "route_range": "01—03",
-        "route_core": "SCDD",
-        "route_one_number": "01",
-        "route_one_name": "Diagnose",
-        "route_two_number": "02",
-        "route_two_name": "Validate",
-        "route_three_number": "03",
-        "route_three_name": "Advance",
-        "route_summary": "One focused starting point, shaped to your maturity and urgency.",
-        "content_width": 1200,
-        "minimum_height": 720,
-        "padding_top": 88,
-        "padding_bottom": 76,
-        "corner_radius": 56,
-        "heading_size": 80,
-        "body_size": 14,
-        "gradient_start": "#318f1d",
-        "gradient_middle": "#1f742b",
-        "gradient_end": "#082946",
-        "grid_color": "#69dc1d",
-        "text_color": "#ffffff",
-        "accent_color": "#65dc13",
-        "accent_light": "#d8ffbf",
-        "button_background": "#55c900",
-        "button_text": "#082946",
-        "card_color": "#052539",
-        "node_one_color": "#123e57",
-        "node_two_color": "#317a35",
-        "node_three_color": "#55c900",
-        "text_width": 820,
-        "body_width": 740,
-        "copy_share": 62,
-        "column_gap": 44,
-        "image_height": 560,
-        "image_fit": "contain",
-        "image_radius": 24,
-        "report_title": "See a sample report",
-        "report_body": "Enter your email to request a sample SCDD report and see what your assessment can look like.",
-        "report_submit": "Email me the sample report",
-        "report_success": "Thanks — your sample-report request has been received.",
-        "popup_background": "#ffffff",
-        "popup_text": "#082946"
-      }
-    },
     "ra_grid_ABDFMN": {
       "type": "ra-grid",
       "blocks": {
@@ -534,27 +437,27 @@
           "type": "step",
           "settings": {
             "number": "01",
-            "icon": "clipboard",
-            "heading": "Answer 10 Focused Questions",
-            "body": "<p>Provide information about areas such as governance, supply-chain visibility, supplier controls, monitoring, and the reason for the assessment.</p>"
+            "icon": "search",
+            "heading": "Identify Where Supplier Risk Needs More Attention",
+            "body": "<p>See which suppliers, activities, or parts of the supply chain need closer review.</p>"
           }
         },
         "step_QCagc8": {
           "type": "step",
           "settings": {
-            "number": "02",
+            "number": "",
             "icon": "pathway",
-            "heading": "See Your Recommended Assessment Level",
-            "body": "<p>Your responses indicate whether Level 1, Level 2, or Level 3 is the most appropriate starting point.</p><p>The result is a recommendation, not a detailed maturity score. Most organizations start at Level 1 — Level 2 or Level 3 needs are often identified once Level 1 results are in and specific gaps are clear.&nbsp;</p>"
+            "heading": "Strengthen Due Diligence Controls",
+            "body": "<p>Find out where governance, responsibilities, and processes work well, and where they need strengthening.</p>"
           }
         },
         "step_xEMLz8": {
           "type": "step",
           "settings": {
-            "number": "03",
+            "number": "",
             "icon": "arrow",
-            "heading": "Continue to the Recommended Assessment",
-            "body": "<p>If Level 1 is recommended, you can proceed straight to purchase. Once payment is confirmed, VECTRA sends an enrollment key by email so you can begin the assessment.<br/><br/>If Level 2 or Level 3 is recommended, you’ll speak with VECTRA about the scope, evidence, and support required — these engagements are scoped individually.&nbsp;<br/></p>"
+            "heading": "Close Gaps in Supply Chain Visibility and Evidence",
+            "body": "<p>Spot where supplier information or documentation is incomplete or inconsistent.</p>"
           }
         }
       },
@@ -565,9 +468,9 @@
       ],
       "name": "VECTRA how it works",
       "settings": {
-        "eyebrow": "WHAT TO EXPECT",
-        "heading": "What Happens During the Pre-Assessment",
-        "body": "<p>The pre-assessment helps identify the level of SCDD assessment your organization may need, without requiring you to complete the full assessment first.</p>",
+        "eyebrow": "WHAT THE FULL ASSESSMENT HELPS YOU IMPROVE",
+        "heading": "Turn Assessment Findings Into Clear Supply Chain Priorities",
+        "body": "<p>The full assessment goes beyond identifying risk. It shows how due diligence is working across your supply chain and what needs to improve.</p>",
         "content_width": 1260,
         "heading_size": 58,
         "cards_margin_top": 64,
@@ -1088,7 +991,6 @@
   },
   "order": [
     "vectra_home_mfggqh",
-    "ra_hero_banner_GNALV9",
     "ra_grid_ABDFMN",
     "ra_quiz_VNJDzX",
     "ra_pathways_UVC87Q",
