@@ -38,7 +38,7 @@ Advanced design block is optional: all its settings have layout defaults.
       {% if s.subheading != blank %}<div class="vts__intro">{{ s.subheading }}</div>{% endif %}
     </header>
     {% if stories.size > 0 %}
-      <div class="vts__grid" data-vts-track tabindex="{% if s.layout == 'carousel' %}0{% else %}-1{% endif %}" {% if s.layout == 'carousel' %}role="region" aria-label="Client testimonials"{% endif %}>
+      <div class="vts__grid" data-vts-track tabindex="{% if s.layout == 'carousel' or s.layout == 'filmstrip' %}0{% else %}-1{% endif %}" {% if s.layout == 'carousel' or s.layout == 'filmstrip' %}role="region" aria-label="Client testimonials"{% endif %}>
         {% for block in stories %}
           {% liquid
             assign b = block.settings
@@ -107,14 +107,15 @@ Advanced design block is optional: all its settings have layout defaults.
           </article>
         {% endfor %}
       </div>
+      {% if s.layout == 'carousel' or s.layout == 'filmstrip' %}
       <div class="vts__controls" data-vts-controls>
-        {% if s.layout == 'carousel' %}
+        {% if s.layout == 'carousel' or s.layout == 'filmstrip' %}
           <button class="vts__control" type="button" data-vts-prev aria-label="Previous testimonials">←</button>
           <span class="vts__counter" data-vts-counter aria-live="off">1 / {{ stories.size }}</span>
           <button class="vts__control" type="button" data-vts-next aria-label="Next testimonials">→</button>
         {% endif %}
-        {% if motion_style != 'none' or s.layout == 'carousel' %}<button class="vts__control vts__pause" type="button" data-vts-pause aria-pressed="false">Pause motion</button>{% endif %}
       </div>
+      {% endif %}
     {% endif %}
     {% if s.footer_text != blank or s.cta_url != blank %}
       <div class="vts__footer">
@@ -299,7 +300,6 @@ Advanced design block is optional: all its settings have layout defaults.
   #VStories-{{ section.id }} .vts__control:hover { border-color: var(--accent); }
   #VStories-{{ section.id }} .vts__control:focus-visible, #VStories-{{ section.id }} .vts__grid:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
   #VStories-{{ section.id }} .vts__counter { color: var(--body); font-size: 12px; }
-  #VStories-{{ section.id }} .vts__pause { margin-left: 8px; }
   #VStories-{{ section.id }}.vts--carousel .vts__grid {
     grid-template-columns: none; grid-template-rows: repeat(12,auto); grid-auto-flow: column;
     grid-auto-columns: calc((100% - ({{ columns }} - 1) * var(--gap)) / {{ columns }});
@@ -324,6 +324,38 @@ Advanced design block is optional: all its settings have layout defaults.
     #VStories-{{ section.id }} .vts__grid { scroll-behavior: auto !important; }
     #VStories-{{ section.id }} .vts__card { transition: none; }
   }
+
+  /* Additional story compositions. All retain the existing content fields. */
+  @media (min-width: 990px) {
+    #VStories-{{ section.id }}.vts--duo .vts__grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    #VStories-{{ section.id }}.vts--wide_first .vts__grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+    #VStories-{{ section.id }}.vts--wide_first .vts__card:first-child { grid-column: span 2; }
+    #VStories-{{ section.id }}.vts--wide_first .vts__card:nth-child(3):last-child { grid-column: 1 / -1; }
+    #VStories-{{ section.id }}.vts--compact .vts__grid { grid-template-columns: repeat({{ columns }},minmax(0,1fr)); }
+    #VStories-{{ section.id }}.vts--compact .vts__card { padding: 22px; }
+    #VStories-{{ section.id }}.vts--compact blockquote { font-size: clamp(16px,{{ d.client_quote_size | default: 24 }}px,21px); }
+    #VStories-{{ section.id }}.vts--alternating .vts__grid { grid-template-columns: minmax(0,1fr); }
+    #VStories-{{ section.id }}.vts--alternating .vts__card { display: grid; grid-template-columns: minmax(160px,.35fr) minmax(0,1fr); column-gap: 40px; }
+    #VStories-{{ section.id }}.vts--alternating .vts__card > * { grid-column: 2; }
+    #VStories-{{ section.id }}.vts--alternating .vts__brand { grid-column: 1; grid-row: 1 / -1; align-self: start; }
+    #VStories-{{ section.id }}.vts--alternating .vts__brand-lockup { flex-direction: column; align-items: flex-start; }
+    #VStories-{{ section.id }}.vts--alternating .vts__card:nth-child(even) { grid-template-columns: minmax(0,1fr) minmax(160px,.35fr); }
+    #VStories-{{ section.id }}.vts--alternating .vts__card:nth-child(even) > * { grid-column: 1; }
+    #VStories-{{ section.id }}.vts--alternating .vts__card:nth-child(even) > .vts__brand { grid-column: 2; }
+  }
+  #VStories-{{ section.id }}.vts--filmstrip .vts__grid {
+    grid-template-columns: none; grid-template-rows: repeat(12,auto); grid-auto-flow: column;
+    grid-auto-columns: 42%; column-gap: var(--gap); row-gap: 0; overflow-x: auto;
+    overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+    scrollbar-width: thin; scrollbar-color: var(--accent) transparent; padding-bottom: 16px; margin-bottom: 0;
+  }
+  #VStories-{{ section.id }}.vts--filmstrip .vts__card { grid-row: 1 / span 12; grid-column: auto; margin-bottom: 0; scroll-snap-align: start; }
+  #VStories-{{ section.id }}:hover .vts__backdrop, #VStories-{{ section.id }}:focus-within .vts__backdrop { animation-play-state: paused; }
+  @media (min-width: 750px) and (max-width: 989px) { #VStories-{{ section.id }}.vts--filmstrip .vts__grid { grid-template-columns: none; grid-auto-columns: 66%; } }
+  @media (max-width: 749px) {
+    #VStories-{{ section.id }}.vts--filmstrip .vts__grid { display: flex; align-items: stretch; gap: var(--gap); }
+    #VStories-{{ section.id }}.vts--filmstrip .vts__card { flex: 0 0 {{ c.mobile_slide_width | default: 88 }}%; }
+  }
 {% endstyle %}
 
 
@@ -340,7 +372,7 @@ Advanced design block is optional: all its settings have layout defaults.
         if (!this.root || !this.track) return;
         this.abort = new AbortController();
         const options = { signal: this.abort.signal };
-        this.carousel = this.root.classList.contains('vts--carousel');
+        this.carousel = this.root.classList.contains('vts--carousel') || this.root.classList.contains('vts--filmstrip');
         this.reduced = matchMedia('(prefers-reduced-motion: reduce)');
         this.paused = this.reduced.matches;
         this.visible = true;
@@ -350,9 +382,6 @@ Advanced design block is optional: all its settings have layout defaults.
         this.cards = [...this.track.querySelectorAll('.vts__card')];
         this.querySelector('[data-vts-next]')?.addEventListener('click', () => this.move(1), options);
         this.querySelector('[data-vts-prev]')?.addEventListener('click', () => this.move(-1), options);
-        this.querySelector('[data-vts-pause]')?.addEventListener('click', () => {
-          this.paused = !this.paused; this.applyState();
-        }, options);
         this.addEventListener('mouseenter', () => { this.hovered = true; this.schedule(); }, options);
         this.addEventListener('mouseleave', () => { this.hovered = false; this.schedule(); }, options);
         this.addEventListener('focusin', () => { this.focused = true; this.schedule(); }, options);
@@ -414,8 +443,6 @@ Advanced design block is optional: all its settings have layout defaults.
       }
       applyState() {
         this.root.classList.toggle('vts--paused', this.paused);
-        const button = this.querySelector('[data-vts-pause]');
-        if (button) { button.textContent = this.paused ? 'Resume motion' : 'Pause motion'; button.setAttribute('aria-pressed', String(this.paused)); }
         this.schedule();
       }
       schedule() {
@@ -507,6 +534,26 @@ Advanced design block is optional: all its settings have layout defaults.
         {
           "value": "carousel",
           "label": "Sliding cards"
+        },
+        {
+          "value": "duo",
+          "label": "Two-column showcase"
+        },
+        {
+          "value": "wide_first",
+          "label": "Wide lead story"
+        },
+        {
+          "value": "alternating",
+          "label": "Alternating editorial rows"
+        },
+        {
+          "value": "compact",
+          "label": "Compact quote grid"
+        },
+        {
+          "value": "filmstrip",
+          "label": "Peek-ahead filmstrip"
         }
       ],
       "default": "grid"
