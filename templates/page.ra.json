@@ -1203,7 +1203,7 @@
             "title_size": 24,
             "outcome_text_size": 14,
             "featured_outcome_size": 16,
-            "client_quote_size": 18,
+            "client_quote_size": 16,
             "person_size": 14,
             "portrait_size": 48,
             "footer_gap": 40,
@@ -1219,8 +1219,8 @@
             "logo_color": "#082946",
             "badge_background": "#edf2ef",
             "badge_color": "#345267",
-            "quote_style": "normal",
-            "design_opacity": 50,
+            "quote_style": "italic",
+            "design_opacity": 60,
             "button_hover_background": "#55c900",
             "button_hover_color": "#082946"
           }
